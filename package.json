@@ -59,7 +59,6 @@
     "docx": "^9.7.1",
     "electron-updater": "^6.8.9",
     "framer-motion": "^12.42.2",
-    "handlebars": "^4.7.9",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.577.0",
     "mammoth": "^1.12.1",

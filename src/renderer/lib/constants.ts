@@ -3,15 +3,8 @@
  * Centralizes magic strings, template definitions, and configuration values.
  */
 
-// ── RAG Embedding Task Types ──────────────────────────────
-export const EMBEDDING_TASK_TYPES = {
-  QUERY: 'RETRIEVAL_QUERY',
-  DOCUMENT: 'RETRIEVAL_DOCUMENT',
-} as const;
-
 // ── File Validation ──────────────────────────────────────
 export const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-export const MAX_FILE_COUNT = 5;
 export const ALLOWED_FILE_TYPES = [
   'application/pdf',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -25,18 +18,6 @@ export const ALLOWED_FILE_TYPES = [
   'image/webp',
   'image/gif',
 ];
-
-
-// ── Default Chat Messages ─────────────────────────────────
-export const INITIAL_FISCAL_MESSAGE = {
-  role: 'model' as const,
-  text: '¡Le damos la bienvenida al módulo Corporativo de Lex Corporativo!\n\nEstoy a su disposición para asistirle en la evaluación de operaciones, contratos, gobierno societario, poderes, garantías y documentación corporativa.\n\n¿En qué podemos asistirle el día de hoy?',
-};
-
-export const RESET_MESSAGE = {
-  role: 'model' as const,
-  text: 'Conversación reiniciada con éxito. Estoy a su disposición para continuar con su siguiente consulta jurídica o análisis documental.',
-};
 
 export interface DraftingTemplate {
   id: string;
@@ -553,25 +534,3 @@ export const LEGAL_ENGINEERING_TEMPLATES: Record<LegalEngineeringArea, DraftingT
   aduanal: ADUANAL_DRAFTING_TEMPLATES,
   fiscal: FISCAL_DRAFTING_TEMPLATES,
 };
-
-// Fase posterior: litigio fiscal profundo, no visible en el módulo actual.
-export const FUTURE_FISCAL_LITIGATION_TEMPLATES = [
-  {
-    title: 'Recurso de Revocación',
-    prompt: 'Proyecto de Recurso de Revocación ante el SAT contra una resolución determinante de crédito fiscal.',
-  },
-  {
-    title: 'Juicio de Nulidad',
-    prompt: 'Demanda de Juicio Contencioso Administrativo Federal ante el TFJA.',
-  },
-  {
-    title: 'Amparo Fiscal',
-    prompt: 'Demanda de Amparo Indirecto en materia fiscal.',
-  },
-];
-
-// ── Mercantil Regulations ─────────────────────────────────
-export const MERCANTIL_REGULATIONS = [
-  { title: 'Ley General de Sociedades Mercantiles (LGSM)', description: 'Regula la constitución, organización y funcionamiento de las sociedades mercantiles.', link: 'corpus-local:LGSM' },
-  { title: 'Código de Comercio', description: 'Regula los actos de comercio y las obligaciones de los comerciantes.', link: 'corpus-local:CCom' },
-];

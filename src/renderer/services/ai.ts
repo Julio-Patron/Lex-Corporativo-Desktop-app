@@ -53,13 +53,6 @@ const withTimeout = <T>(promise: Promise<T>, ms: number = IPC_TIMEOUT_MS): Promi
   ]);
 };
 
-export const analyzeFiscalDocument = async (
-  files: { base64: string; mimeType: string; name: string }[],
-  prompt: string
-): Promise<AnalysisResponse> => {
-  return analyzeDocument(files, prompt, 'fiscal');
-};
-
 export const analyzeDocument = async (
   files: { base64: string; mimeType: string; name: string }[],
   prompt: string,

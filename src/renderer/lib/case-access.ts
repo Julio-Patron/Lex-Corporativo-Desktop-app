@@ -58,7 +58,3 @@ export async function ensureModuleActivity(
 
   return activityCaseId;
 }
-
-export function normalizeFolderError(fallback: string): string {
-  return fallback;
-}

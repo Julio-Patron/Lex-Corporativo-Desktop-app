@@ -40,13 +40,6 @@
       "filter": [
         "**/*.md"
       ]
-    },
-    {
-      "from": "plantillas",
-      "to": "plantillas",
-      "filter": [
-        "**/*.hbs"
-      ]
     }
   ],
   "win": {

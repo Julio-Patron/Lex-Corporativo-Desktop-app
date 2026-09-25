@@ -7,17 +7,6 @@ export interface LexUser {
   photoURL: string | null;
 }
 
-export enum AppView {
-  INTRODUCTION = 'INTRODUCTION',
-  DASHBOARD = 'DASHBOARD',
-  PORTAFOLIO = 'PORTAFOLIO',
-  FISCAL = 'FISCAL',
-  LEGAL_ENGINEERING = 'LEGAL_ENGINEERING',
-  PRIVACY = 'PRIVACY',
-  TERMS = 'TERMS',
-  SETTINGS = 'SETTINGS'
-}
-
 export type ModuleTab =
   | 'fiscal-home'
   | 'analysis'
@@ -128,13 +117,6 @@ export type DocumentAnalysisResult = {
   engine: "rules" | "local-embeddings" | "byok";
 };
 
-export interface AnalyzedFile {
-  fileName: string;
-  fileBase64: string;
-  mimeType: string;
-  previewUrl: string | null;
-}
-
 export interface AnalyzedDocumentHistory {
   id: string;
   requestId?: string;
@@ -213,24 +195,3 @@ export const DEFAULT_SUBSCRIPTION: UserSubscription = {
   freeAnalysesUsed: 0,
   freeDraftsUsed: 0,
 };
-
-// ── Legal Knowledge Infrastructure ──────────────────────────────
-
-export interface LegalCitation {
-  sourceId: string;
-  sourceType: 'legislation' | 'jurisprudence' | 'regulation' | 'criterion' | 'other';
-  legalArea: 'fiscal' | 'mercantil' | string;
-  title: string;
-  article?: string;
-  section?: string;
-  authority?: string;
-  version?: string;
-  effectiveDate?: string;
-  lastReformDate?: string;
-  lastCheckedAt?: string;
-  lastIngestedAt?: string;
-  citationLabel: string;
-  sourceUrl?: string;
-  retrievedTextSnippet?: string;
-  relevanceScore?: number;
-}

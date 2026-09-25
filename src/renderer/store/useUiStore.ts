@@ -9,7 +9,6 @@ interface UiState {
   sidebarOpen: boolean;
   sidebarCollapsed: boolean;
   activeTab: ModuleTab;
-  fiscalGuided: boolean;
   isOnline: boolean;
   runtimeHealth: RuntimeHealth | null;
   runtimeHealthLoading: boolean;
@@ -20,7 +19,6 @@ interface UiState {
   setSidebarOpen: (open: boolean) => void;
   setSidebarCollapsed: (collapsed: boolean) => void;
   setActiveTab: (tab: ModuleTab) => void;
-  setFiscalGuided: (guided: boolean) => void;
   setIsOnline: (online: boolean) => void;
   refreshRuntimeHealth: () => Promise<RuntimeHealth | null>;
   requestProcessingSetup: (intent: string) => void;
@@ -33,7 +31,6 @@ export const useUiStore = create<UiState>((set) => ({
   sidebarOpen: typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches,
   sidebarCollapsed: false,
   activeTab: 'fiscal-home',
-  fiscalGuided: false,
   isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
   runtimeHealth: null,
   runtimeHealthLoading: false,
@@ -53,7 +50,6 @@ export const useUiStore = create<UiState>((set) => ({
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
   setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
   setActiveTab: (tab) => set({ activeTab: tab }),
-  setFiscalGuided: (guided) => set({ fiscalGuided: guided }),
   setIsOnline: (online) => set({ isOnline: online }),
   refreshRuntimeHealth: async () => {
     set({ runtimeHealthLoading: true });
