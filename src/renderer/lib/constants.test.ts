@@ -21,7 +21,7 @@ function expectTemplateCatalogIntegrity(catalog: DraftingTemplate[], expectedPre
     expect(template.description.trim()).toBeTruthy();
     expect(template.prompt.trim()).toBeTruthy();
     expect(template.output.trim()).toBeTruthy();
-    expect(template.requiredFields.length).toBeGreaterThan(0);
+    expect(template.fields.length).toBeGreaterThan(0);
     expect(ids.has(template.id)).toBe(false);
     ids.add(template.id);
   }

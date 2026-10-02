@@ -36,7 +36,7 @@ export const DraftPayloadSchema = z.object({
     id: z.string().min(1),
     title: z.string().min(1),
     prompt: z.string().min(1),
-    requiredFields: z.array(z.string()).optional(),
+    fields: z.array(z.object({ id: z.string(), label: z.string(), type: z.string() })).optional(),
     output: z.string().optional(),
   }).optional(),
   referenceFile: z.object({
@@ -243,7 +243,7 @@ export function registerDraftHandlers(): void {
               `FUENTE_ID=template:${payload.template.id}`,
               `Plantilla seleccionada: ${payload.template.title}`,
               payload.template.output ? `Entregable esperado: ${payload.template.output}` : '',
-              payload.template.requiredFields?.length ? `Campos mínimos: ${payload.template.requiredFields.join(', ')}` : '',
+              payload.template.fields?.length ? `Campos mínimos: ${payload.template.fields.map(f => f.label).join(', ')}` : '',
               `Instrucción de plantilla: ${payload.template.prompt}`,
             ].filter(Boolean).join('\n')
           : 'Plantilla seleccionada: ninguna; redacta desde la instrucción del usuario.';

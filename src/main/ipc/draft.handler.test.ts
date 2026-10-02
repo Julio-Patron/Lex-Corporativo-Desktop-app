@@ -32,7 +32,7 @@ describe('draft payload validation', () => {
         id: 'fiscal-escrito-sat',
         title: 'Escrito SAT',
         prompt: 'Escrito libre al SAT.',
-        requiredFields: ['RFC', 'Folio'],
+        fields: [{ id: 'rfc', label: 'RFC', type: 'text' }, { id: 'folio', label: 'Folio', type: 'text' }],
         output: 'Escrito libre.',
       },
     });

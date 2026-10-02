@@ -114,7 +114,7 @@ export default function DraftingPage() {
         promptProfile: `${area}_drafting`,
         templateId: template?.id,
         template: template
-          ? { id: template.id, title: template.title, prompt: template.prompt, requiredFields: template.requiredFields, output: template.output }
+          ? { id: template.id, title: template.title, prompt: template.prompt, fields: template.fields, output: template.output }
           : undefined,
         referenceFile: draft.referenceFile ? await toFilePayload(draft.referenceFile) : undefined,
         sourceAnalysisId: draft.sourceReview?.id,

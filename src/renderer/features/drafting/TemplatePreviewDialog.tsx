@@ -36,7 +36,7 @@ export function TemplatePreviewDialog({ template, onClose, onOpenTemplate, onCus
         <aside className="overflow-y-auto border-t border-slate-200 bg-slate-50 px-5 py-5 md:border-l md:border-t-0">
           <p className="text-sm font-semibold text-slate-900">Datos que pide</p>
           <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-600">
-            {template.requiredFields.map((field) => <li key={field}>{field}</li>)}
+            {template.fields.map((field) => <li key={field.id}>{field.label}</li>)}
           </ul>
         </aside>
       </div>

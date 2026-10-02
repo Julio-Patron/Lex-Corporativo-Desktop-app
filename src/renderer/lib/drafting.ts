@@ -48,9 +48,9 @@ export function buildDraftRequirements({ template, fieldValues, instructions, ha
   const sections: string[] = [];
   if (template) {
     sections.push(`DOCUMENTO SOLICITADO: ${template.title}`);
-    const data = template.requiredFields.map((field) => {
-      const value = fieldValues[field]?.trim();
-      return `- ${field}: ${value || '[DATO FALTANTE]'}`;
+    const data = template.fields.map((field) => {
+      const value = fieldValues[field.id]?.trim();
+      return `- ${field.label}: ${value || '[DATO FALTANTE]'}`;
     });
     sections.push(`DATOS PROPORCIONADOS:\n${data.join('\n')}`);
   }
@@ -64,7 +64,7 @@ export function buildDraftRequirements({ template, fieldValues, instructions, ha
 }
 
 export function hasDraftInput(input: DraftRequirementsInput): boolean {
-  const filledFields = input.template?.requiredFields.some((field) => input.fieldValues[field]?.trim());
+  const filledFields = input.template?.fields.some((field) => input.fieldValues[field.id]?.trim());
   return Boolean(filledFields || input.instructions.trim());
 }
 

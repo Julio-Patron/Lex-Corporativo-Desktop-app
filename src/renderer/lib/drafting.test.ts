@@ -6,7 +6,7 @@ const template = {
   title: 'Contrato individual de trabajo',
   description: 'Contrato por tiempo indeterminado',
   prompt: 'Contrato conforme a la LFT',
-  requiredFields: ['Patrón', 'Persona trabajadora', 'Salario'],
+  fields: [{id: 'patron', label: 'Patrón', type: 'text'}, {id: 'trabajador', label: 'Persona trabajadora', type: 'text'}, {id: 'salario', label: 'Salario', type: 'amount'}],
   output: 'Contrato',
 };
 

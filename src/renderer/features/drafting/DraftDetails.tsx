@@ -64,11 +64,20 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           <Card>
             <SectionTitle title="Datos del documento" description="Lo que dejes vacío aparecerá como [DATO FALTANTE] en el borrador." />
             <div className="grid gap-4 md:grid-cols-2">
-              {template.requiredFields.map((field, index) => {
+              {template.fields.map((field, index) => {
                 const id = `${instructionsId}-field-${index}`;
                 return (
-                  <Field key={field} label={field} htmlFor={id}>
-                    <TextInput id={id} value={draft.fieldValues[field] ?? ''} onChange={(event) => setField(field, event.target.value)} />
+                  <Field key={field.id} label={field.label} htmlFor={id}>
+                    {field.type === 'date' ? (
+                      <TextInput id={id} type="date" value={draft.fieldValues[field.id] ?? ''} onChange={(event) => setField(field.id, event.target.value)} />
+                    ) : field.type === 'amount' ? (
+                      <div className="relative">
+                        <span className="pointer-events-none absolute left-3 top-2.5 text-slate-500">$</span>
+                        <TextInput id={id} className="pl-7" placeholder="0.00" value={draft.fieldValues[field.id] ?? ''} onChange={(event) => setField(field.id, event.target.value)} />
+                      </div>
+                    ) : (
+                      <TextInput id={id} value={draft.fieldValues[field.id] ?? ''} onChange={(event) => setField(field.id, event.target.value)} />
+                    )}
                   </Field>
                 );
               })}
