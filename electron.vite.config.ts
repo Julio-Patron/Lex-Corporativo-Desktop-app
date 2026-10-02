@@ -41,11 +41,10 @@ export default defineConfig({
           index: resolve(__dirname, 'src/renderer/index.html')
         },
         output: {
+          // Embeddings, PDF y Word se procesan en el proceso principal; el renderer
+          // sólo carga docx y jspdf bajo demanda al exportar.
           manualChunks: {
             'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-            'vendor-ui': ['framer-motion', 'lucide-react'],
-            'vendor-ai': ['@xenova/transformers', 'onnxruntime-web'],
-            'vendor-doc': ['docx', 'jspdf', 'pdf-parse', 'mammoth'],
           }
         }
       }

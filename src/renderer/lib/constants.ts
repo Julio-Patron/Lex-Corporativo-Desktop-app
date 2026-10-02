@@ -1,23 +1,7 @@
 /**
- * Shared constants used across the application.
- * Centralizes magic strings, template definitions, and configuration values.
+ * Catálogo de plantillas de redacción por materia. El texto completo de cada
+ * machote vive en template-bodies.ts.
  */
-
-// ── File Validation ──────────────────────────────────────
-export const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-export const ALLOWED_FILE_TYPES = [
-  'application/pdf',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/msword',
-  'application/xml',
-  'text/xml',
-  'text/plain',
-  'text/markdown',
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-  'image/gif',
-];
 
 export interface DraftingTemplate {
   id: string;
@@ -27,49 +11,6 @@ export interface DraftingTemplate {
   requiredFields: string[];
   output: string;
   intentGroup?: string;
-}
-
-export function buildDraftingPromptFromTemplate(template: DraftingTemplate): string {
-  return [
-    `Plantilla predefinida: ${template.title}`,
-    `Objetivo: ${template.description}`,
-    `Entregable esperado: ${template.output}`,
-    'Requisitos mínimos:',
-    ...template.requiredFields.map((field) => `- ${field}`),
-    '',
-    'Instrucción base:',
-    template.prompt,
-    '',
-    'Datos específicos del portafolio:',
-    '- ',
-  ].join('\n');
-}
-
-export function applyDraftingTemplateToPrompt(
-  template: DraftingTemplate,
-  currentPrompt: string,
-  previousTemplate?: DraftingTemplate | null
-): string {
-  const nextScaffold = buildDraftingPromptFromTemplate(template);
-  const trimmedPrompt = currentPrompt.trim();
-
-  if (!trimmedPrompt) return nextScaffold;
-  if (currentPrompt.includes(`Plantilla predefinida: ${template.title}`)) {
-    return currentPrompt;
-  }
-
-  if (previousTemplate) {
-    const previousScaffold = buildDraftingPromptFromTemplate(previousTemplate);
-    const promptWithoutPreviousScaffold = currentPrompt.replace(previousScaffold, '').trim();
-    if (promptWithoutPreviousScaffold !== trimmedPrompt) {
-      const userNotes = promptWithoutPreviousScaffold.replace(/^Notas (adicionales existentes|del portafolio):\s*/i, '').trim();
-      return userNotes
-        ? `${nextScaffold}\n\nNotas del portafolio:\n${userNotes}`
-        : nextScaffold;
-    }
-  }
-
-  return `${nextScaffold}\n\nNotas del portafolio:\n${currentPrompt}`;
 }
 
 // ── Mercantil Drafting Templates ──────────────────────────
@@ -525,7 +466,6 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
 ];
 
 export type LegalEngineeringArea = 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'fiscal';
-
 
 export const LEGAL_ENGINEERING_TEMPLATES: Record<LegalEngineeringArea, DraftingTemplate[]> = {
   mercantil: MERCANTIL_DRAFTING_TEMPLATES,

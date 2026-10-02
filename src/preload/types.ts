@@ -1,15 +1,100 @@
+export type LegalArea = 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'fiscal';
+export type CaseModule = 'engineering' | 'fiscal' | 'mercantil';
+export type ByokProviderId = 'gemini' | 'openai' | 'anthropic';
+export type ByokKeyStatus = 'missing' | 'ready' | 'unreadable';
+export type CaseRetentionDays = 0 | 30 | 90;
+
+export interface ByokProviderState {
+  model: string;
+  hasApiKey: boolean;
+  keyStatus: ByokKeyStatus;
+  requiresApiKeyReset: boolean;
+  apiKeyFingerprint?: string;
+  updatedAt?: string;
+}
+
+export interface AppSettings {
+  enabled: boolean;
+  provider: ByokProviderId;
+  model: string;
+  strictPrivacy: boolean;
+  automaticUpdatesEnabled: boolean;
+  maxInputChars: number;
+  hasApiKey: boolean;
+  keyStatus: ByokKeyStatus;
+  requiresApiKeyReset: boolean;
+  apiKeyFingerprint?: string;
+  updatedAt?: string;
+  providers: Record<ByokProviderId, ByokProviderState>;
+  updateConsentGiven: boolean;
+  caseRetentionDays: CaseRetentionDays;
+}
+
+export interface CaseMetadata {
+  caseId: string;
+  name: string;
+  module: CaseModule;
+  createdAt: string;
+  updatedAt: string;
+  retentionUntil?: string | null;
+}
+
+export type RuntimeCapabilityId =
+  | 'vault'
+  | 'legalSearch'
+  | 'legalCorpus'
+  | 'legalGeneration'
+  | 'documentReview'
+  | 'rulesAssessment'
+  | 'localAssistant';
+
+export interface RuntimeHealth {
+  status: 'ready' | 'degraded' | 'blocked';
+  checks: Array<{ id: string; label: string; ok: boolean; detail?: string }>;
+  capabilities: Record<RuntimeCapabilityId, { ready: boolean; label: string; detail: string }>;
+}
+
+export interface AnalyzeResponse {
+  result: string;
+  requestId: string;
+  ecosystem: LegalArea;
+  ecosystems: LegalArea[];
+  module: 'analysis';
+  promptProfile: string;
+  currentDocumentOnly: true;
+  // 'ai': dictamen del proveedor validado localmente. 'basic': revisión por reglas locales.
+  reviewMode: 'ai' | 'basic';
+  basicReason?: 'no_api_key' | 'ai_error';
+  engine: 'byok' | 'local_rules';
+  provider?: ByokProviderId;
+  fallbackReason?: string;
+}
+
+export interface DraftResponse {
+  result: string;
+  requestId: string;
+  ecosystem: LegalArea;
+  module: 'drafting';
+  promptProfile: string;
+  sourceAnalysisId?: string;
+  templateId?: string;
+  engine: 'byok';
+  provider?: ByokProviderId;
+  fallbackReason?: string;
+}
+
 export interface LexDesktopAPI {
   cases: {
-    createCase: (payload: { caseId: string; name: string; module: 'engineering' | 'fiscal' | 'mercantil'; retentionUntil?: string; description?: string }) => Promise<any>;
-    listCases: () => Promise<any[]>;
+    createCase: (payload: { caseId: string; name: string; module: CaseModule; description?: string }) => Promise<CaseMetadata>;
+    listCases: () => Promise<CaseMetadata[]>;
     getCase: (caseId: string) => Promise<any>;
-    renameCase: (payload: { caseId: string; name: string }) => Promise<any>;
+    renameCase: (payload: { caseId: string; name: string }) => Promise<CaseMetadata>;
     deleteCase: (caseId: string) => Promise<any>;
-    saveAnalysis: (payload: { caseId: string; analysisId: string; analysisData: Record<string, any>; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' }) => Promise<{ success: true }>;
-    saveDraft: (payload: { caseId: string; draftId: string; draftData: Record<string, any>; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' }) => Promise<{ success: true }>;
-    deleteAnalysis: (payload: { caseId: string; analysisId: string; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' }) => Promise<{ success: true; deleted: boolean }>;
-    deleteDraft: (payload: { caseId: string; draftId: string; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' }) => Promise<{ success: true; deleted: boolean }>;
-    saveState: (payload: { caseId: string; stateData: Record<string, unknown>; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' }) => Promise<{ success: true }>;
+    saveAnalysis: (payload: { caseId: string; analysisId: string; analysisData: Record<string, any>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
+    saveDraft: (payload: { caseId: string; draftId: string; draftData: Record<string, any>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
+    deleteAnalysis: (payload: { caseId: string; analysisId: string; expectedModule?: CaseModule }) => Promise<{ success: true; deleted: boolean }>;
+    deleteDraft: (payload: { caseId: string; draftId: string; expectedModule?: CaseModule }) => Promise<{ success: true; deleted: boolean }>;
+    saveState: (payload: { caseId: string; stateData: Record<string, unknown>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
     purgeExpired: () => Promise<{ deleted: number }>;
     exportAll: () => Promise<{
       success: boolean;
@@ -25,68 +110,41 @@ export interface LexDesktopAPI {
     exportPdf: (payload: { base64: string; defaultPath: string }) => Promise<{ success: boolean; canceled?: boolean; filePath?: string }>;
     exportDocx: (payload: { base64: string; defaultPath: string }) => Promise<{ success: boolean; canceled?: boolean; filePath?: string }>;
   };
-
   analysis: {
     analyzeDocument: (payload: {
       caseId?: string;
-      documentId?: string;
-      files: any[];
-      prompt?: string;
+      files: Array<{ name: string; mimeType: string; base64: string }>;
       focusedInstruction?: string;
-      rules?: 'fiscal' | 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal';
-      ecosystem?: 'fiscal' | 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal';
-      ecosystems?: Array<'fiscal' | 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal'>;
+      ecosystem?: LegalArea;
+      ecosystems?: LegalArea[];
       module?: 'analysis';
       currentDocumentOnly?: true;
       promptProfile?: string;
-    }) => Promise<{
-      result: any;
-      requestId: string;
-      ecosystem: 'fiscal' | 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal';
-      module: 'analysis';
-      promptProfile: string;
-      currentDocumentOnly: true;
-      engine: 'byok';
-      requestedExecutionMode: 'byok';
-      provider?: 'gemini' | 'openai' | 'anthropic';
-      fallbackReason?: string;
-    }>;
-    onProgress: (callback: (progress: { step: number; label: string; details?: string }) => void) => void;
+    }) => Promise<AnalyzeResponse>;
+    onProgress: (callback: (progress: { step: number; label: string; details?: string }) => void) => () => void;
   };
   drafts: {
     generateDraft: (payload: {
       caseId?: string;
       requirements: string;
-      module?: 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
-      ecosystem?: 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
+      module?: LegalArea;
+      ecosystem?: LegalArea;
       workflowModule?: 'drafting';
       sourceAnalysisId?: string;
       templateId?: string;
-      promptProfile?: 'mercantil_drafting' | 'fiscal_drafting' | 'laboral_drafting' | 'comercio_exterior_drafting' | 'aduanal_drafting';
+      promptProfile?: `${LegalArea}_drafting`;
       template?: any;
       referenceFile?: {
         name: string;
-        mimeType: 'application/pdf' | 'text/plain' | 'text/markdown';
+        mimeType: string;
         base64: string;
       };
-    }) => Promise<{
-      result: string;
-      requestId: string;
-      ecosystem: 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
-      module: 'drafting';
-      promptProfile: 'mercantil_drafting' | 'fiscal_drafting' | 'laboral_drafting' | 'comercio_exterior_drafting' | 'aduanal_drafting';
-      sourceAnalysisId?: string;
-      templateId?: string;
-      engine: 'byok';
-      requestedExecutionMode: 'byok';
-      provider?: 'gemini' | 'openai' | 'anthropic';
-      fallbackReason?: string;
-    }>;
+    }) => Promise<DraftResponse>;
   };
   legalKnowledge: {
     searchRAG: (payload: {
       query: string;
-      module: 'todos' | 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
+      module: 'todos' | LegalArea;
       limit?: number;
       useReranker?: boolean;
     }) => Promise<{
@@ -98,7 +156,7 @@ export interface LexDesktopAPI {
         content: string;
         law_code?: string;
         article_number?: string;
-        module?: string;
+        module?: LegalArea;
       }>;
     }>;
   };
@@ -110,7 +168,7 @@ export interface LexDesktopAPI {
       laws: Array<{
         code: string;
         name: string;
-        module: 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'fiscal';
+        module: LegalArea;
         provisions: number;
         bytes: number;
         sha256: string;
@@ -127,20 +185,13 @@ export interface LexDesktopAPI {
       success: boolean;
       code: string;
       name: string;
-      module: 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'fiscal';
+      module: LegalArea;
       content: string;
       provisions: number;
     }>;
   };
   runtime: {
-    getHealth: () => Promise<{
-      status: 'ready' | 'degraded' | 'blocked';
-      checks: Array<{ id: string; label: string; ok: boolean; detail?: string }>;
-      capabilities: Record<
-        'vault' | 'legalSearch' | 'legalCorpus' | 'legalGeneration' | 'rulesAssessment' | 'localAssistant',
-        { ready: boolean; label: string; detail: string }
-      >;
-    }>;
+    getHealth: () => Promise<RuntimeHealth>;
   };
   traceability: {
     getStatus: () => Promise<{ path: string; exists: boolean; size: number }>;
@@ -152,96 +203,34 @@ export interface LexDesktopAPI {
     }>;
   };
   byok: {
-    getSettings: () => Promise<{
-      enabled: boolean;
-      provider: 'gemini' | 'openai' | 'anthropic';
-      model: string;
-      strictPrivacy: boolean;
-      automaticUpdatesEnabled: boolean;
-      maxInputChars: number;
-      hasApiKey: boolean;
-      keyStatus: 'missing' | 'ready' | 'unreadable';
-      requiresApiKeyReset: boolean;
-      apiKeyFingerprint?: string;
-      updatedAt?: string;
-      providers: Record<'gemini' | 'openai' | 'anthropic', {
-        model: string;
-        hasApiKey: boolean;
-        keyStatus: 'missing' | 'ready' | 'unreadable';
-        requiresApiKeyReset: boolean;
-        apiKeyFingerprint?: string;
-        updatedAt?: string;
-      }>;
-      updateConsentGiven: boolean;
-    }>;
+    getSettings: () => Promise<AppSettings>;
     saveSettings: (payload: {
       enabled: boolean;
-      provider?: 'gemini' | 'openai' | 'anthropic';
+      provider?: ByokProviderId;
       model?: string;
       apiKey?: string;
-      strictPrivacy?: boolean;
-      automaticUpdatesEnabled?: boolean;
       maxInputChars?: number;
-      updateConsentGiven?: boolean;
-    }) => Promise<{
-      enabled: boolean;
-      provider: 'gemini' | 'openai' | 'anthropic';
-      model: string;
-      strictPrivacy: boolean;
-      automaticUpdatesEnabled: boolean;
-      maxInputChars: number;
-      hasApiKey: boolean;
-      keyStatus: 'missing' | 'ready' | 'unreadable';
-      requiresApiKeyReset: boolean;
-      apiKeyFingerprint?: string;
-      updatedAt?: string;
-      providers: Record<'gemini' | 'openai' | 'anthropic', {
-        model: string;
-        hasApiKey: boolean;
-        keyStatus: 'missing' | 'ready' | 'unreadable';
-        requiresApiKeyReset: boolean;
-        apiKeyFingerprint?: string;
-        updatedAt?: string;
-      }>;
-      updateConsentGiven: boolean;
-    }>;
-    clearKey: (payload?: { provider?: 'gemini' | 'openai' | 'anthropic' }) => Promise<{
-      enabled: boolean;
-      provider: 'gemini' | 'openai' | 'anthropic';
-      model: string;
-      strictPrivacy: boolean;
-      automaticUpdatesEnabled: boolean;
-      maxInputChars: number;
-      hasApiKey: boolean;
-      keyStatus: 'missing' | 'ready' | 'unreadable';
-      requiresApiKeyReset: boolean;
-      apiKeyFingerprint?: string;
-      updatedAt?: string;
-      providers: Record<'gemini' | 'openai' | 'anthropic', {
-        model: string;
-        hasApiKey: boolean;
-        keyStatus: 'missing' | 'ready' | 'unreadable';
-        requiresApiKeyReset: boolean;
-        apiKeyFingerprint?: string;
-        updatedAt?: string;
-      }>;
-      updateConsentGiven: boolean;
-    }>;
-    testConnection: (payload?: { provider?: 'gemini' | 'openai' | 'anthropic'; apiKey?: string; model?: string }) => Promise<{ ok: true; provider: 'gemini' | 'openai' | 'anthropic'; model: string }>;
-    setUpdateConsent: (consent: boolean) => Promise<{ updateConsentGiven: boolean }>;
+    }) => Promise<AppSettings>;
+    clearKey: (payload?: { provider?: ByokProviderId }) => Promise<AppSettings>;
+    testConnection: (payload?: { provider?: ByokProviderId; apiKey?: string; model?: string }) => Promise<{ ok: true; provider: ByokProviderId; model: string }>;
   };
   settings: {
     getAppVersion: () => Promise<string>;
     getPlatform: () => Promise<'win32' | 'darwin' | 'linux'>;
-    onUpdateAvailable: (callback: (version: string) => void) => void;
-    onUpdateDownloaded: (callback: () => void) => void;
+    savePreferences: (payload: {
+      strictPrivacy?: boolean;
+      automaticUpdatesEnabled?: boolean;
+      caseRetentionDays?: CaseRetentionDays;
+    }) => Promise<AppSettings>;
+    onUpdateAvailable: (callback: (version: string) => void) => () => void;
+    onUpdateDownloaded: (callback: () => void) => () => void;
     checkForUpdates: () => Promise<{ ok: boolean; status: string; version?: string; message?: string }>;
     installUpdate: () => void;
   };
   navigation: {
     onSettings: (callback: () => void) => () => void;
   };
-assistant: {
+  assistant: {
     askInstructivo: (payload: { query: string; history?: Array<{ role: 'user' | 'model' | 'assistant'; text: string }> }) => Promise<{ result: string }>;
   };
   security: {

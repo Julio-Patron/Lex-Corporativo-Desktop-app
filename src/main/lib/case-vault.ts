@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import Database from 'better-sqlite3';
 import { sanitizeForLocalCache } from './sanitizer';
+import { computeCaseRetentionUntil, type CaseRetentionDays } from '../../shared/case-retention';
 
 export interface CaseMetadata {
   caseId: string;
@@ -475,6 +476,28 @@ export async function deleteCase(caseId: string, expectedModule?: CaseModule): P
   
   getDb().prepare('DELETE FROM cases WHERE caseId = ?').run(caseId);
   console.info(`[Vault] Local activity deleted (SQLite): ${getSafeCaseLabel(caseId)}`);
+}
+
+// Recalcula el vencimiento de todos los asuntos según la política vigente:
+// con 0 días se conservan indefinidamente; en otro caso vencen N días después
+// de su última actividad.
+export async function applyRetentionPolicy(retentionDays: CaseRetentionDays): Promise<number> {
+  const database = getDb();
+  const rows = database
+    .prepare('SELECT caseId, updatedAt, retentionUntil FROM cases')
+    .all() as Array<{ caseId: string; updatedAt: string | null; retentionUntil: string | null }>;
+  const update = database.prepare('UPDATE cases SET retentionUntil = ? WHERE caseId = ?');
+  let changed = 0;
+  database.transaction(() => {
+    for (const row of rows) {
+      const next = computeCaseRetentionUntil(row.updatedAt || new Date(), retentionDays);
+      if (next !== (row.retentionUntil ?? null)) {
+        update.run(next, row.caseId);
+        changed += 1;
+      }
+    }
+  })();
+  return changed;
 }
 
 export async function purgeExpiredCases(nowIso = new Date().toISOString()): Promise<number> {

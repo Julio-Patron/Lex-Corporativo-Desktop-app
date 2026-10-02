@@ -138,9 +138,11 @@ interface SourceAnalysisSummary {
   recommendedActions: string[];
 }
 
-function renderSourceAnalysis(analysis: unknown): { text: string; data: SourceAnalysisSummary | null } {
+export function renderSourceAnalysis(analysis: unknown): { text: string; data: SourceAnalysisSummary | null } {
   if (!analysis || typeof analysis !== 'object') return { text: '', data: null };
-  const a = analysis as Record<string, unknown>;
+  // El portafolio guarda cada revisión como un registro con el dictamen en `result`.
+  const record = analysis as Record<string, unknown>;
+  const a = (record.result && typeof record.result === 'object' ? record.result : record) as Record<string, unknown>;
   const data: SourceAnalysisSummary = {
     summary: String(a.summary || ''),
     documentType: String(a.documentType || ''),

@@ -108,4 +108,35 @@ describe('BYOK provider settings', () => {
     expect(getByokProviderConfig('openai').apiKey).toBe('openai-secret');
     expect(JSON.stringify(getByokSettings())).not.toContain('secret');
   });
+
+  it('saves app preferences without requiring an API key', async () => {
+    const { getByokSettings, updateAppPreferences } = await import('./byok-settings');
+    expect(getByokSettings()).toMatchObject({ strictPrivacy: true, caseRetentionDays: 0, updateConsentGiven: false });
+
+    const settings = updateAppPreferences({ strictPrivacy: false, automaticUpdatesEnabled: true, caseRetentionDays: 30 });
+    expect(settings).toMatchObject({
+      enabled: false,
+      hasApiKey: false,
+      strictPrivacy: false,
+      automaticUpdatesEnabled: true,
+      updateConsentGiven: true,
+      caseRetentionDays: 30,
+    });
+  });
+
+  it('turns off automatic updates whenever strict privacy is enabled', async () => {
+    const { updateAppPreferences } = await import('./byok-settings');
+    updateAppPreferences({ strictPrivacy: false, automaticUpdatesEnabled: true });
+    expect(updateAppPreferences({ strictPrivacy: true })).toMatchObject({
+      strictPrivacy: true,
+      automaticUpdatesEnabled: false,
+    });
+  });
+
+  it('keeps provider credentials when preferences change', async () => {
+    const { getActiveByokConfig, saveByokSettings, updateAppPreferences } = await import('./byok-settings');
+    saveByokSettings({ enabled: true, provider: 'anthropic', apiKey: 'anthropic-secret' });
+    updateAppPreferences({ caseRetentionDays: 90 });
+    expect(getActiveByokConfig()).toMatchObject({ enabled: true, provider: 'anthropic', apiKey: 'anthropic-secret' });
+  });
 });

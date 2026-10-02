@@ -4,86 +4,20 @@ import { HashRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { installBrowserPreview } from './dev/browser-preview';
 
-// Browser-only development preview. Electron always injects the real, isolated
-// preload API; this small read-only fixture lets design QA render the renderer
-// directly without weakening or changing the packaged application.
+// Vista previa en navegador para QA de diseño: Electron siempre inyecta el API
+// real y aislado del preload; este simulador sólo existe en desarrollo.
 if (import.meta.env.DEV && !window.lexDesktop) {
-  const emptyProvider = (model: string) => ({
-    model,
-    hasApiKey: false,
-    keyStatus: 'missing' as const,
-    requiresApiKeyReset: false,
-  });
-  Object.defineProperty(window, 'lexDesktop', {
-    configurable: true,
-    value: {
-      cases: {
-        purgeExpired: async () => ({ deleted: 0 }),
-        listCases: async () => [],
-      },
-      runtime: {
-        getHealth: async () => ({
-          status: 'degraded' as const,
-          checks: [],
-          rust: {
-            binaryPath: '', binaryExists: false, modelsPath: '', expectedGgufModel: '',
-            expectedGgufModelPath: '', expectedGgufModelExists: false, ggufModels: [],
-            embeddingModelExists: false, canUseDevelopmentMock: true, modelPathSource: 'default' as const,
-          },
-          capabilities: {
-            vault: { ready: true, label: 'Portafolio local', detail: 'Vista previa de desarrollo.' },
-            legalSearch: { ready: false, label: 'Consulta de corpus', detail: 'Recursos pendientes en la vista previa.' },
-            legalGeneration: { ready: false, label: 'Análisis y generación jurídica', detail: 'Configura un modo de procesamiento.' },
-            rulesAssessment: { ready: true, label: 'Evaluaciones por reglas', detail: 'Disponible.' },
-            localAssistant: { ready: false, label: 'Guía interactiva', detail: 'Configura un modo de procesamiento.' },
-          },
-        }),
-      },
-      byok: {
-        getSettings: async () => ({
-          enabled: false, provider: 'gemini' as const, model: 'gemini', strictPrivacy: true,
-          automaticUpdatesEnabled: false, maxInputChars: 60_000, hasApiKey: false,
-          keyStatus: 'missing' as const, requiresApiKeyReset: false,
-          providers: {
-            gemini: emptyProvider('gemini'),
-            openai: emptyProvider('openai'),
-            anthropic: emptyProvider('claude'),
-          },
-        }),
-        saveSettings: async (payload: { enabled: boolean; provider?: 'gemini' | 'openai' | 'anthropic'; model?: string }) => ({
-          enabled: payload.enabled,
-          provider: payload.provider ?? 'gemini',
-          model: payload.model ?? 'gemini',
-          strictPrivacy: true,
-          automaticUpdatesEnabled: false,
-          maxInputChars: 60_000,
-          hasApiKey: payload.enabled,
-          keyStatus: payload.enabled ? 'ready' as const : 'missing' as const,
-          requiresApiKeyReset: false,
-          providers: {
-            gemini: emptyProvider('gemini'),
-            openai: emptyProvider('openai'),
-            anthropic: emptyProvider('claude'),
-          },
-        }),
-        testConnection: async (payload?: { provider?: 'gemini' | 'openai' | 'anthropic'; model?: string }) => ({
-          ok: true as const,
-          provider: payload?.provider ?? 'gemini',
-          model: payload?.model ?? 'gemini',
-        }),
-      },
-      navigation: { onSettings: () => () => undefined },
-    },
-  });
+  installBrowserPreview();
 }
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
-  throw new Error("Could not find root element to mount to");
+  throw new Error('Could not find root element to mount to');
 }
 
-// CSP Violation Reporting - sends violations to main process via preload API
+// Reporte de violaciones de CSP al proceso principal.
 if (window.lexDesktop?.security?.reportCspViolation) {
   document.addEventListener('securitypolicyviolation', (event) => {
     const violation = {
@@ -103,8 +37,7 @@ if (window.lexDesktop?.security?.reportCspViolation) {
   });
 }
 
-const root = ReactDOM.createRoot(rootElement);
-root.render(
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ErrorBoundary>
       <HashRouter>

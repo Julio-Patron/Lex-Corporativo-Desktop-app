@@ -12,13 +12,23 @@ import { registerByokHandlers } from './byok.handler';
 import { registerCorpusHandlers } from './corpus.handler';
 import { getLegalKnowledgeRuntimePath, isLocalRagAvailable } from '../lib/rag';
 import { isLegalCorpusAvailable } from '../lib/legal-corpus';
-import { getVaultProtectionStatus, listCases } from '../lib/case-vault';
-import { getByokSettings, saveByokSettings } from '../lib/byok-settings';
+import { applyRetentionPolicy, getVaultProtectionStatus, listCases, purgeExpiredCases } from '../lib/case-vault';
+import { getByokSettings, updateAppPreferences } from '../lib/byok-settings';
+import { CASE_RETENTION_OPTIONS, type CaseRetentionDays } from '../../shared/case-retention';
 import { getTraceLedgerStatus, logLegalExecution } from '../lib/traceability';
 import { sanitizeForLogs } from '../lib/sanitizer';
 import * as crypto from 'crypto';
 
 const ALLOWED_EXPORT_EXTS = ['json', 'pdf', 'docx', 'jsonl'];
+
+const AppPreferencesSchema = z.object({
+  strictPrivacy: z.boolean().optional(),
+  automaticUpdatesEnabled: z.boolean().optional(),
+  caseRetentionDays: z.number().refine(
+    (days): days is CaseRetentionDays => CASE_RETENTION_OPTIONS.includes(days as CaseRetentionDays),
+    'Periodo de conservación no admitido.',
+  ).optional(),
+}).strict();
 
 function sanitizeOpenDialogOptions(options: Electron.OpenDialogOptions): Electron.OpenDialogOptions {
   const safeOptions = { ...options };
@@ -152,6 +162,15 @@ export function registerIpcHandlers(): void {
             ? `Disponible mediante ${byokSettings.provider} con la API key del usuario.`
             : 'Requiere bóveda cifrada, corpus local y una API key activa.',
         },
+        documentReview: {
+          ready: vaultReady && legalSearchReady,
+          label: 'Revisión de documentos',
+          detail: !(vaultReady && legalSearchReady)
+            ? 'Requiere la bóveda cifrada y el corpus local con su índice.'
+            : byokGenerationReady
+              ? `Revisión con IA mediante ${byokSettings.provider}.`
+              : 'Revisión básica por reglas locales. Conecta una API para la revisión con IA.',
+        },
         rulesAssessment: {
           ready: vaultReady,
           label: 'Evaluaciones por reglas',
@@ -161,7 +180,7 @@ export function registerIpcHandlers(): void {
         },
         localAssistant: {
           ready: byokGenerationReady,
-          label: 'Instructivo interactivo',
+          label: 'Ayuda conversacional',
           detail: byokGenerationReady
             ? `Disponible mediante ${byokSettings.provider}.`
             : 'Requiere una API key activa.',
@@ -190,19 +209,16 @@ export function registerIpcHandlers(): void {
     return { success: true, filePath, sourcePath: status.path };
   });
 
-  // ── Update Consent ───────────────────────────
-  ipcMain.handle('settings:set-update-consent', async (_event, rawConsent: unknown) => {
-    const consent = z.boolean().parse(rawConsent);
-    const settings = getByokSettings();
-    return saveByokSettings({
-      enabled: settings.enabled,
-      provider: settings.provider,
-      model: settings.model,
-      strictPrivacy: settings.strictPrivacy,
-      automaticUpdatesEnabled: settings.automaticUpdatesEnabled,
-      maxInputChars: settings.maxInputChars,
-      updateConsentGiven: consent,
-    });
+  // ── App Preferences ──────────────────────────
+  // Privacidad, actualizaciones y conservación del portafolio no dependen de la API key.
+  ipcMain.handle('settings:save-preferences', async (_event, rawPayload: unknown) => {
+    const input = AppPreferencesSchema.parse(rawPayload);
+    const settings = updateAppPreferences(input);
+    if (input.caseRetentionDays !== undefined) {
+      await applyRetentionPolicy(settings.caseRetentionDays);
+      await purgeExpiredCases();
+    }
+    return settings;
   });
 
   // ── CSP Violation Reporting ─────────────────

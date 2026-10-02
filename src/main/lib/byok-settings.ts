@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
 import { DEFAULT_BYOK_MODELS, type ByokProvider } from '../../shared/byok-models';
+import { normalizeCaseRetentionDays, type CaseRetentionDays } from '../../shared/case-retention';
 
 export { DEFAULT_BYOK_MODELS } from '../../shared/byok-models';
 export type { ByokProvider } from '../../shared/byok-models';
@@ -39,6 +40,13 @@ export interface ByokSettings {
   updatedAt?: string;
   providers: Record<ByokProvider, ByokProviderStatus>;
   updateConsentGiven: boolean;
+  caseRetentionDays: CaseRetentionDays;
+}
+
+export interface AppPreferencesInput {
+  strictPrivacy?: boolean;
+  automaticUpdatesEnabled?: boolean;
+  caseRetentionDays?: CaseRetentionDays;
 }
 
 export interface SaveByokSettingsInput {
@@ -67,6 +75,7 @@ interface StoredByokSettings {
   automaticUpdatesEnabled?: boolean;
   maxInputChars?: number;
   updateConsentGiven?: boolean;
+  caseRetentionDays?: CaseRetentionDays;
   providers: Partial<Record<ByokProvider, StoredProviderSettings>>;
 }
 
@@ -148,6 +157,7 @@ function emptyStoredSettings(): StoredByokSettings {
     automaticUpdatesEnabled: false,
     maxInputChars: DEFAULT_BYOK_MAX_INPUT_CHARS,
     updateConsentGiven: false,
+    caseRetentionDays: normalizeCaseRetentionDays(undefined),
     providers: {},
   };
 }
@@ -175,6 +185,7 @@ function migrateSettings(raw: Partial<StoredByokSettings & LegacyGeminiSettings>
     automaticUpdatesEnabled: Boolean(raw.automaticUpdatesEnabled),
     maxInputChars: normalizeMaxInputChars(raw.maxInputChars),
     updateConsentGiven: Boolean(raw.updateConsentGiven),
+    caseRetentionDays: normalizeCaseRetentionDays(raw.caseRetentionDays),
     providers,
   };
 }
@@ -250,6 +261,7 @@ export function getByokSettings(): ByokSettings {
     updatedAt: active.updatedAt,
     providers,
     updateConsentGiven: Boolean(stored.updateConsentGiven),
+    caseRetentionDays: normalizeCaseRetentionDays(stored.caseRetentionDays),
   };
 }
 
@@ -309,6 +321,7 @@ export function saveByokSettings(input: SaveByokSettingsInput): ByokSettings {
     automaticUpdatesEnabled: input.automaticUpdatesEnabled ?? current.automaticUpdatesEnabled ?? false,
     maxInputChars: normalizeMaxInputChars(input.maxInputChars ?? current.maxInputChars),
     updateConsentGiven: input.updateConsentGiven ?? current.updateConsentGiven ?? false,
+    caseRetentionDays: normalizeCaseRetentionDays(current.caseRetentionDays),
     providers: {
       ...current.providers,
       [provider]: {
@@ -321,6 +334,27 @@ export function saveByokSettings(input: SaveByokSettingsInput): ByokSettings {
   };
 
   writeStoredSettings(next);
+  return getByokSettings();
+}
+
+// Preferencias generales de la aplicación: no dependen de la API key, por lo que
+// se guardan sin validar credenciales ni alterar la configuración del proveedor.
+export function updateAppPreferences(input: AppPreferencesInput): ByokSettings {
+  const current = readStoredSettings();
+  const strictPrivacy = input.strictPrivacy ?? current.strictPrivacy !== false;
+  const requestedAutomaticUpdates = input.automaticUpdatesEnabled ?? Boolean(current.automaticUpdatesEnabled);
+  const automaticUpdatesEnabled = strictPrivacy ? false : requestedAutomaticUpdates;
+
+  writeStoredSettings({
+    ...current,
+    strictPrivacy,
+    automaticUpdatesEnabled,
+    // Activar las actualizaciones automáticas desde la interfaz es el consentimiento explícito.
+    updateConsentGiven: input.automaticUpdatesEnabled === true && !strictPrivacy
+      ? true
+      : Boolean(current.updateConsentGiven),
+    caseRetentionDays: normalizeCaseRetentionDays(input.caseRetentionDays ?? current.caseRetentionDays),
+  });
   return getByokSettings();
 }
 

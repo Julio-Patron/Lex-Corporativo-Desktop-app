@@ -6,7 +6,7 @@ import { registerIpcHandlers } from './ipc';
 import { registerProtocol, handleDeepLink } from './protocol';
 import { getByokSettings } from './lib/byok-settings';
 import { purgeExpiredUserDocuments } from './lib/rag';
-import { purgeExpiredCases } from './lib/case-vault';
+import { applyRetentionPolicy, purgeExpiredCases } from './lib/case-vault';
 import pkg from 'electron-updater';
 const { autoUpdater } = pkg;
 
@@ -148,7 +148,7 @@ if (!gotTheLock) {
 
     void Promise.all([
       purgeExpiredUserDocuments(),
-      purgeExpiredCases(),
+      applyRetentionPolicy(getByokSettings().caseRetentionDays).then(() => purgeExpiredCases()),
     ]).catch(error => {
       console.warn('[Startup] Local retention cleanup did not complete:', error);
     });

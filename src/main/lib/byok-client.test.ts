@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { composeLimitedByokPrompt, composeLimitedByokPromptWithDisclosure, generateByokText } from './byok-client';
+import { composeLimitedByokPrompt, composeLimitedByokPromptWithDisclosure, generateByokText, normalizeModelName, testByokConnection } from './byok-client';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -73,6 +73,54 @@ describe('BYOK provider client', () => {
     const [, init] = fetchMock.mock.calls[0];
     const body = JSON.parse(init.body);
     expect(body.temperature).toBeUndefined();
+  });
+
+  it('requests structured JSON from current Claude models without forced tools or sampling', async () => {
+    const fetchMock = mockJsonResponse({ stop_reason: 'end_turn', content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: '{"ok":true}' }] });
+    const result = await generateByokText({
+      provider: 'anthropic',
+      apiKey: 'anthropic-secret',
+      model: 'claude-opus-5',
+      prompt: 'consulta',
+      temperature: 0.05,
+      maxOutputTokens: 12_000,
+      jsonSchema: {
+        name: 'result',
+        schema: { type: 'object', additionalProperties: false, properties: { score: { type: 'number', minimum: 0, maximum: 100 } } },
+      },
+    });
+
+    expect(result).toBe('{"ok":true}');
+    const [, init] = fetchMock.mock.calls[0];
+    const body = JSON.parse(init.body);
+    expect(body.temperature).toBeUndefined();
+    expect(body.tool_choice).toBeUndefined();
+    expect(body.max_tokens).toBe(16_000);
+    expect(body.output_config.format).toEqual({
+      type: 'json_schema',
+      schema: { type: 'object', additionalProperties: false, properties: { score: { type: 'number' } } },
+    });
+    expect(body.fallbacks).toBe('default');
+    expect(init.headers['anthropic-beta']).toBe('server-side-fallback-2026-07-01');
+  });
+
+  it('reports a Claude safety refusal instead of an empty result', async () => {
+    mockJsonResponse({ stop_reason: 'refusal', content: [] });
+    await expect(generateByokText({
+      provider: 'anthropic',
+      apiKey: 'anthropic-secret',
+      model: 'claude-opus-5',
+      prompt: 'consulta',
+    })).rejects.toThrow(/declinó/);
+  });
+
+  it('tests the connection with the configured model, not a fixed one', async () => {
+    const fetchMock = mockJsonResponse({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'OK' }] });
+    const result = await testByokConnection({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-5' });
+
+    expect(result.model).toBe('claude-sonnet-5');
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body).model).toBe('claude-sonnet-5');
+    expect(normalizeModelName('anthropic', '')).toBe('claude-opus-5');
   });
 
   it('truncates document evidence before losing the legal context or output contract', () => {
