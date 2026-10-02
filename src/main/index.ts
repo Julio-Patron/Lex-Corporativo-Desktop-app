@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, ipcMain } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain, shell, session } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer } from '@electron-toolkit/utils';
 import { createAppMenu } from './menu';
@@ -88,6 +88,11 @@ function createWindow(): void {
     mainWindow = null;
   });
 
+  // Deny all web permission requests (geolocation, camera, microphone, etc.)
+  session.defaultSession.setPermissionRequestHandler((_webContents, _permission, callback) => {
+    callback(false);
+  });
+
   // External navigation shield
   mainWindow.webContents.on('will-navigate', (event, url) => {
     // Prevent any navigation away from the local app
@@ -99,7 +104,7 @@ function createWindow(): void {
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     // Open http/https links in the default OS browser
     if (url.startsWith('http:') || url.startsWith('https:')) {
-      require('electron').shell.openExternal(url);
+      shell.openExternal(url);
     }
     // Always deny new Electron windows to prevent unsandboxed execution
     return { action: 'deny' };

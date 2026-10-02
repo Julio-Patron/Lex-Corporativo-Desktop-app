@@ -120,7 +120,7 @@ describe('BYOK provider client', () => {
 
     expect(result.model).toBe('claude-sonnet-5');
     expect(JSON.parse(fetchMock.mock.calls[0][1].body).model).toBe('claude-sonnet-5');
-    expect(normalizeModelName('anthropic', '')).toBe('claude-opus-5');
+    expect(normalizeModelName('anthropic', '')).toBe('claude-sonnet-4-20250514');
   });
 
   it('truncates document evidence before losing the legal context or output contract', () => {

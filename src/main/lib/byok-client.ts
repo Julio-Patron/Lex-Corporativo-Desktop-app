@@ -131,29 +131,64 @@ function sanitizedApiError(provider: ByokProvider, status: number, body: string)
   return new Error(`${provider} API error ${status}${compact ? `: ${compact}` : ''}`);
 }
 
+const RETRYABLE_STATUS_CODES = new Set([429, 502, 503, 504]);
+const MAX_RETRIES = 2;
+
+function parseRetryAfterMs(response: Response): number | null {
+  const header = response.headers.get('retry-after');
+  if (!header) return null;
+  const seconds = Number(header);
+  if (!Number.isNaN(seconds) && seconds > 0) return Math.min(seconds * 1_000, 30_000);
+  const date = Date.parse(header);
+  if (!Number.isNaN(date)) return Math.max(0, Math.min(date - Date.now(), 30_000));
+  return null;
+}
+
+function isTransientNetworkError(error: any): boolean {
+  const code = error?.cause?.code || error?.code || '';
+  return ['ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'UND_ERR_CONNECT_TIMEOUT'].includes(code);
+}
+
 async function fetchJson(
   provider: ByokProvider,
   url: string,
   init: RequestInit,
   timeoutMs: number,
 ): Promise<any> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const response = await fetch(url, { ...init, signal: controller.signal });
-    if (!response.ok) {
-      const body = await response.text().catch(() => '');
-      throw sanitizedApiError(provider, response.status, body);
+  let lastError: Error | undefined;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { ...init, signal: controller.signal });
+      if (!response.ok) {
+        const body = await response.text().catch(() => '');
+        const err = sanitizedApiError(provider, response.status, body);
+        if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < MAX_RETRIES) {
+          lastError = err;
+          const delayMs = parseRetryAfterMs(response) ?? Math.min(1_000 * 2 ** attempt, 8_000);
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
+          continue;
+        }
+        throw err;
+      }
+      return await response.json();
+    } catch (error: any) {
+      if (error?.name === 'AbortError') {
+        throw new Error(`${provider} agotó el tiempo de espera.`);
+      }
+      if (isTransientNetworkError(error) && attempt < MAX_RETRIES) {
+        lastError = error;
+        await new Promise((resolve) => setTimeout(resolve, Math.min(1_000 * 2 ** attempt, 8_000)));
+        continue;
+      }
+      throw error;
+    } finally {
+      clearTimeout(timeoutId);
     }
-    return await response.json();
-  } catch (error: any) {
-    if (error?.name === 'AbortError') {
-      throw new Error(`${provider} agotó el tiempo de espera.`);
-    }
-    throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
+  throw lastError ?? new Error(`${provider}: error de conexión tras ${MAX_RETRIES} reintentos.`);
 }
 
 function extractGeminiText(payload: any): string {
@@ -424,7 +459,8 @@ export async function testByokConnection(input: Pick<ByokGenerateInput, 'provide
     maxOutputTokens: 1024,
     timeoutMs: 30_000,
   });
-  if (!response.toUpperCase().includes('OK')) {
+  const normalized = response.toUpperCase().trim();
+  if (!normalized.includes('OK') && !normalized.includes('CORRECTO') && !normalized.includes('LISTO') && !normalized.includes('ENTENDIDO')) {
     throw new Error(`${input.provider} respondió, pero no cumplió la prueba de conexión.`);
   }
   return { ok: true, provider: input.provider, model };
