@@ -184,7 +184,11 @@ export default function DraftingPage() {
 
   const copyDocument = async () => {
     if (!draft.record) return;
-    await navigator.clipboard.writeText(draft.record.document);
+    try {
+      await navigator.clipboard.writeText(draft.record.document);
+    } catch {
+      notify('No se pudo copiar al portapapeles.', 'warning');
+    }
   };
 
   const canOpenStep = (step: DraftStep) => step === 'choose'

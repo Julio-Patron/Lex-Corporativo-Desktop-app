@@ -35,7 +35,10 @@ export default function ReviewPage() {
   const [progress, setProgress] = useState<{ step: number; label: string } | null>(null);
   const [reader, setReader] = useState<{ code: string; article?: string } | null>(null);
 
-  useEffect(() => window.lexDesktop.analysis.onProgress((state) => setProgress({ step: state.step, label: state.label })), []);
+  useEffect(() => {
+    const off = window.lexDesktop.analysis.onProgress((state) => setProgress({ step: state.step, label: state.label }));
+    return off;
+  }, []);
 
   const capability = health?.capabilities.documentReview;
 
@@ -131,7 +134,7 @@ export default function ReviewPage() {
           onDraftClause={(finding) => draftFrom(buildClauseInstructions(finding))}
           onOpenFoundation={openFoundation}
           onExport={exportReport}
-          onCopy={() => navigator.clipboard.writeText(buildReviewReport(review.record!))}
+          onCopy={() => navigator.clipboard.writeText(buildReviewReport(review.record!)).catch(() => notify('No se pudo copiar al portapapeles.', 'warning'))}
           onNewReview={resetReview}
           onConnectAi={() => requestProcessingSetup('hacer una revisión completa con IA')}
         />

@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import { CheckCircle2, ChevronDown, KeyRound } from 'lucide-react';
 import type { AppSettings, ByokProviderId } from '../../../preload/types';
 import { DEFAULT_BYOK_MODELS } from '../../../shared/byok-models';
@@ -40,6 +40,13 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
     // Sólo al cambiar de proveedor: los ajustes guardados no deben borrar lo que se escribe.
   }, [provider]);
 
+  const mountedRef = useRef(true);
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
   const connect = async () => {
     if (!hasStoredKey && apiKey.trim().length < 10) {
       setError('Escribe una API key válida.');
@@ -51,15 +58,17 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       const key = apiKey.trim() || undefined;
       await window.lexDesktop.byok.testConnection({ provider, model: model.trim() || undefined, apiKey: key });
       const saved = await window.lexDesktop.byok.saveSettings({ enabled: true, provider, model: model.trim() || undefined, apiKey: key });
+      if (!mountedRef.current) return;
       setSettings(saved);
       setApiKey('');
       void refreshRuntimeHealth();
       notify(`${providerLabel(provider)} quedó conectado.`, 'success', 'IA conectada');
       onConnected?.(saved);
-    } catch (err: any) {
-      setError(err?.message || `No se pudo conectar con ${providerLabel(provider)}.`);
+    } catch (err: unknown) {
+      if (!mountedRef.current) return;
+      setError(err instanceof Error ? err.message : `No se pudo conectar con ${providerLabel(provider)}.`);
     } finally {
-      setBusy(null);
+      if (mountedRef.current) setBusy(null);
     }
   };
 
@@ -68,13 +77,15 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
     setError('');
     try {
       const saved = await window.lexDesktop.byok.clearKey({ provider });
+      if (!mountedRef.current) return;
       setSettings(saved);
       void refreshRuntimeHealth();
       notify(`Se eliminó la API key de ${providerLabel(provider)}.`, 'info');
-    } catch (err: any) {
-      setError(err?.message || 'No se pudo eliminar la API key.');
+    } catch (err: unknown) {
+      if (!mountedRef.current) return;
+      setError(err instanceof Error ? err.message : 'No se pudo eliminar la API key.');
     } finally {
-      setBusy(null);
+      if (mountedRef.current) setBusy(null);
     }
   };
 

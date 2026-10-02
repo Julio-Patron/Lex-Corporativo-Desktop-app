@@ -89,17 +89,47 @@ export function HelpPanel() {
   const [question, setQuestion] = useState('');
   const [asking, setAsking] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
 
   const screenKey = Object.keys(SCREEN_HELP).find((path) => path !== '/' && location.pathname.startsWith(path)) ?? '/';
   const screen = SCREEN_HELP[screenKey];
 
   useEffect(() => {
     if (!open) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    
+    // Slight delay to ensure the panel has rendered before grabbing focus
+    setTimeout(() => {
+      const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const firstFocusable = panelRef.current?.querySelector<HTMLElement>(FOCUSABLE);
+      (firstFocusable ?? panelRef.current)?.focus();
+    }, 10);
+
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        event.stopPropagation();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== 'Tab' || !panelRef.current) return;
+      const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusable = Array.from(panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        last.focus();
+        event.preventDefault();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        first.focus();
+        event.preventDefault();
+      }
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      previouslyFocused?.focus?.();
+    };
   }, [open, setOpen]);
 
   useEffect(() => {
@@ -127,7 +157,7 @@ export function HelpPanel() {
   return (
     <div className="fixed inset-0 z-[110] flex justify-end">
       <div className="absolute inset-0 bg-slate-950/30" onClick={() => setOpen(false)} aria-hidden="true" />
-      <aside role="dialog" aria-modal="true" aria-labelledby={titleId} className="relative flex h-full w-full max-w-md flex-col bg-white shadow-dialog">
+      <aside ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby={titleId} className="relative flex h-full w-full max-w-md flex-col bg-white shadow-dialog outline-none">
         <header className="flex items-center justify-between border-b border-slate-200 px-5 py-4 pt-12">
           <h2 id={titleId} className="text-lg font-semibold text-slate-950">Ayuda</h2>
           <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" aria-label="Cerrar ayuda">

@@ -97,9 +97,13 @@ export default function LawsPage() {
   };
 
   const copy = async (result: Citation) => {
-    await navigator.clipboard.writeText(citationText(result));
-    setCopiedId(String(result.id));
-    setTimeout(() => setCopiedId(null), 1500);
+    try {
+      await navigator.clipboard.writeText(citationText(result));
+      setCopiedId(String(result.id));
+      setTimeout(() => setCopiedId(null), 1500);
+    } catch {
+      notify('No se pudo copiar al portapapeles.', 'warning');
+    }
   };
 
   const download = async (code: string, name: string) => {

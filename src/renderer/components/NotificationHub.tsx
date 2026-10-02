@@ -2,6 +2,8 @@ import React from 'react';
 import { AlertCircle, AlertTriangle, CheckCircle2, Info, X } from 'lucide-react';
 import type { AppNotification } from '../types';
 
+import { useUiStore } from '../store/useUiStore';
+
 const ICONS = {
   error: <AlertCircle className="text-red-600" size={20} aria-hidden="true" />,
   success: <CheckCircle2 className="text-emerald-600" size={20} aria-hidden="true" />,
@@ -9,12 +11,12 @@ const ICONS = {
   info: <Info className="text-blue-600" size={20} aria-hidden="true" />,
 };
 
-interface NotificationHubProps {
-  notifications: AppNotification[];
-  onDismiss: (id: string) => void;
-}
+export function NotificationHub() {
+  const notifications = useUiStore((state) => state.notifications);
+  const onDismiss = useUiStore((state) => state.dismissNotification);
 
-export function NotificationHub({ notifications, onDismiss }: NotificationHubProps) {
+  if (notifications.length === 0) return null;
+
   return (
     <div className="pointer-events-none fixed bottom-5 right-5 z-[130] flex w-full max-w-sm flex-col gap-2" aria-live="polite">
       {notifications.map((notification) => (

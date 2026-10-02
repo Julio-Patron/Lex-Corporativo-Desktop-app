@@ -9,9 +9,6 @@ import { Sidebar } from './Sidebar';
 import { UpdateBanner } from './UpdateBanner';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const notifications = useUiStore((state) => state.notifications);
-  const dismissNotification = useUiStore((state) => state.dismissNotification);
-
   return (
     <div className="flex h-screen overflow-hidden bg-slate-50 font-sans text-slate-900">
       <AppEffects />
@@ -20,7 +17,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="min-h-0 flex-1">{children}</div>
         <UpdateBanner />
       </main>
-      <NotificationHub notifications={notifications} onDismiss={dismissNotification} />
+      <NotificationHub />
       <ProcessingSetupDialog />
       <HelpPanel />
       <OnboardingDialog />

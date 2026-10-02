@@ -71,7 +71,7 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
             <p className="text-sm text-slate-500">{result.documentType ? `${result.documentType} · ` : ''}{formatDate(record.timestamp)}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Button size="sm" variant="secondary" onClick={() => { void onCopy().then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); }}>
+            <Button size="sm" variant="secondary" onClick={() => { void onCopy().then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => { /* handled by parent or ignore */ }); }}>
               {copied ? <Check size={15} aria-hidden="true" /> : <Clipboard size={15} aria-hidden="true" />} Copiar informe
             </Button>
             <Button size="sm" variant="secondary" onClick={() => void runExport('pdf')} isLoading={exporting === 'pdf'} disabled={exporting !== null}>

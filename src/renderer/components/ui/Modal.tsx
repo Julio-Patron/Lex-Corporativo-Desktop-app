@@ -23,6 +23,9 @@ export function Modal({ isOpen, onClose, children, className, labelledBy }: Moda
     const firstFocusable = modalRef.current?.querySelector<HTMLElement>(FOCUSABLE);
     (firstFocusable ?? modalRef.current)?.focus();
 
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.stopPropagation();
@@ -46,6 +49,7 @@ export function Modal({ isOpen, onClose, children, className, labelledBy }: Moda
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = originalOverflow;
       previouslyFocused?.focus?.();
     };
   }, [isOpen]);
