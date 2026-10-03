@@ -13,7 +13,7 @@ const TASKS = [
     to: '/redactar',
     icon: FileSignature,
     title: 'Redactar un documento',
-    text: 'Elige entre 48 plantillas o parte de tu propio archivo. Llena los datos y obtén el borrador.',
+    text: 'Elige entre 48 documentos base o parte de tu propio archivo. Llena los datos y obtén el borrador.',
   },
   {
     to: '/revisar',
@@ -62,7 +62,7 @@ function SystemStatus() {
           <p className="font-semibold text-slate-900">{aiReady ? `IA conectada: ${providerLabel(provider)}` : 'IA sin conectar'}</p>
           {!aiReady && (
             <>
-              <p className="text-slate-600">Puedes usar plantillas, la revisión básica y la consulta de leyes.</p>
+              <p className="text-slate-600">Puedes usar documentos base, la revisión básica y la consulta de leyes.</p>
               <Button size="sm" variant="secondary" className="mt-2" onClick={() => requestProcessingSetup('redactar y revisar con IA')}>Conectar IA</Button>
             </>
           )}

@@ -3,12 +3,20 @@
  * machote vive en template-bodies.ts.
  */
 
+export type TemplateFieldType = 'text' | 'date' | 'amount';
+
+export interface TemplateField {
+  id: string;
+  label: string;
+  type: TemplateFieldType;
+}
+
 export interface DraftingTemplate {
   id: string;
   title: string;
   description: string;
   prompt: string;
-  fields: { id: string; label: string; type: string }[];
+  fields: TemplateField[];
   output: string;
   intentGroup?: string;
 }
@@ -38,7 +46,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     prompt: 'Acta de Asamblea General Ordinaria Anual de Accionistas conforme a los artículos 178 a 194 de la Ley General de Sociedades Mercantiles, con orden del día formal, quórum de asistencia y votación, aprobación de estados financieros e informes de administración y del comisario (Art. 166 LGSM), asignación a reserva legal y resolución sobre ratificación u otorgamiento de poderes.',
     fields: [
     { id: 'denominaci_n_social_de_la_sociedad', label: 'Denominación social de la sociedad', type: 'text' },
-    { id: 'fecha_y_hora_de_celebraci_n', label: 'Fecha y hora de celebración', type: 'date' },
+    { id: 'fecha_y_hora_de_celebraci_n', label: 'Fecha y hora de celebración', type: 'text' },
     { id: 'accionistas_presentes_y_porcentaje_de_capital', label: 'Accionistas presentes y porcentaje de capital', type: 'text' },
     { id: 'ejercicio_social_a_aprobar', label: 'Ejercicio social a aprobar', type: 'text' },
     { id: 'resoluciones_sobre_estados_financieros_y_comisario', label: 'Resoluciones sobre estados financieros y comisario', type: 'text' },
@@ -53,10 +61,10 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     description: 'Título de crédito formal con monto líquido, intereses ordinarios y moratorios, vencimiento anticipado y aval solidario.',
     prompt: 'Pagaré mercantil ejecutivo conforme a los artículos 170 a 174 de la Ley General de Títulos y Operaciones de Crédito (LGTOC), estipulando la promesa incondicional de pagar una suma determinada de dinero, fecha y lugar de vencimiento, tasa de interés moratorio mensual, cláusula expresa de vencimiento anticipado por mora y designación de aval solidario.',
     fields: [
-    { id: 'monto_en_n_mero_y_letra', label: 'Monto en número y letra', type: 'amount' },
+    { id: 'monto_en_n_mero_y_letra', label: 'Monto en número y letra', type: 'text' },
     { id: 'acreedor_o_beneficiario', label: 'Acreedor o beneficiario', type: 'text' },
     { id: 'suscriptor_deudor', label: 'Suscriptor / Deudor', type: 'text' },
-    { id: 'fecha_y_lugar_de_pago', label: 'Fecha y lugar de pago', type: 'date' },
+    { id: 'fecha_y_lugar_de_pago', label: 'Fecha y lugar de pago', type: 'text' },
     { id: 'tasa_de_inter_s_moratorio', label: 'Tasa de interés moratorio', type: 'text' },
     { id: 'aval_solidario_si_aplica', label: 'Aval solidario (si aplica)', type: 'text' }
   ],
@@ -104,7 +112,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'vendedor', label: 'Vendedor', type: 'text' },
     { id: 'comprador', label: 'Comprador', type: 'text' },
     { id: 'descripci_n_detallada_de_bienes', label: 'Descripción detallada de bienes', type: 'text' },
-    { id: 'precio_y_condiciones_de_pago', label: 'Precio y condiciones de pago', type: 'amount' },
+    { id: 'precio_y_condiciones_de_pago', label: 'Precio y condiciones de pago', type: 'text' },
     { id: 'lugar_y_plazo_de_entrega', label: 'Lugar y plazo de entrega', type: 'text' },
     { id: 'pacto_de_reserva_de_dominio', label: 'Pacto de reserva de dominio', type: 'text' },
     { id: 'plazo_de_garant_a_por_vicios_ocultos', label: 'Plazo de garantía por vicios ocultos', type: 'text' }
@@ -123,7 +131,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'productos_objeto_de_distribuci_n', label: 'Productos objeto de distribución', type: 'text' },
     { id: 'territorio_asignado', label: 'Territorio asignado', type: 'text' },
     { id: 'r_gimen_de_exclusividad', label: 'Régimen de exclusividad', type: 'text' },
-    { id: 'precios_y_condiciones_de_pago', label: 'Precios y condiciones de pago', type: 'amount' },
+    { id: 'precios_y_condiciones_de_pago', label: 'Precios y condiciones de pago', type: 'text' },
     { id: 'vigencia', label: 'Vigencia', type: 'text' }
   ],
     output: 'Contrato formal de distribución comercial con cláusulas operativas y de exclusividad.',
@@ -155,7 +163,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'proveedor_suministrador', label: 'Proveedor / Suministrador', type: 'text' },
     { id: 'cliente_suministrado', label: 'Cliente / Suministrado', type: 'text' },
     { id: 'bienes_o_insumos_suministrados', label: 'Bienes o insumos suministrados', type: 'text' },
-    { id: 'precio_base_y_f_rmula_de_ajuste', label: 'Precio base y fórmula de ajuste', type: 'amount' },
+    { id: 'precio_base_y_f_rmula_de_ajuste', label: 'Precio base y fórmula de ajuste', type: 'text' },
     { id: 'calendario_o_frecuencia_de_entregas', label: 'Calendario o frecuencia de entregas', type: 'text' },
     { id: 'penas_convencionales_por_mora', label: 'Penas convencionales por mora', type: 'text' },
     { id: 'vigencia', label: 'Vigencia', type: 'text' }
@@ -189,7 +197,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'cedente', label: 'Cedente', type: 'text' },
     { id: 'cesionario', label: 'Cesionario', type: 'text' },
     { id: 'bienes_intelectuales_cedidos_c_digo_marca_dise_o_u_obra', label: 'Bienes intelectuales cedidos (código, marca, diseño u obra)', type: 'text' },
-    { id: 'precio_o_contraprestaci_n', label: 'Precio o contraprestación', type: 'amount' },
+    { id: 'precio_o_contraprestaci_n', label: 'Precio o contraprestación', type: 'text' },
     { id: 'garant_a_de_titularidad_y_saneamiento', label: 'Garantía de titularidad y saneamiento', type: 'text' },
     { id: 'jurisdicci_n', label: 'Jurisdicción', type: 'text' }
   ],
@@ -204,8 +212,8 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'acreedor', label: 'Acreedor', type: 'text' },
     { id: 'deudor', label: 'Deudor', type: 'text' },
-    { id: 'monto_total_reconocido_y_origen_de_la_deuda', label: 'Monto total reconocido y origen de la deuda', type: 'amount' },
-    { id: 'calendario_de_parcialidades_y_fechas_l_mite', label: 'Calendario de parcialidades y fechas límite', type: 'date' },
+    { id: 'monto_total_reconocido_y_origen_de_la_deuda', label: 'Monto total reconocido y origen de la deuda', type: 'text' },
+    { id: 'calendario_de_parcialidades_y_fechas_l_mite', label: 'Calendario de parcialidades y fechas límite', type: 'text' },
     { id: 'tasa_de_inter_s_moratorio', label: 'Tasa de interés moratorio', type: 'text' },
     { id: 'causas_de_vencimiento_anticipado', label: 'Causas de vencimiento anticipado', type: 'text' }
   ],
@@ -218,9 +226,9 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     description: 'Convenio modificatorio universal para prorrogar plazos, ajustar montos, modificar entregables o ratificar garantías de contratos vigentes.',
     prompt: 'Convenio modificatorio (adenda universal) para contratos vigentes conforme al Código de Comercio y Código Civil Federal, con estipulación de prórrogas de plazo, ajuste de montos y contraprestaciones, modificación de entregables o especificaciones, subsistencia de cláusulas no modificadas y ratificación expresa de garantías.',
     fields: [
-    { id: 'contrato_original_y_fecha', label: 'Contrato original y fecha', type: 'date' },
+    { id: 'contrato_original_y_fecha', label: 'Contrato original y fecha', type: 'text' },
     { id: 'partes_firmantes', label: 'Partes firmantes', type: 'text' },
-    { id: 'cl_usulas_objeto_de_modificaci_n_plazos_montos_o_entregables', label: 'Cláusulas objeto de modificación (plazos, montos o entregables)', type: 'amount' },
+    { id: 'cl_usulas_objeto_de_modificaci_n_plazos_montos_o_entregables', label: 'Cláusulas objeto de modificación (plazos, montos o entregables)', type: 'text' },
     { id: 'nueva_redacci_n_y_efectos', label: 'Nueva redacción y efectos', type: 'text' },
     { id: 'ratificaci_n_de_garant_as', label: 'Ratificación de garantías', type: 'text' }
   ],
@@ -234,7 +242,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     prompt: 'Cláusula modelo de pena convencional y liquidación anticipada de daños conforme a los artículos 1840 a 1845 del Código Civil Federal y 376 del Código de Comercio, con cuantificación porcentual o fija, límite legal no superior a la obligación principal, notificación previa y exigibilidad ejecutiva inmediata sin necesidad de declaración judicial previa.',
     fields: [
     { id: 'supuestos_espec_ficos_de_incumplimiento', label: 'Supuestos específicos de incumplimiento', type: 'text' },
-    { id: 'monto_fijo_o_porcentaje_de_pena_diaria_mensual', label: 'Monto fijo o porcentaje de pena diaria/mensual', type: 'amount' },
+    { id: 'monto_fijo_o_porcentaje_de_pena_diaria_mensual', label: 'Monto fijo o porcentaje de pena diaria/mensual', type: 'text' },
     { id: 'tope_m_ximo_de_acumulaci_n_legal', label: 'Tope máximo de acumulación legal', type: 'text' },
     { id: 'mecanismo_y_plazo_formal_de_notificaci_n', label: 'Mecanismo y plazo formal de notificación', type: 'text' }
   ],
@@ -281,7 +289,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'cesionario', label: 'Cesionario', type: 'text' },
     { id: 'deudor_cedido', label: 'Deudor cedido', type: 'text' },
     { id: 'cr_dito_facturas_o_t_tulos_objeto_de_cesi_n', label: 'Crédito, facturas o títulos objeto de cesión', type: 'text' },
-    { id: 'precio_y_condiciones_de_pago_de_la_cesi_n', label: 'Precio y condiciones de pago de la cesión', type: 'amount' },
+    { id: 'precio_y_condiciones_de_pago_de_la_cesi_n', label: 'Precio y condiciones de pago de la cesión', type: 'text' },
     { id: 'mecanismo_de_notificaci_n_al_deudor', label: 'Mecanismo de notificación al deudor', type: 'text' }
   ],
     output: 'Contrato formal de cesión de créditos mercantiles con modelo de notificación anexo.',
@@ -317,7 +325,7 @@ export const LABORAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'patr_n', label: 'Patrón', type: 'text' },
     { id: 'persona_trabajadora', label: 'Persona trabajadora', type: 'text' },
-    { id: 'contrato_laboral_base_y_fecha', label: 'Contrato laboral base y fecha', type: 'date' },
+    { id: 'contrato_laboral_base_y_fecha', label: 'Contrato laboral base y fecha', type: 'text' },
     { id: 'domicilio_del_lugar_de_teletrabajo', label: 'Domicilio del lugar de teletrabajo', type: 'text' },
     { id: 'inventario_de_equipo_y_herramientas_asignadas', label: 'Inventario de equipo y herramientas asignadas', type: 'text' },
     { id: 'monto_de_compensaci_n_de_luz_e_internet', label: 'Monto de compensación de luz e internet', type: 'amount' },
@@ -365,7 +373,7 @@ export const LABORAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'patr_n', label: 'Patrón', type: 'text' },
     { id: 'persona_trabajadora', label: 'Persona trabajadora', type: 'text' },
-    { id: 'fecha_de_ingreso_y_fecha_de_terminaci_n', label: 'Fecha de ingreso y fecha de terminación', type: 'date' },
+    { id: 'fecha_de_ingreso_y_fecha_de_terminaci_n', label: 'Fecha de ingreso y fecha de terminación', type: 'text' },
     { id: 'salario_base_de_liquidaci_n', label: 'Salario base de liquidación', type: 'text' },
     { id: 'desglose_detallado_de_conceptos_liquidados_n_meros_y_letras', label: 'Desglose detallado de conceptos liquidados (números y letras)', type: 'text' },
     { id: 'constancia_de_entrega_de_finiquito_y_constancia_patronal', label: 'Constancia de entrega de finiquito y constancia patronal', type: 'text' }
@@ -381,7 +389,7 @@ export const LABORAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'raz_n_social_del_patr_n', label: 'Razón social del patrón', type: 'text' },
     { id: 'trabajador_sujeto_a_investigaci_n', label: 'Trabajador sujeto a investigación', type: 'text' },
-    { id: 'fecha_hora_y_lugar_del_levantamiento', label: 'Fecha, hora y lugar del levantamiento', type: 'date' },
+    { id: 'fecha_hora_y_lugar_del_levantamiento', label: 'Fecha, hora y lugar del levantamiento', type: 'text' },
     { id: 'relaci_n_circunstanciada_de_los_hechos_imputados', label: 'Relación circunstanciada de los hechos imputados', type: 'text' },
     { id: 'nombre_y_declaraci_n_de_2_testigos', label: 'Nombre y declaración de 2 testigos', type: 'text' },
     { id: 'manifestaci_n_y_descargos_del_trabajador', label: 'Manifestación y descargos del trabajador', type: 'text' }
@@ -418,7 +426,7 @@ export const COMERCIO_EXTERIOR_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'descripci_n_y_especificaciones_de_las_mercanc_as', label: 'Descripción y especificaciones de las mercancías', type: 'text' },
     { id: 'regla_incoterms_2020_aplicable_fob_cif_dap_ddp_etc', label: 'Regla Incoterms® 2020 aplicable (FOB, CIF, DAP, DDP, etc.)', type: 'text' },
     { id: 'puerto_o_lugar_convenido_de_entrega', label: 'Puerto o lugar convenido de entrega', type: 'text' },
-    { id: 'precio_unitario_total_y_moneda_usd_eur', label: 'Precio unitario, total y moneda (USD/EUR)', type: 'amount' },
+    { id: 'precio_unitario_total_y_moneda_usd_eur', label: 'Precio unitario, total y moneda (USD/EUR)', type: 'text' },
     { id: 'forma_y_medios_de_pago_internacional', label: 'Forma y medios de pago internacional', type: 'text' },
     { id: 'documentos_de_embarque_y_aduaneros_exigidos', label: 'Documentos de embarque y aduaneros exigidos', type: 'text' }
   ],
@@ -602,7 +610,7 @@ export const ADUANAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'importador_y_rfc', label: 'Importador y RFC', type: 'text' },
     { id: 'proveedor_vendedor_en_el_extranjero', label: 'Proveedor / Vendedor en el extranjero', type: 'text' },
     { id: 'm_todo_de_valoraci_n_aduanera_aplicado', label: 'Método de valoración aduanera aplicado', type: 'text' },
-    { id: 'precio_pagado_o_por_pagar_factura_y_moneda', label: 'Precio pagado o por pagar (factura y moneda)', type: 'amount' },
+    { id: 'precio_pagado_o_por_pagar_factura_y_moneda', label: 'Precio pagado o por pagar (factura y moneda)', type: 'text' },
     { id: 'desglose_de_gastos_incrementables_flete_seguro_embalaje', label: 'Desglose de gastos incrementables (flete, seguro, embalaje)', type: 'text' },
     { id: 'existencia_de_vinculaci_n_entre_las_partes', label: 'Existencia de vinculación entre las partes', type: 'text' },
     { id: 'documentos_soporte_adjuntos', label: 'Documentos soporte adjuntos', type: 'text' }
@@ -616,7 +624,7 @@ export const ADUANAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     description: 'Escrito técnico y justificación de rectificación de pedimento bajo el Art. 89 de la Ley Aduanera y Anexo 22 RGCE.',
     prompt: 'Solicitud técnica y memorándum de rectificación de pedimento con clave R1 conforme al artículo 89 de la Ley Aduanera y Reglas Generales de Comercio Exterior, identificando número y fecha del pedimento original, patente y aduana, descripción del campo o dato inexacto, dato correcto que debe asentarse, causa y justificación técnica del error, documentación soporte probatoria y acreditación de no encontrarse bajo facultades de comprobación.',
     fields: [
-    { id: 'pedimento_original_y_fecha_de_pago', label: 'Pedimento original y fecha de pago', type: 'date' },
+    { id: 'pedimento_original_y_fecha_de_pago', label: 'Pedimento original y fecha de pago', type: 'text' },
     { id: 'patente_aduanal_y_aduana_de_despacho', label: 'Patente aduanal y aduana de despacho', type: 'text' },
     { id: 'campo_o_bloque_espec_fico_a_rectificar', label: 'Campo o bloque específico a rectificar', type: 'text' },
     { id: 'dato_original_declarado_vs_dato_correcto_a_asentar', label: 'Dato original declarado vs. Dato correcto a asentar', type: 'text' },
@@ -687,7 +695,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'mutuante_prestamista_y_rfc', label: 'Mutuante / Prestamista y RFC', type: 'text' },
     { id: 'mutuario_prestatario_y_rfc', label: 'Mutuario / Prestatario y RFC', type: 'text' },
-    { id: 'monto_prestado_y_comprobante_de_transferencia_bancaria', label: 'Monto prestado y comprobante de transferencia bancaria', type: 'amount' },
+    { id: 'monto_prestado_y_comprobante_de_transferencia_bancaria', label: 'Monto prestado y comprobante de transferencia bancaria', type: 'text' },
     { id: 'tasa_de_inter_s_anual_pactada', label: 'Tasa de interés anual pactada', type: 'text' },
     { id: 'plazo_calendario_de_pagos_y_cuenta_bancaria', label: 'Plazo, calendario de pagos y cuenta bancaria', type: 'text' },
     { id: 'retenci_n_fiscal_de_isr_sobre_intereses', label: 'Retención fiscal de ISR sobre intereses', type: 'text' },
@@ -705,7 +713,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'acreedor_y_rfc', label: 'Acreedor y RFC', type: 'text' },
     { id: 'deudor_y_rfc', label: 'Deudor y RFC', type: 'text' },
     { id: 'saldo_total_l_quido_reconocido_y_origen_contractual_fiscal', label: 'Saldo total líquido reconocido y origen contractual/fiscal', type: 'text' },
-    { id: 'calendario_detallado_de_parcialidades_y_montos', label: 'Calendario detallado de parcialidades y montos', type: 'amount' },
+    { id: 'calendario_detallado_de_parcialidades_y_montos', label: 'Calendario detallado de parcialidades y montos', type: 'text' },
     { id: 'tasa_de_inter_s_moratorio', label: 'Tasa de interés moratorio', type: 'text' },
     { id: 'causas_de_vencimiento_anticipado', label: 'Causas de vencimiento anticipado', type: 'text' }
   ],
@@ -753,7 +761,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'arrendador_y_rfc', label: 'Arrendador y RFC', type: 'text' },
     { id: 'arrendatario_y_rfc', label: 'Arrendatario y RFC', type: 'text' },
     { id: 'ubicaci_n_exacta_del_inmueble_comercial', label: 'Ubicación exacta del inmueble comercial', type: 'text' },
-    { id: 'renta_mensual_iva_y_retenciones_aplicables', label: 'Renta mensual, IVA y retenciones aplicables', type: 'amount' },
+    { id: 'renta_mensual_iva_y_retenciones_aplicables', label: 'Renta mensual, IVA y retenciones aplicables', type: 'text' },
     { id: 'n_mero_de_cuenta_predial_para_cfdi', label: 'Número de cuenta predial para CFDI', type: 'text' },
     { id: 'destino_comercial_autorizado', label: 'Destino comercial autorizado', type: 'text' },
     { id: 'dep_sito_en_garant_a_y_fiador', label: 'Depósito en garantía y fiador', type: 'text' }
@@ -787,7 +795,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     { id: 'deudor_y_rfc', label: 'Deudor y RFC', type: 'text' },
     { id: 'adeudo_l_quido_original_a_extinguir', label: 'Adeudo líquido original a extinguir', type: 'text' },
     { id: 'descripci_n_y_aval_o_pericial_de_bienes_entregados_en_pago', label: 'Descripción y avalúo pericial de bienes entregados en pago', type: 'text' },
-    { id: 'fecha_y_lugar_de_entrega_material_y_jur_dica', label: 'Fecha y lugar de entrega material y jurídica', type: 'date' },
+    { id: 'fecha_y_lugar_de_entrega_material_y_jur_dica', label: 'Fecha y lugar de entrega material y jurídica', type: 'text' },
     { id: 'finiquito_y_liberaci_n_total_de_obligaciones', label: 'Finiquito y liberación total de obligaciones', type: 'text' }
   ],
     output: 'Convenio formal de dación en pago con avalúo y efectos fiscales de extinción de obligaciones.',
@@ -801,7 +809,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
     fields: [
     { id: 'contratista_prestador_especializado_y_rfc', label: 'Contratista / Prestador Especializado y RFC', type: 'text' },
     { id: 'contratante_cliente_y_rfc', label: 'Contratante / Cliente y RFC', type: 'text' },
-    { id: 'folio_de_registro_repse_vigente_y_fecha_de_renovaci_n', label: 'Folio de registro REPSE vigente y fecha de renovación', type: 'date' },
+    { id: 'folio_de_registro_repse_vigente_y_fecha_de_renovaci_n', label: 'Folio de registro REPSE vigente y fecha de renovación', type: 'text' },
     { id: 'descripci_n_t_cnica_de_los_servicios_especializados_asignados', label: 'Descripción técnica de los servicios especializados asignados', type: 'text' },
     { id: 'manifestaci_n_de_no_formar_parte_del_objeto_social_preponderante_del_cliente', label: 'Manifestación de no formar parte del objeto social preponderante del cliente', type: 'text' },
     { id: 'n_mero_de_personal_asignado_y_matriz_mensual_de_entregables_sua_sipare_cfdi_n_mina', label: 'Número de personal asignado y matriz mensual de entregables (SUA, SIPARE, CFDI nómina)', type: 'text' }

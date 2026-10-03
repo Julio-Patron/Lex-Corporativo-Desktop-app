@@ -26,14 +26,14 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
         <button type="button" onClick={onStartFromFile} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-card hover:border-slate-300">
           <Upload size={20} className="mt-0.5 shrink-0 text-legal-950" aria-hidden="true" />
           <span>
-            <span className="block text-sm font-semibold text-slate-950">Partir de mi propio archivo</span>
+            <span className="block text-sm font-semibold text-legal-950">Partir de mi propio archivo</span>
             <span className="mt-0.5 block text-sm text-slate-600">Sube un documento y describe los cambios. Requiere IA.</span>
           </span>
         </button>
         <button type="button" onClick={onStartFree} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-card hover:border-slate-300">
           <FilePlus2 size={20} className="mt-0.5 shrink-0 text-legal-950" aria-hidden="true" />
           <span>
-            <span className="block text-sm font-semibold text-slate-950">Redactar sin plantilla</span>
+            <span className="block text-sm font-semibold text-legal-950">Redactar sin documento base</span>
             <span className="mt-0.5 block text-sm text-slate-600">Describe el documento que necesitas. Requiere IA.</span>
           </span>
         </button>
@@ -46,8 +46,8 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
             <TextInput
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Buscar plantilla: pagaré, arrendamiento, confidencialidad…"
-              aria-label="Buscar plantilla"
+              placeholder="Buscar documento base: pagaré, arrendamiento, confidencialidad…"
+              aria-label="Buscar documento base"
               className="pl-9"
             />
           </div>
@@ -69,40 +69,51 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
             ))}
           </div>
         </div>
-        <p className="mt-3 text-sm text-slate-500">{templates.length} plantillas</p>
+        <p className="mt-3 text-sm text-slate-500">{templates.length} documentos base</p>
       </Card>
 
       {templates.length === 0 ? (
-        <EmptyState icon={Search} title="No hay plantillas con ese nombre" description="Prueba con otra palabra o redacta sin plantilla." />
+        <EmptyState icon={Search} title="No hay documentos base con ese nombre" description="Prueba con otra palabra o redacta sin documento base." />
       ) : (
-        <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {templates.map((template) => (
-            <li key={template.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-card">
-              <div className="flex items-center justify-between gap-2">
-                <AreaTag area={template.area} />
-                {template.intentGroup && <span className="truncate text-xs text-slate-500">{template.intentGroup}</span>}
-              </div>
-              <p className="mt-3 text-sm font-semibold text-slate-950">{template.title}</p>
-              <p className="mt-1 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">{template.description}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                {aiReady ? (
-                  <>
-                    <Button size="sm" onClick={() => onCustomize(template)}>Personalizar</Button>
-                    <Button size="sm" variant="secondary" onClick={() => onOpenTemplate(template)}>Machote</Button>
-                  </>
-                ) : (
-                  <>
-                    <Button size="sm" onClick={() => onOpenTemplate(template)}>Abrir machote</Button>
-                    <Button size="sm" variant="secondary" onClick={() => onCustomize(template)}>Con IA</Button>
-                  </>
-                )}
-                <Button size="sm" variant="ghost" onClick={() => setPreview(template)} aria-label={`Ver ${template.title}`}>
-                  <Eye size={15} aria-hidden="true" /> Ver
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-8">
+          {LEGAL_AREAS.map((a) => {
+            const areaTemplates = templates.filter(t => t.area === a);
+            if (areaTemplates.length === 0) return null;
+            return (
+              <section key={a} className="space-y-4">
+                <h3 className="text-lg font-bold text-legal-950 border-b border-slate-200 pb-2">{LEGAL_AREA_INFO[a].label}</h3>
+                <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {areaTemplates.map((template) => (
+                    <li key={template.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-card transition-shadow hover:shadow-md">
+                      <div className="flex items-center justify-between gap-2">
+                        <AreaTag area={template.area} />
+                        {template.intentGroup && <span className="truncate text-xs font-medium text-slate-500 uppercase tracking-wider">{template.intentGroup}</span>}
+                      </div>
+                      <p className="mt-4 text-base font-semibold text-legal-950 leading-tight">{template.title}</p>
+                      <p className="mt-2 line-clamp-3 flex-1 text-sm text-slate-600 leading-relaxed">{template.description}</p>
+                      <div className="mt-5 flex flex-wrap items-center gap-2 pt-4 border-t border-slate-50">
+                        {aiReady ? (
+                          <>
+                            <Button size="sm" onClick={() => onCustomize(template)}>Redactar con IA</Button>
+                            <Button size="sm" variant="secondary" onClick={() => onOpenTemplate(template)}>Abrir documento</Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button size="sm" onClick={() => onOpenTemplate(template)}>Abrir documento</Button>
+                            <Button size="sm" variant="secondary" onClick={() => onCustomize(template)}>Con IA</Button>
+                          </>
+                        )}
+                        <Button size="sm" variant="ghost" onClick={() => setPreview(template)} aria-label={`Ver ${template.title}`}>
+                          <Eye size={15} aria-hidden="true" />
+                        </Button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            );
+          })}
+        </div>
       )}
 
       <TemplatePreviewDialog

@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest';
+import type { DraftingTemplate } from './constants';
 import { buildDraftRequirements, documentTitleFrom, hasDraftInput, searchTemplates, TEMPLATE_CATALOG, templateArea } from './drafting';
 
-const template = {
+const template: DraftingTemplate = {
   id: 'laboral-contrato-prueba',
   title: 'Contrato individual de trabajo',
   description: 'Contrato por tiempo indeterminado',
   prompt: 'Contrato conforme a la LFT',
-  fields: [{id: 'patron', label: 'Patrón', type: 'text'}, {id: 'trabajador', label: 'Persona trabajadora', type: 'text'}, {id: 'salario', label: 'Salario', type: 'amount'}],
+  fields: [
+    { id: 'patron', label: 'Patrón', type: 'text' },
+    { id: 'trabajador', label: 'Persona trabajadora', type: 'text' },
+    { id: 'salario', label: 'Salario', type: 'amount' },
+  ],
   output: 'Contrato',
 };
 
@@ -14,7 +19,7 @@ describe('drafting helpers', () => {
   it('builds requirements from the form and flags missing data', () => {
     const requirements = buildDraftRequirements({
       template,
-      fieldValues: { 'Patrón': 'ACME SA de CV', 'Salario': '$25,000 mensuales' },
+      fieldValues: { patron: 'ACME SA de CV', salario: '$25,000 mensuales' },
       instructions: 'Incluir cláusula de teletrabajo.',
       hasReferenceFile: false,
     });
@@ -33,7 +38,15 @@ describe('drafting helpers', () => {
 
   it('requires at least one datum or instruction', () => {
     expect(hasDraftInput({ template, fieldValues: {}, instructions: '  ', hasReferenceFile: false })).toBe(false);
-    expect(hasDraftInput({ template, fieldValues: { Salario: '10' }, instructions: '', hasReferenceFile: false })).toBe(true);
+    expect(hasDraftInput({ template, fieldValues: { salario: '10' }, instructions: '', hasReferenceFile: false })).toBe(true);
+  });
+
+  it('gives every catalog field a unique, non-empty id within its template', () => {
+    for (const item of TEMPLATE_CATALOG) {
+      const ids = item.fields.map((field) => field.id);
+      expect(ids.every(Boolean)).toBe(true);
+      expect(new Set(ids).size).toBe(ids.length);
+    }
   });
 
   it('finds templates across areas ignoring accents and case', () => {

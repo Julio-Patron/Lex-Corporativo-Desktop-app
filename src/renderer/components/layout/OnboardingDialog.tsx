@@ -24,7 +24,7 @@ function markOnboardingDone() {
 }
 
 const TASKS = [
-  { icon: FileSignature, title: 'Redactar', text: 'Contratos, actas, poderes y escritos a partir de 48 plantillas en cinco materias.' },
+  { icon: FileSignature, title: 'Redactar', text: 'Contratos, actas, poderes y escritos a partir de 48 documentos base en cinco materias.' },
   { icon: ShieldCheck, title: 'Revisar', text: 'Detecta riesgos y omisiones en tus documentos y prepara la adenda que los corrige.' },
   { icon: BookOpenCheck, title: 'Consultar leyes', text: '16 leyes federales instaladas, con búsqueda por tema y lector por artículo.' },
 ];
@@ -69,7 +69,7 @@ export function OnboardingDialog() {
         <div>
           <h2 id={titleId} className="text-xl font-semibold text-slate-950">Conecta tu IA (opcional)</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Con una API key de Google Gemini, OpenAI o Anthropic puedes redactar con IA y obtener revisiones completas. Sin ella puedes usar las plantillas, la revisión básica y la consulta de leyes.
+            Con una API key de Google Gemini, OpenAI o Anthropic puedes redactar con IA y obtener revisiones completas. Sin ella puedes usar los documentos base, la revisión básica y la consulta de leyes.
           </p>
           <div className="mt-5">
             {aiReady ? (

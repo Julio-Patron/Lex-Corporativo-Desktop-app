@@ -18,9 +18,9 @@ interface DraftDetailsProps {
 }
 
 const SOURCE_TITLES: Record<DraftSession['source'], string> = {
-  template: 'Plantilla',
+  template: 'Documento base',
   file: 'Documento a partir de tu archivo',
-  free: 'Redacción sin plantilla',
+  free: 'Redacción sin documento base',
   review: 'Adenda o cláusula a partir de una revisión',
 };
 
@@ -152,8 +152,8 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           {template && (
             <>
               <div className="border-t border-slate-100" />
-              <Button isFullWidth variant="secondary" onClick={onOpenTemplate} disabled={generating}>Abrir machote sin IA</Button>
-              <p className="text-xs leading-relaxed text-slate-500">Abre el texto completo de la plantilla para llenarlo a mano. Los datos de este formulario no se trasladan.</p>
+              <Button isFullWidth variant="secondary" onClick={onOpenTemplate} disabled={generating}>Abrir documento sin IA</Button>
+              <p className="text-xs leading-relaxed text-slate-500">Abre el texto completo del documento base para llenarlo a mano. Los datos de este formulario no se trasladan.</p>
             </>
           )}
         </Card>

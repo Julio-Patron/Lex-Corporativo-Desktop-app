@@ -18,9 +18,9 @@ const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
   '/redactar': {
     title: 'Redactar',
     steps: [
-      'Paso 1: busca una plantilla por nombre o filtra por materia. También puedes partir de tu propio archivo o redactar sin plantilla.',
+      'Paso 1: busca un documento base por nombre o filtra por materia. También puedes partir de tu propio archivo o redactar sin documento base.',
       'Paso 2: completa los datos del formulario. Los campos vacíos se marcan como [DATO FALTANTE] en el borrador.',
-      '"Usar plantilla sin IA" abre el machote completo para llenarlo a mano. "Redactar con IA" genera el borrador con tu proveedor.',
+      '"Abrir documento sin IA" abre el texto completo para llenarlo a mano. "Redactar con IA" genera el borrador con tu proveedor.',
       'Paso 3: revisa, edita y exporta a PDF o Word. Tras guardarlo, los cambios se guardan solos.',
     ],
   },

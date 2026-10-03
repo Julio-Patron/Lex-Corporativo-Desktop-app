@@ -41,7 +41,7 @@ export function TemplatePreviewDialog({ template, onClose, onOpenTemplate, onCus
         </aside>
       </div>
       <footer className="flex flex-wrap justify-end gap-2 border-t border-slate-200 px-6 py-4">
-        <Button variant="secondary" onClick={() => onOpenTemplate(template)}>Abrir machote sin IA</Button>
+        <Button variant="secondary" onClick={() => onOpenTemplate(template)}>Abrir documento sin IA</Button>
         <Button onClick={() => onCustomize(template)}>Personalizar con IA</Button>
       </footer>
     </Modal>
