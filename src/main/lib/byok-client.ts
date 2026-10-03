@@ -71,9 +71,31 @@ export function composeLimitedByokPromptWithDisclosure(
   const minimumEvidenceBudget = Math.min(8_000, Math.floor(sections.maxChars * 0.25));
   const mandatoryBudget = Math.max(0, sections.maxChars - minimumEvidenceBudget - reservedFormattingChars);
 
-  const instructionBudget = Math.min(instruction.length, Math.max(2_000, Math.floor(mandatoryBudget * 0.3)));
-  const outputBudget = Math.min(outputContract.length, Math.max(2_000, Math.floor(mandatoryBudget * 0.25)));
-  const legalBudget = Math.max(0, mandatoryBudget - instructionBudget - outputBudget);
+  if (mandatoryBudget < 5_000) {
+    throw new Error('El límite de caracteres configurado es demasiado bajo para mantener el contexto legal y las instrucciones.');
+  }
+
+  // Pre-calcular necesidades
+  const instructionNeed = instruction.length;
+  const outputNeed = outputContract.length;
+  const legalNeed = legalContext.length;
+
+  // Asignar mínimos garantizados a cada sección
+  const minInstruction = Math.min(instructionNeed, Math.floor(mandatoryBudget * 0.25));
+  const minOutput = Math.min(outputNeed, Math.floor(mandatoryBudget * 0.25));
+  
+  // El resto va al contexto legal primero, hasta cubrir su necesidad
+  let remainingBudget = mandatoryBudget - minInstruction - minOutput;
+  const legalBudget = Math.min(legalNeed, remainingBudget);
+  remainingBudget -= legalBudget;
+
+  // Repartir lo que sobra entre instruction y output contract
+  const instructionExtra = Math.min(instructionNeed - minInstruction, remainingBudget);
+  const instructionBudget = minInstruction + instructionExtra;
+  remainingBudget -= instructionExtra;
+
+  const outputExtra = Math.min(outputNeed - minOutput, remainingBudget);
+  const outputBudget = minOutput + outputExtra;
 
   const preservedInstruction = truncateSection(instruction, instructionBudget, 'INSTRUCCIÓN RECORTADA');
   const preservedLegal = truncateSection(legalContext, legalBudget, 'FUNDAMENTOS RECORTADOS');
@@ -232,21 +254,27 @@ function cleanGeminiSchema(rawSchema: any): any {
   if (!rawSchema || typeof rawSchema !== 'object') return rawSchema;
   const defs = rawSchema.$defs || rawSchema.definitions || {};
 
-  function resolve(obj: any): any {
+  function resolve(obj: any, seen: Set<any> = new Set()): any {
     if (!obj || typeof obj !== 'object') return obj;
-    if (Array.isArray(obj)) return obj.map(resolve);
+    if (seen.has(obj)) {
+      // Si hay un ciclo real en el objeto, devolvemos un objeto vacío u omitimos para evitar stack overflow
+      return {}; 
+    }
+    seen.add(obj);
+
+    if (Array.isArray(obj)) return obj.map(item => resolve(item, new Set(seen)));
 
     if (typeof obj.$ref === 'string') {
       const match = obj.$ref.match(/#\/(?:\$defs|definitions)\/([A-Za-z0-9_-]+)/);
       if (match && defs[match[1]]) {
-        return resolve(defs[match[1]]);
+        return resolve(defs[match[1]], new Set(seen));
       }
     }
 
     const clean: Record<string, any> = {};
     for (const [key, val] of Object.entries(obj)) {
       if (GEMINI_UNSUPPORTED_KEYWORDS.has(key)) continue;
-      clean[key] = resolve(val);
+      clean[key] = resolve(val, new Set(seen));
     }
     return clean;
   }
@@ -354,13 +382,17 @@ const ANTHROPIC_UNSUPPORTED_SCHEMA_KEYWORDS = new Set([
 
 // Las restricciones numéricas y de longitud no se admiten en la salida
 // estructurada; el esquema zod del proceso principal las valida después.
-function cleanAnthropicSchema(value: unknown): unknown {
-  if (Array.isArray(value)) return value.map(cleanAnthropicSchema);
+function cleanAnthropicSchema(value: unknown, seen: Set<any> = new Set()): unknown {
   if (!value || typeof value !== 'object') return value;
+  if (seen.has(value)) return {};
+  seen.add(value);
+
+  if (Array.isArray(value)) return value.map(item => cleanAnthropicSchema(item, new Set(seen)));
+
   return Object.fromEntries(
     Object.entries(value)
       .filter(([key]) => !ANTHROPIC_UNSUPPORTED_SCHEMA_KEYWORDS.has(key))
-      .map(([key, nested]) => [key, cleanAnthropicSchema(nested)]),
+      .map(([key, nested]) => [key, cleanAnthropicSchema(nested, new Set(seen))]),
   );
 }
 
