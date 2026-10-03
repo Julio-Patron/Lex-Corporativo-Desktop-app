@@ -17,6 +17,8 @@ import {
   saveCaseState,
   saveDraft,
 } from '../lib/case-vault';
+import { getByokSettings } from '../lib/byok-settings';
+import { computeCaseRetentionUntil } from '../../shared/case-retention';
 
 const caseIdRegex = /^[a-zA-Z0-9-_]+$/;
 
@@ -25,7 +27,6 @@ export const CreateCaseSchema = z.object({
   caseId: z.string().min(1).regex(caseIdRegex, "Invalid case ID format"),
   name: z.string().min(1),
   module: z.enum(['engineering', 'fiscal', 'mercantil']),
-  retentionUntil: z.string().datetime().optional(),
 });
 
 export const RenameCaseSchema = z.object({
@@ -99,7 +100,10 @@ export function registerVaultHandlers(): void {
   ipcMain.handle('vault:create-case', async (_event, rawPayload: unknown) => {
     try {
       const payload = CreateCaseSchema.parse(rawPayload);
-      return await createCase(payload.caseId, payload.name, payload.module, payload.retentionUntil);
+      // La conservación la decide la preferencia local, no el renderer: cada
+      // actividad renueva el plazo cuando la política tiene caducidad.
+      const retentionUntil = computeCaseRetentionUntil(new Date(), getByokSettings().caseRetentionDays) ?? undefined;
+      return await createCase(payload.caseId, payload.name, payload.module, retentionUntil);
     } catch (err: any) {
       console.error('[IPC Vault] create-case validation or storage error:', err);
       throw new Error(`Error en el portafolio al crear actividad: ${err.message}`);

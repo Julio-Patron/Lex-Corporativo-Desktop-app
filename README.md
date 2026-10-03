@@ -38,6 +38,6 @@ npm run preflight:release
 npm run build:electron
 ```
 
-El instalador incluye el corpus jurídico, LanceDB, MiniLM y plantillas. No incluye un LLM ni un motor generativo local. Antes de publicar se debe validar una instalación limpia, una API key de cada proveedor soportado, firma, actualización y desinstalación.
+El instalador incluye el corpus jurídico, LanceDB y MiniLM. No incluye un LLM ni un motor generativo local. Antes de publicar se debe validar una instalación limpia, una API key de cada proveedor soportado, firma, actualización y desinstalación.
 
 La decisión de producto y sus gates están en [docs/arquitectura-procesamiento-y-gate-publicacion.md](docs/arquitectura-procesamiento-y-gate-publicacion.md).

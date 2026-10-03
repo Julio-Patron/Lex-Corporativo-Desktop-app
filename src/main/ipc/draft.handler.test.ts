@@ -6,7 +6,7 @@ vi.mock('electron', () => ({
   },
 }));
 
-import { parseDraftPayload } from './draft.handler';
+import { parseDraftPayload, renderSourceAnalysis } from './draft.handler';
 
 describe('draft payload validation', () => {
   it('accepts drafting without a predefined template', () => {
@@ -32,7 +32,7 @@ describe('draft payload validation', () => {
         id: 'fiscal-escrito-sat',
         title: 'Escrito SAT',
         prompt: 'Escrito libre al SAT.',
-        requiredFields: ['RFC', 'Folio'],
+        fields: [{ id: 'rfc', label: 'RFC', type: 'text' }, { id: 'folio', label: 'Folio', type: 'text' }],
         output: 'Escrito libre.',
       },
     });
@@ -123,5 +123,15 @@ describe('draft payload validation', () => {
         prompt: 'Escrito libre al SAT.',
       },
     })).toThrow('templateId no coincide');
+  });
+
+  it('reads the saved review whether it is stored as a record or as a bare result', () => {
+    const result = { summary: 'Faltan cláusulas de jurisdicción.', documentType: 'Contrato', missingClauses: ['Jurisdicción'] };
+    const fromRecord = renderSourceAnalysis({ id: 'rev-1', title: 'Revisión', result });
+    const fromResult = renderSourceAnalysis(result);
+
+    expect(fromRecord.text).toContain('Faltan cláusulas de jurisdicción.');
+    expect(fromRecord.text).toContain('- Jurisdicción');
+    expect(fromRecord.text).toBe(fromResult.text);
   });
 });

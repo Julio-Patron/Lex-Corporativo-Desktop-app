@@ -1,187 +1,4 @@
-
-// Local desktop user profile.
-export interface LexUser {
-  id: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-}
-
-export enum AppView {
-  INTRODUCTION = 'INTRODUCTION',
-  DASHBOARD = 'DASHBOARD',
-  PORTAFOLIO = 'PORTAFOLIO',
-  FISCAL = 'FISCAL',
-  LEGAL_ENGINEERING = 'LEGAL_ENGINEERING',
-  PRIVACY = 'PRIVACY',
-  TERMS = 'TERMS',
-  SETTINGS = 'SETTINGS'
-}
-
-export type ModuleTab =
-  | 'fiscal-home'
-  | 'analysis'
-  | 'fiscal-preparation'
-  | 'fiscal-materiality'
-  | 'fiscal-deductibility'
-  | 'fiscal-documentation'
-  | 'drafting'
-  | 'fiscal-regulations';
-
-export type FiscalOperationStep = 'preparation' | 'materiality' | 'deductibility' | 'documentation';
-
-export type FiscalReviewFocus = 'complete' | 'materiality' | 'deductibility' | 'documentation';
-
-export type FiscalEvidenceStatus = 'supported' | 'attention' | 'missing';
-
-export interface FiscalEvidenceRecord {
-  id: string;
-  analysisId?: string;
-  status: FiscalEvidenceStatus;
-  title: string;
-  detail?: string;
-  sourceFiles: string[];
-  foundations: string[];
-  action?: string;
-}
-
-export interface FiscalCfdiRecord {
-  fileName: string;
-  uuid?: string;
-  version?: string;
-  issuerRfc?: string;
-  receiverRfc?: string;
-  total?: string;
-  currency?: string;
-  issuedAt?: string;
-}
-
-export interface FiscalOperationState {
-  title: string;
-  description: string;
-  evidenceFiles: Array<{ name: string; type: string }>;
-  reviewFocus: FiscalReviewFocus;
-  cfdiRecords: FiscalCfdiRecord[];
-  evidenceMatrix: FiscalEvidenceRecord[];
-  resolvedEvidenceIds: string[];
-  materialityAnswers: Record<string, string>;
-  deductibilityAnswers: Record<string, string>;
-  completedSteps: FiscalOperationStep[];
-  lastActiveTab?: ModuleTab;
-  updatedAt?: string;
-}
-
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-  isThinking?: boolean;
-}
-
-export type LegalFoundation = {
-  id: string;
-  title: string;
-  law: string;
-  article?: string;
-  excerpt?: string;
-  source?: string;
-  relevanceScore?: number;
-};
-
-export type DocumentAnalysisResult = {
-  summary: string;
-  documentType: string;
-  riskScore: number;
-  detectedParties: string[];
-  detectedObligations: string[];
-  missingClauses: string[];
-  missingData?: string[];
-  risks: Array<{
-    title: string;
-    severity: "low" | "medium" | "high";
-    explanation: string;
-    relatedClauses: string[];
-    legalFoundations: LegalFoundation[];
-  }>;
-  recommendedActions: string[];
-  checklist?: string[];
-  riskCategories?: {
-    materialidad?: string[];
-    deducibilidad?: string[];
-    ivaAcreditable?: string[];
-    operacionesInexistentes?: string[];
-    laborales?: string[];
-    comercioExterior?: string[];
-    aduanales?: string[];
-    documentales?: string[];
-    logisticos?: string[];
-    clasificacionArancelaria?: string[];
-  };
-  legalFoundations: LegalFoundation[];
-  groundingClaims?: Array<{
-    claimId: string;
-    heading: string;
-    text: string;
-    sourceIds: string[];
-  }>;
-  evidenceMatrix?: FiscalEvidenceRecord[];
-  confidence: "low" | "medium" | "high";
-  engine: "rules" | "local-embeddings" | "byok";
-};
-
-export interface AnalyzedFile {
-  fileName: string;
-  fileBase64: string;
-  mimeType: string;
-  previewUrl: string | null;
-}
-
-export interface AnalyzedDocumentHistory {
-  id: string;
-  requestId?: string;
-  timestamp: string;
-  files: { name: string; type: string }[];
-  result: DocumentAnalysisResult;
-  module: 'fiscal' | 'engineering';
-  ecosystem?: 'fiscal' | 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'integral';
-  promptProfile?: string;
-  currentDocumentOnly?: true;
-  customInstruction: string;
-  executionMode?: 'local' | 'byok';
-  engine?: 'byok' | 'rules';
-  provider?: 'gemini' | 'openai' | 'anthropic';
-}
-
-export interface DraftingHistory {
-  id: string;
-  timestamp: Date | string;
-  prompt: string;
-  requestId?: string;
-  sourceAnalysisId?: string;
-  sourceDocumentAnalysis?: DocumentAnalysisResult;
-  area?: 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
-  ecosystem?: 'mercantil' | 'fiscal' | 'laboral' | 'comercio_exterior' | 'aduanal';
-  promptProfile?: 'mercantil_drafting' | 'fiscal_drafting' | 'laboral_drafting' | 'comercio_exterior_drafting' | 'aduanal_drafting';
-  templateId?: string;
-  templateTitle?: string;
-  referenceFileName?: string;
-  generatedDoc?: string;
-  executionMode?: 'local' | 'byok';
-  engine?: 'byok';
-  provider?: 'gemini' | 'openai' | 'anthropic';
-}
-
-export interface SavedCase {
-  id: string;
-  name: string;
-  date: string;
-  module?: 'engineering' | 'fiscal' | 'mercantil';
-  createdAt?: string;
-  retentionUntil?: string;
-  fiscalAnalysisHistory?: AnalyzedDocumentHistory[];
-  engineeringDraftingHistory?: DraftingHistory[];
-  fiscalDraftingHistory?: DraftingHistory[];
-  analysisHistory?: AnalyzedDocumentHistory[];
-}
+import type { ByokProviderId, LegalArea } from '../preload/types';
 
 export type NotificationType = 'error' | 'success' | 'info' | 'warning';
 
@@ -192,45 +9,87 @@ export interface AppNotification {
   title?: string;
 }
 
-// ── Local license posture ─────────────────────────────────
-
-export interface UserSubscription {
-  licenseId: string | null;
-  planId?: string | null;
-  subscriptionStatus?: string | null;
-  currentPeriodEnd?: string | null;
-  freeChatsUsed?: number;
-  freeAnalysesUsed?: number;
-  freeDraftsUsed?: number;
-}
-
-export const DEFAULT_SUBSCRIPTION: UserSubscription = {
-  licenseId: null,
-  planId: null,
-  subscriptionStatus: null,
-  currentPeriodEnd: null,
-  freeChatsUsed: 0,
-  freeAnalysesUsed: 0,
-  freeDraftsUsed: 0,
-};
-
-// ── Legal Knowledge Infrastructure ──────────────────────────────
-
-export interface LegalCitation {
-  sourceId: string;
-  sourceType: 'legislation' | 'jurisprudence' | 'regulation' | 'criterion' | 'other';
-  legalArea: 'fiscal' | 'mercantil' | string;
+export interface LegalFoundation {
+  id: string;
   title: string;
+  law: string;
   article?: string;
-  section?: string;
-  authority?: string;
-  version?: string;
-  effectiveDate?: string;
-  lastReformDate?: string;
-  lastCheckedAt?: string;
-  lastIngestedAt?: string;
-  citationLabel: string;
-  sourceUrl?: string;
-  retrievedTextSnippet?: string;
+  excerpt?: string;
   relevanceScore?: number;
 }
+
+export interface ReviewRisk {
+  title: string;
+  severity: 'low' | 'medium' | 'high';
+  explanation: string;
+  relatedClauses?: string[];
+  legalFoundations?: LegalFoundation[];
+  // Referencia normativa orientativa de la revisión básica (no recuperada del corpus).
+  reference?: string;
+}
+
+// Elemento mínimo verificado por la revisión básica: sólo indica si el texto lo menciona.
+export interface ReviewCheck {
+  id: string;
+  materia: LegalArea;
+  label: string;
+  found: boolean;
+}
+
+export interface ReviewResult {
+  reviewMode?: 'ai' | 'basic';
+  summary: string;
+  documentType: string;
+  riskScore: number;
+  detectedParties: string[];
+  detectedObligations: string[];
+  missingClauses: string[];
+  missingData?: string[];
+  checks?: ReviewCheck[];
+  risks: ReviewRisk[];
+  recommendedActions: string[];
+  checklist?: string[];
+  riskCategories?: Record<string, string[] | undefined>;
+  legalFoundations: LegalFoundation[];
+  confidence?: 'low' | 'medium' | 'high';
+  engine?: string;
+}
+
+export type ReviewMode = 'ai' | 'basic';
+
+export interface ReviewRecord {
+  id: string;
+  caseId?: string;
+  title: string;
+  fileName: string;
+  areas: LegalArea[];
+  timestamp: string;
+  instruction: string;
+  reviewMode: ReviewMode;
+  basicReason?: 'no_api_key' | 'ai_error';
+  provider?: ByokProviderId;
+  result: ReviewResult;
+}
+
+export type DraftSource = 'template' | 'file' | 'free' | 'review';
+
+export interface DraftRecord {
+  id: string;
+  caseId?: string;
+  title: string;
+  area: LegalArea;
+  timestamp: string;
+  updatedAt: string;
+  source: DraftSource;
+  templateId?: string;
+  referenceFileName?: string;
+  sourceReviewId?: string;
+  instructions: string;
+  document: string;
+  generatedWith: 'ai' | 'template';
+  provider?: ByokProviderId;
+}
+
+export type PortfolioItem =
+  | { kind: 'draft'; caseId: string; record: DraftRecord }
+  | { kind: 'review'; caseId: string; record: ReviewRecord };

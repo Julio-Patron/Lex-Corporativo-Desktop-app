@@ -183,6 +183,21 @@ describeVault('Local Case Vault', () => {
     expect((await vault.listCases()).map(item => item.caseId)).toEqual(['case_active']);
   });
 
+  it('applies the configured retention policy to existing activities', async () => {
+    vault = await import('./case-vault');
+    mockState.isEncryptionAvailable = true;
+
+    await vault.createCase('case_legacy', 'Heredada', 'engineering', '2026-01-01T00:00:00.000Z');
+    await vault.applyRetentionPolicy(0);
+    expect((await vault.listCases())[0].retentionUntil).toBeNull();
+    expect(await vault.purgeExpiredCases('2030-01-01T00:00:00.000Z')).toBe(0);
+
+    await vault.applyRetentionPolicy(30);
+    const [metadata] = await vault.listCases();
+    const expected = new Date(new Date(metadata.updatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    expect(metadata.retentionUntil).toBe(expected);
+  });
+
   it('deletes cases clean and completely from the workspace', async () => {
     vault = await import('./case-vault');
     mockState.isEncryptionAvailable = true;

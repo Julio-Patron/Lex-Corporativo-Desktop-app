@@ -1,4 +1,5 @@
 import type { ByokProvider } from './byok-settings';
+import { DEFAULT_BYOK_MODELS } from '../../shared/byok-models';
 import { redactApiKeysAndSecrets } from './sanitizer';
 
 export interface ByokJsonSchema {
@@ -130,29 +131,64 @@ function sanitizedApiError(provider: ByokProvider, status: number, body: string)
   return new Error(`${provider} API error ${status}${compact ? `: ${compact}` : ''}`);
 }
 
+const RETRYABLE_STATUS_CODES = new Set([429, 502, 503, 504]);
+const MAX_RETRIES = 2;
+
+function parseRetryAfterMs(response: Response): number | null {
+  const header = response.headers.get('retry-after');
+  if (!header) return null;
+  const seconds = Number(header);
+  if (!Number.isNaN(seconds) && seconds > 0) return Math.min(seconds * 1_000, 30_000);
+  const date = Date.parse(header);
+  if (!Number.isNaN(date)) return Math.max(0, Math.min(date - Date.now(), 30_000));
+  return null;
+}
+
+function isTransientNetworkError(error: any): boolean {
+  const code = error?.cause?.code || error?.code || '';
+  return ['ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'UND_ERR_CONNECT_TIMEOUT'].includes(code);
+}
+
 async function fetchJson(
   provider: ByokProvider,
   url: string,
   init: RequestInit,
   timeoutMs: number,
 ): Promise<any> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const response = await fetch(url, { ...init, signal: controller.signal });
-    if (!response.ok) {
-      const body = await response.text().catch(() => '');
-      throw sanitizedApiError(provider, response.status, body);
+  let lastError: Error | undefined;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { ...init, signal: controller.signal });
+      if (!response.ok) {
+        const body = await response.text().catch(() => '');
+        const err = sanitizedApiError(provider, response.status, body);
+        if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < MAX_RETRIES) {
+          lastError = err;
+          const delayMs = parseRetryAfterMs(response) ?? Math.min(1_000 * 2 ** attempt, 8_000);
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
+          continue;
+        }
+        throw err;
+      }
+      return await response.json();
+    } catch (error: any) {
+      if (error?.name === 'AbortError') {
+        throw new Error(`${provider} agotó el tiempo de espera.`);
+      }
+      if (isTransientNetworkError(error) && attempt < MAX_RETRIES) {
+        lastError = error;
+        await new Promise((resolve) => setTimeout(resolve, Math.min(1_000 * 2 ** attempt, 8_000)));
+        continue;
+      }
+      throw error;
+    } finally {
+      clearTimeout(timeoutId);
     }
-    return await response.json();
-  } catch (error: any) {
-    if (error?.name === 'AbortError') {
-      throw new Error(`${provider} agotó el tiempo de espera.`);
-    }
-    throw error;
-  } finally {
-    clearTimeout(timeoutId);
   }
+  throw lastError ?? new Error(`${provider}: error de conexión tras ${MAX_RETRIES} reintentos.`);
 }
 
 function extractGeminiText(payload: any): string {
@@ -168,12 +204,14 @@ function describeEmptyGeminiResponse(payload: any): string {
   return `Gemini no devolvió contenido utilizable${reason ? ` (${reason})` : ''}.`;
 }
 
+// La prueba de conexión debe usar el mismo modelo que las operaciones reales.
 export function normalizeModelName(provider: ByokProvider, model?: string): string {
-  if (provider === 'gemini') return 'gemini-3.7-flash';
-  if (provider === 'openai') return 'gpt-4o-mini';
-  if (provider === 'anthropic') return 'claude-3-5-sonnet-20241022';
-  return (model || '').trim() || 'gemini-3.7-flash';
+  return (model || '').trim() || DEFAULT_BYOK_MODELS[provider];
 }
+
+// Los análisis y borradores largos tardan más de un minuto en modelos con
+// razonamiento; el límite anterior (60 s) provocaba caídas a la revisión básica.
+const DEFAULT_GENERATION_TIMEOUT_MS = 180_000;
 
 const GEMINI_UNSUPPORTED_KEYWORDS = new Set([
   'pattern',
@@ -244,7 +282,7 @@ async function generateGemini(input: ByokGenerateInput): Promise<string> {
         generationConfig,
       }),
     },
-    input.timeoutMs ?? 60_000,
+    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
   );
 
   const text = extractGeminiText(payload);
@@ -294,7 +332,7 @@ async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
         store: false,
       }),
     },
-    input.timeoutMs ?? 60_000,
+    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
   );
 
   const result = extractOpenAiText(payload);
@@ -302,23 +340,64 @@ async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
   return result;
 }
 
+// Familias con salida JSON estructurada (output_config.format). Los modelos
+// anteriores conservan el uso forzado de herramienta.
+const ANTHROPIC_STRUCTURED_OUTPUT_MODELS = /^claude-(?:fable|mythos|opus-5|sonnet-5|opus-4-8|haiku-4-5)/i;
+// Familias que admiten el reintento del servidor ante una negativa de seguridad.
+const ANTHROPIC_SERVER_FALLBACK_MODELS = /^claude-(?:opus-5|fable-5)/i;
+// Modelos anteriores a la retirada de los parámetros de muestreo.
+const ANTHROPIC_SAMPLING_MODELS = /^claude-(?:3|instant|2)|^claude-(?:haiku|sonnet|opus)-4(?:-[0-6])?(?:-\d{8})?$/i;
+const ANTHROPIC_UNSUPPORTED_SCHEMA_KEYWORDS = new Set([
+  'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf',
+  'minLength', 'maxLength', 'pattern', 'minItems', 'maxItems',
+]);
+
+// Las restricciones numéricas y de longitud no se admiten en la salida
+// estructurada; el esquema zod del proceso principal las valida después.
+function cleanAnthropicSchema(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(cleanAnthropicSchema);
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(
+    Object.entries(value)
+      .filter(([key]) => !ANTHROPIC_UNSUPPORTED_SCHEMA_KEYWORDS.has(key))
+      .map(([key, nested]) => [key, cleanAnthropicSchema(nested)]),
+  );
+}
+
 async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
+  const model = normalizeModelName('anthropic', input.model);
+  const usesStructuredOutput = Boolean(input.jsonSchema) && ANTHROPIC_STRUCTURED_OUTPUT_MODELS.test(model);
   const toolName = input.jsonSchema
     ? input.jsonSchema.name.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64)
     : '';
   const body: Record<string, unknown> = {
-    model: input.model,
-    max_tokens: input.maxOutputTokens ?? 12_000,
+    model,
+    // El razonamiento adaptativo consume parte del presupuesto de salida.
+    max_tokens: input.jsonSchema ? Math.max(input.maxOutputTokens ?? 16_000, 16_000) : input.maxOutputTokens ?? 16_000,
     system: input.systemInstruction,
     messages: [{ role: 'user', content: input.prompt }],
   };
-  // Sonnet 5 rejects non-default sampling parameters. Older Claude models
-  // still accept temperature, so keep their existing behavior.
-  if (!/^claude-sonnet-5(?:$|-)/i.test(input.model)) {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'x-api-key': input.apiKey,
+    'anthropic-version': '2023-06-01',
+  };
+
+  // Los modelos actuales rechazan temperature/top_p/top_k con un error 400.
+  if (ANTHROPIC_SAMPLING_MODELS.test(model)) {
     body.temperature = input.temperature ?? 0.15;
   }
 
-  if (input.jsonSchema) {
+  if (ANTHROPIC_SERVER_FALLBACK_MODELS.test(model)) {
+    headers['anthropic-beta'] = 'server-side-fallback-2026-07-01';
+    body.fallbacks = 'default';
+  }
+
+  if (input.jsonSchema && usesStructuredOutput) {
+    body.output_config = {
+      format: { type: 'json_schema', schema: cleanAnthropicSchema(input.jsonSchema.schema) },
+    };
+  } else if (input.jsonSchema) {
     body.tools = [{
       name: toolName,
       description: input.jsonSchema.description || 'Devuelve el resultado estructurado solicitado.',
@@ -332,17 +411,20 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
     'https://api.anthropic.com/v1/messages',
     {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': input.apiKey,
-        'anthropic-version': '2023-06-01',
-      },
+      headers,
       body: JSON.stringify(body),
     },
-    input.timeoutMs ?? 60_000,
+    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
   );
 
-  if (input.jsonSchema) {
+  if (payload?.stop_reason === 'refusal') {
+    throw new Error('Anthropic declinó la solicitud por sus políticas de seguridad.');
+  }
+  if (payload?.stop_reason === 'max_tokens' && input.jsonSchema) {
+    throw new Error('Anthropic devolvió una respuesta incompleta por límite de extensión.');
+  }
+
+  if (input.jsonSchema && !usesStructuredOutput) {
     const toolUse = (payload?.content || []).find((part: any) => part?.type === 'tool_use' && part?.name === toolName);
     if (toolUse?.input) return JSON.stringify(toolUse.input);
   }
@@ -377,7 +459,8 @@ export async function testByokConnection(input: Pick<ByokGenerateInput, 'provide
     maxOutputTokens: 1024,
     timeoutMs: 30_000,
   });
-  if (!response.toUpperCase().includes('OK')) {
+  const normalized = response.toUpperCase().trim();
+  if (!normalized.includes('OK') && !normalized.includes('CORRECTO') && !normalized.includes('LISTO') && !normalized.includes('ENTENDIDO')) {
     throw new Error(`${input.provider} respondió, pero no cumplió la prueba de conexión.`);
   }
   return { ok: true, provider: input.provider, model };

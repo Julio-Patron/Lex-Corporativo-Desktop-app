@@ -59,13 +59,69 @@ CLÁUSULA SEGUNDA.- SALARIO. Percibirá un salario de $25,000 mensuales.`,
     });
 
     expect(audit.summary).toBeDefined();
-    expect(audit.documentType).toBe('Contrato Individual de Trabajo');
+    expect(audit.documentType).toBe('Contrato individual de trabajo');
     expect(audit.riskScore).toBeGreaterThan(0);
     expect(audit.detectedParties).toContain('EMPRESA CORPORATIVA SA DE CV');
     expect(Array.isArray(audit.risks)).toBe(true);
     expect(Array.isArray(audit.missingClauses)).toBe(true);
     expect((audit.missingClauses as string[]).some((c: string) => c.includes('jornada'))).toBe(true);
     expect(audit.groundingClaims).toBeDefined();
+  });
+
+  it('declara el alcance de la revisión básica: qué se verificó y con qué resultado', () => {
+    const audit = generateDeterministicLegalAudit({
+      files: [{
+        name: 'Contrato_Individual_Trabajo.docx',
+        text: 'CLÁUSULA SEGUNDA.- SALARIO. Percibirá un salario de $25,000 mensuales más prestaciones de ley.',
+      }],
+      ecosystem: 'laboral',
+      ragSources: [],
+    });
+
+    expect(audit).toMatchObject({ reviewMode: 'basic', engine: 'local_rules', confidence: 'low' });
+    expect(audit.checks).toEqual([
+      { id: 'jornada', materia: 'laboral', label: 'Jornada u horario de trabajo', found: false },
+      { id: 'salario', materia: 'laboral', label: 'Salario o prestaciones', found: true },
+    ]);
+    expect(audit.summary).toContain('Se verificó la presencia de 2 elementos mínimos');
+    expect(audit.summary).toContain('no interpreta el contenido ni valida su legalidad');
+    // La suficiencia del expediente por nombres de archivo sólo aplica a la materialidad fiscal.
+    expect(audit.summary).not.toContain('CFDI');
+    expect(audit.riskCategories).toEqual({ documentales: [] });
+  });
+
+  it('no inventa partes ni cláusulas cuando no las detecta', () => {
+    const audit = generateDeterministicLegalAudit({
+      files: [{ name: 'nota.txt', text: 'Texto sin estructura contractual.' }],
+      ecosystem: 'mercantil',
+      ragSources: [],
+    });
+
+    expect(audit.detectedParties).toEqual([]);
+    expect(audit.detectedObligations).toEqual([]);
+    expect(audit.documentType).toBe('Documento sin clasificar');
+  });
+
+  it('enlaza los artículos recuperados del corpus con su identificador original', () => {
+    const audit = generateDeterministicLegalAudit({
+      files: [{ name: 'contrato.pdf', text: 'Las partes se someten a los tribunales de la Ciudad de México.' }],
+      ecosystem: 'mercantil',
+      ragSources: [{
+        id: 'CCom-1093',
+        title: 'Código de Comercio',
+        law_code: 'CCom',
+        article_number: 'Artículo 1093',
+        content: 'Hay sumisión expresa cuando los interesados renuncien clara y terminantemente al fuero...',
+        similarity: 0.82,
+      }],
+    });
+
+    expect(audit.legalFoundations).toEqual([expect.objectContaining({
+      id: 'CCom-1093',
+      law: 'CCom',
+      article: 'Artículo 1093',
+      relevanceScore: 0.82,
+    })]);
   });
 
   it('genera una auditoría integral 360° evaluando múltiples materias simultáneamente', () => {
@@ -104,6 +160,8 @@ CLÁUSULA SEGUNDA.- PRECIO. Se pagará la suma pactada en la orden de compra.`,
     expect(missing.some((c: string) => c.includes('CFDI'))).toBe(true); // Fiscal check
     expect(missing.some((c: string) => c.includes('Incoterm'))).toBe(true); // Comercio exterior check
     expect(missing.some((c: string) => c.includes('sumisión') || c.includes('jurisdicción') || c.includes('pena'))).toBe(true); // Mercantil check
+    // Comercio exterior y aduanal comparten la verificación del Incoterm: se reporta una sola vez.
+    expect((audit.checks as Array<{ id: string }>).filter(check => check.id === 'incoterm')).toHaveLength(1);
   });
 });
 

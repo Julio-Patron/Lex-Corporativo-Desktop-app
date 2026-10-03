@@ -36,7 +36,7 @@ export const DraftPayloadSchema = z.object({
     id: z.string().min(1),
     title: z.string().min(1),
     prompt: z.string().min(1),
-    requiredFields: z.array(z.string()).optional(),
+    fields: z.array(z.object({ id: z.string(), label: z.string(), type: z.string() })).optional(),
     output: z.string().optional(),
   }).optional(),
   referenceFile: z.object({
@@ -138,9 +138,11 @@ interface SourceAnalysisSummary {
   recommendedActions: string[];
 }
 
-function renderSourceAnalysis(analysis: unknown): { text: string; data: SourceAnalysisSummary | null } {
+export function renderSourceAnalysis(analysis: unknown): { text: string; data: SourceAnalysisSummary | null } {
   if (!analysis || typeof analysis !== 'object') return { text: '', data: null };
-  const a = analysis as Record<string, unknown>;
+  // El portafolio guarda cada revisión como un registro con el dictamen en `result`.
+  const record = analysis as Record<string, unknown>;
+  const a = (record.result && typeof record.result === 'object' ? record.result : record) as Record<string, unknown>;
   const data: SourceAnalysisSummary = {
     summary: String(a.summary || ''),
     documentType: String(a.documentType || ''),
@@ -241,7 +243,7 @@ export function registerDraftHandlers(): void {
               `FUENTE_ID=template:${payload.template.id}`,
               `Plantilla seleccionada: ${payload.template.title}`,
               payload.template.output ? `Entregable esperado: ${payload.template.output}` : '',
-              payload.template.requiredFields?.length ? `Campos mínimos: ${payload.template.requiredFields.join(', ')}` : '',
+              payload.template.fields?.length ? `Campos mínimos: ${payload.template.fields.map(f => f.label).join(', ')}` : '',
               `Instrucción de plantilla: ${payload.template.prompt}`,
             ].filter(Boolean).join('\n')
           : 'Plantilla seleccionada: ninguna; redacta desde la instrucción del usuario.';

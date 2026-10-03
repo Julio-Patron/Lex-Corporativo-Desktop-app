@@ -228,9 +228,6 @@ export function getDraftInstruction(module: LegalModule): string {
   return 'TAREA: Proyecte un soporte, defensa o instrumento fiscal formal conforme a legislación fiscal mexicana. Use únicamente las instrucciones actuales, la plantilla precargada o el machote proporcionado y el corpus fiscal local. Use [DATO FALTANTE] si falta información.';
 }
 
-export const SYSTEM_INSTRUCTION = getSystemInstruction('mercantil');
-export const DRAFT_INSTRUCTION = getDraftInstruction('mercantil');
-
 export function getAnalysisInstruction(profile: string): string {
   if (profile === 'integral_analysis' || profile.startsWith('integral_')) {
     return 'TAREA: Realice un Dictamen de Auditoría Integral Multidisciplinaria 360°. Evalúe exhaustivamente las materias seleccionadas (Mercantil/Corporativo, Fiscal/Materialidad, Laboral, Comercio Exterior y Aduanal). Identifique tipo de documento, partes, obligaciones, cláusulas faltantes por materia, riesgos clasificados por severidad y materia, fundamentación legal oficial y plan de acción correctivo estructurado.';
@@ -250,8 +247,3 @@ export function getAnalysisInstruction(profile: string): string {
 
   return 'TAREA: Realice un Dictamen de Auditoría Integral fiscal. Evalúe materialidad, deducibilidad, IVA acreditable, operaciones inexistentes, riesgos y cumplimiento. Sustente cada conclusión en los fundamentos fiscales recuperados y en la evidencia documental.';
 }
-
-export const ANALYSIS_PROMPT_PREFIX = (filenames: string[], userPrompt: string) => `
-Realice un Dictamen de Auditoría Integral exhaustivo sobre los siguientes instrumentos: ${filenames.join(', ')}.
-Petición técnica de enfoque: ${userPrompt}
-`;

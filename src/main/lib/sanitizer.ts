@@ -1,31 +1,7 @@
 /**
  * Lex Corporativo Desktop - Security Sanitizer
- * Implements strict data scrubbers for logs, cloud persistence, local caches, and crash reports.
+ * Implements strict data scrubbers for logs, local caches, and traceability.
  */
-
-export function sanitizeForCloud(data: any): any {
-  if (typeof data !== 'object' || data === null) return data;
-  
-  // Clean deep clones to prevent mutating original object
-  const copy = JSON.parse(JSON.stringify(data));
-  
-  const recursiveSanitize = (obj: any) => {
-    for (const key in obj) {
-      if (
-        ['base64', 'fileBase64', 'data'].includes(key) && 
-        typeof obj[key] === 'string' && 
-        obj[key].length > 200
-      ) {
-        obj[key] = '[REDACTED_BINARY_CLOUD]';
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        recursiveSanitize(obj[key]);
-      }
-    }
-  };
-  
-  recursiveSanitize(copy);
-  return copy;
-}
 
 export function sanitizeForLogs(data: any): any {
   if (typeof data !== 'object' || data === null) return data;
@@ -41,29 +17,6 @@ export function sanitizeForLogs(data: any): any {
         obj[key].length > 30
       ) {
         obj[key] = '[REDACTED_SENSITIVE_LOGS]';
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        recursiveSanitize(obj[key]);
-      }
-    }
-  };
-  
-  recursiveSanitize(copy);
-  return copy;
-}
-
-export function sanitizeForCrashReport(data: any): any {
-  if (typeof data !== 'object' || data === null) return data;
-  
-  const copy = JSON.parse(JSON.stringify(data));
-  
-  const recursiveSanitize = (obj: any) => {
-    for (const key in obj) {
-      const lowerKey = key.toLowerCase();
-      // Remove all prompts, history, binary content, and keys
-      if (
-        ['base64', 'filebase64', 'data', 'prompt', 'requirements', 'newmessage', 'text', 'content', 'history', 'apikey', 'token', 'secret'].some(k => lowerKey.includes(k))
-      ) {
-        obj[key] = '[REDACTED_CRASH_REPORT]';
       } else if (typeof obj[key] === 'object' && obj[key] !== null) {
         recursiveSanitize(obj[key]);
       }

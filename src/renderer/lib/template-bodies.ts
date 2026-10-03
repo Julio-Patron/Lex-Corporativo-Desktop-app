@@ -2509,7 +2509,7 @@ export function getFullTemplateBody(template: DraftingTemplate): string {
   }
 
   // Generar un machote formal completo y limpio a partir de los metadatos de la plantilla
-  const requiredList = template.requiredFields.map((f) => `- **${f}:** [${f.toUpperCase()}]`).join('\n');
+  const requiredList = template.fields.map((f) => `- **${f.label}:** [${f.label.toUpperCase()}]`).join('\n');
 
   return `# ${template.title.toUpperCase()}
 

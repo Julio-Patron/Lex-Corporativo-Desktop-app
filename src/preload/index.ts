@@ -1,6 +1,14 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import type { LexDesktopAPI } from './types';
 
+// Suscripción con baja explícita: cada pantalla retira su propio listener sin
+// afectar a las demás.
+function subscribe(channel: string, handler: (payload: any) => void): () => void {
+  const listener = (_event: Electron.IpcRendererEvent, payload: unknown) => handler(payload);
+  ipcRenderer.on(channel, listener);
+  return () => ipcRenderer.removeListener(channel, listener);
+}
+
 const api: LexDesktopAPI = {
   cases: {
     createCase: (payload) => ipcRenderer.invoke('vault:create-case', payload),
@@ -25,10 +33,7 @@ const api: LexDesktopAPI = {
 
   analysis: {
     analyzeDocument: (payload) => ipcRenderer.invoke('ipc:analyze', payload),
-    onProgress: (cb) => {
-      ipcRenderer.removeAllListeners('engine:progress');
-      ipcRenderer.on('engine:progress', (_event, progress) => cb(progress));
-    },
+    onProgress: (cb) => subscribe('engine:progress', (progress) => cb(progress)),
   },
   drafts: {
     generateDraft: (payload) => ipcRenderer.invoke('ipc:draft', payload),
@@ -53,28 +58,18 @@ const api: LexDesktopAPI = {
     saveSettings: (payload) => ipcRenderer.invoke('byok:save-settings', payload),
     clearKey: (payload) => ipcRenderer.invoke('byok:clear-key', payload),
     testConnection: (payload) => ipcRenderer.invoke('byok:test-connection', payload),
-    setUpdateConsent: (consent) => ipcRenderer.invoke('settings:set-update-consent', consent),
   },
   settings: {
     getAppVersion: () => ipcRenderer.invoke('app:version'),
     getPlatform: () => ipcRenderer.invoke('app:platform'),
-    onUpdateAvailable: (cb) => {
-      ipcRenderer.removeAllListeners('update:available');
-      ipcRenderer.on('update:available', (_e, v) => cb(v));
-    },
-    onUpdateDownloaded: (cb) => {
-      ipcRenderer.removeAllListeners('update:downloaded');
-      ipcRenderer.on('update:downloaded', () => cb());
-    },
+    savePreferences: (payload) => ipcRenderer.invoke('settings:save-preferences', payload),
+    onUpdateAvailable: (cb) => subscribe('update:available', (version) => cb(version)),
+    onUpdateDownloaded: (cb) => subscribe('update:downloaded', () => cb()),
     checkForUpdates: () => ipcRenderer.invoke('update:check-now'),
     installUpdate: () => ipcRenderer.send('update:install'),
   },
   navigation: {
-    onSettings: (cb) => {
-      const listener = () => cb();
-      ipcRenderer.on('nav:settings', listener);
-      return () => ipcRenderer.removeListener('nav:settings', listener);
-    },
+    onSettings: (cb) => subscribe('nav:settings', () => cb()),
   },
   assistant: {
     askInstructivo: (payload) => ipcRenderer.invoke('ipc:assistant-ask', payload),

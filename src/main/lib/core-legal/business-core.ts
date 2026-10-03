@@ -197,239 +197,319 @@ export class RiskScoring {
 
 export type SupportedEcosystem = 'mercantil' | 'laboral' | 'comercio_exterior' | 'aduanal' | 'fiscal';
 
+const ECOSYSTEM_LABELS: Record<SupportedEcosystem, string> = {
+  mercantil: 'mercantil',
+  laboral: 'laboral',
+  comercio_exterior: 'comercio exterior',
+  aduanal: 'aduanal',
+  fiscal: 'fiscal',
+};
+
 export interface DeterministicAnalysisInput {
   files: { name: string; text: string; mimeType?: string }[];
   ecosystem?: SupportedEcosystem;
   ecosystems?: SupportedEcosystem[] | SupportedEcosystem;
+  // Acepta tanto la forma de las fuentes recuperadas de LanceDB (law_code,
+  // article_number, similarity) como la forma normalizada (law, article).
   ragSources: Array<{
     id?: string | number;
-    title: string;
+    title?: string;
     law?: string;
+    law_code?: string;
     article?: string;
+    article_number?: string;
     content: string;
     relevanceScore?: number;
+    similarity?: number;
   }>;
   userPrompt?: string;
 }
 
+export interface BasicReviewCheck {
+  id: string;
+  materia: SupportedEcosystem;
+  label: string;
+  found: boolean;
+}
+
+interface BasicReviewRule {
+  id: string;
+  materias: SupportedEcosystem[];
+  label: string;
+  patterns: RegExp[];
+  missingClause?: string;
+  missingData?: string;
+  finding?: Omit<RiskFinding, 'findingId'>;
+}
+
 /**
- * 4. Deterministic Local Fallback Generator:
- * Generates an exhaustive, structured legal audit without cloud reliance.
+ * Alcance de la revisión básica: cada regla sólo comprueba si el texto extraído
+ * menciona un elemento mínimo de la materia. No interpreta cláusulas ni valida
+ * su legalidad; un elemento "encontrado" sólo indica que el término aparece.
+ */
+const BASIC_REVIEW_RULES: BasicReviewRule[] = [
+  {
+    id: 'cfdi',
+    materias: ['fiscal'],
+    label: 'Mención de CFDI o comprobantes fiscales',
+    patterns: [/CFDI|UUID|comprobante/i],
+    missingClause: 'Cláusula de emisión y validación de CFDI 4.0 con desglose de impuestos',
+    finding: {
+      area: 'Comprobantes fiscales',
+      severity: 'high',
+      description: 'El texto no menciona CFDI ni comprobantes fiscales que soporten la operación.',
+      legalFoundation: 'Código Fiscal de la Federación Art. 29 y 29-A',
+      mitigatingAction: 'Incorporar la obligación de emitir CFDI y conservar los folios fiscales.',
+    },
+  },
+  {
+    id: 'materialidad',
+    materias: ['fiscal'],
+    label: 'Mención de entregables, reportes o bitácoras',
+    patterns: [/entregable|bit[aá]cora|reporte/i],
+    missingClause: 'Estipulación expresa de entregables periódicos y bitácora de materialidad',
+    finding: {
+      area: 'Materialidad',
+      severity: 'high',
+      description: 'El texto no menciona entregables, reportes ni bitácoras que acrediten la ejecución.',
+      legalFoundation: 'Código Fiscal de la Federación Art. 69-B',
+      mitigatingAction: 'Pactar entregables verificables y actas de entrega-recepción.',
+    },
+  },
+  {
+    id: 'jornada',
+    materias: ['laboral'],
+    label: 'Jornada u horario de trabajo',
+    patterns: [/jornada|horario/i],
+    missingClause: 'Delimitación expresa de la jornada de trabajo (Art. 59-61 LFT)',
+    finding: {
+      area: 'Jornada de trabajo',
+      severity: 'medium',
+      description: 'El texto no menciona la jornada ni el horario de trabajo.',
+      legalFoundation: 'Ley Federal del Trabajo Art. 25 y 59',
+      mitigatingAction: 'Establecer expresamente el horario y los días de descanso.',
+    },
+  },
+  {
+    id: 'salario',
+    materias: ['laboral'],
+    label: 'Salario o prestaciones',
+    patterns: [/salario|prestaci[oó]n/i],
+    missingData: 'Monto del salario y desglose de prestaciones',
+  },
+  {
+    id: 'incoterm',
+    materias: ['comercio_exterior', 'aduanal'],
+    label: 'Incoterm pactado',
+    patterns: [/incoterm/i, /\b(?:EXW|FCA|FAS|FOB|CFR|CIF|CPT|CIP|DAP|DPU|DDP)\b/],
+    missingClause: 'Definición del Incoterm (ICC 2020) y del punto de transmisión de riesgos',
+    finding: {
+      area: 'Entrega internacional',
+      severity: 'high',
+      description: 'El texto no menciona un Incoterm que fije el punto de entrega y la transmisión de riesgos.',
+      legalFoundation: 'Ley Aduanera Art. 56 y 65',
+      mitigatingAction: 'Especificar el Incoterm (por ejemplo FOB, CIF o DDP) y el lugar de entrega.',
+    },
+  },
+  {
+    id: 'jurisdiccion',
+    materias: ['mercantil'],
+    label: 'Jurisdicción o tribunales competentes',
+    patterns: [/jurisdicci[oó]n|tribunal/i],
+    missingClause: 'Cláusula de sumisión expresa a tribunales competentes y ley aplicable',
+    finding: {
+      area: 'Solución de controversias',
+      severity: 'medium',
+      description: 'El texto no menciona jurisdicción ni tribunales competentes.',
+      legalFoundation: 'Código de Comercio Art. 1093',
+      mitigatingAction: 'Pactar la sumisión expresa a tribunales determinados.',
+    },
+  },
+  {
+    id: 'pena',
+    materias: ['mercantil'],
+    label: 'Pena convencional o intereses moratorios',
+    patterns: [/pena convencional|\bpenas?\b|penalizaci[oó]n|inter[eé]s(?:es)? moratorio/i],
+    missingClause: 'Pena convencional por incumplimiento o interés moratorio',
+    finding: {
+      area: 'Incumplimiento',
+      severity: 'low',
+      description: 'El texto no menciona pena convencional ni intereses moratorios.',
+      legalFoundation: 'Código de Comercio Art. 362',
+      mitigatingAction: 'Pactar pena convencional o interés moratorio dentro de los límites legales.',
+    },
+  },
+];
+
+// Recomendaciones y listas de control generales de cada materia. Son las mismas
+// para cualquier documento y así se presentan en la interfaz.
+const MATERIA_GUIDANCE: Record<SupportedEcosystem, { actions: string[]; checklist: string[] }> = {
+  fiscal: {
+    actions: [
+      'Integrar el expediente con CFDI, estados de cuenta y evidencia de materialidad.',
+      'Verificar que la contraparte no aparezca en las listas del artículo 69-B del CFF.',
+    ],
+    checklist: ['CFDI 4.0 con clave de producto o servicio correcta', 'Comprobante de pago bancario'],
+  },
+  laboral: {
+    actions: [
+      'Recabar acuse de entrega de un ejemplar del contrato a la persona trabajadora.',
+      'Precisar el centro de trabajo y la descripción de funciones.',
+    ],
+    checklist: ['Identificación de patrón y persona trabajadora', 'Salario en moneda nacional', 'Confidencialidad y entrega de herramientas'],
+  },
+  comercio_exterior: {
+    actions: [
+      'Validar la clasificación arancelaria y las Normas Oficiales Mexicanas aplicables.',
+      'Consolidar la manifestación de valor con facturas y documentos de transporte.',
+    ],
+    checklist: ['Factura comercial y lista de empaque', 'Conocimiento de embarque o guía aérea', 'Certificado de origen del tratado aplicable'],
+  },
+  aduanal: {
+    actions: [
+      'Validar la clasificación arancelaria y las Normas Oficiales Mexicanas aplicables.',
+      'Consolidar la manifestación de valor con facturas y documentos de transporte.',
+    ],
+    checklist: ['Pedimento y documentos anexos', 'Factura comercial y lista de empaque', 'Conocimiento de embarque o guía aérea'],
+  },
+  mercantil: {
+    actions: [
+      'Revisar la vigencia de los poderes de quienes suscriben.',
+      'Valorar la ratificación de firmas ante fedatario cuando haya garantías reales.',
+    ],
+    checklist: ['Capacidad y legitimación de las partes', 'Objeto lícito y determinado', 'Firmas autógrafas o electrónicas avanzadas'],
+  },
+};
+
+function resolveEcosystems(input: DeterministicAnalysisInput): SupportedEcosystem[] {
+  if (Array.isArray(input.ecosystems) && input.ecosystems.length > 0) return input.ecosystems;
+  if (typeof input.ecosystems === 'string') return [input.ecosystems];
+  return input.ecosystem ? [input.ecosystem] : ['mercantil'];
+}
+
+function uniquePush(target: string[], value: string) {
+  if (!target.includes(value)) target.push(value);
+}
+
+function detectDocumentType(fileName = ''): string {
+  const lower = fileName.toLowerCase();
+  if (lower.includes('cfdi')) return 'Comprobante Fiscal Digital por Internet (CFDI)';
+  if (lower.includes('pagare')) return 'Pagaré';
+  if (lower.includes('trabajo')) return 'Contrato individual de trabajo';
+  if (lower.includes('pedimento')) return 'Expediente aduanal o pedimento';
+  if (lower.includes('contrato') || lower.includes('convenio')) return 'Contrato o convenio';
+  return 'Documento sin clasificar';
+}
+
+/**
+ * Revisión básica determinista (sin IA). Verifica la presencia de elementos
+ * mínimos por materia, detecta partes y cláusulas por patrones de texto y
+ * enlaza artículos relacionados recuperados del corpus local.
  */
 export function generateDeterministicLegalAudit(input: DeterministicAnalysisInput): Record<string, unknown> {
   const { files, ragSources } = input;
-  const targetEcosystems: SupportedEcosystem[] = Array.isArray(input.ecosystems) && input.ecosystems.length > 0
-    ? input.ecosystems
-    : typeof input.ecosystems === 'string'
-      ? [input.ecosystems as SupportedEcosystem]
-      : input.ecosystem
-        ? [input.ecosystem]
-        : ['mercantil'];
-
+  const targetEcosystems = resolveEcosystems(input);
+  const fileName = files[0]?.name || 'documento';
   const fullText = files.map(f => f.text).join('\n\n');
-  const opDocs: OperationDocument[] = files.map((f, i) => ({
-    documentId: `doc:${i + 1}`,
-    fileName: f.name,
-    mimeType: f.mimeType || 'text/plain',
-    category: DocumentClassifier.classify(f.name, f.mimeType || ''),
-    extractedText: f.text,
-  }));
 
-  const support = EvidenceMapper.assessSupportStrength(opDocs);
-
-  // Detect Parties
   const detectedParties: string[] = [];
   const partyMatches = fullText.matchAll(/(?:por una parte|comparece(?:\s+por\s+una\s+parte)?|denominada|en lo sucesivo|por otra parte)\s+["“']?([A-ZÁÉÍÓÚÑ0-9\s,\.]{3,60}?)(?:["”']|\s+,\s+|\s+a quien|\s+representada|\s+y\s+por\s+|\s+y\s+otra\s+|\s*\.)/gi);
   for (const m of partyMatches) {
     const candidate = m[1].replace(/[\n\r]+/g, ' ').trim();
-    if (candidate.length > 3 && !detectedParties.includes(candidate) && !/^(?:que|los|las|sus|con)\b/i.test(candidate)) {
-      detectedParties.push(candidate);
-    }
+    if (candidate.length > 3 && !/^(?:que|los|las|sus|con)\b/i.test(candidate)) uniquePush(detectedParties, candidate);
     if (detectedParties.length >= 4) break;
   }
-  if (detectedParties.length === 0) {
-    detectedParties.push('Partes contractuales especificadas en el instrumento');
-  }
 
-  // Detect Key Obligations
   const detectedObligations: string[] = [];
-  const clMatches = fullText.matchAll(/(?:CL[AÁ]USULA\s+[A-ZÁÉÍÓÚÑ\-]+|\bPRIMERA|\bSEGUNDA|\bTERCERA)[\.\:\-]?\s*([^\n\r]{20,160})/gi);
-  for (const cm of clMatches) {
-    const clText = cm[1].trim();
-    if (clText && !detectedObligations.includes(clText)) {
-      detectedObligations.push(clText);
-    }
+  const clauseMatches = fullText.matchAll(/(?:CL[AÁ]USULA\s+[A-ZÁÉÍÓÚÑ\-]+|\bPRIMERA|\bSEGUNDA|\bTERCERA)[\.\:\-]?\s*([^\n\r]{20,160})/gi);
+  for (const cm of clauseMatches) {
+    const clauseText = cm[1].trim();
+    if (clauseText) uniquePush(detectedObligations, clauseText);
     if (detectedObligations.length >= 4) break;
   }
-  if (detectedObligations.length === 0) {
-    detectedObligations.push('Obligaciones recíprocas conforme al clausulado general');
-  }
 
-  // Missing clauses and Risk evaluation by ecosystem
+  const checks: BasicReviewCheck[] = [];
   const missingClauses: string[] = [];
   const missingData: string[] = [];
   const findings: RiskFinding[] = [];
+  for (const rule of BASIC_REVIEW_RULES) {
+    const materia = rule.materias.find(item => targetEcosystems.includes(item));
+    if (!materia) continue;
+    const found = rule.patterns.some(pattern => pattern.test(fullText));
+    checks.push({ id: rule.id, materia, label: rule.label, found });
+    if (found) continue;
+    if (rule.missingClause) uniquePush(missingClauses, rule.missingClause);
+    if (rule.missingData) uniquePush(missingData, rule.missingData);
+    if (rule.finding) findings.push({ findingId: `basic-${rule.id}`, ...rule.finding });
+  }
+
   const recommendedActions: string[] = [];
   const checklist: string[] = [];
-
-  const primaryLaw = ragSources[0]?.law || 'Legislación Mexicana Aplicable';
-  const primaryArticle = ragSources[0]?.article || 'Disposiciones aplicables';
-
-  if (targetEcosystems.includes('fiscal')) {
-    if (!/CFDI|UUID|Comprobante/i.test(fullText)) {
-      missingClauses.push('Cláusula de emisión y validación de CFDI 4.0 con desglose de impuestos');
-      findings.push({
-        findingId: 'risk-cfdi-missing',
-        area: 'Deducibilidad e IVA',
-        severity: 'high',
-        description: 'No se acredita la vinculación de comprobantes fiscales digitales (CFDI) con UUID para soportar la deducción.',
-        legalFoundation: 'Código Fiscal de la Federación Art. 29 y 29-A',
-        mitigatingAction: 'Incorporar folios fiscales y constancias de retención aplicables.',
-      });
-    }
-    if (!/entregable|bit[aá]cora|reporte/i.test(fullText)) {
-      missingClauses.push('Estipulación expresa de entregables periódicos y bitácora de materialidad');
-      findings.push({
-        findingId: 'risk-materialidad-missing',
-        area: 'Materialidad (Art. 69-B CFF)',
-        severity: 'high',
-        description: 'Falta de soporte probatorio de la prestación efectiva del servicio o recepción de bienes.',
-        legalFoundation: 'Código Fiscal de la Federación Art. 69-B',
-        mitigatingAction: 'Integrar expediente con reportes de avance, actas de entrega-recepción y bitácoras.',
-      });
-    }
-    recommendedActions.push('Integrar expediente de defensa con CFDI, estados de cuenta bancarios y evidencia de materialidad.');
-    recommendedActions.push('Verificar que el prestador no se encuentre en listas restrictivas del SAT.');
-    checklist.push('CFDI versión 4.0 con clave de producto/servicio correcta');
-    checklist.push('Comprobante de pago bancario mediante transferencia');
+  for (const materia of targetEcosystems) {
+    MATERIA_GUIDANCE[materia].actions.forEach(action => uniquePush(recommendedActions, action));
+    MATERIA_GUIDANCE[materia].checklist.forEach(item => uniquePush(checklist, item));
   }
 
-  if (targetEcosystems.includes('laboral')) {
-    if (!/jornada|horario/i.test(fullText)) {
-      missingClauses.push('Delimitación expresa de la jornada de trabajo máxima (Art. 59-61 LFT)');
-      findings.push({
-        findingId: 'risk-jornada-missing',
-        area: 'Condiciones Laborales',
-        severity: 'medium',
-        description: 'La jornada de trabajo no se encuentra debidamente especificada, arriesgando reclamos por horas extraordinarias.',
-        legalFoundation: 'Ley Federal del Trabajo Art. 25 y 59',
-        mitigatingAction: 'Establecer expresamente el horario y días de descanso semanal.',
-      });
-    }
-    if (!/salario|prestacion/i.test(fullText)) {
-      missingData.push('Monto específico de salario base y desglose de prestaciones legales');
-    }
-    recommendedActions.push('Recabar acuse firmado de entrega de copia del contrato a la persona trabajadora.');
-    recommendedActions.push('Establecer con precisión el centro de trabajo y la descripción pormenorizada de funciones.');
-    checklist.push('Identificación completa de patrón y trabajador');
-    checklist.push('Salario pactado expresado en moneda nacional');
-    checklist.push('Cláusula de confidencialidad y entrega de herramientas');
-  }
+  // La suficiencia del expediente se estima por los nombres de archivo y sólo
+  // tiene sentido para la materialidad fiscal.
+  const support = targetEcosystems.includes('fiscal')
+    ? EvidenceMapper.assessSupportStrength(files.map((f, i) => ({
+      documentId: `doc:${i + 1}`,
+      fileName: f.name,
+      mimeType: f.mimeType || 'text/plain',
+      category: DocumentClassifier.classify(f.name, f.mimeType || ''),
+      extractedText: f.text,
+    })))
+    : null;
 
-  if (targetEcosystems.includes('comercio_exterior') || targetEcosystems.includes('aduanal')) {
-    if (!/incoterm/i.test(fullText)) {
-      missingClauses.push('Definición del término internacional de comercio (Incoterm ICC 2020) y transmisión de riesgos');
-      findings.push({
-        findingId: 'risk-incoterm-missing',
-        area: 'Comercio Exterior y Aduanas',
-        severity: 'high',
-        description: 'Ausencia de Incoterm determinado para fijar el punto de entrega y costos incrementables en aduana.',
-        legalFoundation: 'Ley Aduanera Art. 56 y 65',
-        mitigatingAction: 'Especificar el Incoterm exacto (ej. FOB, CIF, DDP) y el puerto o aduana de ingreso.',
-      });
-    }
-    recommendedActions.push('Validar la clasificación arancelaria y verificar cumplimiento de Normas Oficiales Mexicanas (NOMs).');
-    recommendedActions.push('Consolidar la Manifestación de Valor con facturas y documentos de transporte anexos.');
-    checklist.push('Factura comercial y lista de empaque (Packing List)');
-    checklist.push('Conocimiento de embarque (B/L) o Guía aérea');
-    checklist.push('Certificado de origen bajo tratado aplicable (ej. T-MEC)');
-  }
-
-  if (targetEcosystems.includes('mercantil')) {
-    if (!/jurisdicci[oó]n|tribunal/i.test(fullText)) {
-      missingClauses.push('Cláusula de sumisión expresa a tribunales competentes y ley aplicable');
-      findings.push({
-        findingId: 'risk-jurisdiccion-missing',
-        area: 'Seguridad Contractual',
-        severity: 'medium',
-        description: 'No se definió la competencia territorial para la resolución de controversias jurídicas.',
-        legalFoundation: 'Código de Comercio Art. 1093',
-        mitigatingAction: 'Incorporar renuncia de fueros de domicilio futuro y sumisión a tribunales locales.',
-      });
-    }
-    if (!/pena|penalizaci[oó]n|inter[eé]s/i.test(fullText)) {
-      missingClauses.push('Pena convencional por incumplimiento y tasa de interés moratorio');
-      findings.push({
-        findingId: 'risk-penalizacion-missing',
-        area: 'Garantías y Cobro',
-        severity: 'low',
-        description: 'Falta de penalización convencional pactada para incentivar el cumplimiento oportuno.',
-        legalFoundation: 'Código de Comercio Art. 362',
-        mitigatingAction: 'Pactar pena convencional o interés moratorio pactado dentro de los límites legales.',
-      });
-    }
-    recommendedActions.push('Revisar la vigencia del poder notarial de los representantes que suscriben el contrato.');
-    recommendedActions.push('Certificar firmas ante fedatario público si involucra inmuebles o garantías reales.');
-    checklist.push('Capacidad y legitimación jurídica acreditada');
-    checklist.push('Objeto lícito y determinado');
-    checklist.push('Firmas autógrafas o electrónicas avanzadas');
-  }
-
-  const calculatedRiskScore = RiskScoring.calculateRiskScore(findings);
-
-  const formattedFoundations = ragSources.slice(0, 3).map((s, idx) => ({
-    id: `leg:${idx + 1}`,
-    title: s.title || `Fundamento Legal ${idx + 1}`,
-    law: s.law || primaryLaw,
-    article: s.article || primaryArticle,
-    excerpt: s.content.slice(0, 200).replace(/\s+/g, ' ').trim(),
-    relevanceScore: s.relevanceScore || 0.85,
+  const legalFoundations = ragSources.slice(0, 5).map((source, index) => ({
+    id: String(source.id ?? `leg:${index + 1}`),
+    title: source.title || source.law_code || source.law || `Artículo relacionado ${index + 1}`,
+    law: source.law_code || source.law || source.title || 'Normativa local',
+    article: source.article_number || source.article || '',
+    excerpt: source.content.slice(0, 400).replace(/\s+/g, ' ').trim(),
+    relevanceScore: Math.max(0, Math.min(1, Number(source.similarity ?? source.relevanceScore) || 0)),
   }));
+  const claimSources = ['doc:1', ...(legalFoundations[0] ? [legalFoundations[0].id] : [])];
 
-  const groundingClaims = [
-    {
-      claimText: `Se auditó el instrumento '${files[0]?.name || 'documento'}' en materia ${targetEcosystems.join(', ')}. Se identificó un nivel de suficiencia probatoria ${support.level} (${support.score}/100).`,
-      sourceIds: ['doc:1', ...(formattedFoundations[0] ? [formattedFoundations[0].id] : [])],
-    },
-    ...findings.map(f => ({
-      claimText: `${f.area}: ${f.description}`,
-      sourceIds: ['doc:1', ...(formattedFoundations[0] ? [formattedFoundations[0].id] : [])],
-    })),
-    ...recommendedActions.map(r => ({
-      claimText: r,
-      sourceIds: ['doc:1', ...(formattedFoundations[0] ? [formattedFoundations[0].id] : [])],
-    })),
-  ];
+  const missingCount = checks.filter(check => !check.found).length;
+  const materiaLabel = targetEcosystems.map(materia => ECOSYSTEM_LABELS[materia]).join(', ');
+  const summary = [
+    `Revisión básica por reglas locales de «${fileName}».`,
+    `Se verificó la presencia de ${checks.length} elementos mínimos en materia ${materiaLabel}: ${checks.length - missingCount} aparecen en el texto y ${missingCount} no se encontraron.`,
+    support ? `Soporte documental estimado por los nombres de archivo: ${support.level} (${support.score}/100).` : '',
+    'Esta revisión no interpreta el contenido ni valida su legalidad.',
+  ].filter(Boolean).join(' ');
 
   return {
-    summary: `Auditoría legal y documental determinista sobre '${files[0]?.name || 'documento'}'. El soporte probatorio obtenido es de nivel ${support.level} (${support.score}/100). ${support.missingCategories.length > 0 ? `Faltantes identificados: ${support.missingCategories.join('; ')}.` : 'El expediente cuenta con los elementos básicos de soporte.'}`,
-    documentType: files[0]?.name.toLowerCase().includes('cfdi') ? 'Comprobante Fiscal Digital por Internet (CFDI)' :
-      files[0]?.name.toLowerCase().includes('pagare') ? 'Pagaré Mercantil' :
-      files[0]?.name.toLowerCase().includes('trabajo') ? 'Contrato Individual de Trabajo' :
-      files[0]?.name.toLowerCase().includes('pedimento') ? 'Expediente Aduanal / Pedimento' :
-      'Instrumento Contractual Legal',
-    riskScore: calculatedRiskScore,
+    reviewMode: 'basic',
+    summary,
+    documentType: detectDocumentType(fileName),
+    riskScore: RiskScoring.calculateRiskScore(findings),
     detectedParties,
     detectedObligations,
     missingClauses,
     missingData,
+    checks,
     risks: findings.map(f => ({
       title: f.area,
       severity: f.severity === 'critical' || f.severity === 'high' ? 'high' : f.severity === 'medium' ? 'medium' : 'low',
       explanation: f.description,
-      relatedClauses: detectedObligations.slice(0, 2),
-      legalFoundations: formattedFoundations.slice(0, 1),
+      relatedClauses: [],
+      legalFoundations: [],
+      reference: f.legalFoundation,
     })),
     recommendedActions,
     checklist,
     riskCategories: {
-      contractuales: findings.filter(f => f.area.includes('Contractual')).map(f => f.description),
-      documentales: support.missingCategories,
-      cumplimiento: recommendedActions,
+      documentales: support?.missingCategories ?? [],
     },
-    legalFoundations: formattedFoundations,
-    groundingClaims,
-    confidence: 'high' as const,
-    engine: 'byok' as const,
+    legalFoundations,
+    groundingClaims: [
+      { claimText: summary, sourceIds: claimSources },
+      ...findings.map(f => ({ claimText: f.description, sourceIds: claimSources })),
+    ],
+    confidence: 'low' as const,
+    engine: 'local_rules' as const,
   };
 }

@@ -385,6 +385,26 @@ function extractJsonObject(rawText: string): string {
   return withoutFence;
 }
 
+export type ReviewMode = 'ai' | 'basic';
+export type BasicReviewReason = 'no_api_key' | 'ai_error';
+
+export interface AnalyzeResponse {
+  result: string;
+  requestId: string;
+  ecosystem: AnalysisModule;
+  ecosystems: AnalysisModule[];
+  module: 'analysis';
+  promptProfile: AnalysisPromptProfile;
+  currentDocumentOnly: true;
+  // 'ai': dictamen del proveedor validado localmente. 'basic': revisión por
+  // reglas locales, ya sea porque no hay API key o porque la IA falló.
+  reviewMode: ReviewMode;
+  basicReason?: BasicReviewReason;
+  engine: 'byok' | 'local_rules';
+  provider?: 'gemini' | 'openai' | 'anthropic';
+  fallbackReason?: string;
+}
+
 interface AnalyzeDependencies {
   extractDocumentContent: typeof extractDocumentContent;
   chunkDocumentPages: typeof chunkDocumentPages;
@@ -409,7 +429,7 @@ export async function processAnalyzePayload(
   rawPayload: unknown,
   eventSender: Electron.WebContents | null,
   dependencyOverrides: Partial<AnalyzeDependencies> = {}
-): Promise<{ result: string; requestId: string; ecosystem: AnalysisModule; module: 'analysis'; promptProfile: AnalysisPromptProfile; currentDocumentOnly: true; engine: 'byok'; requestedExecutionMode: 'byok'; provider: 'gemini' | 'openai' | 'anthropic'; fallbackReason?: string }> {
+): Promise<AnalyzeResponse> {
   const deps = { ...defaultAnalyzeDependencies, ...dependencyOverrides };
   let analysisRequestId: string | null = null;
 
@@ -491,7 +511,8 @@ export async function processAnalyzePayload(
     const filenames = payload.files.map((f: any) => f.name || 'documento');
     const userPrompt = payload.focusedInstruction || 'Análisis de riesgos y cumplimiento.';
     const byok = getActiveByokConfig();
-    const requestedExecutionMode = 'byok' as const;
+    let reviewMode: ReviewMode = 'ai';
+    let basicReason: BasicReviewReason | undefined;
 
     const selectedEcosystems = payload.ecosystems && payload.ecosystems.length > 0 ? payload.ecosystems : [activeModule];
     const isIntegral = selectedEcosystems.length > 1;
@@ -556,14 +577,16 @@ export async function processAnalyzePayload(
       let parsedResult: any;
 
       if (!byok.enabled || !byok.apiKey) {
-        emitProgress(4, 'Generando dictamen determinista local');
+        emitProgress(4, 'Aplicando revisión básica por reglas locales');
         parsedResult = generateDeterministicLegalAudit({
           files: extractedFilesList,
           ecosystems: selectedEcosystems,
           ragSources: ragContext.sources,
           userPrompt,
         });
-        fallbackReason = 'offline_deterministic: Sin API Key configurada';
+        reviewMode = 'basic';
+        basicReason = 'no_api_key';
+        fallbackReason = 'basic_review: sin API key configurada';
       } else {
         emitProgress(4, `Analizando con ${byok.provider} BYOK (${isIntegral ? 'Auditoría Integral 360°' : analysisContract.label})`);
         const documentSources = selectedChunks.map((chunk, index) => ({
@@ -711,27 +734,30 @@ export async function processAnalyzePayload(
             fallbackReason = `grounding_repair:${initialGroundingReason}`;
           }
         } catch (byokErr: any) {
-          emitProgress(4, 'Activando motor determinista local');
+          emitProgress(4, 'La IA no respondió; aplicando revisión básica');
           parsedResult = generateDeterministicLegalAudit({
             files: extractedFilesList,
-            ecosystem: activeModule,
+            ecosystems: selectedEcosystems,
             ragSources: ragContext.sources,
             userPrompt,
           });
+          reviewMode = 'basic';
+          basicReason = 'ai_error';
           fallbackReason = `byok_fallback: ${byokErr?.message || 'Error de proveedor'}`;
         }
       }
 
-      parsedResult = hydrateByokAnalysisFoundations(parsedResult, ragContext.sources);
+      parsedResult = { ...hydrateByokAnalysisFoundations(parsedResult, ragContext.sources), reviewMode };
       const cleanResult = JSON.stringify(parsedResult, null, 2);
+      const engine = reviewMode === 'basic' ? 'local_rules' as const : 'byok' as const;
 
       await cleanupTemporaryDocumentRag();
       logLegalExecution({
         requestId: currentAnalysisRequestId,
         operation: 'analysis',
         module: activeModule,
-        primaryModel: byok?.enabled && byok?.apiKey ? `${byok.provider}:${byok.model}` : 'local_deterministic',
-        finalModelUsed: fallbackReason?.startsWith('byok_fallback') || fallbackReason?.startsWith('offline') ? 'local_deterministic' : `${byok.provider}:${byok.model}`,
+        primaryModel: byok?.enabled && byok?.apiKey ? `${byok.provider}:${byok.model}` : 'local_rules',
+        finalModelUsed: reviewMode === 'basic' ? 'local_rules' : `${byok.provider}:${byok.model}`,
         hasFallback: Boolean(fallbackReason),
         fallbackReason,
         prompt: userPrompt,
@@ -744,12 +770,14 @@ export async function processAnalyzePayload(
         result: cleanResult,
         requestId: currentAnalysisRequestId,
         ecosystem: activeModule,
+        ecosystems: selectedEcosystems,
         module: 'analysis',
         promptProfile,
         currentDocumentOnly: true,
-        engine: 'byok',
-        requestedExecutionMode,
-        provider: byok?.provider,
+        reviewMode,
+        basicReason,
+        engine,
+        provider: reviewMode === 'ai' ? byok.provider : undefined,
         fallbackReason,
       };
     }

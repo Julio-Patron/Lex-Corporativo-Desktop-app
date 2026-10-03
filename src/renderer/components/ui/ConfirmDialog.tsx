@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { AlertTriangle, Info } from 'lucide-react';
 import { Modal, ModalHeader, ModalTitle, ModalContent, ModalFooter } from './Modal';
 import { Button } from './Button';
@@ -24,34 +24,23 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
+  const titleId = useId();
   return (
-    <Modal isOpen={isOpen} onClose={onCancel}>
+    <Modal isOpen={isOpen} onClose={onCancel} labelledBy={titleId}>
       <ModalHeader>
-        <div className="flex items-center space-x-2">
-          {variant === 'danger' ? (
-            <AlertTriangle className="h-6 w-6 text-red-500" />
-          ) : (
-            <Info className="h-6 w-6 text-blue-500" />
-          )}
-          <ModalTitle>{title}</ModalTitle>
+        <div className="flex items-center gap-2">
+          {variant === 'danger'
+            ? <AlertTriangle className="h-5 w-5 text-red-600" aria-hidden="true" />
+            : <Info className="h-5 w-5 text-blue-600" aria-hidden="true" />}
+          <ModalTitle id={titleId}>{title}</ModalTitle>
         </div>
       </ModalHeader>
       <ModalContent>
-        <p className="text-sm text-slate-600">{message}</p>
+        <p className="text-sm leading-relaxed text-slate-700">{message}</p>
       </ModalContent>
       <ModalFooter>
-        <Button variant="secondary" onClick={onCancel}>
-          {cancelLabel}
-        </Button>
-        <Button
-          variant={variant === 'danger' ? 'danger' : 'primary'}
-          onClick={() => {
-            onConfirm();
-            onCancel();
-          }}
-        >
-          {confirmLabel}
-        </Button>
+        <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
+        <Button variant={variant === 'danger' ? 'danger' : 'primary'} onClick={onConfirm}>{confirmLabel}</Button>
       </ModalFooter>
     </Modal>
   );

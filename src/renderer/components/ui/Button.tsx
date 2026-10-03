@@ -19,6 +19,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       isIconOnly = false,
       isFullWidth = false,
+      type = 'button',
       children,
       disabled,
       ...props
@@ -28,18 +29,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
+        type={type}
         disabled={disabled || isLoading}
         className={cn(
-          'inline-flex items-center justify-center rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex shrink-0 items-center justify-center gap-2 rounded-lg font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50',
           {
-            'bg-slate-900 text-white hover:bg-slate-800': variant === 'primary',
-            'border border-slate-200 bg-white hover:bg-slate-100 text-slate-900': variant === 'secondary',
-            'hover:bg-slate-100 text-slate-700 hover:text-slate-900': variant === 'ghost',
+            'bg-legal-950 text-white hover:bg-legal-800': variant === 'primary',
+            'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50': variant === 'secondary',
+            'text-slate-700 hover:bg-slate-100 hover:text-slate-950': variant === 'ghost',
             'bg-red-600 text-white hover:bg-red-700': variant === 'danger',
-            'h-8 px-3 text-xs': size === 'sm' && !isIconOnly,
-            'h-10 px-4 py-2 text-sm': size === 'md' && !isIconOnly,
-            'h-12 px-8 text-base': size === 'lg' && !isIconOnly,
-            'h-8 w-8': size === 'sm' && isIconOnly,
+            'h-9 px-3 text-sm': size === 'sm' && !isIconOnly,
+            'h-10 px-4 text-sm': size === 'md' && !isIconOnly,
+            'h-12 px-6 text-base': size === 'lg' && !isIconOnly,
+            'h-9 w-9': size === 'sm' && isIconOnly,
             'h-10 w-10': size === 'md' && isIconOnly,
             'h-12 w-12': size === 'lg' && isIconOnly,
             'w-full': isFullWidth,
@@ -48,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...props}
       >
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isLoading && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
         {children}
       </button>
     );

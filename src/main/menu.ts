@@ -1,4 +1,4 @@
-import { Menu, BrowserWindow } from 'electron';
+import { app, Menu, BrowserWindow } from 'electron';
 
 export function createAppMenu(): Menu {
   const template: Electron.MenuItemConstructorOptions[] = [
@@ -36,10 +36,14 @@ export function createAppMenu(): Menu {
     {
       label: 'Ver',
       submenu: [
-        { role: 'reload', label: 'Volver a cargar' },
-        { role: 'forceReload', label: 'Forzar recarga' },
-        { role: 'toggleDevTools', label: 'Herramientas de desarrollo' },
-        { type: 'separator' },
+        // Recargar descarta el trabajo en curso y DevTools expone el renderer:
+        // solo se ofrecen durante el desarrollo.
+        ...(app.isPackaged ? [] : [
+          { role: 'reload', label: 'Volver a cargar' },
+          { role: 'forceReload', label: 'Forzar recarga' },
+          { role: 'toggleDevTools', label: 'Herramientas de desarrollo' },
+          { type: 'separator' },
+        ] satisfies Electron.MenuItemConstructorOptions[]),
         { role: 'resetZoom', label: 'Tamaño original' },
         { role: 'zoomIn', label: 'Acercar' },
         { role: 'zoomOut', label: 'Alejar' },
