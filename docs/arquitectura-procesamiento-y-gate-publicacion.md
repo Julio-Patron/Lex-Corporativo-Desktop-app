@@ -2,7 +2,13 @@
 
 ## Decisión de producto
 
-Lex Corporativo Desktop es una estación BYOK. La generación requiere una API key del usuario para Gemini, OpenAI o Anthropic. No se incluye ni se ofrece inferencia mediante GGUF, Rust o un LLM local.
+Lex Corporativo Desktop es una estación BYOK. La generación requiere una API key del usuario para Gemini, OpenAI o Anthropic.
+
+**Revisión (octubre 2026).** Se aprueba desarrollar un motor generativo local (SLM de 3–4 B parámetros en formato GGUF) conforme a `docs/plan-edicion-slm-local.md`. Hasta que ese motor cumpla los gates adicionales del plan (§8), BYOK sigue siendo el único motor generativo publicable. Decisiones provisionales, pendientes de confirmar:
+
+- el motor local será un modo dentro del mismo instalador, no una edición separada;
+- el modelo se descargará bajo demanda con verificación SHA-256, sin incluirse en el instalador;
+- BYOK se mantiene y el modo híbrido queda como opción posterior.
 
 Permanecen locales:
 
@@ -30,7 +36,7 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 | LanceDB y embeddings | Integrados |
 | BYOK multiproveedor | Integrado |
 | Validación de fundamentación | Integrada |
-| Motor generativo local | Fuera del producto |
+| Motor generativo local | En desarrollo (plan SLM, Fase 2: abstracción de motor) |
 | Instalador firmado | Pendiente |
 
 ## Gates obligatorios
