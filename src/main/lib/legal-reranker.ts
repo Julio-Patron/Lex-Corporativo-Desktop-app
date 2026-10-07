@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import type { LegalSearchScope, RAGMatch } from './rag';
-import { composeLimitedByokPrompt, generateByokText } from './byok-client';
-import { getActiveByokConfig, type ByokProvider } from './byok-settings';
+import { composeLimitedByokPrompt } from './byok-client';
+import type { ByokProvider } from './byok-settings';
+import { resolveGenerationEngine } from './llm/generation-engine';
 
 const RerankOutputSchema = z.object({
   ranking: z.array(z.object({
@@ -87,16 +88,13 @@ export async function rerankLegalArticles(
   module: LegalSearchScope,
   candidates: RAGMatch[],
 ): Promise<LegalRerankResult> {
-  const byok = getActiveByokConfig();
-  if (!byok.enabled || !byok.apiKey || candidates.length < 2) {
+  const engine = resolveGenerationEngine();
+  if (!engine || candidates.length < 2) {
     return { matches: candidates, status: 'disabled' };
   }
 
   try {
-    const result = await generateByokText({
-      provider: byok.provider,
-      apiKey: byok.apiKey,
-      model: byok.model,
+    const result = await engine.generate({
       systemInstruction: [
         'Eres un reranker extractivo de legislación mexicana.',
         'Tu única tarea es ordenar TODOS los IDs recibidos por pertinencia directa para la consulta.',
@@ -108,7 +106,7 @@ export async function rerankLegalArticles(
         instruction: `CONSULTA BREVE: ${query}\nMATERIA SELECCIONADA: ${module}\nOrdena los ${candidates.length} candidatos. Incluye cada ID exactamente una vez.`,
         legalContext: candidateBlock(candidates),
         outputContract: 'Devuelve exclusivamente el JSON solicitado. relevance es un número de 0 a 100.',
-        maxChars: Math.min(byok.maxInputChars, 32_000),
+        maxChars: Math.min(engine.maxInputChars, 32_000),
       }),
       temperature: 0,
       maxOutputTokens: 2_000,
@@ -124,24 +122,24 @@ export async function rerankLegalArticles(
       return {
         matches: candidates,
         status: 'fallback',
-        provider: byok.provider,
-        model: byok.model,
+        provider: engine.provider,
+        model: engine.model,
         fallbackReason: 'invalid_ranking',
       };
     }
     return {
       matches: reranked,
       status: 'applied',
-      provider: byok.provider,
-      model: byok.model,
+      provider: engine.provider,
+      model: engine.model,
     };
   } catch (error: any) {
-    console.warn(`[Legal Reranker] ${byok.provider} unavailable; preserving local order:`, error?.message || error);
+    console.warn(`[Legal Reranker] ${engine.provider} unavailable; preserving local order:`, error?.message || error);
     return {
       matches: candidates,
       status: 'fallback',
-      provider: byok.provider,
-      model: byok.model,
+      provider: engine.provider,
+      model: engine.model,
       fallbackReason: 'provider_error',
     };
   }

@@ -9,8 +9,8 @@ import { formatAnalyzeError } from '../lib/analysis-errors';
 import { generateDeterministicLegalAudit, DocumentClassifier, EvidenceMapper } from '../lib/core-legal/business-core';
 import { lanceDbWriteMutex } from '../lib/mutex';
 
-import { getActiveByokConfig } from '../lib/byok-settings';
-import { composeLimitedByokPrompt, generateByokText } from '../lib/byok-client';
+import { composeLimitedByokPrompt } from '../lib/byok-client';
+import { resolveGenerationEngine } from '../lib/llm/generation-engine';
 import { logLegalExecution } from '../lib/traceability';
 import {
   GROUNDED_CLAIM_JSON_SCHEMA,
@@ -411,6 +411,7 @@ interface AnalyzeDependencies {
   indexUserDocument: typeof indexUserDocument;
   getHybridLegalContext: typeof getHybridLegalContext;
   cleanupUserDocumentRequest: typeof cleanupUserDocumentRequest;
+  resolveGenerationEngine: typeof resolveGenerationEngine;
   randomUUID: () => string;
   logger: Pick<typeof console, 'error' | 'info' | 'warn'>;
 }
@@ -421,6 +422,7 @@ const defaultAnalyzeDependencies: AnalyzeDependencies = {
   indexUserDocument,
   getHybridLegalContext,
   cleanupUserDocumentRequest,
+  resolveGenerationEngine,
   randomUUID: crypto.randomUUID,
   logger: console,
 };
@@ -510,7 +512,7 @@ export async function processAnalyzePayload(
 
     const filenames = payload.files.map((f: any) => f.name || 'documento');
     const userPrompt = payload.focusedInstruction || 'Análisis de riesgos y cumplimiento.';
-    const byok = getActiveByokConfig();
+    const engine = deps.resolveGenerationEngine();
     let reviewMode: ReviewMode = 'ai';
     let basicReason: BasicReviewReason | undefined;
 
@@ -576,7 +578,7 @@ export async function processAnalyzePayload(
 
       let parsedResult: any;
 
-      if (!byok.enabled || !byok.apiKey) {
+      if (!engine) {
         emitProgress(4, 'Aplicando revisión básica por reglas locales');
         parsedResult = generateDeterministicLegalAudit({
           files: extractedFilesList,
@@ -588,7 +590,7 @@ export async function processAnalyzePayload(
         basicReason = 'no_api_key';
         fallbackReason = 'basic_review: sin API key configurada';
       } else {
-        emitProgress(4, `Analizando con ${byok.provider} BYOK (${isIntegral ? 'Auditoría Integral 360°' : analysisContract.label})`);
+        emitProgress(4, `Analizando con ${engine.provider} BYOK (${isIntegral ? 'Auditoría Integral 360°' : analysisContract.label})`);
         const documentSources = selectedChunks.map((chunk, index) => ({
           id: `doc:${index + 1}`,
           kind: 'evidence' as const,
@@ -652,17 +654,14 @@ export async function processAnalyzePayload(
           : `${getSystemInstruction(analysisContract.systemModule)}\n\nINSTRUCCIÓN DEL USUARIO: ${userPrompt}\nARCHIVOS: ${filenames.join(', ')}`;
 
         try {
-          const providerResult = await generateByokText({
-            provider: byok.provider,
-            apiKey: byok.apiKey,
-            model: byok.model,
+          const providerResult = await engine.generate({
             systemInstruction: systemInstructionContent,
             prompt: composeLimitedByokPrompt({
               instruction: instructionPrompt,
               evidence: documentContext,
               legalContext: ragContext.context,
               outputContract,
-              maxChars: byok.maxInputChars,
+              maxChars: engine.maxInputChars,
             }),
             temperature: 0.05,
             maxOutputTokens: 12_000,
@@ -688,10 +687,7 @@ export async function processAnalyzePayload(
             initialGroundingReason = grounding.reason;
             const rejectedOutput = JSON.stringify(parsedResult);
             const validation = grounding;
-            const repairedProviderResult = await generateByokText({
-              provider: byok.provider,
-              apiKey: byok.apiKey!,
-              model: byok.model,
+            const repairedProviderResult = await engine.generate({
               systemInstruction: [
                 `Corrige un análisis documental JSON rechazado por el validador local de Lex Corporativo (${analysisContract.label}).`,
                 'Los fundamentos locales son la unica fuente juridica autorizada.',
@@ -712,7 +708,7 @@ export async function processAnalyzePayload(
                   'Corrige el borrador y devuelve solamente el objeto JSON completo definido por el esquema.',
                   'Usa [DATO FALTANTE] o elimina la conclusion cuando la evidencia no alcance.',
                 ].join('\n'),
-                maxChars: byok.maxInputChars,
+                maxChars: engine.maxInputChars,
               }),
               temperature: 0,
               maxOutputTokens: 12_000,
@@ -749,15 +745,15 @@ export async function processAnalyzePayload(
 
       parsedResult = { ...hydrateByokAnalysisFoundations(parsedResult, ragContext.sources), reviewMode };
       const cleanResult = JSON.stringify(parsedResult, null, 2);
-      const engine = reviewMode === 'basic' ? 'local_rules' as const : 'byok' as const;
+      const resultEngine = reviewMode === 'basic' ? 'local_rules' as const : 'byok' as const;
 
       await cleanupTemporaryDocumentRag();
       logLegalExecution({
         requestId: currentAnalysisRequestId,
         operation: 'analysis',
         module: activeModule,
-        primaryModel: byok?.enabled && byok?.apiKey ? `${byok.provider}:${byok.model}` : 'local_rules',
-        finalModelUsed: reviewMode === 'basic' ? 'local_rules' : `${byok.provider}:${byok.model}`,
+        primaryModel: engine?.label ?? 'local_rules',
+        finalModelUsed: reviewMode === 'basic' || !engine ? 'local_rules' : engine.label,
         hasFallback: Boolean(fallbackReason),
         fallbackReason,
         prompt: userPrompt,
@@ -776,8 +772,8 @@ export async function processAnalyzePayload(
         currentDocumentOnly: true,
         reviewMode,
         basicReason,
-        engine,
-        provider: reviewMode === 'ai' ? byok.provider : undefined,
+        engine: resultEngine,
+        provider: reviewMode === 'ai' ? engine?.provider : undefined,
         fallbackReason,
       };
     }

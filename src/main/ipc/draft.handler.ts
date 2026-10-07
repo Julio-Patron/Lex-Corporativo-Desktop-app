@@ -11,8 +11,8 @@ import {
   type LegalEcosystem,
 } from '../../shared/legal-contracts';
 import * as crypto from 'crypto';
-import { getActiveByokConfig } from '../lib/byok-settings';
-import { composeLimitedByokPrompt, generateByokText } from '../lib/byok-client';
+import { composeLimitedByokPrompt } from '../lib/byok-client';
+import { resolveGenerationEngine } from '../lib/llm/generation-engine';
 import { extractDocumentContent } from '../lib/document-parser';
 import { logLegalExecution } from '../lib/traceability';
 import {
@@ -218,8 +218,8 @@ export function registerDraftHandlers(): void {
       const payload = parseDraftPayload(rawPayload);
       const activeModule = payload.module;
       const promptProfile = payload.promptProfile;
-      const byok = getActiveByokConfig();
-      if (!byok.enabled || !byok.apiKey) {
+      const engine = resolveGenerationEngine();
+      if (!engine) {
         throw new Error('Configura y activa una API key propia antes de generar documentos.');
       }
       const requestedExecutionMode = 'byok' as const;
@@ -302,12 +302,9 @@ export function registerDraftHandlers(): void {
             'No inventes datos: usa [DATO FALTANTE] en todo campo no proporcionado.',
             'No agregues referencias normativas que no estén en los fundamentos locales verificados.',
           ].join('\n'),
-          maxChars: byok.maxInputChars,
+          maxChars: engine.maxInputChars,
         });
-        const initialResult = await generateByokText({
-          provider: byok.provider,
-          apiKey: byok.apiKey,
-          model: byok.model,
+        const initialResult = await engine.generate({
           systemInstruction: [
             'Eres el backend de redacción jurídica de Lex Corporativo.',
             'Los fundamentos proporcionados son la única fuente jurídica autorizada.',
@@ -330,10 +327,7 @@ export function registerDraftHandlers(): void {
           groundingSources,
           { requiredSourceKinds: hasLegalContext ? ['legal', 'instruction'] : ['instruction'] },
           async (validation, rejectedOutput) => {
-            const repaired = await generateByokText({
-              provider: byok.provider,
-              apiKey: byok.apiKey!,
-              model: byok.model,
+            const repaired = await engine.generate({
               systemInstruction: [
                 'Corrige una redacción jurídica estructurada rechazada por Lex Corporativo.',
                 'Usa únicamente los FUENTE_ID proporcionados y elimina cualquier bloque sin vínculo exacto.',
@@ -358,7 +352,7 @@ export function registerDraftHandlers(): void {
                   getDraftInstruction(activeModule),
                   'Usa [DATO FALTANTE] para todo dato no proporcionado.',
                 ].join('\n'),
-                maxChars: byok.maxInputChars,
+                maxChars: engine.maxInputChars,
               }),
               temperature: 0,
               maxOutputTokens: 12_000,
@@ -385,8 +379,8 @@ export function registerDraftHandlers(): void {
           requestId,
           operation: 'drafting',
           module: activeModule,
-          primaryModel: `${byok.provider}:${byok.model}`,
-          finalModelUsed: `${byok.provider}:${byok.model}`,
+          primaryModel: engine.label,
+          finalModelUsed: engine.label,
           hasFallback: groundingOutcome.repaired,
           fallbackReason,
           prompt: payload.requirements,
@@ -406,7 +400,7 @@ export function registerDraftHandlers(): void {
           templateId: payload.templateId,
           engine: 'byok',
           requestedExecutionMode,
-          provider: byok.provider,
+          provider: engine.provider,
           fallbackReason,
         };
       }
