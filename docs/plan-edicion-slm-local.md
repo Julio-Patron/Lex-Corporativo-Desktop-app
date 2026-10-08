@@ -1,12 +1,21 @@
 # Plan: edición con modelo de lenguaje local (SLM)
 
-> Estado: propuesta para decisión. No modifica el producto actual.
->
-> Este plan contradice la decisión vigente registrada en
-> `docs/arquitectura-procesamiento-y-gate-publicacion.md` ("No se incluye ni se ofrece
-> inferencia mediante GGUF, Rust o un LLM local") y en `CLAUDE.md`. Ejecutarlo exige
-> primero revisar esa decisión (Fase 0). Mientras no se apruebe, la edición BYOK sigue
-> siendo la única soportada.
+> Estado: aprobado y en ejecución. Fase 0 (decisión) y Fase 2 (abstracción de motor)
+> completadas. La revisión de la decisión de producto está registrada en
+> `docs/arquitectura-procesamiento-y-gate-publicacion.md`. BYOK sigue siendo el único motor
+> publicable hasta cumplir los gates de §8.
+
+## 0. Decisiones confirmadas
+
+| Tema | Decisión |
+| --- | --- |
+| Producto | Un solo instalador por plataforma. El motor local es un modo, no una edición separada. Una eventual oferta comercial "Local" se resuelve con licencia, no con otro build. |
+| Plataformas | Windows, macOS y Linux. |
+| Distribución del modelo | El modelo **no** va en el instalador. La app lo descarga en segundo plano desde el primer arranque (§5.2), mientras el resto de las funciones ya están disponibles. |
+| Alojamiento del modelo | Almacenamiento propio con SHA-256 fijado (GitHub Releases limita cada archivo a 2 GiB y un 4B Q4 ronda los 2.5 GB). |
+| BYOK | Se mantiene. Con ambos motores configurados, el motor se elige **por tarea** (política "preferir local"). |
+| Modo híbrido | Pospuesto hasta tener métricas de detección local de datos personales. |
+| Modelo por defecto | Familia Qwen (Apache 2.0). Gemma sólo tras revisión legal de su licencia. |
 
 ## 1. Objetivo
 
@@ -94,13 +103,20 @@ en prefill y 5–15 tok/s en generación con CPU, y varias veces más con GPU.
 
 ### 3.3 Perfiles de hardware
 
-`node-llama-cpp` detecta GPU y VRAM. La aplicación clasifica el equipo al iniciar:
+`node-llama-cpp` detecta GPU y VRAM. La aplicación clasifica el equipo al iniciar, por plataforma:
 
 | Perfil | Requisito orientativo | Modelo | Contexto | Funciones locales |
 | --- | --- | --- | --- | --- |
 | Ligero | 8 GB RAM, sólo CPU | 1.5–2B | 4K | Asistente, clasificación, extracción de datos |
 | Estándar | 16 GB RAM, CPU moderna | 4B Q4 | 8K | + análisis descompuesto, cláusula individual |
-| Acelerado | GPU ≥ 6 GB VRAM o Apple Silicon | 4B Q4/Q5 | 16K | + redacción por secciones, auditoría de 2 materias |
+| Acelerado | GPU ≥ 6 GB VRAM (Windows/Linux) o Apple Silicon con ≥ 16 GB | 4B Q4/Q5 | 16K | + redacción por secciones, auditoría de 2 materias |
+
+| Plataforma | Backend de inferencia | Perfil esperado |
+| --- | --- | --- |
+| macOS Apple Silicon | Metal, memoria unificada | Acelerado (es la plataforma más favorable) |
+| macOS Intel | CPU | Ligero o Estándar |
+| Windows x64 | CPU, Vulkan; CUDA como descarga opcional | Según RAM y GPU |
+| Linux x64 | CPU, Vulkan; CUDA como descarga opcional | Según RAM y GPU |
 
 ## 4. Adaptación funcional a las capacidades del SLM
 
@@ -201,9 +217,17 @@ interface GenerationEngine {
   `localModelId`, `hardwareProfile`, `contextTokens`, `gpuLayers`, `allowHybrid`.
 - Registro de modelos permitidos en `src/shared/local-models.ts`: id, URL, **SHA-256**, tamaño,
   licencia, perfil mínimo y plantilla de chat.
-- Descarga bajo demanda a `userData/models/` con reanudación y verificación de hash (patrón de
-  `scripts/download-embeddings.mjs`). El instalador no crece en ~2.5 GB. Se puede ofrecer un
-  paquete "offline" con el modelo incluido para instalaciones sin red.
+- **Descarga en paralelo desde el primer arranque.** El instalador no incluye el modelo. Al abrir
+  la app por primera vez, el proceso principal detecta el perfil de hardware, elige el modelo del
+  registro y lo descarga en segundo plano a `userData/models/`, con reanudación, verificación
+  SHA-256, progreso visible y cancelación, respetando el proxy del sistema. Mientras tanto ya
+  funcionan portafolio, leyes, búsqueda, revisión básica y BYOK; las funciones locales se activan
+  al terminar. La descarga no la hace el instalador porque `.dmg` y AppImage no tienen paso de
+  instalación y el perfil de hardware sólo se detecta con la app en ejecución.
+- Con privacidad estricta activa, la descarga requiere consentimiento en la pantalla de bienvenida;
+  nunca se inicia sin que el usuario lo autorice.
+- El GGUF es idéntico en las tres plataformas: un solo archivo alojado sirve a todas. Para
+  instalaciones sin red se puede ofrecer, por plataforma, un paquete offline con el modelo.
 - Sólo se cargan archivos cuyo hash esté en el registro: no se aceptan GGUF arbitrarios del usuario.
 - Nuevos canales IPC (handler + `preload/index.ts` + `preload/types.ts`, todos validados con zod):
   `llm:get-status`, `llm:download-model`, `llm:cancel-download`, `llm:delete-model`,
@@ -237,11 +261,18 @@ interface GenerationEngine {
 
 ### 5.6 Empaquetado
 
-- `node-llama-cpp` en `asarUnpack` (binarios nativos). Para Windows x64 conviene incluir
-  CPU + Vulkan y evaluar CUDA como descarga opcional por su tamaño.
-- `release-preflight.mjs`: verificar binarios del runtime y registro de modelos con hashes.
-- CI: prueba de humo en Windows que cargue un modelo diminuto (p. ej. un GGUF de pruebas de
-  pocos MB) en Electron real, análoga a `test:vault:electron`.
+- `node-llama-cpp` en `asarUnpack` (binarios nativos). Por plataforma: Metal en macOS
+  (arm64 y x64); CPU + Vulkan en Windows y Linux, con CUDA como descarga opcional por su tamaño.
+- macOS: firma y notarización (cuenta Apple Developer), incluidos los binarios nativos fuera del
+  asar (`node-llama-cpp`, `better-sqlite3`). electron-updater necesita además el target `zip`.
+- Linux: AppImage. La bóveda depende de un llavero activo (gnome-keyring/kwallet); sin él
+  `safeStorage` cae a `basic_text` y `case-vault.ts` rechaza escrituras. La app debe explicarlo y
+  la documentación debe declararlo como requisito.
+- `release.yml` pasa de sólo Windows a una matriz Windows/macOS/Linux.
+- `release-preflight.mjs`: verificar binarios del runtime y registro de modelos con hashes, y
+  exigir firma de macOS en modo estricto (hoy sólo la exige en Windows).
+- CI: prueba de humo del runtime local con un GGUF diminuto (pocos MB) en Electron real, en
+  Windows, macOS y Linux, análoga a `test:vault:electron`; la prueba de la bóveda se extiende a macOS.
 - RAM: MiniLM + LanceDB + SLM coexisten, así que conviene descargar el SLM tras un periodo de
   inactividad configurable.
 
@@ -269,14 +300,14 @@ conjunto. Los resultados van a `reports/` (gitignored), como los demás audits.
 | Fase | Contenido | Entregable / gate | Estimación |
 | --- | --- | --- | --- |
 | **0. Decisión** | Revisar la decisión de producto; actualizar `arquitectura-procesamiento-y-gate-publicacion.md` y `CLAUDE.md`; revisión legal de licencias (Gemma vs Apache 2.0); definir si es edición separada o modo dentro del mismo producto. | ADR aprobado | 1 semana |
-| **1. Prueba de concepto** | `node-llama-cpp` en `utilityProcess` dentro de Electron/Windows; medir RAM, prefill y generación en 3 equipos de referencia; probar gramática JSON con el esquema de hallazgo; comparar Qwen y Gemma con 10 documentos. | Informe go/no-go con cifras reales | 1–2 semanas |
+| **1. Prueba de concepto** | `node-llama-cpp` en `utilityProcess` dentro de Electron; medir RAM, prefill y generación en al menos un Windows sin GPU, una Mac Apple Silicon y un Linux; probar gramática JSON con el esquema de hallazgo; comparar Qwen y Gemma con 10 documentos. | Informe go/no-go con cifras reales | 1–2 semanas |
 | **2. Abstracción de motor** | `GenerationEngine`, adaptación de BYOK, presupuesto en tokens; **sin cambio de comportamiento** (todas las pruebas existentes en verde). | PR con refactor y pruebas | 1 semana |
-| **3. Runtime y gestor de modelos** | Worker, cola, cancelación, registro de modelos, descarga verificada, IPC, health, AiPanel. | Modelo descargable y funcionando en ajustes | 2 semanas |
+| **3. Runtime y gestor de modelos** | Worker, cola, cancelación, registro de modelos, descarga en segundo plano desde el primer arranque, IPC, health, AiPanel y pantalla de bienvenida. | Modelo descargable y funcionando en ajustes | 2 semanas |
 | **4. Primeras funciones locales** | Asistente, clasificación, extracción de datos y expansión de consultas. | Funciones en modo local con pruebas | 1–2 semanas |
 | **5. Análisis descompuesto** | Pipeline map→reduce, reparación por hallazgo, integración con el esqueleto determinista, UI de progreso. | `eval:local-llm` cumpliendo umbrales | 3 semanas |
 | **6. Redacción por secciones** | Machote primero, cláusula por hallazgo, corrección por cláusula. | Eval de redacción y revisión del abogado | 2 semanas |
 | **7. Modo híbrido (opcional)** | Seudonimización local + BYOK + restauración, con consentimiento y bitácora. | Pruebas de no-fuga de datos | 2 semanas |
-| **8. Endurecimiento y release** | Prueba de humo en CI, preflight, perfiles de hardware, instalador, gates de §8. | Release candidato | 2 semanas |
+| **8. Endurecimiento y release** | Pruebas de humo en CI por plataforma, preflight, perfiles de hardware, matriz de release con firma y notarización de macOS, gates de §8. | Release candidato | 2 semanas |
 
 Total orientativo: 4–5 meses con una persona. Las fases 4 y 5 pueden traslaparse con la 6.
 
@@ -284,11 +315,16 @@ Total orientativo: 4–5 meses con una persona. Las fases 4 y 5 pueden traslapar
 
 A los 12 gates vigentes se suman:
 
-1. `npm run eval:local-llm` cumple los umbrales de §6 con el modelo empaquetado.
-2. Prueba de humo del runtime local en Electron real en Windows (CI).
+1. `npm run eval:local-llm` cumple los umbrales de §6 con el modelo publicado en el registro.
+2. Prueba de humo del runtime local en Electron real en cada plataforma publicada (CI).
 3. Hash del modelo verificado en preflight y registrado en el manifiesto de release.
-4. Prueba en equipo de 8 GB y en uno de 16 GB sin GPU: sin bloqueos de la UI ni cierres por memoria.
-5. Revisión legal de la licencia del modelo distribuido y de los avisos al usuario.
+4. Prueba en equipo de 8 GB y en uno de 16 GB sin GPU, y en una Mac Apple Silicon: sin bloqueos de
+   la UI ni cierres por memoria.
+5. Primer arranque con descarga del modelo en segundo plano: interrupción y reanudación, hash
+   inválido rechazado, proxy corporativo y privacidad estricta sin consentimiento (no descarga).
+6. El gate vigente "instalación, primera apertura, actualización y desinstalación en Windows limpio"
+   se aplica a cada plataforma publicada; en macOS además firma y notarización aceptadas.
+7. Revisión legal de la licencia del modelo distribuido y de los avisos al usuario.
 
 ## 9. Riesgos y mitigaciones
 
@@ -298,15 +334,18 @@ A los 12 gates vigentes se suman:
 | Latencia inaceptable en CPU | Perfiles de hardware, descomposición, caché por fragmento, streaming, cancelación y límites por perfil. |
 | Presión de memoria (SLM + LanceDB + MiniLM) | Un trabajo a la vez, descarga por inactividad, contexto acotado y advertencia en el perfil Ligero. |
 | Fallos de drivers GPU | Worker aislado, reinicio automático en CPU y opción "forzar CPU". |
+| Descarga de ~2.5 GB fallida o lenta | Reanudación, verificación de hash, la app funciona sin el modelo y el modelo Ligero como alternativa. |
+| Firma y notarización de macOS | Cuenta Apple Developer y pipeline de notarización desde la Fase 8; sin ellas macOS bloquea la app. |
+| Linux sin llavero | Mensaje claro en la app y requisito documentado; la bóveda no escribe sin cifrado. |
 | Licencia del modelo | Preferir Apache 2.0 (Qwen); Gemma sólo tras revisión legal. |
 | Calidad desigual en español jurídico mexicano | Conjunto dorado propio; ajuste fino LoRA como línea futura, fuera de este alcance. |
 | Mantenimiento de dos rutas (monolítica vs descompuesta) | Abstracción común, validador y bitácora compartidos; con el tiempo la ruta descompuesta podría servir también a BYOK y reducir su costo. |
 | Expectativas del usuario | Etiquetado claro del motor y comparación honesta con la API propia en la UI y la documentación. |
 
-## 10. Preguntas abiertas para decidir en la Fase 0
+## 10. Preguntas abiertas
 
-1. ¿Edición separada ("Lex Corporativo Local") o modo dentro del mismo instalador?
-2. ¿Modelo incluido en el instalador o descarga bajo demanda?
-3. ¿Se mantiene BYOK en la edición local y se habilita el modo híbrido?
-4. ¿Hardware mínimo comercialmente aceptable para el público objetivo (despachos y áreas legales)?
-5. ¿Quién valida el conjunto dorado y con qué frecuencia se re-evalúa al cambiar de modelo?
+1. ¿Las tres plataformas se publican a la vez o en etapas? (Sugerencia: Windows, luego macOS, luego Linux.)
+2. ¿Hardware mínimo comercialmente aceptable para el público objetivo (despachos y áreas legales)?
+3. ¿Quién valida el conjunto dorado y con qué frecuencia se re-evalúa al cambiar de modelo?
+4. ¿Proveedor de almacenamiento para alojar el modelo?
+5. ¿Se contempla una instalación en servidor compartido por varios usuarios de un despacho? (Cambiaría la arquitectura del motor.)

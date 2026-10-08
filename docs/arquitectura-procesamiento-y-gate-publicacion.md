@@ -4,11 +4,12 @@
 
 Lex Corporativo Desktop es una estación BYOK. La generación requiere una API key del usuario para Gemini, OpenAI o Anthropic.
 
-**Revisión (octubre 2026).** Se aprueba desarrollar un motor generativo local (SLM de 3–4 B parámetros en formato GGUF) conforme a `docs/plan-edicion-slm-local.md`. Hasta que ese motor cumpla los gates adicionales del plan (§8), BYOK sigue siendo el único motor generativo publicable. Decisiones provisionales, pendientes de confirmar:
+**Revisión (octubre 2026).** Se aprueba desarrollar un motor generativo local (SLM de 3–4 B parámetros en formato GGUF) conforme a `docs/plan-edicion-slm-local.md`. Hasta que ese motor cumpla los gates adicionales del plan (§8), BYOK sigue siendo el único motor generativo publicable. Decisiones confirmadas:
 
-- el motor local será un modo dentro del mismo instalador, no una edición separada;
-- el modelo se descargará bajo demanda con verificación SHA-256, sin incluirse en el instalador;
-- BYOK se mantiene y el modo híbrido queda como opción posterior.
+- un solo instalador por plataforma (Windows, macOS y Linux); el motor local es un modo, no una edición separada;
+- el modelo no se incluye en el instalador: la app lo descarga en segundo plano desde el primer arranque, con verificación SHA-256 y consentimiento cuando la privacidad estricta está activa, mientras las demás funciones ya están disponibles;
+- BYOK se mantiene; con ambos motores configurados se elige el motor por tarea; el modo híbrido queda pospuesto;
+- modelo por defecto de la familia Qwen (Apache 2.0).
 
 Permanecen locales:
 
@@ -51,7 +52,7 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 8. Pruebas reales de conexión y generación con Gemini, OpenAI y Anthropic.
 9. `npm run preflight:release:strict`.
 10. `npm run build:electron`.
-11. Instalación, primera apertura, actualización y desinstalación en Windows limpio.
+11. Instalación, primera apertura, actualización y desinstalación en un equipo limpio de cada plataforma publicada (Windows; macOS y Linux cuando se publiquen).
 12. Firma, hash y manifiesto de release.
 
 No se debe crear un release comercial mientras alguno de estos gates permanezca pendiente.
