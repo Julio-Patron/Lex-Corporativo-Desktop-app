@@ -31,7 +31,125 @@ No se generó ni publicó un instalador en esta continuación. Siguen pendientes
 
 ## Estado de la entrega
 
-La entrega se prepara en la rama `main`, sobre el commit base `188839e`. Incluye los cambios de la revisión visual, las correcciones de interacción, las autorizaciones de instalación de dependencias nativas y el lanzador de desarrollo. La versión del producto permanece igual.
+La revisión visual quedó en `60cf580` y la recuperación de redacción en `7363bfe`, ambos commits locales de `main`, sobre la base `188839e`. Antes de esta ampliación documental, el árbol estaba limpio. La referencia local de `origin/main` apunta a `188839e`: `main` aparece dos commits por delante. No se ha hecho push ni se ha consultado de nuevo el remoto; hay que actualizar esas referencias antes de preparar el PR. La versión del producto permanece en `1.0.0-rc.16`.
+
+## Roadmap hasta el merge a main y la publicación de Windows
+
+Este roadmap organiza el trabajo pendiente; las casillas abiertas no representan tareas ejecutadas. **Codex** realiza inspección, implementación, depuración, automatización y preparación de evidencias. **Responsable del producto (tú)** aporta accesos y credenciales, define las decisiones comerciales y de soporte y acepta la entrega. Una tarea conjunta indica qué parte corresponde a cada uno. La creación de este plan no ejecuta limpieza, push, merge, etiquetado ni publicación.
+
+El destino técnico inicial es el configurado actualmente: instalador NSIS para Windows x64, instalación por usuario y conservación de datos al desinstalar. El desarrollo continúa con BYOK y recursos jurídicos locales. macOS, Linux y Windows ARM64 quedan fuera de esta primera entrega; sus configuraciones existentes se revisan, pero no se eliminan sólo por estar fuera del alcance.
+
+### Hallazgos que condicionan el plan
+
+| Hallazgo comprobado en el repositorio | Acción necesaria |
+| --- | --- |
+| Los commits `60cf580` y `7363bfe` ya están en `main` local; `CLAUDE.md` indica trabajo en `desarrollo` y PR hacia `main`. | Preservar ambos commits y continuar en `desarrollo`; integrar mediante PR al `main` remoto actualizado, sin reescribir la historia publicada. |
+| `origin` apunta a `Julio-Patron/Lex-Corporativo-Desktop-app`; `electron-builder.config.json` publica en `elbuilder77/Lex-Corporativo-Desktop-app`. | Confirmar el repositorio de distribución y alinear publicación, permisos y actualizaciones. Usar el remoto actual como candidato inicial, sujeto a la confirmación del propietario. |
+| `.github/workflows/release.yml` se activa con tags `v*` o manualmente, usa preflight no estricto, `--publish always` y convierte borradores en releases públicos. | Separar construcción del candidato y publicación; exigir validaciones, firma y aprobación de la versión antes de exponer artefactos. No disparar el workflow actual para probar el empaquetado. |
+| CI comprueba TypeScript, pruebas, build, corpus y bóveda Electron, pero todavía no recuperación Electron ni todos los gates de recuperación normativa. | Ampliar CI y registrar resultados por commit. Comprobar el manifiesto antes de regenerarlo para no ocultar desajustes. |
+| El preflight estricto falla por falta de identidad de firma. | Configurar firma y verificar el ejecutable resultante; la presencia de una variable de entorno por sí sola no acredita una firma válida. |
+| La evidencia extensa de UX depende de `scratch/` y `reports/`, que no se versionan. | Convertir los recorridos esenciales en pruebas mantenidas y conservar evidencia de aceptación fuera de carpetas temporales. |
+
+### Fase 0 — Preservar la entrega y preparar la rama
+
+- [ ] **Codex:** registrar el estado y actualizar las referencias remotas antes de calcular la diferencia real con `origin/main`; revisar divergencias y protección de ramas.
+- [ ] **Codex:** crear `desarrollo` desde el estado local que contiene `7363bfe` si no existe. Si ya existe en el remoto, recuperarla e integrar los commits locales y el `main` remoto mediante merges normales, resolviendo conflictos y conservando el trabajo de ambas ramas. No hacer `reset --hard` ni force push para acomodar esta entrega.
+- [ ] **Codex:** incorporar esta ampliación del relevo, mantener commits pequeños por tema y preparar el PR `desarrollo → main`. Los dos commits ya realizados deben figurar en el alcance del PR cuando aún no estén en el destino remoto.
+- [ ] **Tú:** confirmar el repositorio definitivo de distribución, facilitar los permisos necesarios y definir quién aprueba el PR y quién autoriza la publicación. Confirmar versiones de Windows soportadas y equipos mínimos de prueba.
+- [ ] **Tú:** iniciar en paralelo la disponibilidad de firma, claves de prueba y entorno Windows limpio; son dependencias de las fases 2 a 4.
+
+**Salida:** rama de trabajo con historia preservada, alcance de Windows acordado y destino de publicación identificado. No es necesario mover o borrar la rama `main` local para abrir un PR desde `desarrollo`.
+
+### Fase 1 — Depurar código, archivos y carpetas
+
+- [ ] **Codex:** elaborar un inventario de candidatos con ruta, tamaño cuando aplique, estado Git, referencias, uso en compilación/instalador/CI, decisión propuesta y comprobación posterior. Separar errores funcionales, código sin uso, documentación antigua y artefactos regenerables.
+- [ ] **Codex:** buscar imports, exportaciones, componentes, tipos, canales IPC, scripts npm y dependencias sin uso. Revisar llamadas dinámicas, imports diferidos, recursos cargados por ruta y módulos nativos antes de declarar algo inservible. Retirar sólo lo que tenga evidencia de no uso; actualizar `package-lock.json` al cambiar dependencias.
+- [ ] **Codex:** depurar concurrencia y manejo de errores en guardado, recuperación, eliminación y generación; revisar respuestas tardías, duplicación de lógica, conversiones de tipos inseguras y promesas sin manejar. Cada corrección funcional debe tener una regresión comprobable.
+- [ ] **Codex:** comprobar solapamientos entre pruebas de `tests/` y pruebas junto a `src/`; consolidar sólo duplicados reales y conservar escenarios distintos. `npm run lint` hoy sólo comprueba TypeScript: no acredita por sí mismo ausencia de código muerto.
+- [ ] **Codex:** ejecutar la limpieza por grupos revisables. Para eliminar o mover carpetas en Windows, resolver y verificar que cada ruta absoluta esté dentro del proyecto o del directorio de prueba previsto; evitar operaciones recursivas sobre rutas no verificadas.
+- [ ] **Tú:** indicar qué capturas, documentación histórica o evidencias necesitas conservar para producto, soporte o auditoría. Validar cambios que retiren una función visible o alteren compatibilidad; la limpieza técnica rutinaria corresponde a Codex.
+
+| Candidato o área concreta | Tratamiento previsto |
+| --- | --- |
+| `screens-electron/` | Contiene capturas versionadas de septiembre de 2026. Revisar referencias y utilidad; archivar las necesarias fuera del paquete y retirar duplicados sin valor vigente. No declarar toda la carpeta obsoleta por su fecha. |
+| `scratch/` | Conservar primero los recorridos útiles en `tests/` o `scripts/`. Después, retirar perfiles y ensayos temporales identificados; comprobar que no contengan la única copia de evidencia o trabajo. |
+| `reports/` | Guardar la evidencia de aceptación vinculada al commit y versión en almacenamiento de artefactos. Limpiar ejecuciones antiguas o duplicadas una vez preservada la evidencia necesaria. |
+| `out/`, futuros `release/` y `build/` | Artefactos regenerables: reconstruir desde una copia limpia. Conservar instaladores firmados, hashes y manifiestos que se hayan usado para aceptación o publicado. |
+| `.npm-cache/` y `node_modules/` | Caché y dependencias locales, no código obsoleto. Su borrado es mantenimiento opcional; no es una condición para publicar. Validar reproducibilidad con `npm ci` en un entorno limpio. |
+| `CLAUDE.md`, README y documentación de arquitectura | Corregir referencias a rutas inexistentes como `renderer/services/` y `renderer/lib/case-access.ts`, cifras antiguas y descripciones desactualizadas de la publicación. Distinguir estado actual de registro histórico. |
+| Rutas heredadas, normalización de Portafolio y migraciones de cifrado | Conservar mientras protejan datos o navegación de versiones anteriores. Retirar sólo con una política de compatibilidad definida y pruebas con perfiles antiguos. |
+| `legal-runtime/corpus/`, `legal-runtime/lance_data/`, modelos MiniLM, `resources/` y assets de marca | Son recursos del producto, varios versionados y empaquetados. No eliminar archivos internos de LanceDB ni modelos por parecer generados o grandes. Cualquier reconstrucción debe usar los scripts mantenidos y validar manifiesto y consultas. |
+| Referencias a un LLM local y configuraciones de otras plataformas | El LLM local está fuera del producto; retirar código activo residual si se encuentra y carece de dependientes. Conservar las decisiones históricas útiles y no confundir MiniLM de búsqueda con un modelo generativo. |
+
+**Salida:** inventario resuelto, cambios revisables, ninguna referencia rota y pruebas/build correctos desde una instalación limpia. Cada eliminación debe tener justificación; una carpeta ignorada por Git no es automáticamente descartable.
+
+### Fase 2 — Seguridad, continuidad, rendimiento y experiencia
+
+- [ ] **Codex:** auditar CSP efectiva en el renderer empaquetado y resolver las directivas ignoradas en `meta`. Comprobar aislamiento de contexto, sandbox, navegación, enlaces externos y protocolo `lexcorp://`; validar remitente, esquema y límites de cada canal IPC, no sólo los canales nuevos de recuperación.
+- [ ] **Codex:** probar exportación y extracción PDF/DOCX, rutas y nombres de archivo, archivos dañados y excesivos, temporales, cifrado, eliminación, conservación, respaldos y trazas. Comprobar que errores y logs no expongan claves ni contenido documental innecesario. Documentar qué datos incluye el respaldo y cómo se recuperan bajo otro perfil de Windows.
+- [ ] **Codex:** revisar dependencias de producción y empaquetado, vulnerabilidades y licencias; corregir hallazgos críticos/altos aplicables y documentar el tratamiento del resto. Verificar que el instalador no incluya perfiles personales, claves, informes privados ni herramientas temporales.
+- [ ] **Codex:** ampliar pruebas de cierre y recuperación a eliminación durante guardado, fallo de cifrado, archivo de recuperación corrupto, proceso terminado y reinicio por actualización. Para Revisar y peticiones de IA en curso, implementar conservación o aviso explícito de interrupción; no prometer reanudación que no exista.
+- [ ] **Codex:** medir arranque frío y caliente, memoria en reposo y tras uso, leyes extensas, búsquedas, revisión y exportaciones. Registrar equipo, versión, corpus y al menos cinco muestras por recorrido; optimizar sólo después de tener una línea base y repetir las mediciones afectadas.
+- [ ] **Codex:** ejecutar regresiones de teclado, foco, diálogos, zoom y escalas de Windows; convertir los recorridos esenciales del ensayo UX temporal en pruebas mantenidas. Facilitar un guion de lector de pantalla y edición manual/IA.
+- [ ] **Tú:** acordar con las mediciones los límites aceptables de arranque, memoria y tiempos de respuesta; realizar o coordinar la aceptación con lector de pantalla y usuarios de prueba. Confirmar que edición, mensajes y recuperación son comprensibles.
+
+**Salida:** hallazgos bloqueantes corregidos, rendimiento documentado y aceptado, y continuidad y accesibilidad verificadas en los escenarios acordados. Las comprobaciones históricas de UX no sustituyen esta regresión.
+
+### Fase 3 — Proveedores reales y automatización de entrega
+
+- [ ] **Tú:** configurar en la aplicación claves de prueba de Gemini, OpenAI y Anthropic, con saldo/permisos y presupuesto acotado; aportar documentos de prueba anonimizados. Mantener claves y credenciales de firma fuera del chat, los commits y los reportes.
+- [ ] **Codex:** validar por proveedor conexión, modelos configurados, revisión, generación, fundamentación, clave inválida, cuota agotada, red interrumpida y timeout. Registrar proveedor/modelo, escenario y resultado sin secretos; distinguir pruebas reales de errores simulados.
+- [ ] **Codex:** verificar operación sin API y sin conexión para las funciones locales y comprobar el consentimiento de actualizaciones y de envío al proveedor.
+- [ ] **Codex:** ampliar CI con recuperación Electron en Windows, pruebas de bóveda bajo Node y Electron, integridad del corpus y gates de recuperación/fundamentación. Publicar logs y reportes sanitizados como artefactos de CI asociados al SHA; no subir perfiles temporales ni datos de prueba sensibles.
+- [ ] **Codex:** modificar el flujo de release para producir primero un candidato sin publicación automática, ejecutar preflight estricto, aplicar firma y verificarla. Retirar la conversión automática de borradores a públicos y exigir una acción de publicación separada sobre artefactos ya aceptados.
+- [ ] **Tú:** habilitar permisos y secretos del repositorio para firma y entrega, configurar las protecciones de `main` y designar los checks requeridos. Confirmar la identidad de editor que debe mostrar Windows.
+- [ ] **Codex:** alinear `publish.owner/repo`, destino real del release, permisos del token y canal de electron-updater; separar versiones candidatas de estables. Validar que un tag o ejecución manual no pueda saltarse los gates.
+
+**Salida:** los tres proveedores validados, CI reproducible y publicación desacoplada de la construcción del candidato. La falta de firma o credenciales reales mantiene las tareas correspondientes abiertas.
+
+### Fase 4 — Candidato firmado y aceptación en Windows limpio
+
+- [ ] **Codex:** preparar la versión candidata y mantener coherentes `package.json`, lockfile, notas y metadatos. Ejecutar los gates sobre el commit candidato y generar el instalador NSIS x64 firmado sin publicarlo. Revisar firma, identidad del editor, sello de tiempo y recursos incluidos en ejecutable e instalador.
+- [ ] **Tú:** disponer de una VM o equipo limpio para cada versión de Windows soportada, con usuario estándar; facilitar acceso o ejecutar el guion que prepare Codex. Aportar una versión anterior soportada para el ensayo de actualización, si existe.
+- [ ] **Codex + tú:** verificar instalación, rutas con espacios y caracteres acentuados, accesos directos, protocolo, primera apertura y uso local sin red. Codex prepara automatización y recoge resultados; tú confirmas los comportamientos visibles, avisos de Windows y aceptación funcional.
+- [ ] **Codex + tú:** probar actualización desde la versión anterior con borrador pendiente y datos existentes, fallo o interrupción de actualización, reinicio y conservación de claves y Portafolio. Si aún no existe una versión anterior distribuida, construir un par de candidatos de prueba para ejercitar el actualizador y registrar esa limitación.
+- [ ] **Codex + tú:** probar desinstalación y reinstalación; comprobar la conservación de datos configurada (`deleteAppDataOnUninstall: false`) y que la opción de eliminación dentro de la aplicación sí retire los datos que promete eliminar.
+- [ ] **Codex:** producir notas de versión, inventario de artefactos, SHA-256 del instalador ya firmado y manifiesto con versión, commit, corpus, plataforma, firma y resultados. Documentar instalación, actualización, respaldo/recuperación, incidencias conocidas y procedimiento de retirada de una versión defectuosa.
+- [ ] **Tú:** revisar textos de privacidad, términos, identidad comercial, contacto de soporte y canal de descarga; obtener la revisión profesional que corresponda. Dar aceptación funcional al candidato probado.
+
+**Salida:** candidato firmado trazable y aceptado, sin fallos bloqueantes. El instalador probado queda reservado como evidencia; cualquier modificación posterior obliga a reconstruir y repetir las pruebas afectadas.
+
+### Fase 5 — PR y merge a main
+
+- [ ] **Codex:** actualizar `desarrollo` con el `origin/main` vigente, resolver conflictos y volver a comprobar el candidato resultante. Confirmar que el PR contiene únicamente cambios previstos y que no incorpora recursos personales, secretos o artefactos temporales.
+- [ ] **Codex:** presentar el PR con problema resuelto, comportamiento final, inventario de limpieza, compatibilidad, pruebas, pendientes no bloqueantes y enlaces a evidencias. Mantener el PR como borrador mientras falte algún requisito de las fases anteriores.
+- [ ] **Tú:** revisar o asignar revisión del PR, aceptar las decisiones de producto y soporte y autorizar el merge cuando los checks y la aceptación de Windows estén completos.
+- [ ] **Codex:** ejecutar el merge cuando esté autorizado y conforme a las reglas del repositorio; registrar el SHA resultante. No usar push directo a `main` para eludir el PR.
+- [ ] **Codex:** repetir las validaciones sobre el SHA integrado, generar desde él los artefactos finales firmados y repetir el smoke de instalación, inicio y actualización. Recalcular hashes: no asumir que el binario anterior al merge identifica el commit final.
+
+**Salida:** `main` remoto contiene la entrega revisada, sus checks están correctos y los artefactos finales son trazables al commit integrado. El merge por sí solo no publica Windows.
+
+### Fase 6 — Checklist final previo a publicar Windows
+
+**A cargo de Codex:**
+
+- [ ] Confirmar que el SHA final pasó `npm run lint`, `npm test`, `npm run build`, `npm run test:vault:electron` y `npm run test:recovery:electron`. Para cubrir los dos ABI, ejecutar primero las pruebas Node con SQLite preparado para Node y luego recompilar con `npm run predev:electron` para las pruebas Electron; justificar cualquier omisión, sin dar por cubiertas las 10 pruebas omitidas en la validación histórica.
+- [ ] Confirmar `npm run audit:corpus-governance:strict`, `npm run audit:legal-knowledge`, `npm run audit:legal-retrieval` y `npm run eval:legal-rag`, con sus evidencias y sin modificar el corpus después de validarlo.
+- [ ] Confirmar pruebas reales de los tres proveedores, cierre de los hallazgos de seguridad y aceptación de rendimiento, accesibilidad y Windows limpio.
+- [ ] Confirmar `npm run preflight:release:strict` y el empaquetado de `npm run build:electron` en el flujo preparado sin publicación automática. El prehook puede regenerar recursos: comprobar el diff y los gates de corpus tras esa preparación; si cambia un archivo versionado, incorporarlo y validar un nuevo commit antes de etiquetar.
+- [ ] Verificar firmas, hashes, manifiesto, versión/tag, notas, instalador, metadatos de actualización y repositorio de destino. Probar las descargas y el feed en el canal de ensayo antes de activar la versión estable.
+- [ ] Dejar preparado el release para revisión con los artefactos finales; publicar y enviar el tag únicamente después de la autorización correspondiente. Tras publicar, verificar descarga, hash y disponibilidad para actualización y registrar la evidencia.
+
+**A tu cargo:**
+
+- [ ] Confirmar titular y destino de distribución, editor firmante y disponibilidad de permisos de publicación y renovación de la firma.
+- [ ] Confirmar resultado de las pruebas con tus cuentas de proveedores y el presupuesto/condiciones de uso que se comunicarán al usuario.
+- [ ] Aceptar el candidato en los Windows soportados, incluidos instalación, actualización, desinstalación y política de conservación de datos.
+- [ ] Aprobar versión estable, notas, limitaciones conocidas, términos, privacidad, contacto de soporte y página o canal de descarga.
+- [ ] Autorizar explícitamente la publicación de los artefactos identificados por versión, SHA de código y hash del instalador. La aceptación del PR y esta autorización son hitos distintos.
+- [ ] Designar quién atenderá incidencias y quién puede retirar una versión o pausar su distribución si aparece un problema bloqueante.
+
+**Criterio de publicación:** todos los gates de [arquitectura de procesamiento](arquitectura-procesamiento-y-gate-publicacion.md) y las casillas aplicables están acreditados para la versión final. Una tarea no aplicable requiere motivo, responsable y aceptación registrada; esto no permite omitir los gates obligatorios. No se marca completa una tarea por haber pasado en un commit anterior ni por quedar fuera del entorno disponible.
 
 ## Decisiones de producto y diseño
 
