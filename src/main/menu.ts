@@ -36,8 +36,8 @@ export function createAppMenu(): Menu {
     {
       label: 'Ver',
       submenu: [
-        // Recargar descarta el trabajo en curso y DevTools expone el renderer:
-        // solo se ofrecen durante el desarrollo.
+        // Recarga y DevTools son herramientas de desarrollo. La redacción tiene
+        // recuperación; las operaciones en curso no se reanudan automáticamente.
         ...(app.isPackaged ? [] : [
           { role: 'reload', label: 'Volver a cargar' },
           { role: 'forceReload', label: 'Forzar recarga' },

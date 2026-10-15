@@ -2,7 +2,32 @@
 
 Fecha de corte: 15 de octubre de 2026. Versión del producto: `1.0.0-rc.16`.
 
-La revisión de UX y UI conserva la identidad visual del producto, reduce la saturación de Inicio y mejora la continuidad entre documentos, leyes y Portafolio. El comando `npm run dev:desktop` dispone de un lanzador explícito para abrir la ventana desde la carpeta del proyecto. La siguiente etapa es auditar seguridad y rendimiento, junto con las pruebas de proveedores reales y de recuperación tras cerrar la aplicación.
+La revisión de UX y UI conserva la identidad visual del producto, reduce la saturación de Inicio y mejora la continuidad entre documentos, leyes y Portafolio. El comando `npm run dev:desktop` dispone de un lanzador explícito para abrir la ventana desde la carpeta del proyecto. La continuación orientada a distribución en Windows añade recuperación de la redacción; faltan la auditoría completa de seguridad y rendimiento y las pruebas de proveedores reales.
+
+## Continuación para distribución en Windows — 15 de octubre de 2026
+
+Sobre el commit `60cf580`, se añadió una copia de recuperación cifrada de la redacción pendiente en `userData/draft-recovery.bin`. Conserva título, texto, datos del formulario, plantilla, materia, instrucciones y referencia a la revisión de origen. Utiliza `safeStorage` del sistema operativo; no guarda el texto en `localStorage` ni admite respaldo sin cifrado. La escritura sustituye el archivo anterior después de completar y vaciar el temporal. El esquema de SQLite y la versión del producto se conservan.
+
+La copia se programa cada 400 ms mientras hay cambios y se vacía de forma síncrona antes del cierre o la recarga. El inicio recupera la redacción antes de montar las pantallas. Si falla la escritura al salir, se ofrece permanecer o continuar sin conservar. La recuperación informa errores de lectura sin borrar el archivo existente. Las revisiones de escritura y la identidad de sesión impiden que peticiones atrasadas sustituyan una copia más reciente. Los canales nuevos comprueban la ventana, el marco principal y el documento de origen; la navegación de la ventana se limita al documento de la aplicación.
+
+Las escrituras de un mismo documento al Portafolio se ejecutan en orden y el primer asunto tiene identidad estable: reintentar tras cerrar durante el guardado no duplica el documento. El resultado generado se incorpora al estado recuperable antes de guardarlo. Guardar, descartar o eliminar el trabajo retira la copia correspondiente; el plazo de conservación configurado se comprueba al leerla. Eliminar un documento abierto detiene su autoguardado y espera las escrituras pendientes.
+
+Los archivos adjuntos no se duplican: se conserva su nombre y el formulario pide volver a seleccionarlos. La recuperación cubre Redactar; no reanuda revisiones de archivos ni peticiones a proveedores que estaban en curso. Un cierre forzado o un corte de energía puede perder los cambios posteriores a la última copia completada. La prueba automatizada comprueba cierre normal, recarga y nuevo proceso; no simula pérdida física de energía ni la instalación de una actualización.
+
+Puntos de entrada: `src/shared/draft-recovery.ts`, `src/main/ipc/recovery.handler.ts`, `src/main/lib/draft-recovery.ts` y `src/renderer/lib/draft-recovery.ts`. La prueba mantenida se ejecuta con `npm run test:recovery:electron`; usa ventanas ocultas y un perfil temporal aislado, y requiere SQLite compilado para Electron. Los contratos de cierre y cifrado se apoyan en [webContents](https://www.electronjs.org/docs/latest/api/web-contents#event-will-prevent-unload) y [safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage).
+
+| Comprobación ejecutada en esta continuación | Resultado |
+| --- | --- |
+| `npm run lint`, `npm run build` y `git diff --check` | Correctos. |
+| `npm test` | 181 aprobadas; 10 omitidas por el ABI de SQLite; 191 en total. |
+| `npm run test:recovery:electron` | Formulario tras reabrir, última edición tras recargar, cierre impedido ante fallo de disco, recuperación entre procesos, escritura SQLite en curso sin duplicados y descarte: correctos. |
+| `npm run test:vault:electron` | Correcto: 1,000 ciclos, reapertura, eliminación y conservación. |
+| `npm run audit:corpus-governance:strict` | Correcto: 16 ordenamientos, 7,348 disposiciones, sin duplicados ni conflictos. |
+| `npm run audit:legal-knowledge` y `npm run audit:legal-retrieval` | Correctos. |
+| `npm run eval:legal-rag -- --summary` | 20/20 casos semánticos y 5/5 controles de fundamentación. |
+| `npm run preflight:release:strict` | Bloqueado: identidad/certificado de firma de Windows no configurado. Recursos locales y el icono `.ico` correctos. |
+
+No se generó ni publicó un instalador en esta continuación. Siguen pendientes firma, empaquetado final y hash/manifiesto, pruebas reales de los tres proveedores, auditoría completa de seguridad —incluida CSP— y rendimiento, accesibilidad asistida y el ciclo de instalación, actualización y desinstalación en Windows limpio. La compilación de la aplicación no acredita esos gates. Los resultados de UX que siguen corresponden a la entrega anterior y no se volvieron a ejecutar en esta continuación.
 
 ## Estado de la entrega
 
@@ -100,7 +125,7 @@ En otro equipo, reproducir los escenarios de la sección de validación o trasla
 
 ## Prioridades para continuar
 
-1. **Cierre y recuperación:** comprobar cerrar, recargar y reiniciar con un borrador nuevo, un formulario pendiente y una escritura en curso. La continuidad no guardada se validó dentro de la misma sesión; no equivale a recuperación tras reiniciar.
+1. **Cierre y recuperación:** la redacción se recupera al cerrar, recargar y reiniciar, incluso con una escritura en curso, mediante la prueba mantenida descrita arriba. Falta comprobar el flujo durante una actualización instalada y decidir la recuperación de Revisar y de operaciones de IA en curso.
 2. **Seguridad:** revisar la aplicación efectiva de CSP. Chromium informó que `frame-ancestors` y `report-uri` se ignoran al declararse mediante `meta`. Continuar con IPC, exportaciones, navegación externa, cifrado, respaldos y trazas. Esta revisión de UX no acredita esos controles.
 3. **Rendimiento:** medir arranque frío y caliente, memoria, apertura de leyes extensas, búsqueda y exportación antes de modificar recursos o límites.
 4. **Proveedores reales:** validar conexión, generación, errores y modelos disponibles con Gemini, OpenAI y Anthropic mediante claves configuradas en la aplicación. Los recorridos realizados no utilizaron claves reales.

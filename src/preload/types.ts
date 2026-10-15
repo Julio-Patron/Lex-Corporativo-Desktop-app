@@ -84,6 +84,7 @@ export interface DraftResponse {
 }
 
 export interface LexDesktopAPI {
+  recovery: import('../shared/draft-recovery').RecoveryAPI;
   cases: {
     createCase: (payload: { caseId: string; name: string; module: CaseModule; description?: string }) => Promise<CaseMetadata>;
     listCases: () => Promise<CaseMetadata[]>;

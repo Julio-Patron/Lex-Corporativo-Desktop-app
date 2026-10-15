@@ -1,8 +1,10 @@
-import { app, BrowserWindow, Menu, ipcMain, shell, session } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain, shell, session, dialog } from 'electron';
 import { join } from 'path';
+import { pathToFileURL } from 'node:url';
 import { electronApp, optimizer } from '@electron-toolkit/utils';
 import { createAppMenu } from './menu';
 import { registerIpcHandlers } from './ipc';
+import { registerRecoveryHandlers } from './ipc/recovery.handler';
 import { registerProtocol, handleDeepLink } from './protocol';
 import { getByokSettings } from './lib/byok-settings';
 import { purgeExpiredUserDocuments } from './lib/rag';
@@ -11,6 +13,15 @@ import pkg from 'electron-updater';
 const { autoUpdater } = pkg;
 
 let mainWindow: BrowserWindow | null = null;
+
+function rendererDocumentUrl(): string {
+  return (!app.isPackaged && process.env.ELECTRON_RENDERER_URL)
+    || pathToFileURL(join(__dirname, '../renderer/index.html')).href;
+}
+
+function isAppDocument(url: string): boolean {
+  return url.split('#')[0] === rendererDocumentUrl().split('#')[0];
+}
 
 function canCheckUpdatesAutomatically(): boolean {
   const settings = getByokSettings();
@@ -88,6 +99,16 @@ function createWindow(): void {
     mainWindow = null;
   });
 
+  mainWindow.webContents.on('will-prevent-unload', (event) => {
+    const choice = dialog.showMessageBoxSync(mainWindow!, {
+      type: 'warning', title: 'Trabajo sin conservar',
+      message: 'No se pudo conservar todo el trabajo pendiente.',
+      detail: 'Permanece en la aplicación para guardar o exportar. Si continúas con el cierre o la recarga, puedes perder los últimos cambios.',
+      buttons: ['Permanecer', 'Continuar sin conservar'], defaultId: 0, cancelId: 0,
+    });
+    if (choice === 1) event.preventDefault();
+  });
+
   // Deny all web permission requests (geolocation, camera, microphone, etc.)
   session.defaultSession.setPermissionRequestHandler((_webContents, _permission, callback) => {
     callback(false);
@@ -96,7 +117,7 @@ function createWindow(): void {
   // External navigation shield
   mainWindow.webContents.on('will-navigate', (event, url) => {
     // Prevent any navigation away from the local app
-    if (!url.startsWith('file:') && !url.startsWith('http://localhost') && !url.startsWith('http://127.0.0.1')) {
+    if (!isAppDocument(url)) {
       event.preventDefault();
     }
   });
@@ -111,7 +132,7 @@ function createWindow(): void {
   });
 
   // HMR for renderer in development, or load static index.html in production
-  const rendererUrl = process.env['ELECTRON_RENDERER_URL'];
+  const rendererUrl = !app.isPackaged && process.env['ELECTRON_RENDERER_URL'];
   if (rendererUrl) {
     mainWindow.loadURL(rendererUrl);
   } else {
@@ -149,6 +170,10 @@ if (!gotTheLock) {
 
     // Register all secure IPC handlers
     registerIpcHandlers();
+    registerRecoveryHandlers((event) => Boolean(mainWindow
+      && event.sender === mainWindow.webContents
+      && event.senderFrame === mainWindow.webContents.mainFrame
+      && isAppDocument(event.senderFrame.url)));
     setupUpdateHandlers();
 
     void Promise.all([

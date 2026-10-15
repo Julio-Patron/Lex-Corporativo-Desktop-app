@@ -93,11 +93,14 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
             />
             <FileDropzone
               file={draft.referenceFile}
-              onFile={(file) => onChange({ referenceFile: file })}
+              onFile={(file) => onChange({ referenceFile: file, missingReferenceFileName: null })}
               onError={onError}
               title="Arrastra el documento o elígelo"
               compact
             />
+            {draft.missingReferenceFileName && !draft.referenceFile && <Callout tone="warning" title="Vuelve a adjuntar el archivo">
+              Se recuperaron los datos del formulario. Selecciona de nuevo «{draft.missingReferenceFileName}» para utilizar su contenido.
+            </Callout>}
           </Card>
         )}
 

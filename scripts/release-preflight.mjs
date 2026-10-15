@@ -18,7 +18,8 @@ function exists(relative) {
 check('vector-store', exists('legal-runtime/lance_data/legal_knowledge.lance'), 'LanceDB legal_knowledge.lance');
 check('corpus-manifest', exists('legal-runtime/corpus/corpus-manifest.json'), 'Manifiesto canónico del corpus');
 check('embedding-model', exists('legal-runtime/models/Xenova/all-MiniLM-L6-v2/onnx/model_quantized.onnx'), 'ONNX MiniLM cuantizado');
-check('app-icon', target === 'mac' ? exists('resources/icon.icns') : exists('resources/icon.png'), target === 'mac' ? 'resources/icon.icns' : 'resources/icon.png');
+const iconPath = target === 'mac' ? 'resources/icon.icns' : target === 'win' ? 'resources/icon.ico' : 'resources/icon.png';
+check('app-icon', exists(iconPath), iconPath);
 
 const signingConfigured = target !== 'win' || Boolean(process.env.CSC_LINK || process.env.WIN_CSC_LINK || process.env.CSC_NAME);
 check('code-signing', signingConfigured, target === 'win' ? 'Certificado/identidad de firma disponible en el entorno' : 'Firma aplicable al destino', strict);

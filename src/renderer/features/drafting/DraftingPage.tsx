@@ -152,11 +152,16 @@ export default function DraftingPage() {
         generatedWith: 'ai',
         provider: response.provider,
       };
+      setDraftDocument(record);
       try {
-        setDraftDocument(await saveDraftRecord(record), { saved: true });
+        const saved = await saveDraftRecord(record);
+        const current = useWorkspaceStore.getState().draft;
+        if (current.record?.id === record.id) updateDraft({
+          record: { ...current.record, caseId: saved.caseId, updatedAt: saved.updatedAt },
+          dirty: current.record.document !== record.document || current.record.title !== record.title,
+        });
         notify('El borrador quedó guardado en tu portafolio.', 'success', 'Documento redactado');
       } catch (error: any) {
-        setDraftDocument(record);
         notify(error?.message || 'El borrador se generó, pero no se pudo guardar.', 'warning', 'Documento sin guardar');
       }
     } catch (error: any) {

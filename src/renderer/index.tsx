@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { installBrowserPreview } from './dev/browser-preview';
+import { startDraftRecovery } from './lib/draft-recovery';
 
 // Vista previa en navegador para QA de diseño: Electron siempre inyecta el API
 // real y aislado del preload; este simulador sólo existe en desarrollo.
@@ -37,7 +38,7 @@ if (window.lexDesktop?.security?.reportCspViolation) {
   });
 }
 
-ReactDOM.createRoot(rootElement).render(
+void startDraftRecovery(window.lexDesktop.recovery).then(() => ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ErrorBoundary>
       <HashRouter>
@@ -45,4 +46,4 @@ ReactDOM.createRoot(rootElement).render(
       </HashRouter>
     </ErrorBoundary>
   </React.StrictMode>
-);
+));

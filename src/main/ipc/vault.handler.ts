@@ -19,6 +19,7 @@ import {
 } from '../lib/case-vault';
 import { getByokSettings } from '../lib/byok-settings';
 import { computeCaseRetentionUntil } from '../../shared/case-retention';
+import { clearDraftRecovery, clearRecoveryForDocument } from '../lib/draft-recovery';
 
 const caseIdRegex = /^[a-zA-Z0-9-_]+$/;
 
@@ -169,6 +170,7 @@ export function registerVaultHandlers(): void {
   ipcMain.handle('vault:delete-draft', async (_event, rawPayload: unknown) => {
     try {
       const payload = DeleteDraftSchema.parse(rawPayload);
+      clearRecoveryForDocument(payload.caseId, payload.draftId);
       const deleted = await deleteDraft(payload.caseId, payload.draftId, payload.expectedModule);
       return { success: true, deleted };
     } catch (err: any) {
@@ -192,6 +194,7 @@ export function registerVaultHandlers(): void {
   ipcMain.handle('vault:delete-case', async (_event, rawPayload: unknown) => {
     try {
       const payload = parseCaseOperation(rawPayload);
+      clearRecoveryForDocument(payload.caseId);
       await deleteCase(payload.caseId, payload.expectedModule);
       return { success: true };
     } catch (err: any) {
@@ -203,6 +206,7 @@ export function registerVaultHandlers(): void {
   ipcMain.handle('vault:purge-expired', async () => ({ deleted: await purgeExpiredCases() }));
   ipcMain.handle('vault:delete-all', async (_event, rawPayload: unknown) => {
     DeleteAllSchema.parse(rawPayload);
+    clearDraftRecovery();
     return { deleted: await deleteAllCases() };
   });
 

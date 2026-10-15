@@ -129,9 +129,25 @@ export async function listPortfolio(): Promise<{ items: PortfolioItem[]; cases: 
   return { items, cases };
 }
 
-export async function saveDraftRecord(record: DraftRecord): Promise<DraftRecord> {
+const draftWrites = new Map<string, Promise<DraftRecord>>();
+
+export function saveDraftRecord(record: DraftRecord): Promise<DraftRecord> {
+  const previous = draftWrites.get(record.id) ?? Promise.resolve();
+  const write = previous.catch(() => undefined).then(() => writeDraftRecord(record));
+  draftWrites.set(record.id, write);
+  void write.finally(() => {
+    if (draftWrites.get(record.id) === write) draftWrites.delete(record.id);
+  }).catch(() => undefined);
+  return write;
+}
+
+async function writeDraftRecord(record: DraftRecord): Promise<DraftRecord> {
   const previousCaseId = record.caseId;
-  const caseId = isOwnCase(previousCaseId, DRAFT_CASE_PREFIX) ? previousCaseId : newRecordId('doc');
+  // Identidad estable: reintentar después de cerrar durante el primer guardado
+  // actualiza el mismo asunto en vez de crear una copia en el portafolio.
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(record.id));
+  const stableId = `doc_${Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('')}`;
+  const caseId = isOwnCase(previousCaseId, DRAFT_CASE_PREFIX) ? previousCaseId : stableId;
   const { caseId: _caseId, ...draftData } = { ...record, updatedAt: new Date().toISOString() };
   await window.lexDesktop.cases.createCase({ caseId, name: record.title.slice(0, 96) || 'Documento', module: 'engineering' });
   await window.lexDesktop.cases.saveDraft({ caseId, draftId: record.id, draftData });
@@ -151,6 +167,7 @@ export async function saveReviewRecord(record: ReviewRecord): Promise<ReviewReco
 }
 
 export async function deletePortfolioItem(item: PortfolioItem): Promise<void> {
+  if (item.kind === 'draft') await draftWrites.get(item.record.id)?.catch(() => undefined);
   const ownCase = item.kind === 'draft'
     ? isOwnCase(item.caseId, DRAFT_CASE_PREFIX)
     : isOwnCase(item.caseId, REVIEW_CASE_PREFIX);

@@ -10,6 +10,7 @@ import { usePortfolioActions } from '../../hooks/usePortfolioActions';
 import { normalizeSearchText } from '../../lib/drafting';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
 import { deletePortfolioItem, listPortfolio } from '../../lib/portfolio';
+import { useWorkspaceStore } from '../../store/useWorkspaceStore';
 import { useUiStore } from '../../store/useUiStore';
 import type { PortfolioItem } from '../../types';
 
@@ -76,11 +77,16 @@ export default function PortfolioPage() {
     if (!accepted) return;
     const key = `${item.caseId}:${item.record.id}`;
     setBusyKey(key);
+    const workspace = useWorkspaceStore.getState();
+    const activeDraft = item.kind === 'draft' && workspace.draft.record?.id === item.record.id ? workspace.draft : null;
+    if (activeDraft) workspace.resetDraft();
+    const clearedDraft = useWorkspaceStore.getState().draft;
     try {
       await deletePortfolioItem(item);
       setItems((current) => current?.filter((entry) => `${entry.caseId}:${entry.record.id}` !== key) ?? null);
       notify('Elemento eliminado.', 'success');
     } catch (error: any) {
+      if (activeDraft && useWorkspaceStore.getState().draft === clearedDraft) useWorkspaceStore.setState({ draft: activeDraft });
       notify(error?.message || 'No se pudo eliminar.', 'error');
     } finally {
       setBusyKey(null);

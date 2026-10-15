@@ -10,6 +10,11 @@ function subscribe(channel: string, handler: (payload: any) => void): () => void
 }
 
 const api: LexDesktopAPI = {
+  recovery: {
+    load: () => ipcRenderer.invoke('recovery:load'),
+    save: (request) => ipcRenderer.invoke('recovery:save', request),
+    flush: (request) => ipcRenderer.sendSync('recovery:flush', request),
+  },
   cases: {
     createCase: (payload) => ipcRenderer.invoke('vault:create-case', payload),
     listCases: () => ipcRenderer.invoke('vault:list-cases'),

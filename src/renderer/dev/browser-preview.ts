@@ -29,6 +29,11 @@ export function installBrowserPreview(): void {
   const touch = (caseId: string) => { const item = cases.get(caseId); if (item) item.metadata.updatedAt = new Date().toISOString(); };
 
   const api: LexDesktopAPI = {
+    recovery: {
+      load: async () => ({ sessionId: crypto.randomUUID(), snapshot: null }),
+      save: async () => ({ ok: true }),
+      flush: () => ({ ok: true }),
+    },
     cases: {
       createCase: async ({ caseId, name, module }) => {
         const now = new Date().toISOString();

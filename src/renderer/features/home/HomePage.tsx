@@ -86,7 +86,7 @@ export default function HomePage() {
         <p className="mt-3 text-sm text-slate-600">¿Qué necesitas hacer hoy?</p>
       </section>
 
-      {(draft.dirty || (draft.step === 'details' && (draft.template || draft.instructions.trim() || draft.referenceFile))) ? (
+      {(draft.dirty || (draft.step === 'details' && (draft.template || draft.instructions.trim() || draft.referenceFile || draft.missingReferenceFileName || Object.values(draft.fieldValues).some(value => value.trim())))) ? (
         <Link to="/redactar" className="flex items-center justify-between gap-3 rounded-lg border-l-2 border-legal-gold bg-white px-4 py-3">
           <span className="min-w-0"><span className="block text-xs text-slate-500">Documento en curso</span><span className="block truncate text-sm font-semibold">{draft.record?.title ?? draft.template?.title ?? 'Tu borrador'}</span></span>
           <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">Continuar <ArrowRight size={16} aria-hidden="true" /></span>

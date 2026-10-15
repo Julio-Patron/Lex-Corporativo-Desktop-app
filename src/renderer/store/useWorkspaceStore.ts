@@ -14,6 +14,7 @@ export interface DraftSession {
   fieldValues: Record<string, string>;
   instructions: string;
   referenceFile: File | null;
+  missingReferenceFileName?: string | null;
   sourceReview: { id: string; caseId?: string; title: string } | null;
   // Documento en edición; `caseId` indica que ya existe en el portafolio.
   record: DraftRecord | null;

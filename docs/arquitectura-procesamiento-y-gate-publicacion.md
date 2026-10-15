@@ -26,7 +26,7 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 | --- | --- |
 | Electron main, preload y renderer | Integrado |
 | Bóveda SQLite | Integrada y probada |
-| Corpus fuente | 9 ordenamientos y 4,573 disposiciones |
+| Corpus fuente | 16 ordenamientos y 7,348 disposiciones; consultar el manifiesto canónico para cifras posteriores |
 | LanceDB y embeddings | Integrados |
 | BYOK multiproveedor | Integrado |
 | Validación de fundamentación | Integrada |
@@ -47,5 +47,6 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 10. `npm run build:electron`.
 11. Instalación, primera apertura, actualización y desinstalación en Windows limpio.
 12. Firma, hash y manifiesto de release.
+13. `npm run test:recovery:electron`: cierre, recarga, reinicio y escritura en curso sin pérdida de la redacción confirmada.
 
 No se debe crear un release comercial mientras alguno de estos gates permanezca pendiente.

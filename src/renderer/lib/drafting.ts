@@ -5,7 +5,7 @@ import type { DraftSession } from '../store/useWorkspaceStore';
 export function hasUnsavedDraft(draft: DraftSession): boolean {
   return draft.record
     ? !draft.record.caseId || draft.dirty
-    : Boolean(draft.referenceFile || draft.instructions.trim() || Object.values(draft.fieldValues).some((value) => value.trim()));
+    : Boolean(draft.referenceFile || draft.missingReferenceFileName || draft.instructions.trim() || Object.values(draft.fieldValues).some((value) => value.trim()));
 }
 
 export interface CatalogTemplate extends DraftingTemplate {

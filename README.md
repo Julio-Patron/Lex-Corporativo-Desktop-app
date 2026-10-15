@@ -32,7 +32,13 @@ Las comprobaciones se ejecutan por separado:
 npm run lint
 npm test
 npm run build
+npm run test:vault:electron
+npm run test:recovery:electron
 ```
+
+La redacción pendiente se recupera al volver a abrir la aplicación mediante una copia local cifrada con el sistema operativo. Incluye texto, título, plantilla, campos e instrucciones; los archivos adjuntos deben volver a seleccionarse. Se borra al guardar el documento, descartarlo o eliminar los datos y respeta el plazo de conservación configurado. Si falla la copia al cerrar o recargar, se ofrece permanecer en la aplicación.
+
+La prueba de recuperación usa ventanas ocultas y un perfil aislado; comprueba recarga, cierre, reinicio de proceso, fallos de escritura y guardado en curso sin duplicados. Las dos pruebas de Electron requieren SQLite preparado para Electron (`npm run predev:electron`).
 
 La gobernanza del corpus se valida con:
 
@@ -45,7 +51,7 @@ npm run audit:corpus-governance:strict
 ## Empaquetado
 
 ```bash
-npm run preflight:release
+npm run preflight:release:strict
 npm run build:electron
 ```
 
