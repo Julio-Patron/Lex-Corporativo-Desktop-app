@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { saveDraftRecord } from '../../lib/portfolio';
 import { useUiStore } from '../../store/useUiStore';
 import { useWorkspaceStore } from '../../store/useWorkspaceStore';
@@ -10,8 +10,13 @@ const AUTOSAVE_DELAY_MS = 1_500;
 // guardado automático del documento abierto una vez que existe en el portafolio.
 export function AppEffects() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const draftRecord = useWorkspaceStore((state) => state.draft.record);
   const draftDirty = useWorkspaceStore((state) => state.draft.dirty);
+
+  useEffect(() => {
+    document.getElementById('main-content')?.focus();
+  }, [pathname]);
 
   useEffect(() => {
     const ui = useUiStore.getState();
@@ -37,7 +42,7 @@ export function AppEffects() {
         .then((saved) => {
           const { draft, updateDraft } = useWorkspaceStore.getState();
           if (draft.record?.id !== saved.id) return;
-          const unchanged = draft.record.document === snapshot.document;
+          const unchanged = draft.record.document === snapshot.document && draft.record.title === snapshot.title;
           updateDraft({ record: { ...draft.record, caseId: saved.caseId, updatedAt: saved.updatedAt }, dirty: !unchanged });
         })
         .catch((error: Error) => {

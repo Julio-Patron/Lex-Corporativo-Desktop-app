@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Check, Clipboard, Download, FileText, Save } from 'lucide-react';
 import logoMarkUrl from '../../assets/logo-mark.png';
@@ -24,12 +24,19 @@ function countPlaceholders(document: string): number {
 }
 
 export function DraftDocument({ record, dirty, onChangeDocument, onRename, onSave, onExport, onCopy, onEditDetails, saving }: DraftDocumentProps) {
-  const [view, setView] = useState<'preview' | 'edit'>(record.generatedWith === 'template' ? 'edit' : 'preview');
+  const [view, setView] = useState<'preview' | 'edit'>('preview');
   const [exporting, setExporting] = useState<'pdf' | 'docx' | null>(null);
   const [copied, setCopied] = useState(false);
   const titleId = useId();
   const saved = Boolean(record.caseId);
   const pending = countPlaceholders(record.document);
+  const editorRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (view !== 'edit') return;
+    editorRef.current?.focus({ preventScroll: true });
+    editorRef.current?.scrollIntoView({ block: 'nearest' });
+  }, [view]);
 
   const runExport = async (format: 'pdf' | 'docx') => {
     setExporting(format);
@@ -76,8 +83,8 @@ export function DraftDocument({ record, dirty, onChangeDocument, onRename, onSav
       </Card>
 
       {pending > 0 && (
-        <Callout tone="warning" title={`Quedan ${pending} datos por completar`}>
-          Busca los textos entre corchetes, por ejemplo [NOMBRE DEL ARRENDADOR], y reemplázalos en el modo Editar.
+        <Callout tone="warning" title={`Quedan ${pending} datos por completar`} action={<Button size="sm" variant="secondary" onClick={() => setView('edit')}>Completar documento</Button>}>
+          Reemplaza los textos entre corchetes con tus datos en el editor.
           {onEditDetails && record.generatedWith === 'ai' && (
             <> También puedes <button type="button" className="font-semibold underline" onClick={onEditDetails}>volver a los datos</button> y redactar de nuevo.</>
           )}
@@ -103,6 +110,7 @@ export function DraftDocument({ record, dirty, onChangeDocument, onRename, onSav
       ) : (
         <div>
           <textarea
+            ref={editorRef}
             aria-label="Texto del documento"
             value={record.document}
             onChange={(event) => onChangeDocument(event.target.value)}

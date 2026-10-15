@@ -4,7 +4,7 @@ import { Download, FileText, FolderOpen, Search, Trash2 } from 'lucide-react';
 import type { CaseMetadata } from '../../../preload/types';
 import { CASE_RETENTION_LABELS } from '../../../shared/case-retention';
 import { PortfolioRowSummary } from '../../components/PortfolioRow';
-import { Button, Card, ConfirmDialog, EmptyState, Page, Segmented, Select, Spinner, TextInput } from '../../components/ui';
+import { Button, Callout, Card, ConfirmDialog, EmptyState, Page, Segmented, Select, Spinner, TextInput } from '../../components/ui';
 import { useConfirmDialog } from '../../hooks/useConfirmDialog';
 import { usePortfolioActions } from '../../hooks/usePortfolioActions';
 import { normalizeSearchText } from '../../lib/drafting';
@@ -23,9 +23,10 @@ export default function PortfolioPage() {
   const navigate = useNavigate();
   const notify = useUiStore((state) => state.notify);
   const retentionDays = useUiStore((state) => state.settings?.caseRetentionDays ?? 0);
-  const { openItem, exportItem } = usePortfolioActions();
+  const { openItem, exportItem, openItemDialog } = usePortfolioActions();
   const [dialogState, confirm] = useConfirmDialog();
   const [items, setItems] = useState<PortfolioItem[] | null>(null);
+  const [loadError, setLoadError] = useState('');
   const [cases, setCases] = useState<CaseMetadata[]>([]);
   const [query, setQuery] = useState('');
   const [kind, setKind] = useState<KindFilter>('all');
@@ -33,15 +34,16 @@ export default function PortfolioPage() {
   const [busyKey, setBusyKey] = useState<string | null>(null);
 
   const load = useCallback(async () => {
+    setLoadError('');
+    setItems(null);
     try {
       const data = await listPortfolio();
       setItems(data.items);
       setCases(data.cases);
     } catch (error: any) {
-      setItems([]);
-      notify(error?.message || 'No se pudo abrir el portafolio.', 'error');
+      setLoadError(error?.message || 'No se pudo abrir el portafolio.');
     }
-  }, [notify]);
+  }, []);
 
   useEffect(() => { void load(); }, [load]);
 
@@ -112,10 +114,15 @@ export default function PortfolioPage() {
         </Select>
       </Card>
 
-      {items === null ? (
+      {loadError ? (
+        <Callout tone="warning" title="No se pudo abrir el portafolio" action={<Button variant="secondary" size="sm" onClick={() => void load()}>Reintentar</Button>}>
+          {loadError}
+        </Callout>
+      ) : items === null ? (
         <Spinner label="Abriendo el portafolio…" />
       ) : items.length === 0 ? (
         <EmptyState
+          branded
           icon={FolderOpen}
           title="Tu portafolio está vacío"
           description="Los documentos que redactes o guardes y las revisiones que hagas aparecerán aquí."
@@ -158,6 +165,7 @@ export default function PortfolioPage() {
       )}
 
       <ConfirmDialog {...dialogState} />
+      <ConfirmDialog {...openItemDialog} />
     </Page>
   );
 }

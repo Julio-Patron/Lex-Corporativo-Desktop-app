@@ -3,7 +3,7 @@ import { CheckCircle2, ChevronDown, KeyRound } from 'lucide-react';
 import type { AppSettings, ByokProviderId } from '../../../preload/types';
 import { DEFAULT_BYOK_MODELS } from '../../../shared/byok-models';
 import { providerLabel, useUiStore } from '../../store/useUiStore';
-import { Button, Field, TextInput } from '../ui';
+import { Button, Field, RadioGroup, TextInput } from '../ui';
 import { cn } from '../../lib/utils';
 
 const PROVIDERS: ByokProviderId[] = ['gemini', 'openai', 'anthropic'];
@@ -42,6 +42,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
 
   const mountedRef = useRef(true);
   useEffect(() => {
+    mountedRef.current = true;
     return () => {
       mountedRef.current = false;
     };
@@ -91,30 +92,26 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
 
   return (
     <div className="space-y-4">
-      <div role="radiogroup" aria-label="Proveedor de IA" className="grid gap-2 sm:grid-cols-3">
-        {PROVIDERS.map((id) => {
+      <RadioGroup
+        label="Proveedor de IA"
+        value={provider}
+        onChange={setProvider}
+        disabled={busy !== null}
+        className="grid gap-2 sm:grid-cols-3"
+        optionClassName={(selected) => cn(
+          'rounded-lg border p-3 text-left transition-colors disabled:cursor-wait',
+          selected ? 'border-legal-950 bg-slate-50 ring-2 ring-legal-gold/40' : 'border-slate-200 bg-white hover:border-slate-300',
+        )}
+        options={PROVIDERS.map((id) => {
           const state = settings?.providers[id];
-          const selected = id === provider;
-          return (
-            <button
-              key={id}
-              type="button"
-              role="radio"
-              aria-checked={selected}
-              onClick={() => setProvider(id)}
-              className={cn(
-                'rounded-lg border p-3 text-left transition-colors',
-                selected ? 'border-legal-950 bg-slate-50 ring-2 ring-legal-gold/40' : 'border-slate-200 bg-white hover:border-slate-300',
-              )}
-            >
+          return { value: id, label: <>
               <span className="block text-sm font-semibold text-slate-900">{providerLabel(id)}</span>
               <span className="mt-0.5 block text-xs text-slate-500">
                 {settings?.enabled && settings.provider === id ? 'En uso' : state?.hasApiKey ? 'Key guardada' : 'Sin key'}
               </span>
-            </button>
-          );
+            </> };
         })}
-      </div>
+      />
 
       <Field
         label="API key"

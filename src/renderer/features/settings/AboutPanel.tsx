@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Callout, Card, SectionTitle, Toggle } from '../../components/ui';
 import { useUiStore } from '../../store/useUiStore';
+import { BrandWatermark } from '../../components/BrandWatermark';
 
 export function AboutPanel() {
   const settings = useUiStore((state) => state.settings);
@@ -50,7 +51,8 @@ export function AboutPanel() {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="relative isolate overflow-hidden py-8">
+        <BrandWatermark className="-right-4 -top-14 -z-10 h-64 w-64" />
         <SectionTitle title="Lex Corporativo Desktop" description={version ? `Versión ${version}` : undefined} />
         {corpus && (
           <p className="text-sm text-slate-600">

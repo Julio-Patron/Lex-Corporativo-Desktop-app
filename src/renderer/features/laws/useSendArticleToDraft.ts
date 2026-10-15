@@ -4,13 +4,13 @@ import type { LegalArea } from '../../lib/legal-areas';
 import { useUiStore } from '../../store/useUiStore';
 import { useWorkspaceStore } from '../../store/useWorkspaceStore';
 
-// Lleva una disposición a las instrucciones del redactor.
+// Incorpora la cita al documento abierto o a las instrucciones en preparación.
 export function useSendArticleToDraft() {
   const navigate = useNavigate();
   const notify = useUiStore((state) => state.notify);
   return useCallback((citation: string, area?: LegalArea) => {
-    useWorkspaceStore.getState().appendDraftInstructions(`FUNDAMENTO A CONSIDERAR:\n${citation}`, area);
-    notify('El artículo se agregó a las instrucciones del documento.', 'success', 'Redactar');
+    const destination = useWorkspaceStore.getState().addLegalCitation(citation, area);
+    notify(destination === 'document' ? 'La cita se agregó al documento. Puedes revisarla, guardarla y exportarla.' : 'La cita se agregó a las instrucciones; los datos que ya capturaste se conservan.', 'success', 'Redactar');
     navigate('/redactar');
   }, [navigate, notify]);
 }

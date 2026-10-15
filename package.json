@@ -12,10 +12,10 @@
     "test:vault:electron": "node scripts/test-case-vault-electron.mjs",
     "test:watch": "vitest",
     "predev:electron": "electron-rebuild -f -o better-sqlite3",
-    "dev:electron": "electron-vite dev",
+    "dev:electron": "node scripts/dev-desktop.mjs",
     "predev:desktop": "electron-rebuild -f -o better-sqlite3",
     "preview:electron": "electron-vite preview",
-    "dev:desktop": "electron-vite dev",
+    "dev:desktop": "node scripts/dev-desktop.mjs",
     "build": "electron-vite build",
     "build:analyze": "vite build --config electron.vite.config.ts -m analyze && npx vite-bundle-analyzer out/renderer",
     "prebuild:electron": "node scripts/generate-ico.mjs && node scripts/generate-corpus-manifest.mjs --write --strict && node scripts/download-embeddings.mjs && electron-rebuild -f -o better-sqlite3",
@@ -97,5 +97,17 @@
     "onnxruntime-web": {
       "protobufjs": "7.6.2"
     }
+  },
+  "allowScripts": {
+    "better-sqlite3@12.11.1": true,
+    "sharp@0.33.5": true,
+    "sharp@0.32.6": true,
+    "onnxruntime-node@1.14.0": true,
+    "onnxruntime-node@1.19.2": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "protobufjs@7.6.5": true,
+    "protobufjs@7.6.2": true,
+    "electron-winstaller@5.4.0": true
   }
 }

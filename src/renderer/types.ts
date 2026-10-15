@@ -86,7 +86,7 @@ export interface DraftRecord {
   sourceReviewId?: string;
   instructions: string;
   document: string;
-  generatedWith: 'ai' | 'template';
+  generatedWith: 'ai' | 'template' | 'manual';
   provider?: ByokProviderId;
 }
 

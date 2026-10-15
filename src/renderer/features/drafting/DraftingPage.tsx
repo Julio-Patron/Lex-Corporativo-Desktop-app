@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
-import { Button, Page } from '../../components/ui';
+import { Button, ConfirmDialog, Page } from '../../components/ui';
+import { useConfirmDialog } from '../../hooks/useConfirmDialog';
 import { useAiGuard } from '../../hooks/useAiGuard';
 import { exportMarkdown } from '../../hooks/usePortfolioActions';
-import { buildDraftRequirements, documentTitleFrom, hasDraftInput, templateArea, type CatalogTemplate } from '../../lib/drafting';
+import { buildDraftRequirements, documentTitleFrom, hasDraftInput, hasUnsavedDraft, templateArea, type CatalogTemplate } from '../../lib/drafting';
 import { toFilePayload } from '../../lib/files';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { newRecordId, saveDraftRecord } from '../../lib/portfolio';
@@ -22,11 +23,12 @@ const STEPS: Array<{ id: DraftStep; label: string }> = [
   { id: 'document', label: 'Revisar y exportar' },
 ];
 
-function Stepper({ current, canOpen, onSelect }: { current: DraftStep; canOpen: (step: DraftStep) => boolean; onSelect: (step: DraftStep) => void }) {
-  const currentIndex = STEPS.findIndex((step) => step.id === current);
+function Stepper({ current, canOpen, onSelect, manual }: { current: DraftStep; canOpen: (step: DraftStep) => boolean; onSelect: (step: DraftStep) => void; manual: boolean }) {
+  const steps = manual ? [STEPS[0], { id: 'document' as const, label: 'Completar y exportar' }] : STEPS;
+  const currentIndex = steps.findIndex((step) => step.id === current);
   return (
     <ol className="flex flex-wrap items-center gap-2" aria-label="Pasos de redacción">
-      {STEPS.map((step, index) => {
+      {steps.map((step, index) => {
         const done = index < currentIndex;
         const active = step.id === current;
         return (
@@ -66,6 +68,18 @@ export default function DraftingPage() {
   const { aiReady, ensureAi } = useAiGuard();
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [dialogState, confirm] = useConfirmDialog();
+
+  const replaceDraft = async (action: () => void) => {
+    const current = useWorkspaceStore.getState().draft;
+    if (hasUnsavedDraft(current) && !await confirm({
+      title: 'Descartar cambios sin guardar',
+      message: 'Hay trabajo sin guardar en la redacción actual. Si continúas, se descartará. Puedes cancelar para conservarlo y guardarlo.',
+      confirmLabel: 'Descartar cambios',
+      variant: 'danger',
+    })) return;
+    action();
+  };
 
   const requirementsInput = {
     template: draft.template,
@@ -77,7 +91,7 @@ export default function DraftingPage() {
     ? Boolean(draft.referenceFile) && Boolean(draft.instructions.trim())
     : hasDraftInput(requirementsInput) || draft.source === 'review';
 
-  const openTemplate = (template: CatalogTemplate | NonNullable<typeof draft.template>) => {
+  const openTemplate = (template: CatalogTemplate | NonNullable<typeof draft.template>) => void replaceDraft(() => {
     const area = templateArea(template);
     const now = new Date().toISOString();
     const record: DraftRecord = {
@@ -94,10 +108,10 @@ export default function DraftingPage() {
     };
     updateDraft({ template, area, source: 'template' });
     setDraftDocument(record);
-  };
+  });
 
   const customize = (template: CatalogTemplate) => {
-    startDraft('template', { template, area: template.area });
+    void replaceDraft(() => startDraft('template', { template, area: template.area }));
   };
 
   const generate = async () => {
@@ -154,9 +168,16 @@ export default function DraftingPage() {
 
   const save = async () => {
     if (!draft.record) return;
+    const snapshot = draft.record;
     setSaving(true);
     try {
-      setDraftDocument(await saveDraftRecord(draft.record), { saved: true });
+      const saved = await saveDraftRecord(snapshot);
+      const current = useWorkspaceStore.getState().draft;
+      if (current.record?.id !== snapshot.id) return;
+      updateDraft({
+        record: { ...current.record, caseId: saved.caseId, updatedAt: saved.updatedAt },
+        dirty: current.record.document !== snapshot.document || current.record.title !== snapshot.title,
+      });
       notify('Guardado en tu portafolio. Los cambios siguientes se guardan solos.', 'success');
     } catch (error: any) {
       notify(error?.message || 'No se pudo guardar el documento.', 'error');
@@ -198,19 +219,19 @@ export default function DraftingPage() {
   return (
     <Page
       title="Redactar"
-      description="Elige un documento, completa sus datos y obtén el borrador listo para revisar y exportar."
+      description={draft.record?.generatedWith === 'manual' ? 'Organiza tus citas, edita el texto y guarda o exporta el documento.' : 'Elige un documento, completa sus datos y obtén el borrador listo para revisar y exportar.'}
       width="wide"
-      actions={draft.step !== 'choose' && <Button variant="secondary" onClick={resetDraft} disabled={generating}>Nuevo documento</Button>}
+      actions={draft.step !== 'choose' && <Button variant="secondary" onClick={() => void replaceDraft(resetDraft)} disabled={generating || saving}>Nuevo documento</Button>}
     >
-      <Stepper current={draft.step} canOpen={canOpenStep} onSelect={(step) => updateDraft({ step })} />
+      {draft.record?.generatedWith !== 'manual' && <Stepper current={draft.step} manual={draft.record?.generatedWith === 'template'} canOpen={(step) => !generating && !saving && canOpenStep(step)} onSelect={(step) => updateDraft({ step })} />}
 
       {draft.step === 'choose' && (
         <TemplateChooser
           aiReady={aiReady}
           onCustomize={customize}
           onOpenTemplate={openTemplate}
-          onStartFromFile={() => startDraft('file', { area: draft.area })}
-          onStartFree={() => startDraft('free', { area: draft.area })}
+          onStartFromFile={() => void replaceDraft(() => startDraft('file', { area: draft.area }))}
+          onStartFree={() => void replaceDraft(() => startDraft('free', { area: draft.area }))}
         />
       )}
 
@@ -241,6 +262,7 @@ export default function DraftingPage() {
           onEditDetails={draft.template || draft.instructions ? () => updateDraft({ step: 'details' }) : undefined}
         />
       )}
+      <ConfirmDialog {...dialogState} />
     </Page>
   );
 }

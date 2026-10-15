@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { BookOpen, Check, ChevronDown, Clipboard, Download, FileSignature, Search } from 'lucide-react';
-import { AreaTag, Button, Callout, Card, EmptyState, Page, SectionTitle, Spinner, TextInput } from '../../components/ui';
+import { AreaTag, Button, Callout, Card, EmptyState, Page, RadioGroup, SectionTitle, Spinner, TextInput } from '../../components/ui';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, isLegalArea, type LegalArea } from '../../lib/legal-areas';
 import { suggestAlternativeLegalModule } from '../../lib/legal-search-routing';
 import { cn } from '../../lib/utils';
@@ -17,23 +17,17 @@ const EXAMPLES = ['rescisión sin responsabilidad', 'requisitos del pagaré', 'a
 
 function AreaFilterChips({ value, onChange }: { value: AreaFilter; onChange: (value: AreaFilter) => void }) {
   return (
-    <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Materia">
-      {(['todos', ...LEGAL_AREAS] as const).map((area) => (
-        <button
-          key={area}
-          type="button"
-          role="radio"
-          aria-checked={value === area}
-          onClick={() => onChange(area)}
-          className={cn(
-            'h-9 rounded-lg border px-3 text-sm font-semibold transition-colors',
-            value === area ? 'border-legal-950 bg-legal-950 text-white' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300',
-          )}
-        >
-          {area === 'todos' ? 'Todas' : LEGAL_AREA_INFO[area].shortLabel}
-        </button>
-      ))}
-    </div>
+    <RadioGroup
+      label="Materia"
+      value={value}
+      onChange={onChange}
+      className="flex flex-wrap gap-1.5"
+      optionClassName={(selected) => cn(
+        'h-9 rounded-lg border px-3 text-sm font-semibold transition-colors',
+        selected ? 'border-legal-950 bg-legal-950 text-white' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300',
+      )}
+      options={(['todos', ...LEGAL_AREAS] as const).map((area) => ({ value: area, label: area === 'todos' ? 'Todas' : LEGAL_AREA_INFO[area].shortLabel }))}
+    />
   );
 }
 
@@ -52,16 +46,30 @@ export default function LawsPage() {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [overview, setOverview] = useState<CorpusOverview | null>(null);
+  const [libraryError, setLibraryError] = useState('');
+  const [searchError, setSearchError] = useState('');
+  const libraryRequest = useRef(0);
+  const searchRequest = useRef(0);
   const [reader, setReader] = useState<{ code: string; article?: string } | null>(null);
   const libraryRef = useRef<HTMLElement>(null);
   const [searchParams] = useSearchParams();
   const showLibrary = searchParams.get('vista') === 'biblioteca';
 
+  const loadLibrary = useCallback(async () => {
+    const request = ++libraryRequest.current;
+    setLibraryError('');
+    try {
+      const response = await window.lexDesktop.legalCorpus.list();
+      if (request === libraryRequest.current) setOverview(response);
+    } catch (error: any) {
+      if (request === libraryRequest.current) setLibraryError(error?.message || 'No se pudo abrir la biblioteca de leyes.');
+    }
+  }, []);
+
   useEffect(() => {
-    window.lexDesktop.legalCorpus.list()
-      .then(setOverview)
-      .catch((error: any) => notify(error?.message || 'No se pudo abrir la biblioteca de leyes.', 'error'));
-  }, [notify]);
+    void loadLibrary();
+    return () => { libraryRequest.current++; searchRequest.current++; };
+  }, [loadLibrary]);
 
   useEffect(() => {
     if (showLibrary && overview) libraryRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -80,19 +88,23 @@ export default function LawsPage() {
   const search = async (value = query, searchArea: AreaFilter = area) => {
     const text = value.trim();
     if (!text) return;
+    const request = ++searchRequest.current;
     setQuery(text);
+    setSearchedQuery(text);
     setArea(searchArea);
     setSearching(true);
+    setSearchError('');
     setExpanded(new Set());
     try {
       const response = await window.lexDesktop.legalKnowledge.searchRAG({ query: text, module: searchArea, limit: 8, useReranker: true });
+      if (request !== searchRequest.current) return;
       setResults(response.citations);
-      setSearchedQuery(text);
     } catch (error: any) {
-      notify(error?.message || 'No se pudo buscar en las leyes locales.', 'error');
-      setResults([]);
+      if (request !== searchRequest.current) return;
+      setSearchError(error?.message || 'No se pudo buscar en las leyes locales.');
+      setResults(null);
     } finally {
-      setSearching(false);
+      if (request === searchRequest.current) setSearching(false);
     }
   };
 
@@ -155,6 +167,12 @@ export default function LawsPage() {
       </Card>
 
       {searching && <Spinner label="Buscando en las leyes locales…" />}
+
+      {!searching && searchError && (
+        <Callout tone="warning" title="No se pudo completar la búsqueda" action={<Button size="sm" variant="secondary" onClick={() => void search(searchedQuery)}>Reintentar búsqueda</Button>}>
+          {searchError}
+        </Callout>
+      )}
 
       {!searching && results !== null && (
         <section aria-label="Resultados">
@@ -225,8 +243,14 @@ export default function LawsPage() {
           title="Biblioteca"
           description={area === 'todos' ? 'Todas las leyes instaladas.' : `Leyes de ${LEGAL_AREA_INFO[area].label.toLowerCase()}.`}
         />
-        {!overview ? (
+        {libraryError ? (
+          <Callout tone="warning" title="No se pudo abrir la biblioteca" action={<Button size="sm" variant="secondary" onClick={() => void loadLibrary()}>Reintentar biblioteca</Button>}>
+            {libraryError}
+          </Callout>
+        ) : !overview ? (
           <Spinner label="Abriendo la biblioteca…" />
+        ) : laws.length === 0 ? (
+          <EmptyState icon={BookOpen} title="No hay leyes instaladas para esta materia" description="Selecciona otra materia o consulta todas las leyes." action={<Button variant="secondary" onClick={() => { setArea('todos'); if (searchedQuery) void search(searchedQuery, 'todos'); }}>Ver todas las materias</Button>} />
         ) : (
           <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {laws.map((law) => (

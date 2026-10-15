@@ -2,6 +2,8 @@ import React from 'react';
 import { AlertTriangle, CheckCircle2, Info, XCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { LEGAL_AREA_INFO, type LegalArea } from '../../lib/legal-areas';
+import { RadioGroup } from './RadioGroup';
+import { BrandWatermark } from '../BrandWatermark';
 
 interface PageProps {
   title: string;
@@ -97,15 +99,17 @@ export function Callout({ tone = 'info', title, children, action, className }: {
   );
 }
 
-export function EmptyState({ icon: Icon, title, description, action }: {
+export function EmptyState({ icon: Icon, title, description, action, branded = false }: {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   title: string;
   description?: React.ReactNode;
   action?: React.ReactNode;
+  branded?: boolean;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
-      <Icon size={28} className="text-slate-400" />
+    <div className="relative isolate flex flex-col items-center justify-center overflow-hidden rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center">
+      {branded && <BrandWatermark className="-right-12 -bottom-16 -z-10 h-80 w-80" />}
+      {!branded && <Icon size={28} className="text-slate-400" />}
       <p className="mt-3 text-base font-semibold text-slate-900">{title}</p>
       {description && <p className="mt-1 max-w-md text-sm text-slate-600">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
@@ -120,24 +124,20 @@ export function Segmented<T extends string>({ value, options, onChange, label }:
   label: string;
 }) {
   return (
-    <div role="radiogroup" aria-label={label} className="inline-flex flex-wrap gap-1 rounded-lg border border-slate-200 bg-slate-100 p-1">
-      {options.map((option) => (
-        <button
-          key={option.value}
-          type="button"
-          role="radio"
-          aria-checked={value === option.value}
-          onClick={() => onChange(option.value)}
-          className={cn(
-            'rounded-md px-3 py-1.5 text-sm font-semibold transition-colors',
-            value === option.value ? 'bg-white text-slate-950 shadow-sm' : 'text-slate-600 hover:text-slate-950',
-          )}
-        >
-          {option.label}
-          {option.count !== undefined && <span className="ml-1.5 text-xs font-medium text-slate-500">{option.count}</span>}
-        </button>
-      ))}
-    </div>
+    <RadioGroup
+      label={label}
+      value={value}
+      onChange={onChange}
+      className="inline-flex flex-wrap gap-1 rounded-lg border border-slate-200 bg-slate-100 p-1"
+      optionClassName={(selected) => cn(
+        'rounded-md px-3 py-1.5 text-sm font-semibold transition-colors',
+        selected ? 'bg-white text-slate-950 shadow-sm' : 'text-slate-600 hover:text-slate-950',
+      )}
+      options={options.map((option) => ({
+        value: option.value,
+        label: <>{option.label}{option.count !== undefined && <span className="ml-1.5 text-xs font-medium text-slate-500">{option.count}</span>}</>,
+      }))}
+    />
   );
 }
 

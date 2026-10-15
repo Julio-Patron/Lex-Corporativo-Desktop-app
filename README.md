@@ -15,9 +15,20 @@ Sin una API key válida se mantienen disponibles el portafolio, los formularios,
 
 ## Desarrollo
 
+Abre una terminal en la carpeta del proyecto, donde está `package.json`. Instala las dependencias la primera vez y abre la herramienta con:
+
 ```bash
 npm ci
 npm run dev:desktop
+```
+
+El comando prepara SQLite para Electron y abre la ventana de Lex Corporativo con recarga de la interfaz al editar. Mantén la terminal abierta mientras trabajas; usa `Ctrl+C` para detener el modo de desarrollo. `npm run dev:electron` es un alias del mismo lanzador.
+
+El lanzador utiliza la raíz del proyecto y elimina `ELECTRON_RUN_AS_NODE` del entorno del proceso hijo para que Electron se ejecute como aplicación de escritorio.
+
+Las comprobaciones se ejecutan por separado:
+
+```bash
 npm run lint
 npm test
 npm run build

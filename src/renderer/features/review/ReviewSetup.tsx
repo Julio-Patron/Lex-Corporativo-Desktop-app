@@ -80,16 +80,16 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           </div>
         </Card>
 
-        <Card>
+        {aiReady && <Card>
           <Field
             label="3. Enfoque de la revisión"
             htmlFor={instructionId}
             optional
-            hint={aiReady ? 'Por ejemplo: revisar penas convencionales, vigencia de poderes y causales de rescisión.' : 'La revisión básica no usa este enfoque; se aplica en la revisión con IA.'}
+            hint="Por ejemplo: revisar penas convencionales, vigencia de poderes y causales de rescisión."
           >
             <TextArea id={instructionId} rows={3} value={review.instruction} onChange={(event) => onChange({ instruction: event.target.value })} />
           </Field>
-        </Card>
+        </Card>}
       </div>
 
       <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">

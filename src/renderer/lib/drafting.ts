@@ -1,5 +1,12 @@
 import { LEGAL_ENGINEERING_TEMPLATES, type DraftingTemplate } from './constants';
 import { LEGAL_AREAS, type LegalArea } from './legal-areas';
+import type { DraftSession } from '../store/useWorkspaceStore';
+
+export function hasUnsavedDraft(draft: DraftSession): boolean {
+  return draft.record
+    ? !draft.record.caseId || draft.dirty
+    : Boolean(draft.referenceFile || draft.instructions.trim() || Object.values(draft.fieldValues).some((value) => value.trim()));
+}
 
 export interface CatalogTemplate extends DraftingTemplate {
   area: LegalArea;

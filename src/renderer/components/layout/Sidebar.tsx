@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   BookOpenCheck,
@@ -31,6 +31,12 @@ const NAV_ITEMS: NavItem[] = [
   { to: '/portafolio', label: 'Portafolio', icon: FolderOpen },
 ];
 
+const compactMedia = window.matchMedia('(max-width: 1023px)');
+const subscribeCompact = (onChange: () => void) => {
+  compactMedia.addEventListener('change', onChange);
+  return () => compactMedia.removeEventListener('change', onChange);
+};
+
 const itemClass = (collapsed: boolean) => ({ isActive }: { isActive: boolean }) => cn(
   'flex h-10 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition-colors',
   collapsed && 'justify-center px-0',
@@ -47,12 +53,14 @@ export function Sidebar() {
   // sidebarCollapsed = true significa que está "oculta/retráctil", false significa que está "fija"
   const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
+  const compact = useSyncExternalStore(subscribeCompact, () => compactMedia.matches);
+  const autoHide = sidebarCollapsed || compact;
 
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   
   // Visually collapsed solo si el usuario prefirió que esté oculta Y no tiene el puntero encima
-  const visuallyCollapsed = sidebarCollapsed && !hovered && !focused;
+  const visuallyCollapsed = autoHide && !hovered && !focused;
 
   const onBlur = (event: React.FocusEvent<HTMLElement>) => {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false);
@@ -61,7 +69,7 @@ export function Sidebar() {
   return (
     <div className={cn(
       "relative h-full shrink-0 transition-[width] duration-200 ease-out",
-      sidebarCollapsed ? "w-[72px]" : "w-[260px]" // Reserva espacio en el layout solo si está fija
+      autoHide ? "w-[72px]" : "w-[260px]" // En ventanas pequeñas reserva sólo el rail de iconos.
     )}>
       <aside
         onMouseEnter={() => setHovered(true)}
@@ -71,25 +79,25 @@ export function Sidebar() {
         className={cn(
           'absolute inset-y-0 left-0 z-40 flex flex-col overflow-hidden bg-legal-950 text-slate-200 transition-[width,box-shadow] duration-200 ease-out',
           visuallyCollapsed ? 'w-[72px]' : 'w-[260px]',
-          sidebarCollapsed && !visuallyCollapsed && 'shadow-2xl' // Sombra solo cuando se expande sobre el contenido
+          autoHide && !visuallyCollapsed && 'shadow-2xl' // Sombra solo cuando se expande sobre el contenido
         )}
       >
-        <div className={cn('window-drag-region flex h-[76px] shrink-0 items-center gap-3 border-b border-white/5 px-4', visuallyCollapsed && 'justify-center px-0')}>
-          <img src={logoUrl} alt="" className="h-9 w-9 shrink-0 object-contain brightness-200" />
+        <div className={cn('window-drag-region relative flex h-[104px] shrink-0 items-center gap-3 border-b border-white/5 px-4', visuallyCollapsed && 'justify-center px-0')}>
+          <img src={logoUrl} alt="" className="h-14 w-14 shrink-0 object-contain mix-blend-lighten" />
           {!visuallyCollapsed && (
-            <div className="min-w-0 flex-1 flex items-center justify-between animate-fade-in-up pr-2">
+            <div className="min-w-0 flex-1 animate-fade-in-up">
               <div className="min-w-0">
-                <p className="truncate font-serif text-[15px] font-bold uppercase tracking-wide text-legal-gold">Lex Corporativo</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Estación Jurídica</p>
+                <p className="font-serif text-[17px] font-semibold leading-snug text-legal-gold">Lex<br />Corporativo</p>
               </div>
-              <button 
+              {!compact && <button
+                type="button"
                 onClick={toggleSidebar} 
-                className="window-no-drag rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-slate-100 transition-colors shrink-0"
+                className="window-no-drag absolute right-2 top-2 rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-slate-100 transition-colors"
                 title={sidebarCollapsed ? "Fijar panel" : "Ocultar automáticamente"}
                 aria-label={sidebarCollapsed ? "Fijar panel" : "Ocultar automáticamente"}
               >
                 {sidebarCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
-              </button>
+              </button>}
             </div>
           )}
         </div>

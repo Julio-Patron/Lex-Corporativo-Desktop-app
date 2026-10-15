@@ -7,6 +7,8 @@ import { buildReviewReport } from '../lib/review';
 import { useUiStore } from '../store/useUiStore';
 import { useWorkspaceStore } from '../store/useWorkspaceStore';
 import type { PortfolioItem } from '../types';
+import { hasUnsavedDraft } from '../lib/drafting';
+import { useConfirmDialog } from './useConfirmDialog';
 
 export type ExportFormat = 'pdf' | 'docx';
 
@@ -54,10 +56,21 @@ export function exportRequestFor(item: PortfolioItem): ExportRequest {
 export function usePortfolioActions() {
   const navigate = useNavigate();
   const notify = useUiStore((state) => state.notify);
+  const [openItemDialog, confirmOpen] = useConfirmDialog();
 
-  const openItem = useCallback((item: PortfolioItem) => {
+  const openItem = useCallback(async (item: PortfolioItem) => {
     const workspace = useWorkspaceStore.getState();
     if (item.kind === 'draft') {
+      if (workspace.draft.record?.id === item.record.id && workspace.draft.record.caseId === item.caseId) {
+        navigate('/redactar');
+        return;
+      }
+      if (hasUnsavedDraft(workspace.draft) && !await confirmOpen({
+        title: 'Abrir otro documento',
+        message: 'Hay trabajo sin guardar en el documento actual. Si abres otro, se sustituirá. Cancela para volver y guardarlo.',
+        confirmLabel: 'Abrir y sustituir',
+        variant: 'danger',
+      })) return;
       workspace.resetDraft();
       workspace.setDraftDocument({ ...item.record, caseId: item.caseId }, { saved: true });
       navigate('/redactar');
@@ -65,7 +78,7 @@ export function usePortfolioActions() {
       workspace.openReview({ ...item.record, caseId: item.caseId });
       navigate('/revisar');
     }
-  }, [navigate]);
+  }, [navigate, confirmOpen]);
 
   const exportItem = useCallback(async (item: PortfolioItem, format: ExportFormat) => {
     try {
@@ -76,5 +89,5 @@ export function usePortfolioActions() {
     }
   }, [notify]);
 
-  return { openItem, exportItem };
+  return { openItem, exportItem, openItemDialog };
 }

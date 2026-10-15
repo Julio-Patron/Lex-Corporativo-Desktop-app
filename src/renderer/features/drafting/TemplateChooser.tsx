@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Eye, FilePlus2, Search, Upload } from 'lucide-react';
-import { AreaTag, Button, Card, EmptyState, TextInput } from '../../components/ui';
+import { AreaTag, Button, Card, EmptyState, RadioGroup, TextInput } from '../../components/ui';
 import { searchTemplates, type CatalogTemplate } from '../../lib/drafting';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
 import { cn } from '../../lib/utils';
@@ -51,23 +51,17 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
               className="pl-9"
             />
           </div>
-          <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Filtrar por materia">
-            {(['todas', ...LEGAL_AREAS] as const).map((value) => (
-              <button
-                key={value}
-                type="button"
-                role="radio"
-                aria-checked={area === value}
-                onClick={() => setArea(value)}
-                className={cn(
-                  'h-9 rounded-lg border px-3 text-sm font-semibold transition-colors',
-                  area === value ? 'border-legal-950 bg-legal-950 text-white' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300',
-                )}
-              >
-                {value === 'todas' ? 'Todas' : LEGAL_AREA_INFO[value].shortLabel}
-              </button>
-            ))}
-          </div>
+          <RadioGroup
+            label="Filtrar por materia"
+            value={area}
+            onChange={setArea}
+            className="flex flex-wrap gap-1.5"
+            optionClassName={(selected) => cn(
+              'h-9 rounded-lg border px-3 text-sm font-semibold transition-colors',
+              selected ? 'border-legal-950 bg-legal-950 text-white' : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300',
+            )}
+            options={(['todas', ...LEGAL_AREAS] as const).map((value) => ({ value, label: value === 'todas' ? 'Todas' : LEGAL_AREA_INFO[value].shortLabel }))}
+          />
         </div>
         <p className="mt-3 text-sm text-slate-500">{templates.length} documentos base</p>
       </Card>

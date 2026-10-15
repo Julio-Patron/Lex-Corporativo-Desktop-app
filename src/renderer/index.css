@@ -120,14 +120,8 @@ body {
 }
 
 ::placeholder {
-  color: #94a3b8;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-input:focus::placeholder,
-textarea:focus::placeholder {
-  opacity: 0.4;
+  color: #64748b;
+  opacity: 1;
 }
 
 /* Electron Window Drag Regions */
@@ -137,6 +131,16 @@ textarea:focus::placeholder {
 }
 
 .window-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.brand-watermark {
+  filter: grayscale(1) brightness(2) contrast(4) invert(1);
+  mix-blend-mode: multiply;
+  opacity: 0.055;
+}
+
+.window-drag-region :is(a, button, input, select, textarea) {
   -webkit-app-region: no-drag;
 }
 

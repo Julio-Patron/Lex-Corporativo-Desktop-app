@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { DraftingTemplate } from '../lib/constants';
 import type { LegalArea } from '../lib/legal-areas';
 import type { DraftRecord, DraftSource, ReviewRecord } from '../types';
+import { newRecordId } from '../lib/portfolio';
 
 export type DraftStep = 'choose' | 'details' | 'document';
 
@@ -52,7 +53,7 @@ interface WorkspaceState {
   updateDraft: (patch: Partial<DraftSession>) => void;
   startDraft: (source: DraftSource, options?: { area?: LegalArea; template?: DraftingTemplate | null }) => void;
   startDraftFromReview: (review: ReviewRecord, instructions: string, area?: LegalArea) => void;
-  appendDraftInstructions: (text: string, area?: LegalArea) => void;
+  addLegalCitation: (citation: string, area?: LegalArea) => 'document' | 'instructions';
   setDraftDocument: (record: DraftRecord, options?: { saved?: boolean }) => void;
   editDraftDocument: (document: string) => void;
   resetDraft: () => void;
@@ -84,20 +85,41 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
       sourceReview: { id: review.id, caseId: review.caseId, title: review.fileName },
     },
   })),
-  appendDraftInstructions: (text, area) => set((state) => {
-    const current = state.draft;
-    const instructions = current.instructions.trim() ? `${current.instructions.trim()}\n\n${text}` : text;
-    const startsNew = current.step === 'choose';
-    return {
-      draft: {
-        ...current,
-        instructions,
-        step: 'details',
-        source: startsNew ? 'free' : current.source,
-        area: startsNew && area ? area : current.area,
-      },
-    };
-  }),
+  addLegalCitation: (citation, area) => {
+    let destination: 'document' | 'instructions' = 'document';
+    set((state) => {
+      const current = state.draft;
+      if (current.record) return {
+        draft: {
+          ...current,
+          step: 'document',
+          record: { ...current.record, document: `${current.record.document.trimEnd()}\n\n${citation}` },
+          dirty: true,
+        },
+      };
+      if (current.step === 'details') {
+        destination = 'instructions';
+        const text = `FUNDAMENTO A CONSIDERAR:\n${citation}`;
+        return { draft: { ...current, instructions: current.instructions.trim() ? `${current.instructions.trim()}\n\n${text}` : text } };
+      }
+      const now = new Date().toISOString();
+      return {
+        draft: {
+          ...emptyDraft(),
+          step: 'document',
+          source: 'free',
+          area: area ?? 'mercantil',
+          dirty: true,
+          record: {
+            id: newRecordId('doc'), title: 'Referencias normativas', area: area ?? 'mercantil',
+            timestamp: now, updatedAt: now, source: 'free', instructions: '',
+            document: `# Referencias normativas\n\n${citation}`, generatedWith: 'manual',
+          },
+        },
+      };
+    });
+    return destination;
+  },
   setDraftDocument: (record, options = {}) => set((state) => ({
     draft: { ...state.draft, step: 'document', record, area: record.area, dirty: !options.saved },
   })),

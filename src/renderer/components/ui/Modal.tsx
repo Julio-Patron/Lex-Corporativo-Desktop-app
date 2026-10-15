@@ -8,36 +8,71 @@ export interface ModalProps {
   children: React.ReactNode;
   className?: string;
   labelledBy?: string;
+  placement?: 'center' | 'right';
 }
 
-const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
+const openModals: HTMLElement[] = [];
+const originalInert = new Map<HTMLElement, boolean>();
+let originalOverflow = '';
 
-export function Modal({ isOpen, onClose, children, className, labelledBy }: ModalProps) {
+function updateBackground() {
+  const top = openModals.at(-1);
+  if (!top) {
+    originalInert.forEach((inert, element) => { element.inert = inert; });
+    originalInert.clear();
+    document.body.style.overflow = originalOverflow;
+    return;
+  }
+  for (const element of Array.from(document.body.children)) {
+    if (!(element instanceof HTMLElement)) continue;
+    if (!originalInert.has(element)) originalInert.set(element, element.inert);
+    element.inert = element === top.parentElement ? originalInert.get(element)! : true;
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function focusableElements(dialog: HTMLElement) {
+  return Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE))
+    .filter((element) => element.tabIndex >= 0 && !element.matches(':disabled') && element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden' && !element.closest('[inert]'));
+}
+
+export function Modal({ isOpen, onClose, children, className, labelledBy, placement = 'center' }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!isOpen) return;
+    const dialog = modalRef.current;
+    if (!dialog) return;
     const previouslyFocused = document.activeElement as HTMLElement | null;
-    const firstFocusable = modalRef.current?.querySelector<HTMLElement>(FOCUSABLE);
-    (firstFocusable ?? modalRef.current)?.focus();
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    if (openModals.length === 0) originalOverflow = document.body.style.overflow;
+    openModals.push(dialog);
+    // El resto de la página y los diálogos inferiores quedan fuera del teclado
+    // y del árbol de accesibilidad mientras este diálogo está al frente.
+    updateBackground();
+    const focusFirst = () => (focusableElements(dialog)[0] ?? dialog).focus();
+    focusFirst();
 
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (openModals.at(-1) !== dialog) return;
       if (event.key === 'Escape') {
+        event.preventDefault();
         event.stopPropagation();
         onCloseRef.current();
         return;
       }
-      if (event.key !== 'Tab' || !modalRef.current) return;
-      const focusable = Array.from(modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE));
-      if (focusable.length === 0) return;
+      if (event.key !== 'Tab') return;
+      const focusable = focusableElements(dialog);
+      if (focusable.length === 0) {
+        event.preventDefault();
+        dialog.focus();
+        return;
+      }
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
         last.focus();
         event.preventDefault();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -46,18 +81,29 @@ export function Modal({ isOpen, onClose, children, className, labelledBy }: Moda
       }
     };
 
+    const handleFocus = (event: FocusEvent) => {
+      if (openModals.at(-1) === dialog && !dialog.contains(event.target as Node)) focusFirst();
+    };
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('focusin', handleFocus);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = originalOverflow;
-      previouslyFocused?.focus?.();
+      document.removeEventListener('focusin', handleFocus);
+      const index = openModals.indexOf(dialog);
+      if (index !== -1) openModals.splice(index, 1);
+      updateBackground();
+      if (previouslyFocused?.isConnected && !previouslyFocused.closest('[inert]')) previouslyFocused.focus();
+      else {
+        const remaining = openModals.at(-1);
+        if (remaining) (focusableElements(remaining)[0] ?? remaining).focus();
+      }
     };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+    <div className={cn('fixed inset-0 z-[120] flex', placement === 'right' ? 'justify-end' : 'items-center justify-center p-4')}>
       <div className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
         ref={modalRef}
@@ -65,7 +111,7 @@ export function Modal({ isOpen, onClose, children, className, labelledBy }: Moda
         aria-modal="true"
         aria-labelledby={labelledBy}
         tabIndex={-1}
-        className={cn('relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-6 shadow-dialog outline-none', className)}
+        className={cn('relative z-10 w-full bg-white shadow-dialog outline-none', placement === 'right' ? 'flex h-full max-w-md flex-col' : 'max-h-[92vh] max-w-lg overflow-y-auto rounded-xl p-6', className)}
       >
         {children}
       </div>

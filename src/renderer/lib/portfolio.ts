@@ -48,7 +48,7 @@ export function normalizeDraftRecord(raw: any, caseId: string, fallbackDate: str
     sourceReviewId: asString(raw.sourceReviewId) || asString(raw.sourceAnalysisId) || undefined,
     instructions: asString(raw.instructions) || asString(raw.prompt),
     document,
-    generatedWith: raw.generatedWith === 'template' ? 'template' : 'ai',
+    generatedWith: raw.generatedWith === 'template' || raw.generatedWith === 'manual' ? raw.generatedWith : 'ai',
     provider: raw.provider,
   };
 }
