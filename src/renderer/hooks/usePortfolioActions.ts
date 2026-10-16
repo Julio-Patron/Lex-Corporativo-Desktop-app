@@ -62,7 +62,7 @@ export function usePortfolioActions() {
     const workspace = useWorkspaceStore.getState();
     if (item.kind === 'draft') {
       if (workspace.draft.record?.id === item.record.id && workspace.draft.record.caseId === item.caseId) {
-        navigate('/redactar');
+        navigate('/estudio/generar');
         return;
       }
       if (hasUnsavedDraft(workspace.draft) && !await confirmOpen({
@@ -73,10 +73,10 @@ export function usePortfolioActions() {
       })) return;
       workspace.resetDraft();
       workspace.setDraftDocument({ ...item.record, caseId: item.caseId }, { saved: true });
-      navigate('/redactar');
+      navigate('/estudio/generar');
     } else {
       workspace.openReview({ ...item.record, caseId: item.caseId });
-      navigate('/revisar');
+      navigate('/estudio/auditar');
     }
   }, [navigate, confirmOpen]);
 

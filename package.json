@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:vault:electron": "node scripts/test-case-vault-electron.mjs",
     "test:recovery:electron": "node scripts/test-recovery-electron.mjs",
+    "test:ui:electron": "node scripts/test-ui-electron.mjs",
     "test:watch": "vitest",
     "predev:electron": "electron-rebuild -f -o better-sqlite3",
     "dev:electron": "node scripts/dev-desktop.mjs",

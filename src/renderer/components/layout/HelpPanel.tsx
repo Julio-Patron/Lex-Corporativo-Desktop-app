@@ -7,55 +7,40 @@ import { Button, Modal, TextInput } from '../ui';
 import { cn } from '../../lib/utils';
 
 const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
-  '/': {
-    title: 'Inicio',
-    steps: [
-      'Elige una tarea: redactar un documento, revisar uno existente o consultar leyes.',
-      'En "Continuar" aparece lo último que guardaste en el portafolio.',
-      'Si algún componente local requiere atención, se indica en "Estado del sistema".',
-    ],
-  },
-  '/redactar': {
-    title: 'Redactar',
-    steps: [
-      'Paso 1: busca un documento base por nombre o filtra por materia. También puedes partir de tu propio archivo o redactar sin documento base.',
-      'Paso 2: completa los datos del formulario. Los campos vacíos se marcan como [DATO FALTANTE] en el borrador.',
-      '"Abrir documento sin IA" abre el texto completo para llenarlo a mano. "Redactar con IA" genera el borrador con tu proveedor.',
-      'Paso 3: revisa, edita y exporta a PDF o Word. Tras guardarlo, los cambios se guardan solos.',
-    ],
-  },
-  '/revisar': {
-    title: 'Revisar',
-    steps: [
-      'Sube el documento y elige una o varias materias.',
-      'Con IA conectada obtienes una revisión con IA validada contra el corpus local; sin IA, una revisión básica.',
-      'Desde el resultado puedes redactar una adenda, una cláusula para un hallazgo o exportar el informe.',
-    ],
-  },
-  '/leyes': {
-    title: 'Leyes',
-    steps: [
-      'Escribe de 2 a 4 palabras sobre el tema (por ejemplo "rescisión sin responsabilidad") y, si quieres, limita la materia.',
-      'Abre cualquier ley completa en el lector: navega por artículo o busca dentro del texto.',
-      'Copia la cita o llévala a Redactar para incluirla en tus instrucciones.',
-    ],
-  },
-  '/portafolio': {
-    title: 'Portafolio',
-    steps: [
-      'Aquí están todos tus documentos y revisiones guardados en este equipo.',
-      'Abre un elemento para seguir trabajando, expórtalo o elimínalo.',
-      'La conservación se configura en Configuración › Datos y privacidad.',
-    ],
-  },
-  '/configuracion': {
-    title: 'Configuración',
-    steps: [
-      'Inteligencia artificial: conecta o cambia tu proveedor y modelo.',
-      'Datos y privacidad: conservación del portafolio, privacidad estricta, respaldo y bitácora.',
-      'Acerca de: versión instalada y actualizaciones.',
-    ],
-  },
+  '/': { title: 'Inicio', steps: [
+    'Consulta la guía para conocer el flujo de auditoría y corrección.',
+    'Abre la ficha técnica para ver formatos admitidos y requisitos de IA.',
+    'Entra al Estudio para auditar un archivo o generar un documento.',
+  ] },
+  '/estudio/generar': { title: 'Generar', steps: [
+    'Solicita un documento a la IA, parte de un archivo o despliega las plantillas precargadas.',
+    'Completa los datos y las instrucciones. También puedes abrir una plantilla para editarla sin IA.',
+    'Revisa, edita y exporta a PDF o Word. Tras guardar el documento, los cambios se guardan solos.',
+  ] },
+  '/estudio/auditar': { title: 'Auditar', steps: [
+    'Sube el documento y elige las materias y el alcance de la revisión.',
+    'Con IA conectada obtienes una auditoría apoyada en el corpus local; sin IA, una revisión básica de alcance limitado.',
+    'Desde el resultado puedes generar una adenda o una cláusula para un hallazgo, o exportar el informe.',
+  ] },
+  '/fundamentador': { title: 'Fundamentador', steps: [
+    'Escribe un tema o artículo y, si quieres, limita la búsqueda por materia.',
+    'Despliega un resultado para leer el artículo completo.',
+    'Copia la cita o úsala en las instrucciones de Generar, dentro del Estudio.',
+  ] },
+  '/leyes': { title: 'Leyes', steps: [
+    'Consulta las referencias agrupadas por materia.',
+    'Abre el enlace a la Cámara de Diputados para consultar la legislación en tu navegador.',
+  ] },
+  '/estudio/portafolio': { title: 'Portafolio', steps: [
+    'Aquí están los documentos generados e informes de revisión guardados en este equipo.',
+    'Abre un elemento para seguir trabajando, expórtalo o elimínalo.',
+    'La conservación se configura en Configuración › Datos y privacidad.',
+  ] },
+  '/configuracion': { title: 'Configuración', steps: [
+    'Inteligencia artificial: conecta o cambia tu proveedor y modelo.',
+    'Datos y privacidad: conservación del portafolio, privacidad estricta, respaldo y bitácora.',
+    'Acerca de: versión instalada y actualizaciones.',
+  ] },
 };
 
 const FAQ = [
@@ -117,7 +102,7 @@ export function HelpPanel() {
 
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)} labelledBy={titleId} placement="right">
-        <header className="flex items-center justify-between border-b border-slate-200 px-5 py-4 pt-12">
+        <header className="flex shrink-0 items-center justify-between border-b border-slate-200 px-5 py-4">
           <h2 id={titleId} className="text-lg font-semibold text-slate-950">Ayuda</h2>
           <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" aria-label="Cerrar ayuda">
             <X size={18} />

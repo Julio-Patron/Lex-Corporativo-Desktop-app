@@ -3,11 +3,10 @@ import { NavLink } from 'react-router-dom';
 import {
   BookOpenCheck,
   CircleHelp,
-  FileSignature,
-  FolderOpen,
   House,
   Settings,
-  ShieldCheck,
+  BriefcaseBusiness,
+  Search,
   PanelLeftClose,
   PanelLeftOpen,
   type LucideIcon,
@@ -25,10 +24,9 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Inicio', icon: House, end: true },
-  { to: '/redactar', label: 'Redactar', icon: FileSignature },
-  { to: '/revisar', label: 'Revisar', icon: ShieldCheck },
+  { to: '/estudio', label: 'Estudio', icon: BriefcaseBusiness },
+  { to: '/fundamentador', label: 'Fundamentador', icon: Search },
   { to: '/leyes', label: 'Leyes', icon: BookOpenCheck },
-  { to: '/portafolio', label: 'Portafolio', icon: FolderOpen },
 ];
 
 const compactMedia = window.matchMedia('(max-width: 1023px)');
@@ -82,7 +80,7 @@ export function Sidebar() {
           autoHide && !visuallyCollapsed && 'shadow-2xl' // Sombra solo cuando se expande sobre el contenido
         )}
       >
-        <div className={cn('window-drag-region relative flex h-[104px] shrink-0 items-center gap-3 border-b border-white/5 px-4', visuallyCollapsed && 'justify-center px-0')}>
+        <div className={cn('relative flex h-[88px] shrink-0 items-center gap-3 border-b border-white/5 px-4', visuallyCollapsed && 'justify-center px-0')}>
           <img src={logoUrl} alt="" className="h-14 w-14 shrink-0 object-contain mix-blend-lighten" />
           {!visuallyCollapsed && (
             <div className="min-w-0 flex-1 animate-fade-in-up">

@@ -13,21 +13,20 @@ interface PageProps {
   width?: 'default' | 'narrow' | 'wide';
 }
 
-// Estructura común de cada pantalla: la cabecera sirve también como zona de
-// arrastre de la ventana (barra de título oculta de Electron).
+// La barra de ventana pertenece a AppShell; esta cabecera sólo contiene la página.
 export function Page({ title, description, actions, children, width = 'default' }: PageProps) {
   return (
     <div className="h-full overflow-y-auto">
-      <header className="window-drag-region sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 backdrop-blur">
-        <div className={cn('mx-auto flex min-h-[72px] flex-wrap items-center justify-between gap-3 px-6 py-3 pr-40', maxWidth(width))}>
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 backdrop-blur">
+        <div className={cn('mx-auto flex min-h-16 flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6', maxWidth(width))}>
           <div className="min-w-0">
             <h1 className="text-xl font-semibold text-slate-950">{title}</h1>
-            {description && <p className="mt-0.5 text-sm text-slate-600">{description}</p>}
+            {description && <p className="mt-1 max-w-prose text-sm text-slate-600">{description}</p>}
           </div>
           {actions && <div className="window-no-drag flex flex-wrap items-center gap-2">{actions}</div>}
         </div>
       </header>
-      <div className={cn('mx-auto space-y-6 px-6 py-6 pb-16', maxWidth(width))}>{children}</div>
+      <div className={cn('mx-auto space-y-5 px-4 py-5 pb-12 sm:px-6', maxWidth(width))}>{children}</div>
     </div>
   );
 }

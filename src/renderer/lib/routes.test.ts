@@ -3,14 +3,21 @@ import { parseSettingsTab, resolveLegacyRoute } from './routes';
 
 describe('legacy routes', () => {
   it('maps the former workspace tabs to the new task screens', () => {
-    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=drafting')).toBe('/redactar');
-    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=analysis')).toBe('/revisar');
+    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=drafting')).toBe('/estudio/generar');
+    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=analysis')).toBe('/estudio/auditar');
     expect(resolveLegacyRoute('/ingenieria-juridica', '')).toBe('/');
   });
 
-  it('merges the search and corpus screens into Leyes', () => {
-    expect(resolveLegacyRoute('/buscador')).toBe('/leyes');
-    expect(resolveLegacyRoute('/corpus-normativo')).toBe('/leyes?vista=biblioteca');
+  it('separates article consultation from official law references', () => {
+    expect(resolveLegacyRoute('/buscador')).toBe('/fundamentador');
+    expect(resolveLegacyRoute('/corpus-normativo')).toBe('/leyes');
+  });
+
+  it('preserves saved links to document workflows', () => {
+    expect(resolveLegacyRoute('/redactar')).toBe('/estudio/generar');
+    expect(resolveLegacyRoute('/revisar')).toBe('/estudio/auditar');
+    expect(resolveLegacyRoute('/portafolio')).toBe('/estudio/portafolio');
+    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=consultation')).toBe('/fundamentador');
   });
 
   it('keeps the requested settings section', () => {
@@ -22,6 +29,7 @@ describe('legacy routes', () => {
   });
 
   it('ignores current routes', () => {
-    expect(resolveLegacyRoute('/redactar')).toBeNull();
+    expect(resolveLegacyRoute('/estudio/generar')).toBeNull();
+    expect(resolveLegacyRoute('/fundamentador')).toBeNull();
   });
 });

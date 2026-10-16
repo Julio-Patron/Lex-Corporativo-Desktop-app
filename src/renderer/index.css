@@ -125,6 +125,51 @@ body {
 }
 
 /* Electron Window Drag Regions */
+:root {
+  --window-titlebar-height: max(40px, env(titlebar-area-height, 40px));
+}
+
+.app-titlebar {
+  height: var(--window-titlebar-height);
+}
+
+.app-modal-layer {
+  top: var(--window-titlebar-height);
+}
+
+.app-dialog {
+  max-height: 100%;
+}
+
+/* Con poco espacio, un único recorrido vertical evita comprimir la lectura
+   hasta cero entre las cabeceras, los índices y las acciones. */
+@media (max-width: 767px), (max-height: 600px) {
+  .document-dialog,
+  .document-dialog-body {
+    display: block;
+  }
+
+  .document-dialog-body {
+    overflow: visible;
+  }
+
+  .document-dialog-body > article,
+  .document-dialog-body > section {
+    min-height: 12rem;
+    overflow: visible;
+  }
+
+  .document-dialog-body > nav {
+    height: 10rem;
+    border-right: 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .document-dialog-body > aside {
+    max-height: 12rem;
+  }
+}
+
 .window-drag-region {
   -webkit-app-region: drag;
   user-select: none;

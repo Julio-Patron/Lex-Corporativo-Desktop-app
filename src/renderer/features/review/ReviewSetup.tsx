@@ -29,7 +29,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
       <div className="space-y-6">
         <Card>
           <SectionTitle title="1. Documento" />
@@ -44,7 +44,6 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
         <Card>
           <SectionTitle
             title="2. Materias"
-            description="Elige las materias contra las que se revisará el documento."
             actions={(
               <Button size="sm" variant="ghost" onClick={() => onChange({ areas: allSelected ? [review.areas[0]] : [...LEGAL_AREAS] })}>
                 {allSelected ? 'Sólo la primera' : 'Todas las materias'}
@@ -92,7 +91,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
         </Card>}
       </div>
 
-      <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+      <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
         <Card className="space-y-3">
           <p className="text-sm font-semibold text-slate-950">{aiReady ? `Revisión con IA · ${providerName}` : 'Revisión básica (sin IA)'}</p>
           {aiReady ? (
@@ -101,11 +100,14 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
             </p>
           ) : (
             <>
-              <ul className="list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-slate-600">
-                {BASIC_REVIEW_SCOPE.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-              <p className="text-xs leading-relaxed text-slate-500">{BASIC_REVIEW_LIMITS}</p>
-              <Button size="sm" variant="secondary" onClick={onConnectAi}>Conectar IA para una revisión completa</Button>
+              <p className="text-sm leading-relaxed text-slate-600">Detecta menciones y estructura del texto. No interpreta ni valida la legalidad del documento.</p>
+              <details className="text-sm text-slate-600">
+                <summary className="cursor-pointer font-semibold text-slate-700">Alcance y límites</summary>
+                <ul className="mt-3 list-disc space-y-2 pl-5">
+                  {BASIC_REVIEW_SCOPE.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+                <p className="mt-3 leading-relaxed">{BASIC_REVIEW_LIMITS}</p>
+              </details>
             </>
           )}
           {!reviewAvailable && <Callout tone="warning">{unavailableReason}</Callout>}
@@ -113,6 +115,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
             <SearchCheck size={18} aria-hidden="true" /> {aiReady ? 'Revisar documento' : 'Hacer revisión básica'}
           </Button>
           {!review.file && <p className="text-xs text-slate-500">Primero elige el documento.</p>}
+          {!aiReady && <Button size="sm" variant="ghost" isFullWidth onClick={onConnectAi}>Conectar IA</Button>}
         </Card>
       </aside>
     </div>

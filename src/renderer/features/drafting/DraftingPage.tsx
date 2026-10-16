@@ -33,7 +33,7 @@ function Stepper({ current, canOpen, onSelect, manual }: { current: DraftStep; c
         const active = step.id === current;
         return (
           <li key={step.id} className="flex items-center gap-2">
-            {index > 0 && <span className="h-px w-6 bg-slate-300" aria-hidden="true" />}
+            {index > 0 && <span className="h-px w-3 bg-slate-300 sm:w-6" aria-hidden="true" />}
             <button
               type="button"
               disabled={!canOpen(step.id) || active}
@@ -47,7 +47,7 @@ function Stepper({ current, canOpen, onSelect, manual }: { current: DraftStep; c
               <span className={cn('flex h-5 w-5 items-center justify-center rounded-full text-xs', active ? 'bg-white/20' : 'bg-slate-200 text-slate-700')}>
                 {done ? <Check size={12} aria-hidden="true" /> : index + 1}
               </span>
-              {step.label}
+              <span className={cn(!active && 'sr-only sm:not-sr-only')}>{step.label}</span>
             </button>
           </li>
         );
@@ -223,8 +223,8 @@ export default function DraftingPage() {
 
   return (
     <Page
-      title="Redactar"
-      description={draft.record?.generatedWith === 'manual' ? 'Organiza tus citas, edita el texto y guarda o exporta el documento.' : 'Elige un documento, completa sus datos y obtén el borrador listo para revisar y exportar.'}
+      title="Generar"
+      description={draft.step === 'choose' ? 'Solicita un documento a la IA, parte de un archivo o utiliza una plantilla.' : undefined}
       width="wide"
       actions={draft.step !== 'choose' && <Button variant="secondary" onClick={() => void replaceDraft(resetDraft)} disabled={generating || saving}>Nuevo documento</Button>}
     >

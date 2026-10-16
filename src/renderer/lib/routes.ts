@@ -11,17 +11,20 @@ const LEGACY_SETTINGS_TABS: Record<string, SettingsTab> = {
 export function resolveLegacyRoute(pathname: string, search = ''): string | null {
   const params = new URLSearchParams(search);
   switch (pathname) {
+    case '/redactar': return '/estudio/generar';
+    case '/revisar': return '/estudio/auditar';
+    case '/portafolio': return '/estudio/portafolio';
     case '/ingenieria-juridica': {
       const tab = params.get('tab');
-      if (tab === 'drafting') return '/redactar';
-      if (tab === 'analysis') return '/revisar';
-      if (tab === 'consultation') return '/leyes';
+      if (tab === 'drafting') return '/estudio/generar';
+      if (tab === 'analysis') return '/estudio/auditar';
+      if (tab === 'consultation') return '/fundamentador';
       return '/';
     }
     case '/buscador':
-      return '/leyes';
+      return '/fundamentador';
     case '/corpus-normativo':
-      return '/leyes?vista=biblioteca';
+      return '/leyes';
     case '/settings': {
       const tab = LEGACY_SETTINGS_TABS[params.get('tab') ?? ''];
       return tab ? `/configuracion?tab=${tab}` : '/configuracion';

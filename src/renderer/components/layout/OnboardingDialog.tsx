@@ -24,9 +24,9 @@ function markOnboardingDone() {
 }
 
 const TASKS = [
-  { icon: FileSignature, title: 'Redactar', text: 'Contratos, actas, poderes y escritos a partir de 48 documentos base en cinco materias.' },
-  { icon: ShieldCheck, title: 'Revisar', text: 'Detecta riesgos y omisiones en tus documentos y prepara la adenda que los corrige.' },
-  { icon: BookOpenCheck, title: 'Consultar leyes', text: '16 leyes federales instaladas, con búsqueda por tema y lector por artículo.' },
+  { icon: ShieldCheck, title: 'Auditar', text: 'Sube un documento al Estudio y revisa sus riesgos, omisiones y fundamentos.' },
+  { icon: FileSignature, title: 'Generar', text: 'Prepara documentos y correcciones. Retoma los resultados guardados en el Portafolio.' },
+  { icon: BookOpenCheck, title: 'Fundamentador', text: 'Consulta artículos por tema y materia, copia citas y úsalas en tus documentos.' },
 ];
 
 // Bienvenida de primer uso: explica qué hace la app y ofrece conectar la IA sin hacerlo obligatorio.
@@ -59,7 +59,7 @@ export function OnboardingDialog() {
           </div>
           <p className="mt-5 flex items-start gap-2 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
             <Lock size={16} className="mt-0.5 shrink-0 text-slate-500" aria-hidden="true" />
-            Tus documentos, el portafolio y las leyes se quedan en este equipo. La IA sólo se usa con tu propia API key y recibe el texto necesario para cada operación.
+            El Portafolio se guarda en este equipo. La IA sólo se usa con tu propia API key y recibe el texto necesario para cada operación.
           </p>
           <div className="mt-6 flex justify-end">
             <Button onClick={() => setStep('ai')}>Continuar</Button>
@@ -69,7 +69,7 @@ export function OnboardingDialog() {
         <div>
           <h2 id={titleId} className="text-xl font-semibold text-slate-950">Conecta tu IA (opcional)</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Con una API key de Google Gemini, OpenAI o Anthropic puedes redactar con IA y obtener revisiones completas. Sin ella puedes usar los documentos base, la revisión básica y la consulta de leyes.
+            Con una API key de Google Gemini, OpenAI o Anthropic puedes redactar con IA y obtener revisiones completas. Sin ella puedes usar los documentos base, la revisión básica y la consulta de artículos en el Fundamentador.
           </p>
           <div className="mt-5">
             {aiReady ? (

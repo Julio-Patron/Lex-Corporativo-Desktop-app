@@ -81,8 +81,8 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
   if (!lawCode) return null;
 
   return (
-    <Modal isOpen onClose={onClose} labelledBy={titleId} className="flex h-[88vh] max-w-6xl flex-col p-0">
-      <header className="flex flex-wrap items-start justify-between gap-4 border-b border-slate-200 px-6 py-4">
+    <Modal isOpen onClose={onClose} labelledBy={titleId} className="document-dialog flex h-[88vh] max-w-6xl flex-col p-0">
+      <header className="flex shrink-0 flex-wrap items-start justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:px-6">
         <div className="min-w-0">
           {law && <div className="flex items-center gap-2"><AreaTag area={law.module} /><span className="text-xs font-semibold text-slate-500">{law.code}</span></div>}
           <h2 id={titleId} className="mt-1 text-lg font-semibold text-slate-950">{law?.name ?? 'Abriendo ley…'}</h2>
@@ -107,7 +107,7 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
       {loading || !law ? (
         <Spinner label="Abriendo el texto de la ley…" />
       ) : (
-        <div className="grid min-h-0 flex-1 md:grid-cols-[280px_minmax(0,1fr)]">
+        <div className="document-dialog-body grid min-h-0 flex-1 md:grid-cols-[280px_minmax(0,1fr)]">
           <nav className="flex min-h-0 flex-col border-b border-slate-200 bg-slate-50 md:border-b-0 md:border-r" aria-label="Índice de artículos">
             <div className="border-b border-slate-200 p-3">
               <div className="relative">
@@ -147,7 +147,7 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
                   <h3 className="font-serif text-xl font-bold text-slate-950">{article.label}</h3>
                   <p className="mt-4 whitespace-pre-line font-serif text-[15px] leading-relaxed text-slate-800">{article.body}</p>
                 </div>
-                <footer className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-200 px-6 py-3">
+                <footer className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-slate-200 px-4 py-3 sm:px-6">
                   <div className="flex items-center gap-1">
                     <Button size="sm" variant="ghost" disabled={index <= 0} onClick={() => setSelectedKey(law.articles[index - 1].key)}>
                       <ChevronLeft size={16} aria-hidden="true" /> Anterior

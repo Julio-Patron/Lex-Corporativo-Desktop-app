@@ -10,7 +10,7 @@ export function useSendArticleToDraft() {
   const notify = useUiStore((state) => state.notify);
   return useCallback((citation: string, area?: LegalArea) => {
     const destination = useWorkspaceStore.getState().addLegalCitation(citation, area);
-    notify(destination === 'document' ? 'La cita se agregó al documento. Puedes revisarla, guardarla y exportarla.' : 'La cita se agregó a las instrucciones; los datos que ya capturaste se conservan.', 'success', 'Redactar');
-    navigate('/redactar');
+    notify(destination === 'document' ? 'La cita se agregó al documento. Puedes revisarla, guardarla y exportarla.' : 'La cita se agregó a las instrucciones; los datos que ya capturaste se conservan.', 'success', 'Generar');
+    navigate('/estudio/generar');
   }, [navigate, notify]);
 }

@@ -91,7 +91,7 @@ export default function ReviewPage() {
     if (!review.record || !ensureAi('redactar la corrección')) return;
     startDraftFromReview(review.record, instructions);
     if (review.file) updateDraft({ referenceFile: review.file });
-    navigate('/redactar');
+    navigate('/estudio/generar');
   };
 
   const openFoundation = (foundation: LegalFoundation) => setReader({ code: foundation.law, article: foundation.article });
@@ -114,7 +114,7 @@ export default function ReviewPage() {
   };
 
   return (
-    <Page title="Revisar" description="Sube un documento para detectar riesgos, omisiones y cláusulas faltantes." width="wide">
+    <Page title="Auditar" description="Sube un documento para detectar riesgos, omisiones y cláusulas faltantes." width="wide">
       {running ? (
         <Card className="mx-auto max-w-xl py-10 text-center">
           <Loader2 size={28} className="mx-auto animate-spin text-legal-950" aria-hidden="true" />

@@ -131,11 +131,11 @@ export default function PortfolioPage() {
           branded
           icon={FolderOpen}
           title="Tu portafolio está vacío"
-          description="Los documentos que redactes o guardes y las revisiones que hagas aparecerán aquí."
+          description="Los documentos generados y los informes de revisión que guardes aparecerán aquí."
           action={(
             <div className="flex gap-2">
-              <Button onClick={() => navigate('/redactar')}>Redactar</Button>
-              <Button variant="secondary" onClick={() => navigate('/revisar')}>Revisar</Button>
+              <Button onClick={() => navigate('/estudio/auditar')}>Auditar</Button>
+              <Button variant="secondary" onClick={() => navigate('/estudio/generar')}>Generar</Button>
             </div>
           )}
         />

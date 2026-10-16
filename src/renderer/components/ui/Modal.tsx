@@ -103,15 +103,15 @@ export function Modal({ isOpen, onClose, children, className, labelledBy, placem
   if (!isOpen) return null;
 
   return createPortal(
-    <div className={cn('fixed inset-0 z-[120] flex', placement === 'right' ? 'justify-end' : 'items-center justify-center p-4')}>
-      <div className="fixed inset-0 bg-slate-950/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+    <div className={cn('app-modal-layer fixed inset-x-0 bottom-0 z-[120] flex', placement === 'right' ? 'justify-end' : 'items-center justify-center p-4')}>
+      <div className="absolute inset-0 bg-slate-950/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
         ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
         tabIndex={-1}
-        className={cn('relative z-10 w-full bg-white shadow-dialog outline-none', placement === 'right' ? 'flex h-full max-w-md flex-col' : 'max-h-[92vh] max-w-lg overflow-y-auto rounded-xl p-6', className)}
+        className={cn('app-dialog relative z-10 min-h-0 w-full bg-white shadow-dialog outline-none', placement === 'right' ? 'flex h-full max-w-md flex-col' : 'max-w-lg overflow-y-auto rounded-xl p-6', className)}
       >
         {children}
       </div>

@@ -39,7 +39,7 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 2. `npm test`.
 3. `npm run test:vault:electron`.
 4. `npm run audit:corpus-governance:strict`.
-5. `npm run audit:legal-knowledge`.
+5. `npm run audit:legal-knowledge:strict`. El modo sin `:strict` informa incumplimientos, pero no garantiza que éstos produzcan un código de salida de error.
 6. `npm run audit:legal-retrieval`.
 7. `npm run eval:legal-rag`.
 8. Pruebas reales de conexión y generación con Gemini, OpenAI y Anthropic.
@@ -48,5 +48,11 @@ LanceDB y el corpus verificado son la fuente común de fundamentación. La API r
 11. Instalación, primera apertura, actualización y desinstalación en Windows limpio.
 12. Firma, hash y manifiesto de release.
 13. `npm run test:recovery:electron`: cierre, recarga, reinicio y escritura en curso sin pérdida de la redacción confirmada.
+14. Exportación y restauración del respaldo en otro perfil de Windows, con protección y alcance documentados y contenido, adjuntos y relaciones verificados; archivos inválidos e importaciones repetidas no deben dañar datos existentes.
+15. Matriz de aceptación de rendimiento, accesibilidad y proveedores, con criterios acordados, responsables y evidencias conforme al [roadmap de entrega](relevo-ux-ui.md#matriz-de-aceptación-de-las-fases-2-a-6).
+16. Trazabilidad de los insumos de construcción, incluida revisión y hashes del modelo y tokenizador, y aceptación del instalador final por hash. Comparar los insumos con el candidato anterior al merge y repetir las pruebas según el impacto documentado; si no puede delimitarse, repetir la matriz aplicable completa. Publicar los artefactos aceptados sin reconstruirlos.
+17. Procedimiento de retirada ensayado en el canal de prueba, incluida atención a usuarios que ya instalaron la versión y conservación de sus datos.
 
 No se debe crear un release comercial mientras alguno de estos gates permanezca pendiente.
+
+CI debe comprobar que los controles de conocimiento jurídico e integridad del manifiesto bloquean ante incumplimientos controlados en una copia aislada. La existencia de un reporte no acredita que el control haya aprobado. Los resultados históricos conservan su alcance original y no acreditan automáticamente estos requisitos ampliados.

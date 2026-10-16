@@ -36,7 +36,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
   };
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
       <div className="space-y-6">
         <Card>
           <SectionTitle
@@ -113,7 +113,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           >
             <TextArea
               id={instructionsId}
-              rows={7}
+              rows={4}
               value={draft.instructions}
               onChange={(event) => onChange({ instructions: event.target.value })}
               placeholder={draft.source === 'file'
@@ -121,23 +121,25 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
                 : 'Ejemplo: contrato de prestación de servicios de consultoría entre ACME y Beta por 12 meses.'}
             />
           </Field>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-500">Agregar:</span>
-            {SUGGESTED_CLAUSES.map((clause) => (
-              <button
-                key={clause}
-                type="button"
-                onClick={() => addClause(clause)}
-                className="inline-flex h-8 items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
-              >
-                <Plus size={12} aria-hidden="true" /> {clause}
-              </button>
-            ))}
-          </div>
+          <details className="mt-3">
+            <summary className="cursor-pointer text-sm font-semibold text-slate-600">Agregar cláusulas sugeridas</summary>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {SUGGESTED_CLAUSES.map((clause) => (
+                <button
+                  key={clause}
+                  type="button"
+                  onClick={() => addClause(clause)}
+                  className="inline-flex min-h-8 items-center gap-1 rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                >
+                  <Plus size={12} aria-hidden="true" /> {clause}
+                </button>
+              ))}
+            </div>
+          </details>
         </Card>
       </div>
 
-      <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+      <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
         <Card className="space-y-3">
           <Button isFullWidth size="lg" onClick={onGenerate} isLoading={generating} disabled={generating || !canGenerate}>
             {!generating && <Sparkles size={18} aria-hidden="true" />}

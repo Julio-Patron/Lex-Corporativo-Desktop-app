@@ -18,8 +18,8 @@ export function TemplatePreviewDialog({ template, onClose, onOpenTemplate, onCus
   if (!template) return null;
 
   return (
-    <Modal isOpen onClose={onClose} labelledBy={titleId} className="flex max-h-[90vh] max-w-4xl flex-col p-0">
-      <header className="flex items-start justify-between gap-4 border-b border-slate-200 px-6 py-4">
+    <Modal isOpen onClose={onClose} labelledBy={titleId} className="document-dialog flex max-h-[90vh] max-w-4xl flex-col p-0">
+      <header className="flex shrink-0 items-start justify-between gap-4 border-b border-slate-200 px-6 py-4">
         <div className="min-w-0">
           <AreaTag area={template.area} />
           <h2 id={titleId} className="mt-2 text-lg font-semibold text-slate-950">{template.title}</h2>
@@ -29,7 +29,7 @@ export function TemplatePreviewDialog({ template, onClose, onOpenTemplate, onCus
           <X size={18} />
         </button>
       </header>
-      <div className="grid min-h-0 flex-1 gap-0 overflow-hidden md:grid-cols-[minmax(0,1fr)_260px]">
+      <div className="document-dialog-body grid min-h-0 flex-1 gap-0 overflow-hidden md:grid-cols-[minmax(0,1fr)_260px]">
         <article className="prose-legal min-h-0 overflow-y-auto px-8 py-6">
           <ReactMarkdown>{body}</ReactMarkdown>
         </article>
@@ -40,7 +40,7 @@ export function TemplatePreviewDialog({ template, onClose, onOpenTemplate, onCus
           </ul>
         </aside>
       </div>
-      <footer className="flex flex-wrap justify-end gap-2 border-t border-slate-200 px-6 py-4">
+      <footer className="flex shrink-0 flex-wrap justify-end gap-2 border-t border-slate-200 px-6 py-4">
         <Button variant="secondary" onClick={() => onOpenTemplate(template)}>Abrir documento sin IA</Button>
         <Button onClick={() => onCustomize(template)}>Personalizar con IA</Button>
       </footer>

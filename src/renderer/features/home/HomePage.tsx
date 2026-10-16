@@ -1,35 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpenCheck, CheckCircle2, FileSignature, ShieldCheck } from 'lucide-react';
-import { Callout, ConfirmDialog, Page, SectionTitle, Spinner } from '../../components/ui';
-import { BrandWatermark } from '../../components/BrandWatermark';
-import { PortfolioRowSummary } from '../../components/PortfolioRow';
-import { usePortfolioActions } from '../../hooks/usePortfolioActions';
-import { listPortfolio } from '../../lib/portfolio';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Callout, Page } from '../../components/ui';
+import logoUrl from '../../assets/logo-lockup-transparent.png';
+import { ACCEPTED_DOCUMENT_LABEL } from '../../lib/files';
 import { providerLabel, selectAiReady, useUiStore } from '../../store/useUiStore';
-import type { PortfolioItem } from '../../types';
-import { useWorkspaceStore } from '../../store/useWorkspaceStore';
-
-const TASKS = [
-  {
-    to: '/redactar',
-    icon: FileSignature,
-    title: 'Redactar',
-    text: 'Prepara un contrato o escrito.',
-  },
-  {
-    to: '/revisar',
-    icon: ShieldCheck,
-    title: 'Revisar',
-    text: 'Examina un documento existente.',
-  },
-  {
-    to: '/leyes',
-    icon: BookOpenCheck,
-    title: 'Consultar leyes',
-    text: 'Busca un tema o lee una ley.',
-  },
-];
 
 function SystemStatus() {
   const health = useUiStore((state) => state.runtimeHealth);
@@ -63,88 +38,47 @@ function SystemStatus() {
 }
 
 export default function HomePage() {
-  const { openItem, openItemDialog } = usePortfolioActions();
-  const draft = useWorkspaceStore((state) => state.draft);
-  const review = useWorkspaceStore((state) => state.review);
-  const [recent, setRecent] = useState<PortfolioItem[] | null>(null);
-  const [recentError, setRecentError] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    listPortfolio()
-      .then(({ items }) => { if (active) setRecent(items.slice(0, 3)); })
-      .catch(() => { if (active) setRecentError(true); });
-    return () => { active = false; };
-  }, []);
-
   return (
-    <Page title="Inicio">
-      <section className="relative isolate overflow-hidden py-5 lg:py-8" aria-label="Bienvenida">
-        <BrandWatermark className="right-0 top-1/2 -z-10 h-72 w-72 -translate-y-1/2 lg:h-80 lg:w-80" />
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-legal-golddark">Tu estación jurídica</p>
-        <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-legal-950 sm:text-4xl">Lex Corporativo</h2>
-        <p className="mt-3 text-sm text-slate-600">¿Qué necesitas hacer hoy?</p>
+    <Page title="Inicio" description="Guía de uso de Lex Corporativo.">
+      <section className="rounded-xl border border-slate-200 bg-white p-5 sm:p-8" aria-label="Guía de Lex Corporativo">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b border-legal-gold/40 pb-5">
+          <img src={logoUrl} alt="Lex Corporativo" className="h-28 w-44 max-w-full object-contain object-left" />
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Guía del usuario</p>
+        </header>
+        <h2 className="mt-6 font-serif text-2xl text-legal-950">Del documento a su revisión y mejora</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">Sube un documento al Estudio, revisa sus hallazgos y prepara los cambios que necesites. El Fundamentador te permite consultar artículos de forma independiente.</p>
+        <ol className="mt-6 grid gap-5 md:grid-cols-3">
+          {[
+            ['1. Audita tu archivo', 'Selecciona las materias y el alcance de la revisión. Consulta los hallazgos y fundamentos del informe.'],
+            ['2. Prepara las correcciones', 'Desde un hallazgo puedes generar una cláusula o una adenda. Revisa y edita el resultado antes de exportarlo.'],
+            ['3. Retoma tu trabajo', 'En el Portafolio puedes abrir los documentos generados e informes guardados para seguir trabajando.'],
+          ].map(([title, text]) => <li key={title}><h3 className="text-sm font-semibold text-slate-950">{title}</h3><p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p></li>)}
+        </ol>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link to="/estudio/auditar" className="inline-flex items-center gap-2 rounded-lg bg-legal-950 px-4 py-3 text-sm font-semibold text-white">Auditar un documento <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link to="/estudio/generar" className="rounded-lg border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50">Generar un documento</Link>
+        </div>
       </section>
-
-      {(draft.dirty || (draft.step === 'details' && (draft.template || draft.instructions.trim() || draft.referenceFile || draft.missingReferenceFileName || Object.values(draft.fieldValues).some(value => value.trim())))) ? (
-        <Link to="/redactar" className="flex items-center justify-between gap-3 rounded-lg border-l-2 border-legal-gold bg-white px-4 py-3">
-          <span className="min-w-0"><span className="block text-xs text-slate-500">Documento en curso</span><span className="block truncate text-sm font-semibold">{draft.record?.title ?? draft.template?.title ?? 'Tu borrador'}</span></span>
-          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">Continuar <ArrowRight size={16} aria-hidden="true" /></span>
-        </Link>
-      ) : review.file && !review.record ? (
-        <Link to="/revisar" className="flex items-center justify-between gap-3 rounded-lg border-l-2 border-legal-gold bg-white px-4 py-3">
-          <span className="min-w-0"><span className="block text-xs text-slate-500">Revisión pendiente</span><span className="block truncate text-sm font-semibold">{review.file.name}</span></span>
-          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">Continuar <ArrowRight size={16} aria-hidden="true" /></span>
-        </Link>
-      ) : null}
-
-      <nav className="grid gap-3 md:grid-cols-3" aria-label="Empezar una tarea">
-        {TASKS.map(({ to, icon: Icon, title, text }) => (
-          <Link
-            key={to}
-            to={to}
-            className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-4 transition hover:border-legal-gold/60 hover:shadow-card"
-          >
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center text-legal-golddark">
-              <Icon size={20} aria-hidden="true" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-sm font-semibold text-slate-950">{title}</span>
-              <span className="mt-1 block text-xs leading-relaxed text-slate-500">{text}</span>
-            </span>
-            <ArrowRight size={16} className="shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-legal-golddark" aria-hidden="true" />
-          </Link>
-        ))}
-      </nav>
-
-      <section className="py-3" aria-label="Trabajo reciente">
-          <SectionTitle
-            title="Recientes"
-            actions={<Link to="/portafolio" className="text-xs font-semibold text-slate-600 hover:underline">Ver portafolio</Link>}
-          />
-          {recentError ? (
-            <Callout tone="warning" title="No se pudo cargar el trabajo reciente" action={<Link to="/portafolio" className="font-semibold underline">Abrir portafolio para reintentar</Link>}>
-              No se pudo comprobar qué documentos están guardados.
-            </Callout>
-          ) : recent === null ? (
-            <Spinner />
-          ) : recent.length === 0 ? (
-            <p className="py-4 text-sm text-slate-500">Los documentos y revisiones que guardes aparecerán aquí.</p>
-          ) : (
-            <ul className="divide-y divide-slate-100">
-              {recent.map((item) => (
-                <li key={`${item.caseId}:${item.record.id}`}>
-                  <button type="button" onClick={() => openItem(item)} className="flex w-full items-center gap-3 py-3 text-left hover:bg-slate-50">
-                    <PortfolioRowSummary item={item} />
-                    <ArrowRight size={16} className="shrink-0 text-slate-400" aria-hidden="true" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+      <section aria-label="Funciones y requisitos" className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white px-5">
+        <details className="py-4">
+          <summary className="cursor-pointer text-sm font-semibold">Qué encontrarás en cada módulo</summary>
+          <dl className="mt-4 space-y-3 text-sm text-slate-600">
+            <div><dt className="font-semibold text-slate-950"><Link to="/estudio" className="underline">Estudio</Link></dt><dd>Audita archivos, genera documentos a partir de instrucciones o plantillas y consulta tu Portafolio.</dd></div>
+            <div><dt className="font-semibold text-slate-950"><Link to="/fundamentador" className="underline">Fundamentador</Link></dt><dd>Busca artículos por tema y materia; copia citas o úsalas al generar un documento.</dd></div>
+            <div><dt className="font-semibold text-slate-950"><Link to="/leyes" className="underline">Leyes</Link></dt><dd>Referencias y acceso a la página de la Cámara de Diputados en tu navegador.</dd></div>
+          </dl>
+        </details>
+        <details className="py-4">
+          <summary className="cursor-pointer text-sm font-semibold">Ficha técnica y primeros pasos</summary>
+          <dl className="mt-4 space-y-3 text-sm text-slate-600">
+            <div><dt className="font-semibold text-slate-950">Archivos admitidos</dt><dd>{ACCEPTED_DOCUMENT_LABEL}</dd></div>
+            <div><dt className="font-semibold text-slate-950">Inteligencia artificial</dt><dd>Conecta tu clave de Gemini, OpenAI o Anthropic en <Link to="/configuracion?tab=ia" className="underline">Configuración</Link> para la auditoría con IA y la generación. Requiere conexión a Internet.</dd></div>
+            <div><dt className="font-semibold text-slate-950">Funciones locales</dt><dd>Consulta de artículos, revisión básica, edición manual de plantillas y acceso al Portafolio. La revisión básica tiene un alcance distinto de la auditoría con IA.</dd></div>
+            <div><dt className="font-semibold text-slate-950">Ayuda</dt><dd>Abre Ayuda en la barra lateral para consultar las instrucciones de la pantalla actual.</dd></div>
+          </dl>
+        </details>
       </section>
-      <footer className="border-t border-slate-200/80 pt-4"><SystemStatus /></footer>
-      <ConfirmDialog {...openItemDialog} />
+      <footer className="border-t border-slate-200 pt-4"><SystemStatus /></footer>
     </Page>
   );
 }

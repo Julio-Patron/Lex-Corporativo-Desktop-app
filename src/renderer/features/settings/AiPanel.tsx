@@ -51,7 +51,7 @@ export function AiPanel() {
       <Card>
         <SectionTitle
           title="Proveedor de IA"
-          description="La IA redacta documentos, hace revisiones completas y responde en la ayuda. Usa tu propia API key; los costos y políticas son los de tu proveedor."
+          description="Conecta tu propia API key. Los costos y políticas corresponden a tu proveedor."
         />
         <ApiKeyForm showAdvanced />
       </Card>
