@@ -1,6 +1,6 @@
 import React, { useId } from 'react';
 import { Check, SearchCheck } from 'lucide-react';
-import { Button, Callout, Card, Field, FileDropzone, SectionTitle, TextArea } from '../../components/ui';
+import { Button, Callout, Card, Field, FileDropzone, TextArea } from '../../components/ui';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
 import { BASIC_REVIEW_LIMITS, BASIC_REVIEW_SCOPE } from '../../lib/review';
 import { cn } from '../../lib/utils';
@@ -29,10 +29,10 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
   };
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_280px]">
+    <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px]">
       <div className="space-y-6">
-        <Card>
-          <SectionTitle title="1. Documento" />
+        <Card className="shadow-none">
+          <StepHeading title="1. Documento" />
           <FileDropzone
             file={review.file}
             onFile={(file) => onChange({ file })}
@@ -41,8 +41,8 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           />
         </Card>
 
-        <Card>
-          <SectionTitle
+        <Card className="shadow-none">
+          <StepHeading
             title="2. Materias"
             actions={(
               <Button size="sm" variant="ghost" onClick={() => onChange({ areas: allSelected ? [review.areas[0]] : [...LEGAL_AREAS] })}>
@@ -62,16 +62,16 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
                   aria-checked={selected}
                   onClick={() => toggleArea(area)}
                   className={cn(
-                    'flex items-start gap-3 rounded-lg border p-3 text-left transition-colors',
-                    selected ? 'border-legal-950 bg-slate-50 ring-2 ring-legal-gold/30' : 'border-slate-200 bg-white hover:border-slate-300',
+                    'flex items-start gap-3 rounded-lg border p-3 text-left',
+                    selected ? 'border-legal-gold bg-white' : 'border-slate-200 bg-white hover:border-slate-300',
                   )}
                 >
                   <span className={cn('mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border', selected ? 'border-legal-950 bg-legal-950 text-white' : 'border-slate-300')}>
                     {selected && <Check size={13} aria-hidden="true" />}
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-sm font-semibold text-slate-900">{info.label}</span>
-                    <span className="mt-0.5 block text-xs text-slate-500">{info.laws}</span>
+                    <span className="block font-serif text-[15px] font-medium leading-snug text-legal-950">{info.label}</span>
+                    <span className="mt-1 block text-[13px] leading-5 text-slate-500">{info.laws}</span>
                   </span>
                 </button>
               );
@@ -79,7 +79,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           </div>
         </Card>
 
-        {aiReady && <Card>
+        {aiReady && <Card className="shadow-none">
           <Field
             label="3. Enfoque de la revisión"
             htmlFor={instructionId}
@@ -92,8 +92,8 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
       </div>
 
       <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
-        <Card className="space-y-3">
-          <p className="text-sm font-semibold text-slate-950">{aiReady ? `Revisión con IA · ${providerName}` : 'Revisión básica (sin IA)'}</p>
+        <Card className="space-y-4 border-t-2 border-t-legal-gold shadow-none">
+          <h2 className="font-serif text-lg font-medium leading-snug text-legal-950">{aiReady ? `Revisión con IA · ${providerName}` : 'Revisión básica (sin IA)'}</h2>
           {aiReady ? (
             <p className="text-sm leading-relaxed text-slate-600">
               Se envían a {providerName} extractos del documento y los artículos aplicables del corpus local. Cada afirmación del dictamen se valida contra esas fuentes antes de mostrarse.
@@ -118,6 +118,15 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           {!aiReady && <Button size="sm" variant="ghost" isFullWidth onClick={onConnectAi}>Conectar IA</Button>}
         </Card>
       </aside>
+    </div>
+  );
+}
+
+function StepHeading({ title, actions }: { title: string; actions?: React.ReactNode }) {
+  return (
+    <div className="mb-4 flex flex-wrap items-baseline justify-between gap-3 border-b border-legal-gold/80 pb-2">
+      <h2 className="font-serif text-xl font-medium text-legal-950">{title}</h2>
+      {actions}
     </div>
   );
 }

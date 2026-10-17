@@ -9,7 +9,8 @@ describe('legacy routes', () => {
   });
 
   it('separates article consultation from official law references', () => {
-    expect(resolveLegacyRoute('/buscador')).toBe('/fundamentador');
+    expect(resolveLegacyRoute('/buscador')).toBe('/');
+    expect(resolveLegacyRoute('/fundamentador')).toBe('/');
     expect(resolveLegacyRoute('/corpus-normativo')).toBe('/leyes');
   });
 
@@ -17,7 +18,7 @@ describe('legacy routes', () => {
     expect(resolveLegacyRoute('/redactar')).toBe('/estudio/generar');
     expect(resolveLegacyRoute('/revisar')).toBe('/estudio/auditar');
     expect(resolveLegacyRoute('/portafolio')).toBe('/estudio/portafolio');
-    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=consultation')).toBe('/fundamentador');
+    expect(resolveLegacyRoute('/ingenieria-juridica', '?tab=consultation')).toBe('/');
   });
 
   it('keeps the requested settings section', () => {
@@ -30,6 +31,6 @@ describe('legacy routes', () => {
 
   it('ignores current routes', () => {
     expect(resolveLegacyRoute('/estudio/generar')).toBeNull();
-    expect(resolveLegacyRoute('/fundamentador')).toBeNull();
+    expect(resolveLegacyRoute('/')).toBeNull();
   });
 });

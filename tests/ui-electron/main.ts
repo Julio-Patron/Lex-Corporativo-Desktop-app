@@ -48,7 +48,7 @@ async function main() {
   const routeTo = async (route: string, zoom: number) => {
     await js(`location.hash = ${JSON.stringify('#' + route)}`);
     await delay(450);
-    const heading = route === '/' ? 'Inicio' : route.startsWith('/configuracion') ? 'Configuración' : ({ '/estudio/generar': 'Generar', '/estudio/auditar': 'Auditar', '/fundamentador': 'Fundamentador', '/leyes': 'Leyes', '/estudio/portafolio': 'Portafolio' })[route];
+    const heading = route === '/' || route === '/fundamentador' ? 'Buscador normativo' : route.startsWith('/configuracion') ? 'Configuración' : ({ '/estudio/generar': 'Generar', '/estudio/auditar': 'Auditar', '/leyes': 'Leyes', '/estudio/portafolio': 'Portafolio' })[route];
     await waitFor(`document.querySelector('h1')?.textContent === ${JSON.stringify(heading)}`);
     win.webContents.setZoomFactor(zoom);
     await delay(200);
@@ -90,8 +90,7 @@ async function main() {
     await win.webContents.debugger.sendCommand('Emulation.setFocusEmulationEnabled', { enabled: true });
     await waitFor('!!document.querySelector("[role=dialog]")');
     await shot('bienvenida');
-    await click('Continuar');
-    await click('Ahora no');
+    await click('Entrar');
     await waitFor('!document.querySelector("[role=dialog]")');
     await routeTo('/estudio/auditar', 1);
     await click('Generar', 'nav[aria-label="Secciones del Estudio"] a');
@@ -108,9 +107,9 @@ async function main() {
         await routeTo(route, zoom);
         await shot(`${width}-${zoom}-${name}`);
       }
-      await click('Ayuda');
+      await click('Info');
       await shot(`${width}-${zoom}-ayuda`);
-      await js(`document.querySelector('[aria-label="Cerrar ayuda"]').click()`);
+      await js(`document.querySelector('[aria-label="Cerrar info"]').click()`);
       await waitFor('!document.querySelector("[role=dialog]")');
       await routeTo('/leyes', zoom);
       assert.equal(await js(`document.querySelector('a[href="https://www.diputados.gob.mx/LeyesBiblio/index.htm"]')?.target`), '_blank');

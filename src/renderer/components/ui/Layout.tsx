@@ -11,22 +11,36 @@ interface PageProps {
   actions?: React.ReactNode;
   children: React.ReactNode;
   width?: 'default' | 'narrow' | 'wide';
+  /** El título ya vive en la fila de Estudio. */
+  hideTitle?: boolean;
 }
 
 // La barra de ventana pertenece a AppShell; esta cabecera sólo contiene la página.
-export function Page({ title, description, actions, children, width = 'default' }: PageProps) {
+export function Page({ title, description, actions, children, width = 'default', hideTitle = false }: PageProps) {
   return (
     <div className="h-full overflow-y-auto">
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-slate-50/95 backdrop-blur">
-        <div className={cn('mx-auto flex min-h-16 flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6', maxWidth(width))}>
-          <div className="min-w-0">
-            <h1 className="text-xl font-semibold text-slate-950">{title}</h1>
-            {description && <p className="mt-1 max-w-prose text-sm text-slate-600">{description}</p>}
+      {!hideTitle && (
+        <header className="sticky top-0 z-30 border-b border-slate-200 bg-legal-paper/95 backdrop-blur">
+          <div className={cn('mx-auto flex min-h-16 flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6', maxWidth(width))}>
+            <div className="min-w-0">
+              <h1 className="font-serif text-2xl font-medium leading-tight text-legal-950">{title}</h1>
+              {description && <p className="mt-1 max-w-prose text-sm text-slate-600">{description}</p>}
+            </div>
+            {actions && <div className="window-no-drag flex flex-wrap items-center gap-2">{actions}</div>}
           </div>
-          {actions && <div className="window-no-drag flex flex-wrap items-center gap-2">{actions}</div>}
+        </header>
+      )}
+      {hideTitle && actions && (
+        <div className="sticky top-0 z-30 border-b border-slate-200 bg-legal-paper/95 backdrop-blur">
+          <div className={cn('mx-auto flex min-h-14 items-center justify-end px-4 py-3 sm:px-6', maxWidth(width))}>
+            <div className="window-no-drag flex flex-wrap items-center gap-2">{actions}</div>
+          </div>
         </div>
-      </header>
-      <div className={cn('mx-auto space-y-5 px-4 py-5 pb-12 sm:px-6', maxWidth(width))}>{children}</div>
+      )}
+      <div className={cn('mx-auto space-y-5 px-4 py-5 pb-12 sm:px-6', maxWidth(width))}>
+        {hideTitle && description && <p className="max-w-prose text-sm leading-6 text-slate-600">{description}</p>}
+        {children}
+      </div>
     </div>
   );
 }

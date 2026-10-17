@@ -96,10 +96,11 @@ export default function PortfolioPage() {
   return (
     <Page
       title="Portafolio"
+      hideTitle
       description={<>Documentos y revisiones guardados en este equipo. {CASE_RETENTION_LABELS[retentionDays]}. <Link to="/configuracion?tab=datos" className="font-semibold text-legal-950 hover:underline">Cambiar</Link></>}
       width="wide"
     >
-      <Card className="flex flex-wrap items-center gap-3 p-4">
+      <Card className="flex flex-wrap items-center gap-3 p-4 shadow-none">
         <div className="relative min-w-[220px] flex-1">
           <Search size={16} className="pointer-events-none absolute left-3 top-3 text-slate-400" aria-hidden="true" />
           <TextInput value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar por título o archivo" aria-label="Buscar en el portafolio" className="pl-9" />
@@ -142,7 +143,7 @@ export default function PortfolioPage() {
       ) : filtered.length === 0 ? (
         <EmptyState icon={Search} title="No hay elementos con esos filtros" description="Cambia la búsqueda o los filtros." />
       ) : (
-        <Card className="p-0">
+        <Card className="p-0 shadow-none">
           <ul className="divide-y divide-slate-100">
             {filtered.map((item) => {
               const key = `${item.caseId}:${item.record.id}`;

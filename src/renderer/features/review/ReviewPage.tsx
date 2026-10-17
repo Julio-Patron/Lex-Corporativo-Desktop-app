@@ -114,7 +114,7 @@ export default function ReviewPage() {
   };
 
   return (
-    <Page title="Auditar" description="Sube un documento para detectar riesgos, omisiones y cláusulas faltantes." width="wide">
+    <Page title="Auditar" hideTitle description="Sube un documento para detectar riesgos, omisiones y cláusulas faltantes." width="wide">
       {running ? (
         <Card className="mx-auto max-w-xl py-10 text-center">
           <Loader2 size={28} className="mx-auto animate-spin text-legal-950" aria-hidden="true" />

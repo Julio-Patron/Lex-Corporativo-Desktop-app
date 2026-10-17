@@ -2,8 +2,7 @@ import React, { useState, useSyncExternalStore } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   BookOpenCheck,
-  CircleHelp,
-  House,
+  Info,
   Settings,
   BriefcaseBusiness,
   Search,
@@ -23,9 +22,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/', label: 'Inicio', icon: House, end: true },
+  { to: '/', label: 'Buscador', icon: Search, end: true },
   { to: '/estudio', label: 'Estudio', icon: BriefcaseBusiness },
-  { to: '/fundamentador', label: 'Fundamentador', icon: Search },
   { to: '/leyes', label: 'Leyes', icon: BookOpenCheck },
 ];
 
@@ -85,7 +83,7 @@ export function Sidebar() {
           {!visuallyCollapsed && (
             <div className="min-w-0 flex-1 animate-fade-in-up">
               <div className="min-w-0">
-                <p className="font-serif text-[17px] font-semibold leading-snug text-legal-gold">Lex<br />Corporativo</p>
+                <p className="font-serif text-[15px] font-medium leading-tight text-legal-gold">Lex Corporativo</p>
               </div>
               {!compact && <button
                 type="button"
@@ -125,9 +123,9 @@ export function Sidebar() {
               ? <span className="sr-only">{aiReady ? 'IA conectada' : 'Conectar IA'}</span>
               : <span className="truncate font-semibold">{aiReady ? `IA: ${providerLabel(settings?.provider)}` : 'Conectar IA'}</span>}
           </button>
-          <button type="button" onClick={() => setHelpOpen(true)} className={itemClass(visuallyCollapsed)({ isActive: false })} title={visuallyCollapsed ? 'Ayuda' : undefined}>
-            <CircleHelp size={18} className="shrink-0" aria-hidden="true" />
-            {visuallyCollapsed ? <span className="sr-only">Ayuda</span> : <span>Ayuda</span>}
+          <button type="button" onClick={() => setHelpOpen(true)} className={itemClass(visuallyCollapsed)({ isActive: false })} title={visuallyCollapsed ? 'Info' : undefined}>
+            <Info size={18} className="shrink-0" aria-hidden="true" />
+            {visuallyCollapsed ? <span className="sr-only">Info</span> : <span>Info</span>}
           </button>
           <NavLink to="/configuracion" className={itemClass(visuallyCollapsed)} title={visuallyCollapsed ? 'Configuración' : undefined}>
             <Settings size={18} className="shrink-0" aria-hidden="true" />

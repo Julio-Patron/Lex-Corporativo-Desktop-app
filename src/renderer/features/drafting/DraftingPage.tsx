@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check } from 'lucide-react';
+
 import { Button, ConfirmDialog, Page } from '../../components/ui';
 import { useConfirmDialog } from '../../hooks/useConfirmDialog';
 import { useAiGuard } from '../../hooks/useAiGuard';
@@ -25,29 +25,24 @@ const STEPS: Array<{ id: DraftStep; label: string }> = [
 
 function Stepper({ current, canOpen, onSelect, manual }: { current: DraftStep; canOpen: (step: DraftStep) => boolean; onSelect: (step: DraftStep) => void; manual: boolean }) {
   const steps = manual ? [STEPS[0], { id: 'document' as const, label: 'Completar y exportar' }] : STEPS;
-  const currentIndex = steps.findIndex((step) => step.id === current);
   return (
-    <ol className="flex flex-wrap items-center gap-2" aria-label="Pasos de redacción">
+    <ol className="flex flex-wrap items-end gap-x-6 gap-y-2 border-b border-slate-200" aria-label="Pasos de redacción">
       {steps.map((step, index) => {
-        const done = index < currentIndex;
         const active = step.id === current;
+        const open = canOpen(step.id) && !active;
         return (
-          <li key={step.id} className="flex items-center gap-2">
-            {index > 0 && <span className="h-px w-3 bg-slate-300 sm:w-6" aria-hidden="true" />}
+          <li key={step.id} className="-mb-px">
             <button
               type="button"
-              disabled={!canOpen(step.id) || active}
+              disabled={!open}
               onClick={() => onSelect(step.id)}
               aria-current={active ? 'step' : undefined}
               className={cn(
-                'inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-semibold transition-colors disabled:cursor-default',
-                active ? 'bg-legal-950 text-white' : done ? 'bg-white text-slate-800 ring-1 ring-slate-200 hover:bg-slate-100' : 'text-slate-500',
+                'border-b-2 pb-2 font-serif text-xl font-medium leading-none disabled:cursor-default',
+                active ? 'border-legal-gold text-legal-950' : open ? 'border-transparent text-slate-600 hover:text-legal-950' : 'border-transparent text-slate-400',
               )}
             >
-              <span className={cn('flex h-5 w-5 items-center justify-center rounded-full text-xs', active ? 'bg-white/20' : 'bg-slate-200 text-slate-700')}>
-                {done ? <Check size={12} aria-hidden="true" /> : index + 1}
-              </span>
-              <span className={cn(!active && 'sr-only sm:not-sr-only')}>{step.label}</span>
+              {index + 1}. {step.label}
             </button>
           </li>
         );
@@ -224,6 +219,7 @@ export default function DraftingPage() {
   return (
     <Page
       title="Generar"
+      hideTitle
       description={draft.step === 'choose' ? 'Solicita un documento a la IA, parte de un archivo o utiliza una plantilla.' : undefined}
       width="wide"
       actions={draft.step !== 'choose' && <Button variant="secondary" onClick={() => void replaceDraft(resetDraft)} disabled={generating || saving}>Nuevo documento</Button>}

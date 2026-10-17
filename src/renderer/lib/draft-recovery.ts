@@ -41,7 +41,7 @@ export async function startDraftRecovery(api: RecoveryAPI, target: Pick<Window, 
     sessionId = loaded.sessionId;
     if (loaded.snapshot) {
       useWorkspaceStore.setState({ draft: restoreDraft(loaded.snapshot) });
-      useRecoveryStatus.setState({ message: 'Se recuperó tu redacción pendiente. Puedes continuar desde Inicio o Redactar.', error: false });
+      useRecoveryStatus.setState({ message: 'Se recuperó tu redacción pendiente. Ábrela en Estudio, sección Generar.', error: false });
     }
     if (loaded.error) failure(loaded.error);
   } catch {

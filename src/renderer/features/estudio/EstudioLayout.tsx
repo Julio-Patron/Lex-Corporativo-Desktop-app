@@ -12,13 +12,20 @@ const SECTIONS = [
 export default function EstudioLayout() {
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <nav aria-label="Secciones del Estudio" className="flex shrink-0 flex-wrap gap-1 border-b border-slate-200 bg-white px-4 py-2 sm:px-6">
+      <nav aria-label="Secciones del Estudio" className="flex shrink-0 flex-wrap items-end gap-x-8 gap-y-1 border-b border-slate-200 bg-legal-paper px-4 sm:px-6">
         {SECTIONS.map(({ to, label, icon: Icon }) => (
           <NavLink key={to} to={to} className={({ isActive }) => cn(
-            'inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold',
-            isActive ? 'bg-legal-950 text-white' : 'text-slate-600 hover:bg-slate-100',
+            '-mb-px inline-flex items-center gap-2 border-b-2 px-1 py-3',
+            isActive ? 'border-legal-gold text-legal-950' : 'border-transparent text-slate-500 hover:text-legal-950',
           )}>
-            <Icon size={16} aria-hidden="true" />{label}
+            {({ isActive }) => (
+              <>
+                <Icon size={18} aria-hidden="true" />
+                {isActive
+                  ? <h1 className="font-serif text-2xl font-medium leading-none">{label}</h1>
+                  : <span className="font-serif text-2xl font-medium leading-none">{label}</span>}
+              </>
+            )}
           </NavLink>
         ))}
       </nav>

@@ -6,8 +6,7 @@ import { Spinner } from './components/ui';
 import { resolveLegacyRoute } from './lib/routes';
 
 const EstudioLayout = lazy(() => import('./features/estudio/EstudioLayout'));
-const FundamentadorPage = lazy(() => import('./features/laws/FundamentadorPage'));
-const HomePage = lazy(() => import('./features/home/HomePage'));
+const BuscadorPage = lazy(() => import('./features/buscador/BuscadorPage'));
 const DraftingPage = lazy(() => import('./features/drafting/DraftingPage'));
 const ReviewPage = lazy(() => import('./features/review/ReviewPage'));
 const LawsPage = lazy(() => import('./features/laws/LawsPage'));
@@ -29,14 +28,13 @@ export default function App() {
       <ErrorBoundary key={location.pathname}>
         <Suspense fallback={<Spinner label="Cargando…" />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<BuscadorPage />} />
             <Route path="/estudio" element={<EstudioLayout />}>
               <Route index element={<Navigate to="auditar" replace />} />
               <Route path="auditar" element={<ReviewPage />} />
               <Route path="generar" element={<DraftingPage />} />
               <Route path="portafolio" element={<PortfolioPage />} />
             </Route>
-            <Route path="/fundamentador" element={<FundamentadorPage />} />
             <Route path="/leyes" element={<LawsPage />} />
             <Route path="/configuracion" element={<SettingsPage />} />
             <Route path="/privacidad" element={<PrivacyPolicy />} />

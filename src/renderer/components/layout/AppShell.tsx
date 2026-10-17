@@ -11,7 +11,7 @@ import { retryDraftRecovery, useRecoveryStatus } from '../../lib/draft-recovery'
 export function AppShell({ children }: { children: React.ReactNode }) {
   const recovery = useRecoveryStatus();
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-slate-50 font-sans text-slate-900">
+    <div className="flex h-screen flex-col overflow-hidden bg-legal-paper font-sans text-legal-950">
       <div className="app-titlebar window-drag-region shrink-0 bg-legal-950" aria-hidden="true" />
       <a
         href="#main-content"

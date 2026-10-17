@@ -15,23 +15,19 @@ export function portfolioItemTitle(item: PortfolioItem): string {
   return item.record.title;
 }
 
-// Fila de un documento o una revisión, usada en Inicio y en Portafolio.
+// Fila de un documento o una revisión, usada en el Portafolio.
 export function PortfolioRowSummary({ item, expiresAt }: { item: PortfolioItem; expiresAt?: string | null }) {
   const isDraft = item.kind === 'draft';
   const areas = isDraft ? [item.record.area] : item.record.areas;
   return (
     <div className="flex min-w-0 flex-1 items-center gap-3">
-      <span className={isDraft
-        ? 'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-700'
-        : 'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-rose-50 text-rose-700'}
-      >
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-legal-paper text-legal-950 ring-1 ring-legal-gold/60">
         {isDraft ? <FileSignature size={17} aria-hidden="true" /> : <ShieldCheck size={17} aria-hidden="true" />}
       </span>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold text-slate-900">{portfolioItemTitle(item)}</p>
-        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-slate-500">
+        <p className="truncate font-serif text-[15px] font-medium text-legal-950">{portfolioItemTitle(item)}</p>
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
           <span>{isDraft ? 'Documento' : item.record.reviewMode === 'basic' ? 'Revisión básica' : 'Revisión con IA'}</span>
-          <span aria-hidden="true">·</span>
           <span>{formatDate(portfolioItemDate(item))}</span>
           {areas.length <= 2
             ? areas.map((area) => <AreaTag key={area} area={area} />)

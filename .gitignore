@@ -50,5 +50,8 @@ tmp/
 tmp-asar-extract/
 tmp-packaged-package.json
 reports/
+.superdesign/init/
+.superdesign/tmp/
+.superdesign/resume.json
 *.gguf
 legal-runtime/models/*.gguf

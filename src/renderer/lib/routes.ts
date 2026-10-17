@@ -18,11 +18,12 @@ export function resolveLegacyRoute(pathname: string, search = ''): string | null
       const tab = params.get('tab');
       if (tab === 'drafting') return '/estudio/generar';
       if (tab === 'analysis') return '/estudio/auditar';
-      if (tab === 'consultation') return '/fundamentador';
+      if (tab === 'consultation') return '/';
       return '/';
     }
     case '/buscador':
-      return '/fundamentador';
+    case '/fundamentador':
+      return '/';
     case '/corpus-normativo':
       return '/leyes';
     case '/settings': {

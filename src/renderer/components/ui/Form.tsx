@@ -124,7 +124,7 @@ export function FileDropzone({ file, onFile, onError, title, compact }: {
       className={cn(
         'flex flex-col items-center justify-center rounded-lg border-2 border-dashed text-center transition-colors',
         compact ? 'px-4 py-6' : 'px-6 py-10',
-        dragging ? 'border-legal-gold bg-amber-50/60' : 'border-slate-300 bg-slate-50',
+        dragging ? 'border-legal-gold bg-legal-paper' : 'border-legal-gold/40 bg-white',
       )}
     >
       <input
@@ -134,7 +134,7 @@ export function FileDropzone({ file, onFile, onError, title, compact }: {
         className="hidden"
         onChange={(event) => { accept(event.target.files?.[0]); event.target.value = ''; }}
       />
-      <Upload size={compact ? 20 : 26} className="text-slate-400" aria-hidden="true" />
+      <Upload size={compact ? 20 : 26} className="text-legal-golddark" aria-hidden="true" />
       <p className="mt-2 text-sm font-semibold text-slate-900">{dragging ? 'Suelta el archivo aquí' : title}</p>
       <p className="mt-0.5 text-xs text-slate-500">{ACCEPTED_DOCUMENT_LABEL}</p>
       <button

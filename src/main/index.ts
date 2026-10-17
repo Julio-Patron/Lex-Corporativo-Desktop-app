@@ -69,12 +69,12 @@ function createWindow(): void {
     show: false,
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
     titleBarOverlay: process.platform === 'win32' ? {
-      color: '#0f172a',
+      color: '#1c1915',
       symbolColor: '#c5a059',
       height: 40
     } : undefined,
     title: 'Lex Corporativo',
-    backgroundColor: '#0f172a', // Avoids white flash before React mounts
+    backgroundColor: '#1c1915', // Evita el blanco antes de que pinte la interfaz.
     icon: process.platform === 'win32'
       ? join(__dirname, '../../resources/icon.ico')
       : join(__dirname, '../../resources/icon.png'),

@@ -11,22 +11,22 @@ const APP_GUIDE = `Lex Corporativo Desktop - Guía de uso
    - La privacidad estricta está activa por defecto: no se buscan actualizaciones en segundo plano.
 
 2. Secciones
-   - Inicio: guía de uso y ficha técnica membretada, con acceso al flujo de auditoría y generación.
+   - Buscador normativo: pantalla de inicio, en forma de conversación. Se elige la materia y se escribe el tema. La respuesta son artículos del corpus local. Cada artículo puede desplegarse, copiarse como cita o enviarse a Generar. La verificación de los fundamentos de un documento se realiza en Auditar.
    - Estudio: agrupa Auditar, Generar y Portafolio. Abre en Auditar.
    - Estudio > Generar: en tres pasos. (1) Elegir el origen: solicitud a la IA, archivo propio o una plantilla precargada (opción desplegable secundaria). (2) Completar los datos en un formulario generado a partir de la plantilla y agregar instrucciones. (3) Revisar, editar y exportar a PDF o Word. "Usar plantilla sin IA" abre el machote completo para llenarlo a mano; "Redactar con IA" requiere API key.
    - Estudio > Auditar: se sube un documento (PDF, Word, XML, TXT o Markdown) y se eligen materias. Con API key se obtiene una revisión con IA cuyas afirmaciones se validan contra el corpus local. Sin API key, o si la IA falla, se obtiene la revisión básica.
    - Revisión básica: sólo comprueba si el texto menciona elementos mínimos por materia (por ejemplo jornada y salario en laboral, CFDI en fiscal, Incoterm en comercio exterior, jurisdicción y pena convencional en mercantil), detecta partes y cláusulas por patrones, muestra artículos relacionados del corpus y recomendaciones generales. No interpreta el contenido ni valida su legalidad.
    - Desde un resultado de revisión se puede redactar una adenda con todos los hallazgos o una cláusula para uno solo, y exportar el informe.
-   - Fundamentador: consulta independiente de artículos por tema y materia en el corpus local. Cada resultado puede desplegarse, copiarse como cita o enviarse a Generar. La verificación de los fundamentos de un documento se realiza en Auditar.
    - Leyes: referencias por materia y enlace externo a la página de Cámara de Diputados. No contiene lector ni descargas de leyes.
    - Estudio > Portafolio: documentos generados e informes guardados, con búsqueda, filtros, exportación y eliminación. Los documentos se guardan automáticamente después del primer guardado. Los archivos originales no se recuperan desde esta vista.
+   - Info: describe la herramienta, el recorrido de las secciones y dónde obtener la API key. Gemini se crea en Google AI Studio (aistudio.google.com/apikey). OpenAI, en platform.openai.com/settings/organization/api-keys. Anthropic, en platform.claude.com/settings/keys. La clave se pega en Conectar IA o en Configuración; queda cifrada en el equipo.
    - Configuración: conexión de IA y modelo; datos y privacidad (conservación del portafolio, privacidad estricta, respaldo, bitácora, eliminación de datos); acerca de (versión y actualizaciones).
    - Conservación: por defecto los elementos del portafolio se conservan hasta que el usuario los elimina; puede configurarse la eliminación tras 30 o 90 días sin actividad.
 
 3. Reglas del asistente
    - Responde sólo sobre el uso, la privacidad, la configuración y los flujos de la aplicación.
    - No da asesoría jurídica, mercantil, laboral, fiscal ni aduanera, no analiza documentos del usuario y no cita leyes para resolver casos.
-   - Si la pregunta es jurídica, declina con amabilidad y sugiere la sección adecuada (Fundamentador para consultar artículos, Estudio > Auditar para documentos).`;
+   - Si la pregunta es jurídica, declina con amabilidad y sugiere la sección adecuada (Buscador normativo para consultar artículos, Estudio > Auditar para documentos).`;
 
 const GuideQuestionSchema = z.object({
   query: z.string().trim().min(3).max(8_000),

@@ -23,28 +23,28 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-3 sm:grid-cols-2">
-        <button type="button" onClick={onStartFromFile} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-card hover:border-slate-300">
-          <Upload size={20} className="mt-0.5 shrink-0 text-legal-950" aria-hidden="true" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <button type="button" onClick={onStartFromFile} className="flex items-start gap-4 rounded-xl border border-slate-200 border-l-[3px] border-l-legal-gold bg-white px-5 py-5 text-left hover:bg-legal-paper/70">
+          <Upload size={18} className="mt-1 shrink-0 text-legal-golddark" aria-hidden="true" />
           <span>
-            <span className="block text-sm font-semibold text-legal-950">Partir de mi propio archivo</span>
-            <span className="mt-0.5 block text-xs text-slate-500">Requiere IA</span>
+            <span className="block font-serif text-lg font-medium leading-snug text-legal-950">Partir de mi propio archivo</span>
+            <span className="mt-1 block text-sm text-slate-500">Requiere IA</span>
           </span>
         </button>
-        <button type="button" onClick={onStartFree} className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-card hover:border-slate-300">
-          <FilePlus2 size={20} className="mt-0.5 shrink-0 text-legal-950" aria-hidden="true" />
+        <button type="button" onClick={onStartFree} className="flex items-start gap-4 rounded-xl border border-slate-200 border-l-[3px] border-l-legal-gold bg-white px-5 py-5 text-left hover:bg-legal-paper/70">
+          <FilePlus2 size={18} className="mt-1 shrink-0 text-legal-golddark" aria-hidden="true" />
           <span>
-            <span className="block text-sm font-semibold text-legal-950">Solicitar un documento a la IA</span>
-            <span className="mt-0.5 block text-xs text-slate-500">Requiere IA</span>
+            <span className="block font-serif text-lg font-medium leading-snug text-legal-950">Solicitar un documento a la IA</span>
+            <span className="mt-1 block text-sm text-slate-500">Requiere IA</span>
           </span>
         </button>
       </div>
 
       <p className="text-sm text-slate-600">Para preparar una corrección desde una revisión, abre el informe en <Link to="/estudio/auditar" className="font-semibold text-legal-950 underline">Auditar</Link> o recupéralo del <Link to="/estudio/portafolio" className="font-semibold text-legal-950 underline">Portafolio</Link>.</p>
 
-      <details className="rounded-xl border border-slate-200 bg-white p-4">
-        <summary className="cursor-pointer text-sm font-semibold text-slate-700">Usar una plantilla precargada</summary>
-        <div className="mt-4 space-y-5">
+      <details className="rounded-xl border border-slate-200 bg-white">
+        <summary className="cursor-pointer px-5 py-4 font-serif text-lg font-medium text-legal-950">Usar una plantilla precargada</summary>
+        <div className="space-y-5 border-t border-slate-200 px-5 py-5">
           <Card>
             <div className="flex flex-wrap items-center gap-3">
               <div className="relative min-w-0 flex-1">
@@ -81,11 +81,11 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
                 if (areaTemplates.length === 0) return null;
                 return (
                   <section key={a} className="space-y-4">
-                    <h2 className="border-b border-slate-200 pb-2 text-base font-semibold text-legal-950">{LEGAL_AREA_INFO[a].label}</h2>
+                    <h2 className="border-b border-slate-200 pb-2 font-serif text-xl font-medium text-legal-950">{LEGAL_AREA_INFO[a].label}</h2>
                     <ul className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
                       {areaTemplates.map((template) => (
-                        <li key={template.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-5 shadow-card transition-shadow hover:shadow-md">
-                          <h3 className="text-base font-semibold leading-snug text-legal-950">{template.title}</h3>
+                        <li key={template.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-5">
+                          <h3 className="font-serif text-lg font-medium leading-snug text-legal-950">{template.title}</h3>
                           <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-slate-600">{template.description}</p>
                           <div className="mt-5 flex flex-wrap items-center gap-2 pt-4 border-t border-slate-50">
                             {aiReady ? (

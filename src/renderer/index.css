@@ -10,23 +10,24 @@
 }
 
 @font-face {
-  font-family: 'Playfair Display Variable';
+  font-family: 'Petrona Variable';
   font-style: normal;
   font-display: swap;
-  font-weight: 400 900;
-  src: url('@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  src: url('@fontsource-variable/petrona/files/petrona-latin-wght-normal.woff2') format('woff2-variations');
 }
 
 @theme {
-  --font-serif: 'Playfair Display Variable', 'Playfair Display', Georgia, serif;
+  --font-serif: 'Petrona Variable', Petrona, Palatino, 'Palatino Linotype', serif;
   --font-sans: 'Manrope Variable', Manrope, system-ui, sans-serif;
 
-  /* Marca: azul marino para acciones y superficies oscuras, dorado para acentos y foco. */
-  --color-legal-950: #0f172a;
-  --color-legal-800: #334155;
+  /* Marca: negro cálido del emblema, latón para el acento, papel para el escritorio. */
+  --color-legal-950: #1c1915;
+  --color-legal-800: #3f3830;
   --color-legal-gold: #c5a059;
   --color-legal-golddark: #8e6d2b;
-  --color-legal-rail: #090d16;
+  --color-legal-rail: #14110e;
+  --color-legal-paper: #f3f1eb;
 
   --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
   --shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
@@ -68,13 +69,13 @@ html {
 body {
   overscroll-behavior-y: contain;
   -webkit-tap-highlight-color: transparent;
-  background-color: #f8fafc;
+  background-color: #f3f1eb;
   font-family: 'Manrope Variable', Manrope, system-ui, sans-serif;
 }
 
 ::selection {
-  background: rgba(197, 160, 89, 0.2);
-  color: #0f172a;
+  background: rgba(197, 160, 89, 0.28);
+  color: #1c1915;
 }
 
 * {
@@ -205,7 +206,7 @@ body {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1c1915;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   text-align: center;
@@ -217,7 +218,7 @@ body {
   font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1c1915;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
   border-bottom: 1px solid #e2e8f0;
