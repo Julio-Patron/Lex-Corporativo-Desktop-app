@@ -77,7 +77,7 @@ describe('drafting templates', () => {
   it('validates placeholder token formatting across all template bodies', async () => {
     const { TEMPLATE_FULL_BODIES } = await import('./template-bodies');
 
-    for (const [id, body] of Object.entries(TEMPLATE_FULL_BODIES)) {
+    for (const body of Object.values(TEMPLATE_FULL_BODIES)) {
       // Find all bracketed placeholders
       const placeholders = body.match(/\[([^\]]+)\]/g) || [];
       expect(placeholders.length).toBeGreaterThan(0);

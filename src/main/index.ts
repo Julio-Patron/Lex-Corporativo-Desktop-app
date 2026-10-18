@@ -1,11 +1,14 @@
-import { app, BrowserWindow, Menu, ipcMain, shell, session, dialog } from 'electron';
+import { app, BrowserWindow, Menu, shell, session, dialog } from 'electron';
 import { join } from 'path';
 import { pathToFileURL } from 'node:url';
 import { electronApp, optimizer } from '@electron-toolkit/utils';
 import { createAppMenu } from './menu';
+import { installContentSecurityPolicy } from './csp';
 import { registerIpcHandlers } from './ipc';
 import { registerRecoveryHandlers } from './ipc/recovery.handler';
+import { ipcMain, isTrustedAppSender, setIpcSenderGuard } from './ipc/trusted-ipc';
 import { registerProtocol, handleDeepLink } from './protocol';
+import { formatForLog } from './lib/sanitizer';
 import { getByokSettings } from './lib/byok-settings';
 import { purgeExpiredUserDocuments } from './lib/rag';
 import { applyRetentionPolicy, purgeExpiredCases } from './lib/case-vault';
@@ -21,6 +24,14 @@ function rendererDocumentUrl(): string {
 
 function isAppDocument(url: string): boolean {
   return url.split('#')[0] === rendererDocumentUrl().split('#')[0];
+}
+
+function isTrustedSender(event: { sender: unknown; senderFrame: { url: string } | null }): boolean {
+  return isTrustedAppSender(event, mainWindow ? {
+    webContents: mainWindow.webContents,
+    mainFrame: mainWindow.webContents.mainFrame,
+    documentUrl: rendererDocumentUrl(),
+  } : null);
 }
 
 function canCheckUpdatesAutomatically(): boolean {
@@ -50,7 +61,7 @@ function setupUpdateHandlers(): void {
         version: result?.updateInfo?.version,
       };
     } catch (err: any) {
-      return { ok: false, status: 'error', message: err?.message || 'No se pudo revisar actualizaciones.' };
+      return { ok: false, status: 'error', message: formatForLog(err?.message || 'No se pudo revisar actualizaciones.') };
     }
   });
 
@@ -108,6 +119,8 @@ function createWindow(): void {
     });
     if (choice === 1) event.preventDefault();
   });
+
+  installContentSecurityPolicy(session.defaultSession);
 
   // Deny all web permission requests (geolocation, camera, microphone, etc.)
   session.defaultSession.setPermissionRequestHandler((_webContents, _permission, callback) => {
@@ -168,19 +181,17 @@ if (!gotTheLock) {
     // Register protocol client (lexcorp://)
     registerProtocol();
 
-    // Register all secure IPC handlers
+    // El guardia lee mainWindow cuando llega el mensaje, así que puede instalarse antes de crear la ventana.
+    setIpcSenderGuard(isTrustedSender);
     registerIpcHandlers();
-    registerRecoveryHandlers((event) => Boolean(mainWindow
-      && event.sender === mainWindow.webContents
-      && event.senderFrame === mainWindow.webContents.mainFrame
-      && isAppDocument(event.senderFrame.url)));
+    registerRecoveryHandlers(isTrustedSender);
     setupUpdateHandlers();
 
     void Promise.all([
       purgeExpiredUserDocuments(),
       applyRetentionPolicy(getByokSettings().caseRetentionDays).then(() => purgeExpiredCases()),
     ]).catch(error => {
-      console.warn('[Startup] Local retention cleanup did not complete:', error);
+      console.warn('[Startup] Local retention cleanup did not complete:', formatForLog(error));
     });
 
     // Default open or close DevTools by F12 in development
@@ -193,7 +204,7 @@ if (!gotTheLock) {
     // Auto Update logic. By default this stays off to preserve local/offline operation.
     if (canCheckUpdatesAutomatically()) {
       autoUpdater.checkForUpdatesAndNotify().catch(err => {
-        console.error('Error al revisar actualizaciones:', err);
+        console.error('Error al revisar actualizaciones:', formatForLog(err));
       });
     }
 

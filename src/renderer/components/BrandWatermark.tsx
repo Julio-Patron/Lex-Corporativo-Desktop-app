@@ -1,4 +1,3 @@
-import React from 'react';
 import logoUrl from '../assets/logo-mark.png';
 import { cn } from '../lib/utils';
 

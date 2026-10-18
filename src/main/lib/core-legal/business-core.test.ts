@@ -13,16 +13,16 @@ function doc(fileName: string, category?: OperationDocument['category']): Operat
     documentId: fileName,
     fileName,
     mimeType: 'application/pdf',
-    category: category || DocumentClassifier.classify(fileName, 'application/pdf')
+    category: category || DocumentClassifier.classify(fileName)
   };
 }
 
 describe('local legal business core', () => {
   it('classifies fiscal and mercantile evidence without remote services', () => {
-    expect(DocumentClassifier.classify('contrato-servicios.pdf', 'application/pdf')).toBe('contract');
-    expect(DocumentClassifier.classify('cfdi-factura.xml', 'application/xml')).toBe('cfdi');
-    expect(DocumentClassifier.classify('comprobante-spei.pdf', 'application/pdf')).toBe('payment_proof');
-    expect(DocumentClassifier.classify('reporte-entregable.pdf', 'application/pdf')).toBe('deliverable');
+    expect(DocumentClassifier.classify('contrato-servicios.pdf')).toBe('contract');
+    expect(DocumentClassifier.classify('cfdi-factura.xml')).toBe('cfdi');
+    expect(DocumentClassifier.classify('comprobante-spei.pdf')).toBe('payment_proof');
+    expect(DocumentClassifier.classify('reporte-entregable.pdf')).toBe('deliverable');
   });
 
   it('scores complete local evidence as sufficient', () => {

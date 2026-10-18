@@ -1,4 +1,4 @@
-import React, { useId, useMemo } from 'react';
+import { useId, useMemo } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { X } from 'lucide-react';
 import { AreaTag, Button, Modal } from '../../components/ui';

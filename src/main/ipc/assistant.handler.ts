@@ -1,4 +1,5 @@
-import { ipcMain } from 'electron';
+import { ipcMain } from './trusted-ipc';
+import { formatForLog } from '../lib/sanitizer';
 import { z } from 'zod';
 import { getActiveByokConfig } from '../lib/byok-settings';
 import { composeLimitedByokPrompt, generateByokText } from '../lib/byok-client';
@@ -73,7 +74,7 @@ export function registerAssistantHandlers(): void {
       }
       throw new Error('Configura y activa una API key propia para usar el asistente.');
     } catch (err: any) {
-      console.error('[IPC Assistant] Query failure:', err);
+      console.error('[IPC Assistant] Query failure:', formatForLog(err));
       throw new Error(err.message || 'No se pudo obtener respuesta del asistente.');
     }
   });

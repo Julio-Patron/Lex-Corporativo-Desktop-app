@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Page, Segmented } from '../../components/ui';
 import { parseSettingsTab, type SettingsTab } from '../../lib/routes';

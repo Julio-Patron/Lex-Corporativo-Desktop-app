@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain } from './trusted-ipc';
 import { z } from 'zod';
 import { indexUserDocument, cleanupUserDocumentRequest, getHybridLegalContext } from '../lib/rag';
 import { chunkDocumentPages } from '../lib/chunking';
@@ -22,7 +22,6 @@ import {
 import {
   LEGAL_ECOSYSTEMS,
   getAnalysisPromptProfile,
-  isPromptProfileForEcosystem,
   type AnalysisPromptProfile,
   type LegalAnalysisEcosystem,
 } from '../../shared/legal-contracts';
@@ -301,18 +300,6 @@ export function parseAnalyzePayload(rawPayload: unknown): ParsedAnalyzePayload {
   };
 }
 
-const ALLOWED_MIME_TYPES = [
-  'application/pdf',
-  'application/xml',
-  'text/plain',
-  'text/markdown',
-  'text/xml',
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-  'image/gif',
-];
-
 export function isAllowedAnalysisFile(file: { name: string; mimeType?: string }): boolean {
   return isAllowedDocumentFile(file);
 }
@@ -569,7 +556,7 @@ export async function processAnalyzePayload(
         documentId: `doc:${i + 1}`,
         fileName: f.name,
         mimeType: f.mimeType || 'text/plain',
-        category: DocumentClassifier.classify(f.name, f.mimeType || ''),
+        category: DocumentClassifier.classify(f.name),
         extractedText: f.text,
       }));
       const supportEval = EvidenceMapper.assessSupportStrength(opDocs);

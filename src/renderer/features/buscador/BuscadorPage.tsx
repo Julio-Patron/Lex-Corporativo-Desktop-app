@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Check, ChevronDown, Clipboard, FileSignature } from 'lucide-react';
 import { BrandPlate } from '../../components/BrandWatermark';
 import { AreaTag, Button, Callout, RadioGroup, TextArea } from '../../components/ui';

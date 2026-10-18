@@ -1,4 +1,3 @@
-import React from 'react';
 import { FileSignature, ShieldCheck } from 'lucide-react';
 import type { PortfolioItem } from '../types';
 import { portfolioItemDate } from '../lib/portfolio';

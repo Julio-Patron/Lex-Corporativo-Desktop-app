@@ -1,4 +1,4 @@
-name: Release Desktop App
+name: Build Windows Candidate
 
 on:
   push:
@@ -7,13 +7,21 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build-and-release-windows:
-    name: Build & Publish Windows Installer (.exe)
+  gates:
+    uses: ./.github/workflows/ci.yml
+
+  build-windows-candidate:
+    name: Signed Windows candidate (no publication)
+    needs: gates
     runs-on: windows-latest
     timeout-minutes: 40
+    environment: windows-signing
+    env:
+      WINDOWS_CERTIFICATE_SHA1: ${{ vars.WINDOWS_CERTIFICATE_SHA1 }}
+      DISTRIBUTION_REPOSITORY: ${{ vars.DISTRIBUTION_REPOSITORY }}
 
     steps:
       - name: Checkout repository
@@ -30,38 +38,48 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Prebuild assets, model embeddings and rebuild native modules
+      - name: Validate committed corpus and pinned resources before preparation
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+        run: |
+          npm run audit:corpus-governance:strict
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run verify:embeddings
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run preflight:release:strict
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Prepare assets and rebuild native modules (no manifest regeneration)
         run: npm run prebuild:electron
 
-      - name: Verify release preflight checklist (vector store, manifest, embeddings)
-        run: npm run preflight:release
+      - name: Check that preparation preserved committed inputs
+        run: |
+          git diff --exit-code
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run audit:corpus-governance:strict
 
       - name: Build Electron frontend and main process
         run: npm run build
 
-      - name: Package installer and publish Release to GitHub
+      - name: Package signed installer without publication
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx electron-builder --config electron-builder.config.json --win --publish always
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
+        run: npx --no-install electron-builder --config electron-builder.config.json --win --publish never -c.forceCodeSigning=true
 
-      - name: Ensure release is published publicly (not draft)
-        if: startsWith(github.ref, 'refs/tags/v')
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify installer and application signatures against expected publisher
+        run: ./scripts/verify-windows-signatures.ps1
+
+      - name: Record tools, inputs, packaged resources and artifact hashes
         run: |
-          Start-Sleep -Seconds 5
-          $tagName = "${{ github.ref_name }}"
-          Write-Host "Checking release status for tag: $tagName"
-          try {
-            $releaseInfo = gh release view $tagName --json isDraft,tagName 2>$null | ConvertFrom-Json
-            if ($releaseInfo -and $releaseInfo.isDraft) {
-              Write-Host "Converting draft release to public for $tagName..."
-              gh release edit $tagName --draft=false
-            } else {
-              Write-Host "Release for $tagName is already published publicly."
-            }
-          } catch {
-            Write-Host "Release check handled: electron-builder managed the publication directly."
-          }
+          $env:BUILD_NPM_VERSION = npm --version
+          node scripts/release-artifacts.mjs create
+
+      - name: Preserve candidate for acceptance
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-candidate-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: release/candidate/
+          if-no-files-found: error
+          retention-days: 30
 

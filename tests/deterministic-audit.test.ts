@@ -2,17 +2,16 @@ import { describe, expect, it } from 'vitest';
 import {
   DocumentClassifier,
   EvidenceMapper,
-  RiskScoring,
   generateDeterministicLegalAudit,
 } from '../src/main/lib/core-legal/business-core';
 
 describe('business-core: Motor determinista y clasificador universal', () => {
   it('clasifica correctamente distintos formatos y tipos documentales', () => {
-    expect(DocumentClassifier.classify('Contrato_Prestacion_Servicios.docx', 'application/docx')).toBe('contract');
-    expect(DocumentClassifier.classify('Factura_CFDI_4.0_Emisor.xml', 'application/xml')).toBe('cfdi');
-    expect(DocumentClassifier.classify('Comprobante_Pago_SPEI.pdf', 'application/pdf')).toBe('payment_proof');
-    expect(DocumentClassifier.classify('Reporte_Entregable_Fase1.pdf', 'application/pdf')).toBe('deliverable');
-    expect(DocumentClassifier.classify('Bitacora_Evidencia.pdf', 'application/pdf')).toBe('evidence');
+    expect(DocumentClassifier.classify('Contrato_Prestacion_Servicios.docx')).toBe('contract');
+    expect(DocumentClassifier.classify('Factura_CFDI_4.0_Emisor.xml')).toBe('cfdi');
+    expect(DocumentClassifier.classify('Comprobante_Pago_SPEI.pdf')).toBe('payment_proof');
+    expect(DocumentClassifier.classify('Reporte_Entregable_Fase1.pdf')).toBe('deliverable');
+    expect(DocumentClassifier.classify('Bitacora_Evidencia.pdf')).toBe('evidence');
   });
 
   it('evalúa la suficiencia probatoria con EvidenceMapper', () => {

@@ -2,6 +2,7 @@ import { createHash } from 'crypto';
 import { PDFParse } from 'pdf-parse';
 import { Worker } from 'worker_threads';
 import { join } from 'path';
+import { formatForLog, redactApiKeysAndSecrets } from './sanitizer';
 
 export interface ExtractedPdfPage {
   pageNumber: number;
@@ -124,7 +125,7 @@ function getWorker(): Worker {
     });
 
     workerInstance.on('error', (error) => {
-      console.error('[PDF Worker] Falla inesperada:', error);
+      console.error('[PDF Worker] Falla inesperada:', formatForLog(error));
       workerInstance = null; // Reset to recreate next time
       pendingRequests.forEach(({ reject, timer }) => {
         if (timer) clearTimeout(timer);
@@ -162,7 +163,7 @@ export function extractTextContentAsync(
         const handlers = pendingRequests.get(id);
         if (handlers) {
           pendingRequests.delete(id);
-          console.warn(`[PDF Worker] Timeout de ${timeoutMs}ms al procesar '${fileName}'. Reiniciando worker.`);
+          console.warn(`[PDF Worker] Timeout de ${timeoutMs}ms al procesar '${redactApiKeysAndSecrets(fileName)}'. Reiniciando worker.`);
           if (workerInstance) {
             workerInstance.terminate().catch(() => undefined);
             workerInstance = null;
@@ -184,7 +185,7 @@ export function extractTextContentAsync(
     } catch (err) {
       if (timer) clearTimeout(timer);
       pendingRequests.delete(id);
-      console.error('[PDF Worker] Error al inicializar worker. Cayendo a parser síncrono.', err);
+      console.error('[PDF Worker] Error al inicializar worker. Cayendo a parser síncrono.', formatForLog(err));
       // Fallback to synchronous extraction if worker creation fails
       extractTextContent(buffer, fileName).then(resolve).catch(reject);
     }

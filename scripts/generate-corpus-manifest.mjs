@@ -248,11 +248,6 @@ function buildManifest() {
 const manifest = buildManifest();
 const serialized = `${JSON.stringify(manifest, null, 2)}\n`;
 
-if (shouldWrite) {
-  fs.mkdirSync(path.dirname(CORPUS_MANIFEST_PATH), { recursive: true });
-  fs.writeFileSync(CORPUS_MANIFEST_PATH, serialized, 'utf8');
-}
-
 let checkFailed = false;
 if (shouldCheck) {
   if (!fs.existsSync(CORPUS_MANIFEST_PATH)) {
@@ -262,6 +257,13 @@ if (shouldCheck) {
     console.error('El manifiesto canónico no coincide con el corpus o LanceDB actuales. Ejecuta npm run manifest:legal-corpus.');
     checkFailed = true;
   }
+}
+
+// Un check nunca puede ser satisfecho reescribiendo primero su referencia.
+// En modo estricto tampoco se persiste un manifiesto que incumple el gate.
+if (shouldWrite && !checkFailed && !(strictMode && !manifest.releaseGate.releaseEligible)) {
+  fs.mkdirSync(path.dirname(CORPUS_MANIFEST_PATH), { recursive: true });
+  fs.writeFileSync(CORPUS_MANIFEST_PATH, serialized, 'utf8');
 }
 
 console.log(JSON.stringify({

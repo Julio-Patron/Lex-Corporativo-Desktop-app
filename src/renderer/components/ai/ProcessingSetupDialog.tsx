@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import { useId } from 'react';
 import { X } from 'lucide-react';
 import { useUiStore } from '../../store/useUiStore';
 import { Modal } from '../ui';

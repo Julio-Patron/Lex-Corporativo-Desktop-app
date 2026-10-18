@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 import mammoth from 'mammoth';
-import { extractTextContentAsync, type ExtractedPdfDocument, type ExtractedPdfPage } from './pdf-parser';
+import { extractTextContentAsync, type ExtractedPdfDocument } from './pdf-parser';
 
 export type SupportedDocumentFormat = 'pdf' | 'docx' | 'xml' | 'cfdi' | 'text' | 'markdown';
 

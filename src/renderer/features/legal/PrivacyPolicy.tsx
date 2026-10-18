@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
 
@@ -96,7 +95,7 @@ export default function PrivacyPolicy() {
           <section>
             <h2 className="text-lg font-serif font-bold text-legal-950 mb-3">VII. Tratamiento de Documentos</h2>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Los archivos se extraen y organizan primero en el equipo. Las operaciones generativas envían al proveedor configurado una selección limitada del texto extraído y los fundamentos recuperados; el archivo binario original y la bóveda completa no se transmiten. Los respaldos exportados quedan sin cifrar en el destino elegido por el usuario.
+              Los archivos se extraen y organizan primero en el equipo. Las operaciones generativas envían al proveedor configurado una selección limitada del texto extraído y los fundamentos recuperados; el archivo binario original y la bóveda completa no se transmiten. En este equipo, el nombre del asunto y el nombre de archivo se guardan cifrados junto con el contenido. El respaldo portátil se cifra con una contraseña elegida por el usuario e incluye asuntos, documentos, análisis, borradores y su estado. No incluye la clave de IA ni la redacción pendiente. Sin esa contraseña el archivo no muestra el portafolio.
             </p>
           </section>
 

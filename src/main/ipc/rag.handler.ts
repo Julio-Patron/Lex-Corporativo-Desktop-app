@@ -1,4 +1,5 @@
-import { ipcMain } from 'electron';
+import { ipcMain } from './trusted-ipc';
+import { formatForLog } from '../lib/sanitizer';
 import * as crypto from 'crypto';
 import { z } from 'zod';
 import { formatRAGContext, searchLegalArticles } from '../lib/rag';
@@ -66,10 +67,7 @@ export async function processRagSearch(rawPayload: unknown): Promise<{
       citations: publicCitations,
     };
   } catch (err: any) {
-    console.error('[IPC RAG] Search handler failed:', err);
-    const rawModule = (typeof rawPayload === 'object' && rawPayload && 'module' in rawPayload)
-      ? String((rawPayload as any).module)
-      : 'unknown';
+    console.error('[IPC RAG] Search handler failed:', formatForLog(err));
     const rawQuery = (typeof rawPayload === 'object' && rawPayload && 'query' in rawPayload)
       ? String((rawPayload as any).query).slice(0, 500)
       : '';

@@ -14,16 +14,6 @@ export const OperationDocumentSchema = z.object({
 
 export type OperationDocument = z.infer<typeof OperationDocumentSchema>;
 
-export const OperationPartySchema = z.object({
-  partyId: z.string().min(1),
-  name: z.string().min(1),
-  role: z.string().min(1), // e.g. "Proveedor", "Cliente", "Fiador"
-  taxId: z.string().optional(), // RFC o Tax Identification Number
-  legalRepresentative: z.string().optional(),
-});
-
-export type OperationParty = z.infer<typeof OperationPartySchema>;
-
 export const EvidenceItemSchema = z.object({
   evidenceId: z.string().min(1),
   title: z.string().min(1),
@@ -34,16 +24,6 @@ export const EvidenceItemSchema = z.object({
 });
 
 export type EvidenceItem = z.infer<typeof EvidenceItemSchema>;
-
-export const ExtractedFactSchema = z.object({
-  factId: z.string().min(1),
-  timestamp: z.string(),
-  description: z.string(),
-  category: z.string(),
-  evidenceId: z.string().optional(),
-});
-
-export type ExtractedFact = z.infer<typeof ExtractedFactSchema>;
 
 export const RiskFindingSchema = z.object({
   findingId: z.string().min(1),
@@ -56,23 +36,13 @@ export const RiskFindingSchema = z.object({
 
 export type RiskFinding = z.infer<typeof RiskFindingSchema>;
 
-export const RecommendationSchema = z.object({
-  recommendationId: z.string().min(1),
-  priority: z.enum(['urgent', 'high', 'medium', 'low']),
-  action: z.string(),
-  expectedOutcome: z.string(),
-  timeline: z.string().optional(),
-});
-
-export type Recommendation = z.infer<typeof RecommendationSchema>;
-
 // ── Shared Domain Operations ────────────────────────────────
 
 /**
- * 1. DocumentClassifier: Categorizes uploaded files based on mime/name/content heuristics
+ * Clasifica documentos por su nombre; la validación del formato vive en document-parser.
  */
 export class DocumentClassifier {
-  static classify(fileName: string, mimeType: string): OperationDocument['category'] {
+  static classify(fileName: string): OperationDocument['category'] {
     const lowerName = fileName.toLowerCase();
     
     if (lowerName.includes('contrato') || lowerName.includes('convenio') || lowerName.includes('contract') || lowerName.includes('acuerdo')) {
@@ -457,7 +427,7 @@ export function generateDeterministicLegalAudit(input: DeterministicAnalysisInpu
       documentId: `doc:${i + 1}`,
       fileName: f.name,
       mimeType: f.mimeType || 'text/plain',
-      category: DocumentClassifier.classify(f.name, f.mimeType || ''),
+      category: DocumentClassifier.classify(f.name),
       extractedText: f.text,
     })))
     : null;

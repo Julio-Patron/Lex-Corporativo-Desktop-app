@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Download, FileText, FolderOpen, Search, Trash2 } from 'lucide-react';
 import type { CaseMetadata } from '../../../preload/types';

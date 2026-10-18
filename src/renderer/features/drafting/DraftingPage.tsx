@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Button, ConfirmDialog, Page } from '../../components/ui';
 import { useConfirmDialog } from '../../hooks/useConfirmDialog';

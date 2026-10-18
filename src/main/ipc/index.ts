@@ -1,8 +1,9 @@
-import { ipcMain, app, dialog, BrowserWindow } from 'electron';
+import { app, dialog } from 'electron';
+import { ipcMain } from './trusted-ipc';
 import { z } from 'zod';
 import { copyFileSync } from 'fs';
 import { existsSync } from 'fs';
-import { join, resolve, basename } from 'path';
+import { join } from 'path';
 import { registerAnalyzeHandlers } from './analyze.handler';
 import { registerDraftHandlers } from './draft.handler';
 import { registerRagHandlers } from './rag.handler';
@@ -19,8 +20,6 @@ import { getTraceLedgerStatus, logLegalExecution } from '../lib/traceability';
 import { sanitizeForLogs } from '../lib/sanitizer';
 import * as crypto from 'crypto';
 
-const ALLOWED_EXPORT_EXTS = ['json', 'pdf', 'docx', 'jsonl'];
-
 const AppPreferencesSchema = z.object({
   strictPrivacy: z.boolean().optional(),
   automaticUpdatesEnabled: z.boolean().optional(),
@@ -30,57 +29,9 @@ const AppPreferencesSchema = z.object({
   ).optional(),
 }).strict();
 
-function sanitizeOpenDialogOptions(options: Electron.OpenDialogOptions): Electron.OpenDialogOptions {
-  const safeOptions = { ...options };
-  if (safeOptions.defaultPath) {
-    const fileName = basename(safeOptions.defaultPath);
-    safeOptions.defaultPath = resolve(app.getPath('downloads'), fileName);
-  } else {
-    safeOptions.defaultPath = app.getPath('downloads');
-  }
-  if (safeOptions.filters) {
-    safeOptions.filters = safeOptions.filters.map(filter => ({
-      ...filter,
-      extensions: filter.extensions?.filter(ext => ALLOWED_EXPORT_EXTS.includes(ext)) || []
-    })).filter(filter => filter.extensions.length > 0);
-  }
-  return safeOptions;
-}
-
-function sanitizeSaveDialogOptions(options: Electron.SaveDialogOptions): Electron.SaveDialogOptions {
-  const safeOptions = { ...options };
-  if (safeOptions.defaultPath) {
-    const fileName = basename(safeOptions.defaultPath);
-    safeOptions.defaultPath = resolve(app.getPath('downloads'), fileName);
-  } else {
-    safeOptions.defaultPath = app.getPath('downloads');
-  }
-  if (safeOptions.filters) {
-    safeOptions.filters = safeOptions.filters.map(filter => ({
-      ...filter,
-      extensions: filter.extensions?.filter(ext => ALLOWED_EXPORT_EXTS.includes(ext)) || []
-    })).filter(filter => filter.extensions.length > 0);
-  }
-  return safeOptions;
-}
-
 export function registerIpcHandlers(): void {
-  // ── Shell Operations ───────────────────────
-  ipcMain.handle('dialog:show-open-dialog', async (_event, options) => {
-    const safeOptions = sanitizeOpenDialogOptions(options);
-    const result = await dialog.showOpenDialog(safeOptions);
-    return result.canceled ? [] : result.filePaths;
-  });
-
-  ipcMain.handle('dialog:show-save-dialog', async (_event, options) => {
-    const safeOptions = sanitizeSaveDialogOptions(options);
-    const result = await dialog.showSaveDialog(safeOptions);
-    return result.canceled ? null : result.filePath;
-  });
-
   // ── App Metadata ───────────────────────────
   ipcMain.handle('app:version', () => app.getVersion());
-  ipcMain.handle('app:platform', () => process.platform);
   ipcMain.handle('runtime:get-health', async () => {
     let vaultReady = false;
     let vaultDetail = 'No se pudo abrir la bóveda local.';

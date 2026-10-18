@@ -89,25 +89,30 @@ export interface LexDesktopAPI {
     createCase: (payload: { caseId: string; name: string; module: CaseModule; description?: string }) => Promise<CaseMetadata>;
     listCases: () => Promise<CaseMetadata[]>;
     getCase: (caseId: string) => Promise<any>;
-    renameCase: (payload: { caseId: string; name: string }) => Promise<CaseMetadata>;
     deleteCase: (caseId: string) => Promise<any>;
     saveAnalysis: (payload: { caseId: string; analysisId: string; analysisData: Record<string, any>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
     saveDraft: (payload: { caseId: string; draftId: string; draftData: Record<string, any>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
     deleteAnalysis: (payload: { caseId: string; analysisId: string; expectedModule?: CaseModule }) => Promise<{ success: true; deleted: boolean }>;
     deleteDraft: (payload: { caseId: string; draftId: string; expectedModule?: CaseModule }) => Promise<{ success: true; deleted: boolean }>;
-    saveState: (payload: { caseId: string; stateData: Record<string, unknown>; expectedModule?: CaseModule }) => Promise<{ success: true }>;
-    purgeExpired: () => Promise<{ deleted: number }>;
-    exportAll: () => Promise<{
+    exportAll: (payload: { password: string }) => Promise<{
       success: boolean;
       canceled?: boolean;
       filePath?: string;
       caseCount: number;
       packageHash?: string;
     }>;
+    importAll: (payload: { password: string; onConflict?: 'abort' | 'replace' }) => Promise<{
+      success: boolean;
+      canceled?: boolean;
+      conflict?: boolean;
+      conflictCount?: number;
+      restored: number;
+      skipped: number;
+      replaced: number;
+    }>;
     deleteAll: (payload: { confirmation: 'DELETE_ALL_LOCAL_DATA' }) => Promise<{ deleted: number }>;
   };
   documents: {
-    selectFile: () => Promise<string[] | null>;
     exportPdf: (payload: { base64: string; defaultPath: string }) => Promise<{ success: boolean; canceled?: boolean; filePath?: string }>;
     exportDocx: (payload: { base64: string; defaultPath: string }) => Promise<{ success: boolean; canceled?: boolean; filePath?: string }>;
   };
@@ -217,7 +222,6 @@ export interface LexDesktopAPI {
   };
   settings: {
     getAppVersion: () => Promise<string>;
-    getPlatform: () => Promise<'win32' | 'darwin' | 'linux'>;
     savePreferences: (payload: {
       strictPrivacy?: boolean;
       automaticUpdatesEnabled?: boolean;

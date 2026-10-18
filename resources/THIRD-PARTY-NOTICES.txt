@@ -1,0 +1,41 @@
+Avisos de binarios que Lex Corporativo redistribuye
+=====================================================
+
+Este archivo acompaña al instalador. No sustituye las licencias que cada
+paquete trae en su propio directorio.
+
+sharp y libvips
+  @xenova/transformers importa sharp al cargar el modelo de embeddings.
+  Hay dos copias en el paquete, las dos fuera del asar, en archivos DLL
+  distintos del ejecutable, y por eso pueden sustituirse.
+
+  @img/sharp-win32-x64 (sharp 0.33.5)
+    Incluye libvips 8.15.3 (libvips-42.dll y libvips-cpp.dll).
+    El paquete declara Apache-2.0 AND LGPL-3.0-or-later.
+    Su archivo LICENSE reproduce Apache-2.0.
+
+  sharp 0.32.6, dentro de @xenova/transformers
+    Incluye libvips 8.14.5 en vendor/8.14.5.
+    También es LGPL-3.0-or-later. Ese directorio trae su propio aviso.
+
+  Código fuente de libvips: https://github.com/libvips/libvips
+
+onnxruntime-node
+  MIT. Lo usa el runtime de embeddings.
+
+@lancedb/lancedb-win32-x64-msvc
+  Apache-2.0. Índice vectorial local.
+
+better-sqlite3
+  MIT. Bóveda local.
+
+Electron
+  MIT. Los avisos de Chromium viajan con el runtime de Electron.
+
+apache-arrow
+  Apache-2.0. Depende de json-bignum, cuyo package.json declara MIT en el
+  campo antiguo "licenses" y no en el campo SPDX "license".
+
+digest-fetch (opcional)
+  Depende de base-64. Ese paquete declara MIT en "licenses" y trae
+  LICENSE-MIT.txt. No usa el campo SPDX "license".

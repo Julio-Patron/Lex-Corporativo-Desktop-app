@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "baseSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+  "date": "2026-10-17",
+  "scope": "Auditoría inicial de seguridad, datos y rendimiento sobre el diseño aceptado y controles locales nuevos; no acredita aceptación de publicación.",
+  "status": "open",
+  "findings": [
+    {
+      "id": "SEC-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Validación de remitente IPC incompleta",
+      "evidence": ["src/main/ipc/index.ts", "src/main/ipc/vault.handler.ts", "src/main/ipc/byok.handler.ts", "src/main/index.ts", "src/main/ipc/recovery.handler.ts"],
+      "observed": "Los handlers de recuperación comprueban ventana, marco principal y documento. La mayoría de los otros canales ignora el evento y no aplica esa autorización; Zod valida datos, no el origen.",
+      "closure": "Aplicar política de remitente a todos los canales sensibles y comprobar rechazo desde otra ventana, subframe y documento navegado, conservando los flujos legítimos.",
+      "source": "https://www.electronjs.org/docs/latest/tutorial/security#17-validate-the-sender-of-all-ipc-messages",
+      "owner": "Codex"
+    },
+    {
+      "id": "SEC-02",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Directivas CSP sin efecto y reporte desconectado",
+      "evidence": ["src/renderer/index.html", "src/main/protocol.ts", "src/main/ipc/index.ts", "reports/audits/performance-a718988.json"],
+      "observed": "frame-ancestors y report-uri están en meta. El protocolo lexcorp registra deep links del SO, no un endpoint HTTP para CSP. Existe csp:report, pero esa declaración no lo conecta. Las otras directivas de meta no quedan invalidadas por este hallazgo.",
+      "closure": "Definir CSP efectiva y reporte seguro, probar bloqueo de recursos e iframes en la aplicación empaquetada y eliminar advertencias de directivas ignoradas.",
+      "source": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors",
+      "owner": "Codex"
+    },
+    {
+      "id": "SEC-03",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Sanitización incompleta de secretos en logs",
+      "evidence": ["src/main/lib/sanitizer.ts", "tests/data-audit-electron/main.ts", "reports/audits/data-a718988.json"],
+      "observed": "Una prueba sintética confirmó que sanitizeForLogs conserva token corto, authorization y secretos dentro de message. Varias rutas de error registran objetos directamente. No se inspeccionaron ni imprimieron secretos reales.",
+      "closure": "Redactar por campo sensible sin depender de longitud, cubrir strings y errores anidados, y revisar todos los emisores de logs con pruebas de no filtración.",
+      "owner": "Codex"
+    },
+    {
+      "id": "DATA-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Respaldo descifrado sin restauración",
+      "evidence": ["src/main/lib/case-vault.ts", "src/main/ipc/vault.handler.ts", "src/preload/index.ts", "reports/audits/data-a718988.json"],
+      "observed": "exportCase devuelve metadatos, documentos, análisis, borradores y estado descifrados con hash de contenido. No hay operación de restauración. No incluye configuración BYOK ni recuperación pendiente; los originales que nunca se guardaron no aparecen por exportar.",
+      "closure": "Acordar protección y alcance del respaldo portátil; implementar restauración transaccional con conflictos, repetición, corrupción e interrupción; comparar contenido en otro perfil Windows.",
+      "owner": "Codex y responsable del producto"
+    },
+    {
+      "id": "DATA-02",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Contenido temporal legible tras borrado lógico en LanceDB",
+      "evidence": ["src/main/lib/rag.ts", "tests/data-audit-electron/main.ts", "reports/audits/data-a718988.json"],
+      "observed": "Después de cleanupUserDocumentRequest la tabla sintética tiene cero filas, pero los archivos de user_documents.lance conservan el marcador de contenido en texto legible. El TTL de 24 horas y table.delete no acreditan eliminación física ni cifrado.",
+      "closure": "Evitar persistencia legible de fragmentos privados o protegerla de forma verificable; cubrir fallo, cierre forzado, historial/versiones y política de conservación. No presentar borrado lógico como borrado seguro.",
+      "owner": "Codex"
+    },
+    {
+      "id": "DATA-03",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Metadatos de asuntos sin cifrar",
+      "evidence": ["src/main/lib/case-vault.ts", "reports/audits/data-a718988.json"],
+      "observed": "La prueba confirma payload cifrado y nombre de asunto legible en SQLite/WAL. El esquema también conserva nombres de archivo como columnas. El cifrado actual protege payloads, no el archivo SQLite completo.",
+      "closure": "Proteger metadatos sensibles con migración compatible y pruebas de recuperación, o definir y aceptar explícitamente su alcance de protección; reflejarlo con precisión en privacidad.",
+      "owner": "Codex y responsable del producto"
+    },
+    {
+      "id": "DEP-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "title": "Alertas de dependencias y revisión de redistribución pendientes",
+      "evidence": ["reports/audits/npm-audit-2026-10-17.json", "package-lock.json", "reports/audits/cleanup-inventory-a718988.json"],
+      "observed": "El triaje de docs/auditorias/dep-01-triaje.md partió de 18 paquetes altos y 18 moderados. Sin npm audit fix --force ni bajadas de versión mayor, un audit posterior dejó 4 altos y 12 moderados. Esos 16 solo se 'arreglan' bajando electron-builder, LanceDB, transformers, mammoth o typography. Electron quedó en 42.11.15. HashRouter no usa el modo RSC. sharp/libvips se carga con los embeddings de texto y no decodifica imágenes del usuario. base-64 y json-bignum declaran MIT en el campo antiguo licenses. libvips es LGPL-3.0-or-later y su aviso va en resources/THIRD-PARTY-NOTICES.txt.",
+      "closure": "Actualizar de forma controlada los componentes afectados, probar ambos ABI y el paquete final, documentar avisos no aplicables y verificar avisos/licencias de los binarios redistribuidos. No usar npm audit fix --force como sustituto del análisis. El triaje, los dos ABI y el directorio release/win-unpacked ya están. Sigue abierto: no hay instalador firmado y faltan aceptar los 16 avisos que solo se quitan bajando de versión mayor.",
+      "source": "https://github.com/electron/electron/security/advisories/GHSA-gr2m-v5gq-v685",
+      "owner": "Codex"
+    },
+    {
+      "id": "PERF-01",
+      "priority": "P2",
+      "releaseBlocking": true,
+      "title": "Línea base de rendimiento sin aceptación en Windows instalado",
+      "evidence": ["reports/audits/performance-a718988.json", "tests/performance-electron/main.ts"],
+      "observed": "Cinco procesos nuevos y 25 muestras por operación. Mediana hasta Inicio: 1931 ms, con una muestra de 30312 ms; búsqueda caliente: 122 ms, revisión básica sintética: 726 ms, PDF: 163 ms, DOCX: 32 ms. La causa del arranque atípico no se ha establecido. El main es de ensayo con handlers reales, ventana oculta y caché del SO sin purgar; no es una medición del instalador ni de proveedores reales.",
+      "closure": "Investigar el arranque atípico, acordar umbrales y repetir en Windows instalado: arranque frío/caliente, renderizado de leyes extensas, memoria sostenida, documentos grandes y proveedores.",
+      "owner": "Codex y responsable del producto"
+    }
+  ],
+  "confirmedControls": [
+    "Ventana principal con contextIsolation, sandbox, nodeIntegration desactivado y webSecurity activo.",
+    "Navegación limitada al documento de aplicación y ventanas nuevas denegadas.",
+    "Payloads de bóveda y recuperación cifrados mediante safeStorage; prueba sintética de contenido no legible en bóveda.",
+    "Recuperación Electron entre procesos y guardado en curso sin duplicados.",
+    "Corpus íntegro, conocimiento jurídico estricto, recuperación normativa y fundamentación aprobados localmente.",
+    "Construcción sin publicación y promoción vinculada al manifiesto aceptado; firma y ejecución alojada pendientes."
+  ],
+  "unvalidated": [
+    "CI alojado en GitHub, protecciones de main y revisores de entornos.",
+    "Firma Authenticode real, instalador y ciclo de actualización/desinstalación.",
+    "Pruebas reales de Gemini, OpenAI y Anthropic.",
+    "Restauración de respaldo en otro usuario o equipo Windows.",
+    "Prueba asistida de accesibilidad y aceptación de rendimiento.",
+    "Análisis completo de imports dinámicos, código muerto y aplicabilidad de todos los avisos de dependencias."
+  ]
+}

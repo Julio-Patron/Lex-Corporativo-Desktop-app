@@ -19,12 +19,18 @@
   ],
   "extraResources": [
     {
-      "from": "legal-runtime/models",
-      "to": "legal-runtime/models",
+      "from": "legal-runtime/models/Xenova/all-MiniLM-L6-v2",
+      "to": "legal-runtime/models/Xenova/all-MiniLM-L6-v2",
       "filter": [
-        "**/*.onnx",
-        "**/*.json"
+        "config.json",
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "onnx/model_quantized.onnx"
       ]
+    },
+    {
+      "from": "legal-runtime/embeddings.lock.json",
+      "to": "legal-runtime/embeddings.lock.json"
     },
     {
       "from": "legal-runtime/lance_data",
@@ -40,6 +46,10 @@
       "filter": [
         "**/*.md"
       ]
+    },
+    {
+      "from": "resources/THIRD-PARTY-NOTICES.txt",
+      "to": "THIRD-PARTY-NOTICES.txt"
     }
   ],
   "win": {
@@ -81,7 +91,7 @@
   },
   "publish": {
     "provider": "github",
-    "owner": "elbuilder77",
+    "owner": "Julio-Patron",
     "repo": "Lex-Corporativo-Desktop-app",
     "releaseType": "release"
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Check, Clipboard, Download, FileText, Save } from 'lucide-react';
 import logoMarkUrl from '../../assets/logo-mark.png';

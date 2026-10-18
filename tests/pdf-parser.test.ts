@@ -15,7 +15,7 @@ vi.mock('pdf-parse', () => ({
 }));
 
 import { PDFParse } from 'pdf-parse';
-import { extractTextContent, extractTextContentAsync, sha256Content, PDF_WORKER_TIMEOUT_MS } from '../src/main/lib/pdf-parser';
+import { extractTextContent, sha256Content, PDF_WORKER_TIMEOUT_MS } from '../src/main/lib/pdf-parser';
 
 describe('pdf-parser local', () => {
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { CheckCircle2, RefreshCw, TriangleAlert } from 'lucide-react';
 import type { CaseRetentionDays } from '../../../preload/types';
 import { CASE_RETENTION_LABELS, CASE_RETENTION_OPTIONS } from '../../../shared/case-retention';
@@ -19,8 +19,14 @@ export function DataPanel() {
   const [dialogState, confirm] = useConfirmDialog();
   const confirmId = useId();
   const [ledger, setLedger] = useState<{ path: string; exists: boolean; size: number } | null>(null);
-  const [busy, setBusy] = useState<'retention' | 'privacy' | 'backup' | 'ledger' | 'delete' | null>(null);
+  const [busy, setBusy] = useState<'retention' | 'privacy' | 'backup' | 'restore' | 'ledger' | 'delete' | null>(null);
   const [deleteText, setDeleteText] = useState('');
+  const [backupPassword, setBackupPassword] = useState('');
+  const [backupConfirm, setBackupConfirm] = useState('');
+  const [restorePassword, setRestorePassword] = useState('');
+  const backupPasswordId = useId();
+  const backupConfirmId = useId();
+  const restorePasswordId = useId();
 
   useEffect(() => {
     window.lexDesktop.traceability.getStatus().then(setLedger).catch(() => setLedger(null));
@@ -52,12 +58,55 @@ export function DataPanel() {
   };
 
   const backup = async () => {
+    if (backupPassword.length < 8) {
+      notify('La contraseña del respaldo debe tener al menos 8 caracteres.', 'error');
+      return;
+    }
+    if (backupPassword !== backupConfirm) {
+      notify('La confirmación no coincide con la contraseña.', 'error');
+      return;
+    }
     setBusy('backup');
     try {
-      const result = await window.lexDesktop.cases.exportAll();
-      if (result.success) notify(`Respaldo de ${result.caseCount} elementos guardado en ${result.filePath}.`, 'success');
+      const result = await window.lexDesktop.cases.exportAll({ password: backupPassword });
+      if (result.success) {
+        notify(`Respaldo cifrado de ${result.caseCount} elementos guardado en ${result.filePath}.`, 'success');
+        setBackupPassword('');
+        setBackupConfirm('');
+      }
     } catch (error: any) {
       notify(error?.message || 'No se pudo crear el respaldo.', 'error');
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const restore = async (onConflict: 'abort' | 'replace' = 'abort') => {
+    if (restorePassword.length < 8) {
+      notify('Escribe la contraseña con la que se creó el respaldo.', 'error');
+      return;
+    }
+    setBusy('restore');
+    try {
+      const result = await window.lexDesktop.cases.importAll({ password: restorePassword, onConflict });
+      if (result.canceled) return;
+      if (result.conflict) {
+        setBusy(null);
+        const accepted = await confirm({
+          title: 'El portafolio ya tiene esos asuntos',
+          message: `${result.conflictCount} asuntos del respaldo ya existen con otro contenido. Reemplazarlos sustituye sus documentos, análisis, borradores y estado. Si cancelas, el portafolio queda igual.`,
+          confirmLabel: 'Reemplazar',
+          variant: 'danger',
+        });
+        if (accepted) await restore('replace');
+        return;
+      }
+      if (result.success) {
+        notify(`Restauración terminada: ${result.restored} asuntos nuevos, ${result.skipped} sin cambios y ${result.replaced} reemplazados.`, 'success');
+        setRestorePassword('');
+      }
+    } catch (error: any) {
+      notify(error?.message || 'No se pudo restaurar el respaldo.', 'error');
     } finally {
       setBusy(null);
     }
@@ -168,8 +217,23 @@ export function DataPanel() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
-          <SectionTitle title="Respaldo" description="Guarda una copia de todo el portafolio en un archivo JSON." />
-          <Button variant="secondary" onClick={() => void backup()} isLoading={busy === 'backup'}>Crear respaldo</Button>
+          <SectionTitle
+            title="Respaldo"
+            description="El archivo se cifra con la contraseña que elijas. En otro equipo se abre con esa contraseña, no con el cifrado de Windows de este perfil. Incluye asuntos, documentos, análisis, borradores y su estado. No incluye la clave de IA ni la redacción pendiente."
+          />
+          <div className="space-y-3">
+            <Field label="Contraseña del respaldo" htmlFor={backupPasswordId}>
+              <TextInput id={backupPasswordId} type="password" autoComplete="new-password" value={backupPassword} onChange={(event) => setBackupPassword(event.target.value)} />
+            </Field>
+            <Field label="Confirmar contraseña" htmlFor={backupConfirmId}>
+              <TextInput id={backupConfirmId} type="password" autoComplete="new-password" value={backupConfirm} onChange={(event) => setBackupConfirm(event.target.value)} />
+            </Field>
+            <Button variant="secondary" onClick={() => void backup()} isLoading={busy === 'backup'} disabled={busy === 'restore'}>Crear respaldo</Button>
+            <Field label="Contraseña para restaurar" htmlFor={restorePasswordId} hint="Si el asunto ya existe con el mismo contenido, no se duplica. Si el contenido es distinto, se pide confirmación antes de reemplazarlo.">
+              <TextInput id={restorePasswordId} type="password" autoComplete="current-password" value={restorePassword} onChange={(event) => setRestorePassword(event.target.value)} />
+            </Field>
+            <Button variant="secondary" onClick={() => void restore()} isLoading={busy === 'restore'} disabled={busy === 'backup'}>Restaurar respaldo</Button>
+          </div>
         </Card>
         <Card>
           <SectionTitle

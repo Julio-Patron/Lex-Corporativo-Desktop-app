@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import { formatForLog, redactApiKeysAndSecrets } from './lib/sanitizer';
 
 const PROTOCOL = 'lexcorp';
 const ALLOWED_HOSTS = ['auth'];
@@ -25,15 +26,15 @@ export function handleDeepLink(rawUrl: string, mainWindow: BrowserWindow): void 
   try {
     const urlObj = new URL(rawUrl);
     if (urlObj.protocol !== 'lexcorp:') {
-      console.warn('[Protocol] Rejected deep link: invalid protocol', rawUrl);
+      console.warn('[Protocol] Rejected deep link: invalid protocol', redactApiKeysAndSecrets(rawUrl));
       return;
     }
     if (!ALLOWED_HOSTS.includes(urlObj.host)) {
-      console.warn('[Protocol] Rejected deep link: host not allowed', rawUrl);
+      console.warn('[Protocol] Rejected deep link: host not allowed', redactApiKeysAndSecrets(rawUrl));
       return;
     }
     if (!urlObj.pathname.includes('auth/callback') && urlObj.host !== 'auth') {
-      console.warn('[Protocol] Rejected deep link: path not allowed', rawUrl);
+      console.warn('[Protocol] Rejected deep link: path not allowed', redactApiKeysAndSecrets(rawUrl));
       return;
     }
     mainWindow.webContents.send('auth:callback', {
@@ -42,6 +43,6 @@ export function handleDeepLink(rawUrl: string, mainWindow: BrowserWindow): void 
     });
     mainWindow.focus();
   } catch (e) {
-    console.error('Invalid deep link URL:', e);
+    console.error('Invalid deep link URL:', formatForLog(e));
   }
 }

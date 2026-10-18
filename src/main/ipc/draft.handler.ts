@@ -1,4 +1,5 @@
-import { ipcMain } from 'electron';
+import { ipcMain } from './trusted-ipc';
+import { formatForLog } from '../lib/sanitizer';
 import { z } from 'zod';
 import { getHybridLegalContext } from '../lib/rag';
 import { getDraftInstruction } from '../lib/prompts';
@@ -412,7 +413,7 @@ export function registerDraftHandlers(): void {
       }
 
     } catch (err: any) {
-      console.error('[IPC Draft] Drafting engine failure:', err);
+      console.error('[IPC Draft] Drafting engine failure:', formatForLog(err));
       throw new Error(formatDraftError(err));
     }
   });

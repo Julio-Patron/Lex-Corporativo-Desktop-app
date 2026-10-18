@@ -1,7 +1,8 @@
-import { app, dialog, ipcMain } from 'electron';
-import { writeFileSync } from 'fs';
+import { app, dialog } from 'electron';
+import { ipcMain } from './trusted-ipc';
+import { formatForLog } from '../lib/sanitizer';
+import { readFileSync, writeFileSync } from 'fs';
 import { basename, resolve } from 'path';
-import { createHash } from 'crypto';
 import { z } from 'zod';
 import {
   createCase,
@@ -11,12 +12,12 @@ import {
   deleteDraft,
   exportCase,
   listCases,
-  purgeExpiredCases,
-  renameCase,
+  restoreVaultBackup,
   saveAnalysis,
-  saveCaseState,
   saveDraft,
+  VaultRestoreConflict,
 } from '../lib/case-vault';
+import { hashPortableBackupCore, openPortableBackup, sealPortableBackup } from '../lib/portable-backup';
 import { getByokSettings } from '../lib/byok-settings';
 import { computeCaseRetentionUntil } from '../../shared/case-retention';
 import { clearDraftRecovery, clearRecoveryForDocument } from '../lib/draft-recovery';
@@ -28,12 +29,6 @@ export const CreateCaseSchema = z.object({
   caseId: z.string().min(1).regex(caseIdRegex, "Invalid case ID format"),
   name: z.string().min(1),
   module: z.enum(['engineering', 'fiscal', 'mercantil']),
-});
-
-export const RenameCaseSchema = z.object({
-  caseId: z.string().min(1).regex(caseIdRegex, "Invalid case ID format"),
-  name: z.string().trim().min(1).max(160),
-  expectedModule: z.enum(['engineering', 'fiscal', 'mercantil']).optional(),
 });
 
 export const SaveAnalysisSchema = z.object({
@@ -62,12 +57,6 @@ export const DeleteDraftSchema = z.object({
   expectedModule: z.enum(['engineering', 'fiscal', 'mercantil']).optional(),
 });
 
-export const SaveStateSchema = z.object({
-  caseId: z.string().min(1).regex(caseIdRegex, "Invalid case ID format"),
-  stateData: z.record(z.string(), z.unknown()),
-  expectedModule: z.enum(['engineering', 'fiscal', 'mercantil']).optional(),
-});
-
 export const CaseOperationSchema = z.union([
   z.string().min(1).regex(caseIdRegex, "Invalid case ID format"),
   z.object({
@@ -91,6 +80,15 @@ const DeleteAllSchema = z.object({
   confirmation: z.literal('DELETE_ALL_LOCAL_DATA'),
 }).strict();
 
+export const ExportBackupSchema = z.object({
+  password: z.string().min(8).max(1024),
+}).strict();
+
+export const ImportBackupSchema = z.object({
+  password: z.string().min(8).max(1024),
+  onConflict: z.enum(['abort', 'replace']).optional(),
+}).strict();
+
 function parseCaseOperation(raw: unknown): { caseId: string; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' } {
   const parsed = CaseOperationSchema.parse(raw);
   return typeof parsed === 'string' ? { caseId: parsed } : parsed;
@@ -106,7 +104,7 @@ export function registerVaultHandlers(): void {
       const retentionUntil = computeCaseRetentionUntil(new Date(), getByokSettings().caseRetentionDays) ?? undefined;
       return await createCase(payload.caseId, payload.name, payload.module, retentionUntil);
     } catch (err: any) {
-      console.error('[IPC Vault] create-case validation or storage error:', err);
+      console.error('[IPC Vault] create-case validation or storage error:', formatForLog(err));
       throw new Error(`Error en el portafolio al crear actividad: ${err.message}`);
     }
   });
@@ -116,19 +114,8 @@ export function registerVaultHandlers(): void {
     try {
       return await listCases();
     } catch (err: any) {
-      console.error('[IPC Vault] list-cases storage error:', err);
+      console.error('[IPC Vault] list-cases storage error:', formatForLog(err));
       throw new Error(`Error en el portafolio al listar actividades: ${err.message}`);
-    }
-  });
-
-  // ── Rename Case ─────────────────────────
-  ipcMain.handle('vault:rename-case', async (_event, rawPayload: unknown) => {
-    try {
-      const payload = RenameCaseSchema.parse(rawPayload);
-      return await renameCase(payload.caseId, payload.name, payload.expectedModule);
-    } catch (err: any) {
-      console.error('[IPC Vault] rename-case validation or storage error:', err);
-      throw new Error(`Error en el portafolio al renombrar actividad: ${err.message}`);
     }
   });
 
@@ -179,17 +166,6 @@ export function registerVaultHandlers(): void {
     }
   });
 
-  ipcMain.handle('vault:save-state', async (_event, rawPayload: unknown) => {
-    try {
-      const payload = SaveStateSchema.parse(rawPayload);
-      await saveCaseState(payload.caseId, payload.stateData, payload.expectedModule);
-      return { success: true };
-    } catch (err: any) {
-      console.error('[IPC Vault] save-state validation or storage error.');
-      throw new Error(`Error en el portafolio al guardar estado: ${err.message}`);
-    }
-  });
-
   // ── Delete Case ──────────────────────────
   ipcMain.handle('vault:delete-case', async (_event, rawPayload: unknown) => {
     try {
@@ -203,16 +179,17 @@ export function registerVaultHandlers(): void {
     }
   });
 
-  ipcMain.handle('vault:purge-expired', async () => ({ deleted: await purgeExpiredCases() }));
   ipcMain.handle('vault:delete-all', async (_event, rawPayload: unknown) => {
     DeleteAllSchema.parse(rawPayload);
     clearDraftRecovery();
     return { deleted: await deleteAllCases() };
   });
 
-  ipcMain.handle('vault:export-all', async () => {
+  ipcMain.handle('vault:export-all', async (_event, rawPayload: unknown) => {
+    const parsed = ExportBackupSchema.safeParse(rawPayload);
+    if (!parsed.success) throw new Error('La contraseña del respaldo debe tener al menos 8 caracteres.');
     const metadata = await listCases();
-    const cases: any[] = [];
+    const cases: unknown[] = [];
     const batchSize = 10;
     for (let i = 0; i < metadata.length; i += batchSize) {
       const batch = metadata.slice(i, i + batchSize);
@@ -222,27 +199,47 @@ export function registerVaultHandlers(): void {
       cases.push(...batchResults);
     }
     const exportCore = {
-      format: 'lex-corporativo-vault-backup',
-      formatVersion: 1,
+      format: 'lex-corporativo-vault-backup' as const,
+      formatVersion: 1 as const,
       exportedAt: new Date().toISOString(),
       caseCount: cases.length,
       cases,
     };
-    const packageHash = createHash('sha256').update(JSON.stringify(exportCore)).digest('hex');
-    const backup = { ...exportCore, packageHash };
     const defaultBackupPath = resolve(
       app.getPath('downloads'),
       `lex-corporativo-respaldo-${new Date().toISOString().slice(0, 10)}.json`
     );
     const { canceled, filePath } = await dialog.showSaveDialog({
       defaultPath: defaultBackupPath,
-      filters: [{ name: 'Respaldo Lex Corporativo', extensions: ['json'] }],
+      filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
     });
     if (canceled || !filePath) {
       return { success: false, canceled: true, caseCount: cases.length };
     }
-    writeFileSync(filePath, `${JSON.stringify(backup, null, 2)}\n`, 'utf8');
-    return { success: true, filePath, caseCount: cases.length, packageHash };
+    writeFileSync(filePath, `${sealPortableBackup(exportCore, parsed.data.password)}\n`, 'utf8');
+    return { success: true, filePath, caseCount: cases.length, packageHash: hashPortableBackupCore(exportCore) };
+  });
+
+  ipcMain.handle('vault:import-all', async (_event, rawPayload: unknown) => {
+    const parsed = ImportBackupSchema.safeParse(rawPayload);
+    if (!parsed.success) throw new Error('La contraseña del respaldo debe tener al menos 8 caracteres.');
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+      filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
+      properties: ['openFile'],
+    });
+    if (canceled || !filePaths?.[0]) {
+      return { success: false, canceled: true, restored: 0, skipped: 0, replaced: 0 };
+    }
+    try {
+      const opened = openPortableBackup(readFileSync(filePaths[0], 'utf8'), parsed.data.password);
+      const result = await restoreVaultBackup(opened, parsed.data.onConflict ?? 'abort');
+      return { success: true, ...result };
+    } catch (error) {
+      if (error instanceof VaultRestoreConflict) {
+        return { success: false, conflict: true, conflictCount: error.conflictCount, restored: 0, skipped: 0, replaced: 0 };
+      }
+      throw new Error(error instanceof Error ? error.message : 'No se pudo restaurar el respaldo.');
+    }
   });
 
   // ── Load Case Data ───────────────────────
@@ -283,7 +280,7 @@ export function registerVaultHandlers(): void {
       }
       return { success: false, canceled: true };
     } catch (err: any) {
-      console.error('[IPC Vault] export-pdf error:', err);
+      console.error('[IPC Vault] export-pdf error:', formatForLog(err));
       throw new Error(`Error al exportar PDF: ${err.message}`);
     }
   });
@@ -312,7 +309,7 @@ export function registerVaultHandlers(): void {
       }
       return { success: false, canceled: true };
     } catch (err: any) {
-      console.error('[IPC Vault] export-docx error:', err);
+      console.error('[IPC Vault] export-docx error:', formatForLog(err));
       throw new Error(`Error al exportar Word: ${err.message}`);
     }
   });

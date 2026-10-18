@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import { useId } from 'react';
 import { Plus, Sparkles } from 'lucide-react';
 import { AreaTag, Button, Callout, Card, Field, FileDropzone, SectionTitle, Select, TextArea, TextInput } from '../../components/ui';
 import { SUGGESTED_CLAUSES } from '../../lib/drafting';

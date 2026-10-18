@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import Database from 'better-sqlite3';
 import { sanitizeForLocalCache } from './sanitizer';
+import { DAMAGED_BACKUP, hashPortableBackupCore, type OpenedPortableBackup } from './portable-backup';
 import { computeCaseRetentionUntil, type CaseRetentionDays } from '../../shared/case-retention';
 
 export interface CaseMetadata {
@@ -32,6 +33,8 @@ export interface VaultProtectionStatus {
   ready: boolean;
 }
 
+const CASE_ID_PATTERN = /^[a-zA-Z0-9-_]+$/;
+const CASE_MODULES = new Set<CaseModule>(['engineering', 'fiscal', 'mercantil']);
 const CASE_NOT_FOUND_MESSAGE = 'Selecciona un portafolio compatible o crea una nueva actividad.';
 const CASE_MODULE_MISMATCH_MESSAGE = 'Este portafolio pertenece a otro ecosistema. Selecciona una actividad compatible o crea una nueva.';
 const VAULT_ENCRYPTION_UNAVAILABLE_MESSAGE = 'La bóveda está bloqueada porque el cifrado seguro del sistema operativo no está disponible. Exporta o elimina los datos existentes desde un perfil compatible; no se guardará información nueva sin cifrado.';
@@ -48,13 +51,6 @@ function getVaultRoot(): string {
     fs.mkdirSync(root, { recursive: true });
   }
   return root;
-}
-
-// DB factory for dependency injection (testing)
-let dbFactory: (dbPath: string) => Database.Database = (p) => new Database(p);
-
-export function setDbFactory(factory: (dbPath: string) => Database.Database): void {
-  dbFactory = factory;
 }
 
 let db: Database.Database | null = null;
@@ -112,7 +108,7 @@ function getDb(): Database.Database {
   if (db) return db;
   const vaultRoot = getVaultRoot();
   const dbPath = path.join(vaultRoot, 'vault.db');
-  db = dbFactory(dbPath);
+  db = new Database(dbPath);
 
   db.pragma('foreign_keys = ON');
   db.pragma('journal_mode = WAL');
@@ -178,13 +174,53 @@ function getDb(): Database.Database {
     CREATE UNIQUE INDEX IF NOT EXISTS idx_drafts_case_draft ON drafts(caseId, draftId);
   `);
   migrateLegacyObfuscatedPayloads(db);
-  
+  migratePlaintextMetadata(db);
+
   return db;
 }
 
 function encryptPayload(plainText: string): string {
   requireSecureStorage();
   return `encrypted:v1:${safeStorage.encryptString(plainText).toString('base64')}`;
+}
+
+function presentMetadata(row: CaseMetadata): CaseMetadata {
+  return { ...row, name: decryptField(row.name) };
+}
+
+function migratePlaintextMetadata(database: Database.Database): number {
+  if (!isSecureStorageAvailable()) return 0;
+  let migrated = 0;
+  const migrate = database.transaction(() => {
+    const cases = database
+      .prepare(`SELECT caseId, name FROM cases WHERE name IS NOT NULL AND name NOT LIKE 'encrypted:v1:%'`)
+      .all() as Array<{ caseId: string; name: string }>;
+    const updateCase = database.prepare('UPDATE cases SET name = ? WHERE caseId = ?');
+    for (const row of cases) {
+      updateCase.run(encryptPayload(row.name), row.caseId);
+      migrated += 1;
+    }
+    const documents = database
+      .prepare(`SELECT id, fileName FROM documents WHERE fileName IS NOT NULL AND fileName NOT LIKE 'encrypted:v1:%'`)
+      .all() as Array<{ id: number; fileName: string }>;
+    const updateDocument = database.prepare('UPDATE documents SET fileName = ? WHERE id = ?');
+    for (const row of documents) {
+      updateDocument.run(encryptPayload(row.fileName), row.id);
+      migrated += 1;
+    }
+  });
+  migrate();
+  if (migrated > 0) {
+    database.pragma('wal_checkpoint(TRUNCATE)');
+    database.exec('VACUUM');
+  }
+  return migrated;
+}
+
+function decryptField(value: string | null | undefined): string {
+  if (!value) return '';
+  if (value.startsWith('encrypted:v1:') || value.startsWith('obfuscated:')) return decryptPayload(value);
+  return value;
 }
 
 function decryptPayload(encryptedText: string): string {
@@ -230,7 +266,7 @@ function readCaseMetadata(caseId: string): CaseMetadata {
   if (!row) {
     throw new Error(CASE_NOT_FOUND_MESSAGE);
   }
-  return row;
+  return presentMetadata(row);
 }
 
 function assertCaseModule(caseId: string, expectedModule?: CaseModule): CaseMetadata {
@@ -263,7 +299,7 @@ export async function createCase(
       module = excluded.module,
       updatedAt = excluded.updatedAt,
       retentionUntil = COALESCE(excluded.retentionUntil, cases.retentionUntil)
-  `).run(caseId, name, module, timestamp, timestamp, retentionUntil ?? null);
+  `).run(caseId, encryptPayload(name), module, timestamp, timestamp, retentionUntil ?? null);
 
   if (!existed) {
     console.info(`[Vault] Local activity initialized (SQLite): ${getSafeCaseLabel(caseId)}`);
@@ -273,7 +309,7 @@ export async function createCase(
 
 export async function listCases(): Promise<CaseMetadata[]> {
   const rows = getDb().prepare('SELECT * FROM cases ORDER BY updatedAt DESC').all() as CaseMetadata[];
-  return rows;
+  return rows.map(presentMetadata);
 }
 
 export async function renameCase(caseId: string, name: string, expectedModule?: CaseModule): Promise<CaseMetadata> {
@@ -282,7 +318,7 @@ export async function renameCase(caseId: string, name: string, expectedModule?: 
   const timestamp = new Date().toISOString();
   getDb()
     .prepare('UPDATE cases SET name = ?, updatedAt = ? WHERE caseId = ?')
-    .run(name, timestamp, caseId);
+    .run(encryptPayload(name), timestamp, caseId);
 
   console.info(`[Vault] Local activity renamed (SQLite): ${getSafeCaseLabel(caseId)}.`);
   return readCaseMetadata(caseId);
@@ -295,7 +331,7 @@ export async function saveDocument(caseId: string, fileName: string, mimeType: s
   const encryptedPayload = encryptPayload(payloadStr);
   
   const stmt = getDb().prepare('INSERT INTO documents (caseId, fileName, mimeType, payload) VALUES (?, ?, ?, ?)');
-  stmt.run(caseId, fileName, mimeType, encryptedPayload);
+  stmt.run(caseId, encryptPayload(fileName), mimeType, encryptedPayload);
   
   updateCaseTimestamp(caseId);
   console.info(`[Vault] Document saved locally (SQLite) for activity ${getSafeCaseLabel(caseId)}.`);
@@ -427,8 +463,127 @@ export async function saveCaseState(
 }
 
 export async function exportCase(caseId: string, expectedModule?: CaseModule): Promise<string> {
+  return readExportedCase(caseId, expectedModule);
+}
+
+export class VaultRestoreConflict extends Error {
+  readonly conflictCount: number;
+
+  constructor(conflictCount: number) {
+    super('El respaldo contiene asuntos que ya existen con otro contenido.');
+    this.name = 'VaultRestoreConflict';
+    this.conflictCount = conflictCount;
+  }
+}
+
+function contentFingerprint(exported: Record<string, unknown>): string {
+  const { exportMetadata, ...content } = exported;
+  return crypto.createHash('sha256').update(JSON.stringify(content)).digest('hex');
+}
+
+function assertRestorableCase(entry: any): void {
+  const metadata = entry?.metadata;
+  if (!metadata || typeof metadata.caseId !== 'string' || !CASE_ID_PATTERN.test(metadata.caseId)) throw new Error(DAMAGED_BACKUP);
+  if (typeof metadata.name !== 'string' || metadata.name.length < 1) throw new Error(DAMAGED_BACKUP);
+  if (typeof metadata.createdAt !== 'string' || typeof metadata.updatedAt !== 'string') throw new Error(DAMAGED_BACKUP);
+  if (!CASE_MODULES.has(metadata.module)) throw new Error(DAMAGED_BACKUP);
+  if (!Array.isArray(entry.documents) || !Array.isArray(entry.analyses) || !Array.isArray(entry.drafts)) throw new Error(DAMAGED_BACKUP);
+  const keys = entry.recordKeys;
+  if (!keys || !Array.isArray(keys.analyses) || keys.analyses.length !== entry.analyses.length) throw new Error(DAMAGED_BACKUP);
+  if (!Array.isArray(keys.drafts) || keys.drafts.length !== entry.drafts.length) throw new Error(DAMAGED_BACKUP);
+  for (const document of entry.documents) {
+    if (!document || typeof document.fileName !== 'string' || typeof document.mimeType !== 'string') throw new Error(DAMAGED_BACKUP);
+  }
+  for (const id of [...keys.analyses, ...keys.drafts]) {
+    if (typeof id !== 'string' || id.length < 1) throw new Error(DAMAGED_BACKUP);
+  }
+}
+
+function insertRestoredCase(entry: any): void {
+  const metadata = entry.metadata;
+  getDb().prepare(`
+    INSERT INTO cases (caseId, name, module, createdAt, updatedAt, retentionUntil)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `).run(
+    metadata.caseId,
+    encryptPayload(metadata.name),
+    metadata.module,
+    metadata.createdAt,
+    metadata.updatedAt,
+    metadata.retentionUntil ?? null,
+  );
+  const insertDocument = getDb().prepare('INSERT INTO documents (caseId, fileName, mimeType, payload) VALUES (?, ?, ?, ?)');
+  for (const document of entry.documents) {
+    insertDocument.run(metadata.caseId, encryptPayload(document.fileName), document.mimeType, encryptPayload(JSON.stringify(document)));
+  }
+  const insertAnalysis = getDb().prepare('INSERT INTO analyses (caseId, analysisId, payload) VALUES (?, ?, ?)');
+  entry.analyses.forEach((analysis: unknown, index: number) => {
+    insertAnalysis.run(metadata.caseId, entry.recordKeys.analyses[index], encryptPayload(JSON.stringify(analysis)));
+  });
+  const insertDraft = getDb().prepare('INSERT INTO drafts (caseId, draftId, payload) VALUES (?, ?, ?)');
+  entry.drafts.forEach((draft: unknown, index: number) => {
+    insertDraft.run(metadata.caseId, entry.recordKeys.drafts[index], encryptPayload(JSON.stringify(draft)));
+  });
+  if (entry.state) {
+    getDb().prepare('INSERT INTO case_state (caseId, payload, updatedAt) VALUES (?, ?, ?)').run(
+      metadata.caseId,
+      encryptPayload(JSON.stringify(entry.state)),
+      metadata.updatedAt,
+    );
+  }
+}
+
+export async function restoreVaultBackup(
+  payload: OpenedPortableBackup,
+  mode: 'abort' | 'replace' = 'abort',
+): Promise<{ restored: number; skipped: number; replaced: number }> {
+  requireSecureStorage();
+  const { packageHash, ...core } = payload;
+  if (
+    payload?.format !== 'lex-corporativo-vault-backup'
+    || payload.formatVersion !== 1
+    || !Array.isArray(payload.cases)
+    || payload.caseCount !== payload.cases.length
+    || hashPortableBackupCore(core) !== packageHash
+  ) {
+    throw new Error(DAMAGED_BACKUP);
+  }
+
+  let restored = 0;
+  let skipped = 0;
+  let replaced = 0;
+  let conflicts = 0;
+  const apply = getDb().transaction(() => {
+    for (const entry of payload.cases as any[]) {
+      assertRestorableCase(entry);
+      const caseId = entry.metadata.caseId as string;
+      const exists = Boolean(getDb().prepare('SELECT 1 FROM cases WHERE caseId = ?').get(caseId));
+      if (!exists) {
+        insertRestoredCase(entry);
+        restored += 1;
+        continue;
+      }
+      const current = JSON.parse(readExportedCase(caseId)) as Record<string, unknown>;
+      if (contentFingerprint(current) === contentFingerprint(entry)) {
+        skipped += 1;
+        continue;
+      }
+      if (mode === 'replace') {
+        getDb().prepare('DELETE FROM cases WHERE caseId = ?').run(caseId);
+        insertRestoredCase(entry);
+        replaced += 1;
+        continue;
+      }
+      conflicts += 1;
+    }
+    if (conflicts > 0) throw new VaultRestoreConflict(conflicts);
+  });
+  apply();
+  return { restored, skipped, replaced };
+}
+
+function readExportedCase(caseId: string, expectedModule?: CaseModule): string {
   const metadata = assertCaseModule(caseId, expectedModule);
-  
   const result: VaultCase = {
     metadata,
     documents: [],
@@ -436,39 +591,34 @@ export async function exportCase(caseId: string, expectedModule?: CaseModule): P
     drafts: [],
     state: null,
   };
-  
-  const docs = getDb().prepare('SELECT payload FROM documents WHERE caseId = ?').all(caseId) as any[];
-  for (const doc of docs) {
-    const dec = decryptPayload(doc.payload);
-    const parsed = JSON.parse(dec);
-    result.documents.push(parsed); // contains fileName, mimeType, base64
-  }
-  
-  const analyses = getDb().prepare('SELECT payload FROM analyses WHERE caseId = ?').all(caseId) as any[];
-  for (const a of analyses) {
-    result.analyses.push(JSON.parse(decryptPayload(a.payload)));
-  }
+  return JSON.stringify(fillExportedCase(result, caseId));
+}
 
-  const drafts = getDb().prepare('SELECT payload FROM drafts WHERE caseId = ?').all(caseId) as any[];
-  for (const d of drafts) {
-    result.drafts.push(JSON.parse(decryptPayload(d.payload)));
-  }
+function fillExportedCase(result: VaultCase, caseId: string): VaultCase {
+  const docs = getDb().prepare('SELECT payload FROM documents WHERE caseId = ? ORDER BY id').all(caseId) as Array<{ payload: string }>;
+  for (const doc of docs) result.documents.push(JSON.parse(decryptPayload(doc.payload)));
 
-  const stateRow = getDb().prepare('SELECT payload FROM case_state WHERE caseId = ?').get(caseId) as { payload: string } | undefined;
-  if (stateRow) {
-    result.state = JSON.parse(decryptPayload(stateRow.payload));
-  }
-  
-  (result as any).exportMetadata = {
-    timestamp: new Date().toISOString(),
-    version: '2.0.0', // SQLite vault version
+  const analyses = getDb().prepare('SELECT analysisId, payload FROM analyses WHERE caseId = ? ORDER BY id').all(caseId) as Array<{ analysisId: string; payload: string }>;
+  for (const analysis of analyses) result.analyses.push(JSON.parse(decryptPayload(analysis.payload)));
+
+  const drafts = getDb().prepare('SELECT draftId, payload FROM drafts WHERE caseId = ? ORDER BY id').all(caseId) as Array<{ draftId: string; payload: string }>;
+  for (const draft of drafts) result.drafts.push(JSON.parse(decryptPayload(draft.payload)));
+
+  (result as VaultCase & { recordKeys: { analyses: string[]; drafts: string[] } }).recordKeys = {
+    analyses: analyses.map(analysis => analysis.analysisId),
+    drafts: drafts.map(draft => draft.draftId),
   };
 
-  const packageString = JSON.stringify(result);
-  const exportHash = crypto.createHash('sha256').update(packageString).digest('hex');
-  
-  (result as any).exportMetadata.packageHash = exportHash;
-  return JSON.stringify(result);
+  const stateRow = getDb().prepare('SELECT payload FROM case_state WHERE caseId = ?').get(caseId) as { payload: string } | undefined;
+  if (stateRow) result.state = JSON.parse(decryptPayload(stateRow.payload));
+
+  const exportMetadata: { timestamp: string; version: string; packageHash?: string } = {
+    timestamp: new Date().toISOString(),
+    version: '2.0.0',
+  };
+  (result as VaultCase & { exportMetadata: typeof exportMetadata }).exportMetadata = exportMetadata;
+  exportMetadata.packageHash = crypto.createHash('sha256').update(JSON.stringify(result)).digest('hex');
+  return result;
 }
 
 export async function deleteCase(caseId: string, expectedModule?: CaseModule): Promise<void> {
@@ -523,6 +673,3 @@ export function closeDb(): void {
   }
 }
 
-export function resetDbFactory(): void {
-  dbFactory = (p) => new Database(p);
-}

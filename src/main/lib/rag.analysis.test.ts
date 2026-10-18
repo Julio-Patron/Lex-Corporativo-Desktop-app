@@ -1,5 +1,5 @@
 import { mkdirSync } from 'fs';
-import { join, resolve } from 'path';
+import { join } from 'path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mockState = vi.hoisted(() => ({
@@ -136,7 +136,7 @@ vi.mock('@lancedb/lancedb', () => {
   const userTable = {
     vectorSearch: () => createQuery((filterValue?: string) => (
       mockState.userRows.filter(row => (
-        filterValue?.includes(`"requestId" = '${row.requestId}'`)
+        filterValue?.includes(`requestId = '${row.requestId}'`)
         && filterValue?.includes(`module = '${row.module}'`)
       ))
     ), 'user-search'),
@@ -200,7 +200,7 @@ describe('analysis double-lane RAG context', () => {
       && filter.includes("law_code = 'LGTOC'")
       && !filter.includes("law_code = 'CFF'")
     ))).toBe(true);
-    expect(mockState.filters).toContain('user-search:"requestId" = \'analysis-1\' AND module = \'mercantil\'');
+    expect(mockState.filters).toContain('user-search:requestId = \'analysis-1\' AND module = \'mercantil\'');
   });
 
   it('keeps fiscal analysis on fiscal documents and fiscal laws only', async () => {
@@ -220,6 +220,6 @@ describe('analysis double-lane RAG context', () => {
       && filter.includes("law_code = 'RMF'")
       && !filter.includes("law_code = 'LGTOC'")
     ))).toBe(true);
-    expect(mockState.filters).toContain('user-search:"requestId" = \'analysis-fiscal\' AND module = \'fiscal\'');
+    expect(mockState.filters).toContain('user-search:requestId = \'analysis-fiscal\' AND module = \'fiscal\'');
   });
 });

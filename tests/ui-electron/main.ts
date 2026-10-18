@@ -3,11 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
+import { isTrustedAppSender, setIpcSenderGuard } from '../../src/main/ipc/trusted-ipc';
 
 const root = process.cwd();
 const profile = process.env.LEX_UI_TEST_ROOT!;
-const baseline = process.env.LEX_UI_BASELINE === '1';
-const output = path.join(root, 'reports', 'ux-ui', baseline ? 'layout-before' : 'restructure-after');
+const evidenceId = process.env.LEX_UI_EVIDENCE_ID;
+if (!evidenceId || !/^[a-zA-Z0-9_-]+$/.test(evidenceId)) throw new Error('Identificador de evidencia inválido');
+const output = path.join(root, 'reports', 'ux-ui', evidenceId);
 fs.mkdirSync(output, { recursive: true });
 app.setPath('userData', profile);
 app.setPath('sessionData', profile);
@@ -28,6 +30,11 @@ async function main() {
   });
   const { registerRecoveryHandlers } = await import('../../src/main/ipc/recovery.handler');
   const documentUrl = pathToFileURL(path.join(root, 'out/renderer/index.html')).href;
+  setIpcSenderGuard(event => isTrustedAppSender(event, {
+    webContents: win.webContents,
+    mainFrame: win.webContents.mainFrame,
+    documentUrl,
+  }));
   registerRecoveryHandlers(event => event.sender === win.webContents && event.senderFrame === win.webContents.mainFrame && event.senderFrame.url.split('#')[0] === documentUrl);
   const js = (source: string) => win.webContents.executeJavaScript(source, true);
   const waitFor = async (source: string) => {
@@ -72,14 +79,12 @@ async function main() {
     })()`);
     screens.push({ name, zoom: win.webContents.getZoomFactor(), ...geometry });
     fs.writeFileSync(path.join(output, `${name}.png`), (await win.webContents.capturePage()).toPNG());
-    if (!baseline) {
-      assert.ok(geometry.main.top >= geometry.boundary - 1, `${name}: contenido bajo controles nativos`);
-      assert.ok(geometry.sidebar.top >= geometry.boundary - 1, `${name}: sidebar bajo controles nativos`);
-      assert.ok(geometry.dialogs.every((r: { top: number; bottom: number }) => r.top >= geometry.boundary - 1 && r.bottom <= geometry.height + 1), `${name}: diálogo dentro del área útil`);
-      assert.deepEqual(geometry.clipped, [], `${name}: controles sin recortes horizontales`);
-      assert.equal(geometry.shellOverflow, false, `${name}: sin desbordamiento horizontal`);
-      if (geometry.readingHeight !== null) assert.ok(geometry.readingHeight >= 80, `${name}: texto con espacio de lectura`);
-    }
+    assert.ok(geometry.main.top >= geometry.boundary - 1, `${name}: contenido bajo controles nativos`);
+    assert.ok(geometry.sidebar.top >= geometry.boundary - 1, `${name}: sidebar bajo controles nativos`);
+    assert.ok(geometry.dialogs.every((r: { top: number; bottom: number }) => r.top >= geometry.boundary - 1 && r.bottom <= geometry.height + 1), `${name}: diálogo dentro del área útil`);
+    assert.deepEqual(geometry.clipped, [], `${name}: controles sin recortes horizontales`);
+    assert.equal(geometry.shellOverflow, false, `${name}: sin desbordamiento horizontal`);
+    if (geometry.readingHeight !== null) assert.ok(geometry.readingHeight >= 80, `${name}: texto con espacio de lectura`);
     console.log(`[ui] ${name}: ${geometry.width} × ${geometry.height}`);
   };
   try {
@@ -147,7 +152,7 @@ async function main() {
     await js(`document.querySelector('main').focus()`);
     await shot('sidebar-fija');
   } finally {
-    fs.writeFileSync(path.join(output, 'audit.json'), JSON.stringify({ baseline, scope: process.env.LEX_UI_SCOPE ?? 'complete', electron: process.versions.electron, platform: process.platform, screens }, null, 2));
+    fs.writeFileSync(path.join(output, 'audit.json'), JSON.stringify({ sourceSha: process.env.LEX_UI_SOURCE_SHA, workingTreeDirty: process.env.LEX_UI_WORKTREE_DIRTY === '1', evidenceId, scope: process.env.LEX_UI_SCOPE ?? 'complete', electron: process.versions.electron, platform: process.platform, screens }, null, 2));
     win.destroy();
   }
 }

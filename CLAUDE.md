@@ -23,7 +23,7 @@ npm run build                # electron-vite build -> out/
 
 The native `better-sqlite3` module can only be built for one ABI at a time. `dev:desktop` and `predev:electron` rebuild it for Electron, and after that `src/main/lib/case-vault.test.ts` skips itself (`describe.skip`) under Node vitest. Run `npm rebuild better-sqlite3` to get the Node build back before running the vault unit tests.
 
-CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and `manifest:legal-corpus && audit:corpus-governance:strict` on Ubuntu, plus the Electron vault smoke test on Windows.
+CI (`.github/workflows/ci.yml`) executes `ci:quality` on Ubuntu and `ci:windows` on Windows. It validates the committed manifest before any regeneration, checks pinned embeddings, runs the strict legal-knowledge gate, retrieval and grounding evaluations, and tests deliberate gate failures in an isolated copy. Node vault tests must not skip for ABI mismatch (`LEX_REQUIRE_NODE_SQLITE=1`). Windows runs Node tests before rebuilding for Electron, then vault, recovery and UI tests. Sanitized evidence is uploaded with SHA and run identifiers.
 
 ### Corpus / RAG pipeline (Node scripts in `scripts/`)
 
@@ -39,21 +39,21 @@ The law list, source URLs, verification metadata, and `CORPUS_VERSION` all live 
 
 ### Packaging
 
-`npm run preflight:release` checks for the vector store, the manifest, the ONNX model, and the icon. `npm run build:electron` runs the `prebuild:electron` hook (icon, strict manifest, embeddings download, native rebuild) and then electron-builder (NSIS x64). Pushing a `v*` tag triggers `.github/workflows/release.yml`, which publishes a GitHub release that electron-updater consumes. The release gate checklist is in `docs/arquitectura-procesamiento-y-gate-publicacion.md`.
+`npm run preflight:release:strict` verifies resources and their integrity, signing configuration, expected certificate thumbprint and the confirmed distribution repository. `npm run build:electron` validates the committed manifest, prepares the icon and pinned MiniLM resources, rebuilds native modules and packages NSIS x64 with `--publish never`. Tags or manual runs of `.github/workflows/release.yml` first run CI and produce a signed candidate only. `.github/workflows/publish.yml` requires an accepted manifest hash and source SHA, a successful candidate run, an existing matching tag integrated in main, and the protected publication environment; it verifies and publishes those exact files without rebuilding. Signing secrets, repository alignment and GitHub environment protections remain external prerequisites. See README and `docs/arquitectura-procesamiento-y-gate-publicacion.md`.
 
 ## Architecture
 
 ### Process split
 
-- **`src/main/`**: all privileged work. `index.ts` creates a sandboxed window (`contextIsolation`, no `nodeIntegration`), blocks external navigation, registers the `lexcorp://` protocol (`protocol.ts`, which also receives CSP reports), wires auto-update (off unless the user consents and strict privacy is off), and purges expired cases and temporary document vectors at startup.
+- **`src/main/`**: all privileged work. `index.ts` creates a sandboxed window (`contextIsolation`, no `nodeIntegration`), blocks external navigation, registers the `lexcorp://` OS deep-link protocol, wires auto-update (off unless the user consents and strict privacy is off), and purges expired cases and temporary document vectors at startup. CSP reports have an IPC handler; the `report-uri` declared in the HTML meta tag is not effective and remains a security finding.
 - **`src/main/ipc/`**: one `*.handler.ts` per domain (`analyze`, `draft`, `rag`, `vault`, `byok`, `corpus`, `assistant`), each registered from `ipc/index.ts`. `ipc/index.ts` also holds the dialog sanitizers (only `json|pdf|docx|jsonl`, defaulting to Downloads) and `runtime:get-health`, which computes the capability flags the UI gates on. Every handler validates its raw payload with zod (`*Schema` / `parse*Payload`) before doing anything.
 - **`src/preload/index.ts`**: exposes `window.lexDesktop` via `contextBridge`, typed by `src/preload/types.ts` (`LexDesktopAPI`). Adding an IPC channel means touching the handler, `preload/index.ts`, and `preload/types.ts`.
 - **`src/shared/`**: types and constants imported by both main and renderer, such as the ecosystem list, prompt profiles (`legal-contracts.ts`), and default BYOK models.
-- **`src/renderer/`**: React 19 + react-router + zustand + Tailwind 4, with the `@/` alias pointing at `src/renderer`. The renderer never touches Node or the filesystem. It calls `window.lexDesktop.*` through `services/` and the stores. DOCX and PDF files are generated in the renderer (`lib/docx-generator.ts`, `lib/pdf-generator.ts`) and passed as base64 to `vault:export-*` for saving. Drafting templates ("machotes") live in `lib/constants.ts` and `lib/template-bodies.ts`. The CSP in `index.html` allows `connect-src 'self' lexcorp:` only, so all network calls must go through main.
+- **`src/renderer/`**: React 19 + react-router + zustand + Tailwind 4. The renderer never touches Node or the filesystem. Features, hooks and stores call `window.lexDesktop.*` directly; there is no `services/` directory. DOCX and PDF files are generated in the renderer (`lib/docx-generator.ts`, `lib/pdf-generator.ts`) and passed as base64 to `vault:export-*` for saving. Drafting templates ("machotes") live in `lib/constants.ts` and `lib/template-bodies.ts`. The CSP in `index.html` allows `connect-src 'self' lexcorp:` only, so provider network calls go through main.
 
 ### Legal ecosystems
 
-There are five ecosystems (`mercantil`, `laboral`, `comercio_exterior`, `aduanal`, `fiscal`), defined in `src/shared/legal-contracts.ts`. Each maps to the law codes it may cite through `MODULE_ALLOWED_LAW_CODES` in `src/main/lib/prompts.ts`. The same file also provides system and draft instructions per ecosystem. Vault cases use a separate module axis (`engineering | fiscal | mercantil`). Vault operations accept `expectedModule` and reject cross-ecosystem access (see `renderer/lib/case-access.ts`).
+There are five ecosystems (`mercantil`, `laboral`, `comercio_exterior`, `aduanal`, `fiscal`), defined in `src/shared/legal-contracts.ts`. Each maps to the law codes it may cite through `MODULE_ALLOWED_LAW_CODES` in `src/main/lib/prompts.ts`. The same file also provides system and draft instructions per ecosystem. Vault cases use a separate module axis (`engineering | fiscal | mercantil`). Vault operations accept `expectedModule`; the optional module check is implemented by `assertCaseModule` in `src/main/lib/case-vault.ts`.
 
 ### Analysis pipeline (`ipc/analyze.handler.ts` → `processAnalyzePayload`)
 

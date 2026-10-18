@@ -2,6 +2,7 @@ import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createRequire } from 'module';
+import { openPortableBackup, sealPortableBackup } from './portable-backup';
 
 const mockState = {
   isEncryptionAvailable: true,
@@ -31,7 +32,8 @@ const sqliteNativeAvailableInNode = (() => {
     const db = new Database(':memory:');
     db.close();
     return true;
-  } catch {
+  } catch (error) {
+    if (process.env.LEX_REQUIRE_NODE_SQLITE === '1') throw error;
     return false;
   }
 })();
@@ -225,4 +227,124 @@ describeVault('Local Case Vault', () => {
     const cases = await vault.listCases();
     expect(cases[0].name).toBe('Renombrado');
   });
+
+  it('stores case names and file names only in encrypted form', async () => {
+    vault = await import('./case-vault');
+    const caseName = 'ClienteSentinela-9f3a';
+    const fileName = 'ContratoSentinela-9f3a.pdf';
+    await vault.createCase('case_meta', caseName, 'fiscal');
+    await vault.saveDocument('case_meta', fileName, 'application/pdf', 'contenido', 'fiscal');
+
+    expect((await vault.listCases())[0].name).toBe(caseName);
+    vault.closeDb();
+    const stored = readVaultFiles();
+    expect(stored).not.toContain(caseName);
+    expect(stored).not.toContain(fileName);
+  });
+
+  it('encrypts legacy plaintext names when the vault opens', async () => {
+    vault = await import('./case-vault');
+    await vault.createCase('case_legacy_name', 'Temporal', 'mercantil');
+    await vault.saveDocument('case_legacy_name', 'temporal.pdf', 'application/pdf', 'contenido', 'mercantil');
+    vault.closeDb();
+    const Database = require('better-sqlite3');
+    const database = new Database(path.join(mockState.testVaultPath, 'CaseVault', 'vault.db'));
+    database.prepare('UPDATE cases SET name = ? WHERE caseId = ?').run('ClienteVisible-4c2b', 'case_legacy_name');
+    database.prepare('UPDATE documents SET fileName = ?').run('EscrituraVisible-4c2b.pdf');
+    database.close();
+
+    expect((await vault.listCases())[0].name).toBe('ClienteVisible-4c2b');
+    expect(JSON.parse(await vault.exportCase('case_legacy_name', 'mercantil')).documents[0].fileName).toBe('temporal.pdf');
+    vault.closeDb();
+    const migrated = new Database(path.join(mockState.testVaultPath, 'CaseVault', 'vault.db'));
+    const row = migrated.prepare('SELECT name FROM cases WHERE caseId = ?').get('case_legacy_name') as { name: string };
+    const document = migrated.prepare('SELECT fileName FROM documents').get() as { fileName: string };
+    migrated.close();
+    expect(row.name.startsWith('encrypted:v1:')).toBe(true);
+    expect(document.fileName.startsWith('encrypted:v1:')).toBe(true);
+    const stored = readVaultFiles();
+    expect(stored).not.toContain('ClienteVisible-4c2b');
+    expect(stored).not.toContain('EscrituraVisible-4c2b.pdf');
+  });
+
+  it('restores a sealed backup, skips a repeat, and rolls back conflicts and damaged files', async () => {
+    vault = await import('./case-vault');
+    await vault.createCase('case_keep', 'Conservar', 'fiscal');
+    await vault.createCase('case_backup', 'Asunto original', 'mercantil');
+    await vault.saveDocument('case_backup', 'anexo.pdf', 'application/pdf', 'pdf-bytes', 'mercantil');
+    await vault.saveAnalysis('case_backup', 'analysis_1', { id: 'analysis_1', summary: 'Original' }, 'mercantil');
+    await vault.saveDraft('case_backup', 'draft_1', { id: 'draft_1', generatedDoc: 'Texto' }, 'mercantil');
+    await vault.saveCaseState('case_backup', { note: 'estado' }, 'mercantil');
+    const exported = JSON.parse(await vault.exportCase('case_backup', 'mercantil'));
+    const opened = openBackup([exported]);
+
+    await vault.deleteCase('case_backup', 'mercantil');
+    expect(await vault.restoreVaultBackup(opened)).toEqual({ restored: 1, skipped: 0, replaced: 0 });
+    expect((await vault.restoreVaultBackup(opened)).skipped).toBe(1);
+
+    const roundTrip = JSON.parse(await vault.exportCase('case_backup', 'mercantil'));
+    expect(roundTrip.metadata.name).toBe('Asunto original');
+    expect(roundTrip.documents[0]).toMatchObject({ fileName: 'anexo.pdf', base64: 'pdf-bytes' });
+    expect(roundTrip.analyses).toEqual([{ id: 'analysis_1', summary: 'Original' }]);
+    expect(roundTrip.drafts).toEqual([{ id: 'draft_1', generatedDoc: 'Texto' }]);
+    expect(roundTrip.state.note).toBe('estado');
+    expect(roundTrip.recordKeys).toEqual({ analyses: ['analysis_1'], drafts: ['draft_1'] });
+
+    await vault.saveAnalysis('case_backup', 'analysis_1', { id: 'analysis_1', summary: 'Cambiado' }, 'mercantil');
+    await expect(vault.restoreVaultBackup(opened)).rejects.toBeInstanceOf(vault.VaultRestoreConflict);
+    expect(JSON.parse(await vault.exportCase('case_backup', 'mercantil')).analyses[0].summary).toBe('Cambiado');
+    expect((await vault.restoreVaultBackup(opened, 'replace')).replaced).toBe(1);
+    expect(JSON.parse(await vault.exportCase('case_backup', 'mercantil')).analyses[0].summary).toBe('Original');
+
+    const damaged = openBackup([
+      {
+        metadata: {
+          caseId: 'case_new',
+          name: 'Nuevo',
+          module: 'fiscal',
+          createdAt: '2026-02-01T00:00:00.000Z',
+          updatedAt: '2026-02-01T00:00:00.000Z',
+          retentionUntil: null,
+        },
+        documents: [],
+        analyses: [],
+        drafts: [],
+        state: null,
+        recordKeys: { analyses: [], drafts: [] },
+      },
+      {
+        metadata: {
+          caseId: 'case_bad',
+          name: 'Mal',
+          module: 'no-existe',
+          createdAt: '2026-01-01T00:00:00.000Z',
+          updatedAt: '2026-01-01T00:00:00.000Z',
+        },
+        documents: [],
+        analyses: [],
+        drafts: [],
+        recordKeys: { analyses: [], drafts: [] },
+      },
+    ]);
+    await expect(vault.restoreVaultBackup(damaged)).rejects.toThrow('dañado');
+    expect((await vault.listCases()).map(item => item.caseId).sort()).toEqual(['case_backup', 'case_keep']);
+  });
 });
+
+function readVaultFiles(): string {
+  const dir = path.join(mockState.testVaultPath, 'CaseVault');
+  return fs.readdirSync(dir)
+    .map(name => fs.readFileSync(path.join(dir, name)))
+    .map(buf => buf.toString('latin1'))
+    .join('\n');
+}
+
+function openBackup(cases: unknown[]) {
+  return openPortableBackup(sealPortableBackup({
+    format: 'lex-corporativo-vault-backup',
+    formatVersion: 1,
+    exportedAt: '2026-10-17T00:00:00.000Z',
+    caseCount: cases.length,
+    cases,
+  }, 'frase-larga-1'), 'frase-larga-1');
+}

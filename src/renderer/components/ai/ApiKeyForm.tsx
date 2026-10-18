@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { CheckCircle2, ChevronDown, KeyRound } from 'lucide-react';
 import type { AppSettings, ByokProviderId } from '../../../preload/types';
 import { DEFAULT_BYOK_MODELS } from '../../../shared/byok-models';

@@ -1,4 +1,6 @@
 {
+  "include": ["src/**/*", "tests/**/*", "scripts/**/*", "*.ts", "*.js"],
+  "exclude": ["node_modules", "out", "release", "scratch", "reports", ".superdesign"],
   "compilerOptions": {
     "target": "ES2022",
     "experimentalDecorators": true,
@@ -25,6 +27,8 @@
       ]
     },
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

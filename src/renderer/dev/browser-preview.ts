@@ -47,19 +47,16 @@ export function installBrowserPreview(): void {
         const item = cases.get(caseId);
         return { metadata: item?.metadata, drafts: [...(item?.drafts.values() ?? [])], analyses: [...(item?.analyses.values() ?? [])] };
       },
-      renameCase: unavailable,
       deleteCase: async (caseId) => { cases.delete(caseId); return { success: true }; },
       saveAnalysis: async ({ caseId, analysisId, analysisData }) => { cases.get(caseId)?.analyses.set(analysisId, analysisData); touch(caseId); return { success: true }; },
       saveDraft: async ({ caseId, draftId, draftData }) => { cases.get(caseId)?.drafts.set(draftId, draftData); touch(caseId); return { success: true }; },
       deleteAnalysis: async ({ caseId, analysisId }) => ({ success: true, deleted: Boolean(cases.get(caseId)?.analyses.delete(analysisId)) }),
       deleteDraft: async ({ caseId, draftId }) => ({ success: true, deleted: Boolean(cases.get(caseId)?.drafts.delete(draftId)) }),
-      saveState: async () => ({ success: true }),
-      purgeExpired: async () => ({ deleted: 0 }),
       exportAll: async () => ({ success: false, canceled: true, caseCount: cases.size }),
+      importAll: async () => ({ success: false, canceled: true, restored: 0, skipped: 0, replaced: 0 }),
       deleteAll: async () => { const deleted = cases.size; cases.clear(); return { deleted }; },
     },
     documents: {
-      selectFile: async () => null,
       exportPdf: async () => ({ success: false, canceled: true }),
       exportDocx: async () => ({ success: false, canceled: true }),
     },
@@ -134,7 +131,6 @@ export function installBrowserPreview(): void {
     },
     settings: {
       getAppVersion: async () => '0.0.0-dev',
-      getPlatform: async () => 'win32',
       savePreferences: async (payload) => {
         settings = { ...settings, ...payload, automaticUpdatesEnabled: (payload.strictPrivacy ?? settings.strictPrivacy) ? false : payload.automaticUpdatesEnabled ?? settings.automaticUpdatesEnabled };
         return settings;

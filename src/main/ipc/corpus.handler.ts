@@ -1,5 +1,6 @@
 import { copyFileSync } from 'fs';
-import { dialog, ipcMain } from 'electron';
+import { dialog } from 'electron';
+import { ipcMain } from './trusted-ipc';
 import { z } from 'zod';
 import { getInstalledCorpusLaw, getLegalCorpusOverview, readLegalCorpusLawContent } from '../lib/legal-corpus';
 

@@ -8,11 +8,9 @@ import { normalizeCaseRetentionDays, type CaseRetentionDays } from '../../shared
 export { DEFAULT_BYOK_MODELS } from '../../shared/byok-models';
 export type { ByokProvider } from '../../shared/byok-models';
 
-export type AiExecutionMode = 'local' | 'byok';
 export type ByokKeyStatus = 'missing' | 'ready' | 'unreadable';
 
 export const BYOK_PROVIDERS: ByokProvider[] = ['gemini', 'openai', 'anthropic'];
-export const DEFAULT_GEMINI_MODEL = DEFAULT_BYOK_MODELS.gemini;
 export const DEFAULT_BYOK_MAX_INPUT_CHARS = 60_000;
 export const MIN_BYOK_MAX_INPUT_CHARS = 10_000;
 export const MAX_BYOK_MAX_INPUT_CHARS = 200_000;

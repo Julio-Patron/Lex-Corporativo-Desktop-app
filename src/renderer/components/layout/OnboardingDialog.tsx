@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 import { BrandPlate } from '../BrandWatermark';
 import { providerLabel, selectAiReady, useUiStore } from '../../store/useUiStore';

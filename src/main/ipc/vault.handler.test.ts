@@ -22,16 +22,16 @@ vi.mock('../lib/case-vault', () => ({
   deleteDraft: vi.fn(),
   exportCase: vi.fn(),
   listCases: vi.fn(),
-  purgeExpiredCases: vi.fn(),
-  renameCase: vi.fn(),
+  restoreVaultBackup: vi.fn(),
   saveAnalysis: vi.fn(),
-  saveCaseState: vi.fn(),
   saveDraft: vi.fn(),
+  VaultRestoreConflict: class VaultRestoreConflict extends Error {},
 }));
 
 import {
   CreateCaseSchema,
-  RenameCaseSchema,
+  ExportBackupSchema,
+  ImportBackupSchema,
   SaveAnalysisSchema,
   SaveDraftSchema,
   ExportPdfSchema,
@@ -110,6 +110,13 @@ describe('vault IPC input validation schemas', () => {
     })).toThrow();
   });
 
+  it('rejects a short backup password without echoing it', () => {
+    expect(() => ExportBackupSchema.parse({ password: 'corta' })).toThrow();
+    expect(ExportBackupSchema.parse({ password: 'frase-larga-1' }).password).toBe('frase-larga-1');
+    expect(ImportBackupSchema.parse({ password: 'frase-larga-1', onConflict: 'replace' }).onConflict).toBe('replace');
+    expect(() => ImportBackupSchema.parse({ password: 'frase-larga-1', extra: true })).toThrow();
+  });
+
   it('rejects invalid caseId with special characters or path traversal attempts', () => {
     expect(() => CreateCaseSchema.parse({
       caseId: '../../etc/passwd',
@@ -117,9 +124,10 @@ describe('vault IPC input validation schemas', () => {
       module: 'mercantil',
     })).toThrow('Invalid case ID format');
 
-    expect(() => RenameCaseSchema.parse({
+    expect(() => SaveDraftSchema.parse({
       caseId: 'case;DROP TABLE cases;',
-      name: 'SQL injection attempt',
+      draftId: 'draft-1',
+      draftData: {},
     })).toThrow('Invalid case ID format');
   });
 });

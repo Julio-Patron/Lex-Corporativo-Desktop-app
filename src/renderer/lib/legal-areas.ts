@@ -62,6 +62,3 @@ export function isLegalArea(value: unknown): value is LegalArea {
   return typeof value === 'string' && (LEGAL_AREAS as string[]).includes(value);
 }
 
-export function legalAreaLabel(value: unknown): string {
-  return isLegalArea(value) ? LEGAL_AREA_INFO[value].shortLabel : 'Varias materias';
-}

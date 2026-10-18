@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { LegalSearchScope, RAGMatch } from './rag';
 import { composeLimitedByokPrompt, generateByokText } from './byok-client';
+import { formatForLog } from './sanitizer';
 import { getActiveByokConfig, type ByokProvider } from './byok-settings';
 
 const RerankOutputSchema = z.object({
@@ -136,7 +137,7 @@ export async function rerankLegalArticles(
       model: byok.model,
     };
   } catch (error: any) {
-    console.warn(`[Legal Reranker] ${byok.provider} unavailable; preserving local order:`, error?.message || error);
+    console.warn(`[Legal Reranker] ${byok.provider} unavailable; preserving local order:`, formatForLog(error));
     return {
       matches: candidates,
       status: 'fallback',

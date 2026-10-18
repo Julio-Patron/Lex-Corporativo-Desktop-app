@@ -1,4 +1,3 @@
-import React from 'react';
 import { Download, RefreshCw } from 'lucide-react';
 import { useUiStore } from '../../store/useUiStore';
 import { Button } from '../ui';

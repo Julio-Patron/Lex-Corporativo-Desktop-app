@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clipboard, Download, FileSignature, Search, X } from 'lucide-react';
 import { AreaTag, Button, Modal, Spinner, TextInput } from '../../components/ui';
 import { filterArticles, findArticle, formatArticleCitation, parseLawMarkdown, type ParsedLaw } from '../../lib/law-reader';

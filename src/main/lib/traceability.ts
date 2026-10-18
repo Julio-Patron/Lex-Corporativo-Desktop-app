@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
-import { sanitizeForLogs } from './sanitizer';
+import { formatForLog, sanitizeForLogs } from './sanitizer';
 import type { GroundedClaim } from './legal-grounding';
 import type { LegalEcosystem } from '../../shared/legal-contracts';
 
@@ -100,7 +100,7 @@ export function logTrace(trace: QueryTrace): void {
     const logLine = JSON.stringify(cleanTrace) + '\n';
     fs.appendFileSync(ledgerPath, logLine, 'utf-8');
   } catch (error) {
-    console.error('[TRACEABILITY] Failed to write trace to secure ledger', error);
+    console.error('[TRACEABILITY] Failed to write trace to secure ledger', formatForLog(error));
   }
 }
 

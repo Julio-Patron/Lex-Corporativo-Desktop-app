@@ -83,13 +83,6 @@ export interface StructuredGroundingValidationOptions {
   requiredSourceKinds?: GroundingSourceKind[];
 }
 
-export interface GroundingRepairOutcome {
-  output: string;
-  validation: GroundingValidation;
-  repaired: boolean;
-  initialValidation?: GroundingValidation;
-}
-
 export interface StructuredGroundingRepairOutcome {
   output: StructuredGroundedOutput;
   validation: GroundingValidation;
@@ -401,27 +394,6 @@ export function renderGroundedClaims(
   }).join('\n\n');
 
   return body.trim();
-}
-
-export async function validateOrRepairGroundedOutput(
-  initialOutput: string,
-  sources: GroundingSource[],
-  options: GroundingValidationOptions = {},
-  repair?: (validation: GroundingValidation, rejectedOutput: string) => Promise<string>,
-): Promise<GroundingRepairOutcome> {
-  const initialValidation = validateGroundedLegalOutput(initialOutput, sources, options);
-  if (initialValidation.valid || !repair) {
-    return { output: initialOutput, validation: initialValidation, repaired: false };
-  }
-
-  const repairedOutput = (await repair(initialValidation, initialOutput)).trim();
-  const repairedValidation = validateGroundedLegalOutput(repairedOutput, sources, options);
-  return {
-    output: repairedOutput,
-    validation: repairedValidation,
-    repaired: true,
-    initialValidation,
-  };
 }
 
 export async function validateOrRepairStructuredGroundedOutput(

@@ -1,6 +1,6 @@
 import { build } from 'esbuild';
 import electron from 'electron';
-import { spawn } from 'node:child_process';
+import { spawn, execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +12,9 @@ const root = mkdtempSync(path.join(scratch, 'ui-test-'));
 try {
   await build({ entryPoints: [path.join(repo, 'tests/ui-electron/main.ts')], outfile: path.join(root, 'main.cjs'), bundle: true, platform: 'node', format: 'cjs', packages: 'external' });
   const env = { ...process.env, LEX_UI_TEST_ROOT: root };
+  env.LEX_UI_SOURCE_SHA = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim();
+  env.LEX_UI_WORKTREE_DIRTY = execFileSync('git', ['status', '--porcelain'], { cwd: repo, encoding: 'utf8' }).trim() ? '1' : '0';
+  if (!env.LEX_UI_EVIDENCE_ID) env.LEX_UI_EVIDENCE_ID = `validation-${env.LEX_UI_SOURCE_SHA.slice(0, 7)}-${Date.now()}`;
   delete env.ELECTRON_RUN_AS_NODE;
   await new Promise((resolve, reject) => {
     const child = spawn(electron, [path.join(root, 'main.cjs')], { cwd: repo, env, stdio: 'inherit', windowsHide: true });

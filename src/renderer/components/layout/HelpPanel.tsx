@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ExternalLink, Loader2, Send, X } from 'lucide-react';
 import { selectAiReady, useUiStore } from '../../store/useUiStore';

@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, safeStorage } from 'electron';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as lancedb from '@lancedb/lancedb';
@@ -7,6 +7,7 @@ import type { DocumentChunk } from './chunking';
 import { MODULE_ALLOWED_LAW_CODES, getModuleLabel, isLawAllowedForModule, normalizeLawCode, type LegalModule } from './prompts';
 import { assessLegalEvidence, getExplicitProvisionTarget, getPreferredLawCodes } from './legal-relevance';
 import { expandLegalQuery, type ExpandedLegalQuery } from './legal-query-expansion';
+import { formatForLog } from './sanitizer';
 
 export type LegalSearchScope = LegalModule | 'todos';
 
@@ -146,7 +147,7 @@ async function ensureLegalKnowledgeIndices(table: lancedb.Table, dbPath: string)
     const activeColumns = new Set(active.flatMap(index => index.columns));
     if (required.every(index => activeColumns.has(index.column))) indexedLegalPaths.add(dbPath);
   })().catch((error: any) => {
-    console.warn('[RAG Local] Could not create one or more optional retrieval indices:', error?.message || error);
+    console.warn('[RAG Local] Could not create one or more optional retrieval indices:', formatForLog(error));
   }).finally(() => {
     legalIndexPromises.delete(dbPath);
   });
@@ -169,7 +170,7 @@ async function getExtractor() {
     try {
       extractorModel = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
     } catch (err) {
-      console.error('[RAG Local] Failed to load embedding model. Ensure the model is bundled in extraResources.', err);
+      console.error('[RAG Local] Failed to load embedding model. Ensure the model is bundled in extraResources.', formatForLog(err));
       throw err;
     }
   }
@@ -267,7 +268,7 @@ async function getLexicalMatches(
         .limit(Math.max(limit * 4, 80))
         .toArray();
     } catch (ftsError: any) {
-      console.info(`[RAG Local] FTS index unavailable for ${module}; using bounded lexical fallback:`, ftsError.message || ftsError);
+      console.info(`[RAG Local] FTS index unavailable for ${module}; using bounded lexical fallback:`, formatForLog(ftsError));
       rows = await table
         .query()
         .where(lawFilter)
@@ -284,20 +285,9 @@ async function getLexicalMatches(
       .slice(0, limit)
       .map(({ row, score }: { row: any; score: number }) => ({ ...row, _lexicalScore: score }));
   } catch (err: any) {
-    console.warn(`[RAG Local] Lexical rerank failed for ${module}:`, err.message || err);
+    console.warn(`[RAG Local] Lexical rerank failed for ${module}:`, formatForLog(err));
     return [];
   }
-}
-
-function getRagCandidatePaths(): string[] {
-  const configuredPath = getConfiguredLancePath();
-  if (configuredPath) return [configuredPath];
-  const userDataPath = path.join(app.getPath('userData'), 'lance_data');
-  const bundledPath = app.isPackaged
-    ? path.join(process.resourcesPath, 'legal-runtime', 'lance_data')
-    : path.join(app.getAppPath(), 'legal-runtime', 'lance_data');
-
-  return [...new Set([userDataPath, bundledPath])];
 }
 
 function hasLegalKnowledgeTable(dbPath: string): boolean {
@@ -371,7 +361,7 @@ function getVerifiedLawCodes(): Set<string> {
         .filter(Boolean),
     );
   } catch (error: any) {
-    console.error('[RAG Local] Corpus governance manifest is missing or invalid; legal retrieval is disabled.', error.message || error);
+    console.error('[RAG Local] Corpus governance manifest is missing or invalid; legal retrieval is disabled.', formatForLog(error));
     return new Set();
   }
 }
@@ -417,7 +407,7 @@ function synchronizePackagedLegalKnowledge(userDataPath: string, bundledPath: st
       throw error;
     }
   } catch (error: any) {
-    console.error('[RAG Local] Packaged legal corpus synchronization failed; retrieval is disabled.', error.message || error);
+    console.error('[RAG Local] Packaged legal corpus synchronization failed; retrieval is disabled.', formatForLog(error));
     return false;
   }
 }
@@ -434,7 +424,7 @@ export async function isLocalRagAvailable(): Promise<boolean> {
     await ensureLegalKnowledgeIndices(table, dbPath);
     return true;
   } catch (err: any) {
-    console.warn('[RAG Local] LanceDB availability check failed:', err.message || err);
+    console.warn('[RAG Local] LanceDB availability check failed:', formatForLog(err));
     return false;
   }
 }
@@ -476,7 +466,7 @@ async function searchLegalKnowledge(
       .limit(rawLimit)
       .toArray();
   } catch (err: any) {
-    console.warn(`[RAG Local] Module filter failed for ${module}; using post-filter fallback:`, err.message || err);
+    console.warn(`[RAG Local] Module filter failed for ${module}; using post-filter fallback:`, formatForLog(err));
   }
 
   if (searchResults.length === 0) {
@@ -623,7 +613,7 @@ export async function getHybridLegalContext(
     const context = formatRAGContext(preparedSources, module, isDrafting);
     return { context, sources: preparedSources };
   } catch (err: any) {
-    console.warn('[RAG Local] Search failed — Operating without verified RAG database context:', err.message || err);
+    console.warn('[RAG Local] Search failed — Operating without verified RAG database context:', formatForLog(err));
     return { context: '', sources: [] };
   }
 }
@@ -682,11 +672,11 @@ export async function getAnalysisContext(
     const vector = await createEmbedding(query);
     const [legalResult, documentSources] = await Promise.all([
       searchLegalKnowledge(query, query, module, vector, limit).catch((err: any) => {
-        console.warn(`[RAG Local] Analysis legal lane failed for ${module}:`, err.message || err);
+        console.warn(`[RAG Local] Analysis legal lane failed for ${module}:`, formatForLog(err));
         return { matches: [], dbPath: '' };
       }),
-      searchUserDocuments(query, module, requestId, vector, limit).catch((err: any) => {
-        console.warn(`[RAG Local] Analysis document lane failed for ${module}:`, err.message || err);
+      searchUserDocuments(module, requestId, vector, limit).catch((err: any) => {
+        console.warn(`[RAG Local] Analysis document lane failed for ${module}:`, formatForLog(err));
         return [];
       }),
     ]);
@@ -701,7 +691,7 @@ export async function getAnalysisContext(
       documentSources,
     };
   } catch (err: any) {
-    console.warn('[RAG Local] Analysis context failed:', err.message || err);
+    console.warn('[RAG Local] Analysis context failed:', formatForLog(err));
     return {
       context: '',
       legalSources: [],
@@ -710,8 +700,28 @@ export async function getAnalysisContext(
   }
 }
 
-async function searchUserDocuments(
-  query: string,
+const ENCRYPTED_FIELD_PREFIX = 'encrypted:v1:';
+
+function documentEncryptionAvailable(): boolean {
+  return Boolean(safeStorage?.isEncryptionAvailable?.());
+}
+
+function sealUserDocumentField(value: string): string {
+  if (!documentEncryptionAvailable()) {
+    throw new Error('No se puede indexar el documento porque el cifrado del sistema no está disponible.');
+  }
+  return `${ENCRYPTED_FIELD_PREFIX}${safeStorage.encryptString(value).toString('base64')}`;
+}
+
+function openUserDocumentField(value: string): string {
+  if (!value.startsWith(ENCRYPTED_FIELD_PREFIX)) return value;
+  if (!documentEncryptionAvailable()) {
+    throw new Error('No se puede leer el documento temporal porque el cifrado del sistema no está disponible.');
+  }
+  return safeStorage.decryptString(Buffer.from(value.slice(ENCRYPTED_FIELD_PREFIX.length), 'base64'));
+}
+
+export async function searchUserDocuments(
   module: LegalModule,
   requestId: string,
   vector: number[],
@@ -721,29 +731,42 @@ async function searchUserDocuments(
   if (!hasUserDocumentsTable(dbPath)) return [];
 
   const db = await lancedb.connect(dbPath);
-  const table = await db.openTable('user_documents');
-  const rawLimit = Math.max(limit * 3, 12);
-  const requestFilter = `"requestId" = '${escapeSqlLiteral(requestId)}' AND module = '${module}'`;
-  const rows: any[] = await table
-    .vectorSearch(vector)
-    .where(requestFilter)
-    .limit(rawLimit)
-    .toArray();
+  try {
+    const table = await db.openTable('user_documents');
+    try {
+      const rawLimit = Math.max(limit * 3, 12);
+      const requestFilter = `requestId = '${escapeSqlLiteral(requestId)}' AND module = '${escapeSqlLiteral(module)}'`;
+      const rows: any[] = await table
+        .vectorSearch(vector)
+        .where(requestFilter)
+        .limit(rawLimit)
+        .toArray();
 
-  return rows
-    .filter((row: any) => row.requestId === requestId && row.module === module)
-    .slice(0, limit)
-    .map((row: any) => ({
-      id: row.id || crypto.randomUUID(),
-      fileName: row.fileName || 'documento',
-      content: row.content || '',
-      similarity: 1.0 - (row._distance || 0),
-      module,
-      requestId,
-      contentHash: row.contentHash || '',
-      chunkIndex: Number(row.chunkIndex || 0),
-      pageNumber: Number(row.pageNumber || 0) || undefined,
-    }));
+      return rows.flatMap((row: any) => {
+        if (row.requestId !== requestId || row.module !== module) return [];
+        try {
+          return [{
+            id: row.id || crypto.randomUUID(),
+            fileName: openUserDocumentField(String(row.fileName || 'documento')),
+            content: openUserDocumentField(String(row.content || '')),
+            similarity: 1.0 - (row._distance || 0),
+            module,
+            requestId,
+            contentHash: row.contentHash || '',
+            chunkIndex: Number(row.chunkIndex || 0),
+            pageNumber: Number(row.pageNumber || 0) || undefined,
+          }];
+        } catch (err) {
+          console.warn('[RAG Local] Se omitió un fragmento temporal ilegible.', formatForLog(err));
+          return [];
+        }
+      }).slice(0, limit);
+    } finally {
+      table.close?.();
+    }
+  } finally {
+    db.close?.();
+  }
 }
 
 /**
@@ -823,25 +846,104 @@ INSTRUCCIONES:
 `;
 }
 
-export async function getDynamicLawsForChunk(
-  chunkText: string,
-  module: LegalModule,
-  limit = 3
-): Promise<string> {
+async function ensureUserDocumentIndices(table: lancedb.Table, sample?: Record<string, unknown>): Promise<void> {
+  for (const column of ['requestId', 'module', 'contentHash'] as const) {
+    if (sample && !(column in sample)) continue;
+    await table.createIndex(column, { config: lancedb.Index.btree() }).catch(() => undefined);
+  }
+}
+
+function plainLanceValue(value: unknown): unknown {
+  if (typeof value === 'bigint') return Number(value);
+  if (value instanceof Date) return value.toISOString();
+  if (ArrayBuffer.isView(value)) return Array.from(value as unknown as ArrayLike<number>, item => Number(item));
+  if (Array.isArray(value)) return value.map(item => typeof item === 'bigint' ? Number(item) : item);
+  if (value && typeof value === 'object' && typeof (value as { toArray?: unknown }).toArray === 'function') {
+    return plainLanceValue((value as { toArray: () => unknown }).toArray());
+  }
+  return value;
+}
+
+function plainLanceRecord(row: Record<string, unknown>): Record<string, unknown> {
+  const record: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(row)) {
+    if (key.startsWith('_') || value === undefined) continue;
+    record[key] = plainLanceValue(value);
+  }
+  return record;
+}
+
+function removeUserDocumentsDirectory(directory: string): void {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      fs.rmSync(directory, { recursive: true, force: true });
+      if (!fs.existsSync(directory)) return;
+    } catch (error) {
+      lastError = error;
+    }
+    const until = Date.now() + 40 * (attempt + 1);
+    while (Date.now() < until) {
+      // Windows puede conservar el directorio hasta que el proceso nativo suelta el archivo.
+    }
+  }
+  throw lastError instanceof Error ? lastError : new Error('No se pudo borrar la tabla temporal de documentos.');
+}
+
+/**
+ * table.delete deja el texto en los fragmentos. Se copian las filas vivas, se elimina el directorio
+ * y se recrea la tabla. La tabla legal vive en otro directorio y no se toca.
+ * Hay que cerrar la conexión anterior: el mutex de Lance no se toma aquí porque no es reentrante.
+ */
+async function physicallyRewriteUserDocuments(dbPath: string): Promise<void> {
+  const directory = path.join(dbPath, 'user_documents.lance');
+  if (!fs.existsSync(directory)) return;
+
+  const db = await lancedb.connect(dbPath);
+  let rows: Record<string, unknown>[] = [];
+  let schema: Awaited<ReturnType<lancedb.Table['schema']>> | null = null;
   try {
-    const vector = await createEmbedding(chunkText);
-    const { matches } = await searchLegalKnowledge(chunkText, chunkText, module, vector, limit);
-    if (matches.length === 0) return 'No se encontraron artículos específicos aplicables a este fragmento.';
-    
-    return matches.map(m => `- ${m.law_code || m.title} ${m.article_number || ''}: "${m.content.slice(0, 1500)}"`).join('\n\n');
-  } catch (err: any) {
-    console.warn(`[RAG Local] Dynamic RAG failed for chunk:`, err.message || err);
-    return 'Error recuperando leyes para este fragmento.';
+    const names = await db.tableNames();
+    if (!names.includes('user_documents')) return;
+    const table = await db.openTable('user_documents');
+    try {
+      schema = await table.schema();
+      const count = await table.countRows();
+      if (count > 0) {
+        const fetched = await table.query().limit(count).toArray();
+        if (fetched.length !== count) {
+          throw new Error('No se pudieron copiar todos los fragmentos temporales antes de reescribir la tabla.');
+        }
+        rows = fetched.map(row => plainLanceRecord(row as Record<string, unknown>));
+      }
+    } finally {
+      table.close?.();
+    }
+    await db.dropTable('user_documents');
+  } finally {
+    db.close?.();
+  }
+
+  removeUserDocumentsDirectory(directory);
+  const reopened = await lancedb.connect(dbPath);
+  try {
+    if (rows.length === 0) {
+      if (!schema) throw new Error('No se pudo recrear la tabla temporal vacía.');
+      const created = await reopened.createEmptyTable('user_documents', schema);
+      created.close?.();
+      return;
+    }
+    const created = await reopened.createTable('user_documents', rows);
+    await ensureUserDocumentIndices(created, rows[0]);
+    created.close?.();
+  } finally {
+    reopened.close?.();
   }
 }
 
 /**
  * Indexa chunks ya extraídos del usuario en una tabla LanceDB local y escribible.
+ * El texto y el nombre se guardan cifrados. Sin cifrado del sistema no hay copia en claro.
  */
 export async function indexUserDocument(input: IndexUserDocumentInput): Promise<IndexedUserDocument> {
   const startMs = Date.now();
@@ -850,19 +952,19 @@ export async function indexUserDocument(input: IndexUserDocumentInput): Promise<
   if (chunks.length === 0) {
     throw new Error(`No hay contenido indexable en '${input.fileName}'.`);
   }
+  if (!documentEncryptionAvailable()) {
+    throw new Error('No se puede indexar el documento porque el cifrado del sistema no está disponible.');
+  }
 
-  const dbPath = getUserDocumentsRagPath();
-  const db = await lancedb.connect(dbPath);
-  const tableNames = await db.tableNames();
+  const sealedFileName = sealUserDocumentField(input.fileName);
   const indexedAt = new Date().toISOString();
   const records = [];
-
   for (const chunk of chunks) {
     records.push({
       id: crypto.randomUUID(),
       requestId: input.requestId,
-      fileName: input.fileName,
-      content: chunk.text,
+      fileName: sealedFileName,
+      content: sealUserDocumentField(chunk.text),
       module: input.module,
       contentHash: input.contentHash,
       chunkIndex: chunk.chunkIndex,
@@ -873,27 +975,34 @@ export async function indexUserDocument(input: IndexUserDocumentInput): Promise<
     });
   }
 
-  if (tableNames.includes('user_documents')) {
-    const table = await db.openTable('user_documents');
-    try {
-      await table.delete(`requestId = '${escapeSqlLiteral(input.requestId)}' AND contentHash = '${escapeSqlLiteral(input.contentHash)}'`);
-      await table.add(records);
-    } catch (err: any) {
-      console.warn('[RAG Local] Recreating user_documents due to incompatible schema or corrupted table:', err.message || err);
-      await db.dropTable('user_documents');
-      const recreated = await db.createTable('user_documents', records);
-      await recreated.createIndex('requestId', { config: lancedb.Index.btree() }).catch(() => undefined);
-      await recreated.createIndex('module', { config: lancedb.Index.btree() }).catch(() => undefined);
-      await recreated.createIndex('contentHash', { config: lancedb.Index.btree() }).catch(() => undefined);
+  const dbPath = getUserDocumentsRagPath();
+  const db = await lancedb.connect(dbPath);
+  let table: lancedb.Table | null = null;
+  try {
+    const tableNames = await db.tableNames();
+    if (tableNames.includes('user_documents')) {
+      table = await db.openTable('user_documents');
+      try {
+        await table.delete(`requestId = '${escapeSqlLiteral(input.requestId)}' AND contentHash = '${escapeSqlLiteral(input.contentHash)}'`);
+        await table.add(records);
+      } catch (err: any) {
+        console.warn('[RAG Local] Recreating user_documents due to incompatible schema or corrupted table:', formatForLog(err));
+        table.close?.();
+        table = null;
+        await db.dropTable('user_documents');
+        table = await db.createTable('user_documents', records);
+        await ensureUserDocumentIndices(table);
+      }
+    } else {
+      table = await db.createTable('user_documents', records);
+      await ensureUserDocumentIndices(table);
     }
-  } else {
-    const table = await db.createTable('user_documents', records);
-    await table.createIndex('requestId', { config: lancedb.Index.btree() }).catch(() => undefined);
-    await table.createIndex('module', { config: lancedb.Index.btree() }).catch(() => undefined);
-    await table.createIndex('contentHash', { config: lancedb.Index.btree() }).catch(() => undefined);
+  } finally {
+    table?.close?.();
+    db.close?.();
   }
 
-  console.info(`[RAG Local] User document '${input.fileName}' indexed for ${input.module}. ${chunks.length} chunks in ${Date.now() - startMs}ms from ${dbPath}`);
+  console.info(`[RAG Local] User document indexed for ${input.module}. ${chunks.length} chunks in ${Date.now() - startMs}ms`);
 
   return {
     fileName: input.fileName,
@@ -909,10 +1018,16 @@ export async function cleanupUserDocumentRequest(requestId: string): Promise<voi
   try {
     const db = await lancedb.connect(dbPath);
     const table = await db.openTable('user_documents');
-    await table.delete(`requestId = '${escapeSqlLiteral(requestId)}'`);
+    try {
+      await table.delete(`requestId = '${escapeSqlLiteral(requestId)}'`);
+    } finally {
+      table.close?.();
+      db.close?.();
+    }
+    await physicallyRewriteUserDocuments(dbPath);
     console.info(`[RAG Local] Cleared temporary chunks for request ${requestId.slice(0, 8)}...`);
   } catch (err: any) {
-    console.warn('[RAG Local] Failed to clear temporary user document chunks:', err.message || err);
+    console.warn('[RAG Local] Failed to clear temporary user document chunks:', formatForLog(err));
   }
 }
 
@@ -933,18 +1048,24 @@ export async function purgeExpiredUserDocuments(
     const table = await db.openTable('user_documents');
     const cutoffMs = nowMs - maxAgeMs;
     const cutoff = new Date(cutoffMs).toISOString();
-
-    const countBefore = await table.countRows();
-    await table.delete(`indexedAt < '${cutoff}' OR indexedAt IS NULL`);
-    const countAfter = await table.countRows();
-    const deleted = Math.max(0, countBefore - countAfter);
+    let deleted = 0;
+    try {
+      const countBefore = await table.countRows();
+      await table.delete(`indexedAt < '${cutoff}' OR indexedAt IS NULL`);
+      const countAfter = await table.countRows();
+      deleted = Math.max(0, countBefore - countAfter);
+    } finally {
+      table.close?.();
+      db.close?.();
+    }
 
     if (deleted > 0) {
+      await physicallyRewriteUserDocuments(dbPath);
       console.info(`[RAG Local] Purged ${deleted} temporary user-document chunks older than ${cutoff}.`);
     }
     return deleted;
   } catch (err: any) {
-    console.warn('[RAG Local] Failed to purge expired temporary chunks:', err.message || err);
+    console.warn('[RAG Local] Failed to purge expired temporary chunks:', formatForLog(err));
     return 0;
   }
 }

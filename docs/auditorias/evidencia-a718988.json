@@ -1,0 +1,1892 @@
+{
+  "schemaVersion": 1,
+  "baseSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+  "workingTreeDirty": true,
+  "historicalUiEvidenceSha": "82d567a25343ba8e42b67e7b3125a769e5954367",
+  "sourceNote": "Validaciones locales del diseño a718988 y cambios de controles sin commit. No equivalen a CI alojado ni aceptación del instalador.",
+  "quality": {
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "workingTreeDirty": true,
+    "inputFilesSha256": "3059d14271640f194a103aac9555c97dbf4c5b08699430c6edd1fa85ecfb2019",
+    "mode": "quality",
+    "status": "pass",
+    "node": "v24.21.0",
+    "npm": "12.2.0",
+    "platform": "win32",
+    "arch": "x64",
+    "os": "10.0.26300",
+    "lockfileSha256": "51e91e43d2bde23187e0e352fa643bfc6528d1527d34214b08d5a0dd62e4cede",
+    "checks": [
+      {
+        "script": "audit:corpus-governance:strict",
+        "exitCode": 0,
+        "durationMs": 718
+      },
+      {
+        "script": "verify:embeddings",
+        "exitCode": 0,
+        "durationMs": 367
+      },
+      {
+        "script": "lint",
+        "exitCode": 0,
+        "durationMs": 5091
+      },
+      {
+        "script": "test",
+        "exitCode": 0,
+        "durationMs": 14924
+      },
+      {
+        "script": "test:release-controls",
+        "exitCode": 0,
+        "durationMs": 683
+      },
+      {
+        "script": "build",
+        "exitCode": 0,
+        "durationMs": 25273
+      },
+      {
+        "script": "audit:legal-knowledge:strict",
+        "exitCode": 0,
+        "durationMs": 676
+      },
+      {
+        "script": "audit:legal-retrieval",
+        "exitCode": 0,
+        "durationMs": 2207
+      },
+      {
+        "script": "eval:legal-rag",
+        "exitCode": 0,
+        "durationMs": 7902
+      },
+      {
+        "script": "test:legal-gates",
+        "exitCode": 0,
+        "durationMs": 3029
+      },
+      {
+        "script": "audit:corpus-governance:strict",
+        "exitCode": 0,
+        "durationMs": 680
+      }
+    ]
+  },
+  "windows": {
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "workingTreeDirty": true,
+    "inputFilesSha256": "392327931cc9e46dfb36c7bab1f1ad76b5816c30a1daed8da43e4e7cd40c8af3",
+    "mode": "windows",
+    "status": "pass",
+    "uiEvidenceId": "ci-a71898852d5e035eb850da3a80164d12c7ad5e86-1792291082913-1",
+    "node": "v24.21.0",
+    "npm": "12.2.0",
+    "platform": "win32",
+    "arch": "x64",
+    "os": "10.0.26300",
+    "lockfileSha256": "51e91e43d2bde23187e0e352fa643bfc6528d1527d34214b08d5a0dd62e4cede",
+    "checks": [
+      {
+        "script": "audit:corpus-governance:strict",
+        "exitCode": 0,
+        "durationMs": 672
+      },
+      {
+        "script": "verify:embeddings",
+        "exitCode": 0,
+        "durationMs": 343
+      },
+      {
+        "script": "test",
+        "exitCode": 0,
+        "durationMs": 3956
+      },
+      {
+        "script": "predev:electron",
+        "exitCode": 0,
+        "durationMs": 2843
+      },
+      {
+        "script": "build",
+        "exitCode": 0,
+        "durationMs": 11320
+      },
+      {
+        "script": "test:vault:electron",
+        "exitCode": 0,
+        "durationMs": 824
+      },
+      {
+        "script": "test:recovery:electron",
+        "exitCode": 0,
+        "durationMs": 2018
+      },
+      {
+        "script": "test:ui:electron",
+        "exitCode": 0,
+        "durationMs": 101569
+      }
+    ]
+  },
+  "releaseControlsFinal": {
+    "exitCode": 0,
+    "note": "Reejecución específica posterior a ci:quality tras ampliar la comparación de recursos empaquetados.",
+    "passed": 8,
+    "command": "npm run test:release-controls"
+  },
+  "legalGateControls": {
+    "status": "pass",
+    "isolated": true,
+    "checks": [
+      {
+        "id": "manifest-intacto",
+        "exitCode": 0,
+        "status": "pass"
+      },
+      {
+        "id": "conocimiento-intacto",
+        "exitCode": 0,
+        "status": "pass"
+      },
+      {
+        "id": "manifest-alterado",
+        "exitCode": 1,
+        "status": "pass"
+      },
+      {
+        "id": "check-antes-de-write",
+        "exitCode": 1,
+        "status": "pass"
+      },
+      {
+        "id": "ancla-juridica-ausente",
+        "exitCode": 1,
+        "status": "pass"
+      },
+      {
+        "id": "vectores-alterados",
+        "exitCode": 1,
+        "status": "pass"
+      }
+    ]
+  },
+  "ragEvaluation": {
+    "semanticPassed": 20,
+    "semanticTotal": 20,
+    "groundingPassed": 5,
+    "groundingTotal": 5
+  },
+  "embeddingDownload": {
+    "generatedAt": "2026-10-18T02:25:08.396Z",
+    "status": "pass",
+    "emptyDestination": true,
+    "source": "remote-pinned-revision",
+    "model": "Xenova/all-MiniLM-L6-v2",
+    "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+    "files": [
+      {
+        "path": "config.json",
+        "bytes": 650,
+        "sha256": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7",
+        "gitBlobSha1": "72147e4ff4426ebedbfa2146c4a0999def51a313"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 711661,
+        "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+        "gitBlobSha1": "c17ed520ed8438736732a54957a69306b8822215"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 366,
+        "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+        "gitBlobSha1": "37fca74771bc76a8e01178ce3a6055a0995f8093"
+      },
+      {
+        "path": "onnx/model_quantized.onnx",
+        "bytes": 22972370,
+        "sha256": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1"
+      }
+    ]
+  },
+  "preflight": {
+    "generatedAt": "2026-10-17T21:50:23.174Z",
+    "target": "win",
+    "strict": true,
+    "status": "fail",
+    "checks": [
+      {
+        "id": "vector-store",
+        "status": "pass",
+        "detail": "LanceDB legal_knowledge.lance"
+      },
+      {
+        "id": "corpus-manifest",
+        "status": "pass",
+        "detail": "Manifiesto canónico del corpus"
+      },
+      {
+        "id": "embedding-model",
+        "status": "pass",
+        "detail": "ONNX MiniLM cuantizado"
+      },
+      {
+        "id": "embedding-integrity",
+        "status": "pass",
+        "detail": "Xenova/all-MiniLM-L6-v2@751bff37182d3f1213fa05d7196b954e230abad9: hashes correctos"
+      },
+      {
+        "id": "corpus-integrity",
+        "status": "pass",
+        "detail": "Manifiesto versionado comprobado sin regeneración"
+      },
+      {
+        "id": "app-icon",
+        "status": "pass",
+        "detail": "resources/icon.ico"
+      },
+      {
+        "id": "code-signing",
+        "status": "fail",
+        "detail": "Certificado/identidad de firma disponible en el entorno"
+      },
+      {
+        "id": "signing-identity",
+        "status": "fail",
+        "detail": "Huella del editor esperada para verificar Authenticode"
+      },
+      {
+        "id": "distribution-repository",
+        "status": "fail",
+        "detail": "Repositorio de distribución confirmado y coincidente con el feed"
+      }
+    ],
+    "nextCommand": null
+  },
+  "ui": {
+    "captures": 94,
+    "geometryIssues": 0,
+    "workingTreeDirty": true,
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "evidenceId": "ci-a71898852d5e035eb850da3a80164d12c7ad5e86-1792291082913-1",
+    "electron": "42.6.1"
+  },
+  "data": {
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "generatedAt": "2026-10-17T21:56:53.764Z",
+    "syntheticOnly": true,
+    "vaultPayloadEncrypted": true,
+    "vaultMetadataPlaintext": true,
+    "exportedBackupPlaintext": true,
+    "logicalRowsAfterDeletion": 0,
+    "plaintextVectorRemainsAfterLogicalDeletion": true,
+    "sanitizer": {
+      "shortTokenRedacted": false,
+      "authorizationRedacted": false,
+      "messageSecretRedacted": false
+    },
+    "status": "findings-open",
+    "limits": [
+      "Sólo fixtures sintéticos y un perfil temporal; no se inspeccionó el perfil real.",
+      "La ausencia de texto literal no acreditaría borrado físico seguro.",
+      "Exportar no prueba restauración ni portabilidad entre usuarios de Windows."
+    ]
+  },
+  "performance": {
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "workingTreeDirty": true,
+    "generatedAt": "2026-10-17T21:51:03.116Z",
+    "environment": {
+      "platform": "win32",
+      "arch": "x64",
+      "os": "10.0.26300",
+      "cpu": "AMD Ryzen 7 7730U with Radeon Graphics         ",
+      "logicalCpus": 16,
+      "memoryBytes": 41689669632,
+      "electron": "42.6.1"
+    },
+    "corpus": "469fe4ada8352c5bb43968f5b68c17e4ece2bc4120e41337919acaeb404ec337",
+    "limitations": [
+      "Ventana oculta y main de ensayo con handlers reales; no mide el main completo del producto instalado.",
+      "Cinco procesos y perfiles nuevos; caché del sistema operativo sin purgar. No equivale a arranque tras reiniciar Windows.",
+      "Recarga como aproximación de arranque caliente; lectura RMF sin renderizar el lector.",
+      "Revisión básica y documento sintético; sin proveedores ni credenciales reales.",
+      "Exportación con diálogo simulado; no incluye tiempo de elección del usuario.",
+      "Línea base descriptiva, sin umbrales de aceptación acordados."
+    ],
+    "metrics": {
+      "processToHomeMs": {
+        "count": 5,
+        "medianMs": 1931,
+        "p95Ms": 30312,
+        "minMs": 1883,
+        "maxMs": 30312
+      },
+      "reloadHomeMs": {
+        "count": 5,
+        "medianMs": 414.0925000000025,
+        "p95Ms": 425.4604999999999,
+        "minMs": 407.45510000000013,
+        "maxMs": 425.4604999999999
+      },
+      "firstSearchMs": {
+        "count": 5,
+        "medianMs": 508.1876000000002,
+        "p95Ms": 747.0757000000012,
+        "minMs": 458.58359999999993,
+        "maxMs": 747.0757000000012
+      },
+      "warmSearchMs": {
+        "count": 25,
+        "medianMs": 122.06750000000011,
+        "p95Ms": 139.56719999999768,
+        "minMs": 114.60770000000048,
+        "maxMs": 141.1248999999989
+      },
+      "largeLawReadMs": {
+        "count": 25,
+        "medianMs": 18.253600000000006,
+        "p95Ms": 26.982899999999972,
+        "minMs": 16.10439999999653,
+        "maxMs": 36.449000000000524
+      },
+      "basicReviewMs": {
+        "count": 25,
+        "medianMs": 726.2183000000005,
+        "p95Ms": 899.163700000001,
+        "minMs": 667.2241999999997,
+        "maxMs": 914.2325000000001
+      },
+      "pdfExportMs": {
+        "count": 25,
+        "medianMs": 162.66229999999996,
+        "p95Ms": 417.6010000000024,
+        "minMs": 134.76500000000033,
+        "maxMs": 422.5425
+      },
+      "docxExportMs": {
+        "count": 25,
+        "medianMs": 31.533000000003085,
+        "p95Ms": 87.03579999999965,
+        "minMs": 25.78179999999975,
+        "maxMs": 87.10119999999733
+      }
+    },
+    "runs": [
+      {
+        "samples": {
+          "processToHomeMs": [
+            30312
+          ],
+          "reloadHomeMs": [
+            414.0925000000025
+          ],
+          "firstSearchMs": [
+            747.0757000000012
+          ],
+          "warmSearchMs": [
+            141.1248999999989,
+            139.56719999999768,
+            123.42859999999928,
+            114.60770000000048,
+            119.88240000000224
+          ],
+          "largeLawReadMs": [
+            36.449000000000524,
+            26.504199999995762,
+            16.10439999999653,
+            16.269200000002456,
+            18.385199999996985
+          ],
+          "basicReviewMs": [
+            899.163700000001,
+            765.6077000000005,
+            714.2431999999972,
+            729.8262000000032,
+            717.4786000000022
+          ],
+          "pdfExportMs": [
+            417.6010000000024,
+            180.0676999999996,
+            158.78880000000208,
+            152.4589000000051,
+            142.78590000000258
+          ],
+          "docxExportMs": [
+            87.10119999999733,
+            33.311799999995856,
+            25.898600000000442,
+            31.533000000003085,
+            36.98979999999574
+          ]
+        },
+        "memoryBefore": {
+          "mainRssBytes": 173318144,
+          "appWorkingSetKiB": 469352
+        },
+        "memoryAfter": {
+          "mainRssBytes": 437960704,
+          "appWorkingSetKiB": 836884
+        },
+        "cspWarnings": [
+          "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+          "The Content Security Policy directive 'report-uri' is ignored when delivered via a <meta> element."
+        ]
+      },
+      {
+        "samples": {
+          "processToHomeMs": [
+            1891
+          ],
+          "reloadHomeMs": [
+            408.92560000000026
+          ],
+          "firstSearchMs": [
+            508.1876000000002
+          ],
+          "warmSearchMs": [
+            123.25160000000005,
+            119.86709999999948,
+            120.58669999999984,
+            124.29589999999916,
+            120.8710000000001
+          ],
+          "largeLawReadMs": [
+            20.646400000000085,
+            17.48120000000017,
+            23.874899999999798,
+            18.990899999999783,
+            17.86120000000028
+          ],
+          "basicReviewMs": [
+            834.54,
+            714.8220999999994,
+            672.6855000000005,
+            681.8501999999999,
+            752.3764999999994
+          ],
+          "pdfExportMs": [
+            358.30229999999983,
+            153.8733999999995,
+            171.10159999999996,
+            141.4385000000002,
+            182.60709999999926
+          ],
+          "docxExportMs": [
+            87.03579999999965,
+            31.763700000000426,
+            27.751800000000003,
+            25.78179999999975,
+            29.62879999999859
+          ]
+        },
+        "memoryBefore": {
+          "mainRssBytes": 172417024,
+          "appWorkingSetKiB": 442012
+        },
+        "memoryAfter": {
+          "mainRssBytes": 441643008,
+          "appWorkingSetKiB": 822376
+        },
+        "cspWarnings": [
+          "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+          "The Content Security Policy directive 'report-uri' is ignored when delivered via a <meta> element."
+        ]
+      },
+      {
+        "samples": {
+          "processToHomeMs": [
+            1931
+          ],
+          "reloadHomeMs": [
+            425.4604999999999
+          ],
+          "firstSearchMs": [
+            458.58359999999993
+          ],
+          "warmSearchMs": [
+            123.70150000000012,
+            119.97909999999956,
+            116.70949999999993,
+            131.22360000000026,
+            122.06750000000011
+          ],
+          "largeLawReadMs": [
+            16.615299999999934,
+            16.438900000000103,
+            17.354600000000573,
+            17.111300000000483,
+            18.253600000000006
+          ],
+          "basicReviewMs": [
+            880.5136000000002,
+            696.6940000000004,
+            735.6522000000004,
+            721.0726000000004,
+            718.2590000000009
+          ],
+          "pdfExportMs": [
+            369.5104000000001,
+            134.76500000000033,
+            173.48359999999957,
+            154.7482,
+            149.60019999999895
+          ],
+          "docxExportMs": [
+            78.13799999999992,
+            30.35269999999946,
+            31.681300000000192,
+            30.815999999999804,
+            34.962900000000445
+          ]
+        },
+        "memoryBefore": {
+          "mainRssBytes": 172445696,
+          "appWorkingSetKiB": 419860
+        },
+        "memoryAfter": {
+          "mainRssBytes": 441413632,
+          "appWorkingSetKiB": 815604
+        },
+        "cspWarnings": [
+          "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+          "The Content Security Policy directive 'report-uri' is ignored when delivered via a <meta> element."
+        ]
+      },
+      {
+        "samples": {
+          "processToHomeMs": [
+            1945
+          ],
+          "reloadHomeMs": [
+            407.45510000000013
+          ],
+          "firstSearchMs": [
+            462.0291000000002
+          ],
+          "warmSearchMs": [
+            130.66580000000022,
+            119.53360000000066,
+            138.55169999999998,
+            115.25990000000002,
+            124.44669999999951
+          ],
+          "largeLawReadMs": [
+            20.06349999999975,
+            21.69670000000042,
+            18.61319999999978,
+            16.149199999999837,
+            20.269500000000335
+          ],
+          "basicReviewMs": [
+            873.7559999999999,
+            726.2183000000005,
+            773.6605,
+            680.4999000000007,
+            696.4590000000007
+          ],
+          "pdfExportMs": [
+            373.8896,
+            161.89490000000023,
+            156.35540000000037,
+            160.7552000000005,
+            174.88990000000013
+          ],
+          "docxExportMs": [
+            74.85769999999957,
+            29.58100000000013,
+            29.724999999999454,
+            30.232299999999668,
+            39.954900000000634
+          ]
+        },
+        "memoryBefore": {
+          "mainRssBytes": 172122112,
+          "appWorkingSetKiB": 445040
+        },
+        "memoryAfter": {
+          "mainRssBytes": 453488640,
+          "appWorkingSetKiB": 829072
+        },
+        "cspWarnings": [
+          "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+          "The Content Security Policy directive 'report-uri' is ignored when delivered via a <meta> element."
+        ]
+      },
+      {
+        "samples": {
+          "processToHomeMs": [
+            1883
+          ],
+          "reloadHomeMs": [
+            419.4211
+          ],
+          "firstSearchMs": [
+            546.4486000000002
+          ],
+          "warmSearchMs": [
+            138.64180000000033,
+            118.41709999999966,
+            120.15999999999985,
+            130.7521999999999,
+            120.79529999999977
+          ],
+          "largeLawReadMs": [
+            23.28359999999975,
+            16.57470000000012,
+            16.184699999999793,
+            26.982899999999972,
+            16.60859999999957
+          ],
+          "basicReviewMs": [
+            914.2325000000001,
+            738.4171999999999,
+            722.0933999999997,
+            772.3026,
+            667.2241999999997
+          ],
+          "pdfExportMs": [
+            422.5425,
+            173.77350000000024,
+            162.66229999999996,
+            179.08019999999942,
+            158.8586000000014
+          ],
+          "docxExportMs": [
+            81.99649999999929,
+            31.95340000000033,
+            30.532400000000052,
+            27.67529999999988,
+            26.93960000000152
+          ]
+        },
+        "memoryBefore": {
+          "mainRssBytes": 172146688,
+          "appWorkingSetKiB": 445272
+        },
+        "memoryAfter": {
+          "mainRssBytes": 451653632,
+          "appWorkingSetKiB": 846252
+        },
+        "cspWarnings": [
+          "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.",
+          "The Content Security Policy directive 'report-uri' is ignored when delivered via a <meta> element."
+        ]
+      }
+    ]
+  },
+  "cleanup": {
+    "sourceSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+    "generatedAt": "2026-10-18T02:38:20.698Z",
+    "workingTreeDirty": true,
+    "deletedPaths": [],
+    "inventory": [
+      {
+        "path": "screens-electron",
+        "exists": true,
+        "files": 7,
+        "bytes": 2792767,
+        "trackedFiles": 7,
+        "gitStatus": "",
+        "references": [
+          "docs/relevo-ux-ui.md"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "mantenimiento",
+        "decision": "Conservar capturas históricas; no empaquetadas. Revisar valor documental antes de retirar.",
+        "verification": "git ls-files screens-electron; búsqueda de referencias; selección del responsable de producto",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "scratch",
+        "exists": true,
+        "files": 850,
+        "bytes": 55453789,
+        "trackedFiles": 0,
+        "gitStatus": "!! scratch/",
+        "references": [
+          "docs/relevo-ux-ui.md",
+          "scripts/test-recovery-electron.mjs",
+          "scripts/test-ui-electron.mjs",
+          "tsconfig.json"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "mantenimiento",
+        "decision": "Conservar evidencia y ensayos previos. Sólo los perfiles creados por cada prueba se eliminan al terminar.",
+        "verification": "Recorridos mantenidos en tests/; no borrar perfiles o archivos preexistentes",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "reports",
+        "exists": true,
+        "files": 592,
+        "bytes": 189230555,
+        "trackedFiles": 0,
+        "gitStatus": "!! reports/",
+        "references": [
+          ".github/workflows/ci.yml",
+          "CLAUDE.md",
+          "README.md",
+          "docs/relevo-ux-ui.md",
+          "scripts/evaluate-legal-rag.mjs",
+          "scripts/legal-corpus-config.mjs",
+          "scripts/test-ui-electron.mjs",
+          "scripts/verify-lance-metadata.mjs",
+          "src/main/lib/byok-client.test.ts",
+          "src/main/lib/legal-corpus.test.ts",
+          "tests/ui-electron/main.ts",
+          "tsconfig.json"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "mantenimiento",
+        "decision": "Conservar auditoría de 82d567a y nueva evidencia de a718988 en destinos separados.",
+        "verification": "Verificar SHA de cada informe antes de archivar",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": ".superdesign",
+        "exists": true,
+        "files": 18,
+        "bytes": 216332,
+        "trackedFiles": 0,
+        "gitStatus": "?? .superdesign/\n!! .superdesign/init/\n!! .superdesign/tmp/",
+        "references": [
+          "tsconfig.json"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "mantenimiento",
+        "decision": "Conservar trabajo local pendiente del diseño aprobado.",
+        "verification": "No tocar archivos locales",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "docs/auditoria-ui-2026-10-17.html",
+        "exists": true,
+        "files": 1,
+        "bytes": 2282858,
+        "trackedFiles": 0,
+        "gitStatus": "?? docs/auditoria-ui-2026-10-17.html",
+        "references": [
+          "docs/relevo-ux-ui.md"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "evidencia-historica",
+        "decision": "Conservar; corresponde a 82d567a y no acredita a718988.",
+        "verification": "Documento original intacto",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "out",
+        "exists": true,
+        "files": 36,
+        "bytes": 4354223,
+        "trackedFiles": 0,
+        "gitStatus": "!! out/",
+        "references": [
+          ".github/workflows/ci.yml",
+          ".github/workflows/release.yml",
+          "CLAUDE.md",
+          "docs/identidad-branding-y-sitio-comercial.md",
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "electron.vite.config.ts",
+          "package.json",
+          "scripts/download-embeddings.mjs",
+          "scripts/evaluate-legal-rag.mjs",
+          "scripts/export-legal-corpus.mjs",
+          "scripts/generate-ico.mjs",
+          "scripts/ingest-local.mjs",
+          "scripts/repair-legal-anchors.mjs",
+          "scripts/stage-official-documental-corpus.mjs",
+          "scripts/stage-official-fiscal-corpus.mjs",
+          "scripts/stage-official-mercantile-corpus.mjs",
+          "scripts/test-case-vault-electron.mjs",
+          "scripts/test-recovery-electron.mjs",
+          "scripts/test-ui-electron.mjs",
+          "src/main/ipc/analyze.handler.ts",
+          "src/main/ipc/assistant.handler.ts",
+          "src/main/ipc/draft.handler.test.ts",
+          "src/main/ipc/draft.handler.ts",
+          "src/main/ipc/index.ts",
+          "src/main/ipc/rag.handler.test.ts",
+          "src/main/ipc/rag.handler.ts",
+          "src/main/lib/analysis-errors.test.ts",
+          "src/main/lib/analysis-errors.ts",
+          "src/main/lib/byok-client.test.ts",
+          "src/main/lib/byok-client.ts",
+          "src/main/lib/byok-settings.test.ts",
+          "src/main/lib/case-vault.test.ts",
+          "src/main/lib/case-vault.ts",
+          "src/main/lib/core-legal/business-core.test.ts",
+          "src/main/lib/legal-corpus.test.ts",
+          "src/main/lib/legal-grounding.test.ts",
+          "src/main/lib/legal-grounding.ts",
+          "src/main/lib/legal-reranker.ts",
+          "src/main/lib/pdf-parser.ts",
+          "src/main/lib/rag-context-policy.test.ts",
+          "src/main/lib/rag.ts",
+          "src/main/lib/traceability.test.ts",
+          "src/main/lib/traceability.ts",
+          "src/main/menu.ts",
+          "src/renderer/App.tsx",
+          "src/renderer/components/layout/AppEffects.tsx",
+          "src/renderer/components/layout/AppShell.tsx",
+          "src/renderer/components/layout/HelpPanel.tsx",
+          "src/renderer/components/layout/Sidebar.tsx",
+          "src/renderer/components/ui/Form.tsx",
+          "src/renderer/components/ui/Layout.tsx",
+          "src/renderer/components/ui/Modal.tsx",
+          "src/renderer/components/ui/index.ts",
+          "src/renderer/features/buscador/BuscadorPage.tsx",
+          "src/renderer/features/drafting/DraftDetails.tsx",
+          "src/renderer/features/drafting/DraftDocument.tsx",
+          "src/renderer/features/drafting/DraftingPage.tsx",
+          "src/renderer/features/drafting/TemplateChooser.tsx",
+          "src/renderer/features/estudio/EstudioLayout.tsx",
+          "src/renderer/features/laws/LawsPage.tsx",
+          "src/renderer/features/laws/useSendArticleToDraft.ts",
+          "src/renderer/features/legal/PrivacyPolicy.tsx",
+          "src/renderer/features/legal/TermsConditions.tsx",
+          "src/renderer/features/portfolio/PortfolioPage.tsx",
+          "src/renderer/features/review/ReviewPage.tsx",
+          "src/renderer/features/review/ReviewResultView.tsx",
+          "src/renderer/features/review/ReviewSetup.tsx",
+          "src/renderer/features/settings/AboutPanel.tsx",
+          "src/renderer/features/settings/SettingsPage.tsx",
+          "src/renderer/hooks/usePortfolioActions.ts",
+          "src/renderer/index.css",
+          "src/renderer/index.tsx",
+          "src/renderer/lib/constants.test.ts",
+          "src/renderer/lib/constants.ts",
+          "src/renderer/lib/draft-recovery.ts",
+          "src/renderer/lib/drafting.test.ts",
+          "src/renderer/lib/legal-search-routing.test.ts",
+          "src/renderer/lib/pdf-generator.ts",
+          "src/renderer/lib/routes.test.ts",
+          "src/renderer/lib/routes.ts",
+          "src/renderer/lib/template-bodies.ts",
+          "src/renderer/store/useUiStore.ts",
+          "tests/dev-desktop-launcher.test.ts",
+          "tests/official-fiscal-parser.test.ts",
+          "tests/pdf-parser.test.ts",
+          "tests/recovery-electron/main.ts",
+          "tests/ui-electron/main.ts",
+          "tsconfig.json",
+          "vitest.config.ts"
+        ],
+        "buildUse": "Construcción, recursos o empaquetado",
+        "classification": "regenerable",
+        "decision": "Salida de compilación vigente, necesaria para pruebas Electron.",
+        "verification": "npm run build y recorridos Electron",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "release",
+        "exists": false,
+        "files": 0,
+        "bytes": 0,
+        "trackedFiles": 0,
+        "gitStatus": "",
+        "references": [
+          ".github/workflows/release.yml",
+          "CLAUDE.md",
+          "README.md",
+          "docs/arquitectura-procesamiento-y-gate-publicacion.md",
+          "docs/identidad-branding-y-sitio-comercial.md",
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "package.json",
+          "scripts/audit-legal-knowledge.mjs",
+          "scripts/generate-corpus-manifest.mjs",
+          "scripts/probe-legal-retrieval.mjs",
+          "tsconfig.json",
+          "vitest.config.ts"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "regenerable",
+        "decision": "Conservar cualquier candidato aceptado; no existe autorización para eliminar instaladores.",
+        "verification": "Hashes y manifiesto de aceptación",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": ".npm-cache",
+        "exists": true,
+        "files": 1682,
+        "bytes": 381753995,
+        "trackedFiles": 0,
+        "gitStatus": "!! .npm-cache/",
+        "references": [
+          "docs/relevo-ux-ui.md"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "mantenimiento",
+        "decision": "No borrar: mantenimiento opcional sin efecto funcional.",
+        "verification": "Reproducibilidad mediante npm ci en CI",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "node_modules",
+        "exists": true,
+        "files": 29979,
+        "bytes": 1673765000,
+        "trackedFiles": 0,
+        "gitStatus": "!! node_modules/",
+        "references": [
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "tests/dev-desktop-launcher.test.ts",
+          "tsconfig.json",
+          "vitest.config.ts"
+        ],
+        "buildUse": "Dependencias incluidas por electron-builder",
+        "classification": "necesario",
+        "decision": "Conservar para pruebas; auditar vulnerabilidades/licencias por separado.",
+        "verification": "npm ci y ABI Node/Electron",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "legal-runtime/corpus",
+        "exists": true,
+        "files": 20,
+        "bytes": 12843584,
+        "trackedFiles": 20,
+        "gitStatus": "",
+        "references": [
+          "CLAUDE.md",
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "scripts/legal-corpus-config.mjs",
+          "scripts/release-preflight.mjs",
+          "src/renderer/lib/law-reader.test.ts"
+        ],
+        "buildUse": "Construcción, recursos o empaquetado",
+        "classification": "necesario",
+        "decision": "Conservar íntegro.",
+        "verification": "audit:corpus-governance:strict; audit:legal-knowledge:strict",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "legal-runtime/lance_data",
+        "exists": true,
+        "files": 24,
+        "bytes": 33366828,
+        "trackedFiles": 24,
+        "gitStatus": "",
+        "references": [
+          "CLAUDE.md",
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "scripts/export-legal-corpus.mjs",
+          "scripts/legal-corpus-config.mjs",
+          "scripts/release-preflight.mjs"
+        ],
+        "buildUse": "Construcción, recursos o empaquetado",
+        "classification": "necesario",
+        "decision": "Conservar archivos internos de LanceDB.",
+        "verification": "audit:legal-retrieval; eval:legal-rag",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "legal-runtime/models",
+        "exists": true,
+        "files": 4,
+        "bytes": 23685047,
+        "trackedFiles": 4,
+        "gitStatus": "",
+        "references": [
+          "electron-builder.config.json",
+          "scripts/download-embeddings.mjs",
+          "scripts/evaluate-legal-rag.mjs",
+          "scripts/release-preflight.mjs"
+        ],
+        "buildUse": "Construcción, recursos o empaquetado",
+        "classification": "necesario",
+        "decision": "Conservar MiniLM; no es un LLM generativo. Empaquetar sólo los cuatro recursos fijados.",
+        "verification": "verify:embeddings",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "resources",
+        "exists": true,
+        "files": 2,
+        "bytes": 464468,
+        "trackedFiles": 2,
+        "gitStatus": "",
+        "references": [
+          ".github/workflows/ci.yml",
+          ".github/workflows/release.yml",
+          "CLAUDE.md",
+          "docs/identidad-branding-y-sitio-comercial.md",
+          "docs/relevo-ux-ui.md",
+          "electron-builder.config.json",
+          "scripts/generate-ico.mjs",
+          "scripts/release-preflight.mjs",
+          "src/main/index.ts",
+          "src/main/ipc/index.ts",
+          "src/main/lib/legal-corpus.ts",
+          "src/main/lib/rag.ts"
+        ],
+        "buildUse": "Construcción, recursos o empaquetado",
+        "classification": "necesario",
+        "decision": "Conservar iconos y recursos de todas las plataformas.",
+        "verification": "preflight y construcción",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "CLAUDE.md",
+        "exists": true,
+        "files": 1,
+        "bytes": 9959,
+        "trackedFiles": 1,
+        "gitStatus": "M CLAUDE.md",
+        "references": [
+          "docs/relevo-ux-ui.md"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "necesario",
+        "decision": "Corregir publicación y rutas inexistentes, conservando la arquitectura real.",
+        "verification": "Revisión de referencias y comandos",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      },
+      {
+        "path": "README.md",
+        "exists": true,
+        "files": 1,
+        "bytes": 6473,
+        "trackedFiles": 1,
+        "gitStatus": "M README.md",
+        "references": [
+          "docs/relevo-ux-ui.md"
+        ],
+        "buildUse": "Fuera de files/extraResources del instalador",
+        "classification": "necesario",
+        "decision": "Actualizar controles y ruta de evidencia visual.",
+        "verification": "Revisión de comandos documentados",
+        "owner": "Codex; selección de evidencia histórica por responsable de producto"
+      }
+    ],
+    "dependencies": [
+      {
+        "name": "@electron-toolkit/utils",
+        "references": [
+          "src/main/index.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "@fontsource-variable/manrope",
+        "references": [
+          "src/renderer/index.css"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "@fontsource-variable/petrona",
+        "references": [
+          "src/renderer/index.css"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "@lancedb/lancedb",
+        "references": [
+          "scripts/audit-legal-knowledge.mjs",
+          "scripts/ensure-legal-indices.mjs",
+          "scripts/evaluate-legal-rag.mjs",
+          "scripts/export-legal-corpus.mjs",
+          "scripts/ingest-local.mjs",
+          "scripts/legal-lance-indices.mjs",
+          "scripts/probe-legal-retrieval.mjs",
+          "scripts/repair-legal-anchors.mjs",
+          "scripts/verify-lance-metadata.mjs",
+          "src/main/ipc/analyze.handler.test.ts",
+          "src/main/lib/rag.analysis.test.ts",
+          "src/main/lib/rag.retention.test.ts",
+          "src/main/lib/rag.ts",
+          "tests/rag.test.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "@tailwindcss/typography",
+        "references": [
+          "src/renderer/index.css"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "@xenova/transformers",
+        "references": [
+          "scripts/evaluate-legal-rag.mjs",
+          "scripts/ingest-local.mjs",
+          "scripts/repair-legal-anchors.mjs",
+          "src/main/ipc/analyze.handler.test.ts",
+          "src/main/lib/rag.analysis.test.ts",
+          "src/main/lib/rag.ts",
+          "tests/rag.test.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "apache-arrow",
+        "references": [
+          "electron-builder.config.json"
+        ],
+        "decision": "Conservar: dependencia nativa/indirecta de LanceDB y regla asarUnpack; ausencia de import directo no prueba desuso."
+      },
+      {
+        "name": "better-sqlite3",
+        "references": [
+          ".github/workflows/ci.yml",
+          "CLAUDE.md",
+          "README.md",
+          "docs/relevo-ux-ui.md",
+          "scripts/test-case-vault-electron.mjs",
+          "scripts/test-recovery-electron.mjs",
+          "src/main/lib/case-vault.test.ts",
+          "src/main/lib/case-vault.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "clsx",
+        "references": [
+          "src/renderer/lib/utils.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "docx",
+        "references": [
+          "CLAUDE.md",
+          "electron.vite.config.ts",
+          "src/main/ipc/index.ts",
+          "src/main/ipc/vault.handler.test.ts",
+          "src/main/ipc/vault.handler.ts",
+          "src/main/lib/document-parser.ts",
+          "src/preload/index.ts",
+          "src/renderer/features/drafting/DraftDocument.tsx",
+          "src/renderer/features/drafting/DraftingPage.tsx",
+          "src/renderer/features/portfolio/PortfolioPage.tsx",
+          "src/renderer/features/review/ReviewPage.tsx",
+          "src/renderer/features/review/ReviewResultView.tsx",
+          "src/renderer/hooks/usePortfolioActions.ts",
+          "src/renderer/lib/docx-export.ts",
+          "src/renderer/lib/docx-generator.ts",
+          "src/renderer/lib/files.ts",
+          "tests/deterministic-audit.test.ts",
+          "tests/document-parser.test.ts",
+          "tests/docx-generator.test.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "electron-updater",
+        "references": [
+          "docs/relevo-ux-ui.md",
+          "src/main/index.ts",
+          "src/renderer/components/layout/UpdateBanner.tsx"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "jspdf",
+        "references": [
+          "electron.vite.config.ts",
+          "src/renderer/lib/pdf-generator.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "lucide-react",
+        "references": [
+          "src/renderer/components/ErrorBoundary.tsx",
+          "src/renderer/components/NotificationHub.tsx",
+          "src/renderer/components/PortfolioRow.tsx",
+          "src/renderer/components/ai/ApiKeyForm.tsx",
+          "src/renderer/components/ai/ProcessingSetupDialog.tsx",
+          "src/renderer/components/layout/HelpPanel.tsx",
+          "src/renderer/components/layout/OnboardingDialog.tsx",
+          "src/renderer/components/layout/Sidebar.tsx",
+          "src/renderer/components/layout/UpdateBanner.tsx",
+          "src/renderer/components/ui/Button.tsx",
+          "src/renderer/components/ui/ConfirmDialog.tsx",
+          "src/renderer/components/ui/Form.tsx",
+          "src/renderer/components/ui/Layout.tsx",
+          "src/renderer/features/buscador/BuscadorPage.tsx",
+          "src/renderer/features/drafting/DraftDetails.tsx",
+          "src/renderer/features/drafting/DraftDocument.tsx",
+          "src/renderer/features/drafting/TemplateChooser.tsx",
+          "src/renderer/features/drafting/TemplatePreviewDialog.tsx",
+          "src/renderer/features/estudio/EstudioLayout.tsx",
+          "src/renderer/features/laws/LawReaderDialog.tsx",
+          "src/renderer/features/laws/LawsPage.tsx",
+          "src/renderer/features/legal/PrivacyPolicy.tsx",
+          "src/renderer/features/legal/TermsConditions.tsx",
+          "src/renderer/features/portfolio/PortfolioPage.tsx",
+          "src/renderer/features/review/ReviewPage.tsx",
+          "src/renderer/features/review/ReviewResultView.tsx",
+          "src/renderer/features/review/ReviewSetup.tsx",
+          "src/renderer/features/settings/DataPanel.tsx",
+          "src/renderer/lib/legal-areas.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "mammoth",
+        "references": [
+          "src/main/lib/document-parser.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "pdf-parse",
+        "references": [
+          "CLAUDE.md",
+          "scripts/ingest-local.mjs",
+          "scripts/official-pdf-reader.mjs",
+          "scripts/stage-official-fiscal-corpus.mjs",
+          "src/main/lib/chunking.test.ts",
+          "src/main/lib/document-parser.ts",
+          "src/main/lib/pdf-parser.ts",
+          "src/main/lib/pdf-worker.ts",
+          "tests/pdf-parser.test.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "react",
+        "references": [
+          "CLAUDE.md",
+          "electron.vite.config.ts",
+          "src/renderer/App.tsx",
+          "src/renderer/components/BrandWatermark.tsx",
+          "src/renderer/components/ErrorBoundary.tsx",
+          "src/renderer/components/NotificationHub.tsx",
+          "src/renderer/components/PortfolioRow.tsx",
+          "src/renderer/components/ai/ApiKeyForm.tsx",
+          "src/renderer/components/ai/ProcessingSetupDialog.tsx",
+          "src/renderer/components/layout/AppEffects.tsx",
+          "src/renderer/components/layout/AppShell.tsx",
+          "src/renderer/components/layout/HelpPanel.tsx",
+          "src/renderer/components/layout/OnboardingDialog.tsx",
+          "src/renderer/components/layout/Sidebar.tsx",
+          "src/renderer/components/layout/UpdateBanner.tsx",
+          "src/renderer/components/ui/Button.tsx",
+          "src/renderer/components/ui/ConfirmDialog.tsx",
+          "src/renderer/components/ui/Form.tsx",
+          "src/renderer/components/ui/Layout.tsx",
+          "src/renderer/components/ui/Modal.tsx",
+          "src/renderer/components/ui/RadioGroup.tsx",
+          "src/renderer/features/buscador/BuscadorPage.tsx",
+          "src/renderer/features/drafting/DraftDetails.tsx",
+          "src/renderer/features/drafting/DraftDocument.tsx",
+          "src/renderer/features/drafting/DraftingPage.tsx",
+          "src/renderer/features/drafting/TemplateChooser.tsx",
+          "src/renderer/features/drafting/TemplatePreviewDialog.tsx",
+          "src/renderer/features/estudio/EstudioLayout.tsx",
+          "src/renderer/features/laws/LawReaderDialog.tsx",
+          "src/renderer/features/laws/LawsPage.tsx",
+          "src/renderer/features/laws/useSendArticleToDraft.ts",
+          "src/renderer/features/legal/PrivacyPolicy.tsx",
+          "src/renderer/features/legal/TermsConditions.tsx",
+          "src/renderer/features/portfolio/PortfolioPage.tsx",
+          "src/renderer/features/review/ReviewPage.tsx",
+          "src/renderer/features/review/ReviewResultView.tsx",
+          "src/renderer/features/review/ReviewSetup.tsx",
+          "src/renderer/features/settings/AboutPanel.tsx",
+          "src/renderer/features/settings/AiPanel.tsx",
+          "src/renderer/features/settings/DataPanel.tsx",
+          "src/renderer/features/settings/SettingsPage.tsx",
+          "src/renderer/hooks/useAiGuard.ts",
+          "src/renderer/hooks/useConfirmDialog.ts",
+          "src/renderer/hooks/usePortfolioActions.ts",
+          "src/renderer/index.tsx",
+          "src/renderer/lib/legal-areas.ts",
+          "tsconfig.json"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "react-dom",
+        "references": [
+          "electron.vite.config.ts",
+          "src/renderer/components/ui/Modal.tsx",
+          "src/renderer/index.tsx"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "react-markdown",
+        "references": [
+          "src/renderer/features/drafting/DraftDocument.tsx",
+          "src/renderer/features/drafting/TemplatePreviewDialog.tsx"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "react-router-dom",
+        "references": [
+          "electron.vite.config.ts",
+          "src/renderer/App.tsx",
+          "src/renderer/components/layout/AppEffects.tsx",
+          "src/renderer/components/layout/HelpPanel.tsx",
+          "src/renderer/components/layout/Sidebar.tsx",
+          "src/renderer/features/drafting/TemplateChooser.tsx",
+          "src/renderer/features/estudio/EstudioLayout.tsx",
+          "src/renderer/features/laws/useSendArticleToDraft.ts",
+          "src/renderer/features/legal/PrivacyPolicy.tsx",
+          "src/renderer/features/legal/TermsConditions.tsx",
+          "src/renderer/features/portfolio/PortfolioPage.tsx",
+          "src/renderer/features/review/ReviewPage.tsx",
+          "src/renderer/features/settings/AboutPanel.tsx",
+          "src/renderer/features/settings/SettingsPage.tsx",
+          "src/renderer/hooks/usePortfolioActions.ts",
+          "src/renderer/index.tsx"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "tailwind-merge",
+        "references": [
+          "src/renderer/lib/utils.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "zod",
+        "references": [
+          "CLAUDE.md",
+          "src/main/ipc/analyze.handler.ts",
+          "src/main/ipc/assistant.handler.ts",
+          "src/main/ipc/byok.handler.ts",
+          "src/main/ipc/corpus.handler.ts",
+          "src/main/ipc/draft.handler.ts",
+          "src/main/ipc/index.ts",
+          "src/main/ipc/rag.handler.ts",
+          "src/main/ipc/recovery.handler.ts",
+          "src/main/ipc/vault.handler.ts",
+          "src/main/lib/byok-client.ts",
+          "src/main/lib/core-legal/business-core.ts",
+          "src/main/lib/legal-corpus.ts",
+          "src/main/lib/legal-grounding.ts",
+          "src/main/lib/legal-reranker.ts",
+          "src/shared/draft-recovery.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      },
+      {
+        "name": "zustand",
+        "references": [
+          "CLAUDE.md",
+          "src/renderer/lib/draft-recovery.ts",
+          "src/renderer/store/useUiStore.ts",
+          "src/renderer/store/useWorkspaceStore.ts"
+        ],
+        "decision": "Conservar hasta revisar imports dinámicos, CSS y empaquetado."
+      }
+    ],
+    "exactDuplicateTests": [],
+    "testOverlap": {
+      "paths": [
+        "tests/chunking.test.ts",
+        "src/main/lib/chunking.test.ts"
+      ],
+      "decision": "Conservar escenarios diferenciados; hash distinto no basta para consolidar."
+    },
+    "licenses": {
+      "licenseCounts": {
+        "MIT": 618,
+        "BSD-2-Clause": 11,
+        "ISC": 57,
+        "OFL-1.1": 2,
+        "Apache-2.0": 49,
+        "SEE LICENSE IN LICENSE.txt": 1,
+        "BSD-3-Clause": 27,
+        "LGPL-3.0-or-later": 8,
+        "Apache-2.0 AND LGPL-3.0-or-later AND MIT": 1,
+        "Apache-2.0 AND LGPL-3.0-or-later": 2,
+        "0BSD": 2,
+        "Python-2.0": 1,
+        "sin-metadato": 2,
+        "CC-BY-4.0": 1,
+        "BlueOak-1.0.0": 8,
+        "(MPL-2.0 OR Apache-2.0)": 1,
+        "BSD": 1,
+        "(MIT OR WTFPL)": 1,
+        "(MIT OR GPL-3.0-or-later)": 1,
+        "(MIT AND Zlib)": 2,
+        "MPL-2.0": 12,
+        "(BSD-2-Clause OR MIT OR Apache-2.0)": 1,
+        "MIT OR SEE LICENSE IN FEEL-FREE.md": 1,
+        "WTFPL OR ISC": 1,
+        "(MIT OR CC0-1.0)": 1,
+        "WTFPL": 1,
+        "(WTFPL OR MIT)": 1
+      },
+      "missingLicense": [
+        "node_modules/base-64",
+        "node_modules/json-bignum"
+      ],
+      "acceptance": "Inventario de metadatos; falta revisar avisos y licencias de binarios redistribuidos y el paquete final."
+    },
+    "limitations": [
+      "Referencias textuales no equivalen a un análisis completo de código muerto.",
+      "No se eliminaron cachés, capturas, modelos ni evidencia local."
+    ]
+  },
+  "dependencyAudit": {
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 18,
+      "high": 18,
+      "critical": 0,
+      "total": 36
+    },
+    "packages": [
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/app-builder-lib/node_modules/@electron/get"
+        ],
+        "advisoryUrls": [],
+        "name": "@electron/get",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@huggingface/transformers"
+        ],
+        "advisoryUrls": [],
+        "name": "@huggingface/transformers",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@lancedb/lancedb"
+        ],
+        "advisoryUrls": [],
+        "name": "@lancedb/lancedb",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/@tailwindcss/typography"
+        ],
+        "advisoryUrls": [],
+        "name": "@tailwindcss/typography",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/@vitest/mocker"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-82fw-gwwq-j7x9"
+        ],
+        "name": "@vitest/mocker",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@xenova/transformers"
+        ],
+        "advisoryUrls": [],
+        "name": "@xenova/transformers",
+        "direct": true
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@xmldom/xmldom"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-6gmq-8vp8-gcm6",
+          "https://github.com/advisories/GHSA-w2rr-34g9-rvrj",
+          "https://github.com/advisories/GHSA-4w3w-2rp5-g8jm",
+          "https://github.com/advisories/GHSA-c7q8-3ch8-vqpv",
+          "https://github.com/advisories/GHSA-27p8-2357-5qqv",
+          "https://github.com/advisories/GHSA-6h8r-xr42-gp59",
+          "https://github.com/advisories/GHSA-8344-3jmq-59r6",
+          "https://github.com/advisories/GHSA-x4fp-j954-r2f4",
+          "https://github.com/advisories/GHSA-965w-775f-mr7g",
+          "https://github.com/advisories/GHSA-93r5-fhx6-vmg9"
+        ],
+        "name": "@xmldom/xmldom",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/app-builder-lib"
+        ],
+        "advisoryUrls": [],
+        "name": "app-builder-lib",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/mammoth/node_modules/argparse"
+        ],
+        "advisoryUrls": [],
+        "name": "argparse",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/baseline-browser-mapping"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-w5vr-8v7q-w6rv"
+        ],
+        "name": "baseline-browser-mapping",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@electron/asar/node_modules/brace-expansion",
+          "node_modules/@electron/universal/node_modules/brace-expansion",
+          "node_modules/brace-expansion",
+          "node_modules/dir-compare/node_modules/brace-expansion",
+          "node_modules/filelist/node_modules/brace-expansion",
+          "node_modules/glob/node_modules/brace-expansion"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+          "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+          "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p"
+        ],
+        "name": "brace-expansion",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/browserslist"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-c83g-rgw3-j3cx",
+          "https://github.com/advisories/GHSA-73wf-gq98-2v4g"
+        ],
+        "name": "browserslist",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/dmg-builder"
+        ],
+        "advisoryUrls": [],
+        "name": "dmg-builder",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/dompurify"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-55q2-fjhq-7xh7",
+          "https://github.com/advisories/GHSA-c2j3-45gr-mqc4",
+          "https://github.com/advisories/GHSA-6688-9rhm-gjv2"
+        ],
+        "name": "dompurify",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/electron"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-gr2m-v5gq-v685",
+          "https://github.com/advisories/GHSA-j84w-jfhq-vhvj",
+          "https://github.com/advisories/GHSA-qmv3-fv6v-rmhq",
+          "https://github.com/advisories/GHSA-9qh4-3jw8-366w"
+        ],
+        "name": "electron",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/electron-builder"
+        ],
+        "advisoryUrls": [],
+        "name": "electron-builder",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/electron-builder-squirrel-windows"
+        ],
+        "advisoryUrls": [],
+        "name": "electron-builder-squirrel-windows",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/fast-uri"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-v2hh-gcrm-f6hx",
+          "https://github.com/advisories/GHSA-7p8r-x3mc-p8w7",
+          "https://github.com/advisories/GHSA-f65p-4m7j-42xc",
+          "https://github.com/advisories/GHSA-fph4-wmhf-6fwf",
+          "https://github.com/advisories/GHSA-jqff-g426-hqxp",
+          "https://github.com/advisories/GHSA-4c8g-83qw-93j6",
+          "https://github.com/advisories/GHSA-qw65-cvwx-89v3",
+          "https://github.com/advisories/GHSA-hrr3-gc8f-f4qj"
+        ],
+        "name": "fast-uri",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/global-agent"
+        ],
+        "advisoryUrls": [],
+        "name": "global-agent",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/http-cache-semantics"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-ch52-4w7c-c8xp"
+        ],
+        "name": "http-cache-semantics",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/js-yaml"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-52cp-r559-cp3m",
+          "https://github.com/advisories/GHSA-5p4m-2wfm-xmqj",
+          "https://github.com/advisories/GHSA-2883-xcg3-v3hh"
+        ],
+        "name": "js-yaml",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/mammoth"
+        ],
+        "advisoryUrls": [],
+        "name": "mammoth",
+        "direct": true
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/nanoid"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+          "https://github.com/advisories/GHSA-2v37-7h3g-55p8"
+        ],
+        "name": "nanoid",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/@huggingface/transformers/node_modules/onnxruntime-web"
+        ],
+        "advisoryUrls": [],
+        "name": "onnxruntime-web",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/postcss"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+          "https://github.com/advisories/GHSA-r28c-9q8g-f849"
+        ],
+        "name": "postcss",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/postcss-selector-parser"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-rj75-hqrm-r3gf"
+        ],
+        "name": "postcss-selector-parser",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/@huggingface/transformers/node_modules/protobufjs"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-f38q-mgvj-vph7",
+          "https://github.com/advisories/GHSA-j3f2-48v5-ccww"
+        ],
+        "name": "protobufjs",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/react-router"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-qwww-vcr4-c8h2"
+        ],
+        "name": "react-router",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/react-router-dom"
+        ],
+        "advisoryUrls": [],
+        "name": "react-router-dom",
+        "direct": true
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/roarr"
+        ],
+        "advisoryUrls": [],
+        "name": "roarr",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/@xenova/transformers/node_modules/sharp",
+          "node_modules/sharp"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-f88m-g3jw-g9cj",
+          "https://github.com/advisories/GHSA-rgj7-g3m4-5g8c",
+          "https://github.com/advisories/GHSA-wq5f-xc86-pv6w"
+        ],
+        "name": "sharp",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/source-map-js"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-68fv-2mgg-jv7q"
+        ],
+        "name": "source-map-js",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/mammoth/node_modules/sprintf-js",
+          "node_modules/sprintf-js"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-hp3w-g68c-fv3c"
+        ],
+        "name": "sprintf-js",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/tar"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-r292-9mhp-454m"
+        ],
+        "name": "tar",
+        "direct": false
+      },
+      {
+        "severity": "high",
+        "nodes": [
+          "node_modules/node-gyp/node_modules/undici",
+          "node_modules/undici"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-8xcm-r25x-g524",
+          "https://github.com/advisories/GHSA-8xcm-r25x-g524",
+          "https://github.com/advisories/GHSA-4cwx-7wf7-3272",
+          "https://github.com/advisories/GHSA-m8rv-5g2x-5cg5",
+          "https://github.com/advisories/GHSA-m8rv-5g2x-5cg5",
+          "https://github.com/advisories/GHSA-jr45-8vmc-qm54",
+          "https://github.com/advisories/GHSA-v3r7-h72x-cjcm",
+          "https://github.com/advisories/GHSA-v3r7-h72x-cjcm",
+          "https://github.com/advisories/GHSA-3wwx-pv8p-q78v",
+          "https://github.com/advisories/GHSA-3wwx-pv8p-q78v",
+          "https://github.com/advisories/GHSA-pmjh-fq2x-6v4x",
+          "https://github.com/advisories/GHSA-r53p-7pc4-xj5r",
+          "https://github.com/advisories/GHSA-r53p-7pc4-xj5r",
+          "https://github.com/advisories/GHSA-rfgv-xxqx-mfg5",
+          "https://github.com/advisories/GHSA-rfgv-xxqx-mfg5",
+          "https://github.com/advisories/GHSA-3xpg-4rpp-hhhm",
+          "https://github.com/advisories/GHSA-2jfj-6hjv-fm6j",
+          "https://github.com/advisories/GHSA-2gqq-gqf2-x968",
+          "https://github.com/advisories/GHSA-w293-vg96-wgc3",
+          "https://github.com/advisories/GHSA-8436-99hf-9mmv",
+          "https://github.com/advisories/GHSA-rx4f-c7p8-82vq"
+        ],
+        "name": "undici",
+        "direct": false
+      },
+      {
+        "severity": "moderate",
+        "nodes": [
+          "node_modules/vitest"
+        ],
+        "advisoryUrls": [
+          "https://github.com/advisories/GHSA-82fw-gwwq-j7x9"
+        ],
+        "name": "vitest",
+        "direct": true
+      }
+    ]
+  },
+  "historicalUiFileSha256": "b01cbf2ad1a2621847bcc4d7d8bf6d9f5f8d0c184377ba05752ea174360b07c5"
+}

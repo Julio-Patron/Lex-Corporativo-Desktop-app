@@ -2,12 +2,9 @@ export const LEGAL_ECOSYSTEMS = ['mercantil', 'laboral', 'comercio_exterior', 'a
 export type LegalAnalysisEcosystem = typeof LEGAL_ECOSYSTEMS[number];
 export type LegalDraftingArea = LegalAnalysisEcosystem;
 export type LegalEcosystem = LegalDraftingArea;
-export type LegalWorkflowModule = 'analysis' | 'drafting';
-export type AiExecutionMode = 'local' | 'byok';
 
 export type AnalysisPromptProfile = `${LegalAnalysisEcosystem}_analysis` | 'integral_analysis';
 export type DraftingPromptProfile = `${LegalDraftingArea}_drafting`;
-export type LegalPromptProfile = AnalysisPromptProfile | DraftingPromptProfile;
 
 export const ANALYSIS_PROMPT_PROFILES: Record<LegalAnalysisEcosystem, AnalysisPromptProfile> = {
   mercantil: 'mercantil_analysis',

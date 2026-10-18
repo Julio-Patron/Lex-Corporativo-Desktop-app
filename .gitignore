@@ -50,8 +50,7 @@ tmp/
 tmp-asar-extract/
 tmp-packaged-package.json
 reports/
-.superdesign/init/
-.superdesign/tmp/
-.superdesign/resume.json
+.superdesign/
+docs/auditoria-ui-2026-10-17.html
 *.gguf
 legal-runtime/models/*.gguf

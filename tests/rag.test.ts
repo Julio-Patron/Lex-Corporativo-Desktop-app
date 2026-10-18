@@ -157,7 +157,7 @@ describe('RAG doble carril para análisis', () => {
       && filter.includes("law_code = 'RMF'")
       && !filter.includes("law_code = 'LGTOC'")
     ))).toBe(true);
-    expect(ragMockState.filters).toContain('user-search:"requestId" = \'req-fiscal\' AND module = \'fiscal\'');
+    expect(ragMockState.filters).toContain('user-search:requestId = \'req-fiscal\' AND module = \'fiscal\'');
     expect(ragMockState.filters.some(filter => filter.includes("module = 'mercantil'"))).toBe(false);
   });
 
@@ -177,7 +177,7 @@ describe('RAG doble carril para análisis', () => {
       && filter.includes("law_code = 'LGTOC'")
       && !filter.includes("law_code = 'CFF'")
     ))).toBe(true);
-    expect(ragMockState.filters).toContain('user-search:"requestId" = \'req-mercantil\' AND module = \'mercantil\'');
+    expect(ragMockState.filters).toContain('user-search:requestId = \'req-mercantil\' AND module = \'mercantil\'');
     expect(ragMockState.filters.some(filter => filter.includes("module = 'fiscal'"))).toBe(false);
   });
 });
