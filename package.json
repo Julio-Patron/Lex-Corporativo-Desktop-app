@@ -21,6 +21,7 @@
     "audit:performance:electron": "node scripts/audit-performance-electron.mjs",
     "audit:cleanup": "node scripts/audit-cleanup-inventory.mjs",
     "audit:data:electron": "node scripts/audit-data-electron.mjs",
+    "audit:security:electron": "node scripts/audit-security-electron.mjs",
     "test:watch": "vitest",
     "predev:electron": "electron-rebuild -f -o better-sqlite3",
     "dev:electron": "node scripts/dev-desktop.mjs",
