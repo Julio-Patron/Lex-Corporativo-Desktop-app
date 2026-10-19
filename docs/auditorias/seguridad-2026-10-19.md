@@ -10,7 +10,7 @@ Fuera de alcance: pruebas de penetración, revisión de proveedores externos de 
 
 | Elemento | Valor |
 | --- | --- |
-| Código auditado | `main` @ `2ccc31b` (rango revisado `a718988..2ccc31b`) |
+| Código auditado | `main` @ `56aa94b` (rango revisado `a718988..56aa94b`) |
 | Node / npm | v24.21.0 / 12.2.0 |
 | Electron / electron-builder | 42.11.15 / 26.15.3 |
 | Windows | 11 Pro 10.0.26300, AMD Ryzen 7 7730U |
@@ -84,7 +84,7 @@ Correcciones derivadas de la revisión de código: un nombre de asunto cifrado p
 
 ### Dependencias (DEP-01)
 
-`npm audit` sobre `2ccc31b`: 16 paquetes, 4 altos y 12 moderados, 0 críticos. Es el mismo conjunto triado en `dep-01-triaje.md` (sharp y la cadena de transformers/LanceDB; electron-builder → sprintf-js; mammoth/argparse; typography/postcss-selector-parser). No hay avisos nuevos. El único arreglo que npm propone para los 16 es una bajada de versión mayor, rechazada. `pdfjs-dist` aparece como dependencia no declarada en dos scripts de corpus: llega por `pdf-parse` y sólo se usa en herramientas de mantenimiento.
+`npm audit` sobre `56aa94b`: 16 paquetes, 4 altos y 12 moderados, 0 críticos. Es el mismo conjunto triado en `dep-01-triaje.md` (sharp y la cadena de transformers/LanceDB; electron-builder → sprintf-js; mammoth/argparse; typography/postcss-selector-parser). No hay avisos nuevos. El único arreglo que npm propone para los 16 es una bajada de versión mayor, rechazada. `pdfjs-dist` aparece como dependencia no declarada en dos scripts de corpus: llega por `pdf-parse` y sólo se usa en herramientas de mantenimiento.
 
 ### Contenido del instalador
 

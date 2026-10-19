@@ -6,7 +6,7 @@
 
 ## Entorno
 
-Código auditado `main` @ `2ccc31b`; revisión de corrección sobre `a718988..HEAD`. TypeScript 5.9.3, vitest 4.1.12, Node v24.21.0. Herramientas de un solo uso: `knip@latest`, `depcheck`.
+Código auditado `main` @ `56aa94b`; revisión de corrección sobre `a718988..HEAD`. TypeScript 5.9.3, vitest 4.1.12, Node v24.21.0. Herramientas de un solo uso: `knip@latest`, `depcheck`.
 
 ## Métricas
 

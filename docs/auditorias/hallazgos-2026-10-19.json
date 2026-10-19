@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "baseSha": "2ccc31b",
-  "reviewRange": "a718988..2ccc31b",
+  "baseSha": "56aa94b",
+  "reviewRange": "a718988..56aa94b",
   "supersedes": "a71898852d5e035eb850da3a80164d12c7ad5e86",
   "date": "2026-10-19",
   "scope": "Cierre de la fase de desarrollo: re-evaluación de los hallazgos de a718988 con ensayos automatizados en Electron, revisión de código del rango y hallazgos nuevos. Distingue lo que bloquea un release comercial (releaseBlocking) de lo que bloquea el piloto interno sin firma (pilotBlocking).",
@@ -25,7 +25,7 @@
       "closureEvidence": [
         "src/main/ipc/trusted-ipc.ts (wrapper obligatorio; main instala el guardia antes de registrar handlers)",
         "src/main/ipc/trusted-ipc.test.ts (7 casos: subframe, otra ventana, documento navegado, marco ausente, normalización file:///C:)",
-        "reports/audits/security-2ccc31b.json → checks SEC-01 ok (ventana ajena, copia del documento y documento navegado rechazados con 'Origen no autorizado.')",
+        "reports/audits/security-56aa94b.json → checks SEC-01 ok (ventana ajena, copia del documento y documento navegado rechazados con 'Origen no autorizado.')",
         "3d242cd: ipcMain.on protegido descarta el mensaje en lugar de lanzar en el listener"
       ],
       "verifiedAt": "2026-10-19",
@@ -43,8 +43,8 @@
       "closureEvidence": [
         "src/shared/content-security-policy.ts, src/main/csp.ts, src/renderer/index.html (meta sin frame-ancestors/report-uri)",
         "src/renderer/index.tsx (securitypolicyviolation → csp:report → bitácora)",
-        "reports/audits/security-2ccc31b.json → checks SEC-02 ok (iframe frame-src, object object-src, script en línea script-src-elem, fetch connect-src bloqueados; encabezado con frame-ancestors)",
-        "reports/audits/performance-2ccc31b.json → cspWarnings vacío"
+        "reports/audits/security-56aa94b.json → checks SEC-02 ok (iframe frame-src, object object-src, script en línea script-src-elem, fetch connect-src bloqueados; encabezado con frame-ancestors)",
+        "reports/audits/performance-56aa94b.json → cspWarnings vacío"
       ],
       "verifiedAt": "2026-10-19",
       "pilotRelevance": "Ninguna acción del tester."
@@ -60,7 +60,7 @@
       "closureEvidence": [
         "src/main/lib/sanitizer.ts",
         "src/main/lib/sanitizer.test.ts (5 casos: fixture de la auditoría, Error anidado, dato corto no credencial, authorization corto, campos jurídicos no redactados)",
-        "reports/audits/data-2ccc31b.json → checks SEC-03 ok",
+        "reports/audits/data-56aa94b.json → checks SEC-03 ok",
         "3d242cd: finalModelUsed registra el modelo que realmente respondió (integridad de la bitácora)"
       ],
       "verifiedAt": "2026-10-19",
@@ -77,7 +77,7 @@
       "closureEvidence": [
         "src/main/lib/portable-backup.ts (scrypt + AES-256-GCM, contraseña ≥ 8), src/main/lib/case-vault.ts restoreVaultBackup (transaccional, conflictos, repetición), src/main/ipc/vault.handler.ts export-all/import-all",
         "src/main/lib/portable-backup.test.ts, src/main/lib/case-vault.test.ts",
-        "reports/audits/data-2ccc31b.json → checks DATA-01 ok (sellado sin texto, contraseña incorrecta/truncado/en claro rechazados, restaurar 1, repetir omite 1, conflicto detectado, replace 1)",
+        "reports/audits/data-56aa94b.json → checks DATA-01 ok (sellado sin texto, contraseña incorrecta/truncado/en claro rechazados, restaurar 1, repetir omite 1, conflicto detectado, replace 1)",
         "3d242cd: import-all sólo relee rutas ofrecidas por el diálogo"
       ],
       "pendingClosure": "Restauración en otro usuario de Windows con comparación de contenido: escenario RES-03 del piloto (gate 14).",
@@ -96,7 +96,7 @@
       "closureEvidence": [
         "src/main/lib/rag.ts (fragmentos cifrados al indexar; reescritura física de user_documents.lance tras el borrado; purgeExpiredUserDocuments al arrancar cubre cierre forzado)",
         "src/main/lib/rag.user-document-privacy.test.ts, src/main/lib/rag.retention.test.ts",
-        "reports/audits/data-2ccc31b.json → checks DATA-02 ok (0 filas, sin texto legible)"
+        "reports/audits/data-56aa94b.json → checks DATA-02 ok (0 filas, sin texto legible)"
       ],
       "verifiedAt": "2026-10-19",
       "pilotRelevance": "Ninguna acción del tester."
@@ -111,7 +111,7 @@
       "observed": "Hallazgo original: nombre de asunto legible en SQLite/WAL; nombres de archivo en columnas.",
       "closureEvidence": [
         "src/main/lib/case-vault.ts (migratePlaintextMetadata cifra name y fileName al abrir; wal_checkpoint + VACUUM)",
-        "reports/audits/data-2ccc31b.json → checks DATA-03 ok (vaultMetadataPlaintext false, fileNamePlaintext false)",
+        "reports/audits/data-56aa94b.json → checks DATA-03 ok (vaultMetadataPlaintext false, fileNamePlaintext false)",
         "3d242cd: un nombre indescifrable en este equipo se lista con marcador en lugar de bloquear el portafolio"
       ],
       "verifiedAt": "2026-10-19",
@@ -124,9 +124,9 @@
       "pilotBlocking": false,
       "title": "Alertas de dependencias y revisión de redistribución pendientes",
       "status": "abierto",
-      "observed": "npm audit en 2ccc31b: 16 paquetes (4 altos, 12 moderados, 0 críticos), el mismo conjunto triado en dep-01-triaje.md; ningún aviso nuevo. El único arreglo que npm propone es una bajada de versión mayor.",
+      "observed": "npm audit en 56aa94b: 16 paquetes (4 altos, 12 moderados, 0 críticos), el mismo conjunto triado en dep-01-triaje.md; ningún aviso nuevo. El único arreglo que npm propone es una bajada de versión mayor.",
       "closure": "Aceptación formal del responsable sobre los 16 avisos triados (decisión O3) y, para el release comercial, instalador firmado. No bloquea el piloto interno.",
-      "closureEvidence": ["reports/audits/npm-audit-2ccc31b.json", "docs/auditorias/dep-01-triaje.md"],
+      "closureEvidence": ["reports/audits/npm-audit-56aa94b.json", "docs/auditorias/dep-01-triaje.md"],
       "verifiedAt": "2026-10-19",
       "pilotRelevance": "Ninguna."
     },
@@ -137,9 +137,9 @@
       "pilotBlocking": false,
       "title": "Línea base de rendimiento sin aceptación en Windows instalado",
       "status": "mitigado",
-      "observed": "Umbrales provisionales codificados en scripts/audit-performance-electron.mjs (arranque mediana < 5 s y máx < 15 s; búsqueda caliente mediana < 500 ms). Ensayo en 2ccc31b: ver docs/auditorias/rendimiento-2026-10-19.md.",
+      "observed": "Umbrales provisionales codificados en scripts/audit-performance-electron.mjs (arranque mediana < 5 s y máx < 15 s; búsqueda caliente mediana < 500 ms). Ensayo en 56aa94b: ver docs/auditorias/rendimiento-2026-10-19.md.",
       "pendingClosure": "Cinco muestras de arranque en frío del instalador en Windows limpio (INS-02 del piloto, por equipo) dentro de los umbrales; confirmación de los umbrales por el responsable (decisión O2).",
-      "closureEvidence": ["reports/audits/performance-2ccc31b.json", "scripts/audit-performance-electron.mjs"],
+      "closureEvidence": ["reports/audits/performance-56aa94b.json", "scripts/audit-performance-electron.mjs"],
       "verifiedAt": "2026-10-19",
       "pilotRelevance": "INS-02 (P0), LEY-01."
     },

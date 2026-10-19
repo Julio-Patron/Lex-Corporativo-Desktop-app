@@ -8,11 +8,11 @@ Arranque del proceso hasta la pantalla de inicio, recarga, primera búsqueda y b
 
 | Elemento | Valor |
 | --- | --- |
-| Código | `main` @ `2ccc31b`, versión 1.0.0-rc.17 |
+| Código | `main` @ `56aa94b`, versión 1.0.0-rc.17 |
 | Electron | 42.11.15 |
 | Equipo | AMD Ryzen 7 7730U, 39 GB RAM, Windows 11 Pro 10.0.26300 |
 | Método | `npm run audit:performance:electron`: 5 procesos Electron nuevos con perfil temporal, ventana oculta, handlers reales; 5 muestras por operación y proceso (25 por operación) |
-| Evidencia | `reports/audits/performance-2ccc31b.json` (consolidado en `evidencia-2026-10-19.json`) |
+| Evidencia | `reports/audits/performance-56aa94b.json` (consolidado en `evidencia-2026-10-19.json`) |
 
 ## Umbrales
 
