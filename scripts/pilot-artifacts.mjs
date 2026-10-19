@@ -29,7 +29,8 @@ if (buildShaArg) {
   try {
     buildSha = execFileSync('git', ['rev-parse', '--verify', `${buildShaArg}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
     execFileSync('git', ['merge-base', '--is-ancestor', buildSha, 'HEAD'], { cwd: root });
-    const packagedDiff = execFileSync('git', ['diff', '--name-only', buildSha, 'HEAD', '--', 'src', 'scripts', 'legal-runtime', 'resources', 'package.json', 'package-lock.json', 'electron-builder.config.json', 'electron.vite.config.ts', 'tsconfig.json'], { cwd: root, encoding: 'utf8' }).trim();
+    // Entradas del paquete: código compilado a out/, package.json (dentro del asar), dependencias, recursos y configuración del builder. scripts/ no se empaqueta.
+    const packagedDiff = execFileSync('git', ['diff', '--name-only', buildSha, 'HEAD', '--', 'src', 'legal-runtime', 'resources', 'package.json', 'package-lock.json', 'electron-builder.config.json', 'electron.vite.config.ts', 'tsconfig.json'], { cwd: root, encoding: 'utf8' }).trim();
     check('sha-de-construccion', packagedDiff === '', packagedDiff ? `Archivos empaquetables distintos desde ${buildSha.slice(0, 7)}:\n${packagedDiff}` : `${buildSha.slice(0, 7)} es ancestro de HEAD sin cambios empaquetables`);
   } catch (error) {
     check('sha-de-construccion', false, `SHA de construcción inválido o no integrado: ${error.message}`);
