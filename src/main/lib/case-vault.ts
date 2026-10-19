@@ -184,8 +184,16 @@ function encryptPayload(plainText: string): string {
   return `encrypted:v1:${safeStorage.encryptString(plainText).toString('base64')}`;
 }
 
+const UNREADABLE_CASE_NAME = 'No se pudo descifrar este asunto en este equipo';
+
 function presentMetadata(row: CaseMetadata): CaseMetadata {
-  return { ...row, name: decryptField(row.name) };
+  // Un nombre cifrado por otro usuario de Windows no debe dejar inutilizable todo el portafolio:
+  // el asunto se lista con un marcador y puede eliminarse; su contenido sigue protegido.
+  try {
+    return { ...row, name: decryptField(row.name) };
+  } catch {
+    return { ...row, name: UNREADABLE_CASE_NAME };
+  }
 }
 
 function migratePlaintextMetadata(database: Database.Database): number {

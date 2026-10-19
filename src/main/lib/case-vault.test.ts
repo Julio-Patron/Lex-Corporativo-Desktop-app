@@ -21,7 +21,12 @@ vi.mock('electron', () => ({
     isEncryptionAvailable: () => mockState.isEncryptionAvailable,
     getSelectedStorageBackend: () => mockState.backend,
     encryptString: (str: string) => Buffer.from('encrypted:' + str, 'utf-8'),
-    decryptString: (buf: Buffer) => buf.toString('utf-8').slice('encrypted:'.length),
+    decryptString: (buf: Buffer) => {
+      const text = buf.toString('utf-8');
+      // Simula un registro cifrado por otro usuario de Windows: DPAPI no puede abrirlo.
+      if (text.includes('OTRO_PERFIL')) throw new Error('DPAPI: clave de otro usuario');
+      return text.slice('encrypted:'.length);
+    },
   },
 }));
 
@@ -65,6 +70,19 @@ describeVault('Local Case Vault', () => {
     await expect(vault.createCase('case_123', 'Test Case 1', 'mercantil'))
       .rejects.toThrow('cifrado seguro del sistema operativo no está disponible');
     expect(vault.getVaultProtectionStatus().ready).toBe(false);
+  });
+
+  it('keeps the portfolio usable when one case name cannot be decrypted on this profile', async () => {
+    vault = await import('./case-vault');
+    await vault.createCase('case_ok', 'Asunto legible', 'fiscal');
+    await vault.createCase('case_foreign', 'OTRO_PERFIL asunto ajeno', 'fiscal');
+
+    const cases = await vault.listCases();
+    expect(cases.map(item => item.caseId).sort()).toEqual(['case_foreign', 'case_ok']);
+    expect(cases.find(item => item.caseId === 'case_ok')?.name).toBe('Asunto legible');
+    expect(cases.find(item => item.caseId === 'case_foreign')?.name).toMatch(/no se pudo descifrar/i);
+    await expect(vault.deleteCase('case_foreign')).resolves.toBeUndefined();
+    expect((await vault.listCases()).length).toBe(1);
   });
 
   it('creates and lists cases using OS safeStorage encryption when available', async () => {

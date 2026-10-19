@@ -147,7 +147,8 @@ function normalizeProvider(value: unknown): ByokProvider {
 }
 
 const RETIRED_GEMINI_MODEL_PATTERN = /^(?:models\/)?gemini-(?:1\.[05]|2\.[05]|pro)(?:-[a-z0-9._-]+)?$/i;
-const RETIRED_ANTHROPIC_MODEL_PATTERN = /^claude-(?:2|instant|3-[057]?(?:-(?:sonnet|opus|haiku))?)(?:-[a-z0-9._-]+)?$/i;
+// Debe coincidir con byok-client.ts. Cubre claude-2*, claude-instant*, claude-3-opus/haiku/sonnet-* y claude-3-5/3-7-*.
+const RETIRED_ANTHROPIC_MODEL_PATTERN = /^claude-(?:2|instant|3(?:-[057])?(?:-(?:sonnet|opus|haiku))?)(?:-[a-z0-9._-]+)?$/i;
 
 function normalizeProviderModel(provider: ByokProvider, model?: string): string {
   const raw = (model || '').trim();

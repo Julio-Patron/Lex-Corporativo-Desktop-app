@@ -144,6 +144,10 @@ describe('BYOK provider client', () => {
     expect(normalizeModelName('gemini', 'models/gemini-2.5-flash')).toBe('gemini-3.5-flash-lite');
     expect(normalizeModelName('gemini', 'models/gemini-3.8-flash')).toBe('gemini-3.8-flash');
     expect(normalizeModelName('anthropic', 'claude-3-5-sonnet-20241022')).toBe('claude-sonnet-4-20250514');
+    expect(normalizeModelName('anthropic', 'claude-3-opus-20240229')).toBe('claude-sonnet-4-20250514');
+    expect(normalizeModelName('anthropic', 'claude-3-haiku-20240307')).toBe('claude-sonnet-4-20250514');
+    expect(normalizeModelName('anthropic', 'claude-3-7-sonnet-latest')).toBe('claude-sonnet-4-20250514');
+    expect(normalizeModelName('anthropic', 'claude-sonnet-4-6')).toBe('claude-sonnet-4-6');
   });
 
   it('auto-discovers an available Gemini model via ListModels when the requested model returns 404 or 402', async () => {

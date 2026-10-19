@@ -83,7 +83,9 @@ describe('ipcMain protegido', () => {
     ipcMain.on('demo-event', listener);
 
     expect(() => state.handlers.get('handle:demo')!(sender())).toThrow(/Origen no autorizado/);
-    expect(() => state.handlers.get('on:demo-event')!(sender())).toThrow(/Origen no autorizado/);
+    // Un listener de ipcMain.on no tiene promesa que rechazar: lanzar ahí sería una excepción no capturada
+    // en el proceso principal. El mensaje se descarta en silencio.
+    expect(() => state.handlers.get('on:demo-event')!(sender())).not.toThrow();
     expect(listener).not.toHaveBeenCalled();
   });
 

@@ -221,10 +221,16 @@ export function registerVaultHandlers(): void {
     return { success: true, filePath, caseCount: cases.length, packageHash: hashPortableBackupCore(exportCore) };
   });
 
+  // Sólo se vuelven a leer rutas que el diálogo del proceso principal entregó en esta sesión
+  // (reintento tras un conflicto). El renderer no puede pedir la lectura de un archivo arbitrario.
+  const offeredBackupPaths = new Set<string>();
   ipcMain.handle('vault:import-all', async (_event, rawPayload: unknown) => {
     const parsed = ImportBackupSchema.safeParse(rawPayload);
     if (!parsed.success) throw new Error('La contraseña del respaldo debe tener al menos 8 caracteres.');
     let selectedFilePath = parsed.data.filePath;
+    if (selectedFilePath && !offeredBackupPaths.has(selectedFilePath)) {
+      throw new Error('Selecciona el archivo de respaldo mediante el diálogo de la aplicación.');
+    }
     if (!selectedFilePath) {
       const { canceled, filePaths } = await dialog.showOpenDialog({
         filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
@@ -234,6 +240,7 @@ export function registerVaultHandlers(): void {
         return { success: false, canceled: true, restored: 0, skipped: 0, replaced: 0 };
       }
       selectedFilePath = filePaths[0];
+      offeredBackupPaths.add(selectedFilePath);
     }
     try {
       const opened = openPortableBackup(readFileSync(selectedFilePath, 'utf8'), parsed.data.password);

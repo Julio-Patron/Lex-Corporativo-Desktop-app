@@ -31,14 +31,16 @@ async function extractTextContentWorker(buffer: Buffer, fileName: string) {
   const parser = new PDFParse({ data: new Uint8Array(buffer) });
 
   try {
+    // El conteo de páginas se lee antes de extraer texto: así el límite protege de verdad el tiempo y la memoria.
+    const info = await parser.getInfo();
+    if (info.total && info.total > MAX_PDF_PAGES) {
+      throw new Error(`El PDF '${fileName}' excede el número máximo de páginas permitidas (${MAX_PDF_PAGES}).`);
+    }
+
     const result = await parser.getText({
       lineEnforce: true,
       pageJoiner: '',
     });
-
-    if (result.total && result.total > MAX_PDF_PAGES) {
-      throw new Error(`El PDF '${fileName}' excede el número máximo de páginas permitidas (${MAX_PDF_PAGES}).`);
-    }
 
     const pages = result.pages
       .map((page: any) => ({

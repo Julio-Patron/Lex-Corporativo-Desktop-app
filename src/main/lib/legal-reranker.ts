@@ -205,12 +205,15 @@ export async function rerankLegalArticles(
 
   const headCandidates = candidates.slice(0, 12);
   const tailCandidates = candidates.slice(12);
+  // El cliente BYOK puede caer a un modelo alternativo; el resultado debe nombrar el que respondió.
+  let resolvedModel = byok.model;
 
   try {
     const result = await generateByokText({
       provider: byok.provider,
       apiKey: byok.apiKey,
       model: byok.model,
+      onModelResolved: (model) => { resolvedModel = model; },
       systemInstruction: [
         'Eres el motor de fundamentación y correlación normativa de Lex Corporativo para legislación mexicana.',
         'Tu tarea NO es conversar como un chat, sino:',
@@ -244,7 +247,7 @@ export async function rerankLegalArticles(
         matches: local.matches,
         status: 'fallback',
         provider: byok.provider,
-        model: byok.model,
+        model: resolvedModel,
         fallbackReason: 'invalid_ranking',
         synthesis: local.synthesis,
       };
@@ -255,7 +258,7 @@ export async function rerankLegalArticles(
       matches: localFallback.matches,
       status: 'applied',
       provider: byok.provider,
-      model: byok.model,
+      model: resolvedModel,
       synthesis: parsedMeta.success && parsedMeta.data.synthesis?.trim()
         ? parsedMeta.data.synthesis.trim()
         : localFallback.synthesis,
@@ -268,7 +271,7 @@ export async function rerankLegalArticles(
       matches: local.matches,
       status: 'fallback',
       provider: byok.provider,
-      model: byok.model,
+      model: resolvedModel,
       fallbackReason: 'provider_error',
       synthesis: local.synthesis,
     };

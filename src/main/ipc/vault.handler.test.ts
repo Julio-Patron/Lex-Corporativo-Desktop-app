@@ -11,6 +11,7 @@ vi.mock('electron', () => ({
   },
   dialog: {
     showSaveDialog: vi.fn(),
+    showOpenDialog: vi.fn(),
   },
 }));
 
@@ -28,6 +29,8 @@ vi.mock('../lib/case-vault', () => ({
   VaultRestoreConflict: class VaultRestoreConflict extends Error {},
 }));
 
+import { ipcMain as electronIpcMain } from 'electron';
+import { setIpcSenderGuard } from './trusted-ipc';
 import {
   CreateCaseSchema,
   ExportBackupSchema,
@@ -36,7 +39,21 @@ import {
   SaveDraftSchema,
   ExportPdfSchema,
   ExportDocxSchema,
+  registerVaultHandlers,
 } from './vault.handler';
+
+describe('vault:import-all file path boundary', () => {
+  it('only reads a backup path that the main-process dialog offered in this session', async () => {
+    setIpcSenderGuard(() => true);
+    registerVaultHandlers();
+    const registration = (electronIpcMain.handle as unknown as { mock: { calls: Array<[string, (...args: unknown[]) => unknown]> } }).mock.calls
+      .find(([channel]) => channel === 'vault:import-all');
+    expect(registration).toBeDefined();
+    const handler = registration![1];
+    await expect(handler({}, { password: 'contrasena-larga', filePath: 'C:/Users/alguien/AppData/Roaming/Lex Corporativo/byok-settings.json' }))
+      .rejects.toThrow(/diálogo/);
+  });
+});
 
 describe('vault IPC input validation schemas', () => {
   it('strictly validates SaveAnalysisSchema and rejects non-record analysisData (preventing z.any regression)', () => {

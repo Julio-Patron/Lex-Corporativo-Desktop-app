@@ -128,7 +128,9 @@ export function resolveLawCode(law: string | null | undefined): string | null {
   for (const [pattern, code] of LAW_NAME_TO_CODE) {
     if (pattern.test(normalized)) return code;
   }
-  const codeMatch = trimmed.match(/\b(CCF|CCOM|CCom|LGSM|LGTOC|LIE|CNPCF|CFF|LISR|RLIVA|LIVA|LFT|RLCE|LCE|RLA|LA|RGCE|LIGIE|TIGIE)\b/);
+  // "LA" sólo cuenta como Ley Aduanera cuando es el código completo (KNOWN_LAW_CODES) o el nombre explícito:
+  // dentro de un nombre desconocido es el artículo "la" y abriría la ley equivocada.
+  const codeMatch = trimmed.match(/\b(CCF|CCOM|CCom|LGSM|LGTOC|LIE|CNPCF|CFF|LISR|RLIVA|LIVA|LFT|RLCE|LCE|RLA|RGCE|LIGIE|TIGIE)\b/);
   if (codeMatch) return codeMatch[1].toUpperCase();
   return null;
 }

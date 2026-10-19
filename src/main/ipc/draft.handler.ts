@@ -245,6 +245,8 @@ export function registerDraftHandlers(): void {
       }
       const requestedExecutionMode = 'byok' as const;
       let fallbackReason: string | undefined;
+      // El cliente BYOK puede caer a un modelo alternativo; la bitácora debe registrar el que respondió.
+      let resolvedModel = byok.model;
       const referenceText = await extractReferenceFile(payload);
       const referenceContext = referenceText
         ? payload.sourceAnalysisId
@@ -335,6 +337,7 @@ export function registerDraftHandlers(): void {
           provider: byok.provider,
           apiKey: byok.apiKey,
           model: byok.model,
+          onModelResolved: (model) => { resolvedModel = model; },
           systemInstruction: [
             'Eres el backend de redacción jurídica de Lex Corporativo.',
             'Los fundamentos proporcionados son la única fuente jurídica autorizada.',
@@ -362,6 +365,7 @@ export function registerDraftHandlers(): void {
               provider: byok.provider,
               apiKey: byok.apiKey!,
               model: byok.model,
+              onModelResolved: (model) => { resolvedModel = model; },
               systemInstruction: [
                 'Corrige una redacción jurídica estructurada rechazada por Lex Corporativo.',
                 'Usa únicamente los FUENTE_ID proporcionados y elimina cualquier bloque sin vínculo exacto.',
@@ -417,7 +421,7 @@ export function registerDraftHandlers(): void {
           operation: 'drafting',
           module: activeModule,
           primaryModel: `${byok.provider}:${byok.model}`,
-          finalModelUsed: `${byok.provider}:${byok.model}`,
+          finalModelUsed: `${byok.provider}:${resolvedModel}`,
           hasFallback: groundingOutcome.repaired,
           fallbackReason,
           prompt: payload.requirements,

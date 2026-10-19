@@ -47,7 +47,8 @@ for (const [index, script] of suites[mode].entries()) {
     let text = '';
     child.stdout.on('data', chunk => { text += chunk; });
     child.stderr.on('data', chunk => { text += chunk; });
-    child.on('error', error => { text += error.message; });
+    // Si el proceso no llega a arrancar no se emite 'close': resolver aquí evita que el paso cuelgue hasta el timeout.
+    child.on('error', error => { text += error.message; resolve({ code: 1, text: sanitize(text) }); });
     child.on('close', code => resolve({ code, text: sanitize(text) }));
   });
   fs.writeFileSync(path.join(output, `${index}-${script.replaceAll(':', '-')}.log`), result.text);

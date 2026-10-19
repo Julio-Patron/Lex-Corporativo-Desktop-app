@@ -67,7 +67,9 @@ export const ipcMain = {
   },
   on(channel: string, listener: OnListener): void {
     electronIpc.on(channel, (event, ...args) => {
-      assertTrustedIpcSender(event);
+      // Un listener de `on` no devuelve promesa: lanzar aquí sería una excepción no capturada del proceso
+      // principal. El mensaje de un origen no autorizado se descarta.
+      if (!guard(event)) return;
       listener(event, ...args);
     });
   },

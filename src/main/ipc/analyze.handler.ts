@@ -540,6 +540,8 @@ export async function processAnalyzePayload(
     const userPrompt = payload.focusedInstruction || 'Análisis de riesgos y cumplimiento.';
     const byok = getActiveByokConfig();
     let reviewMode: ReviewMode = 'ai';
+    // El cliente BYOK puede caer a un modelo alternativo; la bitácora debe registrar el que respondió.
+    let resolvedModel = byok.model;
     let basicReason: BasicReviewReason | undefined;
 
     const selectedEcosystems = payload.ecosystems && payload.ecosystems.length > 0 ? payload.ecosystems : [activeModule];
@@ -684,6 +686,7 @@ export async function processAnalyzePayload(
             provider: byok.provider,
             apiKey: byok.apiKey,
             model: byok.model,
+            onModelResolved: (model) => { resolvedModel = model; },
             systemInstruction: systemInstructionContent,
             prompt: composeLimitedByokPrompt({
               instruction: instructionPrompt,
@@ -721,6 +724,7 @@ export async function processAnalyzePayload(
               provider: byok.provider,
               apiKey: byok.apiKey!,
               model: byok.model,
+              onModelResolved: (model) => { resolvedModel = model; },
               systemInstruction: [
                 `Corrige un análisis documental JSON rechazado por el validador local de Lex Corporativo (${isIntegral ? `Auditoría Integral 360°: ${contractLabels}` : analysisContract.label}).`,
                 'Los fundamentos locales son la unica fuente juridica autorizada.',
@@ -788,7 +792,7 @@ export async function processAnalyzePayload(
         operation: 'analysis',
         module: activeModule,
         primaryModel: byok?.enabled && byok?.apiKey ? `${byok.provider}:${byok.model}` : 'local_rules',
-        finalModelUsed: reviewMode === 'basic' ? 'local_rules' : `${byok.provider}:${byok.model}`,
+        finalModelUsed: reviewMode === 'basic' ? 'local_rules' : `${byok.provider}:${resolvedModel}`,
         hasFallback: Boolean(fallbackReason),
         fallbackReason,
         prompt: userPrompt,
