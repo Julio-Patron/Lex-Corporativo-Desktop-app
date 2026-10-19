@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { describe, expect, it } from 'vitest';
-import { filterArticles, findArticle, formatArticleCitation, parseLawMarkdown } from './law-reader';
+import { canOpenLawInReader, filterArticles, findArticle, formatArticleCitation, parseLawMarkdown, resolveLawCode } from './law-reader';
 
 const sample = `# Ley Federal del Trabajo
 
@@ -54,5 +54,14 @@ describe('law reader', () => {
       const parsed = parseLawMarkdown(fs.readFileSync(path.join(corpusDir, law.corpusFile), 'utf8'));
       expect(parsed.articles.length, law.code).toBeGreaterThan(50);
     }
+  });
+
+  it('resolves canonical law codes and full law names while rejecting placeholders', () => {
+    expect(resolveLawCode('LGSM')).toBe('LGSM');
+    expect(resolveLawCode('Ley General de Sociedades Mercantiles')).toBe('LGSM');
+    expect(resolveLawCode('Código Fiscal de la Federación (CFF)')).toBe('CFF');
+    expect(resolveLawCode('Normativa local')).toBeNull();
+    expect(canOpenLawInReader('Ley Federal del Trabajo')).toBe(true);
+    expect(canOpenLawInReader('Normativa local')).toBe(false);
   });
 });

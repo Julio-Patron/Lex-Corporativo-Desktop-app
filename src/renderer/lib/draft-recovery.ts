@@ -6,9 +6,10 @@ import { hasUnsavedDraft, TEMPLATE_CATALOG } from './drafting';
 export const useRecoveryStatus = create<{ message: string | null; error: boolean }>(() => ({ message: null, error: false }));
 let retry = () => {};
 export const retryDraftRecovery = () => retry();
+export const dismissRecoveryNotice = () => useRecoveryStatus.setState((state) => (state.error ? state : { message: null, error: false }));
 
 export function snapshotDraft(draft: DraftSession): DraftRecovery | null {
-  if (!hasUnsavedDraft(draft) && (draft.record || draft.step === 'choose')) return null;
+  if (!hasUnsavedDraft(draft) && (draft.record || draft.step === 'choose' || (!draft.template && !draft.sourceReview))) return null;
   return {
     version: 1, step: draft.step, source: draft.source, area: draft.area,
     templateId: draft.template?.id ?? null, fieldValues: draft.fieldValues,

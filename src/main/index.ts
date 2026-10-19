@@ -6,7 +6,7 @@ import { createAppMenu } from './menu';
 import { installContentSecurityPolicy } from './csp';
 import { registerIpcHandlers } from './ipc';
 import { registerRecoveryHandlers } from './ipc/recovery.handler';
-import { ipcMain, isTrustedAppSender, setIpcSenderGuard } from './ipc/trusted-ipc';
+import { ipcMain, isSameAppDocument, isTrustedAppSender, setIpcSenderGuard } from './ipc/trusted-ipc';
 import { registerProtocol, handleDeepLink } from './protocol';
 import { formatForLog } from './lib/sanitizer';
 import { getByokSettings } from './lib/byok-settings';
@@ -23,7 +23,7 @@ function rendererDocumentUrl(): string {
 }
 
 function isAppDocument(url: string): boolean {
-  return url.split('#')[0] === rendererDocumentUrl().split('#')[0];
+  return isSameAppDocument(url, rendererDocumentUrl());
 }
 
 function isTrustedSender(event: { sender: unknown; senderFrame: { url: string } | null }): boolean {

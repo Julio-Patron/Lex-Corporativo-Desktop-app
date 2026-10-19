@@ -9,7 +9,7 @@ vi.mock('electron', () => ({
   },
 }));
 
-import { ipcMain, isTrustedAppSender, setIpcSenderGuard, type TrustedWindow } from './trusted-ipc';
+import { ipcMain, isSameAppDocument, isTrustedAppSender, setIpcSenderGuard, type TrustedWindow } from './trusted-ipc';
 
 const documentUrl = 'file:///app/index.html';
 const webContents = { id: 'main' };
@@ -40,6 +40,26 @@ describe('isTrustedAppSender', () => {
       ...expected,
       mainFrame: hashedFrame,
     })).toBe(true);
+  });
+
+  it('acepta la URL raíz normalizada por Chromium en desarrollo', () => {
+    const devFrame = { url: 'http://localhost:5173/#/estudio/auditar' };
+    const devExpected = { webContents, mainFrame: devFrame, documentUrl: 'http://localhost:5173' };
+    expect(isTrustedAppSender(sender({ senderFrame: devFrame }), devExpected)).toBe(true);
+    expect(isTrustedAppSender(sender({ senderFrame: { ...devFrame } }), devExpected)).toBe(false);
+    expect(isTrustedAppSender(sender({ sender: {}, senderFrame: devFrame }), devExpected)).toBe(false);
+  });
+
+  it('conserva la restricción de origen, puerto, ruta y query al normalizar', () => {
+    const devUrl = 'http://localhost:5173';
+    for (const actual of [
+      'http://127.0.0.1:5173/', 'http://localhost:5174/', 'https://localhost:5173/',
+      'http://localhost:5173/other', 'http://localhost:5173/?other=1',
+      'http://localhost:5173.evil.example/', 'about:blank', 'not a URL',
+    ]) {
+      expect(isSameAppDocument(actual, devUrl)).toBe(false);
+    }
+    expect(isSameAppDocument(documentUrl, 'not a URL')).toBe(false);
   });
 
   it('rechaza otra ventana, un subframe, un documento navegado y un marco ausente', () => {

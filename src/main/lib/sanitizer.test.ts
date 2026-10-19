@@ -51,4 +51,17 @@ describe('sanitizeForLocalCache', () => {
     expect(redacted.authorization).toBe('[REDACTED_LOCAL_CACHE]');
     expect(redacted.note).toBe('visible');
   });
+
+  it('conserva campos jurídicos como secretario, secretaria y secreto_industrial sin redactarlos como credenciales', () => {
+    const payload = {
+      secretario: 'Lic. Roberto Gómez',
+      secretaria_actas: 'Lic. María Pérez',
+      secreto_industrial: 'Proceso de manufactura confidencial',
+      missingData: ['RFC del comisario'],
+    };
+    expect(sanitizeForLocalCache(payload)).toEqual(payload);
+    const logSafe = sanitizeForLogs(payload) as typeof payload;
+    expect(logSafe.secretario).toBe('Lic. Roberto Gómez');
+    expect(logSafe.missingData).toEqual(['RFC del comisario']);
+  });
 });

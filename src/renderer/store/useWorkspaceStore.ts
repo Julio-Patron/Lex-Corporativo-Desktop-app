@@ -1,8 +1,17 @@
 import { create } from 'zustand';
-import type { DraftingTemplate } from '../lib/constants';
-import type { LegalArea } from '../lib/legal-areas';
+import { LEGAL_ENGINEERING_TEMPLATES, type DraftingTemplate } from '../lib/constants';
+import { LEGAL_AREAS, type LegalArea } from '../lib/legal-areas';
 import type { DraftRecord, DraftSource, ReviewRecord } from '../types';
 import { newRecordId } from '../lib/portfolio';
+
+function findTemplateById(templateId?: string | null): DraftingTemplate | null {
+  if (!templateId) return null;
+  for (const area of LEGAL_AREAS) {
+    const found = LEGAL_ENGINEERING_TEMPLATES[area].find((template) => template.id === templateId);
+    if (found) return found;
+  }
+  return null;
+}
 
 export type DraftStep = 'choose' | 'details' | 'document';
 
@@ -98,10 +107,25 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
           dirty: true,
         },
       };
-      if (current.step === 'details') {
+      const hasDetailsProgress = current.step === 'details'
+        || Boolean(
+          current.template
+          || current.instructions.trim()
+          || current.referenceFile
+          || current.missingReferenceFileName
+          || current.sourceReview
+          || Object.values(current.fieldValues).some((value) => value.trim()),
+        );
+      if (hasDetailsProgress) {
         destination = 'instructions';
         const text = `FUNDAMENTO A CONSIDERAR:\n${citation}`;
-        return { draft: { ...current, instructions: current.instructions.trim() ? `${current.instructions.trim()}\n\n${text}` : text } };
+        return {
+          draft: {
+            ...current,
+            step: 'details',
+            instructions: current.instructions.trim() ? `${current.instructions.trim()}\n\n${text}` : text,
+          },
+        };
       }
       const now = new Date().toISOString();
       return {
@@ -121,9 +145,31 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
     });
     return destination;
   },
-  setDraftDocument: (record, options = {}) => set((state) => ({
-    draft: { ...state.draft, step: 'document', record, area: record.area, dirty: !options.saved },
-  })),
+  setDraftDocument: (record, options = {}) => set((state) => {
+    const template = state.draft.template?.id === record.templateId
+      ? state.draft.template
+      : (findTemplateById(record.templateId) ?? state.draft.template);
+    const instructions = state.draft.instructions.trim() ? state.draft.instructions : record.instructions;
+    const missingReferenceFileName = !state.draft.referenceFile && record.referenceFileName
+      ? record.referenceFileName
+      : state.draft.missingReferenceFileName;
+    const sourceReview = state.draft.sourceReview
+      ?? (record.sourceReviewId ? { id: record.sourceReviewId, caseId: record.caseId, title: record.title } : null);
+    return {
+      draft: {
+        ...state.draft,
+        step: 'document',
+        source: record.source ?? state.draft.source,
+        area: record.area,
+        template,
+        instructions,
+        missingReferenceFileName,
+        sourceReview,
+        record,
+        dirty: !options.saved,
+      },
+    };
+  }),
   editDraftDocument: (document) => set((state) => (
     state.draft.record
       ? { draft: { ...state.draft, record: { ...state.draft.record, document }, dirty: true } }

@@ -90,7 +90,7 @@ export interface StructuredGroundingRepairOutcome {
   initialValidation?: GroundingValidation;
 }
 
-const LAW_CODES = 'CFF|LISR|RLISR|LIVA|RLIVA|RMF|CCOM|LGSM|LGTOC';
+const LAW_CODES = 'CFF|LISR|RLISR|LIVA|RLIVA|RMF|CCOM|LGSM|LGTOC|LFT|LCE|RLCE|LA|RLA|RGCE|LIGIE|TIGIE';
 const ARTICLE_ID = String.raw`\d+(?:o|º|°)?(?:\s*-\s*[A-Z])?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?`;
 const RULE_ID = String.raw`\d+(?:\.\d+){1,3}`;
 

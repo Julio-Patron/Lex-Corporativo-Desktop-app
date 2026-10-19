@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BookOpen, Check, CircleCheck, CircleX, Clipboard, Download, FilePlus2, FileSignature, FileText, RotateCcw } from 'lucide-react';
 import { AreaTag, Badge, Button, Callout, Card, SectionTitle } from '../../components/ui';
 import { formatDate } from '../../components/PortfolioRow';
+import { canOpenLawInReader } from '../../lib/law-reader';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { BASIC_REVIEW_LIMITS, reviewModeLabel, risksBySeverity, SEVERITY_LABELS } from '../../lib/review';
 import { cn } from '../../lib/utils';
@@ -172,7 +173,7 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
                   <Button size="sm" variant="secondary" onClick={() => onDraftClause(risk)}>
                     <FilePlus2 size={14} aria-hidden="true" /> Redactar cláusula
                   </Button>
-                  {(risk.legalFoundations ?? []).slice(0, 2).map((foundation) => (
+                  {(risk.legalFoundations ?? []).slice(0, 2).filter((foundation) => canOpenLawInReader(foundation.law)).map((foundation) => (
                     <Button key={foundation.id} size="sm" variant="ghost" onClick={() => onOpenFoundation(foundation)}>
                       <BookOpen size={14} aria-hidden="true" /> {foundation.law} {foundation.article}
                     </Button>
@@ -231,9 +232,11 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
               <li key={foundation.id} className="flex flex-col rounded-lg border border-slate-200 p-4">
                 <p className="text-sm font-semibold text-slate-950">{foundation.law}{foundation.article ? ` · ${foundation.article}` : ''}</p>
                 {foundation.excerpt && <p className="mt-1.5 line-clamp-4 flex-1 font-serif text-sm leading-relaxed text-slate-700">{foundation.excerpt}</p>}
-                <Button size="sm" variant="ghost" className="mt-3 self-start" onClick={() => onOpenFoundation(foundation)}>
-                  <BookOpen size={14} aria-hidden="true" /> Leer artículo
-                </Button>
+                {canOpenLawInReader(foundation.law) && (
+                  <Button size="sm" variant="ghost" className="mt-3 self-start" onClick={() => onOpenFoundation(foundation)}>
+                    <BookOpen size={14} aria-hidden="true" /> Leer artículo
+                  </Button>
+                )}
               </li>
             ))}
           </ul>

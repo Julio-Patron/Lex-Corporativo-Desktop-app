@@ -7,6 +7,7 @@ import type { DocumentChunk } from './chunking';
 import { MODULE_ALLOWED_LAW_CODES, getModuleLabel, isLawAllowedForModule, normalizeLawCode, type LegalModule } from './prompts';
 import { assessLegalEvidence, getExplicitProvisionTarget, getPreferredLawCodes } from './legal-relevance';
 import { expandLegalQuery, type ExpandedLegalQuery } from './legal-query-expansion';
+import { lanceDbWriteMutex } from './mutex';
 import { formatForLog } from './sanitizer';
 
 export type LegalSearchScope = LegalModule | 'todos';
@@ -18,6 +19,13 @@ function resolveRuntimeOverride(value: string): string {
 function getConfiguredModelRoot(): string | null {
   const configuredModelPath = process.env.LEX_EMBEDDING_MODEL_PATH?.trim();
   return configuredModelPath ? path.dirname(resolveRuntimeOverride(configuredModelPath)) : null;
+}
+
+function isPathWithinRoot(targetPath: string, rootPath: string): boolean {
+  const normTarget = process.platform === 'win32' ? path.resolve(targetPath).toLowerCase() : path.resolve(targetPath);
+  const normRoot = process.platform === 'win32' ? path.resolve(rootPath).toLowerCase() : path.resolve(rootPath);
+  const relative = path.relative(normRoot, normTarget);
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 
 function getConfiguredLancePath(): string | null {
@@ -32,7 +40,7 @@ function getConfiguredLancePath(): string | null {
       : path.join(app.getAppPath(), 'legal-runtime', 'lance_data'),
   ];
   
-  if (!allowedRoots.some(root => resolved.startsWith(root))) {
+  if (!allowedRoots.some(root => isPathWithinRoot(resolved, root))) {
     console.warn('[RAG] LEX_ENGINE_LANCE_PATH outside allowed roots, ignoring');
     return null;
   }
@@ -418,14 +426,19 @@ export async function isLocalRagAvailable(): Promise<boolean> {
 
   if (!hasLegalKnowledgeTable(dbPath) || getVerifiedLawCodes().size === 0) return false;
 
+  let db: lancedb.Connection | null = null;
+  let table: lancedb.Table | null = null;
   try {
-    const db = await lancedb.connect(dbPath);
-    const table = await db.openTable('legal_knowledge');
+    db = await lancedb.connect(dbPath);
+    table = await db.openTable('legal_knowledge');
     await ensureLegalKnowledgeIndices(table, dbPath);
     return true;
   } catch (err: any) {
     console.warn('[RAG Local] LanceDB availability check failed:', formatForLog(err));
     return false;
+  } finally {
+    table?.close?.();
+    db?.close?.();
   }
 }
 
@@ -438,130 +451,142 @@ async function searchLegalKnowledge(
 ): Promise<{ matches: RAGMatch[]; dbPath: string }> {
   const dbPath = getLocalRagPath();
   const db = await lancedb.connect(dbPath);
-  const table = await db.openTable('legal_knowledge');
-  await ensureLegalKnowledgeIndices(table, dbPath);
-  const verifiedLawCodes = getVerifiedLawCodes();
-  if (verifiedLawCodes.size === 0) return { matches: [], dbPath };
-  const rawLimit = Math.max(limit * 4, 20);
-  const lawFilter = getModuleLawFilter(module);
-
-  const explicitTarget = getExplicitProvisionTarget(evidenceQuery);
-  const preferredLawCodes = getPreferredLawCodes(evidenceQuery);
-  let explicitResults: any[] = [];
-  if (explicitTarget.lawCode && explicitTarget.id) {
-    const storedLawCode = toStoredLawCode(explicitTarget.lawCode);
-    const label = `${explicitTarget.kind === 'rule' || ['RMF', 'RGCE'].includes(explicitTarget.lawCode) ? 'Regla' : 'Artículo'} ${explicitTarget.id}`;
-    explicitResults = await table
-      .query()
-      .where(`law_code = '${escapeSqlLiteral(storedLawCode)}' AND article = '${escapeSqlLiteral(label)}' AND (${lawFilter})`)
-      .limit(1)
-      .toArray();
-  }
-
-  let searchResults: any[] = [];
+  let table: lancedb.Table | null = null;
   try {
-    searchResults = await table
-      .vectorSearch(vector)
-      .where(lawFilter)
-      .limit(rawLimit)
-      .toArray();
-  } catch (err: any) {
-    console.warn(`[RAG Local] Module filter failed for ${module}; using post-filter fallback:`, formatForLog(err));
+    table = await db.openTable('legal_knowledge');
+    await ensureLegalKnowledgeIndices(table, dbPath);
+    const verifiedLawCodes = getVerifiedLawCodes();
+    if (verifiedLawCodes.size === 0) return { matches: [], dbPath };
+    const rawLimit = Math.max(limit * 4, 20);
+    const lawFilter = getModuleLawFilter(module);
+
+    const explicitTarget = getExplicitProvisionTarget(evidenceQuery);
+    const rawPreferredLawCodes = getPreferredLawCodes(evidenceQuery);
+    const preferredLawCodes = module === 'todos'
+      ? rawPreferredLawCodes
+      : new Set([...rawPreferredLawCodes].filter(code => isLawAllowedForModule(code, module)));
+    const isShortFocusedQuery = evidenceQuery.trim().split(/\s+/).filter(Boolean).length <= 16;
+
+    let explicitResults: any[] = [];
+    if (explicitTarget.lawCode && explicitTarget.id) {
+      const storedLawCode = toStoredLawCode(explicitTarget.lawCode);
+      const label = `${explicitTarget.kind === 'rule' || ['RMF', 'RGCE'].includes(explicitTarget.lawCode) ? 'Regla' : 'Artículo'} ${explicitTarget.id}`;
+      explicitResults = await table
+        .query()
+        .where(`law_code = '${escapeSqlLiteral(storedLawCode)}' AND article = '${escapeSqlLiteral(label)}' AND (${lawFilter})`)
+        .limit(1)
+        .toArray();
+    }
+
+    let searchResults: any[] = [];
+    try {
+      searchResults = await table
+        .vectorSearch(vector)
+        .where(lawFilter)
+        .limit(rawLimit)
+        .toArray();
+    } catch (err: any) {
+      console.warn(`[RAG Local] Module filter failed for ${module}; using post-filter fallback:`, formatForLog(err));
+    }
+
+    if (searchResults.length === 0) {
+      searchResults = await table
+        .vectorSearch(vector)
+        .limit(rawLimit)
+        .toArray();
+    }
+
+    const lexicalResults = (await getLexicalMatches(table, retrievalQuery, module, rawLimit))
+      .filter((row: any) => verifiedLawCodes.has(normalizeLawCode(row.law_code || row.title) || ''));
+    const candidateMap = new Map<string, any>();
+    const mergeCandidate = (row: any, signal: 'direct' | 'lexical' | 'semantic') => {
+      const id = String(row.id || `${row.law_code}-${row.article}`);
+      const current = candidateMap.get(id) || {};
+      candidateMap.set(id, {
+        ...current,
+        ...row,
+        _explicitMatch: current._explicitMatch || signal === 'direct',
+        _lexicalScore: Math.max(Number(current._lexicalScore || 0), Number(row._lexicalScore || 0)),
+        _distance: typeof row._distance === 'number' ? row._distance : current._distance,
+      });
+    };
+    explicitResults.forEach(row => mergeCandidate(row, 'direct'));
+    searchResults.forEach(row => mergeCandidate(row, 'semantic'));
+    lexicalResults.forEach(row => mergeCandidate(row, 'lexical'));
+
+    const candidates = [...candidateMap.values()]
+      .filter((r: any) => {
+        const lawCode = r.law_code || r.title;
+        const normalizedCode = normalizeLawCode(lawCode) || '';
+        return verifiedLawCodes.has(normalizedCode)
+          && (module === 'todos' || isLawAllowedForModule(lawCode, module))
+          && (!isShortFocusedQuery || preferredLawCodes.size === 0 || preferredLawCodes.has(normalizedCode));
+      })
+      .map((r: any) => {
+        const normalizedCode = normalizeLawCode(r.law_code || r.title) || r.law_code || r.title;
+        const semanticScore = typeof r._distance === 'number'
+          ? Math.max(0, Math.min(1, 1 - r._distance))
+          : 0;
+        const lexicalScore = Math.max(0, Number(r._lexicalScore || 0));
+        const normalizedLexicalScore = Math.min(1, lexicalScore / 40);
+        const retrievalType: RAGMatch['retrieval_type'] = r._explicitMatch
+          ? 'direct'
+          : semanticScore > 0 && lexicalScore > 0
+            ? 'hybrid'
+            : lexicalScore > 0
+              ? 'lexical'
+              : 'semantic';
+        const preferredBoost = !isShortFocusedQuery && preferredLawCodes.has(normalizedCode) ? 0.04 : 0;
+        const localScore = r._explicitMatch
+          ? 1
+          : retrievalType === 'hybrid'
+            ? Math.min(0.99, (semanticScore * 0.55) + (normalizedLexicalScore * 0.45) + 0.08 + preferredBoost)
+            : retrievalType === 'lexical'
+              ? Math.min(0.95, 0.45 + (normalizedLexicalScore * 0.5) + preferredBoost)
+              : Math.min(0.99, semanticScore + preferredBoost);
+        const match: RAGMatch = {
+          id: r.id || crypto.randomUUID(),
+          type: 'statute' as const,
+          title: r.title,
+          subtitle: r.article,
+          content: r.content,
+          similarity: localScore,
+          law_code: normalizedCode,
+          article_number: r.article,
+          citation_label: r.citation_label,
+          source_url: r.source_url,
+          source_authority: r.source_authority,
+          source_type: r.source_type,
+          last_checked_at: r.last_checked_at,
+          provision_key: r.provision_key,
+          module: module === 'todos' && ['mercantil', 'laboral', 'comercio_exterior', 'aduanal', 'fiscal'].includes(r.module)
+            ? r.module
+            : module === 'todos' ? undefined : module,
+          verification_status: 'verified_against_official_source' as const,
+          retrieval_type: retrievalType,
+        };
+        const assessment = assessLegalEvidence(retrievalQuery, match);
+        return {
+          match: {
+            ...match,
+            matched_terms: assessment.matchedTerms,
+            evidence_coverage: assessment.coverage,
+          },
+          assessment,
+        };
+      })
+      .filter(({ assessment }) => assessment.sufficient)
+      .sort((left, right) => right.match.similarity - left.match.similarity);
+
+    const matches = candidates
+      .map(({ match }) => match)
+      .slice(0, limit);
+
+    return { matches, dbPath };
+  } finally {
+    table?.close?.();
+    db.close?.();
   }
-
-  if (searchResults.length === 0) {
-    searchResults = await table
-      .vectorSearch(vector)
-      .limit(rawLimit)
-      .toArray();
-  }
-
-  const lexicalResults = (await getLexicalMatches(table, retrievalQuery, module, rawLimit))
-    .filter((row: any) => verifiedLawCodes.has(normalizeLawCode(row.law_code || row.title) || ''));
-  const candidateMap = new Map<string, any>();
-  const mergeCandidate = (row: any, signal: 'direct' | 'lexical' | 'semantic') => {
-    const id = String(row.id || `${row.law_code}-${row.article}`);
-    const current = candidateMap.get(id) || {};
-    candidateMap.set(id, {
-      ...current,
-      ...row,
-      _explicitMatch: current._explicitMatch || signal === 'direct',
-      _lexicalScore: Math.max(Number(current._lexicalScore || 0), Number(row._lexicalScore || 0)),
-      _distance: typeof row._distance === 'number' ? row._distance : current._distance,
-    });
-  };
-  explicitResults.forEach(row => mergeCandidate(row, 'direct'));
-  searchResults.forEach(row => mergeCandidate(row, 'semantic'));
-  lexicalResults.forEach(row => mergeCandidate(row, 'lexical'));
-
-  const candidates = [...candidateMap.values()]
-    .filter((r: any) => {
-      const lawCode = r.law_code || r.title;
-      const normalizedCode = normalizeLawCode(lawCode) || '';
-      return verifiedLawCodes.has(normalizedCode)
-        && (module === 'todos' || isLawAllowedForModule(lawCode, module))
-        && (preferredLawCodes.size === 0 || preferredLawCodes.has(normalizedCode));
-    })
-    .map((r: any) => {
-      const normalizedCode = normalizeLawCode(r.law_code || r.title) || r.law_code || r.title;
-      const semanticScore = typeof r._distance === 'number'
-        ? Math.max(0, Math.min(1, 1 - r._distance))
-        : 0;
-      const lexicalScore = Math.max(0, Number(r._lexicalScore || 0));
-      const normalizedLexicalScore = Math.min(1, lexicalScore / 40);
-      const retrievalType: RAGMatch['retrieval_type'] = r._explicitMatch
-        ? 'direct'
-        : semanticScore > 0 && lexicalScore > 0
-          ? 'hybrid'
-          : lexicalScore > 0
-            ? 'lexical'
-            : 'semantic';
-      const localScore = r._explicitMatch
-        ? 1
-        : retrievalType === 'hybrid'
-          ? Math.min(0.99, (semanticScore * 0.55) + (normalizedLexicalScore * 0.45) + 0.08)
-          : retrievalType === 'lexical'
-            ? Math.min(0.95, 0.45 + (normalizedLexicalScore * 0.5))
-            : semanticScore;
-      const match: RAGMatch = {
-        id: r.id || crypto.randomUUID(),
-        type: 'statute' as const,
-        title: r.title,
-        subtitle: r.article,
-        content: r.content,
-        similarity: localScore,
-        law_code: normalizedCode,
-        article_number: r.article,
-        citation_label: r.citation_label,
-        source_url: r.source_url,
-        source_authority: r.source_authority,
-        source_type: r.source_type,
-        last_checked_at: r.last_checked_at,
-        provision_key: r.provision_key,
-        module: module === 'todos' && ['mercantil', 'laboral', 'comercio_exterior', 'aduanal', 'fiscal'].includes(r.module)
-          ? r.module
-          : module === 'todos' ? undefined : module,
-        verification_status: 'verified_against_official_source' as const,
-        retrieval_type: retrievalType,
-      };
-      const assessment = assessLegalEvidence(retrievalQuery, match);
-      return {
-        match: {
-          ...match,
-          matched_terms: assessment.matchedTerms,
-          evidence_coverage: assessment.coverage,
-        },
-        assessment,
-      };
-    })
-    .filter(({ assessment }) => assessment.sufficient)
-    .sort((left, right) => right.match.similarity - left.match.similarity);
-
-  const matches = candidates
-    .map(({ match }) => match)
-    .slice(0, limit);
-
-  return { matches, dbPath };
 }
 
 /**
@@ -873,7 +898,7 @@ function plainLanceRecord(row: Record<string, unknown>): Record<string, unknown>
   return record;
 }
 
-function removeUserDocumentsDirectory(directory: string): void {
+async function removeUserDocumentsDirectory(directory: string): Promise<void> {
   let lastError: unknown;
   for (let attempt = 0; attempt < 8; attempt += 1) {
     try {
@@ -882,10 +907,7 @@ function removeUserDocumentsDirectory(directory: string): void {
     } catch (error) {
       lastError = error;
     }
-    const until = Date.now() + 40 * (attempt + 1);
-    while (Date.now() < until) {
-      // Windows puede conservar el directorio hasta que el proceso nativo suelta el archivo.
-    }
+    await new Promise(resolve => setTimeout(resolve, 40 * (attempt + 1)));
   }
   throw lastError instanceof Error ? lastError : new Error('No se pudo borrar la tabla temporal de documentos.');
 }
@@ -924,7 +946,7 @@ async function physicallyRewriteUserDocuments(dbPath: string): Promise<void> {
     db.close?.();
   }
 
-  removeUserDocumentsDirectory(directory);
+  await removeUserDocumentsDirectory(directory);
   const reopened = await lancedb.connect(dbPath);
   try {
     if (rows.length === 0) {
@@ -1015,7 +1037,9 @@ export async function cleanupUserDocumentRequest(requestId: string): Promise<voi
   const dbPath = getUserDocumentsRagPath();
   if (!hasUserDocumentsTable(dbPath)) return;
 
+  const unlock = await lanceDbWriteMutex.lock();
   try {
+    if (!hasUserDocumentsTable(dbPath)) return;
     const db = await lancedb.connect(dbPath);
     const table = await db.openTable('user_documents');
     try {
@@ -1028,6 +1052,8 @@ export async function cleanupUserDocumentRequest(requestId: string): Promise<voi
     console.info(`[RAG Local] Cleared temporary chunks for request ${requestId.slice(0, 8)}...`);
   } catch (err: any) {
     console.warn('[RAG Local] Failed to clear temporary user document chunks:', formatForLog(err));
+  } finally {
+    unlock();
   }
 }
 
@@ -1043,7 +1069,9 @@ export async function purgeExpiredUserDocuments(
   const dbPath = getUserDocumentsRagPath();
   if (!hasUserDocumentsTable(dbPath)) return 0;
 
+  const unlock = await lanceDbWriteMutex.lock();
   try {
+    if (!hasUserDocumentsTable(dbPath)) return 0;
     const db = await lancedb.connect(dbPath);
     const table = await db.openTable('user_documents');
     const cutoffMs = nowMs - maxAgeMs;
@@ -1067,5 +1095,7 @@ export async function purgeExpiredUserDocuments(
   } catch (err: any) {
     console.warn('[RAG Local] Failed to purge expired temporary chunks:', formatForLog(err));
     return 0;
+  } finally {
+    unlock();
   }
 }

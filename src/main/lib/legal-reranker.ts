@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { LegalSearchScope, RAGMatch } from './rag';
-import { composeLimitedByokPrompt, generateByokText } from './byok-client';
+import { composeLimitedByokPrompt, extractJsonObject, generateByokText } from './byok-client';
 import { formatForLog } from './sanitizer';
 import { getActiveByokConfig, type ByokProvider } from './byok-settings';
 
@@ -120,7 +120,7 @@ export async function rerankLegalArticles(
         schema: RERANK_JSON_SCHEMA,
       },
     });
-    const reranked = applyRerankRanking(candidates, JSON.parse(result));
+    const reranked = applyRerankRanking(candidates, JSON.parse(extractJsonObject(result)));
     if (!reranked) {
       return {
         matches: candidates,

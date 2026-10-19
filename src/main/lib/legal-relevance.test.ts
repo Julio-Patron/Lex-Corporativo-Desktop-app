@@ -120,4 +120,25 @@ describe('legal relevance explicit references', () => {
       similarity: 1,
     }).sufficient).toBe(true);
   });
+
+  it('does not treat uppercase Spanish article LA in contract headings as Ley Aduanera', () => {
+    const contractText = 'DECLARACIONES DE LA PARTE ACREDITADA\nCLÁUSULA PRIMERA.- OBJETO DE LA SOCIEDAD conforme al artículo 6 de la LGSM.';
+    expect(getExplicitProvisionTarget(contractText).lawCode).toBe('LGSM');
+    expect(getPreferredLawCodes('DECLARACIONES DE LA PARTE CONTRATANTE').has('LA')).toBe(false);
+  });
+
+  it('does not narrow generic acreditar personalidad queries to LIVA', () => {
+    expect([...getPreferredLawCodes('acreditar la personalidad jurídica del representante legal')]).toEqual([]);
+  });
+
+  it('evaluates long document queries without diluting coverage across dozens of terms', () => {
+    const longQuery = 'CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES que celebran por una parte la empresa contratante y por la otra el prestador respecto de servicios de consultoría mercantil con emisión de comprobantes fiscales digitales y obligaciones de confidencialidad';
+    const assessment = assessLegalEvidence(longQuery, {
+      law_code: 'CFF',
+      article_number: 'Artículo 29-A',
+      content: 'Los comprobantes fiscales digitales por Internet deberán cumplir con los requisitos de las obligaciones fiscales.',
+      similarity: 0.58,
+    });
+    expect(assessment.sufficient).toBe(true);
+  });
 });

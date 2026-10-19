@@ -101,11 +101,12 @@ export interface LexDesktopAPI {
       caseCount: number;
       packageHash?: string;
     }>;
-    importAll: (payload: { password: string; onConflict?: 'abort' | 'replace' }) => Promise<{
+    importAll: (payload: { password: string; onConflict?: 'abort' | 'replace'; filePath?: string }) => Promise<{
       success: boolean;
       canceled?: boolean;
       conflict?: boolean;
       conflictCount?: number;
+      filePath?: string;
       restored: number;
       skipped: number;
       replaced: number;

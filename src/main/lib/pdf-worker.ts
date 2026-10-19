@@ -17,9 +17,15 @@ function cleanExtractedText(text: string): string {
     .trim();
 }
 
+const MAX_PDF_SIZE = 50 * 1024 * 1024; // 50MB
+const MAX_PDF_PAGES = 500;
+
 async function extractTextContentWorker(buffer: Buffer, fileName: string) {
   if (buffer.length === 0) {
     throw new Error(`El PDF '${fileName}' está vacío.`);
+  }
+  if (buffer.length > MAX_PDF_SIZE) {
+    throw new Error(`El PDF '${fileName}' excede el tamaño máximo permitido (${MAX_PDF_SIZE / 1024 / 1024}MB).`);
   }
 
   const parser = new PDFParse({ data: new Uint8Array(buffer) });
@@ -29,6 +35,10 @@ async function extractTextContentWorker(buffer: Buffer, fileName: string) {
       lineEnforce: true,
       pageJoiner: '',
     });
+
+    if (result.total && result.total > MAX_PDF_PAGES) {
+      throw new Error(`El PDF '${fileName}' excede el número máximo de páginas permitidas (${MAX_PDF_PAGES}).`);
+    }
 
     const pages = result.pages
       .map((page: any) => ({

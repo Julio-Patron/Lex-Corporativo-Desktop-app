@@ -27,6 +27,7 @@ export interface LegalDocxOptions {
   filenamePrefix?: string;
   ecosystem?: string;
   parties?: string[];
+  includeSignatures?: boolean;
 }
 
 const LEGAL_FONT = 'Georgia';
@@ -65,6 +66,7 @@ export async function generateDocumentDocx(
     filenamePrefix = 'Documento_Legal',
     ecosystem = 'Corporativo',
     parties = [],
+    includeSignatures = filenamePrefix !== 'Revision',
   } = options;
 
   const paragraphs: (Paragraph | Table)[] = [];
@@ -207,80 +209,82 @@ export async function generateDocumentDocx(
     }
   }
 
-  // Add Formal Signatures Table if parties exist or default signature block
-  const signParties = parties.length > 0 ? parties : ['LA PARTE CONTRATANTE / ACREDITADA', 'LA PARTE PRESTADORA / AVAL'];
-  const signatureCells: TableCell[] = signParties.slice(0, 3).map((party) => {
-    return new TableCell({
-      width: { size: Math.floor(100 / signParties.length), type: WidthType.PERCENTAGE },
-      borders: {
-        top: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
-        bottom: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
-        left: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
-        right: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
-      },
-      children: [
-        new Paragraph({
-          alignment: AlignmentType.CENTER,
-          spacing: { before: 360, after: 60 },
-          children: [
-            new TextRun({
-              text: '________________________________________',
-              color: '475569',
-              font: LEGAL_FONT,
-            }),
-          ],
-        }),
-        new Paragraph({
-          alignment: AlignmentType.CENTER,
-          spacing: { after: 30 },
-          children: [
-            new TextRun({
-              text: party,
-              bold: true,
-              size: 19,
-              color: '0F172A',
-              font: LEGAL_FONT,
-            }),
-          ],
-        }),
-        new Paragraph({
-          alignment: AlignmentType.CENTER,
-          children: [
-            new TextRun({
-              text: 'Firma y Razón Social',
-              italics: true,
-              size: 16,
-              color: '94A3B8',
-              font: LEGAL_FONT,
-            }),
-          ],
-        }),
-      ],
+  // Add Formal Signatures Table if parties exist or default signature block for legal documents
+  if (includeSignatures) {
+    const signParties = parties.length > 0 ? parties : ['LA PARTE CONTRATANTE / ACREDITADA', 'LA PARTE PRESTADORA / AVAL'];
+    const signatureCells: TableCell[] = signParties.slice(0, 3).map((party) => {
+      return new TableCell({
+        width: { size: Math.floor(100 / signParties.length), type: WidthType.PERCENTAGE },
+        borders: {
+          top: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+          bottom: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+          left: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+          right: { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' },
+        },
+        children: [
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { before: 360, after: 60 },
+            children: [
+              new TextRun({
+                text: '________________________________________',
+                color: '475569',
+                font: LEGAL_FONT,
+              }),
+            ],
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 30 },
+            children: [
+              new TextRun({
+                text: party,
+                bold: true,
+                size: 19,
+                color: '0F172A',
+                font: LEGAL_FONT,
+              }),
+            ],
+          }),
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [
+              new TextRun({
+                text: 'Firma y Razón Social',
+                italics: true,
+                size: 16,
+                color: '94A3B8',
+                font: LEGAL_FONT,
+              }),
+            ],
+          }),
+        ],
+      });
     });
-  });
 
-  paragraphs.push(
-    new Paragraph({
-      alignment: AlignmentType.CENTER,
-      spacing: { before: 280, after: 80 },
-      children: [
-        new TextRun({
-          text: 'FIRMAS DE CONFORMIDAD Y RATIFICACIÓN',
-          bold: true,
-          size: 21,
-          color: '1E293B',
-          font: LEGAL_FONT,
-        }),
-      ],
-    })
-  );
+    paragraphs.push(
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 280, after: 80 },
+        children: [
+          new TextRun({
+            text: 'FIRMAS DE CONFORMIDAD Y RATIFICACIÓN',
+            bold: true,
+            size: 21,
+            color: '1E293B',
+            font: LEGAL_FONT,
+          }),
+        ],
+      })
+    );
 
-  paragraphs.push(
-    new Table({
-      width: { size: 100, type: WidthType.PERCENTAGE },
-      rows: [new TableRow({ children: signatureCells })],
-    })
-  );
+    paragraphs.push(
+      new Table({
+        width: { size: 100, type: WidthType.PERCENTAGE },
+        rows: [new TableRow({ children: signatureCells })],
+      })
+    );
+  }
 
   const doc = new Document({
     sections: [

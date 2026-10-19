@@ -63,4 +63,35 @@ describe('continuidad del trabajo con citas normativas', () => {
     store.updateDraft({ instructions: 'No perder estas instrucciones.' });
     expect(hasUnsavedDraft(useWorkspaceStore.getState().draft)).toBe(true);
   });
+
+  it('conserva datos capturados cuando el usuario volvió a elegir documento y agrega una cita normativa', () => {
+    const store = useWorkspaceStore.getState();
+    store.startDraft('free', { area: 'laboral' });
+    store.updateDraft({ step: 'choose', instructions: 'Incluir jornada reducida.', fieldValues: { puesto: 'Analista' } });
+
+    expect(store.addLegalCitation('LFT · Artículo 58', 'laboral')).toBe('instructions');
+    const draft = useWorkspaceStore.getState().draft;
+    expect(draft.step).toBe('details');
+    expect(draft.fieldValues).toEqual({ puesto: 'Analista' });
+    expect(draft.instructions).toContain('Incluir jornada reducida.');
+    expect(draft.instructions).toContain('LFT · Artículo 58');
+  });
+
+  it('hidrata plantilla, origen e instrucciones al abrir un borrador guardado desde el portafolio', () => {
+    const store = useWorkspaceStore.getState();
+    store.setDraftDocument({
+      ...original,
+      source: 'template',
+      templateId: 'mercantil-pagare',
+      instructions: 'Cláusula de intereses moratorios.',
+      referenceFileName: 'base.pdf',
+      sourceReviewId: 'rev-1',
+    }, { saved: true });
+
+    const draft = useWorkspaceStore.getState().draft;
+    expect(draft.template?.id).toBe('mercantil-pagare');
+    expect(draft.instructions).toBe('Cláusula de intereses moratorios.');
+    expect(draft.missingReferenceFileName).toBe('base.pdf');
+    expect(draft.sourceReview?.id).toBe('rev-1');
+  });
 });

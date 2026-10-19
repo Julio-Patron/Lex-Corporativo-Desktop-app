@@ -19,8 +19,16 @@ export function clearDraftRecovery(): void {
 }
 
 export function clearRecoveryForDocument(caseId: string, draftId?: string): void {
-  const snapshot = readDraftRecovery(0);
-  if (snapshot?.record?.caseId === caseId && (!draftId || snapshot.record.id === draftId)) clearDraftRecovery();
+  try {
+    const snapshot = readDraftRecovery(0);
+    if (!snapshot?.record) return;
+    const matchesCase = snapshot.record.caseId === caseId || snapshot.record.id === caseId;
+    const matchesDraft = !draftId || snapshot.record.id === draftId;
+    if (matchesCase && matchesDraft) clearDraftRecovery();
+  } catch {
+    // Si la copia de recuperación está dañada o ilegible, se descarta para no bloquear el borrado del portafolio.
+    clearDraftRecovery();
+  }
 }
 
 export function readDraftRecovery(retentionDays: CaseRetentionDays): DraftRecovery | null {

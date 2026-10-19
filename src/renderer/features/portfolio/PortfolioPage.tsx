@@ -79,14 +79,20 @@ export default function PortfolioPage() {
     setBusyKey(key);
     const workspace = useWorkspaceStore.getState();
     const activeDraft = item.kind === 'draft' && workspace.draft.record?.id === item.record.id ? workspace.draft : null;
+    const activeReview = item.kind === 'review' && (workspace.review.record?.id === item.record.id || workspace.review.record?.caseId === item.caseId)
+      ? workspace.review
+      : null;
     if (activeDraft) workspace.resetDraft();
+    if (activeReview) workspace.resetReview();
     const clearedDraft = useWorkspaceStore.getState().draft;
+    const clearedReview = useWorkspaceStore.getState().review;
     try {
       await deletePortfolioItem(item);
       setItems((current) => current?.filter((entry) => `${entry.caseId}:${entry.record.id}` !== key) ?? null);
       notify('Elemento eliminado.', 'success');
     } catch (error: any) {
       if (activeDraft && useWorkspaceStore.getState().draft === clearedDraft) useWorkspaceStore.setState({ draft: activeDraft });
+      if (activeReview && useWorkspaceStore.getState().review === clearedReview) useWorkspaceStore.setState({ review: activeReview });
       notify(error?.message || 'No se pudo eliminar.', 'error');
     } finally {
       setBusyKey(null);

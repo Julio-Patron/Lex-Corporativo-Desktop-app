@@ -27,6 +27,8 @@
     "predev:desktop": "electron-rebuild -f -o better-sqlite3",
     "preview:electron": "electron-vite preview",
     "dev:desktop": "node scripts/dev-desktop.mjs",
+    "dev": "npm run dev:desktop",
+    "run:dev": "npm run dev:desktop",
     "build": "electron-vite build",
     "build:analyze": "vite build --config electron.vite.config.ts -m analyze && npx vite-bundle-analyzer out/renderer",
     "prebuild:electron": "npm run audit:corpus-governance:strict && node scripts/generate-ico.mjs && node scripts/download-embeddings.mjs && electron-rebuild -f -o better-sqlite3",

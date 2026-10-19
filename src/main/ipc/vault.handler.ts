@@ -87,6 +87,7 @@ export const ExportBackupSchema = z.object({
 export const ImportBackupSchema = z.object({
   password: z.string().min(8).max(1024),
   onConflict: z.enum(['abort', 'replace']).optional(),
+  filePath: z.string().min(1).max(1024).optional(),
 }).strict();
 
 function parseCaseOperation(raw: unknown): { caseId: string; expectedModule?: 'engineering' | 'fiscal' | 'mercantil' } {
@@ -223,20 +224,32 @@ export function registerVaultHandlers(): void {
   ipcMain.handle('vault:import-all', async (_event, rawPayload: unknown) => {
     const parsed = ImportBackupSchema.safeParse(rawPayload);
     if (!parsed.success) throw new Error('La contraseña del respaldo debe tener al menos 8 caracteres.');
-    const { canceled, filePaths } = await dialog.showOpenDialog({
-      filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
-      properties: ['openFile'],
-    });
-    if (canceled || !filePaths?.[0]) {
-      return { success: false, canceled: true, restored: 0, skipped: 0, replaced: 0 };
+    let selectedFilePath = parsed.data.filePath;
+    if (!selectedFilePath) {
+      const { canceled, filePaths } = await dialog.showOpenDialog({
+        filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
+        properties: ['openFile'],
+      });
+      if (canceled || !filePaths?.[0]) {
+        return { success: false, canceled: true, restored: 0, skipped: 0, replaced: 0 };
+      }
+      selectedFilePath = filePaths[0];
     }
     try {
-      const opened = openPortableBackup(readFileSync(filePaths[0], 'utf8'), parsed.data.password);
+      const opened = openPortableBackup(readFileSync(selectedFilePath, 'utf8'), parsed.data.password);
       const result = await restoreVaultBackup(opened, parsed.data.onConflict ?? 'abort');
       return { success: true, ...result };
     } catch (error) {
       if (error instanceof VaultRestoreConflict) {
-        return { success: false, conflict: true, conflictCount: error.conflictCount, restored: 0, skipped: 0, replaced: 0 };
+        return {
+          success: false,
+          conflict: true,
+          conflictCount: error.conflictCount,
+          filePath: selectedFilePath,
+          restored: 0,
+          skipped: 0,
+          replaced: 0,
+        };
       }
       throw new Error(error instanceof Error ? error.message : 'No se pudo restaurar el respaldo.');
     }

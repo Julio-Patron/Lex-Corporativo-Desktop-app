@@ -2,6 +2,7 @@ import { app } from 'electron';
 import { existsSync, readFileSync } from 'fs';
 import { extname, isAbsolute, relative, resolve } from 'path';
 import { z } from 'zod';
+import { normalizeLawCode } from './legal-relevance';
 
 const LegalCorpusModuleSchema = z.enum([
   'mercantil',
@@ -129,8 +130,15 @@ export function getLegalCorpusOverview(): LegalCorpusOverview {
 
 export function getInstalledCorpusLaw(code: string): InstalledCorpusLaw {
   const normalizedCode = code.trim().toLocaleLowerCase('es-MX');
+  const resolvedCode = normalizeLawCode(code)?.toLocaleLowerCase('es-MX');
   const law = readInstalledCorpus().installedLaws.find(
-    (candidate) => candidate.code.toLocaleLowerCase('es-MX') === normalizedCode,
+    (candidate) => {
+      const candidateCode = candidate.code.toLocaleLowerCase('es-MX');
+      const candidateName = candidate.name.toLocaleLowerCase('es-MX');
+      return candidateCode === normalizedCode
+        || (resolvedCode && candidateCode === resolvedCode)
+        || candidateName === normalizedCode;
+    },
   );
   if (!law) throw new Error('El ordenamiento solicitado no forma parte del corpus instalado.');
   return law;

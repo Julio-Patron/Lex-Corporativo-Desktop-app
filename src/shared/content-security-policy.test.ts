@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  contentSecurityPolicyMeta,
   CONTENT_SECURITY_POLICY_HEADER,
   CONTENT_SECURITY_POLICY_META,
   withContentSecurityPolicy,
@@ -29,5 +30,20 @@ describe('política de contenido', () => {
     expect(headers['Content-Type']).toEqual(['text/html']);
     expect(headers['Content-Security-Policy']).toEqual([CONTENT_SECURITY_POLICY_HEADER]);
     expect(headers['content-security-policy']).toBeUndefined();
+  });
+
+  it('autoriza sólo el hash del preámbulo en ambas políticas sin abrir scripts inline', () => {
+    const hash = 'Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=';
+    const meta = contentSecurityPolicyMeta(hash);
+    expect(meta).toContain(`script-src 'self' 'sha256-${hash}'`);
+    expect(meta).not.toContain("script-src 'self' 'unsafe-inline'");
+    expect(withContentSecurityPolicy(undefined, hash)['Content-Security-Policy'])
+      .toEqual([`${meta}; frame-ancestors 'none'`]);
+    expect(contentSecurityPolicyMeta()).toBe(CONTENT_SECURITY_POLICY_META);
+    expect(CONTENT_SECURITY_POLICY_META).not.toContain('sha256-');
+  });
+
+  it('rechaza valores que puedan inyectar directivas desde el entorno', () => {
+    expect(() => contentSecurityPolicyMeta("x'; script-src *")).toThrow(/inválido/);
   });
 });

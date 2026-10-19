@@ -23,21 +23,15 @@ export interface ExtractedDocument {
 export const ALLOWED_DOCUMENT_MIME_TYPES = [
   'application/pdf',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'application/msword',
   'application/xml',
   'text/xml',
   'text/plain',
   'text/markdown',
-  'image/jpeg',
-  'image/png',
-  'image/webp',
-  'image/gif',
 ] as const;
 
 export const ALLOWED_DOCUMENT_EXTENSIONS = [
   '.pdf',
   '.docx',
-  '.doc',
   '.xml',
   '.txt',
   '.md',
@@ -57,9 +51,7 @@ export function detectDocumentFormat(fileName: string, mimeType?: string): Suppo
   }
   if (
     lowerMime.includes('wordprocessingml') ||
-    lowerMime.includes('msword') ||
-    lowerName.endsWith('.docx') ||
-    lowerName.endsWith('.doc')
+    lowerName.endsWith('.docx')
   ) {
     return 'docx';
   }

@@ -476,8 +476,14 @@ export function generateDeterministicLegalAudit(input: DeterministicAnalysisInpu
     },
     legalFoundations,
     groundingClaims: [
-      { claimText: summary, sourceIds: claimSources },
-      ...findings.map(f => ({ claimText: f.description, sourceIds: claimSources })),
+      { claimId: 'claim-summary', heading: 'Resumen', text: summary, claimText: summary, sourceIds: claimSources },
+      ...findings.map((f, index) => ({
+        claimId: `claim-finding-${index + 1}`,
+        heading: f.area,
+        text: f.description,
+        claimText: f.description,
+        sourceIds: claimSources,
+      })),
     ],
     confidence: 'low' as const,
     engine: 'local_rules' as const,

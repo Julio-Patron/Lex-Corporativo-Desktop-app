@@ -3,17 +3,45 @@
  * Implements strict data scrubbers for logs, local caches, and traceability.
  */
 
-const CREDENTIAL_KEY_PARTS = ['apikey', 'authorization', 'token', 'secret', 'password', 'servicekey', 'credential'];
-const BULKY_KEY_PARTS = ['base64', 'filebase64', 'data', 'value'];
-const LOCAL_CACHE_KEY_PARTS = ['apikey', 'authorization', 'token', 'secret', 'password', 'servicekey', 'credential'];
+const CREDENTIAL_EXACT_TOKENS = new Set(['apikey', 'authorization', 'token', 'tokens', 'secret', 'secrets', 'password', 'passwd', 'servicekey', 'privatekey', 'credential', 'credentials']);
+const CREDENTIAL_COMPOUND_KEYS = new Set(['apikey', 'servicekey', 'privatekey', 'clientsecret', 'accesstoken', 'refreshtoken', 'bearertoken', 'authtoken']);
+const BULKY_EXACT_KEYS = new Set(['base64', 'filebase64', 'pdfbase64', 'data', 'value', 'rawdata', 'filedata']);
 
 function normalizedKey(key: string): string {
   return key.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-function keyIncludes(key: string, parts: readonly string[]): boolean {
+function keyTokens(key: string): string[] {
+  return key
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+function isCredentialKey(key: string): boolean {
   const normalized = normalizedKey(key);
-  return parts.some(part => normalized.includes(part));
+  if (CREDENTIAL_EXACT_TOKENS.has(normalized) || CREDENTIAL_COMPOUND_KEYS.has(normalized)) {
+    return true;
+  }
+  const tokens = keyTokens(key);
+  if (tokens.some(token => CREDENTIAL_EXACT_TOKENS.has(token))) {
+    return true;
+  }
+  for (let i = 0; i < tokens.length - 1; i += 1) {
+    if (CREDENTIAL_COMPOUND_KEYS.has(`${tokens[i]}${tokens[i + 1]}`)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isBulkyKey(key: string): boolean {
+  const normalized = normalizedKey(key);
+  if (BULKY_EXACT_KEYS.has(normalized)) return true;
+  const tokens = keyTokens(key);
+  return tokens.includes('base64');
 }
 
 const KEY_PATTERNS = [
@@ -76,9 +104,9 @@ function scrubLogs(value: unknown): unknown {
   if (value && typeof value === 'object') {
     const out: Record<string, unknown> = {};
     for (const [key, item] of Object.entries(value as Record<string, unknown>)) {
-      if (keyIncludes(key, CREDENTIAL_KEY_PARTS)) {
+      if (isCredentialKey(key)) {
         out[key] = '[REDACTED_SENSITIVE_LOGS]';
-      } else if (typeof item === 'string' && keyIncludes(key, BULKY_KEY_PARTS) && item.length > 30) {
+      } else if (typeof item === 'string' && isBulkyKey(key) && item.length > 30) {
         out[key] = '[REDACTED_SENSITIVE_LOGS]';
       } else {
         out[key] = scrubLogs(item);
@@ -111,7 +139,7 @@ export function sanitizeForLocalCache(data: any): any {
   const recursiveSanitize = (obj: any) => {
     for (const key in obj) {
       if (
-        keyIncludes(key, LOCAL_CACHE_KEY_PARTS) &&
+        isCredentialKey(key) &&
         typeof obj[key] === 'string'
       ) {
         obj[key] = '[REDACTED_LOCAL_CACHE]';

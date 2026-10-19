@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { getInstalledCorpusLaw, getLegalCorpusOverview, readLegalCorpusLawContent } from '../lib/legal-corpus';
 
 const CorpusLawPayloadSchema = z.object({
-  code: z.string().trim().min(1).max(24),
+  code: z.string().trim().min(1).max(240),
 });
 
 function safeDownloadName(code: string, name: string): string {

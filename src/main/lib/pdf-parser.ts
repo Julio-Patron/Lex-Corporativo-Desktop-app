@@ -108,9 +108,11 @@ function getWorker(): Worker {
     if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
       workerPath = join(__dirname, 'pdf-worker.ts');
     }
-    workerInstance = new Worker(workerPath);
+    const createdWorker = new Worker(workerPath);
+    workerInstance = createdWorker;
 
-    workerInstance.on('message', (message) => {
+    createdWorker.on('message', (message) => {
+      if (workerInstance !== createdWorker) return;
       const { id, result, error } = message;
       const handlers = pendingRequests.get(id);
       if (handlers) {
@@ -124,7 +126,8 @@ function getWorker(): Worker {
       }
     });
 
-    workerInstance.on('error', (error) => {
+    createdWorker.on('error', (error) => {
+      if (workerInstance !== createdWorker) return;
       console.error('[PDF Worker] Falla inesperada:', formatForLog(error));
       workerInstance = null; // Reset to recreate next time
       pendingRequests.forEach(({ reject, timer }) => {
@@ -134,7 +137,8 @@ function getWorker(): Worker {
       pendingRequests.clear();
     });
 
-    workerInstance.on('exit', (code) => {
+    createdWorker.on('exit', (code) => {
+      if (workerInstance !== createdWorker) return;
       if (code !== 0) {
         console.error(`[PDF Worker] Terminó con código ${code}`);
       }
@@ -165,8 +169,9 @@ export function extractTextContentAsync(
           pendingRequests.delete(id);
           console.warn(`[PDF Worker] Timeout de ${timeoutMs}ms al procesar '${redactApiKeysAndSecrets(fileName)}'. Reiniciando worker.`);
           if (workerInstance) {
-            workerInstance.terminate().catch(() => undefined);
+            const timedOutWorker = workerInstance;
             workerInstance = null;
+            timedOutWorker.terminate().catch(() => undefined);
           }
           handlers.reject(
             new Error(

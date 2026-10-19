@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
-import { Card, Page } from '../../components/ui';
+import { Card, ConfirmDialog, Page } from '../../components/ui';
+import { useConfirmDialog } from '../../hooks/useConfirmDialog';
 import { useAiGuard } from '../../hooks/useAiGuard';
 import { exportMarkdown } from '../../hooks/usePortfolioActions';
+import { hasUnsavedDraft } from '../../lib/drafting';
 import { toFilePayload } from '../../lib/files';
+import { resolveLawCode } from '../../lib/law-reader';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { newRecordId, saveReviewRecord } from '../../lib/portfolio';
 import { buildAddendumInstructions, buildClauseInstructions, buildReviewReport } from '../../lib/review';
@@ -31,6 +34,7 @@ export default function ReviewPage() {
   const requestProcessingSetup = useUiStore((state) => state.requestProcessingSetup);
   const { aiReady, ensureAi } = useAiGuard();
   const sendArticleToDraft = useSendArticleToDraft();
+  const [dialogState, confirm] = useConfirmDialog();
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState<{ step: number; label: string } | null>(null);
   const [reader, setReader] = useState<{ code: string; article?: string } | null>(null);
@@ -44,6 +48,7 @@ export default function ReviewPage() {
 
   const start = async () => {
     if (!review.file) return;
+    const initialRecordId = review.record?.id;
     setRunning(true);
     setProgress({ step: 1, label: 'Extrayendo texto' });
     try {
@@ -57,6 +62,8 @@ export default function ReviewPage() {
         module: 'analysis',
         currentDocumentOnly: true,
       });
+      const latestReview = useWorkspaceStore.getState().review;
+      if (latestReview.record && latestReview.record.id !== initialRecordId) return;
       const result = JSON.parse(response.result) as ReviewResult;
       const record: ReviewRecord = {
         id: newRecordId('rev'),
@@ -87,14 +94,28 @@ export default function ReviewPage() {
     }
   };
 
-  const draftFrom = (instructions: string) => {
+  const draftFrom = async (instructions: string) => {
     if (!review.record || !ensureAi('redactar la corrección')) return;
+    const currentDraft = useWorkspaceStore.getState().draft;
+    if (hasUnsavedDraft(currentDraft) && !await confirm({
+      title: 'Descartar cambios sin guardar',
+      message: 'Hay trabajo sin guardar en la redacción actual. Si continúas con esta corrección, se sustituirá. Cancela para volver y guardarlo.',
+      confirmLabel: 'Sustituir redacción',
+      variant: 'danger',
+    })) return;
     startDraftFromReview(review.record, instructions);
     if (review.file) updateDraft({ referenceFile: review.file });
     navigate('/estudio/generar');
   };
 
-  const openFoundation = (foundation: LegalFoundation) => setReader({ code: foundation.law, article: foundation.article });
+  const openFoundation = (foundation: LegalFoundation) => {
+    const code = resolveLawCode(foundation.law);
+    if (!code) {
+      notify(`No se encontró «${foundation.law}» en el corpus instalado.`, 'info', 'Lector de leyes');
+      return;
+    }
+    setReader({ code, article: foundation.article });
+  };
 
   const exportReport = async (format: 'pdf' | 'docx') => {
     if (!review.record) return;
@@ -130,8 +151,8 @@ export default function ReviewPage() {
         <ReviewResultView
           record={review.record}
           aiReady={aiReady}
-          onDraftAddendum={() => draftFrom(buildAddendumInstructions(review.record!))}
-          onDraftClause={(finding) => draftFrom(buildClauseInstructions(finding))}
+          onDraftAddendum={() => void draftFrom(buildAddendumInstructions(review.record!))}
+          onDraftClause={(finding) => void draftFrom(buildClauseInstructions(finding))}
           onOpenFoundation={openFoundation}
           onExport={exportReport}
           onCopy={() => navigator.clipboard.writeText(buildReviewReport(review.record!)).catch(() => notify('No se pudo copiar al portapapeles.', 'warning'))}
@@ -158,6 +179,7 @@ export default function ReviewPage() {
         onClose={() => setReader(null)}
         onUseArticle={(citation, area) => { setReader(null); sendArticleToDraft(citation, area); }}
       />
+      <ConfirmDialog {...dialogState} />
     </Page>
   );
 }

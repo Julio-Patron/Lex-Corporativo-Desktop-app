@@ -29,11 +29,15 @@ export async function processRagSearch(rawPayload: unknown): Promise<{
   let parsedPayload: z.infer<typeof RAGPayloadSchema> | null = null;
   try {
     parsedPayload = RAGPayloadSchema.parse(rawPayload);
+    const startedAt = Date.now();
     const localResult = await searchLegalArticles(parsedPayload.query, parsedPayload.module, 24);
     const rerankResult = parsedPayload.useReranker === false
       ? { matches: localResult.matches, status: 'disabled' as const }
       : await rerankLegalArticles(parsedPayload.query, parsedPayload.module, localResult.matches);
     const sources = rerankResult.matches.slice(0, parsedPayload.limit || 8);
+    console.info(
+      `[IPC RAG] Search completed -> module=${parsedPayload.module} localCandidates=${localResult.matches.length} reranker=${rerankResult.status} returned=${sources.length} durationMs=${Date.now() - startedAt}`
+    );
     const publicCitations = sources.map((source) => ({
       id: source.id,
       title: source.title,

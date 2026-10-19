@@ -28,10 +28,19 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
   const [modelOpen, setModelOpen] = useState(false);
   const [busy, setBusy] = useState<'testing' | 'clearing' | null>(null);
   const [error, setError] = useState('');
+  const userTouchedRef = useRef(false);
+  const hydratedSettingsRef = useRef(Boolean(settings));
 
   const providerState = settings?.providers[provider];
   const hasStoredKey = Boolean(providerState?.hasApiKey);
   const isActive = Boolean(settings?.enabled && settings.provider === provider);
+
+  useEffect(() => {
+    if (!settings || hydratedSettingsRef.current || userTouchedRef.current) return;
+    hydratedSettingsRef.current = true;
+    setProvider(settings.provider);
+    setModel(settings.providers[settings.provider]?.model ?? DEFAULT_BYOK_MODELS[settings.provider]);
+  }, [settings]);
 
   useEffect(() => {
     setModel(settings?.providers[provider]?.model ?? DEFAULT_BYOK_MODELS[provider]);
@@ -95,7 +104,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       <RadioGroup
         label="Proveedor de IA"
         value={provider}
-        onChange={setProvider}
+        onChange={(nextProvider) => { userTouchedRef.current = true; setProvider(nextProvider); }}
         disabled={busy !== null}
         className="grid gap-2 sm:grid-cols-3"
         optionClassName={(selected) => cn(
@@ -127,7 +136,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
             type="password"
             autoComplete="off"
             value={apiKey}
-            onChange={(event) => setApiKey(event.target.value)}
+            onChange={(event) => { userTouchedRef.current = true; setApiKey(event.target.value); }}
             placeholder={hasStoredKey ? '••••••••••••' : `Pega tu API key de ${providerLabel(provider)}`}
             className="pl-9"
           />
@@ -147,7 +156,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
         {modelOpen && (
           <div className="mt-2">
             <Field label="Identificador del modelo" htmlFor={modelInputId} hint={`Predeterminado: ${DEFAULT_BYOK_MODELS[provider]}. Cámbialo sólo si tu cuenta usa otro modelo.`}>
-              <TextInput id={modelInputId} value={model} onChange={(event) => setModel(event.target.value)} />
+              <TextInput id={modelInputId} value={model} onChange={(event) => { userTouchedRef.current = true; setModel(event.target.value); }} />
             </Field>
           </div>
         )}

@@ -47,11 +47,12 @@ export interface DraftRequirementsInput {
   fieldValues: Record<string, string>;
   instructions: string;
   hasReferenceFile: boolean;
+  source?: DraftSession['source'];
 }
 
 // Convierte el formulario en las instrucciones que recibe el redactor. Los datos
 // sin capturar se marcan como faltantes para que el borrador los deje señalados.
-export function buildDraftRequirements({ template, fieldValues, instructions, hasReferenceFile }: DraftRequirementsInput): string {
+export function buildDraftRequirements({ template, fieldValues, instructions, hasReferenceFile, source }: DraftRequirementsInput): string {
   const sections: string[] = [];
   if (template) {
     sections.push(`DOCUMENTO SOLICITADO: ${template.title}`);
@@ -62,7 +63,11 @@ export function buildDraftRequirements({ template, fieldValues, instructions, ha
     sections.push(`DATOS PROPORCIONADOS:\n${data.join('\n')}`);
   }
   if (hasReferenceFile && !template) {
-    sections.push('Usa el archivo adjunto como documento base y aplica los cambios indicados.');
+    sections.push(
+      source === 'review'
+        ? 'Usa el archivo adjunto como contexto del instrumento auditado para redactar lo solicitado en las instrucciones.'
+        : 'Usa el archivo adjunto como documento base y aplica los cambios indicados.',
+    );
   }
   if (instructions.trim()) {
     sections.push(`${template ? 'INSTRUCCIONES ADICIONALES' : 'INSTRUCCIONES'}:\n${instructions.trim()}`);

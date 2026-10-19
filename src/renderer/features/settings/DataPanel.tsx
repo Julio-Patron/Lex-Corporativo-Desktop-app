@@ -81,14 +81,18 @@ export function DataPanel() {
     }
   };
 
-  const restore = async (onConflict: 'abort' | 'replace' = 'abort') => {
+  const restore = async (onConflict: 'abort' | 'replace' = 'abort', filePath?: string) => {
     if (restorePassword.length < 8) {
       notify('Escribe la contraseña con la que se creó el respaldo.', 'error');
       return;
     }
     setBusy('restore');
     try {
-      const result = await window.lexDesktop.cases.importAll({ password: restorePassword, onConflict });
+      const result = await window.lexDesktop.cases.importAll({
+        password: restorePassword,
+        onConflict,
+        ...(filePath ? { filePath } : {}),
+      });
       if (result.canceled) return;
       if (result.conflict) {
         setBusy(null);
@@ -98,7 +102,7 @@ export function DataPanel() {
           confirmLabel: 'Reemplazar',
           variant: 'danger',
         });
-        if (accepted) await restore('replace');
+        if (accepted) await restore('replace', result.filePath);
         return;
       }
       if (result.success) {

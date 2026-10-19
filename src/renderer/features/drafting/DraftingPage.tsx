@@ -81,10 +81,13 @@ export default function DraftingPage() {
     fieldValues: draft.fieldValues,
     instructions: draft.instructions,
     hasReferenceFile: Boolean(draft.referenceFile),
+    source: draft.source,
   };
   const canGenerate = draft.source === 'file'
     ? Boolean(draft.referenceFile) && Boolean(draft.instructions.trim())
-    : hasDraftInput(requirementsInput) || draft.source === 'review';
+    : draft.source === 'review'
+      ? Boolean(draft.instructions.trim())
+      : hasDraftInput(requirementsInput);
 
   const openTemplate = (template: CatalogTemplate | NonNullable<typeof draft.template>) => void replaceDraft(() => {
     const area = templateArea(template);
@@ -111,6 +114,7 @@ export default function DraftingPage() {
 
   const generate = async () => {
     if (!ensureAi('redactar el documento')) return;
+    const initialRecordId = draft.record?.id;
     setGenerating(true);
     try {
       const { template, area } = draft;
@@ -129,6 +133,8 @@ export default function DraftingPage() {
         sourceAnalysisId: draft.sourceReview?.id,
         caseId: draft.sourceReview?.caseId,
       });
+      const latestBeforeSet = useWorkspaceStore.getState().draft;
+      if (latestBeforeSet.step === 'document' && latestBeforeSet.record?.id !== initialRecordId) return;
       const now = new Date().toISOString();
       const fallbackTitle = template?.title
         ?? (draft.source === 'review' ? `Adenda: ${draft.sourceReview?.title ?? 'revisión'}` : draft.referenceFile?.name ?? 'Documento');

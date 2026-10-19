@@ -11,6 +11,26 @@ export interface TrustedWindow {
   documentUrl: string;
 }
 
+function normalizeFileHref(url: URL): string {
+  // En Windows, Node puede generar file:///c:/... mientras Chromium normaliza a file:///C:/...
+  return url.protocol === 'file:'
+    ? url.href.replace(/^file:\/\/\/([a-z]):/i, (_match, drive: string) => `file:///${drive.toUpperCase()}:`)
+    : url.href;
+}
+
+export function isSameAppDocument(actualUrl: string, expectedUrl: string): boolean {
+  try {
+    const actual = new URL(actualUrl);
+    const expected = new URL(expectedUrl);
+    actual.hash = '';
+    expected.hash = '';
+    // Chromium normaliza http://localhost:puerto a http://localhost:puerto/.
+    return normalizeFileHref(actual) === normalizeFileHref(expected);
+  } catch {
+    return false;
+  }
+}
+
 /**
  * La ventana principal, su marco principal y el documento de la app son el único origen admitido.
  * El hash de la ruta local no cambia el documento.
@@ -19,7 +39,7 @@ export function isTrustedAppSender(event: IpcSenderEvent, expected: TrustedWindo
   if (!expected || !event.senderFrame) return false;
   return event.sender === expected.webContents
     && event.senderFrame === expected.mainFrame
-    && event.senderFrame.url.split('#')[0] === expected.documentUrl.split('#')[0];
+    && isSameAppDocument(event.senderFrame.url, expected.documentUrl);
 }
 
 type Guard = (event: IpcSenderEvent) => boolean;

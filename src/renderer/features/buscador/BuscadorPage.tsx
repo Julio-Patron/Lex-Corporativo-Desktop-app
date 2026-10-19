@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { create } from 'zustand';
 import { Check, ChevronDown, Clipboard, FileSignature } from 'lucide-react';
 import { BrandPlate } from '../../components/BrandWatermark';
 import { AreaTag, Button, Callout, RadioGroup, TextArea } from '../../components/ui';
@@ -20,6 +21,36 @@ interface Turn {
   error: string;
   expanded: string[];
 }
+
+interface BuscadorSessionState {
+  area: AreaFilter;
+  draft: string;
+  turns: Turn[];
+  seq: number;
+  inflight: boolean;
+  setArea: (area: AreaFilter) => void;
+  setDraft: (draft: string) => void;
+  setTurns: (updater: (current: Turn[]) => Turn[]) => void;
+  nextTurnId: () => number;
+  setInflight: (inflight: boolean) => void;
+}
+
+const useBuscadorStore = create<BuscadorSessionState>((set, get) => ({
+  area: 'todos',
+  draft: '',
+  turns: [],
+  seq: 0,
+  inflight: false,
+  setArea: (area) => set({ area }),
+  setDraft: (draft) => set({ draft }),
+  setTurns: (updater) => set((state) => ({ turns: updater(state.turns) })),
+  nextTurnId: () => {
+    const next = get().seq + 1;
+    set({ seq: next });
+    return next;
+  },
+  setInflight: (inflight) => set({ inflight }),
+}));
 
 function areaPhrase(area: AreaFilter): string {
   return area === 'todos' ? 'en todas las materias' : `en ${LEGAL_AREA_INFO[area].label}`;
@@ -56,20 +87,15 @@ function Opening({ compact }: { compact: boolean }) {
 export default function BuscadorPage() {
   const notify = useUiStore((state) => state.notify);
   const sendArticleToDraft = useSendArticleToDraft();
-  const [area, setArea] = useState<AreaFilter>('todos');
-  const [draft, setDraft] = useState('');
-  const [turns, setTurns] = useState<Turn[]>([]);
+  const area = useBuscadorStore((state) => state.area);
+  const setArea = useBuscadorStore((state) => state.setArea);
+  const draft = useBuscadorStore((state) => state.draft);
+  const setDraft = useBuscadorStore((state) => state.setDraft);
+  const turns = useBuscadorStore((state) => state.turns);
+  const setTurns = useBuscadorStore((state) => state.setTurns);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const alive = useRef(true);
-  const seq = useRef(0);
-  const inflight = useRef(false);
   const busy = turns.some((turn) => turn.status === 'loading');
-
-  useEffect(() => {
-    alive.current = true;
-    return () => { alive.current = false; };
-  }, []);
 
   const tail = turns.map((turn) => `${turn.id}:${turn.status}`).join('|');
   useEffect(() => {
@@ -81,21 +107,20 @@ export default function BuscadorPage() {
 
   const consult = async (value: string, searchArea: AreaFilter = area, existingId?: number) => {
     const text = value.trim();
-    if (!text || inflight.current) return;
-    inflight.current = true;
-    const id = existingId ?? ++seq.current;
+    const store = useBuscadorStore.getState();
+    if (!text || store.inflight) return;
+    store.setInflight(true);
+    const id = existingId ?? store.nextTurnId();
     const next: Turn = { id, query: text, area: searchArea, status: 'loading', results: null, error: '', expanded: [] };
     setTurns((current) => existingId ? current.map((turn) => turn.id === id ? next : turn) : [...current, next]);
     if (!existingId) setDraft('');
     try {
       const response = await window.lexDesktop.legalKnowledge.searchRAG({ query: text, module: searchArea, limit: 8, useReranker: true });
-      if (!alive.current) return;
       setTurns((current) => current.map((turn) => turn.id === id ? { ...turn, status: 'ready', results: response.citations } : turn));
     } catch (error: unknown) {
-      if (!alive.current) return;
       setTurns((current) => current.map((turn) => turn.id === id ? { ...turn, status: 'error', error: errorMessage(error), results: null } : turn));
     } finally {
-      inflight.current = false;
+      useBuscadorStore.getState().setInflight(false);
     }
   };
 

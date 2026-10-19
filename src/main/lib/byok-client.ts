@@ -318,6 +318,22 @@ async function generateGemini(input: ByokGenerateInput): Promise<string> {
   return text;
 }
 
+export function extractJsonObject(rawText: string): string {
+  const trimmed = String(rawText || '').trim();
+  const withoutFence = trimmed
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```$/i, '')
+    .trim();
+
+  const firstBrace = withoutFence.indexOf('{');
+  const lastBrace = withoutFence.lastIndexOf('}');
+  if (firstBrace >= 0 && lastBrace > firstBrace) {
+    return withoutFence.slice(firstBrace, lastBrace + 1);
+  }
+  return withoutFence;
+}
+
 function extractOpenAiText(payload: any): string {
   if (typeof payload?.output_text === 'string' && payload.output_text.trim()) return payload.output_text.trim();
   return (payload?.output || [])
@@ -328,18 +344,59 @@ function extractOpenAiText(payload: any): string {
     .trim();
 }
 
+const OPENAI_REASONING_MODELS = /^(?:o\d|gpt-5)/i;
+const OPENAI_UNSUPPORTED_SCHEMA_KEYWORDS = new Set([
+  'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf',
+  'minLength', 'maxLength', 'pattern', 'minItems', 'maxItems',
+]);
+
+function cleanOpenAiSchema(value: unknown, seen: Set<any> = new Set()): any {
+  if (!value || typeof value !== 'object') return value;
+  if (seen.has(value)) return {};
+  seen.add(value);
+
+  if (Array.isArray(value)) return value.map(item => cleanOpenAiSchema(item, new Set(seen)));
+
+  const raw = value as Record<string, unknown>;
+  const cleaned: Record<string, unknown> = Object.fromEntries(
+    Object.entries(raw)
+      .filter(([key]) => !OPENAI_UNSUPPORTED_SCHEMA_KEYWORDS.has(key))
+      .map(([key, nested]) => [key, cleanOpenAiSchema(nested, new Set(seen))]),
+  );
+
+  if (cleaned.type === 'object' && cleaned.properties && typeof cleaned.properties === 'object' && !Array.isArray(cleaned.properties)) {
+    cleaned.additionalProperties = false;
+    cleaned.required = Object.keys(cleaned.properties as Record<string, unknown>);
+  }
+
+  return cleaned;
+}
+
 async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
+  const model = normalizeModelName('openai', input.model);
   const text = input.jsonSchema
     ? {
         format: {
           type: 'json_schema',
           name: input.jsonSchema.name.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64),
           description: input.jsonSchema.description,
-          schema: input.jsonSchema.schema,
+          schema: cleanOpenAiSchema(input.jsonSchema.schema),
           strict: true,
         },
       }
     : undefined;
+
+  const body: Record<string, unknown> = {
+    model,
+    instructions: input.systemInstruction,
+    input: input.prompt,
+    max_output_tokens: input.maxOutputTokens ?? 12_000,
+    text,
+    store: false,
+  };
+  if (OPENAI_REASONING_MODELS.test(model)) {
+    body.reasoning = { effort: 'low' };
+  }
 
   const payload = await fetchJson(
     'openai',
@@ -350,15 +407,7 @@ async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${input.apiKey}`,
       },
-      body: JSON.stringify({
-        model: input.model,
-        instructions: input.systemInstruction,
-        input: input.prompt,
-        max_output_tokens: input.maxOutputTokens ?? 12_000,
-        reasoning: { effort: 'low' },
-        text,
-        store: false,
-      }),
+      body: JSON.stringify(body),
     },
     input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
   );
@@ -471,9 +520,22 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
 }
 
 export async function generateByokText(input: ByokGenerateInput): Promise<string> {
-  if (input.provider === 'openai') return generateOpenAi(input);
-  if (input.provider === 'anthropic') return generateAnthropic(input);
-  return generateGemini(input);
+  const model = normalizeModelName(input.provider, input.model);
+  const schemaName = input.jsonSchema?.name ?? 'text';
+  const startedAt = Date.now();
+  console.info(`[BYOK] Request start -> provider=${input.provider} model=${model} mode=${schemaName} promptChars=${input.prompt.length}`);
+  try {
+    const result = input.provider === 'openai'
+      ? await generateOpenAi(input)
+      : input.provider === 'anthropic'
+        ? await generateAnthropic(input)
+        : await generateGemini(input);
+    console.info(`[BYOK] Request ok <- provider=${input.provider} model=${model} mode=${schemaName} outputChars=${result.length} durationMs=${Date.now() - startedAt}`);
+    return result;
+  } catch (error: any) {
+    console.warn(`[BYOK] Request failed <- provider=${input.provider} model=${model} mode=${schemaName} durationMs=${Date.now() - startedAt} error=${redactApiKeysAndSecrets(String(error?.message || error))}`);
+    throw error;
+  }
 }
 
 export async function testByokConnection(input: Pick<ByokGenerateInput, 'provider' | 'apiKey' | 'model'>): Promise<{

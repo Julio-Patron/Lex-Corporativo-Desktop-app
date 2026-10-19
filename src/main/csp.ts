@@ -1,4 +1,4 @@
-import { session, type Session } from 'electron';
+import { app, session, type Session } from 'electron';
 import { withContentSecurityPolicy } from '../shared/content-security-policy';
 
 let installed = false;
@@ -10,7 +10,8 @@ let installed = false;
 export function installContentSecurityPolicy(target: Session = session.defaultSession): void {
   if (installed) return;
   installed = true;
+  const reactPreambleHash = app.isPackaged ? undefined : process.env.LEX_DEV_REACT_PREAMBLE_HASH;
   target.webRequest.onHeadersReceived((details, callback) => {
-    callback({ responseHeaders: withContentSecurityPolicy(details.responseHeaders) });
+    callback({ responseHeaders: withContentSecurityPolicy(details.responseHeaders, reactPreambleHash) });
   });
 }
