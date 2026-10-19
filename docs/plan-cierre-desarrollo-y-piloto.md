@@ -1,6 +1,8 @@
 # Plan de cierre de la fase de desarrollo y arranque del piloto
 
-Estado al 19 de octubre de 2026. Código de referencia: `main` @ `2ccc31b`, versión `1.0.0-rc.17`. Este documento es la fuente vigente; `relevo-ux-ui.md` queda como historia.
+Estado al 19 de octubre de 2026. Código de referencia: `main` @ `2ccc31b`, versión `1.0.0-rc.17`. Este documento es la fuente vigente; `relevo-ux-ui.md` queda como historia. El índice de documentos vigentes e históricos está en [README.md](README.md).
+
+Convención de SHA: los informes citan el commit de código que auditan. La evidencia automática y el instalador se regeneran sobre el último commit, que puede diferir del anterior sólo en documentación; el manifiesto del piloto lo comprueba y registra ambos.
 
 ## 1. Decisiones
 
@@ -22,6 +24,8 @@ Estado al 19 de octubre de 2026. Código de referencia: `main` @ `2ccc31b`, vers
 | 3 | Auditoría de seguridad y datos con ensayos en Electron | ✅ | `auditorias/seguridad-2026-10-19.md`, `reports/audits/{security,data}-<sha7>.json` |
 | 4 | Auditoría de pruebas (234 pruebas, cobertura, suites Electron, gates) | ✅ | `auditorias/pruebas-2026-10-19.md` |
 | 5 | Re-evaluación de los 8 hallazgos de a718988 y registro de los nuevos | ✅ | `auditorias/hallazgos-2026-10-19.json` |
+| 5a | Revisión de calidad de la documentación (F1.G): errores y enlaces rotos corregidos, índice vigente/histórico | ✅ | `revisiones/documentacion-2026-10-19.md`, `docs/README.md` |
+| 5b | Revisión de calidad de interfaz y flujo (F1.H): recorrido por las seis rutas y textos contra las reglas de voz; textos corregidos, rediseños al piloto | ✅ | `revisiones/interfaz-y-flujo-2026-10-19.md` |
 | 6 | Correcciones derivadas (9 de 15 hallazgos de la revisión) con pruebas RED→GREEN | ✅ | commit `3d242cd` |
 | 7 | Limpieza del repositorio con evidencia por elemento | ✅ | `auditorias/limpieza-2026-10-19.md`, commit `46b46b6` |
 | 8 | Bump a `1.0.0-rc.17` | ✅ | commit `3983df3` |

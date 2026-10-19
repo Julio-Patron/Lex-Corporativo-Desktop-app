@@ -1,5 +1,7 @@
 {
   "schemaVersion": 1,
+  "supersededBy": "hallazgos-2026-10-19.json",
+  "historicalNote": "Estado al 17 de octubre de 2026. Los hallazgos fueron re-evaluados el 19 de octubre de 2026; consultar hallazgos-2026-10-19.json para el estado vigente.",
   "baseSha": "a71898852d5e035eb850da3a80164d12c7ad5e86",
   "date": "2026-10-17",
   "scope": "Auditoría inicial de seguridad, datos y rendimiento sobre el diseño aceptado y controles locales nuevos; no acredita aceptación de publicación.",

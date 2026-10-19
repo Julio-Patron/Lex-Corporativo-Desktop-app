@@ -24,7 +24,8 @@ const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
   ] },
   '/leyes': { title: 'Leyes', steps: [
     'El inventario presenta el corpus legal integrado, ordenado por materia.',
-    'Abre el enlace a la Cámara de Diputados para consultar la legislación en tu navegador.',
+    'Abrir articulado muestra el texto íntegro de cada ley dentro de la aplicación, sin conexión.',
+    'El enlace a la Cámara de Diputados abre la fuente oficial en tu navegador.',
   ] },
   '/estudio/portafolio': { title: 'Portafolio', steps: [
     'Aquí están los documentos generados e informes de revisión guardados en este equipo.',

@@ -50,7 +50,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-5">
           <Card>
-            <StepHeading title="1. Documento" subtitle="Selecciona o arrastra el archivo PDF, DOCX o TXT a dictaminar" />
+            <StepHeading title="1. Documento" subtitle="Selecciona o arrastra el archivo PDF, DOCX o TXT a revisar" />
             <FileDropzone
               file={review.file}
               onFile={(file) => onChange({ file })}
@@ -101,6 +101,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
                 );
               })}
             </div>
+            <p className="mt-3 text-xs text-slate-500">Mantén al menos una materia seleccionada; la última no se puede desmarcar.</p>
           </Card>
 
           {aiReady && (

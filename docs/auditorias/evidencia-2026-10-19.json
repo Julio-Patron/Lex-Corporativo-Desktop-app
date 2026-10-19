@@ -1,0 +1,706 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "sourceSha": "fcae82c",
+  "supersedes": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+  "ci": {
+    "quality": {
+      "status": "pass",
+      "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+      "workingTreeDirty": false,
+      "node": "v24.21.0",
+      "npm": "12.2.0",
+      "platform": "win32",
+      "checks": [
+        {
+          "script": "audit:corpus-governance:strict",
+          "exitCode": 0,
+          "durationMs": 811
+        },
+        {
+          "script": "verify:embeddings",
+          "exitCode": 0,
+          "durationMs": 492
+        },
+        {
+          "script": "lint",
+          "exitCode": 0,
+          "durationMs": 5470
+        },
+        {
+          "script": "test",
+          "exitCode": 0,
+          "durationMs": 4374
+        },
+        {
+          "script": "test:release-controls",
+          "exitCode": 0,
+          "durationMs": 802
+        },
+        {
+          "script": "build",
+          "exitCode": 0,
+          "durationMs": 8853
+        },
+        {
+          "script": "audit:legal-knowledge:strict",
+          "exitCode": 0,
+          "durationMs": 696
+        },
+        {
+          "script": "audit:legal-retrieval",
+          "exitCode": 0,
+          "durationMs": 2220
+        },
+        {
+          "script": "eval:legal-rag",
+          "exitCode": 0,
+          "durationMs": 6117
+        },
+        {
+          "script": "test:legal-gates",
+          "exitCode": 0,
+          "durationMs": 3384
+        },
+        {
+          "script": "audit:corpus-governance:strict",
+          "exitCode": 0,
+          "durationMs": 753
+        }
+      ]
+    },
+    "windows": {
+      "status": "pass",
+      "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+      "workingTreeDirty": false,
+      "node": "v24.21.0",
+      "npm": "12.2.0",
+      "platform": "win32",
+      "uiEvidenceId": "ci-fcae82c1e0bb5c270a08565aafec559b39dfe9b3-1792410854576-1",
+      "checks": [
+        {
+          "script": "audit:corpus-governance:strict",
+          "exitCode": 0,
+          "durationMs": 762
+        },
+        {
+          "script": "verify:embeddings",
+          "exitCode": 0,
+          "durationMs": 456
+        },
+        {
+          "script": "test",
+          "exitCode": 0,
+          "durationMs": 4561
+        },
+        {
+          "script": "predev:electron",
+          "exitCode": 0,
+          "durationMs": 1043
+        },
+        {
+          "script": "build",
+          "exitCode": 0,
+          "durationMs": 8743
+        },
+        {
+          "script": "test:vault:electron",
+          "exitCode": 0,
+          "durationMs": 805
+        },
+        {
+          "script": "test:recovery:electron",
+          "exitCode": 0,
+          "durationMs": 2087
+        },
+        {
+          "script": "test:ui:electron",
+          "exitCode": 0,
+          "durationMs": 101878
+        }
+      ]
+    }
+  },
+  "performance": {
+    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "workingTreeDirty": false,
+    "generatedAt": "2026-10-19T11:56:48.693Z",
+    "environment": {
+      "platform": "win32",
+      "arch": "x64",
+      "os": "10.0.26300",
+      "cpu": "AMD Ryzen 7 7730U with Radeon Graphics         ",
+      "logicalCpus": 16,
+      "memoryBytes": 41689669632,
+      "electron": "42.11.15"
+    },
+    "thresholds": {
+      "processToHomeMs": {
+        "medianMs": 5000,
+        "maxMs": 15000
+      },
+      "warmSearchMs": {
+        "medianMs": 500
+      }
+    },
+    "evaluation": [
+      {
+        "metric": "processToHomeMs",
+        "statistic": "medianMs",
+        "limit": 5000,
+        "observed": 1206,
+        "ok": true
+      },
+      {
+        "metric": "processToHomeMs",
+        "statistic": "maxMs",
+        "limit": 15000,
+        "observed": 1244,
+        "ok": true
+      },
+      {
+        "metric": "warmSearchMs",
+        "statistic": "medianMs",
+        "limit": 500,
+        "observed": 68.20430000000033,
+        "ok": true
+      }
+    ],
+    "status": "pass",
+    "metrics": {
+      "processToHomeMs": {
+        "count": 5,
+        "medianMs": 1206,
+        "p95Ms": 1244,
+        "minMs": 1088,
+        "maxMs": 1244
+      },
+      "reloadHomeMs": {
+        "count": 5,
+        "medianMs": 387.3212000000001,
+        "p95Ms": 400.0991999999999,
+        "minMs": 341.5718999999999,
+        "maxMs": 400.0991999999999
+      },
+      "firstSearchMs": {
+        "count": 5,
+        "medianMs": 263.47209999999995,
+        "p95Ms": 279.932,
+        "minMs": 235.17869999999994,
+        "maxMs": 279.932
+      },
+      "warmSearchMs": {
+        "count": 25,
+        "medianMs": 68.20430000000033,
+        "p95Ms": 77.96190000000001,
+        "minMs": 59.24579999999969,
+        "maxMs": 91.73309999999947
+      },
+      "largeLawReadMs": {
+        "count": 25,
+        "medianMs": 9.486899999999878,
+        "p95Ms": 11.41190000000006,
+        "minMs": 8.246099999999842,
+        "maxMs": 12.169399999999769
+      },
+      "basicReviewMs": {
+        "count": 25,
+        "medianMs": 498.4396000000006,
+        "p95Ms": 580.6415000000002,
+        "minMs": 448.48070000000007,
+        "maxMs": 583.6641999999999
+      },
+      "pdfExportMs": {
+        "count": 25,
+        "medianMs": 73.33210000000008,
+        "p95Ms": 151.76789999999983,
+        "minMs": 57.00200000000041,
+        "maxMs": 170.10770000000002
+      },
+      "docxExportMs": {
+        "count": 25,
+        "medianMs": 14.372299999999996,
+        "p95Ms": 36.520800000000236,
+        "minMs": 11.25170000000071,
+        "maxMs": 37.059099999999944
+      }
+    },
+    "limitations": [
+      "Ventana oculta y main de ensayo con handlers reales; no mide el main completo del producto instalado.",
+      "Cinco procesos y perfiles nuevos; caché del sistema operativo sin purgar. No equivale a arranque tras reiniciar Windows.",
+      "Recarga como aproximación de arranque caliente; lectura RMF sin renderizar el lector.",
+      "Revisión básica y documento sintético; sin proveedores ni credenciales reales.",
+      "Exportación con diálogo simulado; no incluye tiempo de elección del usuario.",
+      "Umbrales provisionales del 17-oct-2026; se confirman con cinco muestras del instalador en Windows limpio."
+    ]
+  },
+  "data": {
+    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "workingTreeDirty": false,
+    "generatedAt": "2026-10-19T11:56:17.100Z",
+    "checks": [
+      {
+        "id": "VAULT-PAYLOAD",
+        "label": "Contenido de la bóveda cifrado en reposo",
+        "ok": true
+      },
+      {
+        "id": "DATA-01",
+        "label": "Respaldo cifrado con contraseña, restaurable, sin duplicados y con conflictos detectados",
+        "ok": true
+      },
+      {
+        "id": "DATA-02",
+        "label": "Sin texto legible en LanceDB tras eliminar los fragmentos",
+        "ok": true
+      },
+      {
+        "id": "DATA-03",
+        "label": "Nombre del asunto y de los archivos cifrados",
+        "ok": true
+      },
+      {
+        "id": "SEC-03",
+        "label": "Secretos redactados en bitácoras sin depender de la longitud",
+        "ok": true
+      }
+    ],
+    "status": "pass",
+    "portableBackup": {
+      "sealedContainsPlaintext": false,
+      "wrongPasswordRejected": true,
+      "truncatedRejected": true,
+      "cleartextRejected": true,
+      "firstRestore": {
+        "restored": 1,
+        "skipped": 0,
+        "replaced": 0
+      },
+      "repeatedRestore": {
+        "restored": 0,
+        "skipped": 1,
+        "replaced": 0
+      },
+      "restoreRoundTrip": true,
+      "conflictDetected": true,
+      "replaceRestore": {
+        "restored": 0,
+        "skipped": 0,
+        "replaced": 1
+      },
+      "conflictReplaced": true
+    },
+    "sanitizer": {
+      "shortTokenRedacted": true,
+      "authorizationRedacted": true,
+      "messageSecretRedacted": true
+    },
+    "logicalRowsAfterDeletion": 0,
+    "plaintextVectorRemainsAfterLogicalDeletion": false,
+    "limits": [
+      "Sólo fixtures sintéticos y un perfil temporal; no se inspeccionó el perfil real.",
+      "La ausencia de texto literal no acredita borrado forense del disco.",
+      "exportCase es el JSON interno de un asunto y va en claro por diseño; el respaldo que recibe la persona usuaria es el sellado.",
+      "La restauración se ensaya en el mismo perfil; la portabilidad entre usuarios de Windows se valida manualmente en el piloto."
+    ]
+  },
+  "security": {
+    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "workingTreeDirty": false,
+    "generatedAt": "2026-10-19T11:56:19.883Z",
+    "checks": [
+      {
+        "id": "SEC-01",
+        "label": "La frontera IPC sólo atiende al marco principal del documento de la app en la ventana registrada",
+        "ok": true
+      },
+      {
+        "id": "SEC-02",
+        "label": "La CSP del documento bloquea iframes, plugins, scripts en línea y conexiones externas; el encabezado añade frame-ancestors",
+        "ok": true
+      },
+      {
+        "id": "PROTO-01",
+        "label": "El deep link lexcorp:// sólo admite el host auth",
+        "ok": true
+      }
+    ],
+    "status": "pass",
+    "ipc": {
+      "trustedHealth": {
+        "ok": true,
+        "status": "blocked"
+      },
+      "foreignHealth": {
+        "ok": false,
+        "message": "Error invoking remote method 'runtime:get-health': Error: Origen no autorizado."
+      },
+      "foreignRecovery": {
+        "ok": false,
+        "message": "Error invoking remote method 'recovery:load': Error: Origen no autorizado."
+      },
+      "cloneHealth": {
+        "ok": false,
+        "message": "Error invoking remote method 'runtime:get-health': Error: Origen no autorizado."
+      },
+      "navigatedHealth": {
+        "ok": false,
+        "message": "Error invoking remote method 'runtime:get-health': Error: Origen no autorizado."
+      }
+    },
+    "csp": {
+      "metaPolicy": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' lexcorp:; img-src 'self' data: blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'",
+      "header": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' lexcorp:; img-src 'self' data: blob:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'",
+      "iframe": {
+        "violated": "frame-src",
+        "blocked": "https://example.invalid/"
+      },
+      "plugin": {
+        "violated": "object-src",
+        "blocked": "https://example.invalid/x.pdf"
+      },
+      "inlineScript": {
+        "violated": "script-src-elem",
+        "blocked": "inline"
+      },
+      "inlineExecuted": false,
+      "connect": {
+        "violated": "connect-src",
+        "blocked": "https://example.invalid/"
+      }
+    },
+    "deepLink": {
+      "rejectedDeepLinks": true,
+      "acceptedDeepLink": true
+    },
+    "limits": [
+      "La ventana del ensayo replica las webPreferences del producto; la configuración real de src/main/index.ts se verifica estáticamente.",
+      "frame-ancestors sólo viaja en el encabezado y no aplica a documentos file://; se comprueba la función que lo añade, no una respuesta http.",
+      "No se ensayan subframes dentro de la app porque frame-src none los impide; la prueba unitaria de trusted-ipc cubre ese caso."
+    ]
+  },
+  "cleanup": {
+    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "workingTreeDirty": false,
+    "deletedPaths": [],
+    "exactDuplicateTests": [],
+    "licenses": {
+      "licenseCounts": {
+        "MIT": 625,
+        "BSD-2-Clause": 11,
+        "ISC": 58,
+        "OFL-1.1": 2,
+        "Apache-2.0": 49,
+        "SEE LICENSE IN LICENSE.txt": 1,
+        "BSD-3-Clause": 29,
+        "LGPL-3.0-or-later": 8,
+        "Apache-2.0 AND LGPL-3.0-or-later AND MIT": 1,
+        "Apache-2.0 AND LGPL-3.0-or-later": 2,
+        "0BSD": 2,
+        "Python-2.0": 1,
+        "sin-metadato": 2,
+        "CC-BY-4.0": 1,
+        "BlueOak-1.0.0": 8,
+        "(MPL-2.0 OR Apache-2.0)": 1,
+        "BSD": 1,
+        "(MIT OR WTFPL)": 1,
+        "(MIT OR GPL-3.0-or-later)": 1,
+        "(MIT AND Zlib)": 2,
+        "MPL-2.0": 12,
+        "(BSD-2-Clause OR MIT OR Apache-2.0)": 1,
+        "MIT OR SEE LICENSE IN FEEL-FREE.md": 1,
+        "WTFPL OR ISC": 1,
+        "(MIT OR CC0-1.0)": 1,
+        "WTFPL": 1,
+        "(WTFPL OR MIT)": 1
+      },
+      "missingLicense": [
+        "node_modules/base-64",
+        "node_modules/json-bignum"
+      ],
+      "acceptance": "Inventario de metadatos; falta revisar avisos y licencias de binarios redistribuidos y el paquete final."
+    }
+  },
+  "dependencyAudit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 12,
+      "high": 4,
+      "critical": 0,
+      "total": 16
+    },
+    "packages": [
+      {
+        "name": "@electron/get",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@huggingface/transformers",
+        "severity": "high",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@lancedb/lancedb",
+        "severity": "high",
+        "direct": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@tailwindcss/typography",
+        "severity": "moderate",
+        "direct": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "@xenova/transformers",
+        "severity": "high",
+        "direct": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "app-builder-lib",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "argparse",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "dmg-builder",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "electron-builder",
+        "severity": "moderate",
+        "direct": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "electron-builder-squirrel-windows",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "global-agent",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "mammoth",
+        "severity": "moderate",
+        "direct": true,
+        "fixIsMajor": true
+      },
+      {
+        "name": "postcss-selector-parser",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "roarr",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "sharp",
+        "severity": "high",
+        "direct": false,
+        "fixIsMajor": true
+      },
+      {
+        "name": "sprintf-js",
+        "severity": "moderate",
+        "direct": false,
+        "fixIsMajor": true
+      }
+    ]
+  },
+  "preflight": {
+    "status": "pass",
+    "target": "win",
+    "strict": false,
+    "checks": [
+      {
+        "id": "vector-store",
+        "status": "pass",
+        "detail": "LanceDB legal_knowledge.lance"
+      },
+      {
+        "id": "corpus-manifest",
+        "status": "pass",
+        "detail": "Manifiesto canónico del corpus"
+      },
+      {
+        "id": "embedding-model",
+        "status": "pass",
+        "detail": "ONNX MiniLM cuantizado"
+      },
+      {
+        "id": "embedding-integrity",
+        "status": "pass",
+        "detail": "Xenova/all-MiniLM-L6-v2@751bff37182d3f1213fa05d7196b954e230abad9: hashes correctos"
+      },
+      {
+        "id": "corpus-integrity",
+        "status": "pass",
+        "detail": "Manifiesto versionado comprobado sin regeneración"
+      },
+      {
+        "id": "app-icon",
+        "status": "pass",
+        "detail": "resources/icon.ico"
+      },
+      {
+        "id": "code-signing",
+        "status": "warn",
+        "detail": "Certificado/identidad de firma disponible en el entorno"
+      },
+      {
+        "id": "signing-identity",
+        "status": "warn",
+        "detail": "Huella del editor esperada para verificar Authenticode"
+      },
+      {
+        "id": "distribution-repository",
+        "status": "warn",
+        "detail": "Repositorio de distribución confirmado y coincidente con el feed"
+      }
+    ]
+  },
+  "coverage": {
+    "total": {
+      "lines": {
+        "total": 3460,
+        "covered": 2531,
+        "skipped": 0,
+        "pct": 73.15
+      },
+      "statements": {
+        "total": 3983,
+        "covered": 2797,
+        "skipped": 0,
+        "pct": 70.22
+      },
+      "functions": {
+        "total": 709,
+        "covered": 541,
+        "skipped": 0,
+        "pct": 76.3
+      },
+      "branches": {
+        "total": 3319,
+        "covered": 1989,
+        "skipped": 0,
+        "pct": 59.92
+      },
+      "branchesTrue": {
+        "total": 0,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 100
+      }
+    }
+  },
+  "pilotInstaller": {
+    "version": "1.0.0-rc.17",
+    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "buildSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "signed": false,
+    "signature": {
+      "status": "NotSigned",
+      "thumbprint": null
+    },
+    "installer": {
+      "path": "Lex-Corporativo-Setup-1.0.0-rc.17.exe",
+      "bytes": 355006471,
+      "sha256": "7f579697cada52b07a81552115d68fe5c3c4d637e910450b6d5485ea513f8faf"
+    },
+    "build": {
+      "node": "v24.21.0",
+      "platform": "win32",
+      "arch": "x64",
+      "os": "10.0.26300",
+      "tools": {
+        "electron": "42.11.15",
+        "electron-builder": "26.15.3",
+        "@electron/rebuild": "4.2.0",
+        "@xenova/transformers": "2.17.2",
+        "@lancedb/lancedb": "0.31.0",
+        "better-sqlite3": "12.11.1"
+      }
+    },
+    "inputs": {
+      "lockfileSha256": "e33261de480a08dd19ac704687df0f02b30f43cfaa3cae5f307895662b09240d",
+      "corpusManifestSha256": "38ed32317847cf03d502331d01c85ce3f46090dffa0386fb294000f14efbed4a",
+      "embeddingsLockSha256": "c94bf8126d02424af68cf2c5187623af54ffb04fa8a2918c9d2ab52421ec6632",
+      "embeddingsModel": "Xenova/all-MiniLM-L6-v2",
+      "packagedResources": {
+        "corpus": 16,
+        "vectors": 24,
+        "embeddings": 4
+      }
+    },
+    "checks": [
+      {
+        "id": "arbol-limpio",
+        "ok": true,
+        "detail": "Checkout limpio"
+      },
+      {
+        "id": "instalador",
+        "ok": true,
+        "detail": "Lex-Corporativo-Setup-1.0.0-rc.17.exe"
+      },
+      {
+        "id": "artefacto:Lex-Corporativo-Setup-1.0.0-rc.17.exe.blockmap",
+        "ok": true,
+        "detail": "Lex-Corporativo-Setup-1.0.0-rc.17.exe.blockmap"
+      },
+      {
+        "id": "artefacto:latest.yml",
+        "ok": true,
+        "detail": "latest.yml"
+      },
+      {
+        "id": "recursos-empaquetados",
+        "ok": true,
+        "detail": "corpus 16 archivos, vectores 24, modelo 4"
+      },
+      {
+        "id": "avisos-terceros",
+        "ok": true,
+        "detail": "THIRD-PARTY-NOTICES.txt"
+      },
+      {
+        "id": "contenido-asar",
+        "ok": true,
+        "detail": "19861 entradas sin rutas prohibidas"
+      },
+      {
+        "id": "firma-registrada",
+        "ok": true,
+        "detail": "Authenticode: NotSigned"
+      }
+    ],
+    "status": "pass"
+  },
+  "generatedAt": "2026-10-19T12:00:12.888Z",
+  "git": {
+    "head": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "dirty": false
+  }
+}

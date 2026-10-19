@@ -71,7 +71,7 @@ function drawDiscreetHeader(doc: jsPDF, logoDataUri: string | null) {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(6.5);
   doc.setTextColor(100, 116, 139); // slate-500
-  doc.text('INGENIERÍA JURÍDICA Y DICTAMEN NORMATIVO', textStartX, 15.5);
+  doc.text('INGENIERÍA JURÍDICA Y REVISIÓN NORMATIVA', textStartX, 15.5);
 
   // Right-aligned discreet date
   doc.setFontSize(7);

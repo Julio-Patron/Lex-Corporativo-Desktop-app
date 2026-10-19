@@ -39,7 +39,7 @@ export default function EstudioLayout() {
             <div className="min-w-0">
               <p className="text-lg font-bold leading-tight text-legal-950 sm:text-xl">Estudio Jurídico</p>
               <p className="mt-0.5 text-xs text-slate-500 sm:text-sm">
-                Dictamen de riesgos, redacción asistida y portafolio local
+                Revisión de riesgos, redacción asistida y portafolio local
               </p>
             </div>
           </div>

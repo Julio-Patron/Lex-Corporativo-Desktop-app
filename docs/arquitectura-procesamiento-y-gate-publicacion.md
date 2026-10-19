@@ -1,5 +1,7 @@
 # Arquitectura de procesamiento y gate de publicación
 
+> Estado por gate al 19 de octubre de 2026: ver la sección 7 de [plan-cierre-desarrollo-y-piloto.md](plan-cierre-desarrollo-y-piloto.md). Los gates de este documento aplican al release comercial; el piloto interno sin firma no es un release.
+
 ## Decisión de producto
 
 Lex Corporativo Desktop es una estación BYOK. La generación requiere una API key del usuario para Gemini, OpenAI o Anthropic. No se incluye ni se ofrece inferencia mediante GGUF, Rust o un LLM local.
@@ -7,7 +9,7 @@ Lex Corporativo Desktop es una estación BYOK. La generación requiere una API k
 Permanecen locales:
 
 - bóveda SQLite y portafolio;
-- corpus jurídico Mercantil y Fiscal;
+- corpus jurídico de las cinco materias (mercantil, laboral, comercio exterior, aduanal y fiscal; 16 ordenamientos);
 - LanceDB y MiniLM;
 - extracción y selección de fragmentos;
 - reglas deterministas y CFDI;
