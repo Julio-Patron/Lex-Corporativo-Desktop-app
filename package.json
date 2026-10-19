@@ -37,6 +37,7 @@
     "build:desktop": "npm run build:electron",
     "preflight:release": "node scripts/release-preflight.mjs --target=win",
     "preflight:release:strict": "node scripts/release-preflight.mjs --target=win --strict",
+    "pilot:manifest": "node scripts/pilot-artifacts.mjs",
     "audit:legal-knowledge": "node scripts/audit-legal-knowledge.mjs",
     "audit:legal-knowledge:strict": "node scripts/audit-legal-knowledge.mjs --write --strict",
     "audit:legal-retrieval": "node scripts/probe-legal-retrieval.mjs --write",

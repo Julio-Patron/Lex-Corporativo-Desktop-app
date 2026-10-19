@@ -19,28 +19,31 @@ function measure(relative) {
   return { exists: true, files: children.reduce((sum, item) => sum + item.files, 0), bytes: children.reduce((sum, item) => sum + item.bytes, 0) };
 }
 const candidates = [
-  ['screens-electron', 'mantenimiento', 'Conservar capturas históricas; no empaquetadas. Revisar valor documental antes de retirar.', 'git ls-files screens-electron; búsqueda de referencias; selección del responsable de producto'],
-  ['scratch', 'mantenimiento', 'Conservar evidencia y ensayos previos. Sólo los perfiles creados por cada prueba se eliminan al terminar.', 'Recorridos mantenidos en tests/; no borrar perfiles o archivos preexistentes'],
-  ['reports', 'mantenimiento', 'Conservar auditoría de 82d567a y nueva evidencia de a718988 en destinos separados.', 'Verificar SHA de cada informe antes de archivar'],
-  ['.superdesign', 'mantenimiento', 'Conservar trabajo local pendiente del diseño aprobado.', 'No tocar archivos locales'],
-  ['docs/auditoria-ui-2026-10-17.html', 'evidencia-historica', 'Conservar; corresponde a 82d567a y no acredita a718988.', 'Documento original intacto'],
+  ['screens-electron', 'retirado', 'Capturas de septiembre de 2026 sin referencias en código, build ni CI; retiradas del repositorio el 19-oct-2026 por decisión del responsable. La historia de Git las conserva.', 'git ls-files screens-electron vacío; evidencia visual vigente en reports/ux-ui mediante test:ui:electron'],
+  ['scratch', 'mantenimiento', 'Directorio local ignorado. Sólo se eliminan las carpetas temporales con prefijo performance-, data-audit- y security- que dejan los ensayos.', 'Recorridos mantenidos en tests/; no borrar archivos preexistentes'],
+  ['reports', 'mantenimiento', 'Directorio local ignorado con evidencia regenerable; conservar audits/*-a718988.json y ci/ hasta publicar el nuevo bundle de evidencia.', 'Verificar SHA de cada informe antes de archivar'],
   ['out', 'regenerable', 'Salida de compilación vigente, necesaria para pruebas Electron.', 'npm run build y recorridos Electron'],
-  ['release', 'regenerable', 'Conservar cualquier candidato aceptado; no existe autorización para eliminar instaladores.', 'Hashes y manifiesto de aceptación'],
+  ['release', 'regenerable', 'Salida local de electron-builder. Un instalador de piloto se conserva junto con release/pilot-manifest.json hasta terminar el piloto.', 'Hashes y manifiesto de piloto'],
   ['.npm-cache', 'mantenimiento', 'No borrar: mantenimiento opcional sin efecto funcional.', 'Reproducibilidad mediante npm ci en CI'],
   ['node_modules', 'necesario', 'Conservar para pruebas; auditar vulnerabilidades/licencias por separado.', 'npm ci y ABI Node/Electron'],
   ['legal-runtime/corpus', 'necesario', 'Conservar íntegro.', 'audit:corpus-governance:strict; audit:legal-knowledge:strict'],
   ['legal-runtime/lance_data', 'necesario', 'Conservar archivos internos de LanceDB.', 'audit:legal-retrieval; eval:legal-rag'],
   ['legal-runtime/models', 'necesario', 'Conservar MiniLM; no es un LLM generativo. Empaquetar sólo los cuatro recursos fijados.', 'verify:embeddings'],
-  ['resources', 'necesario', 'Conservar iconos y recursos de todas las plataformas.', 'preflight y construcción'],
-  ['CLAUDE.md', 'necesario', 'Corregir publicación y rutas inexistentes, conservando la arquitectura real.', 'Revisión de referencias y comandos'],
-  ['README.md', 'necesario', 'Actualizar controles y ruta de evidencia visual.', 'Revisión de comandos documentados'],
+  ['resources', 'necesario', 'Conservar icono Windows y avisos de terceros. No existe icon.icns; el producto se distribuye sólo para Windows.', 'preflight y construcción'],
+  ['electron-builder.config.json', 'necesario', 'Sólo el destino win/nsis está soportado; los bloques mac y linux se retiraron porque referenciaban recursos inexistentes.', 'npm run build:electron'],
+  ['scripts/repair-legal-anchors.mjs', 'mantenimiento', 'Herramienta de mantenimiento del corpus, referenciada sólo por package.json. Conservar mientras exista el flujo de promoción de corpus.', 'Uso documentado en package.json'],
+  ['scripts/export-legal-corpus.mjs', 'mantenimiento', 'Herramienta de mantenimiento del corpus, referenciada sólo por package.json. Conservar mientras exista el flujo de promoción de corpus.', 'Uso documentado en package.json'],
+  ['.gitignore', 'necesario', 'Se retiraron las entradas de modelos GGUF (el producto no incluye LLM local) y de un informe HTML que nunca se versionó.', 'git check-ignore sobre rutas de ejemplo'],
+  ['.gitattributes', 'necesario', 'Se retiró la regla binaria de *.gguf.', 'Revisión del archivo'],
+  ['CLAUDE.md', 'necesario', 'Guía del repositorio actualizada el 19-oct-2026 con la frontera IPC, la CSP compartida y las suites de auditoría.', 'Revisión de referencias y comandos'],
+  ['README.md', 'necesario', 'Documenta las auditorías y la evidencia.', 'Revisión de comandos documentados'],
 ];
 const inventory = candidates.map(([relative, classification, decision, verification]) => ({
   path: relative, ...measure(relative), trackedFiles: tracked.filter(file => file === relative || file.startsWith(`${relative}/`)).length,
   gitStatus: git(['status', '--short', '--ignored', '--', relative]),
   references: textFiles.filter(item => item.file !== relative && item.content.includes(relative)).map(item => item.file),
   buildUse: relative === 'node_modules' ? 'Dependencias incluidas por electron-builder' : ['out', 'legal-runtime/corpus', 'legal-runtime/lance_data', 'legal-runtime/models', 'resources'].includes(relative) ? 'Construcción, recursos o empaquetado' : 'Fuera de files/extraResources del instalador',
-  classification, decision, verification, owner: 'Codex; selección de evidencia histórica por responsable de producto',
+  classification, decision, verification, owner: 'Responsable de producto; ejecución asistida',
 }));
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const dependencies = Object.keys(pkg.dependencies).map(name => ({ name, references: textFiles.filter(item => item.file !== 'package.json' && item.content.includes(name)).map(item => item.file), decision: name === 'apache-arrow' ? 'Conservar: dependencia nativa/indirecta de LanceDB y regla asarUnpack; ausencia de import directo no prueba desuso.' : 'Conservar hasta revisar imports dinámicos, CSS y empaquetado.' }));
