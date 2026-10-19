@@ -56,7 +56,21 @@ npm run verify:embeddings
 
 Sólo después de un cambio intencional del corpus se ejecutan `ingest:local:offline` y `manifest:legal-corpus`; revisar el diff y validar un nuevo commit. `test:legal-gates` altera una copia temporal para comprobar que los controles rechazan un manifiesto incoherente y un ancla jurídica ausente.
 
-Los mismos controles de CI se pueden ejecutar con `npm rebuild better-sqlite3` y `npm run ci:quality`, seguidos de `npm run ci:windows`. El segundo comando prueba Node antes de preparar SQLite para Electron. Las omisiones por ABI bloquean CI. Los logs sanitizados y reportes permitidos se guardan en `reports/ci/`; el resumen distingue SHA base y árbol modificado. `npm run audit:cleanup` inventaría archivos sin eliminarlos; `npm run audit:performance:electron` mide cinco procesos con datos sintéticos después de compilar y preparar Electron.
+Los mismos controles de CI se pueden ejecutar con `npm rebuild better-sqlite3` y `npm run ci:quality`, seguidos de `npm run ci:windows`. El segundo comando prueba Node antes de preparar SQLite para Electron. Las omisiones por ABI bloquean CI. Los logs sanitizados y reportes permitidos se guardan en `reports/ci/`; el resumen distingue SHA base y árbol modificado.
+
+### Auditorías y evidencia
+
+Las auditorías de rendimiento, datos y seguridad se ejecutan en Electron con perfiles temporales y datos sintéticos, después de `npm run build` y `npm run predev:electron`. Cada una escribe un JSON con `status` en `reports/audits/` y falla si algún control no se cumple, salvo con `--report-only`:
+
+```bash
+npm run audit:performance:electron   # cinco procesos; umbrales provisionales de arranque y búsqueda
+npm run audit:data:electron          # cifrado en reposo, metadatos, respaldo portátil, fragmentos LanceDB, sanitizador
+npm run audit:security:electron      # frontera IPC con el preload real, CSP efectiva, deep link
+npm run audit:cleanup                # inventario de archivos y dependencias; nunca elimina
+npm audit --json                     # avisos de dependencias; triaje en docs/auditorias/
+```
+
+Los informes de cada auditoría, los hallazgos re-evaluados y el bundle de evidencia sanitizado se versionan en `docs/auditorias/`. El plan de cierre de desarrollo y el kit del piloto están en `docs/plan-cierre-desarrollo-y-piloto.md` y `docs/piloto/`. `npm run pilot:manifest` genera `release/pilot-manifest.json` para un instalador interno sin firma.
 
 ## Empaquetado
 

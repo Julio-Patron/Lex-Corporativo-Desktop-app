@@ -2,6 +2,16 @@
 
 Fecha de corte: 15 de octubre de 2026. Versión del producto: `1.0.0-rc.16`.
 
+## Cierre de desarrollo y arranque del piloto — 19 de octubre de 2026
+
+Este documento se conserva como historia. El estado vigente está en [docs/plan-cierre-desarrollo-y-piloto.md](plan-cierre-desarrollo-y-piloto.md) y en los informes de `docs/auditorias/` fechados el 19 de octubre de 2026.
+
+- **Fase 0 superada.** La rama `desarrollo` se integró en `main` mediante el PR #2 (`a73859e`) y se eliminó local y remotamente. El trabajo continúa directamente en `main`; el disparador de CI ya no la lista.
+- **Corrección de referencia.** El informe `docs/auditoria-ui-2026-10-17.html` citado más abajo nunca se versionó en el repositorio. Sus conclusiones sobreviven en el resumen de la sección "Auditoría visual con Superdesign" y en `reports/ux-ui/superdesign-audit/` (local). La entrada de `.gitignore` que lo nombraba se retiró.
+- **Hallazgos a718988 re-evaluados.** SEC-01, SEC-02, SEC-03, DATA-02 y DATA-03 quedaron cerrados con ensayos automatizados en Electron (`npm run audit:security:electron`, `npm run audit:data:electron`); DATA-01 queda mitigado hasta la restauración en otro usuario de Windows durante el piloto; PERF-01 pasa en el ensayo con umbrales codificados y se cierra con las cinco muestras del instalador; DEP-01 sigue abierto sin bloquear el piloto. Detalle y evidencia en `docs/auditorias/hallazgos-2026-10-19.json`.
+- **Limpieza.** `screens-electron/` se retiró del repositorio (la historia de Git conserva las capturas); se eliminaron las reglas de `.gitignore` y `.gitattributes` para modelos GGUF, y los bloques `mac` y `linux` de `electron-builder.config.json`, que referenciaban recursos inexistentes.
+- **Piloto.** Build interno `1.0.0-rc.17` sin firma, sin tag ni release en GitHub; kit del tester en `docs/piloto/`.
+
 ## Controles y auditoría técnica sobre el diseño aceptado — 17 de octubre de 2026
 
 El responsable del producto confirmó que la interfaz de `a71898852d5e035eb850da3a80164d12c7ad5e86` es la correcta. Esta continuación conserva ese diseño y los cambios locales pendientes. La auditoría visual de la sección siguiente y `docs/auditoria-ui-2026-10-17.html` corresponden a `82d567a`: se conservan como evidencia histórica y no se presentan como validación del diseño nuevo. No se hizo commit, push, merge, tag ni publicación en esta etapa.

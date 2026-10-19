@@ -73,18 +73,6 @@
     "createStartMenuShortcut": true,
     "shortcutName": "Lex Corporativo"
   },
-  "mac": {
-    "target": [
-      { "target": "dmg", "arch": ["x64", "arm64"] }
-    ],
-    "icon": "resources/icon.icns",
-    "category": "public.app-category.business"
-  },
-  "linux": {
-    "target": "AppImage",
-    "icon": "resources/icon.png",
-    "category": "Office"
-  },
   "protocols": {
     "name": "Lex Corporativo",
     "schemes": ["lexcorp"]
