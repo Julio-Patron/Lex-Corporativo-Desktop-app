@@ -51,4 +51,6 @@ tmp-asar-extract/
 tmp-packaged-package.json
 reports/
 coverage/
+# Caché de Electron y electron-builder usada por .github/workflows/build-installer.yml
+.cache/
 .superdesign/
