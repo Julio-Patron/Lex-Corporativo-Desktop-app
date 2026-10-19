@@ -1,6 +1,6 @@
 # Plan de cierre de la fase de desarrollo y arranque del piloto
 
-Estado al 19 de octubre de 2026. Código de referencia: `main` @ `56aa94b`, versión `1.0.0-rc.17`. Este documento es la fuente vigente; `relevo-ux-ui.md` queda como historia. El índice de documentos vigentes e históricos está en [README.md](README.md).
+Estado al 19 de octubre de 2026. Código de referencia: `main` @ `56aa94b`, versión `1.0.0-rc.17`; instalador construido en `e12c206` (SHA-256 `262dda2e…e247d`, ver `piloto/manifiesto-instalador.md`). Este documento es la fuente vigente; `relevo-ux-ui.md` queda como historia. El índice de documentos vigentes e históricos está en [README.md](README.md).
 
 Convención de SHA: los informes citan el commit de código que auditan. La evidencia automática y el instalador se regeneran sobre el último commit, que puede diferir del anterior sólo en documentación; el manifiesto del piloto lo comprueba y registra ambos.
 

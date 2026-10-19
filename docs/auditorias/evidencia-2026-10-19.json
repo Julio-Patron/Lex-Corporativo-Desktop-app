@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-19",
-  "sourceSha": "fcae82c",
+  "sourceSha": "e12c206",
   "supersedes": "a71898852d5e035eb850da3a80164d12c7ad5e86",
   "ci": {
     "quality": {
       "status": "pass",
-      "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+      "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
       "workingTreeDirty": false,
       "node": "v24.21.0",
       "npm": "12.2.0",
@@ -15,116 +15,116 @@
         {
           "script": "audit:corpus-governance:strict",
           "exitCode": 0,
-          "durationMs": 811
+          "durationMs": 775
         },
         {
           "script": "verify:embeddings",
           "exitCode": 0,
-          "durationMs": 492
+          "durationMs": 482
         },
         {
           "script": "lint",
           "exitCode": 0,
-          "durationMs": 5470
+          "durationMs": 5502
         },
         {
           "script": "test",
           "exitCode": 0,
-          "durationMs": 4374
+          "durationMs": 4566
         },
         {
           "script": "test:release-controls",
           "exitCode": 0,
-          "durationMs": 802
+          "durationMs": 814
         },
         {
           "script": "build",
           "exitCode": 0,
-          "durationMs": 8853
+          "durationMs": 8671
         },
         {
           "script": "audit:legal-knowledge:strict",
           "exitCode": 0,
-          "durationMs": 696
+          "durationMs": 688
         },
         {
           "script": "audit:legal-retrieval",
           "exitCode": 0,
-          "durationMs": 2220
+          "durationMs": 2156
         },
         {
           "script": "eval:legal-rag",
           "exitCode": 0,
-          "durationMs": 6117
+          "durationMs": 6072
         },
         {
           "script": "test:legal-gates",
           "exitCode": 0,
-          "durationMs": 3384
+          "durationMs": 3367
         },
         {
           "script": "audit:corpus-governance:strict",
           "exitCode": 0,
-          "durationMs": 753
+          "durationMs": 770
         }
       ]
     },
     "windows": {
       "status": "pass",
-      "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+      "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
       "workingTreeDirty": false,
       "node": "v24.21.0",
       "npm": "12.2.0",
       "platform": "win32",
-      "uiEvidenceId": "ci-fcae82c1e0bb5c270a08565aafec559b39dfe9b3-1792410854576-1",
+      "uiEvidenceId": "ci-e12c206295d3194d1d41aaae94d5dc5f69e6b3a8-1792411492954-1",
       "checks": [
         {
           "script": "audit:corpus-governance:strict",
           "exitCode": 0,
-          "durationMs": 762
+          "durationMs": 775
         },
         {
           "script": "verify:embeddings",
           "exitCode": 0,
-          "durationMs": 456
+          "durationMs": 461
         },
         {
           "script": "test",
           "exitCode": 0,
-          "durationMs": 4561
+          "durationMs": 4466
         },
         {
           "script": "predev:electron",
           "exitCode": 0,
-          "durationMs": 1043
+          "durationMs": 1040
         },
         {
           "script": "build",
           "exitCode": 0,
-          "durationMs": 8743
+          "durationMs": 8591
         },
         {
           "script": "test:vault:electron",
           "exitCode": 0,
-          "durationMs": 805
+          "durationMs": 807
         },
         {
           "script": "test:recovery:electron",
           "exitCode": 0,
-          "durationMs": 2087
+          "durationMs": 1990
         },
         {
           "script": "test:ui:electron",
           "exitCode": 0,
-          "durationMs": 101878
+          "durationMs": 101868
         }
       ]
     }
   },
   "performance": {
-    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "workingTreeDirty": false,
-    "generatedAt": "2026-10-19T11:56:48.693Z",
+    "generatedAt": "2026-10-19T12:07:25.366Z",
     "environment": {
       "platform": "win32",
       "arch": "x64",
@@ -148,21 +148,21 @@
         "metric": "processToHomeMs",
         "statistic": "medianMs",
         "limit": 5000,
-        "observed": 1206,
+        "observed": 1183,
         "ok": true
       },
       {
         "metric": "processToHomeMs",
         "statistic": "maxMs",
         "limit": 15000,
-        "observed": 1244,
+        "observed": 1212,
         "ok": true
       },
       {
         "metric": "warmSearchMs",
         "statistic": "medianMs",
         "limit": 500,
-        "observed": 68.20430000000033,
+        "observed": 64.97779999999966,
         "ok": true
       }
     ],
@@ -170,59 +170,59 @@
     "metrics": {
       "processToHomeMs": {
         "count": 5,
-        "medianMs": 1206,
-        "p95Ms": 1244,
-        "minMs": 1088,
-        "maxMs": 1244
+        "medianMs": 1183,
+        "p95Ms": 1212,
+        "minMs": 1163,
+        "maxMs": 1212
       },
       "reloadHomeMs": {
         "count": 5,
-        "medianMs": 387.3212000000001,
-        "p95Ms": 400.0991999999999,
-        "minMs": 341.5718999999999,
-        "maxMs": 400.0991999999999
+        "medianMs": 384.20669999999996,
+        "p95Ms": 393.66290000000004,
+        "minMs": 344.7416999999998,
+        "maxMs": 393.66290000000004
       },
       "firstSearchMs": {
         "count": 5,
-        "medianMs": 263.47209999999995,
-        "p95Ms": 279.932,
-        "minMs": 235.17869999999994,
-        "maxMs": 279.932
+        "medianMs": 258.09000000000015,
+        "p95Ms": 270.17550000000006,
+        "minMs": 252.9104000000002,
+        "maxMs": 270.17550000000006
       },
       "warmSearchMs": {
         "count": 25,
-        "medianMs": 68.20430000000033,
-        "p95Ms": 77.96190000000001,
-        "minMs": 59.24579999999969,
-        "maxMs": 91.73309999999947
+        "medianMs": 64.97779999999966,
+        "p95Ms": 73.56730000000016,
+        "minMs": 62.083100000000286,
+        "maxMs": 74.19569999999999
       },
       "largeLawReadMs": {
         "count": 25,
-        "medianMs": 9.486899999999878,
-        "p95Ms": 11.41190000000006,
-        "minMs": 8.246099999999842,
-        "maxMs": 12.169399999999769
+        "medianMs": 9.164099999999962,
+        "p95Ms": 10.565899999999601,
+        "minMs": 8.667399999999816,
+        "maxMs": 10.61160000000018
       },
       "basicReviewMs": {
         "count": 25,
-        "medianMs": 498.4396000000006,
-        "p95Ms": 580.6415000000002,
-        "minMs": 448.48070000000007,
-        "maxMs": 583.6641999999999
+        "medianMs": 446.38560000000007,
+        "p95Ms": 546.4094999999998,
+        "minMs": 389.6384000000003,
+        "maxMs": 551.0323000000001
       },
       "pdfExportMs": {
         "count": 25,
-        "medianMs": 73.33210000000008,
-        "p95Ms": 151.76789999999983,
-        "minMs": 57.00200000000041,
-        "maxMs": 170.10770000000002
+        "medianMs": 67.83129999999983,
+        "p95Ms": 155.15120000000024,
+        "minMs": 64.22299999999996,
+        "maxMs": 157.9011999999998
       },
       "docxExportMs": {
         "count": 25,
-        "medianMs": 14.372299999999996,
-        "p95Ms": 36.520800000000236,
-        "minMs": 11.25170000000071,
-        "maxMs": 37.059099999999944
+        "medianMs": 12.846000000000004,
+        "p95Ms": 32.46910000000025,
+        "minMs": 11.576399999999921,
+        "maxMs": 33.44080000000031
       }
     },
     "limitations": [
@@ -235,9 +235,9 @@
     ]
   },
   "data": {
-    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "workingTreeDirty": false,
-    "generatedAt": "2026-10-19T11:56:17.100Z",
+    "generatedAt": "2026-10-19T12:06:55.100Z",
     "checks": [
       {
         "id": "VAULT-PAYLOAD",
@@ -305,9 +305,9 @@
     ]
   },
   "security": {
-    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "workingTreeDirty": false,
-    "generatedAt": "2026-10-19T11:56:19.883Z",
+    "generatedAt": "2026-10-19T12:06:57.898Z",
     "checks": [
       {
         "id": "SEC-01",
@@ -380,7 +380,7 @@
     ]
   },
   "cleanup": {
-    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "workingTreeDirty": false,
     "deletedPaths": [],
     "exactDuplicateTests": [],
@@ -617,8 +617,8 @@
   },
   "pilotInstaller": {
     "version": "1.0.0-rc.17",
-    "sourceSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
-    "buildSha": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "sourceSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
+    "buildSha": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "signed": false,
     "signature": {
       "status": "NotSigned",
@@ -626,8 +626,8 @@
     },
     "installer": {
       "path": "Lex-Corporativo-Setup-1.0.0-rc.17.exe",
-      "bytes": 355006471,
-      "sha256": "7f579697cada52b07a81552115d68fe5c3c4d637e910450b6d5485ea513f8faf"
+      "bytes": 355006373,
+      "sha256": "262dda2e6745882fb27c392ad2c3552ae3066d96342f195299728040410e247d"
     },
     "build": {
       "node": "v24.21.0",
@@ -698,9 +698,9 @@
     ],
     "status": "pass"
   },
-  "generatedAt": "2026-10-19T12:00:12.888Z",
+  "generatedAt": "2026-10-19T12:10:30.835Z",
   "git": {
-    "head": "fcae82c1e0bb5c270a08565aafec559b39dfe9b3",
+    "head": "e12c206295d3194d1d41aaae94d5dc5f69e6b3a8",
     "dirty": false
   }
 }
