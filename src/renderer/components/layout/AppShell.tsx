@@ -12,7 +12,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const recovery = useRecoveryStatus();
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-legal-paper font-sans text-legal-950">
-      <div className="app-titlebar window-drag-region shrink-0 bg-legal-950" aria-hidden="true" />
+      <div className="app-titlebar window-drag-region shrink-0 border-b border-legal-gold/25 bg-legal-rail" aria-hidden="true" />
       <a
         href="#main-content"
         onClick={(event) => { event.preventDefault(); document.getElementById('main-content')?.focus(); }}

@@ -20,7 +20,7 @@ vi.mock('@lancedb/lancedb', () => ({
   connect: vi.fn(),
 }));
 
-import { isAllowedAnalysisFile, parseAnalyzePayload } from './analyze.handler';
+import { isAllowedAnalysisFile, parseAnalyzePayload, processAnalyzePayload } from './analyze.handler';
 
 const basePayload = {
   caseId: 'activity_fiscal',
@@ -86,5 +86,34 @@ describe('analysis payload contract', () => {
   it('accepts CFDI XML as local text evidence', () => {
     expect(isAllowedAnalysisFile({ name: 'cfdi.xml', mimeType: 'application/xml' })).toBe(true);
     expect(isAllowedAnalysisFile({ name: 'cfdi.xml', mimeType: 'application/octet-stream' })).toBe(true);
+  });
+
+  it('requests analysis RAG instructions (isDrafting=false) during document audit', async () => {
+    const getHybridLegalContext = vi.fn().mockResolvedValue({
+      context: '<CONTEXTO LEGAL>CFF Artículo 27</CONTEXTO LEGAL>',
+      sources: [{ id: 'cff-27', type: 'statute', title: 'CFF', law_code: 'CFF', article_number: 'Artículo 27', content: 'RFC', similarity: 0.9 }],
+    });
+
+    await processAnalyzePayload(
+      {
+        ecosystem: 'fiscal',
+        files: [{ name: 'contrato.txt', mimeType: 'text/plain', base64: Buffer.from('Contrato de servicios').toString('base64') }],
+      },
+      null,
+      {
+        extractDocumentContent: vi.fn().mockResolvedValue({
+          text: 'Contrato de servicios',
+          pages: [{ pageNumber: 1, text: 'Contrato de servicios' }],
+          contentHash: 'hash-1',
+        }),
+        chunkDocumentPages: vi.fn().mockReturnValue([{ text: 'Contrato de servicios', pageNumber: 1, chunkIndex: 0 }]),
+        indexUserDocument: vi.fn().mockResolvedValue({ fileName: 'contrato.txt', contentHash: 'hash-1', chunkCount: 1 }),
+        getHybridLegalContext,
+        cleanupUserDocumentRequest: vi.fn().mockResolvedValue(undefined),
+        logger: { info: vi.fn(), warn: vi.fn(), error: vi.fn() },
+      },
+    );
+
+    expect(getHybridLegalContext).toHaveBeenCalledWith(expect.any(String), 'fiscal', expect.any(Number), false, 'byok');
   });
 });

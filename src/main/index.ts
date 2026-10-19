@@ -80,12 +80,12 @@ function createWindow(): void {
     show: false,
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
     titleBarOverlay: process.platform === 'win32' ? {
-      color: '#1c1915',
+      color: '#0b1120',
       symbolColor: '#c5a059',
       height: 40
     } : undefined,
     title: 'Lex Corporativo',
-    backgroundColor: '#1c1915', // Evita el blanco antes de que pinte la interfaz.
+    backgroundColor: '#0b1120', // Evita el blanco antes de que pinte la interfaz.
     icon: process.platform === 'win32'
       ? join(__dirname, '../../resources/icon.ico')
       : join(__dirname, '../../resources/icon.png'),
@@ -121,6 +121,19 @@ function createWindow(): void {
   });
 
   installContentSecurityPolicy(session.defaultSession);
+
+  if (!app.isPackaged) {
+    mainWindow.webContents.on('console-message', (details) => {
+      const msg = String(details.message || '');
+      if (details.level === 'error') {
+        console.error('[Renderer Error]', formatForLog(msg));
+      } else if (details.level === 'warning' && !msg.includes('React Router Future Flag')) {
+        console.warn('[Renderer Warn]', formatForLog(msg));
+      } else if (msg.startsWith('[Live Audit]')) {
+        console.info(formatForLog(msg));
+      }
+    });
+  }
 
   // Deny all web permission requests (geolocation, camera, microphone, etc.)
   session.defaultSession.setPermissionRequestHandler((_webContents, _permission, callback) => {

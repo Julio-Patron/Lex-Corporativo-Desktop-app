@@ -146,6 +146,27 @@ function normalizeProvider(value: unknown): ByokProvider {
   return BYOK_PROVIDERS.includes(value as ByokProvider) ? value as ByokProvider : 'gemini';
 }
 
+const RETIRED_GEMINI_MODEL_PATTERN = /^(?:models\/)?gemini-(?:1\.[05]|2\.[05]|pro)(?:-[a-z0-9._-]+)?$/i;
+const RETIRED_ANTHROPIC_MODEL_PATTERN = /^claude-(?:2|instant|3-[057]?(?:-(?:sonnet|opus|haiku))?)(?:-[a-z0-9._-]+)?$/i;
+
+function normalizeProviderModel(provider: ByokProvider, model?: string): string {
+  const raw = (model || '').trim();
+  if (!raw) return DEFAULT_BYOK_MODELS[provider];
+  if (provider === 'gemini') {
+    const withoutPrefix = raw.replace(/^models\//i, '').trim();
+    if (!withoutPrefix || RETIRED_GEMINI_MODEL_PATTERN.test(withoutPrefix)) {
+      return DEFAULT_BYOK_MODELS.gemini;
+    }
+    return withoutPrefix;
+  }
+  if (provider === 'anthropic') {
+    if (RETIRED_ANTHROPIC_MODEL_PATTERN.test(raw)) {
+      return DEFAULT_BYOK_MODELS.anthropic;
+    }
+  }
+  return raw;
+}
+
 function emptyStoredSettings(): StoredByokSettings {
   return {
     schemaVersion: 2,
@@ -168,11 +189,20 @@ function migrateSettings(raw: Partial<StoredByokSettings & LegacyGeminiSettings>
 
   if (raw.encryptedApiKey || raw.model || raw.apiKeyFingerprint) {
     providers.gemini = {
-      model: raw.model || DEFAULT_BYOK_MODELS.gemini,
+      model: normalizeProviderModel('gemini', raw.model),
       encryptedApiKey: raw.encryptedApiKey,
       apiKeyFingerprint: raw.apiKeyFingerprint,
       updatedAt: raw.updatedAt,
     };
+  }
+
+  for (const p of BYOK_PROVIDERS) {
+    if (providers[p]?.model) {
+      providers[p] = {
+        ...providers[p],
+        model: normalizeProviderModel(p, providers[p]?.model),
+      };
+    }
   }
 
   return {
@@ -229,7 +259,7 @@ function getKeyStatus(stored?: StoredProviderSettings): ByokKeyStatus {
 function providerStatus(provider: ByokProvider, stored?: StoredProviderSettings): ByokProviderStatus {
   const keyStatus = getKeyStatus(stored);
   return {
-    model: stored?.model || DEFAULT_BYOK_MODELS[provider],
+    model: normalizeProviderModel(provider, stored?.model),
     hasApiKey: keyStatus === 'ready',
     keyStatus,
     requiresApiKeyReset: keyStatus === 'unreadable',
@@ -277,7 +307,7 @@ export function getActiveByokConfig(): {
   return {
     enabled: Boolean(stored.enabled && apiKey),
     provider: stored.provider,
-    model: active?.model || DEFAULT_BYOK_MODELS[stored.provider],
+    model: normalizeProviderModel(stored.provider, active?.model),
     apiKey,
     maxInputChars: normalizeMaxInputChars(stored.maxInputChars),
   };
@@ -292,7 +322,7 @@ export function getByokProviderConfig(providerInput: ByokProvider): {
   const stored = readStoredSettings().providers[provider];
   return {
     provider,
-    model: stored?.model || DEFAULT_BYOK_MODELS[provider],
+    model: normalizeProviderModel(provider, stored?.model),
     apiKey: decryptText(stored?.encryptedApiKey),
   };
 }
@@ -323,7 +353,7 @@ export function saveByokSettings(input: SaveByokSettingsInput): ByokSettings {
     providers: {
       ...current.providers,
       [provider]: {
-        model: input.model?.trim() || previousProvider.model || DEFAULT_BYOK_MODELS[provider],
+        model: normalizeProviderModel(provider, input.model?.trim() || previousProvider.model),
         encryptedApiKey: nextApiKey ? encryptText(nextApiKey) : undefined,
         apiKeyFingerprint: nextApiKey ? fingerprintApiKey(nextApiKey) : undefined,
         updatedAt: now,
@@ -362,7 +392,7 @@ export function clearByokApiKey(providerInput?: ByokProvider): ByokSettings {
   const previousProvider = current.providers[provider] || {};
   const providers = { ...current.providers };
   providers[provider] = {
-    model: previousProvider.model || DEFAULT_BYOK_MODELS[provider],
+    model: normalizeProviderModel(provider, previousProvider.model),
     updatedAt: new Date().toISOString(),
   };
 

@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
-import { Callout, Page } from '../../components/ui';
+import { useEffect, useMemo, useState } from 'react';
+import { BookOpen, CheckCircle2, ExternalLink, Search } from 'lucide-react';
+import { AreaTag, Badge, Callout, Card, EmptyState, Page, RadioGroup, TextInput } from '../../components/ui';
+import { normalizeSearchText } from '../../lib/drafting';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
+import { LawReaderDialog } from './LawReaderDialog';
+import { useSendArticleToDraft } from './useSendArticleToDraft';
+import { cn } from '../../lib/utils';
 
 type CorpusOverview = Awaited<ReturnType<typeof window.lexDesktop.legalCorpus.list>>;
 
@@ -15,6 +19,10 @@ function failureMessage(error: unknown): string {
 export default function LawsPage() {
   const [overview, setOverview] = useState<CorpusOverview | null>(null);
   const [error, setError] = useState('');
+  const [query, setQuery] = useState('');
+  const [areaFilter, setAreaFilter] = useState<LegalArea | 'todas'>('todas');
+  const [readerCode, setReaderCode] = useState<string | null>(null);
+  const sendArticleToDraft = useSendArticleToDraft();
 
   useEffect(() => {
     let alive = true;
@@ -24,63 +32,143 @@ export default function LawsPage() {
     return () => { alive = false; };
   }, []);
 
-  const sections = LEGAL_AREAS.map((area) => ({
-    area,
-    laws: overview?.laws.filter((law) => law.module === area) ?? [],
-  })).filter((section) => section.laws.length > 0);
+  const filteredLaws = useMemo(() => {
+    const list = overview?.laws ?? [];
+    const term = normalizeSearchText(query);
+    return list.filter((law) => {
+      if (areaFilter !== 'todas' && law.module !== areaFilter) return false;
+      if (!term) return true;
+      return normalizeSearchText(`${law.name} ${law.code}`).includes(term);
+    });
+  }, [overview, query, areaFilter]);
+
+  const versionShort = overview?.corpusVersion.match(/^\d{4}\.\d{2}/)?.[0] ?? overview?.corpusVersion;
 
   return (
-    <Page title="Leyes" description="Inventario del corpus legal integrado.">
-      <header className="border-b border-legal-gold/80 pb-5">
-        <h2 className="font-serif text-[1.75rem] font-medium leading-tight text-legal-950">Corpus legal integrado</h2>
-        <p className="mt-3 max-w-prose text-[15px] leading-6 text-slate-600">
-          Ordenamientos de la legislación federal mexicana. El buscador normativo responde con RAG sobre este corpus. La fuente de verificación es la Cámara de Diputados del H. Congreso de la Unión.
-        </p>
-        {overview && (
-          <p className="mt-4 text-sm leading-6 text-slate-700">
-            {overview.lawsCount} ordenamientos y {overview.provisionsCount.toLocaleString('es-MX')} disposiciones. Versión {overview.corpusVersion.match(/^\d{4}\.\d{2}/)?.[0] ?? overview.corpusVersion}.
+    <Page
+      title="Leyes"
+      description="Biblioteca legislativa federal mexicana e inventario del corpus instalado."
+      width="wide"
+      actions={overview && (
+        <>
+          <Badge tone="neutral" className="gap-1.5 px-3 py-1">
+            <BookOpen size={13} className="text-slate-500" aria-hidden="true" />
+            {overview.lawsCount} ordenamientos
+          </Badge>
+          <Badge tone="success" className="gap-1.5 px-3 py-1">
+            <CheckCircle2 size={13} aria-hidden="true" />
+            {overview.provisionsCount.toLocaleString('es-MX')} disposiciones
+          </Badge>
+        </>
+      )}
+    >
+      <Card className="space-y-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative min-w-[240px] flex-1">
+            <Search size={16} className="pointer-events-none absolute left-3.5 top-3 text-slate-400" aria-hidden="true" />
+            <TextInput
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Buscar ley por nombre o acrónimo (ej. LGSM, LFT, CFF)..."
+              aria-label="Buscar ordenamiento"
+              className="pl-10"
+            />
+          </div>
+          <RadioGroup
+            label="Filtrar por materia"
+            value={areaFilter}
+            onChange={setAreaFilter}
+            className="flex flex-wrap gap-1.5"
+            optionClassName={(selected) => cn(
+              'rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all',
+              selected
+                ? 'border-legal-950 bg-legal-950 text-white shadow-sm'
+                : 'border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50',
+            )}
+            options={(['todas', ...LEGAL_AREAS] as const).map((value) => ({
+              value,
+              label: value === 'todas' ? 'Todas' : LEGAL_AREA_INFO[value].shortLabel,
+            }))}
+          />
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
+          <p>
+            Ordenamientos de la legislación federal mexicana integrados localmente para consulta RAG
+            {versionShort ? ` · Versión ${versionShort}` : ''}.
           </p>
-        )}
-        <a
-          href={DIPUTADOS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-legal-950 underline decoration-legal-gold underline-offset-4"
-        >
-          Cámara de Diputados
-          <ExternalLink size={14} aria-hidden="true" />
-        </a>
-      </header>
+          <a
+            href={DIPUTADOS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-semibold text-legal-950 underline decoration-legal-gold underline-offset-4 hover:text-legal-golddark"
+          >
+            Cámara de Diputados
+            <ExternalLink size={13} aria-hidden="true" />
+          </a>
+        </div>
+      </Card>
 
       {error && <Callout tone="warning" title="El inventario no está disponible">{error}</Callout>}
       {!overview && !error && <p className="text-sm text-slate-600" role="status">Cargando el inventario del corpus…</p>}
 
-      {sections.map(({ area, laws }) => (
-        <CorpusSection key={area} area={area} laws={laws} />
-      ))}
+      {overview && filteredLaws.length === 0 && (
+        <EmptyState
+          icon={Search}
+          title="No se encontraron ordenamientos"
+          description="Prueba con otro nombre, sigla o filtro de materia."
+        />
+      )}
+
+      {overview && filteredLaws.length > 0 && (
+        <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {filteredLaws.map((law) => {
+            const area = (LEGAL_AREAS.includes(law.module as LegalArea) ? law.module : 'corporativo') as LegalArea;
+            return (
+              <li
+                key={law.code}
+                className="flex flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-5 shadow-card transition-all hover:border-slate-300 hover:shadow-md"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <AreaTag area={area} />
+                    <span className="rounded-lg border border-slate-200/80 bg-slate-50 px-2.5 py-0.5 text-xs font-bold text-slate-700">
+                      {law.code}
+                    </span>
+                  </div>
+                  <h3 className="mt-3.5 text-base font-bold leading-snug text-legal-950">{law.name}</h3>
+                  <p className="mt-1.5 text-xs text-slate-500">
+                    {LEGAL_AREA_INFO[area].label} · Corpus local verificado
+                  </p>
+                </div>
+
+                <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5">
+                  <span className="text-xs font-semibold text-slate-600">
+                    {law.provisions.toLocaleString('es-MX')} disposiciones
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setReaderCode(law.code)}
+                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-legal-950 transition-colors hover:border-slate-300 hover:bg-slate-100"
+                  >
+                    Abrir articulado
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+
+      <LawReaderDialog
+        lawCode={readerCode}
+        onClose={() => setReaderCode(null)}
+        onUseArticle={(citation, area) => {
+          setReaderCode(null);
+          sendArticleToDraft(citation, area);
+        }}
+      />
     </Page>
   );
 }
 
-function CorpusSection({ area, laws }: { area: LegalArea; laws: CorpusOverview['laws'] }) {
-  const info = LEGAL_AREA_INFO[area];
-  return (
-    <section aria-labelledby={`corpus-${area}`}>
-      <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
-        <h3 id={`corpus-${area}`} className="font-serif text-xl font-medium text-legal-950">{info.label}</h3>
-        <p className="text-sm text-slate-500">{laws.length === 1 ? '1 ordenamiento' : `${laws.length} ordenamientos`}</p>
-      </div>
-      <ol className="border-t border-slate-200">
-        {laws.map((law) => (
-          <li key={law.code} className="border-b border-slate-200 py-4">
-            <div className="flex items-baseline justify-between gap-4">
-              <p className="min-w-0 font-serif text-lg leading-snug text-legal-950">{law.name}</p>
-              <p className="shrink-0 text-sm font-medium text-slate-500">{law.code}</p>
-            </div>
-            <p className="mt-1 text-sm text-slate-500">{law.provisions.toLocaleString('es-MX')} disposiciones</p>
-          </li>
-        ))}
-      </ol>
-    </section>
-  );
-}

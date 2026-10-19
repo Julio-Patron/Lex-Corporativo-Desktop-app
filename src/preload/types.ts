@@ -156,6 +156,13 @@ export interface LexDesktopAPI {
       useReranker?: boolean;
     }) => Promise<{
       context: string;
+      connectionSummary?: string;
+      connectionMode?: 'ai' | 'local';
+      relatedQueries?: Array<{
+        query: string;
+        label: string;
+        kind: 'cross_reference' | 'topic';
+      }>;
       citations: Array<{
         id: string | number;
         title: string;
@@ -164,6 +171,14 @@ export interface LexDesktopAPI {
         law_code?: string;
         article_number?: string;
         module?: LegalArea;
+        connection?: string;
+        matched_terms?: string[];
+        retrieval_type?: 'direct' | 'hybrid' | 'lexical' | 'semantic';
+        related_refs?: Array<{
+          law_code: string;
+          article_number: string;
+          query: string;
+        }>;
       }>;
     }>;
   };
