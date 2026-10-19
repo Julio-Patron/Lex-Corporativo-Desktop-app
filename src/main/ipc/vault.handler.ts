@@ -191,13 +191,24 @@ export function registerVaultHandlers(): void {
     if (!parsed.success) throw new Error('La contraseña del respaldo debe tener al menos 8 caracteres.');
     const metadata = await listCases();
     const cases: unknown[] = [];
+    // Un asunto que no se puede descifrar en este equipo se omite del respaldo en lugar de abortarlo
+    // o de respaldar un marcador como si fuera su nombre.
+    const omittedCases: string[] = [];
     const batchSize = 10;
     for (let i = 0; i < metadata.length; i += batchSize) {
       const batch = metadata.slice(i, i + batchSize);
       const batchResults = await Promise.all(
-        batch.map(async item => JSON.parse(await exportCase(item.caseId)))
+        batch.map(async item => {
+          try {
+            return JSON.parse(await exportCase(item.caseId));
+          } catch (error) {
+            console.warn(`[IPC Vault] export-all omite el asunto ${item.caseId}: ${formatForLog(error)}`);
+            omittedCases.push(item.caseId);
+            return null;
+          }
+        })
       );
-      cases.push(...batchResults);
+      cases.push(...batchResults.filter(entry => entry !== null));
     }
     const exportCore = {
       format: 'lex-corporativo-vault-backup' as const,
@@ -215,10 +226,10 @@ export function registerVaultHandlers(): void {
       filters: [{ name: 'Respaldo cifrado Lex Corporativo', extensions: ['json'] }],
     });
     if (canceled || !filePath) {
-      return { success: false, canceled: true, caseCount: cases.length };
+      return { success: false, canceled: true, caseCount: cases.length, omittedCount: omittedCases.length };
     }
     writeFileSync(filePath, `${sealPortableBackup(exportCore, parsed.data.password)}\n`, 'utf8');
-    return { success: true, filePath, caseCount: cases.length, packageHash: hashPortableBackupCore(exportCore) };
+    return { success: true, filePath, caseCount: cases.length, omittedCount: omittedCases.length, packageHash: hashPortableBackupCore(exportCore) };
   });
 
   // Sólo se vuelven a leer rutas que el diálogo del proceso principal entregó en esta sesión

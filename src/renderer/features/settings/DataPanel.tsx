@@ -71,6 +71,9 @@ export function DataPanel() {
       const result = await window.lexDesktop.cases.exportAll({ password: backupPassword });
       if (result.success) {
         notify(`Respaldo cifrado de ${result.caseCount} elementos guardado en ${result.filePath}.`, 'success');
+        if (result.omittedCount) {
+          notify(`${result.omittedCount} asunto(s) no se incluyeron porque no se pueden descifrar en este equipo. Elimínalos del portafolio o restáuralos desde el equipo donde se crearon.`, 'error');
+        }
         setBackupPassword('');
         setBackupConfirm('');
       }

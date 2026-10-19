@@ -81,6 +81,10 @@ describeVault('Local Case Vault', () => {
     expect(cases.map(item => item.caseId).sort()).toEqual(['case_foreign', 'case_ok']);
     expect(cases.find(item => item.caseId === 'case_ok')?.name).toBe('Asunto legible');
     expect(cases.find(item => item.caseId === 'case_foreign')?.name).toMatch(/no se pudo descifrar/i);
+    expect(cases.find(item => item.caseId === 'case_foreign')?.nameUnreadable).toBe(true);
+    expect(cases.find(item => item.caseId === 'case_ok')?.nameUnreadable).toBeUndefined();
+    // El marcador nunca debe viajar a un respaldo: exportar ese asunto falla de forma explícita.
+    await expect(vault.exportCase('case_foreign')).rejects.toThrow(/descifrar/);
     await expect(vault.deleteCase('case_foreign')).resolves.toBeUndefined();
     expect((await vault.listCases()).length).toBe(1);
   });

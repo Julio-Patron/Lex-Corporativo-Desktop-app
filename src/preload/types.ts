@@ -37,6 +37,8 @@ export interface CaseMetadata {
   createdAt: string;
   updatedAt: string;
   retentionUntil?: string | null;
+  /** El nombre no se pudo descifrar en este equipo; `name` es un marcador y el asunto no se exporta. */
+  nameUnreadable?: boolean;
 }
 
 export type RuntimeCapabilityId =
@@ -99,6 +101,8 @@ export interface LexDesktopAPI {
       canceled?: boolean;
       filePath?: string;
       caseCount: number;
+      /** Asuntos que no se pudieron descifrar en este equipo y quedaron fuera del respaldo. */
+      omittedCount?: number;
       packageHash?: string;
     }>;
     importAll: (payload: { password: string; onConflict?: 'abort' | 'replace'; filePath?: string }) => Promise<{

@@ -69,7 +69,11 @@ export const ipcMain = {
     electronIpc.on(channel, (event, ...args) => {
       // Un listener de `on` no devuelve promesa: lanzar aquí sería una excepción no capturada del proceso
       // principal. El mensaje de un origen no autorizado se descarta.
-      if (!guard(event)) return;
+      if (!guard(event)) {
+        // Un sendSync rechazado debe recibir respuesta; de lo contrario el renderer queda bloqueado.
+        if ('returnValue' in event) event.returnValue = { ok: false, message: 'Origen no autorizado.' };
+        return;
+      }
       listener(event, ...args);
     });
   },

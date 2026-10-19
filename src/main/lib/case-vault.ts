@@ -14,6 +14,8 @@ export interface CaseMetadata {
   createdAt: string;
   updatedAt: string;
   retentionUntil?: string | null;
+  /** El nombre no se pudo descifrar en este equipo; `name` es un marcador y el asunto no se exporta. */
+  nameUnreadable?: boolean;
 }
 
 export interface VaultCase {
@@ -189,10 +191,11 @@ const UNREADABLE_CASE_NAME = 'No se pudo descifrar este asunto en este equipo';
 function presentMetadata(row: CaseMetadata): CaseMetadata {
   // Un nombre cifrado por otro usuario de Windows no debe dejar inutilizable todo el portafolio:
   // el asunto se lista con un marcador y puede eliminarse; su contenido sigue protegido.
+  // El marcador se señala con nameUnreadable para que nunca se exporte como si fuera el nombre real.
   try {
     return { ...row, name: decryptField(row.name) };
   } catch {
-    return { ...row, name: UNREADABLE_CASE_NAME };
+    return { ...row, name: UNREADABLE_CASE_NAME, nameUnreadable: true };
   }
 }
 
@@ -592,6 +595,7 @@ export async function restoreVaultBackup(
 
 function readExportedCase(caseId: string, expectedModule?: CaseModule): string {
   const metadata = assertCaseModule(caseId, expectedModule);
+  if (metadata.nameUnreadable) throw new Error(`${UNREADABLE_CASE_NAME}; no se puede exportar ni respaldar.`);
   const result: VaultCase = {
     metadata,
     documents: [],

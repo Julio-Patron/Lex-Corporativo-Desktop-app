@@ -85,7 +85,10 @@ describe('ipcMain protegido', () => {
     expect(() => state.handlers.get('handle:demo')!(sender())).toThrow(/Origen no autorizado/);
     // Un listener de ipcMain.on no tiene promesa que rechazar: lanzar ahí sería una excepción no capturada
     // en el proceso principal. El mensaje se descarta en silencio.
-    expect(() => state.handlers.get('on:demo-event')!(sender())).not.toThrow();
+    const syncEvent = { ...sender(), returnValue: undefined as unknown };
+    expect(() => state.handlers.get('on:demo-event')!(syncEvent)).not.toThrow();
+    // Un sendSync rechazado recibe respuesta en vez de quedarse bloqueado.
+    expect(syncEvent.returnValue).toEqual({ ok: false, message: 'Origen no autorizado.' });
     expect(listener).not.toHaveBeenCalled();
   });
 

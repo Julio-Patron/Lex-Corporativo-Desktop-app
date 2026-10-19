@@ -7,9 +7,19 @@ import { fileURLToPath } from 'node:url';
 // Consolida la evidencia local (reports/) en un bundle sanitizado versionable en docs/auditorias/.
 // Uso: node scripts/collect-audit-evidence.mjs <sha7> [fecha]
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const sha7 = process.argv[2];
+const shaArg = process.argv[2];
 const date = process.argv[3] || new Date().toISOString().slice(0, 10);
-if (!/^[0-9a-f]{7,40}$/i.test(sha7 || '')) throw new Error('Uso: collect-audit-evidence.mjs <sha7> [fecha]');
+if (!/^[0-9a-f]{7,40}$/i.test(shaArg || '')) throw new Error('Uso: collect-audit-evidence.mjs <sha> [fecha] [--supersedes=<sha>]');
+// Los reportes de auditoría se nombran con los 7 primeros caracteres del SHA.
+const sha7 = shaArg.slice(0, 7).toLowerCase();
+const supersedesArg = process.argv.find(arg => arg.startsWith('--supersedes='))?.slice('--supersedes='.length);
+// Por defecto se supersede el bundle versionado más reciente distinto del que se va a escribir.
+const previousBundles = fs.readdirSync(path.join(root, 'docs/auditorias'))
+  .filter(name => /^evidencia-.+\.json$/.test(name) && name !== `evidencia-${date}.json`)
+  .sort();
+const supersedes = supersedesArg || (previousBundles.length
+  ? (JSON.parse(fs.readFileSync(path.join(root, 'docs/auditorias', previousBundles.at(-1)), 'utf8')).sourceSha ?? previousBundles.at(-1))
+  : null);
 
 function sanitize(text) {
   for (const prefix of [root, os.homedir()].sort((a, b) => b.length - a.length)) {
@@ -17,30 +27,38 @@ function sanitize(text) {
   }
   return text.replace(/(Bearer\s+)[^\s"']+/gi, '$1<redacted>').replace(/\b(?:sk-|AIza)[A-Za-z0-9_-]{16,}/g, '<redacted>');
 }
-const readJson = relative => {
+const readJson = (relative, { required = true } = {}) => {
   const absolute = path.join(root, relative);
-  if (!fs.existsSync(absolute)) return { missing: relative };
+  if (!fs.existsSync(absolute)) {
+    if (required) throw new Error(`Falta el reporte requerido ${relative}; ejecuta la auditoría correspondiente sobre ${sha7} antes de consolidar.`);
+    return { missing: relative };
+  }
   const raw = fs.readFileSync(absolute, 'utf8');
-  return JSON.parse(sanitize(raw.slice(raw.indexOf('{'))));
+  const start = raw.indexOf('{');
+  if (start < 0) throw new Error(`${relative} no contiene JSON.`);
+  return JSON.parse(sanitize(raw.slice(start)));
 };
 const summary = (report, keys) => report.missing ? report : Object.fromEntries(keys.filter(key => key in report).map(key => [key, report[key]]));
 
 const performance = readJson(`reports/audits/performance-${sha7}.json`);
 const data = readJson(`reports/audits/data-${sha7}.json`);
 const security = readJson(`reports/audits/security-${sha7}.json`);
-const cleanup = readJson(`reports/audits/cleanup-inventory-${sha7}.json`);
+const cleanup = readJson(`reports/audits/cleanup-inventory-${sha7}.json`, { required: false });
 const npmAudit = readJson(`reports/audits/npm-audit-${sha7}.json`);
 const preflight = readJson(`reports/audits/preflight-${sha7}.json`);
 const quality = readJson('reports/ci/quality/summary.json');
 const windows = readJson('reports/ci/windows/summary.json');
-const pilot = readJson('release/pilot-manifest.json');
-const coverage = readJson('reports/coverage/coverage-summary.json');
+const pilot = readJson('release/pilot-manifest.json', { required: false });
+const coverage = readJson('reports/coverage/coverage-summary.json', { required: false });
+for (const [name, report] of Object.entries({ quality, windows })) {
+  if (!String(report.sourceSha || '').startsWith(sha7)) throw new Error(`El resumen de ci:${name} corresponde a ${String(report.sourceSha).slice(0, 7)}, no a ${sha7}; vuelve a ejecutar la suite.`);
+}
 
 const bundle = {
   schemaVersion: 1,
   date,
   sourceSha: sha7,
-  supersedes: 'a71898852d5e035eb850da3a80164d12c7ad5e86',
+  supersedes,
   ci: {
     quality: summary(quality, ['status', 'sourceSha', 'workingTreeDirty', 'node', 'npm', 'platform', 'checks']),
     windows: summary(windows, ['status', 'sourceSha', 'workingTreeDirty', 'node', 'npm', 'platform', 'uiEvidenceId', 'checks']),
