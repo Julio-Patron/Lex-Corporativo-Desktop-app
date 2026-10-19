@@ -41,17 +41,28 @@ try {
     const values = runs.flatMap(run => run.samples[key]).sort((a, b) => a - b);
     metrics[key] = { count: values.length, medianMs: values[Math.floor(values.length / 2)], p95Ms: values[Math.ceil(values.length * 0.95) - 1], minMs: values[0], maxMs: values.at(-1) };
   }
+  // Umbrales provisionales acordados el 17-oct-2026 (docs/relevo-ux-ui.md). Se confirman con las muestras del instalador.
+  const thresholds = {
+    processToHomeMs: { medianMs: 5000, maxMs: 15000 },
+    warmSearchMs: { medianMs: 500 },
+  };
+  const evaluation = Object.entries(thresholds).flatMap(([metric, limits]) => Object.entries(limits).map(([statistic, limit]) => {
+    const observed = metrics[metric]?.[statistic];
+    return { metric, statistic, limit, observed, ok: typeof observed === 'number' && observed < limit };
+  }));
   const report = {
     sourceSha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim(), workingTreeDirty: Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: repo, encoding: 'utf8' }).trim()),
     generatedAt: new Date().toISOString(), environment: { platform: process.platform, arch: process.arch, os: os.release(), cpu: os.cpus()[0].model, logicalCpus: os.cpus().length, memoryBytes: os.totalmem(), electron: JSON.parse(fs.readFileSync(path.join(repo, 'node_modules/electron/package.json'), 'utf8')).version },
     corpus: JSON.parse(fs.readFileSync(path.join(repo, 'legal-runtime/corpus/corpus-manifest.json'), 'utf8')).artifactSha256,
-    limitations: ['Ventana oculta y main de ensayo con handlers reales; no mide el main completo del producto instalado.', 'Cinco procesos y perfiles nuevos; caché del sistema operativo sin purgar. No equivale a arranque tras reiniciar Windows.', 'Recarga como aproximación de arranque caliente; lectura RMF sin renderizar el lector.', 'Revisión básica y documento sintético; sin proveedores ni credenciales reales.', 'Exportación con diálogo simulado; no incluye tiempo de elección del usuario.', 'Línea base descriptiva, sin umbrales de aceptación acordados.'],
+    limitations: ['Ventana oculta y main de ensayo con handlers reales; no mide el main completo del producto instalado.', 'Cinco procesos y perfiles nuevos; caché del sistema operativo sin purgar. No equivale a arranque tras reiniciar Windows.', 'Recarga como aproximación de arranque caliente; lectura RMF sin renderizar el lector.', 'Revisión básica y documento sintético; sin proveedores ni credenciales reales.', 'Exportación con diálogo simulado; no incluye tiempo de elección del usuario.', 'Umbrales provisionales del 17-oct-2026; se confirman con cinco muestras del instalador en Windows limpio.'],
+    thresholds, evaluation, status: evaluation.every(item => item.ok) ? 'pass' : 'thresholds-exceeded',
     metrics, runs,
   };
   const output = path.join(repo, `reports/audits/performance-${report.sourceSha.slice(0, 7)}.json`);
   fs.mkdirSync(path.dirname(output), { recursive: true });
   fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
-  console.log(JSON.stringify(metrics, null, 2));
+  console.log(JSON.stringify({ metrics, evaluation, status: report.status }, null, 2));
+  if (report.status !== 'pass' && !process.argv.includes('--report-only')) process.exitCode = 1;
 } finally {
   if (path.dirname(temporary) !== scratch || !path.basename(temporary).startsWith('performance-')) throw new Error('Ruta temporal inesperada');
   fs.rmSync(temporary, { recursive: true, force: true, maxRetries: 3, retryDelay: 200 });

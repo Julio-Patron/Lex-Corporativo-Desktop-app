@@ -29,6 +29,8 @@ try {
   const report = { sourceSha, workingTreeDirty: Boolean(execFileSync('git', ['status', '--porcelain'], { cwd: repo, encoding: 'utf8' }).trim()), generatedAt: new Date().toISOString(), ...JSON.parse(fs.readFileSync(path.join(temporary, 'result.json'), 'utf8')) };
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
+  // El estado se calcula a partir de las comprobaciones; sin --report-only, un hallazgo abierto falla el comando.
+  if (report.status !== 'pass' && !process.argv.includes('--report-only')) process.exitCode = 1;
 } finally {
   if (path.dirname(temporary) !== scratch || !path.basename(temporary).startsWith('data-audit-')) throw new Error('Ruta temporal inesperada');
   fs.rmSync(temporary, { recursive: true, force: true, maxRetries: 3, retryDelay: 200 });
