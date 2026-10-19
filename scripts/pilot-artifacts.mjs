@@ -21,6 +21,21 @@ const sourceSha = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encodi
 const dirty = execFileSync('git', ['status', '--porcelain'], { cwd: root, encoding: 'utf8' }).trim();
 check('arbol-limpio', !dirty || allowDirty, dirty ? `Cambios sin confirmar:\n${dirty}` : 'Checkout limpio');
 
+// --build-sha=<sha>: el instalador se construyó en un commit anterior a HEAD. Se admite sólo si desde entonces
+// no cambió nada que entre en el paquete (código, scripts, dependencias, configuración del builder, recursos).
+const buildShaArg = process.argv.find(arg => arg.startsWith('--build-sha='))?.slice('--build-sha='.length);
+let buildSha = sourceSha;
+if (buildShaArg) {
+  try {
+    buildSha = execFileSync('git', ['rev-parse', '--verify', `${buildShaArg}^{commit}`], { cwd: root, encoding: 'utf8' }).trim();
+    execFileSync('git', ['merge-base', '--is-ancestor', buildSha, 'HEAD'], { cwd: root });
+    const packagedDiff = execFileSync('git', ['diff', '--name-only', buildSha, 'HEAD', '--', 'src', 'scripts', 'legal-runtime', 'resources', 'package.json', 'package-lock.json', 'electron-builder.config.json', 'electron.vite.config.ts', 'tsconfig.json'], { cwd: root, encoding: 'utf8' }).trim();
+    check('sha-de-construccion', packagedDiff === '', packagedDiff ? `Archivos empaquetables distintos desde ${buildSha.slice(0, 7)}:\n${packagedDiff}` : `${buildSha.slice(0, 7)} es ancestro de HEAD sin cambios empaquetables`);
+  } catch (error) {
+    check('sha-de-construccion', false, `SHA de construcción inválido o no integrado: ${error.message}`);
+  }
+}
+
 const installerPath = path.join(release, installerName);
 check('instalador', fs.existsSync(installerPath), fs.existsSync(installerPath) ? installerName : `Falta release/${installerName}; ejecuta npm run build:electron`);
 for (const name of [`${installerName}.blockmap`, 'latest.yml']) check(`artefacto:${name}`, fs.existsSync(path.join(release, name)), name);
@@ -57,7 +72,12 @@ try {
 let signature = { status: 'unknown' };
 if (process.platform === 'win32' && fs.existsSync(installerPath)) {
   try {
-    const raw = execFileSync('powershell', ['-NoProfile', '-NonInteractive', '-Command', `(Get-AuthenticodeSignature -LiteralPath '${installerPath.replaceAll("'", "''")}') | Select-Object Status, @{n='Thumbprint';e={$_.SignerCertificate.Thumbprint}} | ConvertTo-Json -Compress`], { encoding: 'utf8' });
+    const command = `(Get-AuthenticodeSignature -LiteralPath '${installerPath.replaceAll("'", "''")}') | Select-Object Status, @{n='Thumbprint';e={$_.SignerCertificate.Thumbprint}} | ConvertTo-Json -Compress`;
+    let raw;
+    // PowerShell 7 primero; Windows PowerShell como respaldo (en algunos entornos no carga el módulo Security).
+    for (const shell of ['pwsh', 'powershell']) {
+      try { raw = execFileSync(shell, ['-NoProfile', '-NonInteractive', '-Command', command], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); break; } catch (error) { raw = undefined; if (shell === 'powershell') throw error; }
+    }
     const parsed = JSON.parse(raw);
     signature = { status: typeof parsed.Status === 'number' ? ({ 0: 'Valid', 1: 'UnknownError', 2: 'NotSigned', 3: 'HashMismatch', 4: 'NotTrusted', 5: 'NotSupportedFileFormat', 6: 'Incompatible' })[parsed.Status] ?? String(parsed.Status) : String(parsed.Status), thumbprint: parsed.Thumbprint || null };
   } catch (error) {
@@ -73,6 +93,7 @@ const manifest = {
   kind: 'pilot-unsigned',
   version: pkg.version,
   sourceSha,
+  buildSha,
   workingTreeDirty: Boolean(dirty),
   generatedAt: new Date().toISOString(),
   signed: signature.status === 'Valid',
@@ -90,7 +111,8 @@ const markdown = [
   `| Campo | Valor |`,
   `| --- | --- |`,
   `| Versión | ${pkg.version} |`,
-  `| Commit de origen | \`${sourceSha}\` |`,
+  `| Commit de construcción | \`${buildSha}\` |`,
+  `| Commit documentado (HEAD) | \`${sourceSha}\`${buildSha === sourceSha ? '' : ' (sólo documentación desde la construcción)'} |`,
   `| Instalador | \`${installer?.path ?? 'no generado'}\` |`,
   `| SHA-256 | \`${installer?.sha256 ?? '—'}\` |`,
   `| Tamaño | ${installer ? `${(installer.bytes / 1024 / 1024).toFixed(1)} MB (${installer.bytes} bytes)` : '—'} |`,

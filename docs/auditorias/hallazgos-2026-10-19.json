@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "baseSha": "2ccc31b",
+  "reviewRange": "a718988..2ccc31b",
+  "supersedes": "a71898852d5e035eb850da3a80164d12c7ad5e86",
+  "date": "2026-10-19",
+  "scope": "Cierre de la fase de desarrollo: re-evaluación de los hallazgos de a718988 con ensayos automatizados en Electron, revisión de código del rango y hallazgos nuevos. Distingue lo que bloquea un release comercial (releaseBlocking) de lo que bloquea el piloto interno sin firma (pilotBlocking).",
+  "status": "pilot-ready",
+  "statusLegend": {
+    "cerrado": "Control implementado y verificado con evidencia automatizada en este SHA.",
+    "mitigado": "Control implementado y verificado parcialmente; el cierre depende de un ensayo manual asignado al piloto.",
+    "abierto": "Sin resolver.",
+    "aceptado": "Riesgo aceptado formalmente por el responsable.",
+    "aplazado": "Mejora sin efecto funcional, programada para después del piloto."
+  },
+  "findings": [
+    {
+      "id": "SEC-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": true,
+      "title": "Validación de remitente IPC incompleta",
+      "status": "cerrado",
+      "observed": "Hallazgo original: la mayoría de los canales ignoraba el evento y no aplicaba autorización de origen.",
+      "closureEvidence": [
+        "src/main/ipc/trusted-ipc.ts (wrapper obligatorio; main instala el guardia antes de registrar handlers)",
+        "src/main/ipc/trusted-ipc.test.ts (7 casos: subframe, otra ventana, documento navegado, marco ausente, normalización file:///C:)",
+        "reports/audits/security-2ccc31b.json → checks SEC-01 ok (ventana ajena, copia del documento y documento navegado rechazados con 'Origen no autorizado.')",
+        "3d242cd: ipcMain.on protegido descarta el mensaje en lugar de lanzar en el listener"
+      ],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "Ninguna acción del tester; cubierto por ensayo automatizado."
+    },
+    {
+      "id": "SEC-02",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": true,
+      "title": "Directivas CSP sin efecto y reporte desconectado",
+      "status": "cerrado",
+      "acceptedLimitation": "frame-ancestors sólo viaja en el encabezado y no aplica a documentos file://; el riesgo de incrustación lo mitigan frame-src 'none', setWindowOpenHandler (deniega ventanas) y will-navigate.",
+      "observed": "Hallazgo original: frame-ancestors y report-uri en meta, ignorados por Chromium; csp:report sin conectar.",
+      "closureEvidence": [
+        "src/shared/content-security-policy.ts, src/main/csp.ts, src/renderer/index.html (meta sin frame-ancestors/report-uri)",
+        "src/renderer/index.tsx (securitypolicyviolation → csp:report → bitácora)",
+        "reports/audits/security-2ccc31b.json → checks SEC-02 ok (iframe frame-src, object object-src, script en línea script-src-elem, fetch connect-src bloqueados; encabezado con frame-ancestors)",
+        "reports/audits/performance-2ccc31b.json → cspWarnings vacío"
+      ],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "Ninguna acción del tester."
+    },
+    {
+      "id": "SEC-03",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": true,
+      "title": "Sanitización incompleta de secretos en logs",
+      "status": "cerrado",
+      "observed": "Hallazgo original: sanitizeForLogs conservaba token corto, authorization y secretos dentro de message.",
+      "closureEvidence": [
+        "src/main/lib/sanitizer.ts",
+        "src/main/lib/sanitizer.test.ts (5 casos: fixture de la auditoría, Error anidado, dato corto no credencial, authorization corto, campos jurídicos no redactados)",
+        "reports/audits/data-2ccc31b.json → checks SEC-03 ok",
+        "3d242cd: finalModelUsed registra el modelo que realmente respondió (integridad de la bitácora)"
+      ],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "CFG-05 (exportar bitácora y comprobar que no contiene texto ni claves), AUD-06 (clave inválida sin fuga)."
+    },
+    {
+      "id": "DATA-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": false,
+      "title": "Respaldo descifrado sin restauración",
+      "status": "mitigado",
+      "observed": "Hallazgo original: exportCase devolvía todo descifrado y no existía restauración.",
+      "closureEvidence": [
+        "src/main/lib/portable-backup.ts (scrypt + AES-256-GCM, contraseña ≥ 8), src/main/lib/case-vault.ts restoreVaultBackup (transaccional, conflictos, repetición), src/main/ipc/vault.handler.ts export-all/import-all",
+        "src/main/lib/portable-backup.test.ts, src/main/lib/case-vault.test.ts",
+        "reports/audits/data-2ccc31b.json → checks DATA-01 ok (sellado sin texto, contraseña incorrecta/truncado/en claro rechazados, restaurar 1, repetir omite 1, conflicto detectado, replace 1)",
+        "3d242cd: import-all sólo relee rutas ofrecidas por el diálogo"
+      ],
+      "pendingClosure": "Restauración en otro usuario de Windows con comparación de contenido: escenario RES-03 del piloto (gate 14).",
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "RES-01..RES-07; RES-03 es P0 y cierra el hallazgo."
+    },
+    {
+      "id": "DATA-02",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": true,
+      "title": "Contenido temporal legible tras borrado lógico en LanceDB",
+      "status": "cerrado",
+      "acceptedLimitation": "La ausencia de texto legible en los archivos no acredita borrado forense del disco; no se presenta como tal.",
+      "observed": "Hallazgo original: tras cleanupUserDocumentRequest la tabla tenía cero filas pero los archivos conservaban el texto.",
+      "closureEvidence": [
+        "src/main/lib/rag.ts (fragmentos cifrados al indexar; reescritura física de user_documents.lance tras el borrado; purgeExpiredUserDocuments al arrancar cubre cierre forzado)",
+        "src/main/lib/rag.user-document-privacy.test.ts, src/main/lib/rag.retention.test.ts",
+        "reports/audits/data-2ccc31b.json → checks DATA-02 ok (0 filas, sin texto legible)"
+      ],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "Ninguna acción del tester."
+    },
+    {
+      "id": "DATA-03",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": true,
+      "title": "Metadatos de asuntos sin cifrar",
+      "status": "cerrado",
+      "observed": "Hallazgo original: nombre de asunto legible en SQLite/WAL; nombres de archivo en columnas.",
+      "closureEvidence": [
+        "src/main/lib/case-vault.ts (migratePlaintextMetadata cifra name y fileName al abrir; wal_checkpoint + VACUUM)",
+        "reports/audits/data-2ccc31b.json → checks DATA-03 ok (vaultMetadataPlaintext false, fileNamePlaintext false)",
+        "3d242cd: un nombre indescifrable en este equipo se lista con marcador en lugar de bloquear el portafolio"
+      ],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "POR-01."
+    },
+    {
+      "id": "DEP-01",
+      "priority": "P1",
+      "releaseBlocking": true,
+      "pilotBlocking": false,
+      "title": "Alertas de dependencias y revisión de redistribución pendientes",
+      "status": "abierto",
+      "observed": "npm audit en 2ccc31b: 16 paquetes (4 altos, 12 moderados, 0 críticos), el mismo conjunto triado en dep-01-triaje.md; ningún aviso nuevo. El único arreglo que npm propone es una bajada de versión mayor.",
+      "closure": "Aceptación formal del responsable sobre los 16 avisos triados (decisión O3) y, para el release comercial, instalador firmado. No bloquea el piloto interno.",
+      "closureEvidence": ["reports/audits/npm-audit-2ccc31b.json", "docs/auditorias/dep-01-triaje.md"],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "Ninguna."
+    },
+    {
+      "id": "PERF-01",
+      "priority": "P2",
+      "releaseBlocking": true,
+      "pilotBlocking": false,
+      "title": "Línea base de rendimiento sin aceptación en Windows instalado",
+      "status": "mitigado",
+      "observed": "Umbrales provisionales codificados en scripts/audit-performance-electron.mjs (arranque mediana < 5 s y máx < 15 s; búsqueda caliente mediana < 500 ms). Ensayo en 2ccc31b: ver docs/auditorias/rendimiento-2026-10-19.md.",
+      "pendingClosure": "Cinco muestras de arranque en frío del instalador en Windows limpio (INS-02 del piloto, por equipo) dentro de los umbrales; confirmación de los umbrales por el responsable (decisión O2).",
+      "closureEvidence": ["reports/audits/performance-2ccc31b.json", "scripts/audit-performance-electron.mjs"],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "INS-02 (P0), LEY-01."
+    },
+    {
+      "id": "SEC-04",
+      "priority": "P2",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "vault:import-all leía una ruta absoluta enviada por el renderer",
+      "status": "cerrado",
+      "closureEvidence": ["3d242cd src/main/ipc/vault.handler.ts", "src/main/ipc/vault.handler.test.ts"],
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "SEC-05",
+      "priority": "P2",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "ipcMain.on protegido lanzaba dentro del listener (excepción no capturada en el proceso principal)",
+      "status": "cerrado",
+      "closureEvidence": ["3d242cd src/main/ipc/trusted-ipc.ts", "src/main/ipc/trusted-ipc.test.ts"],
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "SEC-06",
+      "priority": "P3",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "Fallback de modelo Gemini ante 429/403/400/402 y persistencia del modelo alternativo desde 'Probar y conectar'",
+      "status": "abierto",
+      "observed": "Es la resiliencia multi-modelo introducida en 1a0f212; una prueba existente exige el fallback con 402. Un 429 transitorio durante la prueba de conexión puede guardar un modelo distinto al elegido.",
+      "closure": "Decisión de producto del responsable: limitar el fallback a 'modelo no encontrado' o conservarlo y no persistir el modelo resuelto desde el formulario.",
+      "closureEvidence": ["src/main/lib/byok-client.ts generateGemini", "src/renderer/components/ai/ApiKeyForm.tsx"],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "CFG-02 (cambiar modelo por uno inexistente y observar qué se guarda)."
+    },
+    {
+      "id": "CODE-01",
+      "priority": "P2",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "Diálogo de bienvenida sin inerte ni foco inicial; Escape global cierra mientras se escribe la clave",
+      "status": "abierto",
+      "closure": "Volver al Modal compartido o replicar inerte, foco inicial y Escape acotado; validar con A11Y-01.",
+      "closureEvidence": ["src/renderer/components/layout/OnboardingDialog.tsx"],
+      "verifiedAt": "2026-10-19",
+      "pilotRelevance": "A11Y-01, INS-01 (primer arranque)."
+    },
+    {
+      "id": "CODE-02",
+      "priority": "P3",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "Duplicación de normalizeModelName/regex entre byok-settings y byok-client, y de helpers del reranker en rag.handler",
+      "status": "aplazado",
+      "closure": "Mover a src/shared/byok-models.ts y reutilizar buildLocalConsultationInsights; sin efecto funcional.",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "CODE-03",
+      "priority": "P3",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "EstudioLayout recarga y descifra todo el portafolio en cada cambio de ruta para un contador",
+      "status": "aplazado",
+      "closure": "Usar listCases para el conteo o un canal dedicado; medir con portafolios grandes en el piloto.",
+      "closureEvidence": ["src/renderer/features/estudio/EstudioLayout.tsx"],
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "CODE-04",
+      "priority": "P3",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "21 exportaciones y 13 tipos sin consumidor externo; pdfjs-dist no declarado en scripts de corpus",
+      "status": "aplazado",
+      "closure": "Reducir visibilidad de lo que no usa ninguna prueba; declarar pdfjs-dist cuando se toque el flujo de corpus.",
+      "verifiedAt": "2026-10-19"
+    },
+    {
+      "id": "TEST-01",
+      "priority": "P3",
+      "releaseBlocking": false,
+      "pilotBlocking": false,
+      "title": "Sin pruebas de componentes React; handlers de bóveda sin prueba unitaria por canal",
+      "status": "aplazado",
+      "closure": "Cobertura E2E en Electron y escenarios manuales del piloto mientras tanto.",
+      "verifiedAt": "2026-10-19"
+    }
+  ],
+  "confirmedControls": [
+    "Ventana principal con contextIsolation, sandbox, nodeIntegration desactivado, webSecurity activo, permisos denegados, navegación y ventanas nuevas bloqueadas.",
+    "Frontera IPC verificada dinámicamente con el preload compilado.",
+    "CSP efectiva verificada dinámicamente en el documento file://; encabezado con frame-ancestors.",
+    "Bóveda, metadatos, nombres de archivo y recuperación cifrados con safeStorage; respaldo portátil cifrado con contraseña y restauración transaccional.",
+    "Fragmentos temporales cifrados y reescritos físicamente tras el borrado.",
+    "Bitácora de trazabilidad con secretos redactados y modelo real registrado.",
+    "Corpus íntegro (16 ordenamientos), conocimiento jurídico estricto, recuperación normativa y fundamentación aprobados.",
+    "Umbrales provisionales de rendimiento codificados y evaluados automáticamente."
+  ],
+  "unvalidated": [
+    "Firma Authenticode, preflight estricto y ciclo instalar/actualizar/desinstalar en Windows limpio (se ensaya en el piloto sin firma).",
+    "CI alojado en GitHub con protecciones de main y entornos.",
+    "Pruebas reales de Gemini, OpenAI y Anthropic (claves de las personas participantes en el piloto).",
+    "Restauración de respaldo en otro usuario de Windows (RES-03).",
+    "Accesibilidad asistida con lector de pantalla.",
+    "Aceptación formal de los 16 avisos de dependencias."
+  ]
+}
