@@ -258,6 +258,10 @@ export function registerDraftHandlers(): void {
         : '';
 
       {
+        const startedAt = Date.now();
+        console.info(
+          `[IPC Draft] Start -> module=${activeModule} profile=${promptProfile} provider=${byok.provider} model=${byok.model} template=${payload.templateId || 'none'} sourceAnalysis=${payload.sourceAnalysisId || 'none'} hasReference=${Boolean(referenceText)}`
+        );
         const ragContext = await getHybridLegalContext(payload.requirements, activeModule, 10, true, 'byok');
         const hasLegalContext = ragContext.sources.length > 0 && ragContext.context.trim().length > 0;
 
@@ -353,6 +357,7 @@ export function registerDraftHandlers(): void {
           groundingSources,
           { requiredSourceKinds: hasLegalContext ? ['legal', 'instruction'] : ['instruction'] },
           async (validation, rejectedOutput) => {
+            console.warn(`[IPC Draft] Grounding repair triggered -> module=${activeModule} reason=${validation.reason}`);
             const repaired = await generateByokText({
               provider: byok.provider,
               apiKey: byok.apiKey!,
@@ -404,6 +409,9 @@ export function registerDraftHandlers(): void {
         }
 
         const requestId = crypto.randomUUID();
+        console.info(
+          `[IPC Draft] Completed -> requestId=${requestId.slice(0, 8)} module=${activeModule} provider=${byok.provider} model=${byok.model} legalSources=${ragContext.sources.length} claims=${groundingOutcome.output.claims.length} repaired=${groundingOutcome.repaired} durationMs=${Date.now() - startedAt}`
+        );
         logLegalExecution({
           requestId,
           operation: 'drafting',

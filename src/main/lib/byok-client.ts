@@ -18,6 +18,7 @@ export interface ByokGenerateInput {
   maxOutputTokens?: number;
   timeoutMs?: number;
   jsonSchema?: ByokJsonSchema;
+  onModelResolved?: (resolvedModel: string) => void;
 }
 
 export interface ByokPromptSections {
@@ -148,13 +149,44 @@ export function composeLimitedByokPrompt(sections: ByokPromptSections): string {
   return composeLimitedByokPromptWithDisclosure(sections).prompt;
 }
 
+function providerDisplayName(provider: ByokProvider): string {
+  if (provider === 'gemini') return 'Google Gemini';
+  if (provider === 'openai') return 'OpenAI';
+  return 'Anthropic Claude';
+}
+
 function sanitizedApiError(provider: ByokProvider, status: number, body: string): Error {
   const compact = redactApiKeysAndSecrets(body.replace(/\s+/g, ' ')).slice(0, 500);
+  const label = providerDisplayName(provider);
+
+  if (status === 402 || /prepayment credits are depleted|insufficient_quota|credit balance is too low|billing/i.test(compact)) {
+    return new Error(
+      `La API key de ${label} es válida, pero el proyecto o cuenta tiene el saldo o créditos agotados (${provider} API error ${status}). Recarga saldo en el panel de tu proveedor o utiliza una API key de un proyecto con nivel gratuito. Detalle: ${compact}`,
+    );
+  }
+  if (status === 401 || /API_KEY_INVALID|invalid_api_key|authentication_error/i.test(compact)) {
+    return new Error(
+      `La API key de ${label} no es válida o fue revocada (${provider} API error ${status}). Verifica que esté copiada completa sin espacios.`,
+    );
+  }
+  if (status === 429) {
+    return new Error(
+      `Se alcanzó el límite de cuota o solicitudes por minuto en ${label} (${provider} API error 429). Espera unos segundos o revisa el plan de tu cuenta. Detalle: ${compact}`,
+    );
+  }
   return new Error(`${provider} API error ${status}${compact ? `: ${compact}` : ''}`);
 }
 
 const RETRYABLE_STATUS_CODES = new Set([429, 502, 503, 504]);
 const MAX_RETRIES = 2;
+
+function isPermanentQuotaOrBillingError(status: number, body: string): boolean {
+  if (status === 402) return true;
+  if (status === 429 && /prepayment credits are depleted|insufficient_quota|credit balance is too low|billing_not_active/i.test(body)) {
+    return true;
+  }
+  return false;
+}
 
 function parseRetryAfterMs(response: Response): number | null {
   const header = response.headers.get('retry-after');
@@ -187,7 +219,11 @@ async function fetchJson(
       if (!response.ok) {
         const body = await response.text().catch(() => '');
         const err = sanitizedApiError(provider, response.status, body);
-        if (RETRYABLE_STATUS_CODES.has(response.status) && attempt < MAX_RETRIES) {
+        if (
+          RETRYABLE_STATUS_CODES.has(response.status) &&
+          !isPermanentQuotaOrBillingError(response.status, body) &&
+          attempt < MAX_RETRIES
+        ) {
           lastError = err;
           const delayMs = parseRetryAfterMs(response) ?? Math.min(1_000 * 2 ** attempt, 8_000);
           await new Promise((resolve) => setTimeout(resolve, delayMs));
@@ -226,9 +262,61 @@ function describeEmptyGeminiResponse(payload: any): string {
   return `Gemini no devolvió contenido utilizable${reason ? ` (${reason})` : ''}.`;
 }
 
+const RETIRED_GEMINI_MODEL_PATTERN = /^(?:models\/)?gemini-(?:1\.[05]|2\.[05]|pro)(?:-[a-z0-9._-]+)?$/i;
+const RETIRED_ANTHROPIC_MODEL_PATTERN = /^claude-(?:2|instant|3-[057]?(?:-(?:sonnet|opus|haiku))?)(?:-[a-z0-9._-]+)?$/i;
+
+const GEMINI_FALLBACK_CANDIDATES = [
+  'gemini-3.5-flash-lite',
+  'gemini-3.1-flash-lite',
+  'gemini-3.8-flash',
+  'gemini-flash-lite-latest',
+  'gemini-flash-latest',
+  'gemma-4-26b-a4b-it',
+  'gemma-4-31b-it',
+  'gemini-4-argon',
+  'gemini-2.5-flash',
+  'gemini-2.5-pro',
+  'gemini-2.0-flash',
+];
+
+const OPENAI_FALLBACK_CANDIDATES = [
+  'gpt-4.1-mini',
+  'gpt-4o-mini',
+  'gpt-4.1-nano',
+  'gpt-4.1',
+  'gpt-4o',
+  'gpt-5-mini',
+  'o4-mini',
+];
+
+const ANTHROPIC_FALLBACK_CANDIDATES = [
+  'claude-sonnet-4-6',
+  'claude-sonnet-4-5',
+  'claude-haiku-4-5',
+  'claude-sonnet-5',
+  'claude-sonnet-4-20250514',
+  'claude-opus-4-6',
+  'claude-opus-5',
+  'claude-3-7-sonnet-latest',
+];
+
 // La prueba de conexión debe usar el mismo modelo que las operaciones reales.
 export function normalizeModelName(provider: ByokProvider, model?: string): string {
-  return (model || '').trim() || DEFAULT_BYOK_MODELS[provider];
+  const raw = (model || '').trim();
+  if (!raw) return DEFAULT_BYOK_MODELS[provider];
+  if (provider === 'gemini') {
+    const withoutPrefix = raw.replace(/^models\//i, '').trim();
+    if (!withoutPrefix || RETIRED_GEMINI_MODEL_PATTERN.test(withoutPrefix)) {
+      return DEFAULT_BYOK_MODELS.gemini;
+    }
+    return withoutPrefix;
+  }
+  if (provider === 'anthropic') {
+    if (RETIRED_ANTHROPIC_MODEL_PATTERN.test(raw)) {
+      return DEFAULT_BYOK_MODELS.anthropic;
+    }
+  }
+  return raw;
 }
 
 // Los análisis y borradores largos tardan más de un minuto en modelos con
@@ -257,8 +345,7 @@ function cleanGeminiSchema(rawSchema: any): any {
   function resolve(obj: any, seen: Set<any> = new Set()): any {
     if (!obj || typeof obj !== 'object') return obj;
     if (seen.has(obj)) {
-      // Si hay un ciclo real en el objeto, devolvemos un objeto vacío u omitimos para evitar stack overflow
-      return {}; 
+      return {};
     }
     seen.add(obj);
 
@@ -282,8 +369,97 @@ function cleanGeminiSchema(rawSchema: any): any {
   return resolve(rawSchema);
 }
 
-async function generateGemini(input: ByokGenerateInput): Promise<string> {
+async function discoverGeminiModelsFromApi(apiKey: string, failedModel: string, timeoutMs: number): Promise<string[]> {
+  try {
+    const payload = await fetchJson(
+      'gemini',
+      'https://generativelanguage.googleapis.com/v1beta/models',
+      {
+        method: 'GET',
+        headers: { 'x-goog-api-key': apiKey },
+      },
+      Math.min(timeoutMs, 15_000),
+    );
+    const availableList = (Array.isArray(payload?.models) ? payload.models : [])
+      .filter((m: any) =>
+        Array.isArray(m?.supportedGenerationMethods) &&
+        m.supportedGenerationMethods.includes('generateContent'),
+      )
+      .map((m: any) => String(m?.name || '').replace(/^models\//i, '').trim())
+      .filter((name: string) =>
+        Boolean(name) &&
+        name !== failedModel &&
+        /^(?:gemini|gemma)-/i.test(name) &&
+        !/(?:tts|image|embedding|veo|imagen|audio|transcribe|robotics|computer-use|aqa|live)/i.test(name),
+      );
+    const available = new Set<string>(availableList);
+    if (availableList.length > 0) {
+      console.info(`[BYOK] Modelos Gemini disponibles en la cuenta (${availableList.length}): ${availableList.slice(0, 12).join(', ')}`);
+    }
+    const ordered: string[] = [];
+    for (const candidate of GEMINI_FALLBACK_CANDIDATES) {
+      if (candidate !== failedModel && available.has(candidate) && !ordered.includes(candidate)) {
+        ordered.push(candidate);
+      }
+    }
+    for (const name of availableList) {
+      if (/flash-lite|flash|gemma/i.test(name) && !ordered.includes(name)) {
+        ordered.push(name);
+      }
+    }
+    for (const name of availableList) {
+      if (!ordered.includes(name)) {
+        ordered.push(name);
+      }
+    }
+    return ordered.slice(0, 5);
+  } catch {
+    return [];
+  }
+}
+
+async function requestGeminiGenerateContent(
+  model: string,
+  input: ByokGenerateInput,
+  generationConfig: Record<string, unknown>,
+  timeoutMs: number,
+): Promise<any> {
+  const isGemma = /^gemma-/i.test(model);
+  const effectiveConfig: Record<string, unknown> = isGemma
+    ? {
+        temperature: generationConfig.temperature,
+        maxOutputTokens: generationConfig.maxOutputTokens,
+      }
+    : generationConfig;
+  const promptText = isGemma && input.systemInstruction
+    ? `${input.systemInstruction}\n\n${input.prompt}`
+    : input.prompt;
+
+  return fetchJson(
+    'gemini',
+    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': input.apiKey,
+      },
+      body: JSON.stringify({
+        systemInstruction: !isGemma && input.systemInstruction
+          ? { parts: [{ text: input.systemInstruction }] }
+          : undefined,
+        contents: [{ role: 'user', parts: [{ text: promptText }] }],
+        generationConfig: effectiveConfig,
+      }),
+    },
+    timeoutMs,
+  );
+}
+
+async function generateGemini(input: ByokGenerateInput, onModelResolved?: (model: string) => void): Promise<string> {
   const modelToUse = normalizeModelName('gemini', input.model);
+  onModelResolved?.(modelToUse);
+  const timeoutMs = input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS;
   const generationConfig: Record<string, unknown> = {
     temperature: input.temperature ?? 0.15,
     maxOutputTokens: input.maxOutputTokens ?? 12_000,
@@ -293,25 +469,34 @@ async function generateGemini(input: ByokGenerateInput): Promise<string> {
     generationConfig.responseJsonSchema = cleanGeminiSchema(input.jsonSchema.schema);
   }
 
-  const payload = await fetchJson(
-    'gemini',
-    `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modelToUse)}:generateContent`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-goog-api-key': input.apiKey,
-      },
-      body: JSON.stringify({
-        systemInstruction: input.systemInstruction
-          ? { parts: [{ text: input.systemInstruction }] }
-          : undefined,
-        contents: [{ role: 'user', parts: [{ text: input.prompt }] }],
-        generationConfig,
-      }),
-    },
-    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
-  );
+  let payload: any;
+  try {
+    payload = await requestGeminiGenerateContent(modelToUse, input, generationConfig, timeoutMs);
+  } catch (err: any) {
+    const msg = String(err?.message || '');
+    if (/\b(?:404|402|429|403|400)\b|NOT_FOUND|RESOURCE_EXHAUSTED|INVALID_ARGUMENT/i.test(msg)) {
+      const candidates = await discoverGeminiModelsFromApi(input.apiKey, modelToUse, timeoutMs);
+      let lastFallbackErr: any = err;
+      let succeeded = false;
+      for (const candidate of candidates) {
+        if (candidate === modelToUse) continue;
+        try {
+          console.info(`[BYOK] Modelo Gemini '${modelToUse}' falló; probando alternativa '${candidate}'`);
+          payload = await requestGeminiGenerateContent(candidate, input, generationConfig, timeoutMs);
+          onModelResolved?.(candidate);
+          succeeded = true;
+          break;
+        } catch (fallbackErr: any) {
+          lastFallbackErr = fallbackErr;
+        }
+      }
+      if (!succeeded) {
+        throw lastFallbackErr;
+      }
+    } else {
+      throw err;
+    }
+  }
 
   const text = extractGeminiText(payload);
   if (!text) throw new Error(describeEmptyGeminiResponse(payload));
@@ -336,12 +521,16 @@ export function extractJsonObject(rawText: string): string {
 
 function extractOpenAiText(payload: any): string {
   if (typeof payload?.output_text === 'string' && payload.output_text.trim()) return payload.output_text.trim();
-  return (payload?.output || [])
+  const fromResponses = (payload?.output || [])
     .flatMap((item: any) => item?.content || [])
-    .filter((part: any) => part?.type === 'output_text')
+    .filter((part: any) => part?.type === 'output_text' || part?.type === 'text')
     .map((part: any) => part?.text || '')
     .join('')
     .trim();
+  if (fromResponses) return fromResponses;
+  const fromChat = payload?.choices?.[0]?.message?.content;
+  if (typeof fromChat === 'string' && fromChat.trim()) return fromChat.trim();
+  return '';
 }
 
 const OPENAI_REASONING_MODELS = /^(?:o\d|gpt-5)/i;
@@ -372,8 +561,35 @@ function cleanOpenAiSchema(value: unknown, seen: Set<any> = new Set()): any {
   return cleaned;
 }
 
-async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
-  const model = normalizeModelName('openai', input.model);
+async function discoverOpenAiModelsFromApi(apiKey: string, failedModel: string, timeoutMs: number): Promise<string[]> {
+  try {
+    const payload = await fetchJson(
+      'openai',
+      'https://api.openai.com/v1/models',
+      {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${apiKey}` },
+      },
+      Math.min(timeoutMs, 15_000),
+    );
+    const available = new Set<string>(
+      (Array.isArray(payload?.data) ? payload.data : [])
+        .map((m: any) => String(m?.id || '').trim())
+        .filter((id: string) => Boolean(id) && id !== failedModel),
+    );
+    const ordered: string[] = [];
+    for (const candidate of OPENAI_FALLBACK_CANDIDATES) {
+      if (candidate !== failedModel && available.has(candidate)) {
+        ordered.push(candidate);
+      }
+    }
+    return ordered.slice(0, 3);
+  } catch {
+    return [];
+  }
+}
+
+async function requestOpenAiResponses(model: string, input: ByokGenerateInput, timeoutMs: number): Promise<any> {
   const text = input.jsonSchema
     ? {
         format: {
@@ -398,7 +614,7 @@ async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
     body.reasoning = { effort: 'low' };
   }
 
-  const payload = await fetchJson(
+  return fetchJson(
     'openai',
     'https://api.openai.com/v1/responses',
     {
@@ -409,8 +625,40 @@ async function generateOpenAi(input: ByokGenerateInput): Promise<string> {
       },
       body: JSON.stringify(body),
     },
-    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
+    timeoutMs,
   );
+}
+
+async function generateOpenAi(input: ByokGenerateInput, onModelResolved?: (model: string) => void): Promise<string> {
+  const model = normalizeModelName('openai', input.model);
+  onModelResolved?.(model);
+  const timeoutMs = input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS;
+
+  let payload: any;
+  try {
+    payload = await requestOpenAiResponses(model, input, timeoutMs);
+  } catch (err: any) {
+    const msg = String(err?.message || '');
+    if (/\b(?:404|403)\b|model_not_found|does not exist|does not have access/i.test(msg)) {
+      const candidates = await discoverOpenAiModelsFromApi(input.apiKey, model, timeoutMs);
+      let succeeded = false;
+      let lastErr: any = err;
+      for (const candidate of candidates) {
+        try {
+          console.info(`[BYOK] Modelo OpenAI '${model}' no disponible; probando '${candidate}'`);
+          payload = await requestOpenAiResponses(candidate, input, timeoutMs);
+          onModelResolved?.(candidate);
+          succeeded = true;
+          break;
+        } catch (fallbackErr: any) {
+          lastErr = fallbackErr;
+        }
+      }
+      if (!succeeded) throw lastErr;
+    } else {
+      throw err;
+    }
+  }
 
   const result = extractOpenAiText(payload);
   if (!result) throw new Error('OpenAI no devolvió contenido utilizable.');
@@ -445,16 +693,60 @@ function cleanAnthropicSchema(value: unknown, seen: Set<any> = new Set()): unkno
   );
 }
 
-async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
-  const model = normalizeModelName('anthropic', input.model);
-  const usesStructuredOutput = Boolean(input.jsonSchema) && ANTHROPIC_STRUCTURED_OUTPUT_MODELS.test(model);
-  const toolName = input.jsonSchema
-    ? input.jsonSchema.name.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64)
-    : '';
+async function discoverAnthropicModelsFromApi(apiKey: string, failedModel: string, timeoutMs: number): Promise<string[]> {
+  try {
+    const payload = await fetchJson(
+      'anthropic',
+      'https://api.anthropic.com/v1/models',
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+      },
+      Math.min(timeoutMs, 15_000),
+    );
+    const availableList = (Array.isArray(payload?.data) ? payload.data : [])
+      .map((m: any) => String(m?.id || '').trim())
+      .filter((id: string) => Boolean(id) && id !== failedModel && /^claude-/i.test(id));
+    const available = new Set<string>(availableList);
+    const ordered: string[] = [];
+    for (const candidate of ANTHROPIC_FALLBACK_CANDIDATES) {
+      if (candidate !== failedModel && available.has(candidate)) {
+        ordered.push(candidate);
+      }
+    }
+    for (const id of availableList) {
+      if (!ordered.includes(id)) ordered.push(id);
+    }
+    return ordered.slice(0, 4);
+  } catch {
+    return [];
+  }
+}
+
+function anthropicMaxTokensForModel(model: string, requested?: number, hasJsonSchema?: boolean): number {
+  const desired = hasJsonSchema ? Math.max(requested ?? 16_000, 16_000) : requested ?? 16_000;
+  if (/^claude-3-(?:haiku|opus|sonnet-20240229)/i.test(model)) {
+    return Math.min(desired, 4_096);
+  }
+  if (/^claude-3-[57]/i.test(model)) {
+    return Math.min(desired, 8_192);
+  }
+  return desired;
+}
+
+async function requestAnthropicMessages(
+  model: string,
+  input: ByokGenerateInput,
+  toolName: string,
+  usesStructuredOutput: boolean,
+  timeoutMs: number,
+): Promise<any> {
   const body: Record<string, unknown> = {
     model,
-    // El razonamiento adaptativo consume parte del presupuesto de salida.
-    max_tokens: input.jsonSchema ? Math.max(input.maxOutputTokens ?? 16_000, 16_000) : input.maxOutputTokens ?? 16_000,
+    max_tokens: anthropicMaxTokensForModel(model, input.maxOutputTokens, Boolean(input.jsonSchema)),
     system: input.systemInstruction,
     messages: [{ role: 'user', content: input.prompt }],
   };
@@ -464,7 +756,6 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
     'anthropic-version': '2023-06-01',
   };
 
-  // Los modelos actuales rechazan temperature/top_p/top_k con un error 400.
   if (ANTHROPIC_SAMPLING_MODELS.test(model)) {
     body.temperature = input.temperature ?? 0.15;
   }
@@ -487,7 +778,7 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
     body.tool_choice = { type: 'tool', name: toolName };
   }
 
-  const payload = await fetchJson(
+  return fetchJson(
     'anthropic',
     'https://api.anthropic.com/v1/messages',
     {
@@ -495,8 +786,46 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
       headers,
       body: JSON.stringify(body),
     },
-    input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS,
+    timeoutMs,
   );
+}
+
+async function generateAnthropic(input: ByokGenerateInput, onModelResolved?: (model: string) => void): Promise<string> {
+  let model = normalizeModelName('anthropic', input.model);
+  onModelResolved?.(model);
+  const timeoutMs = input.timeoutMs ?? DEFAULT_GENERATION_TIMEOUT_MS;
+  const toolName = input.jsonSchema
+    ? input.jsonSchema.name.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64)
+    : '';
+
+  let payload: any;
+  let usesStructuredOutput = Boolean(input.jsonSchema) && ANTHROPIC_STRUCTURED_OUTPUT_MODELS.test(model);
+  try {
+    payload = await requestAnthropicMessages(model, input, toolName, usesStructuredOutput, timeoutMs);
+  } catch (err: any) {
+    const msg = String(err?.message || '');
+    if (/\b404\b|not_found_error/i.test(msg)) {
+      const candidates = await discoverAnthropicModelsFromApi(input.apiKey, model, timeoutMs);
+      let succeeded = false;
+      let lastErr: any = err;
+      for (const candidate of candidates) {
+        try {
+          console.info(`[BYOK] Modelo Anthropic '${model}' no disponible (404); probando '${candidate}'`);
+          usesStructuredOutput = Boolean(input.jsonSchema) && ANTHROPIC_STRUCTURED_OUTPUT_MODELS.test(candidate);
+          payload = await requestAnthropicMessages(candidate, input, toolName, usesStructuredOutput, timeoutMs);
+          model = candidate;
+          onModelResolved?.(candidate);
+          succeeded = true;
+          break;
+        } catch (fallbackErr: any) {
+          lastErr = fallbackErr;
+        }
+      }
+      if (!succeeded) throw lastErr;
+    } else {
+      throw err;
+    }
+  }
 
   if (payload?.stop_reason === 'refusal') {
     throw new Error('Anthropic declinó la solicitud por sus políticas de seguridad.');
@@ -520,16 +849,21 @@ async function generateAnthropic(input: ByokGenerateInput): Promise<string> {
 }
 
 export async function generateByokText(input: ByokGenerateInput): Promise<string> {
-  const model = normalizeModelName(input.provider, input.model);
+  let model = normalizeModelName(input.provider, input.model);
+  const handleModelResolved = (resolvedModel: string) => {
+    model = resolvedModel;
+    input.onModelResolved?.(resolvedModel);
+  };
+  handleModelResolved(model);
   const schemaName = input.jsonSchema?.name ?? 'text';
   const startedAt = Date.now();
   console.info(`[BYOK] Request start -> provider=${input.provider} model=${model} mode=${schemaName} promptChars=${input.prompt.length}`);
   try {
     const result = input.provider === 'openai'
-      ? await generateOpenAi(input)
+      ? await generateOpenAi(input, handleModelResolved)
       : input.provider === 'anthropic'
-        ? await generateAnthropic(input)
-        : await generateGemini(input);
+        ? await generateAnthropic(input, handleModelResolved)
+        : await generateGemini(input, handleModelResolved);
     console.info(`[BYOK] Request ok <- provider=${input.provider} model=${model} mode=${schemaName} outputChars=${result.length} durationMs=${Date.now() - startedAt}`);
     return result;
   } catch (error: any) {
@@ -543,10 +877,13 @@ export async function testByokConnection(input: Pick<ByokGenerateInput, 'provide
   provider: ByokProvider;
   model: string;
 }> {
-  const model = normalizeModelName(input.provider, input.model);
+  let resolvedModel = normalizeModelName(input.provider, input.model);
   const response = await generateByokText({
     ...input,
-    model,
+    model: resolvedModel,
+    onModelResolved: (m) => {
+      resolvedModel = m;
+    },
     systemInstruction: 'Sigue la instrucción.',
     prompt: 'Responde con la palabra OK.',
     temperature: 0,
@@ -557,5 +894,6 @@ export async function testByokConnection(input: Pick<ByokGenerateInput, 'provide
   if (!normalized.includes('OK') && !normalized.includes('CORRECTO') && !normalized.includes('LISTO') && !normalized.includes('ENTENDIDO')) {
     throw new Error(`${input.provider} respondió, pero no cumplió la prueba de conexión.`);
   }
-  return { ok: true, provider: input.provider, model };
+  return { ok: true, provider: input.provider, model: resolvedModel };
 }
+

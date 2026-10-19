@@ -6,7 +6,7 @@ import * as path from 'path';
 import type { DocumentChunk } from './chunking';
 import { MODULE_ALLOWED_LAW_CODES, getModuleLabel, isLawAllowedForModule, normalizeLawCode, type LegalModule } from './prompts';
 import { assessLegalEvidence, getExplicitProvisionTarget, getPreferredLawCodes } from './legal-relevance';
-import { expandLegalQuery, type ExpandedLegalQuery } from './legal-query-expansion';
+import { expandLegalQuery, extractCrossReferencedProvisions, type ExpandedLegalQuery, type RelatedArticleReference } from './legal-query-expansion';
 import { lanceDbWriteMutex } from './mutex';
 import { formatForLog } from './sanitizer';
 
@@ -71,6 +71,8 @@ export interface RAGMatch {
   matched_terms?: string[];
   evidence_coverage?: number;
   rerank_score?: number;
+  connection_note?: string;
+  related_refs?: RelatedArticleReference[];
 }
 
 export interface LegalArticleSearchResult {
@@ -564,6 +566,7 @@ async function searchLegalKnowledge(
             : module === 'todos' ? undefined : module,
           verification_status: 'verified_against_official_source' as const,
           retrieval_type: retrievalType,
+          related_refs: extractCrossReferencedProvisions(normalizedCode, r.article, String(r.content || '')),
         };
         const assessment = assessLegalEvidence(retrievalQuery, match);
         return {
@@ -578,9 +581,71 @@ async function searchLegalKnowledge(
       .filter(({ assessment }) => assessment.sufficient)
       .sort((left, right) => right.match.similarity - left.match.similarity);
 
-    const matches = candidates
+    const matches: RAGMatch[] = candidates
       .map(({ match }) => match)
       .slice(0, limit);
+
+    // Fetch up to 2 directly cross-referenced provisions cited by the top matches
+    if (!explicitTarget.id && matches.length > 0 && matches.length < limit) {
+      const existingKeys = new Set(
+        matches.map(m => `${String(m.law_code || '').toUpperCase()}:${String(m.article_number || '').toUpperCase()}`),
+      );
+      const crossRefTargets: Array<{ ref: RelatedArticleReference; sourceLabel: string }> = [];
+      for (const topMatch of matches.slice(0, 2)) {
+        for (const ref of topMatch.related_refs || []) {
+          const refKey = `${ref.law_code.toUpperCase()}:${ref.article_number.toUpperCase()}`;
+          if (existingKeys.has(refKey)) continue;
+          existingKeys.add(refKey);
+          crossRefTargets.push({
+            ref,
+            sourceLabel: `${topMatch.law_code || topMatch.title} ${topMatch.article_number || ''}`.trim(),
+          });
+          if (crossRefTargets.length >= 2) break;
+        }
+        if (crossRefTargets.length >= 2) break;
+      }
+
+      for (const { ref, sourceLabel } of crossRefTargets) {
+        if (matches.length >= limit) break;
+        try {
+          const storedCode = toStoredLawCode(ref.law_code);
+          const rows = await table
+            .query()
+            .where(`law_code = '${escapeSqlLiteral(storedCode)}' AND article = '${escapeSqlLiteral(ref.article_number)}' AND (${lawFilter})`)
+            .limit(1)
+            .toArray();
+          const row = rows[0];
+          if (!row) continue;
+          const normalizedCode = normalizeLawCode(row.law_code || row.title) || ref.law_code;
+          if (!verifiedLawCodes.has(normalizedCode)) continue;
+          matches.push({
+            id: row.id || crypto.randomUUID(),
+            type: 'statute' as const,
+            title: row.title,
+            subtitle: row.article,
+            content: row.content,
+            similarity: 0.72,
+            law_code: normalizedCode,
+            article_number: row.article,
+            citation_label: row.citation_label,
+            source_url: row.source_url,
+            source_authority: row.source_authority,
+            source_type: row.source_type,
+            last_checked_at: row.last_checked_at,
+            provision_key: row.provision_key,
+            module: module === 'todos' && ['mercantil', 'laboral', 'comercio_exterior', 'aduanal', 'fiscal'].includes(row.module)
+              ? row.module
+              : module === 'todos' ? undefined : module,
+            verification_status: 'verified_against_official_source' as const,
+            retrieval_type: 'hybrid',
+            connection_note: `Disposición correlacionada por remisión expresa en ${sourceLabel}.`,
+            related_refs: extractCrossReferencedProvisions(normalizedCode, row.article, String(row.content || '')),
+          });
+        } catch {
+          // Ignore optional cross-reference lookup errors
+        }
+      }
+    }
 
     return { matches, dbPath };
   } finally {

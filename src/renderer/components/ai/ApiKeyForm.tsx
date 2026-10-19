@@ -3,7 +3,7 @@ import { CheckCircle2, ChevronDown, KeyRound } from 'lucide-react';
 import type { AppSettings, ByokProviderId } from '../../../preload/types';
 import { DEFAULT_BYOK_MODELS } from '../../../shared/byok-models';
 import { providerLabel, useUiStore } from '../../store/useUiStore';
-import { Button, Field, RadioGroup, TextInput } from '../ui';
+import { Badge, Button, Field, RadioGroup, TextInput } from '../ui';
 import { cn } from '../../lib/utils';
 
 const PROVIDERS: ByokProviderId[] = ['gemini', 'openai', 'anthropic'];
@@ -57,6 +57,12 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
     };
   }, []);
 
+  const cleanIpcError = (err: unknown, fallback: string): string => {
+    const raw = err instanceof Error ? err.message : String(err || '');
+    const cleaned = raw.replace(/^Error invoking remote method '[^']+':\s*(?:Error:\s*)?/i, '').trim();
+    return cleaned || fallback;
+  };
+
   const connect = async () => {
     if (!hasStoredKey && apiKey.trim().length < 10) {
       setError('Escribe una API key válida.');
@@ -66,17 +72,49 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
     setError('');
     try {
       const key = apiKey.trim() || undefined;
-      await window.lexDesktop.byok.testConnection({ provider, model: model.trim() || undefined, apiKey: key });
-      const saved = await window.lexDesktop.byok.saveSettings({ enabled: true, provider, model: model.trim() || undefined, apiKey: key });
+      const tested = await window.lexDesktop.byok.testConnection({ provider, model: model.trim() || undefined, apiKey: key });
+      const resolvedModel = tested.model || model.trim() || undefined;
+      const saved = await window.lexDesktop.byok.saveSettings({ enabled: true, provider, model: resolvedModel, apiKey: key });
       if (!mountedRef.current) return;
       setSettings(saved);
+      setModel(saved.providers[provider]?.model ?? DEFAULT_BYOK_MODELS[provider]);
       setApiKey('');
       void refreshRuntimeHealth();
       notify(`${providerLabel(provider)} quedó conectado.`, 'success', 'IA conectada');
       onConnected?.(saved);
     } catch (err: unknown) {
       if (!mountedRef.current) return;
-      setError(err instanceof Error ? err.message : `No se pudo conectar con ${providerLabel(provider)}.`);
+      setError(cleanIpcError(err, `No se pudo conectar con ${providerLabel(provider)}.`));
+    } finally {
+      if (mountedRef.current) setBusy(null);
+    }
+  };
+
+  const saveWithoutTest = async () => {
+    if (!hasStoredKey && apiKey.trim().length < 10) {
+      setError('Escribe una API key válida.');
+      return;
+    }
+    setBusy('testing');
+    setError('');
+    try {
+      const key = apiKey.trim() || undefined;
+      const saved = await window.lexDesktop.byok.saveSettings({
+        enabled: true,
+        provider,
+        model: model.trim() || undefined,
+        apiKey: key,
+      });
+      if (!mountedRef.current) return;
+      setSettings(saved);
+      setModel(saved.providers[provider]?.model ?? DEFAULT_BYOK_MODELS[provider]);
+      setApiKey('');
+      void refreshRuntimeHealth();
+      notify(`API key de ${providerLabel(provider)} guardada.`, 'info', 'Key guardada');
+      onConnected?.(saved);
+    } catch (err: unknown) {
+      if (!mountedRef.current) return;
+      setError(cleanIpcError(err, 'No se pudo guardar la API key.'));
     } finally {
       if (mountedRef.current) setBusy(null);
     }
@@ -93,88 +131,130 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       notify(`Se eliminó la API key de ${providerLabel(provider)}.`, 'info');
     } catch (err: unknown) {
       if (!mountedRef.current) return;
-      setError(err instanceof Error ? err.message : 'No se pudo eliminar la API key.');
+      setError(cleanIpcError(err, 'No se pudo eliminar la API key.'));
     } finally {
       if (mountedRef.current) setBusy(null);
     }
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <RadioGroup
         label="Proveedor de IA"
         value={provider}
         onChange={(nextProvider) => { userTouchedRef.current = true; setProvider(nextProvider); }}
         disabled={busy !== null}
-        className="grid gap-2 sm:grid-cols-3"
+        className="grid gap-3 sm:grid-cols-3"
         optionClassName={(selected) => cn(
-          'rounded-lg border p-3 text-left transition-colors disabled:cursor-wait',
-          selected ? 'border-legal-950 bg-slate-50 ring-2 ring-legal-gold/40' : 'border-slate-200 bg-white hover:border-slate-300',
+          'relative rounded-xl border p-4 text-left transition-all disabled:cursor-wait',
+          selected
+            ? 'border-blue-600 bg-blue-50/35 ring-1 ring-blue-600/20'
+            : 'border-slate-200/90 bg-white hover:border-slate-300 hover:bg-slate-50/60',
         )}
         options={PROVIDERS.map((id) => {
           const state = settings?.providers[id];
-          return { value: id, label: <>
-              <span className="block text-sm font-semibold text-slate-900">{providerLabel(id)}</span>
-              <span className="mt-0.5 block text-xs text-slate-500">
-                {settings?.enabled && settings.provider === id ? 'En uso' : state?.hasApiKey ? 'Key guardada' : 'Sin key'}
-              </span>
-            </> };
+          const selected = provider === id;
+          const modelName = state?.model || DEFAULT_BYOK_MODELS[id];
+          return {
+            value: id,
+            label: (
+              <>
+                <span className="flex items-center justify-between gap-2">
+                  <span className="text-sm font-bold text-legal-950">{providerLabel(id)}</span>
+                  <span
+                    className={cn(
+                      'h-2.5 w-2.5 shrink-0 rounded-full transition-colors',
+                      selected ? 'bg-blue-600' : 'bg-slate-200',
+                    )}
+                    aria-hidden="true"
+                  />
+                </span>
+                <span className="mt-1 block truncate text-xs text-slate-500">{modelName}</span>
+                <span className="mt-2 block text-[11px] font-semibold text-slate-500">
+                  {settings?.enabled && settings.provider === id ? 'En uso' : state?.hasApiKey ? 'Key guardada' : 'Sin key'}
+                </span>
+              </>
+            ),
+          };
         })}
       />
 
-      <Field
-        label="API key"
-        htmlFor={keyInputId}
-        hint={hasStoredKey
-          ? `Hay una key guardada${providerState?.apiKeyFingerprint ? ` (huella ${providerState.apiKeyFingerprint})` : ''}. Déjalo vacío para conservarla.`
-          : 'Se guarda cifrada por el sistema operativo. Sólo se usa cuando pides redactar, revisar con IA o consultar la ayuda.'}
-      >
-        <div className="relative">
-          <KeyRound size={16} className="pointer-events-none absolute left-3 top-3 text-slate-400" aria-hidden="true" />
-          <TextInput
-            id={keyInputId}
-            type="password"
-            autoComplete="off"
-            value={apiKey}
-            onChange={(event) => { userTouchedRef.current = true; setApiKey(event.target.value); }}
-            placeholder={hasStoredKey ? '••••••••••••' : `Pega tu API key de ${providerLabel(provider)}`}
-            className="pl-9"
-          />
-        </div>
-      </Field>
-
-      <div>
-        <button
-          type="button"
-          onClick={() => setModelOpen((open) => !open)}
-          aria-expanded={modelOpen}
-          className="inline-flex items-center gap-1 text-sm font-semibold text-slate-600 hover:text-slate-950"
-        >
-          <ChevronDown size={16} className={cn('transition-transform', modelOpen && 'rotate-180')} />
-          Modelo: {model || DEFAULT_BYOK_MODELS[provider]}
-        </button>
-        {modelOpen && (
-          <div className="mt-2">
-            <Field label="Identificador del modelo" htmlFor={modelInputId} hint={`Predeterminado: ${DEFAULT_BYOK_MODELS[provider]}. Cámbialo sólo si tu cuenta usa otro modelo.`}>
-              <TextInput id={modelInputId} value={model} onChange={(event) => { userTouchedRef.current = true; setModel(event.target.value); }} />
-            </Field>
+      <div className="space-y-4 rounded-xl border border-slate-200/80 bg-slate-50/50 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <p className="text-sm font-bold text-legal-950">Credenciales de {providerLabel(provider)}</p>
+            <p className="text-xs text-slate-500">
+              Cifrada localmente en el llavero seguro del sistema operativo.
+            </p>
           </div>
-        )}
-      </div>
+          {hasStoredKey && (
+            <Badge tone="success" className="gap-1.5 px-2.5 py-0.5">
+              <CheckCircle2 size={12} aria-hidden="true" />
+              {isActive ? 'Key activa' : 'Key guardada'}
+            </Badge>
+          )}
+        </div>
 
-      {error && <p className="text-sm font-medium text-red-700" role="alert">{error}</p>}
+        <Field
+          label="API key"
+          htmlFor={keyInputId}
+          hint={hasStoredKey
+            ? `Hay una key guardada${providerState?.apiKeyFingerprint ? ` (huella ${providerState.apiKeyFingerprint})` : ''}. Déjalo vacío para conservarla.`
+            : 'Se guarda cifrada por el sistema operativo. Sólo se usa cuando pides redactar, revisar con IA o consultar la ayuda.'}
+        >
+          <div className="relative">
+            <KeyRound size={16} className="pointer-events-none absolute left-3 top-3 text-slate-400" aria-hidden="true" />
+            <TextInput
+              id={keyInputId}
+              type="password"
+              autoComplete="off"
+              value={apiKey}
+              onChange={(event) => { userTouchedRef.current = true; setApiKey(event.target.value); }}
+              placeholder={hasStoredKey ? '••••••••••••' : `Pega tu API key de ${providerLabel(provider)}`}
+              className="bg-white pl-9"
+            />
+          </div>
+        </Field>
 
-      <div className="flex flex-wrap items-center gap-2">
-        <Button onClick={() => void connect()} isLoading={busy === 'testing'} disabled={busy !== null || (!hasStoredKey && apiKey.trim().length < 10)}>
-          {busy !== 'testing' && <CheckCircle2 size={16} />}
-          {isActive && !apiKey ? 'Probar conexión' : 'Probar y conectar'}
-        </Button>
-        {showAdvanced && hasStoredKey && (
-          <Button variant="ghost" onClick={() => void clearKey()} isLoading={busy === 'clearing'} disabled={busy !== null}>
-            Eliminar key
+        <div>
+          <button
+            type="button"
+            onClick={() => setModelOpen((open) => !open)}
+            aria-expanded={modelOpen}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-slate-600 hover:text-legal-950"
+          >
+            <ChevronDown size={15} className={cn('transition-transform', modelOpen && 'rotate-180')} />
+            Modelo: {model || DEFAULT_BYOK_MODELS[provider]}
+          </button>
+          {modelOpen && (
+            <div className="mt-2">
+              <Field label="Identificador del modelo" htmlFor={modelInputId} hint={`Predeterminado: ${DEFAULT_BYOK_MODELS[provider]}. Cámbialo sólo si tu cuenta usa otro modelo.`}>
+                <TextInput id={modelInputId} value={model} onChange={(event) => { userTouchedRef.current = true; setModel(event.target.value); }} className="bg-white" />
+              </Field>
+            </div>
+          )}
+        </div>
+
+        {error && <p className="text-sm font-medium text-red-700" role="alert">{error}</p>}
+
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          <Button onClick={() => void connect()} isLoading={busy === 'testing'} disabled={busy !== null || (!hasStoredKey && apiKey.trim().length < 10)}>
+            {busy !== 'testing' && <CheckCircle2 size={16} />}
+            {isActive && !apiKey ? 'Probar conexión' : 'Probar y conectar'}
           </Button>
-        )}
+          {error && (hasStoredKey || apiKey.trim().length >= 10) && (
+            <Button variant="secondary" onClick={() => void saveWithoutTest()} disabled={busy !== null}>
+              Guardar key sin probar
+            </Button>
+          )}
+          {showAdvanced && hasStoredKey && (
+            <Button variant="ghost" onClick={() => void clearKey()} isLoading={busy === 'clearing'} disabled={busy !== null}>
+              Eliminar key
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
 }
+

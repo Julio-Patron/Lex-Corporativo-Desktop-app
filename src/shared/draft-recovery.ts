@@ -2,6 +2,9 @@ import { z } from 'zod';
 import type { DraftRecord, DraftSource } from '../renderer/types';
 import type { LegalArea } from '../preload/types';
 
+// Evita que Zod v4 ejecute `new Function("")` para detectar JIT en el renderer bajo CSP estricta.
+z.config({ jitless: true });
+
 export const RECOVERY_MAX_CHARS = 8_000_000;
 export const RECOVERY_ERROR = 'No se pudo conservar la copia de recuperación. Guarda o exporta el documento antes de salir y vuelve a intentarlo.';
 

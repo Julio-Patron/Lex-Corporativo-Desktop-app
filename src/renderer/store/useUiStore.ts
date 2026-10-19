@@ -15,6 +15,14 @@ function readSidebarPreference(): boolean {
   }
 }
 
+function readStationCoverInitial(): boolean {
+  try {
+    return sessionStorage.getItem('lex_station_opened') !== 'done';
+  } catch {
+    return true;
+  }
+}
+
 export type UpdateState =
   | { status: 'idle' }
   | { status: 'available'; version: string }
@@ -23,6 +31,7 @@ export type UpdateState =
 interface UiState {
   notifications: AppNotification[];
   sidebarCollapsed: boolean;
+  stationCoverOpen: boolean;
   runtimeHealth: RuntimeHealth | null;
   runtimeHealthLoading: boolean;
   settings: AppSettings | null;
@@ -32,6 +41,7 @@ interface UiState {
   notify: (message: string, type?: NotificationType, title?: string) => void;
   dismissNotification: (id: string) => void;
   toggleSidebar: () => void;
+  setStationCoverOpen: (open: boolean) => void;
   refreshRuntimeHealth: () => Promise<RuntimeHealth | null>;
   refreshSettings: () => Promise<AppSettings | null>;
   setSettings: (settings: AppSettings) => void;
@@ -44,6 +54,7 @@ interface UiState {
 export const useUiStore = create<UiState>((set, get) => ({
   notifications: [],
   sidebarCollapsed: readSidebarPreference(),
+  stationCoverOpen: readStationCoverInitial(),
   runtimeHealth: null,
   runtimeHealthLoading: false,
   settings: null,
@@ -87,6 +98,7 @@ export const useUiStore = create<UiState>((set, get) => ({
     }
   },
   setSettings: (settings) => set({ settings }),
+  setStationCoverOpen: (stationCoverOpen) => set({ stationCoverOpen }),
   requestProcessingSetup: (intent) => set({ processingSetupIntent: intent }),
   dismissProcessingSetup: () => set({ processingSetupIntent: null }),
   setHelpOpen: (helpOpen) => set({ helpOpen }),

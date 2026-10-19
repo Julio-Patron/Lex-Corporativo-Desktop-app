@@ -21,17 +21,17 @@
   --font-serif: 'Petrona Variable', Petrona, Palatino, 'Palatino Linotype', serif;
   --font-sans: 'Manrope Variable', Manrope, system-ui, sans-serif;
 
-  /* Marca: negro cálido del emblema, latón para el acento, papel para el escritorio. */
-  --color-legal-950: #1c1915;
-  --color-legal-800: #3f3830;
+  /* Identidad visual: Tinta institucional (#0F172A), rail profundo (#0B1120), oro (#C5A059) y fondo operativo (#F8FAFC). */
+  --color-legal-950: #0f172a;
+  --color-legal-800: #1e293b;
   --color-legal-gold: #c5a059;
   --color-legal-golddark: #8e6d2b;
-  --color-legal-rail: #14110e;
-  --color-legal-paper: #f3f1eb;
+  --color-legal-rail: #0b1120;
+  --color-legal-paper: #f8fafc;
 
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
-  --shadow-dialog: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 2px 12px -4px rgba(15, 23, 42, 0.05), 0 1px 3px -1px rgba(15, 23, 42, 0.03);
+  --shadow-card-hover: 0 8px 20px -6px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-dialog: 0 24px 36px -8px rgba(15, 23, 42, 0.16), 0 10px 14px -6px rgba(15, 23, 42, 0.08);
 
   --animate-fade-in-up: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
@@ -47,6 +47,7 @@
 
 html {
   font-size: 16px;
+  color-scheme: light;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -69,13 +70,13 @@ html {
 body {
   overscroll-behavior-y: contain;
   -webkit-tap-highlight-color: transparent;
-  background-color: #f3f1eb;
+  background-color: #f8fafc;
   font-family: 'Manrope Variable', Manrope, system-ui, sans-serif;
 }
 
 ::selection {
   background: rgba(197, 160, 89, 0.28);
-  color: #1c1915;
+  color: #0f172a;
 }
 
 * {
@@ -206,7 +207,7 @@ body {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1c1915;
+  color: #0f172a;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   text-align: center;
@@ -218,7 +219,7 @@ body {
   font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 700;
-  color: #1c1915;
+  color: #0f172a;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
   border-bottom: 1px solid #e2e8f0;
@@ -259,4 +260,10 @@ body {
 .prose-legal hr {
   border-color: #cbd5e1;
   margin: 1.5rem 0;
+}
+
+@media (forced-colors: active) {
+  button, a, [role="radio"], [role="checkbox"], [role="switch"] {
+    outline-color: Highlight;
+  }
 }

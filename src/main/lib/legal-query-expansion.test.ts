@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { expandLegalQuery } from './legal-query-expansion';
+import { buildRelatedCorpusQueries, expandLegalQuery, extractCrossReferencedProvisions } from './legal-query-expansion';
 
 describe('legal short-query expansion', () => {
   it('normalizes a household-worker query and adds the controlled benefits vocabulary', () => {
@@ -20,5 +20,32 @@ describe('legal short-query expansion', () => {
     const result = expandLegalQuery('Obligaciones especiales', 'mercantil');
     expect(result.addedTerms).toEqual([]);
     expect(result.retrieval).toBe('obligaciones especiales');
+  });
+
+  it('extracts cross-referenced articles inside statute text while ignoring self-references', () => {
+    const refs = extractCrossReferencedProvisions(
+      'LGTOC',
+      'Artículo 170',
+      'Artículo 170.- El pagaré deberá contener los requisitos siguientes. Son aplicables los artículos 171 y 174 de esta Ley.',
+    );
+    expect(refs.map(r => r.article_number)).toEqual(['Artículo 171', 'Artículo 174']);
+    expect(refs[0].query).toBe('LGTOC Artículo 171');
+  });
+
+  it('builds related corpus queries combining cross-references and domain topics', () => {
+    const related = buildRelatedCorpusQueries(
+      'requisitos del pagare',
+      'mercantil',
+      [
+        {
+          law_code: 'LGTOC',
+          article_number: 'Artículo 170',
+          content: 'En los términos del artículo 171 y del artículo 174.',
+        },
+      ],
+      ['endoso en propiedad y procuración LGTOC'],
+    );
+    expect(related.some(item => item.kind === 'cross_reference' && item.query === 'LGTOC Artículo 171')).toBe(true);
+    expect(related.some(item => item.query.includes('endoso'))).toBe(true);
   });
 });

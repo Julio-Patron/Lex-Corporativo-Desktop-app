@@ -120,7 +120,7 @@ describe('BYOK provider client', () => {
 
     expect(result.model).toBe('claude-sonnet-5');
     expect(JSON.parse(fetchMock.mock.calls[0][1].body).model).toBe('claude-sonnet-5');
-    expect(normalizeModelName('anthropic', '')).toBe('claude-3-5-sonnet-20241022');
+    expect(normalizeModelName('anthropic', '')).toBe('claude-sonnet-4-20250514');
   });
 
   it('truncates document evidence before losing the legal context or output contract', () => {
@@ -136,6 +136,61 @@ describe('BYOK provider client', () => {
     expect(prompt).toContain('FUNDAMENTO-CONSERVADO');
     expect(prompt).toContain('CONTRATO-CONSERVADO');
     expect(prompt).toContain('EVIDENCIA DOCUMENTAL RECORTADA');
+  });
+
+  it('migrates retired Gemini 1.x/2.x and Claude 3.x models and strips models/ prefix', () => {
+    expect(normalizeModelName('gemini', 'gemini-1.5-flash')).toBe('gemini-3.5-flash-lite');
+    expect(normalizeModelName('gemini', 'models/gemini-1.5-flash-latest')).toBe('gemini-3.5-flash-lite');
+    expect(normalizeModelName('gemini', 'models/gemini-2.5-flash')).toBe('gemini-3.5-flash-lite');
+    expect(normalizeModelName('gemini', 'models/gemini-3.8-flash')).toBe('gemini-3.8-flash');
+    expect(normalizeModelName('anthropic', 'claude-3-5-sonnet-20241022')).toBe('claude-sonnet-4-20250514');
+  });
+
+  it('auto-discovers an available Gemini model via ListModels when the requested model returns 404 or 402', async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 404,
+        text: async () => '{"error":{"code":404,"message":"models/gemini-custom-old is not found for API version v1beta","status":"NOT_FOUND"}}',
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          models: [
+            { name: 'models/text-embedding-004', supportedGenerationMethods: ['embedContent'] },
+            { name: 'models/gemini-3.8-flash', supportedGenerationMethods: ['generateContent'] },
+            { name: 'models/gemma-4-26b-a4b-it', supportedGenerationMethods: ['generateContent'] },
+          ],
+        }),
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 402,
+        text: async () => '{"error":{"code":402,"message":"Your prepayment credits are depleted.","status":"RESOURCE_EXHAUSTED"}}',
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          candidates: [{ content: { parts: [{ text: 'OK' }] } }],
+        }),
+      });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await testByokConnection({
+      provider: 'gemini',
+      apiKey: 'gemini-secret',
+      model: 'gemini-custom-old',
+    });
+
+    expect(result).toEqual({
+      ok: true,
+      provider: 'gemini',
+      model: 'gemma-4-26b-a4b-it',
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(4);
+    expect(fetchMock.mock.calls[1][0]).toBe('https://generativelanguage.googleapis.com/v1beta/models');
+    expect(fetchMock.mock.calls[2][0]).toContain('/models/gemini-3.8-flash:generateContent');
+    expect(fetchMock.mock.calls[3][0]).toContain('/models/gemma-4-26b-a4b-it:generateContent');
   });
 
   it('describes exactly which categories are included without claiming files or vault are sent', () => {

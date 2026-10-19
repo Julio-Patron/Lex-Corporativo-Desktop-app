@@ -466,6 +466,7 @@ export async function processAnalyzePayload(
   };
 
   const emitProgress = (step: number, label: string) => {
+    deps.logger.info(`[IPC Analyze] Stage ${step}/5 -> ${label}`);
     if (eventSender) {
       eventSender.send('engine:progress', { step, label });
     }
@@ -567,10 +568,10 @@ export async function processAnalyzePayload(
 
       for (const eco of selectedEcosystems) {
         const topK = Math.max(3, Math.floor(10 / selectedEcosystems.length));
-        let ecoRag = await deps.getHybridLegalContext(retrievalQuery, eco, topK, true, 'byok');
+        let ecoRag = await deps.getHybridLegalContext(retrievalQuery, eco, topK, false, 'byok');
         if (ecoRag.sources.length === 0) {
           const fallbackQuery = `${userPrompt} ${fallbackKeywords[eco] || ''}`.trim();
-          ecoRag = await deps.getHybridLegalContext(fallbackQuery, eco, Math.max(2, Math.floor(8 / selectedEcosystems.length)), true, 'byok');
+          ecoRag = await deps.getHybridLegalContext(fallbackQuery, eco, Math.max(2, Math.floor(8 / selectedEcosystems.length)), false, 'byok');
         }
         if (ecoRag.sources.length > 0) {
           ragSources.push(...ecoRag.sources);
@@ -713,6 +714,7 @@ export async function processAnalyzePayload(
 
           if (!grounding.valid) {
             initialGroundingReason = grounding.reason;
+            deps.logger.warn(`[IPC Analyze] Grounding repair triggered -> module=${activeModule} reason=${grounding.reason}`);
             const rejectedOutput = JSON.stringify(parsedResult);
             const validation = grounding;
             const repairedProviderResult = await generateByokText({
@@ -759,6 +761,7 @@ export async function processAnalyzePayload(
             fallbackReason = `grounding_repair:${initialGroundingReason}`;
           }
         } catch (byokErr: any) {
+          deps.logger.warn(`[IPC Analyze] BYOK fallback to local rules -> module=${activeModule} reason=${byokErr?.message || 'Error de proveedor'}`);
           emitProgress(4, 'La IA no respondió; aplicando revisión básica');
           parsedResult = generateDeterministicLegalAudit({
             files: extractedFilesList,
@@ -777,6 +780,9 @@ export async function processAnalyzePayload(
       const engine = reviewMode === 'basic' ? 'local_rules' as const : 'byok' as const;
 
       await cleanupTemporaryDocumentRag();
+      deps.logger.info(
+        `[IPC Analyze] Completed -> requestId=${currentAnalysisRequestId.slice(0, 8)} module=${activeModule} ecosystems=${selectedEcosystems.join('+')} mode=${reviewMode} engine=${engine} legalSources=${ragContext.sources.length} foundations=${parsedResult.legalFoundations?.length ?? 0} fallback=${fallbackReason || 'none'}`
+      );
       logLegalExecution({
         requestId: currentAnalysisRequestId,
         operation: 'analysis',
