@@ -11,7 +11,7 @@ Convención de SHA: los informes citan el commit de código que auditan. La evid
 | Rama de trabajo | `main` directamente | La rama `desarrollo` se integró (PR #2) y se eliminó |
 | Versión del piloto | `1.0.0-rc.17` | En semver `beta` < `rc`: un `beta.1` instalado vería el `rc.16` publicado como actualización. El release `v1.0.0-rc.16` de GitHub se considera obsoleto |
 | Firma | Sin firma (build interno) | No hay certificado de código en esta fase; SmartScreen advertirá y la guía del tester lo explica |
-| Distribución | Enlace privado + SHA-256 en `docs/piloto/manifiesto-instalador.md` | Sin `git tag` (dispararía `release.yml`, que falla sin secretos) y sin GitHub Release |
+| Distribución | Artefacto del workflow `build-installer.yml` en cada push a `main`; pre-release de GitHub sólo mediante ejecución manual con `publish_prerelease`; SHA-256 en `docs/piloto/manifiesto-instalador.md` | Los workflows de candidato firmado y publicación anteriores y las releases rc.13–rc.16 se eliminaron el 19-oct; no se crean tags a mano |
 | Claves de IA | Cada persona participante usa la suya | Decisión del responsable |
 | Qué NO es | No es release comercial | Gates 8, 9 estricto, 11 firma, 12, 15, 16 y 17 de `arquitectura-procesamiento-y-gate-publicacion.md` siguen abiertos |
 
@@ -58,7 +58,9 @@ node scripts/collect-audit-evidence.mjs <sha7> <fecha>   # docs/auditorias/evide
 
 Comprobaciones manuales sobre el artefacto: `Get-FileHash -Algorithm SHA256` coincide con el manifiesto; `Get-AuthenticodeSignature` → `NotSigned` (documentado); `release/win-unpacked/resources/` contiene `THIRD-PARTY-NOTICES.txt` y `legal-runtime/{corpus,lance_data,models,embeddings.lock.json,corpus-manifest.json}`.
 
-Qué no hacer: `git tag v*` (dispara el workflow de candidato firmado, que falla sin secretos); `gh release create`; `npm run preflight:release:strict` (fallará por diseño hasta tener certificado).
+Qué no hacer: crear tags `v*` ni releases a mano (el workflow `build-installer.yml` los crea cuando se ejecuta manualmente con `publish_prerelease`); `npm run preflight:release:strict` (fallará por diseño hasta tener certificado).
+
+En GitHub Actions la misma secuencia la ejecuta `build-installer.yml`: validaciones, `build:electron`, comprobación de árbol, `pilot:manifest` y artefacto `Lex-Corporativo-Setup-<versión>-<sha>` con instalador, blockmap, `latest.yml` y manifiesto.
 
 ## 4. Smoke test en Windows limpio (responsable)
 
