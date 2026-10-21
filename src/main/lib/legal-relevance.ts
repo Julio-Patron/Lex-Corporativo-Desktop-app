@@ -98,13 +98,17 @@ function termMatches(queryTerm: string, evidenceTerms: Set<string>): boolean {
 export function getExplicitProvisionTarget(query: string): { lawCode: string | null; kind: 'article' | 'rule' | null; id: string | null } {
   const normalized = normalizeExplicitQuery(query);
   const law = getExplicitLawCode(query, normalized);
-  const identifier = String.raw`(\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Z]+)?(?:\s+(?:BIS|TER|QUATER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES))?)`;
+  // El sufijo latino puede llevar número ("1390 BIS 12"). La letra suelta ("17 A") se
+  // acepta salvo E, O, U e Y, que en la consulta suelen ser conjunciones, y salvo que la
+  // siga un artículo ("5 A LA FECHA"); se guarda con guion, como en el corpus ("17-A").
+  const identifier = String.raw`(\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Z]+)?(?:\s+(?:BIS|TER|QUATER|QUINQUIES|QUINTUS|SEXIES|SEPTIES|OCTIES|NONIES)(?:\s+\d+)?|\s+[A-DF-NP-TV-XZ](?![A-Z0-9])(?!\s+(?:LA|EL|LOS|LAS|LO)\b))?)`;
   const labeled = normalized.match(new RegExp(`\\b(ART(?:ICULO)?\\.?|REGLA)\\s+${identifier}`));
   const compact = law ? normalized.match(new RegExp(`\\b${law}\\s+${identifier}`)) : null;
   const rawId = labeled?.[2] || compact?.[1] || null;
   const id = rawId
     ?.replace(/\s*-\s*/g, '-')
-    .replace(/\s+(BIS|TER|QUATER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES)\b/, (_match, suffix: string) => (
+    .replace(/^(\d+)\s+([A-Z])$/, '$1-$2')
+    .replace(/\s+(BIS|TER|QUATER|QUINQUIES|QUINTUS|SEXIES|SEPTIES|OCTIES|NONIES)\b/, (_match, suffix: string) => (
       ` ${suffix.charAt(0)}${suffix.slice(1).toLowerCase()}`
     ))
     || null;
@@ -175,7 +179,7 @@ export function assessLegalEvidence(query: string, candidate: EvidenceCandidate)
   const similarity = Number.isFinite(candidate.similarity) ? Number(candidate.similarity) : 0;
   const target = getExplicitProvisionTarget(query);
   const candidateCode = normalizeLawCode(candidate.law_code || candidate.title);
-  const candidateId = String(candidate.article_number || '').match(/\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?/i)?.[0]
+  const candidateId = String(candidate.article_number || '').match(/\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?)?/i)?.[0]
     ?.replace(/\s+/g, '')
     .toUpperCase() || null;
   const idMatches = Boolean(target.id && candidateId === target.id.replace(/\s+/g, '').toUpperCase());

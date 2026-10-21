@@ -105,6 +105,31 @@ describe('legal relevance explicit references', () => {
     });
   });
 
+  it('recognizes numbered suffixes and a separate suffix letter in explicit references', () => {
+    expect(getExplicitProvisionTarget('Código de Comercio artículo 1390 bis 12')).toEqual({
+      lawCode: 'CCOM',
+      kind: 'article',
+      id: '1390 Bis 12',
+    });
+    expect(getExplicitProvisionTarget('artículo 17 A de la Ley de Comercio Exterior')).toEqual({
+      lawCode: 'LCE',
+      kind: 'article',
+      id: '17-A',
+    });
+    expect(getExplicitProvisionTarget('artículo 5 a la fecha de la LCE')?.id).toBe('5');
+    expect(getExplicitProvisionTarget('artículo 27 y 28 de la LFT')?.id).toBe('27');
+  });
+
+  it('matches an explicit numbered-suffix reference only to that exact article', () => {
+    const query = '¿Qué dice el artículo 1390 Bis 12 del Código de Comercio?';
+    expect(assessLegalEvidence(query, {
+      law_code: 'CCom', article_number: 'Artículo 1390 Bis 12', content: 'Pruebas en el juicio oral.', similarity: 0.5,
+    }).reason).toBe('explicit_reference');
+    expect(assessLegalEvidence(query, {
+      law_code: 'CCom', article_number: 'Artículo 1390 Bis', content: 'Juicio oral mercantil.', similarity: 0.5,
+    }).reason).not.toBe('explicit_reference');
+  });
+
   it('qualifies exact RMF and LGSM explicit references', () => {
     expect(assessLegalEvidence('Que establece la regla 11.18.2 de la RMF?', {
       law_code: 'RMF',
