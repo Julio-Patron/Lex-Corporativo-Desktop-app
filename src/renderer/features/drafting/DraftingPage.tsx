@@ -10,7 +10,7 @@ import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { newRecordId, saveDraftRecord } from '../../lib/portfolio';
 import { getFullTemplateBody } from '../../lib/template-bodies';
 import { cn } from '../../lib/utils';
-import { providerLabel, useUiStore } from '../../store/useUiStore';
+import { useUiStore } from '../../store/useUiStore';
 import { useWorkspaceStore, type DraftStep } from '../../store/useWorkspaceStore';
 import type { DraftRecord } from '../../types';
 import { DraftDetails } from './DraftDetails';
@@ -59,7 +59,6 @@ export default function DraftingPage() {
   const editDraftDocument = useWorkspaceStore((state) => state.editDraftDocument);
   const resetDraft = useWorkspaceStore((state) => state.resetDraft);
   const notify = useUiStore((state) => state.notify);
-  const provider = useUiStore((state) => state.settings?.provider);
   const { aiReady, ensureAi } = useAiGuard();
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -246,7 +245,6 @@ export default function DraftingPage() {
         <DraftDetails
           draft={draft}
           generating={generating}
-          providerName={providerLabel(provider)}
           canGenerate={canGenerate}
           onChange={updateDraft}
           onGenerate={() => void generate()}

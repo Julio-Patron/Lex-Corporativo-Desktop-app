@@ -10,7 +10,7 @@ import { toFilePayload } from '../../lib/files';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { newRecordId, saveReviewRecord } from '../../lib/portfolio';
 import { buildAddendumInstructions, buildClauseInstructions, buildReviewReport } from '../../lib/review';
-import { providerLabel, useUiStore } from '../../store/useUiStore';
+import { useUiStore } from '../../store/useUiStore';
 import { useWorkspaceStore } from '../../store/useWorkspaceStore';
 import type { ReviewRecord, ReviewResult } from '../../types';
 import { ReviewResultView } from './ReviewResultView';
@@ -26,7 +26,6 @@ export default function ReviewPage() {
   const startDraftFromReview = useWorkspaceStore((state) => state.startDraftFromReview);
   const updateDraft = useWorkspaceStore((state) => state.updateDraft);
   const notify = useUiStore((state) => state.notify);
-  const provider = useUiStore((state) => state.settings?.provider);
   const health = useUiStore((state) => state.runtimeHealth);
   const requestProcessingSetup = useUiStore((state) => state.requestProcessingSetup);
   const { aiReady, ensureAi } = useAiGuard();
@@ -126,7 +125,7 @@ export default function ReviewPage() {
         <Card className="mx-auto max-w-xl py-10 text-center">
           <Loader2 size={28} className="mx-auto animate-spin text-legal-950" aria-hidden="true" />
           <p className="mt-4 text-base font-semibold text-slate-950">{progress?.label ?? 'Procesando'}…</p>
-          <p className="mt-1 text-sm text-slate-600">{aiReady ? `Con ${providerLabel(provider)} puede tardar uno o dos minutos.` : 'La revisión básica tarda unos segundos.'}</p>
+          <p className="mt-1 text-sm text-slate-600">{aiReady ? 'La revisión con IA puede tardar uno o dos minutos.' :'La revisión básica tarda unos segundos.'}</p>
           <ol className="mx-auto mt-6 flex max-w-md justify-between text-xs text-slate-500" aria-label="Avance">
             {PROGRESS_STEPS.map((label, index) => (
               <li key={label} className={index + 1 <= (progress?.step ?? 1) ? 'font-semibold text-legal-950' : ''}>{label}</li>
@@ -148,7 +147,6 @@ export default function ReviewPage() {
         <ReviewSetup
           review={review}
           aiReady={aiReady}
-          providerName={providerLabel(provider)}
           reviewAvailable={capability?.ready ?? true}
           unavailableReason={capability?.detail}
           onChange={updateReview}

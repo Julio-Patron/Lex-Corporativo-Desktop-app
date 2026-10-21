@@ -8,7 +8,6 @@ import type { DraftSession } from '../../store/useWorkspaceStore';
 interface DraftDetailsProps {
   draft: DraftSession;
   generating: boolean;
-  providerName: string;
   canGenerate: boolean;
   onChange: (patch: Partial<DraftSession>) => void;
   onGenerate: () => void;
@@ -24,7 +23,7 @@ const SOURCE_TITLES: Record<DraftSession['source'], string> = {
   review: 'Adenda o cláusula a partir de una revisión',
 };
 
-export function DraftDetails({ draft, generating, providerName, canGenerate, onChange, onGenerate, onOpenTemplate, onChangeSource, onError }: DraftDetailsProps) {
+export function DraftDetails({ draft, generating, canGenerate, onChange, onGenerate, onOpenTemplate, onChangeSource, onError }: DraftDetailsProps) {
   const instructionsId = useId();
   const areaId = useId();
   const { template } = draft;
@@ -147,9 +146,9 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           </Button>
           <p className="text-xs leading-relaxed text-slate-500">
             {generating
-              ? `${providerName} está redactando. Puede tardar uno o dos minutos.`
+              ? 'La IA está redactando. Puede tardar uno o dos minutos.'
               : canGenerate
-                ? `Se enviarán a ${providerName} tus datos, tus instrucciones y los artículos de ley que aplican. El resultado se guarda en tu portafolio.`
+                ? 'Se enviarán a la IA tus datos, tus instrucciones y los artículos de ley que aplican. El resultado se guarda en tu portafolio.'
                 : draft.source === 'file' && !draft.referenceFile
                   ? 'Adjunta el documento base para continuar.'
                   : 'Completa al menos un dato o una instrucción.'}
