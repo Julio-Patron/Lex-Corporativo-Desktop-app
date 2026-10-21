@@ -1,4 +1,4 @@
-# Escenarios del piloto 1.0.0-rc.17
+# Escenarios del piloto 1.0.0-rc.18
 
 Cada escenario tiene identificador, ruta en la aplicación, prerrequisitos, pasos, resultado esperado y prioridad. **P0** es obligatorio para todas las personas participantes; **P1** debe cubrirse al menos por dos personas; **P2** es deseable. La última columna indica qué hallazgo de auditoría o gate de publicación ayuda a cerrar.
 
