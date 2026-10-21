@@ -203,17 +203,24 @@ function isTransientNetworkError(error: any): boolean {
   return ['ECONNRESET', 'ETIMEDOUT', 'ECONNREFUSED', 'UND_ERR_CONNECT_TIMEOUT'].includes(code);
 }
 
-async function fetchJson(
+// readBody llama a keepAlive cada vez que llegan datos: el límite cuenta desde
+// el último dato recibido y no desde el inicio de la petición.
+async function fetchWithRetry<T>(
   provider: ByokProvider,
   url: string,
   init: RequestInit,
   timeoutMs: number,
-): Promise<any> {
+  readBody: (response: Response, keepAlive: () => void) => Promise<T>,
+): Promise<T> {
   let lastError: Error | undefined;
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    let timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    const keepAlive = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+    };
     try {
       const response = await fetch(url, { ...init, signal: controller.signal });
       if (!response.ok) {
@@ -231,7 +238,7 @@ async function fetchJson(
         }
         throw err;
       }
-      return await response.json();
+      return await readBody(response, keepAlive);
     } catch (error: any) {
       if (error?.name === 'AbortError') {
         throw new Error(`${provider} agotó el tiempo de espera.`);
@@ -247,6 +254,10 @@ async function fetchJson(
     }
   }
   throw lastError ?? new Error(`${provider}: error de conexión tras ${MAX_RETRIES} reintentos.`);
+}
+
+function fetchJson(provider: ByokProvider, url: string, init: RequestInit, timeoutMs: number): Promise<any> {
+  return fetchWithRetry(provider, url, init, timeoutMs, (response) => response.json());
 }
 
 function extractGeminiText(payload: any): string {
@@ -727,6 +738,85 @@ async function discoverAnthropicModelsFromApi(apiKey: string, failedModel: strin
   }
 }
 
+// Arma el mensaje final (content, stop_reason, usage) a partir de los eventos
+// SSE de Messages, con la misma forma que la respuesta sin streaming.
+async function readAnthropicMessageStream(response: Response, keepAlive: () => void): Promise<any> {
+  if (!response.body) throw new Error('Anthropic no devolvió contenido utilizable.');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  const message: any = { content: [] };
+  const partialJson = new Map<number, string>();
+  let finished = false;
+  let buffer = '';
+
+  const handleEvent = (rawEvent: string) => {
+    const data = rawEvent
+      .split('\n')
+      .filter((line) => line.startsWith('data:'))
+      .map((line) => line.slice(5).trimStart())
+      .join('\n');
+    if (!data) return;
+    const event = JSON.parse(data);
+    const block = typeof event.index === 'number' ? message.content[event.index] : undefined;
+    switch (event.type) {
+      case 'message_start':
+        Object.assign(message, event.message, { content: [] });
+        break;
+      case 'content_block_start':
+        message.content[event.index] = { ...event.content_block };
+        if (event.content_block?.type === 'tool_use') partialJson.set(event.index, '');
+        break;
+      case 'content_block_delta':
+        if (!block) break;
+        if (event.delta?.type === 'text_delta') block.text = (block.text ?? '') + event.delta.text;
+        else if (event.delta?.type === 'input_json_delta') partialJson.set(event.index, (partialJson.get(event.index) ?? '') + event.delta.partial_json);
+        else if (event.delta?.type === 'thinking_delta') block.thinking = (block.thinking ?? '') + event.delta.thinking;
+        break;
+      case 'content_block_stop':
+        if (block && partialJson.has(event.index)) {
+          const json = partialJson.get(event.index) ?? '';
+          block.input = json ? JSON.parse(json) : {};
+        }
+        break;
+      case 'message_delta':
+        Object.assign(message, event.delta);
+        if (event.usage) message.usage = { ...message.usage, ...event.usage };
+        break;
+      case 'message_stop':
+        finished = true;
+        break;
+      case 'error':
+        throw new Error(`Anthropic interrumpió la respuesta (${event.error?.type || 'error'}).`);
+      default:
+        // ping y eventos nuevos no cambian el mensaje.
+        break;
+    }
+  };
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      keepAlive();
+      buffer += decoder.decode(value, { stream: true }).replace(/\r/g, '');
+      let boundary = buffer.indexOf('\n\n');
+      while (boundary !== -1) {
+        handleEvent(buffer.slice(0, boundary));
+        buffer = buffer.slice(boundary + 2);
+        boundary = buffer.indexOf('\n\n');
+      }
+    }
+    buffer += decoder.decode().replace(/\r/g, '');
+    if (buffer.trim()) handleEvent(buffer);
+  } catch (error) {
+    await reader.cancel().catch(() => undefined);
+    throw error;
+  }
+
+  if (!finished) throw new Error('Anthropic cerró la respuesta antes de terminar.');
+  return message;
+}
+
 function anthropicMaxTokensForModel(model: string, requested?: number, hasJsonSchema?: boolean): number {
   const desired = hasJsonSchema ? Math.max(requested ?? 16_000, 16_000) : requested ?? 16_000;
   if (/^claude-3-(?:haiku|opus|sonnet-20240229)/i.test(model)) {
@@ -750,6 +840,9 @@ async function requestAnthropicMessages(
     max_tokens: anthropicMaxTokensForModel(model, input.maxOutputTokens, Boolean(input.jsonSchema)),
     system: input.systemInstruction,
     messages: [{ role: 'user', content: input.prompt }],
+    // Una auditoría integral tarda más de tres minutos en escribirse completa;
+    // con streaming el límite de espera cuenta desde el último dato recibido.
+    stream: true,
   };
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -779,7 +872,7 @@ async function requestAnthropicMessages(
     body.tool_choice = { type: 'tool', name: toolName };
   }
 
-  return fetchJson(
+  return fetchWithRetry(
     'anthropic',
     'https://api.anthropic.com/v1/messages',
     {
@@ -788,6 +881,7 @@ async function requestAnthropicMessages(
       body: JSON.stringify(body),
     },
     timeoutMs,
+    readAnthropicMessageStream,
   );
 }
 
