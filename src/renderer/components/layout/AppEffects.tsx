@@ -25,6 +25,7 @@ export function AppEffects() {
 
     const unsubscribers = [
       window.lexDesktop.navigation.onSettings(() => navigate('/configuracion')),
+      window.lexDesktop.navigation.onHelp(() => useUiStore.getState().setHelpOpen(true)),
       window.lexDesktop.settings.onUpdateAvailable((version) => useUiStore.getState().setUpdate({ status: 'available', version })),
       window.lexDesktop.settings.onUpdateDownloaded(() => {
         const current = useUiStore.getState().update;

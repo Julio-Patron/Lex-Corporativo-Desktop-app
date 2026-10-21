@@ -254,6 +254,7 @@ export interface LexDesktopAPI {
   };
   navigation: {
     onSettings: (callback: () => void) => () => void;
+    onHelp: (callback: () => void) => () => void;
   };
   assistant: {
     askInstructivo: (payload: { query: string; history?: Array<{ role: 'user' | 'model' | 'assistant'; text: string }> }) => Promise<{ result: string }>;

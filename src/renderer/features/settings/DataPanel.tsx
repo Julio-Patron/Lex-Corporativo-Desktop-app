@@ -123,11 +123,11 @@ export function DataPanel() {
     setBusy('ledger');
     try {
       const result = await window.lexDesktop.traceability.exportLedger();
-      if (result.success) notify(`Bitácora guardada en ${result.filePath}.`, 'success');
-      else if (result.reason === 'empty') notify('La bitácora todavía está vacía.', 'info');
+      if (result.success) notify(`Registro de actividad guardado en ${result.filePath}.`, 'success');
+      else if (result.reason === 'empty') notify('El registro de actividad todavía está vacío.', 'info');
       setLedger(await window.lexDesktop.traceability.getStatus());
     } catch (error: any) {
-      notify(error?.message || 'No se pudo exportar la bitácora.', 'error');
+      notify(error?.message || 'No se pudo exportar el registro de actividad.', 'error');
     } finally {
       setBusy(null);
     }
@@ -156,9 +156,9 @@ export function DataPanel() {
   };
 
   const checks = health ? [
-    { label: 'Portafolio cifrado (SQLite)', ok: health.capabilities.vault.ready, detail: health.capabilities.vault.detail },
+    { label: 'Portafolio cifrado', ok: health.capabilities.vault.ready, detail: health.capabilities.vault.detail },
     { label: 'Leyes instaladas', ok: health.capabilities.legalCorpus.ready, detail: health.capabilities.legalCorpus.detail },
-    { label: 'Índice de búsqueda (LanceDB y modelo local)', ok: health.capabilities.legalSearch.ready, detail: health.capabilities.legalSearch.detail },
+    { label: 'Índice de búsqueda en las leyes', ok: health.capabilities.legalSearch.ready, detail: health.capabilities.legalSearch.detail },
   ] : [];
 
   return (
@@ -200,7 +200,7 @@ export function DataPanel() {
 
       <Card>
         <SectionTitle
-          title="Componentes locales"
+          title="Estado de la aplicación"
           actions={(
             <Button size="sm" variant="ghost" onClick={() => void refreshRuntimeHealth()} isLoading={healthLoading}>
               {!healthLoading && <RefreshCw size={14} aria-hidden="true" />} Comprobar
@@ -226,7 +226,7 @@ export function DataPanel() {
         <Card>
           <SectionTitle
             title="Respaldo"
-            description="El archivo se cifra con la contraseña que elijas. En otro equipo se abre con esa contraseña, no con el cifrado de Windows de este perfil. Incluye asuntos, documentos, análisis, borradores y su estado. No incluye la clave de IA ni la redacción pendiente."
+            description="El archivo se cifra con la contraseña que elijas. Puedes abrirlo en otro equipo con esa misma contraseña; no depende de tu usuario de Windows. Incluye asuntos, documentos, análisis, borradores y su estado. No incluye la clave de IA ni el documento que estés redactando sin guardar."
           />
           <div className="space-y-3">
             <Field label="Contraseña del respaldo" htmlFor={backupPasswordId}>
@@ -244,10 +244,10 @@ export function DataPanel() {
         </Card>
         <Card>
           <SectionTitle
-            title="Bitácora de trazabilidad"
-            description={ledger?.exists ? `Registro de cada operación con hashes de verificación (${formatFileSize(ledger.size)}).` : 'Registro de cada operación con hashes de verificación. Aún no hay registros.'}
+            title="Registro de actividad"
+            description={ledger?.exists ? `Anota cada operación con una huella de verificación (${formatFileSize(ledger.size)}).` : 'Anota cada operación con una huella de verificación. Aún no hay registros.'}
           />
-          <Button variant="secondary" onClick={() => void exportLedger()} isLoading={busy === 'ledger'} disabled={!ledger?.exists}>Exportar bitácora</Button>
+          <Button variant="secondary" onClick={() => void exportLedger()} isLoading={busy === 'ledger'} disabled={!ledger?.exists}>Exportar registro</Button>
         </Card>
       </div>
 

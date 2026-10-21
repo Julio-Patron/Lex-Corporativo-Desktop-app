@@ -8,16 +8,16 @@ export const SEVERITY_LABELS: Record<ReviewRisk['severity'], string> = {
 };
 
 export const BASIC_REVIEW_SCOPE = [
-  'Comprueba si el texto menciona elementos mínimos de cada materia seleccionada (por ejemplo, jornada y salario en laboral, CFDI en fiscal o Incoterm en comercio exterior).',
-  'Detecta partes y cláusulas numeradas mediante patrones de texto.',
-  'Muestra artículos del corpus local relacionados con el documento por búsqueda semántica.',
-  'Añade recomendaciones y listas de control generales de la materia, iguales para cualquier documento.',
+  'Revisa si el texto menciona los elementos básicos de cada materia elegida (por ejemplo, jornada y salario en laboral, factura en fiscal o Incoterm en comercio exterior).',
+  'Identifica a las partes y las cláusulas numeradas.',
+  'Muestra artículos de las leyes instaladas que se relacionan con el documento.',
+  'Agrega recomendaciones generales de la materia, iguales para cualquier documento.',
 ];
 
 export const BASIC_REVIEW_LIMITS = 'No interpreta el contenido, no valida la legalidad de las cláusulas ni sustituye la revisión profesional. Un elemento "encontrado" sólo indica que el término aparece en el texto.';
 
 export function reviewModeLabel(record: Pick<ReviewRecord, 'reviewMode' | 'provider'>): string {
-  if (record.reviewMode === 'basic') return 'Revisión básica (reglas locales)';
+  if (record.reviewMode === 'basic') return 'Revisión básica (sin IA)';
   const provider = record.provider === 'openai' ? 'OpenAI' : record.provider === 'anthropic' ? 'Anthropic' : record.provider === 'gemini' ? 'Gemini' : 'IA';
   return `Revisión con IA · ${provider}`;
 }
@@ -66,7 +66,7 @@ export function buildReviewReport(record: ReviewRecord): string {
   }
   if (result.detectedParties.length) sections.push(`## Partes detectadas\n${bullet(result.detectedParties)}`);
   if (result.legalFoundations.length) {
-    sections.push(`## ${isBasic ? 'Artículos relacionados del corpus local' : 'Fundamentos'}\n${result.legalFoundations
+    sections.push(`## ${isBasic ? 'Artículos relacionados de las leyes instaladas' : 'Fundamentos'}\n${result.legalFoundations
       .map((foundation) => `- **${foundation.law}${foundation.article ? ` · ${foundation.article}` : ''}**${foundation.excerpt ? `: ${foundation.excerpt}` : ''}`)
       .join('\n')}`);
   }

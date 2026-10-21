@@ -133,7 +133,8 @@ async function main() {
       await shot(`${width}-${zoom}-clausulas`);
       await click('Cambiar');
       await routeTo('/estudio/auditar', zoom);
-      await click('Alcance y límites', 'summary');
+      // Sin IA, el alcance de la revisión básica se muestra abierto (U-01).
+      assert.equal(await js(`[...document.querySelectorAll('main summary')].find(e => e.textContent.trim() === 'Alcance y límites')?.parentElement.open`), true);
       await shot(`${width}-${zoom}-alcance`);
     }
     win.webContents.setZoomFactor(1);

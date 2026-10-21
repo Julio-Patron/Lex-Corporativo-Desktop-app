@@ -116,7 +116,7 @@ export function DraftDocument({ record, dirty, onChangeDocument, onRename, onSav
             onChange={(event) => onChangeDocument(event.target.value)}
             className="min-h-[65vh] w-full rounded-xl border border-slate-300 bg-white p-6 font-mono text-sm leading-relaxed text-slate-900 outline-none focus:border-legal-800 focus:ring-2 focus:ring-legal-gold/30"
           />
-          <p className="mt-2 text-xs text-slate-500">Formato Markdown: # para títulos y **texto** para negritas. {record.document.length.toLocaleString('es-MX')} caracteres.</p>
+          <p className="mt-2 text-xs text-slate-500">Formato: escribe # al inicio de una línea para hacerla título y **texto** para negritas. {record.document.length.toLocaleString('es-MX')} caracteres.</p>
         </div>
       )}
     </div>

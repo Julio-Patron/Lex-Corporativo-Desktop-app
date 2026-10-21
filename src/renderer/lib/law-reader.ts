@@ -85,6 +85,15 @@ export function filterArticles(articles: LawArticle[], query: string): LawArticl
   return byNumber ? [byNumber, ...matches.filter((article) => article !== byNumber)] : matches;
 }
 
+// La RMF y las RGCE se dividen en reglas; las demás leyes y reglamentos, en artículos.
+const RULE_BASED_CODES = new Set(['RMF', 'RGCE']);
+
+export function provisionCountLabel(lawCode: string, count: number): string {
+  const ruleBased = RULE_BASED_CODES.has(lawCode.toUpperCase());
+  const unit = ruleBased ? (count === 1 ? 'regla' : 'reglas') : (count === 1 ? 'artículo' : 'artículos');
+  return `${count.toLocaleString('es-MX')} ${unit}`;
+}
+
 export function formatArticleCitation(article: LawArticle, lawName: string, lawCode: string): string {
   return `${article.label} de la ${lawName} (${lawCode}):\n"${article.body}"`;
 }

@@ -48,7 +48,7 @@ El lockup integra símbolo, nombre “Lex Corporativo” y la leyenda “Sistema
 Activos canónicos del repositorio:
 
 - `src/renderer/assets/logo-mark.png`: isotipo para navegación e iconografía de producto.
-- `src/renderer/assets/logo-lockup-transparent.png`: lockup principal para bienvenida, documentos y comunicación.
+- `src/renderer/components/BrandLockup.tsx`: lockup principal en vector (isotipo, nombre en Petrona y leyenda «SISTEMA DE INTELIGENCIA JURÍDICA» con acento) para la bienvenida. Sustituye al PNG anterior, cuya leyenda rasterizada no llevaba acento (U-08).
 - `resources/icon.png`: icono de la aplicación y empaquetado.
 
 Antes de construir el sitio comercial deben prepararse equivalentes vectoriales SVG, versiones monocromáticas y variantes sobre fondos claro y oscuro. No se debe reconstruir el símbolo con CSS ni usar aproximaciones tipográficas.

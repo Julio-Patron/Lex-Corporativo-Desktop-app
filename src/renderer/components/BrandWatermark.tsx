@@ -9,6 +9,7 @@ export function BrandWatermark({ className }: { className?: string }) {
 
 const PLATE = {
   hero: { box: 'h-32 w-32 rounded-3xl border border-legal-gold/25', mark: 'h-44 w-44' },
+  medium: { box: 'h-20 w-20 rounded-2xl border border-legal-gold/25', mark: 'h-28 w-28' },
   small: { box: 'h-12 w-12 rounded-2xl border border-legal-gold/25', mark: 'h-16 w-16' },
 } as const;
 

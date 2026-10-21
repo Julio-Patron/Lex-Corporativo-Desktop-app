@@ -2,14 +2,14 @@ export const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
 // Debe coincidir con ALLOWED_DOCUMENT_EXTENSIONS en src/main/lib/document-parser.ts: el .doc binario no se extrae.
 export const ACCEPTED_DOCUMENT_TYPES = '.pdf,.docx,.xml,.txt,.md';
-export const ACCEPTED_DOCUMENT_LABEL = 'PDF, Word (.docx), XML (CFDI), TXT o Markdown · hasta 20 MB';
+export const ACCEPTED_DOCUMENT_LABEL = 'PDF, Word (.docx), factura XML (CFDI) o texto (.txt, .md) · hasta 20 MB';
 
 const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.xml', '.txt', '.md'];
 
 export function validateDocumentFile(file: File): string | null {
   const name = file.name.toLowerCase();
   if (!ALLOWED_EXTENSIONS.some((extension) => name.endsWith(extension))) {
-    return 'Formato no compatible. Usa PDF, Word (.docx), XML (CFDI), TXT o Markdown.';
+    return 'Formato no compatible. Usa PDF, Word (.docx), factura XML (CFDI) o texto (.txt, .md).';
   }
   if (file.size > MAX_FILE_SIZE) {
     return 'El archivo supera el límite de 20 MB.';

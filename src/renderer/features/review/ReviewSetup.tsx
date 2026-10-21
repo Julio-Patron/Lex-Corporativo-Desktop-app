@@ -21,6 +21,8 @@ interface ReviewSetupProps {
 export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, unavailableReason, onChange, onStart, onConnectAi, onError }: ReviewSetupProps) {
   const instructionId = useId();
   const allSelected = review.areas.length === LEGAL_AREAS.length;
+  const startLabel = aiReady ? 'Revisar documento' : 'Hacer revisión básica';
+  const canStart = Boolean(review.file) && reviewAvailable;
 
   const toggleArea = (area: LegalArea) => {
     const selected = review.areas.includes(area);
@@ -36,9 +38,9 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
             <ShieldCheck size={20} aria-hidden="true" />
           </span>
           <div>
-            <p className="text-sm font-bold text-legal-950">Sistema listo para operar</p>
+            <p className="text-sm font-bold text-legal-950">{reviewAvailable ? 'Todo listo para revisar' : 'La revisión no está disponible por ahora'}</p>
             <p className="text-xs text-slate-500">
-              Motor local verificador y buscador normativo activos · {aiReady ? `Proveedor ${providerName} conectado` : 'Modo local sin IA externa'}
+              {aiReady ? `Revisión con IA mediante ${providerName}` : 'Revisión básica en tu computadora, sin IA'}
             </p>
           </div>
         </div>
@@ -50,7 +52,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-5">
           <Card>
-            <StepHeading title="1. Documento" subtitle="Selecciona o arrastra el archivo PDF, DOCX o TXT a revisar" />
+            <StepHeading title="1. Documento" subtitle="Elige o arrastra el archivo a revisar: PDF, Word o texto" />
             <FileDropzone
               file={review.file}
               onFile={(file) => onChange({ file })}
@@ -62,7 +64,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           <Card>
             <StepHeading
               title="2. Materias"
-              subtitle="Elige los ordenamientos contra los cuales se contrastará el documento"
+              subtitle="Elige contra qué leyes se revisa el documento"
               actions={(
                 <Button size="sm" variant="ghost" onClick={() => onChange({ areas: allSelected ? [review.areas[0]] : [...LEGAL_AREAS] })}>
                   {allSelected ? 'Sólo la primera' : 'Todas las materias'}
@@ -116,6 +118,14 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
               </Field>
             </Card>
           )}
+
+          {/* Con la columna lateral abajo (menos de 1280 px), la acción queda fija al pie de la pantalla (U-06). */}
+          <div className="sticky bottom-0 z-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white/95 px-4 py-3 shadow-card backdrop-blur xl:hidden">
+            <p className="min-w-0 truncate text-xs text-slate-500">{review.file ? review.file.name : 'Primero elige el documento.'}</p>
+            <Button onClick={onStart} disabled={!canStart}>
+              <SearchCheck size={18} aria-hidden="true" /> {startLabel}
+            </Button>
+          </div>
         </div>
 
         <aside className="space-y-4 xl:sticky xl:top-28 xl:self-start">
@@ -130,12 +140,13 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
             </div>
             {aiReady ? (
               <p className="text-sm leading-relaxed text-slate-600">
-                Se envían a {providerName} extractos del documento y los artículos aplicables del corpus local. Cada afirmación del dictamen se valida contra esas fuentes antes de mostrarse.
+                Se envían a {providerName} partes del documento y los artículos que aplican. Cada observación se comprueba contra esas fuentes antes de mostrarse.
               </p>
             ) : (
               <>
-                <p className="text-sm leading-relaxed text-slate-600">Detecta menciones y estructura del texto. No interpreta ni valida la legalidad del documento.</p>
-                <details className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-sm text-slate-600">
+                <p className="text-sm leading-relaxed text-slate-600">Señala qué temas y apartados contiene el documento. No opina sobre si es legal.</p>
+                {/* Sin IA el límite de la revisión básica se muestra abierto (U-01). */}
+                <details open className="rounded-xl border border-slate-200/80 bg-slate-50/70 p-3 text-sm text-slate-600">
                   <summary className="cursor-pointer font-semibold text-slate-700">Alcance y límites</summary>
                   <ul className="mt-3 list-disc space-y-2 pl-5">
                     {BASIC_REVIEW_SCOPE.map((item) => <li key={item}>{item}</li>)}
@@ -145,10 +156,12 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
               </>
             )}
             {!reviewAvailable && <Callout tone="warning">{unavailableReason}</Callout>}
-            <Button isFullWidth size="lg" onClick={onStart} disabled={!review.file || !reviewAvailable}>
-              <SearchCheck size={18} aria-hidden="true" /> {aiReady ? 'Revisar documento' : 'Hacer revisión básica'}
-            </Button>
-            {!review.file && <p className="text-center text-xs text-slate-500">Primero elige el documento.</p>}
+            <div className="hidden space-y-2 xl:block">
+              <Button isFullWidth size="lg" onClick={onStart} disabled={!canStart}>
+                <SearchCheck size={18} aria-hidden="true" /> {startLabel}
+              </Button>
+              {!review.file && <p className="text-center text-xs text-slate-500">Primero elige el documento.</p>}
+            </div>
             {!aiReady && <Button size="sm" variant="secondary" isFullWidth onClick={onConnectAi}>Conectar IA</Button>}
           </Card>
         </aside>

@@ -71,6 +71,7 @@ const api: LexDesktopAPI = {
   },
   navigation: {
     onSettings: (cb) => subscribe('nav:settings', () => cb()),
+    onHelp: (cb) => subscribe('nav:help', () => cb()),
   },
   assistant: {
     askInstructivo: (payload) => ipcRenderer.invoke('ipc:assistant-ask', payload),

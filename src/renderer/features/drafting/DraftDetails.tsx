@@ -47,7 +47,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           {template ? (
             <AreaTag area={draft.area} />
           ) : (
-            <Field label="Materia" htmlFor={areaId} hint="Determina qué leyes del corpus se usan como fundamento.">
+            <Field label="Materia" htmlFor={areaId} hint="Define qué leyes se usan como fundamento.">
               <Select id={areaId} value={draft.area} onChange={(event) => onChange({ area: event.target.value as LegalArea })} className="max-w-xs">
                 {LEGAL_AREAS.map((area) => <option key={area} value={area}>{LEGAL_AREA_INFO[area].label}</option>)}
               </Select>
@@ -55,7 +55,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           )}
           {draft.source === 'review' && draft.sourceReview && (
             <Callout tone="info" className="mt-4" title={`Basado en la revisión de «${draft.sourceReview.title}»`}>
-              Los hallazgos de la revisión se incluyen como contexto para el redactor.
+              Los hallazgos de la revisión se incluyen en las instrucciones para la IA.
             </Callout>
           )}
         </Card>
@@ -89,7 +89,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
           <Card>
             <SectionTitle
               title={draft.source === 'file' ? 'Documento base' : 'Documento revisado (opcional)'}
-              description={draft.source === 'file' ? 'El redactor lo usará como punto de partida.' : 'Adjúntalo si quieres que la adenda cite su texto.'}
+              description={draft.source === 'file' ? 'La IA lo usará como punto de partida.' : 'Adjúntalo si quieres que la adenda cite su texto.'}
             />
             <FileDropzone
               file={draft.referenceFile}
@@ -149,7 +149,7 @@ export function DraftDetails({ draft, generating, providerName, canGenerate, onC
             {generating
               ? `${providerName} está redactando. Puede tardar uno o dos minutos.`
               : canGenerate
-                ? `Se enviarán tus datos, instrucciones y los artículos aplicables del corpus local a ${providerName}. El resultado se guarda en tu portafolio.`
+                ? `Se enviarán a ${providerName} tus datos, tus instrucciones y los artículos de ley que aplican. El resultado se guarda en tu portafolio.`
                 : draft.source === 'file' && !draft.referenceFile
                   ? 'Adjunta el documento base para continuar.'
                   : 'Completa al menos un dato o una instrucción.'}

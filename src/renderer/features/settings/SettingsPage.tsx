@@ -25,19 +25,19 @@ export default function SettingsPage() {
   return (
     <Page
       title="Configuración"
-      description="Preferencias del sistema, conexión BYOK y privacidad del almacenamiento local."
+      description="Tu cuenta de IA, la privacidad de tus datos y la versión instalada."
       width="wide"
       actions={(
         <Badge tone={aiReady ? 'success' : 'neutral'} className="gap-1.5 px-3 py-1">
           <Sparkles size={13} aria-hidden="true" />
-          {aiReady ? `${providerLabel(provider)} activo` : 'Modo local'}
+          {aiReady ? `${providerLabel(provider)} activo` : 'Sin IA'}
         </Badge>
       )}
     >
       <div className="grid gap-5 lg:grid-cols-[250px_minmax(0,1fr)] lg:items-start">
         <Card className="p-3">
           <p className="px-3 pb-2 pt-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-400">
-            Ajustes de estación
+            Ajustes
           </p>
           <RadioGroup
             label="Secciones de configuración"

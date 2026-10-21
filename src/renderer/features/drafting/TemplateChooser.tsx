@@ -35,7 +35,7 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
             </span>
             <span className="mt-3.5 block text-base font-bold leading-snug text-legal-950">Partir de mi propio archivo</span>
             <span className="mt-1 block text-xs leading-relaxed text-slate-500">
-              Sube un contrato o documento base para adaptarlo, perfeccionar cláusulas o generar un derivado con IA.
+              Sube un contrato o documento base para que la IA lo adapte, mejore sus cláusulas o prepare uno nuevo a partir de él.
             </span>
           </div>
           <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-semibold text-slate-500">
@@ -57,7 +57,7 @@ export function TemplateChooser({ aiReady, onCustomize, onOpenTemplate, onStartF
             </span>
             <span className="mt-3.5 block text-base font-bold leading-snug text-legal-950">Solicitar un documento a la IA</span>
             <span className="mt-1 block text-xs leading-relaxed text-slate-500">
-              Redacta contratos, convenios, actas o escritos corporativos desde cero con fundamento en el corpus local.
+              Redacta contratos, convenios, actas o escritos corporativos desde cero, con fundamento en las leyes instaladas.
             </span>
           </div>
           <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-xs font-semibold text-slate-500">

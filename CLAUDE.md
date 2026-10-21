@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Lex Corporativo Desktop is an Electron workstation for Mexican corporate, commercial, labor, foreign-trade/customs, and tax law. Everything stays local (encrypted SQLite vault, legal corpus, LanceDB vector store, MiniLM embeddings, trace ledger). Generative features use the user's own API key only (BYOK: Gemini, OpenAI, or Anthropic). There is no local LLM, and none should be added; this is a product decision recorded in `docs/arquitectura-procesamiento-y-gate-publicacion.md`. With no API key, the portfolio, the deterministic rule-based audits, the corpus reader, and legal search still work.
 
-All user-facing strings, error messages, prompts, code comments and docs are in Spanish. Commits follow Conventional Commits with Spanish descriptions (e.g. `feat(rag): ...`, `fix(ci): ...`). Work happens directly on `main`; there is no long-lived development branch.
+All user-facing strings, error messages, prompts, code comments and docs are in Spanish. Visible text uses everyday language a non-technical user understands, the same rule as the website: no developer terms (corpus, ordenamientos, disposiciones, BYOK, API key, RAG, embeddings, hash, trazabilidad, telemetría, motor/modo local) and no marketing phrases ("estación de trabajo"). Say "leyes", "artículos", "tu cuenta de IA" / "clave de IA", "protegido con tu usuario de Windows", "registro de actividad". Never call an output a "dictamen". Technical names stay in code, comments and IT-facing docs. Commits follow Conventional Commits with Spanish descriptions (e.g. `feat(rag): ...`, `fix(ci): ...`). Work happens directly on `main`; there is no long-lived development branch.
 
 ## Commands
 

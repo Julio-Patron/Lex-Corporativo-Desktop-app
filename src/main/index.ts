@@ -112,10 +112,10 @@ function createWindow(): void {
 
   mainWindow.webContents.on('will-prevent-unload', (event) => {
     const choice = dialog.showMessageBoxSync(mainWindow!, {
-      type: 'warning', title: 'Trabajo sin conservar',
-      message: 'No se pudo conservar todo el trabajo pendiente.',
-      detail: 'Permanece en la aplicación para guardar o exportar. Si continúas con el cierre o la recarga, puedes perder los últimos cambios.',
-      buttons: ['Permanecer', 'Continuar sin conservar'], defaultId: 0, cancelId: 0,
+      type: 'warning', title: 'Cambios sin guardar',
+      message: 'No se pudieron guardar tus últimos cambios.',
+      detail: 'Quédate para guardarlos o exportarlos. Si sales ahora, puedes perderlos.',
+      buttons: ['Quedarme', 'Salir sin guardar'], defaultId: 0, cancelId: 0,
     });
     if (choice === 1) event.preventDefault();
   });

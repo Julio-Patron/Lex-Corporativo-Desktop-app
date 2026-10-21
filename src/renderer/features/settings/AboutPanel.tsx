@@ -14,6 +14,8 @@ export function AboutPanel() {
   const [checking, setChecking] = useState(false);
   const [checkMessage, setCheckMessage] = useState('');
   const [savingAuto, setSavingAuto] = useState(false);
+  // Una versión con sufijo (1.0.0-rc.17) es de prueba: sus actualizaciones se entregan a los participantes (U-10).
+  const isTestVersion = version.includes('-');
 
   useEffect(() => {
     window.lexDesktop.settings.getAppVersion().then(setVersion).catch(() => setVersion(''));
@@ -56,7 +58,7 @@ export function AboutPanel() {
         <SectionTitle title="Lex Corporativo Desktop" description={version ? `Versión ${version}` : undefined} />
         {corpus && (
           <p className="text-sm text-slate-600">
-            Corpus {corpus.version}: {corpus.laws} leyes y {corpus.provisions.toLocaleString('es-MX')} disposiciones verificadas contra sus fuentes oficiales.
+            {corpus.laws} leyes y reglamentos con {corpus.provisions.toLocaleString('es-MX')} artículos y reglas, revisados contra su publicación oficial. Leyes actualizadas a la versión {corpus.version.match(/^\d{4}\.\d{2}/)?.[0] ?? corpus.version}.
           </p>
         )}
       </Card>
@@ -74,6 +76,11 @@ export function AboutPanel() {
           <Button variant="secondary" onClick={() => void checkNow()} isLoading={checking}>Buscar actualizaciones</Button>
           {checkMessage && <p className="text-sm text-slate-600" role="status">{checkMessage}</p>}
         </div>
+        {isTestVersion && (
+          <Callout tone="info" title="Versión de prueba">
+            Durante las pruebas, las versiones nuevas se entregan directamente a los participantes; esta búsqueda no las encuentra.
+          </Callout>
+        )}
         <div className="border-t border-slate-100" />
         <Toggle
           label="Buscar actualizaciones al iniciar"

@@ -26,15 +26,15 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { to: '/', label: 'Buscador Normativo', icon: Search, end: true },
+  { to: '/', label: 'Buscador normativo', icon: Search, end: true },
   { to: '/estudio', label: 'Estudio Jurídico', icon: BriefcaseBusiness },
-  { to: '/leyes', label: 'Corpus Normativo', icon: BookOpenCheck },
+  { to: '/leyes', label: 'Leyes', icon: BookOpenCheck },
   { to: '/configuracion', label: 'Configuración', icon: Settings },
 ];
 
 const ESTUDIO_SUBITEMS = [
   { to: '/estudio/auditar', label: 'Auditar documento', icon: ShieldCheck },
-  { to: '/estudio/generar', label: 'Redactor y Plantillas', icon: FileSignature },
+  { to: '/estudio/generar', label: 'Generar documento', icon: FileSignature },
   { to: '/estudio/portafolio', label: 'Portafolio', icon: FolderOpen },
 ] as const;
 
@@ -100,9 +100,6 @@ export function Sidebar() {
           {!visuallyCollapsed && (
             <div className="min-w-0 flex-1 pr-6 animate-fade-in-up">
               <p className="truncate text-[15px] font-bold leading-tight text-white">Lex Corporativo</p>
-              <p className="mt-0.5 truncate text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                Estación privada
-              </p>
               {!compact && (
                 <button
                   type="button"
@@ -170,11 +167,11 @@ export function Sidebar() {
             className={cn(
               'flex w-full items-center gap-3 rounded-xl px-3.5 py-2 text-left text-xs transition-colors',
               visuallyCollapsed && 'justify-center px-0',
-              aiReady ? 'text-emerald-300 hover:bg-white/5' : 'text-legal-gold hover:bg-white/5',
+              aiReady ? 'text-emerald-300 hover:bg-white/5' : 'text-slate-300 hover:bg-white/5 hover:text-white',
             )}
-            title={aiReady ? `IA conectada: ${providerLabel(settings?.provider)}` : 'Conectar IA'}
+            title={aiReady ? `IA conectada: ${providerLabel(settings?.provider)}` : 'Conectar IA (opcional)'}
           >
-            <span className={cn('h-2 w-2 shrink-0 rounded-full', aiReady ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-legal-gold')} aria-hidden="true" />
+            <span className={cn('h-2 w-2 shrink-0 rounded-full', aiReady ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'border border-slate-400 bg-transparent')} aria-hidden="true" />
             {visuallyCollapsed
               ? <span className="sr-only">{aiReady ? 'IA conectada' : 'Conectar IA'}</span>
               : <span className="truncate font-semibold">{aiReady ? `${providerLabel(settings?.provider)} conectado` : 'Conectar IA'}</span>}
@@ -196,7 +193,7 @@ export function Sidebar() {
                   LC
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-xs font-semibold text-white">Estación local</span>
+                  <span className="block truncate text-xs font-semibold text-white">Tu equipo</span>
                   <span className="block truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-400">
                     {inEstudio ? 'Estudio activo' : 'Configuración'}
                   </span>
@@ -206,8 +203,8 @@ export function Sidebar() {
                 type="button"
                 onClick={() => setStationCoverOpen(true)}
                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/10 hover:text-legal-gold"
-                title="Abrir portada de la estación"
-                aria-label="Abrir portada de la estación"
+                title="Abrir la bienvenida"
+                aria-label="Abrir la bienvenida"
               >
                 <Home size={15} aria-hidden="true" />
               </button>
@@ -217,11 +214,11 @@ export function Sidebar() {
               type="button"
               onClick={() => setStationCoverOpen(true)}
               className={itemClass(true)({ isActive: false })}
-              title="Abrir portada de la estación"
-              aria-label="Abrir portada de la estación"
+              title="Abrir la bienvenida"
+              aria-label="Abrir la bienvenida"
             >
               <Home size={18} className="shrink-0 text-slate-400" aria-hidden="true" />
-              <span className="sr-only">Portada</span>
+              <span className="sr-only">Bienvenida</span>
             </button>
           )}
         </div>

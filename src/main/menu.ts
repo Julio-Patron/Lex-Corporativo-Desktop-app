@@ -54,7 +54,13 @@ export function createAppMenu(): Menu {
     {
       label: 'Ayuda',
       submenu: [
-        { label: 'Soporte disponible en el sitio de descarga', enabled: false },
+        {
+          label: 'Abrir la ayuda',
+          accelerator: 'F1',
+          click: (_menuItem, browserWindow) => {
+            if (browserWindow) (browserWindow as BrowserWindow).webContents.send('nav:help');
+          }
+        },
       ],
     },
   ];

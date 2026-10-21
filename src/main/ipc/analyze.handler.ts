@@ -485,7 +485,7 @@ export async function processAnalyzePayload(
     let allDocumentChunks: { text: string; fileName: string; pageNumber?: number }[] = [];
     const extractedFilesList: { name: string; text: string; mimeType?: string }[] = [];
 
-    emitProgress(1, 'Extrayendo texto');
+    emitProgress(1, 'Leyendo el documento');
     const unlock = await lanceDbWriteMutex.lock();
     try {
       for (const file of payload.files) {
@@ -548,7 +548,7 @@ export async function processAnalyzePayload(
     const isIntegral = selectedEcosystems.length > 1;
 
     {
-      emitProgress(3, isIntegral ? `Buscando fundamentos en ${selectedEcosystems.length} corpus locales` : 'Buscando fundamentos en corpus local');
+      emitProgress(3, isIntegral ? `Buscando artículos aplicables en ${selectedEcosystems.length} materias` : 'Buscando artículos aplicables');
       const selectedChunks = selectBalancedDocumentChunks(allDocumentChunks, 24);
       
       // Extract document title and leading clauses for focused semantic retrieval
@@ -607,7 +607,7 @@ export async function processAnalyzePayload(
       let parsedResult: any;
 
       if (!byok.enabled || !byok.apiKey) {
-        emitProgress(4, 'Aplicando revisión básica por reglas locales');
+        emitProgress(4, 'Haciendo la revisión básica');
         parsedResult = generateDeterministicLegalAudit({
           files: extractedFilesList,
           ecosystems: selectedEcosystems,
@@ -618,7 +618,7 @@ export async function processAnalyzePayload(
         basicReason = 'no_api_key';
         fallbackReason = 'basic_review: sin API key configurada';
       } else {
-        emitProgress(4, `Analizando con ${byok.provider} BYOK (${isIntegral ? 'Auditoría Integral 360°' : analysisContract.label})`);
+        emitProgress(4, 'Revisando con IA');
         const documentSources = selectedChunks.map((chunk, index) => ({
           id: `doc:${index + 1}`,
           kind: 'evidence' as const,
@@ -704,7 +704,7 @@ export async function processAnalyzePayload(
             },
           });
 
-          emitProgress(5, 'Validando fundamentos y preparando reporte');
+          emitProgress(5, 'Comprobando las citas y preparando el informe');
           parsedResult = ByokAnalysisResultSchema.parse(JSON.parse(extractJsonObject(providerResult)));
           const groundingSources: GroundingSource[] = [
             ...ragContext.sources.map(source => ({ ...source, kind: 'legal' as const })),
@@ -766,7 +766,7 @@ export async function processAnalyzePayload(
           }
         } catch (byokErr: any) {
           deps.logger.warn(`[IPC Analyze] BYOK fallback to local rules -> module=${activeModule} reason=${byokErr?.message || 'Error de proveedor'}`);
-          emitProgress(4, 'La IA no respondió; aplicando revisión básica');
+          emitProgress(4, 'La IA no respondió; haciendo la revisión básica');
           parsedResult = generateDeterministicLegalAudit({
             files: extractedFilesList,
             ecosystems: selectedEcosystems,

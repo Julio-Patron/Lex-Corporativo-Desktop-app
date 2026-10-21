@@ -40,7 +40,7 @@ describe('review report', () => {
     expect(report).toContain('- No encontrado: Jornada u horario de trabajo (Laboral)');
     expect(report).toContain('- Mencionado: Salario o prestaciones (Laboral)');
     expect(report).toContain('## Recomendaciones generales de la materia');
-    expect(report).toContain('## Artículos relacionados del corpus local');
+    expect(report).toContain('## Artículos relacionados de las leyes instaladas');
     expect(report).toContain('Referencia: LFT Art. 59.');
   });
 

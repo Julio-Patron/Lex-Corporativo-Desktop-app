@@ -68,7 +68,7 @@ function citationText(result: Citation): string {
 
 function errorMessage(error: unknown): string {
   if (typeof error === 'object' && error && 'message' in error && typeof error.message === 'string' && error.message) return error.message;
-  return 'No se pudo buscar en las leyes locales.';
+  return 'No se pudo buscar en las leyes instaladas.';
 }
 
 function Opening({ compact }: { compact: boolean }) {
@@ -81,11 +81,12 @@ function Opening({ compact }: { compact: boolean }) {
     );
   }
 
+  // Sin consultas, la tarea va primero: emblema mediano, título y la caja de consulta debajo (U-07).
   return (
-    <div className="mb-5 flex flex-col items-center text-center">
-      <BrandPlate className="animate-fade-in-up" />
-      <p className="mt-4 font-serif text-[1.75rem] font-medium leading-tight text-legal-950">Lex Corporativo</p>
-      <h1 className="mt-1 font-serif text-base leading-snug text-slate-600">Buscador normativo</h1>
+    <div className="mb-6 flex flex-col items-center text-center">
+      <BrandPlate size="medium" className="animate-fade-in-up" />
+      <h1 className="mt-4 font-serif text-[1.75rem] font-medium leading-tight text-legal-950">Buscador normativo</h1>
+      <p className="mt-1.5 max-w-md text-sm leading-6 text-slate-600">Escribe un tema y elige la materia. Verás los artículos que aplican y la ley de la que vienen.</p>
     </div>
   );
 }
@@ -103,6 +104,7 @@ export default function BuscadorPage() {
   const [readerTarget, setReaderTarget] = useState<{ lawCode: string; articleRef?: string | null } | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const busy = turns.some((turn) => turn.status === 'loading');
+  const empty = turns.length === 0;
 
   const tail = turns.map((turn) => `${turn.id}:${turn.status}`).join('|');
   useEffect(() => {
@@ -163,10 +165,12 @@ export default function BuscadorPage() {
   };
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div ref={scrollerRef} className="min-h-0 flex-1 overflow-y-auto">
-        <div className="mx-auto flex min-h-full w-full max-w-3xl flex-col justify-end px-4 py-6 sm:px-6">
-          <Opening compact={turns.length > 0} />
+    // Sin consultas, título y caja de consulta forman un solo bloque centrado; con
+    // consultas, la caja se ancla al pie y el historial ocupa el resto.
+    <div className={cn('flex h-full min-h-0 flex-col', empty && 'justify-center')}>
+      <div ref={scrollerRef} className={cn('min-h-0 overflow-y-auto', empty ? 'flex-none' : 'flex-1')}>
+        <div className={cn('mx-auto flex w-full max-w-3xl flex-col px-4 sm:px-6', empty ? 'pt-6' : 'min-h-full justify-end py-6')}>
+          <Opening compact={!empty} />
 
           <div className={cn(turns.length > 0 && 'space-y-6')} aria-live="polite">
             {turns.map((turn) => {
@@ -201,11 +205,11 @@ export default function BuscadorPage() {
                           <div className="flex flex-wrap items-center justify-between gap-2">
                             <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-legal-950">
                               <Link2 size={13} className="text-legal-gold" aria-hidden="true" />
-                              Conexión entre la consulta y los fundamentos
+                              Cómo se relaciona tu consulta con estos artículos
                             </span>
                             <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-medium text-slate-600">
                               {turn.connectionMode === 'ai' && <Sparkles size={11} className="text-legal-gold" aria-hidden="true" />}
-                              {turn.connectionMode === 'ai' ? 'Correlación con IA sobre corpus' : 'Correlación en corpus local'}
+                              {turn.connectionMode === 'ai' ? 'Explicación con IA' : 'Encontrada en las leyes'}
                             </span>
                           </div>
                           <p className="mt-1.5 text-[13.5px] leading-relaxed text-slate-700">
@@ -244,12 +248,12 @@ export default function BuscadorPage() {
                                 {result.connection && (
                                   <div className="mt-2 rounded-lg border border-slate-200/80 bg-slate-50/90 px-3 py-2">
                                     <p className="text-xs leading-relaxed text-slate-700">
-                                      <span className="font-semibold text-legal-950">Nexo jurídico: </span>
+                                      <span className="font-semibold text-legal-950">Por qué aparece: </span>
                                       {result.connection}
                                     </p>
                                     {matchedTerms.length > 0 && (
                                       <div className="mt-1.5 flex flex-wrap items-center gap-1">
-                                        <span className="text-[11px] text-slate-500">Conceptos detectados:</span>
+                                        <span className="text-[11px] text-slate-500">Palabras clave:</span>
                                         {matchedTerms.map((term) => (
                                           <span key={term} className="rounded bg-white px-1.5 py-0.5 text-[11px] font-medium text-slate-600 ring-1 ring-slate-200">
                                             {term}
@@ -273,7 +277,7 @@ export default function BuscadorPage() {
 
                                 {relatedRefs.length > 0 && (
                                   <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-2.5">
-                                    <span className="text-[11px] font-medium text-slate-500">Artículos correlacionados en el texto:</span>
+                                    <span className="text-[11px] font-medium text-slate-500">Artículos que menciona:</span>
                                     {relatedRefs.map((ref) => (
                                       <button
                                         key={ref.query}
@@ -316,7 +320,7 @@ export default function BuscadorPage() {
                         <div className="mt-4 rounded-xl border border-slate-200 bg-white p-3.5">
                           <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-600">
                             <Compass size={13} className="text-legal-gold" aria-hidden="true" />
-                            Buscar artículos relacionados en el corpus
+                            Buscar artículos relacionados
                           </p>
                           <div className="mt-2 flex flex-wrap gap-1.5">
                             {turn.relatedQueries.map((item) => (
@@ -343,10 +347,10 @@ export default function BuscadorPage() {
       </div>
 
       <form
-        className="border-t border-slate-200 bg-legal-paper px-4 py-3 sm:px-6"
+        className={cn('px-4 sm:px-6', empty ? 'pb-12' : 'border-t border-slate-200 bg-legal-paper py-3')}
         onSubmit={(event) => { event.preventDefault(); void consult(draft); }}
       >
-        <div className="mx-auto w-full max-w-3xl">
+        <div className={cn('mx-auto w-full max-w-3xl', empty && 'rounded-2xl border border-slate-200 bg-white p-4 shadow-card')}>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
             <span className="text-sm text-slate-600">Materia</span>
             <RadioGroup

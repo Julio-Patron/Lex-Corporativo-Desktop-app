@@ -51,7 +51,7 @@ export function AiPanel() {
       <Card>
         <SectionTitle
           title="Proveedor de IA"
-          description="Conecta tu propia API key. Los costos y políticas corresponden a tu proveedor."
+          description="Conecta tu cuenta de IA con su clave. El costo y las condiciones de uso son los de tu proveedor."
         />
         <ApiKeyForm showAdvanced />
       </Card>
@@ -62,7 +62,7 @@ export function AiPanel() {
             label="Funciones con IA activadas"
             description={settings.enabled
               ? `Se usa ${providerLabel(settings.provider)} cuando pides redactar o revisar con IA.`
-              : 'La key sigue guardada, pero no se usa hasta que la actives.'}
+              : 'La clave sigue guardada, pero no se usa mientras esto esté desactivado.'}
             checked={settings.enabled}
             disabled={saving}
             onChange={(enabled) => void save({ enabled })}

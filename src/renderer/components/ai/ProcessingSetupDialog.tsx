@@ -16,7 +16,7 @@ export function ProcessingSetupDialog() {
         <div>
           <h2 id={titleId} className="text-lg font-semibold text-slate-950">Conecta tu IA para continuar</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Para {intent} se necesita la API key de tu proveedor. El proveedor recibe sólo el texto necesario para esa operación.
+            Para {intent} se necesita la clave de tu cuenta de IA. Tu proveedor recibe sólo el texto necesario para esa tarea.
           </p>
         </div>
         <button type="button" onClick={dismiss} className="rounded-lg p-2 text-slate-500 hover:bg-slate-100" aria-label="Cerrar">

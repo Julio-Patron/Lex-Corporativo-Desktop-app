@@ -39,7 +39,7 @@ export default function EstudioLayout() {
             <div className="min-w-0">
               <p className="text-lg font-bold leading-tight text-legal-950 sm:text-xl">Estudio Jurídico</p>
               <p className="mt-0.5 text-xs text-slate-500 sm:text-sm">
-                Revisión de riesgos, redacción asistida y portafolio local
+                Revisa documentos, redacta contratos y guarda tu trabajo en este equipo
               </p>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function EstudioLayout() {
             </Badge>
             <Badge tone={aiReady ? 'success' : 'neutral'} className="gap-1.5 px-3 py-1">
               <Sparkles size={13} aria-hidden="true" />
-              {aiReady ? `${providerLabel(provider)} conectado` : 'Modo local'}
+              {aiReady ? `${providerLabel(provider)} conectado` : 'Sin IA'}
             </Badge>
           </div>
         </div>

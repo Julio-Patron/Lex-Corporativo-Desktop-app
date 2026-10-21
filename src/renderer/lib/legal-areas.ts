@@ -19,7 +19,7 @@ export const LEGAL_AREA_INFO: Record<LegalArea, LegalAreaInfo> = {
   mercantil: {
     label: 'Mercantil y corporativo',
     shortLabel: 'Mercantil',
-    laws: 'Código de Comercio, LGSM, LGTOC',
+    laws: 'Código de Comercio, Ley General de Sociedades Mercantiles y Ley General de Títulos y Operaciones de Crédito',
     icon: Scale,
     dot: 'bg-blue-600',
     tag: 'border-blue-200 bg-blue-50 text-blue-900',
@@ -35,7 +35,7 @@ export const LEGAL_AREA_INFO: Record<LegalArea, LegalAreaInfo> = {
   fiscal: {
     label: 'Fiscal',
     shortLabel: 'Fiscal',
-    laws: 'CFF, LISR, RLISR, LIVA, RLIVA, RMF',
+    laws: 'Código Fiscal de la Federación, leyes y reglamentos del ISR y del IVA, y Resolución Miscelánea Fiscal',
     icon: ReceiptText,
     dot: 'bg-teal-600',
     tag: 'border-teal-200 bg-teal-50 text-teal-900',
@@ -51,7 +51,7 @@ export const LEGAL_AREA_INFO: Record<LegalArea, LegalAreaInfo> = {
   aduanal: {
     label: 'Aduanal',
     shortLabel: 'Aduanal',
-    laws: 'Ley Aduanera, RLA, LIGIE, RGCE',
+    laws: 'Ley Aduanera y su Reglamento, Ley de los Impuestos Generales de Importación y de Exportación, y Reglas Generales de Comercio Exterior',
     icon: ShipWheel,
     dot: 'bg-violet-600',
     tag: 'border-violet-200 bg-violet-50 text-violet-900',

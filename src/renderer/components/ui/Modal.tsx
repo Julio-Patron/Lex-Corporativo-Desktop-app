@@ -8,7 +8,8 @@ export interface ModalProps {
   children: React.ReactNode;
   className?: string;
   labelledBy?: string;
-  placement?: 'center' | 'right';
+  // `cover` ocupa toda el área útil de la ventana (bienvenida); conserva foco, fondo inerte y Escape.
+  placement?: 'center' | 'right' | 'cover';
 }
 
 const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
@@ -103,7 +104,7 @@ export function Modal({ isOpen, onClose, children, className, labelledBy, placem
   if (!isOpen) return null;
 
   return createPortal(
-    <div className={cn('app-modal-layer fixed inset-x-0 bottom-0 z-[120] flex', placement === 'right' ? 'justify-end' : 'items-center justify-center p-4')}>
+    <div className={cn('app-modal-layer fixed inset-x-0 bottom-0 z-[120] flex', placement === 'right' ? 'justify-end' : placement === 'center' && 'items-center justify-center p-4')}>
       <div className="absolute inset-0 bg-slate-950/50 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
         ref={modalRef}
@@ -111,7 +112,11 @@ export function Modal({ isOpen, onClose, children, className, labelledBy, placem
         aria-modal="true"
         aria-labelledby={labelledBy}
         tabIndex={-1}
-        className={cn('app-dialog relative z-10 min-h-0 w-full bg-white shadow-dialog outline-none', placement === 'right' ? 'flex h-full max-w-md flex-col' : 'max-w-lg overflow-y-auto rounded-xl p-6', className)}
+        className={cn(
+          'app-dialog relative z-10 min-h-0 w-full bg-white shadow-dialog outline-none',
+          placement === 'right' ? 'flex h-full max-w-md flex-col' : placement === 'cover' ? 'h-full overflow-y-auto' : 'max-w-lg overflow-y-auto rounded-xl p-6',
+          className,
+        )}
       >
         {children}
       </div>

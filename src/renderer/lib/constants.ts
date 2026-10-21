@@ -157,7 +157,7 @@ export const MERCANTIL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
   {
     id: 'mercantil-suministro',
     title: 'Suministro Mercantil',
-    description: 'Contrato de suministro de bienes o materias primas con entregas periódicas, SLA, revisión de precios y penas convencionales.',
+    description: 'Contrato de suministro de bienes o materias primas con entregas periódicas, niveles de servicio, revisión de precios y penas convencionales.',
     prompt: 'Contrato de suministro mercantil continuo y periódico conforme al Código de Comercio y Código Civil Federal, con especificación de bienes o insumos, niveles de servicio (SLA), procedimiento de órdenes de compra, fórmula de revisión de precios, control de calidad, pena convencional por retraso en entrega y pactos de exclusividad.',
     fields: [
     { id: 'proveedor_suministrador', label: 'Proveedor / Suministrador', type: 'text' },
@@ -739,7 +739,7 @@ export const FISCAL_DRAFTING_TEMPLATES: DraftingTemplate[] = [
   {
     id: 'fiscal-memo-analisis',
     title: 'Dictamen Técnico y Memorándum de Análisis Jurídico-Fiscal',
-    description: 'Dictamen de auditoría y evaluación de riesgos tributarios, materialidad, deducibilidad y defense file.',
+    description: 'Dictamen de auditoría y evaluación de riesgos tributarios, materialidad, deducibilidad y expediente de defensa.',
     prompt: 'Dictamen técnico y memorándum de análisis jurídico-fiscal para evaluar la viabilidad, riesgos de recalificación (Art. 5-A CFF), operaciones inexistentes (Art. 69-B CFF), deducibilidad en ISR y acreditamiento de IVA de una operación corporativa o contractual, analizando antecedentes, marco legal aplicable, matriz de riesgos identificados, conclusiones técnico-jurídicas y recomendaciones estratégicas de integración de expediente de defensa (defense file).',
     fields: [
     { id: 'empresa_contribuyente_analizado', label: 'Empresa / Contribuyente analizado', type: 'text' },

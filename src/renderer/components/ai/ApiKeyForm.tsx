@@ -65,7 +65,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
 
   const connect = async () => {
     if (!hasStoredKey && apiKey.trim().length < 10) {
-      setError('Escribe una API key válida.');
+      setError('Escribe una clave de IA válida.');
       return;
     }
     setBusy('testing');
@@ -92,7 +92,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
 
   const saveWithoutTest = async () => {
     if (!hasStoredKey && apiKey.trim().length < 10) {
-      setError('Escribe una API key válida.');
+      setError('Escribe una clave de IA válida.');
       return;
     }
     setBusy('testing');
@@ -110,11 +110,11 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       setModel(saved.providers[provider]?.model ?? DEFAULT_BYOK_MODELS[provider]);
       setApiKey('');
       void refreshRuntimeHealth();
-      notify(`API key de ${providerLabel(provider)} guardada.`, 'info', 'Key guardada');
+      notify(`Clave de ${providerLabel(provider)} guardada.`, 'info', 'Clave guardada');
       onConnected?.(saved);
     } catch (err: unknown) {
       if (!mountedRef.current) return;
-      setError(cleanIpcError(err, 'No se pudo guardar la API key.'));
+      setError(cleanIpcError(err, 'No se pudo guardar la clave de IA.'));
     } finally {
       if (mountedRef.current) setBusy(null);
     }
@@ -128,10 +128,10 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       if (!mountedRef.current) return;
       setSettings(saved);
       void refreshRuntimeHealth();
-      notify(`Se eliminó la API key de ${providerLabel(provider)}.`, 'info');
+      notify(`Se eliminó la clave de ${providerLabel(provider)}.`, 'info');
     } catch (err: unknown) {
       if (!mountedRef.current) return;
-      setError(cleanIpcError(err, 'No se pudo eliminar la API key.'));
+      setError(cleanIpcError(err, 'No se pudo eliminar la clave de IA.'));
     } finally {
       if (mountedRef.current) setBusy(null);
     }
@@ -171,7 +171,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
                 </span>
                 <span className="mt-1 block truncate text-xs text-slate-500">{modelName}</span>
                 <span className="mt-2 block text-[11px] font-semibold text-slate-500">
-                  {settings?.enabled && settings.provider === id ? 'En uso' : state?.hasApiKey ? 'Key guardada' : 'Sin key'}
+                  {settings?.enabled && settings.provider === id ? 'En uso' : state?.hasApiKey ? 'Clave guardada' : 'Sin clave'}
                 </span>
               </>
             ),
@@ -182,25 +182,25 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
       <div className="space-y-4 rounded-xl border border-slate-200/80 bg-slate-50/50 p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <p className="text-sm font-bold text-legal-950">Credenciales de {providerLabel(provider)}</p>
+            <p className="text-sm font-bold text-legal-950">Clave de {providerLabel(provider)}</p>
             <p className="text-xs text-slate-500">
-              Cifrada localmente en el llavero seguro del sistema operativo.
+              Se guarda cifrada con tu usuario de Windows.
             </p>
           </div>
           {hasStoredKey && (
             <Badge tone="success" className="gap-1.5 px-2.5 py-0.5">
               <CheckCircle2 size={12} aria-hidden="true" />
-              {isActive ? 'Key activa' : 'Key guardada'}
+              {isActive ? 'Clave activa' : 'Clave guardada'}
             </Badge>
           )}
         </div>
 
         <Field
-          label="API key"
+          label="Clave de tu cuenta de IA"
           htmlFor={keyInputId}
           hint={hasStoredKey
-            ? `Hay una key guardada${providerState?.apiKeyFingerprint ? ` (huella ${providerState.apiKeyFingerprint})` : ''}. Déjalo vacío para conservarla.`
-            : 'Se guarda cifrada por el sistema operativo. Sólo se usa cuando pides redactar, revisar con IA o consultar la ayuda.'}
+            ? 'Ya hay una clave guardada. Deja este campo vacío para conservarla.'
+            : 'Sólo se usa cuando pides redactar, revisar con IA o preguntar en la ayuda.'}
         >
           <div className="relative">
             <KeyRound size={16} className="pointer-events-none absolute left-3 top-3 text-slate-400" aria-hidden="true" />
@@ -210,7 +210,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
               autoComplete="off"
               value={apiKey}
               onChange={(event) => { userTouchedRef.current = true; setApiKey(event.target.value); }}
-              placeholder={hasStoredKey ? '••••••••••••' : `Pega tu API key de ${providerLabel(provider)}`}
+              placeholder={hasStoredKey ? '••••••••••••' : `Pega aquí tu clave de ${providerLabel(provider)}`}
               className="bg-white pl-9"
             />
           </div>
@@ -228,7 +228,7 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
           </button>
           {modelOpen && (
             <div className="mt-2">
-              <Field label="Identificador del modelo" htmlFor={modelInputId} hint={`Predeterminado: ${DEFAULT_BYOK_MODELS[provider]}. Cámbialo sólo si tu cuenta usa otro modelo.`}>
+              <Field label="Nombre del modelo" htmlFor={modelInputId} hint={`Predeterminado: ${DEFAULT_BYOK_MODELS[provider]}. Cámbialo sólo si tu cuenta usa otro modelo.`}>
                 <TextInput id={modelInputId} value={model} onChange={(event) => { userTouchedRef.current = true; setModel(event.target.value); }} className="bg-white" />
               </Field>
             </div>
@@ -244,12 +244,12 @@ export function ApiKeyForm({ onConnected, showAdvanced = false }: ApiKeyFormProp
           </Button>
           {error && (hasStoredKey || apiKey.trim().length >= 10) && (
             <Button variant="secondary" onClick={() => void saveWithoutTest()} disabled={busy !== null}>
-              Guardar key sin probar
+              Guardar clave sin probar
             </Button>
           )}
           {showAdvanced && hasStoredKey && (
             <Button variant="ghost" onClick={() => void clearKey()} isLoading={busy === 'clearing'} disabled={busy !== null}>
-              Eliminar key
+              Eliminar clave
             </Button>
           )}
         </div>

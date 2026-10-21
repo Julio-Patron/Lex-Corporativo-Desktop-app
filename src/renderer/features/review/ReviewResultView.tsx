@@ -91,7 +91,7 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
       {isBasic && (
         <Callout
           tone={record.basicReason === 'ai_error' ? 'warning' : 'info'}
-          title={record.basicReason === 'ai_error' ? 'La IA no respondió; se muestra la revisión básica' : 'Revisión básica por reglas locales'}
+          title={record.basicReason === 'ai_error' ? 'La IA no respondió; se muestra la revisión básica' : 'Revisión básica, sin IA'}
           action={!aiReady && <Button size="sm" variant="secondary" onClick={onConnectAi}>Conectar IA para una revisión completa</Button>}
         >
           {BASIC_REVIEW_LIMITS}
@@ -224,8 +224,8 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
       {result.legalFoundations.length > 0 && (
         <Card>
           <SectionTitle
-            title={isBasic ? 'Artículos relacionados del corpus local' : 'Fundamentos'}
-            description={isBasic ? 'Recuperados por similitud con el documento; no se afirma que sean aplicables.' : 'Disposiciones del corpus local citadas en el dictamen.'}
+            title={isBasic ? 'Artículos relacionados de las leyes instaladas' : 'Fundamentos'}
+            description={isBasic ? 'Aparecen porque se parecen al texto del documento; eso no significa que apliquen.' : 'Artículos de las leyes instaladas que cita la revisión.'}
           />
           <ul className="grid gap-3 md:grid-cols-2">
             {result.legalFoundations.map((foundation) => (
@@ -245,7 +245,7 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
 
       {(result.detectedParties.length > 0 || result.detectedObligations.length > 0) && (
         <Card>
-          <SectionTitle title="Detectado en el documento" description={isBasic ? 'Identificado por patrones de texto; verifícalo.' : undefined} />
+          <SectionTitle title="Detectado en el documento" description={isBasic ? 'Encontrado por coincidencia de palabras; verifícalo.' : undefined} />
           <div className="grid gap-6 md:grid-cols-2">
             {result.detectedParties.length > 0 && (
               <div>

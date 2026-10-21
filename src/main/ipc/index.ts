@@ -70,9 +70,9 @@ export function registerIpcHandlers(): void {
     const checks = [
       { id: 'vault', label: 'Bóveda SQLite cifrada', ok: vaultReady, detail: vaultDetail },
       { id: 'rag', label: 'Base legal LanceDB', ok: ragReady, detail: getLegalKnowledgeRuntimePath() },
-      { id: 'corpus', label: 'Corpus normativo íntegro', ok: legalCorpusReady, detail: legalCorpusReady ? 'Los 16 ordenamientos están disponibles.' : 'Faltan archivos del corpus instalado.' },
+      { id: 'corpus', label: 'Corpus normativo íntegro', ok: legalCorpusReady, detail: legalCorpusReady ? 'Las 16 leyes y reglamentos están disponibles.' : 'Faltan archivos de las leyes instaladas.' },
       { id: 'embeddings', label: 'Modelo local de búsqueda', ok: embeddingsReady, detail: embeddingModelPath },
-      { id: 'byok', label: 'API propia del usuario', ok: byokGenerationReady, detail: byokGenerationReady ? `${byokSettings.provider}:${byokSettings.model}` : 'Agrega y activa una API key' },
+      { id: 'byok', label: 'Cuenta de IA del usuario', ok: byokGenerationReady, detail: byokGenerationReady ? `${byokSettings.provider}:${byokSettings.model}` : 'Agrega y activa una clave de IA' },
       { id: 'privacy', label: 'Privacidad estricta', ok: byokSettings.strictPrivacy || !byokSettings.automaticUpdatesEnabled },
     ];
 
@@ -90,51 +90,51 @@ export function registerIpcHandlers(): void {
         vault: {
           ready: vaultReady,
           label: 'Portafolio local',
-          detail: vaultReady ? 'La bóveda cifrada está disponible.' : vaultDetail,
+          detail: vaultReady ? 'Tu portafolio está disponible y protegido con tu usuario de Windows.' : vaultDetail,
         },
         legalSearch: {
           ready: legalSearchReady,
-          label: 'Consulta de corpus',
+          label: 'Búsqueda en las leyes',
           detail: legalSearchReady
-            ? 'LanceDB y el modelo de embeddings local están disponibles.'
-            : 'Requiere la base LanceDB verificada y el modelo de embeddings local.',
+            ? 'La búsqueda en las leyes funciona en tu computadora.'
+            : 'Faltan archivos necesarios para buscar en las leyes.',
         },
         legalCorpus: {
           ready: legalCorpusReady,
-          label: 'Corpus normativo',
+          label: 'Leyes instaladas',
           detail: legalCorpusReady
-            ? 'Los textos íntegros instalados están disponibles para descarga.'
-            : 'No se encontraron todos los textos normativos instalados.',
+            ? 'El texto completo de cada ley está disponible.'
+            : 'Faltan textos de algunas leyes.',
         },
         legalGeneration: {
           ready: legalGenerationReady,
           label: 'Análisis y generación jurídica',
           detail: legalGenerationReady
-            ? `Disponible mediante ${byokSettings.provider} con la API key del usuario.`
-            : 'Requiere bóveda cifrada, corpus local y una API key activa.',
+            ? `Disponible mediante ${byokSettings.provider} con tu cuenta de IA.`
+            : 'Requiere el portafolio, las leyes instaladas y una clave de IA activa.',
         },
         documentReview: {
           ready: vaultReady && legalSearchReady,
           label: 'Revisión de documentos',
           detail: !(vaultReady && legalSearchReady)
-            ? 'Requiere la bóveda cifrada y el corpus local con su índice.'
+            ? 'Requiere el portafolio y la búsqueda en las leyes.'
             : byokGenerationReady
               ? `Revisión con IA mediante ${byokSettings.provider}.`
-              : 'Revisión básica por reglas locales. Conecta una API para la revisión con IA.',
+              : 'Revisión básica, sin IA. Conecta tu cuenta de IA para la revisión completa.',
         },
         rulesAssessment: {
           ready: vaultReady,
-          label: 'Evaluaciones por reglas',
+          label: 'Revisiones básicas',
           detail: vaultReady
-            ? 'Las evaluaciones deterministas pueden guardarse en el portafolio.'
-            : 'Requiere la bóveda cifrada para conservar el resultado.',
+            ? 'Las revisiones básicas pueden guardarse en el portafolio.'
+            : 'Requiere el portafolio para guardar el resultado.',
         },
         localAssistant: {
           ready: byokGenerationReady,
           label: 'Ayuda conversacional',
           detail: byokGenerationReady
             ? `Disponible mediante ${byokSettings.provider}.`
-            : 'Requiere una API key activa.',
+            : 'Requiere una clave de IA activa.',
         },
       },
     };

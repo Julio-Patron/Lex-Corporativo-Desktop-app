@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Clipboard, Download, FileSignature, Search, X } from 'lucide-react';
 import { AreaTag, Button, Modal, Spinner, TextInput } from '../../components/ui';
-import { filterArticles, findArticle, formatArticleCitation, parseLawMarkdown, type ParsedLaw } from '../../lib/law-reader';
+import { filterArticles, findArticle, formatArticleCitation, parseLawMarkdown, provisionCountLabel, type ParsedLaw } from '../../lib/law-reader';
 import type { LegalArea } from '../../lib/legal-areas';
 import { cn } from '../../lib/utils';
 import { useUiStore } from '../../store/useUiStore';
@@ -72,7 +72,7 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
     if (!law) return;
     try {
       const result = await window.lexDesktop.legalCorpus.download({ code: law.code });
-      if (result.success) notify(`${law.name} guardada en Markdown.`, 'success');
+      if (result.success) notify(`Se guardó ${law.name} como archivo de texto.`, 'success');
     } catch (error: any) {
       notify(error?.message || 'No se pudo descargar la ley.', 'error');
     }
@@ -88,8 +88,8 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
           <h2 id={titleId} className="mt-1 text-lg font-semibold text-slate-950">{law?.name ?? 'Abriendo ley…'}</h2>
           {law && (
             <p className="mt-0.5 text-xs text-slate-500">
-              {law.articles.length.toLocaleString('es-MX')} disposiciones
-              {law.metadata['Verificación oficial'] && ` · Verificada contra la fuente oficial el ${law.metadata['Verificación oficial']}`}
+              {provisionCountLabel(law.code, law.articles.length)}
+              {law.metadata['Verificación oficial'] && ` · Texto revisado contra la fuente oficial el ${law.metadata['Verificación oficial']}`}
               {law.metadata['Última reforma indicada en la fuente'] && ` · Última reforma: ${law.metadata['Última reforma indicada en la fuente']}`}
             </p>
           )}
@@ -169,7 +169,7 @@ export function LawReaderDialog({ lawCode, articleRef, onClose, onUseArticle }: 
                 </footer>
               </>
             ) : (
-              <p className="p-8 text-sm text-slate-600">Esta ley no contiene disposiciones con el formato esperado.</p>
+              <p className="p-8 text-sm text-slate-600">No se pudieron mostrar los artículos de esta ley.</p>
             )}
           </section>
         </div>

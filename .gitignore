@@ -54,3 +54,8 @@ coverage/
 # Caché de Electron y electron-builder usada por .github/workflows/build-installer.yml
 .cache/
 .superdesign/
+
+# Instaladores descargados o generados localmente: se distribuyen por GitHub Releases, nunca en el repo
+Lex-Corporativo-Setup-*/
+*.exe
+*.blockmap

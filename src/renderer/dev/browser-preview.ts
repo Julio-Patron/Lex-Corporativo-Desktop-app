@@ -96,7 +96,7 @@ export function installBrowserPreview(): void {
         checks: [],
         capabilities: {
           vault: ready('Portafolio local'),
-          legalSearch: ready('Consulta de corpus'),
+          legalSearch: ready('Búsqueda en las leyes'),
           legalCorpus: ready('Corpus normativo'),
           legalGeneration: { ready: settings.enabled, label: 'Generación', detail: 'Vista previa de desarrollo.' },
           documentReview: ready('Revisión de documentos'),
@@ -140,7 +140,7 @@ export function installBrowserPreview(): void {
       checkForUpdates: async () => ({ ok: false, status: 'dev-mode', message: 'La búsqueda de actualizaciones sólo aplica a la app instalada.' }),
       installUpdate: () => undefined,
     },
-    navigation: { onSettings: noop },
+    navigation: { onSettings: noop, onHelp: noop },
     assistant: { askInstructivo: unavailable },
     security: { reportCspViolation: async () => ({ ok: true }) },
   };

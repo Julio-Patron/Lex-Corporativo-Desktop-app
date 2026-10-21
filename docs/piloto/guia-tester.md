@@ -39,7 +39,7 @@ Si el hash no coincide con el del manifiesto, **no instales** y avisa al respons
 
 Tus datos se guardan en `%APPDATA%\Lex Corporativo`. Esa carpeta **no se borra al desinstalar**; la sección 7 explica cómo eliminarla.
 
-## 5. Conectar tu clave de IA (BYOK)
+## 5. Conectar tu cuenta de IA (opcional)
 
 Las funciones de análisis con IA y redacción requieren una clave propia de uno de estos proveedores. Sin clave puedes usar el buscador, el lector de leyes, la auditoría por reglas y el portafolio.
 

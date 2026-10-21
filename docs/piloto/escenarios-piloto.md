@@ -23,7 +23,7 @@ Registra cada ejecución con la plantilla de retroalimentación, incluso cuando 
 | BUS-03 | P1 | Consulta ambigua entre materias | Pregunta que mezcle laboral y fiscal (p. ej. "retención de ISR en finiquito") | La app sugiere o enruta la materia; los resultados son pertinentes | — |
 | BUS-04 | P1 | Sin resultados | Consulta fuera del corpus (p. ej. derecho penal) | Mensaje de abstención claro, sin inventar fuentes | Política de grounding |
 
-## Corpus normativo / Leyes (`/leyes`)
+## Leyes (`/leyes`)
 
 | ID | Pr. | Escenario | Pasos | Esperado | Cierra |
 | --- | --- | --- | --- | --- | --- |
@@ -43,7 +43,7 @@ Registra cada ejecución con la plantilla de retroalimentación, incluso cuando 
 | AUD-06 | P0 | Clave inválida | Cambiar la clave por una inventada y auditar | Error claro del proveedor sin mostrar la clave; opción de volver a la revisión básica | SEC-03 |
 | AUD-07 | P1 | Sin red con clave activa | Desconectar la red y auditar con IA | Cae a la revisión básica e informa el motivo (`fallbackReason`) | — |
 
-## Redactor y plantillas (`/estudio/generar`)
+## Generar documento (`/estudio/generar`)
 
 | ID | Pr. | Escenario | Pasos | Esperado | Cierra |
 | --- | --- | --- | --- | --- | --- |

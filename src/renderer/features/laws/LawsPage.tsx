@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { BookOpen, CheckCircle2, ExternalLink, Search } from 'lucide-react';
 import { AreaTag, Badge, Callout, Card, EmptyState, Page, RadioGroup, TextInput } from '../../components/ui';
 import { normalizeSearchText } from '../../lib/drafting';
+import { provisionCountLabel } from '../../lib/law-reader';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
 import { LawReaderDialog } from './LawReaderDialog';
 import { useSendArticleToDraft } from './useSendArticleToDraft';
@@ -13,7 +14,7 @@ const DIPUTADOS_URL = 'https://www.diputados.gob.mx/LeyesBiblio/index.htm';
 
 function failureMessage(error: unknown): string {
   if (typeof error === 'object' && error && 'message' in error && typeof error.message === 'string' && error.message) return error.message;
-  return 'No se pudo leer el inventario del corpus.';
+  return 'No se pudo cargar la lista de leyes.';
 }
 
 export default function LawsPage() {
@@ -47,17 +48,17 @@ export default function LawsPage() {
   return (
     <Page
       title="Leyes"
-      description="Biblioteca legislativa federal mexicana e inventario del corpus instalado."
+      description="Consulta el texto completo de cada ley, aun sin conexión a internet."
       width="wide"
       actions={overview && (
         <>
           <Badge tone="neutral" className="gap-1.5 px-3 py-1">
             <BookOpen size={13} className="text-slate-500" aria-hidden="true" />
-            {overview.lawsCount} ordenamientos
+            {overview.lawsCount} leyes y reglamentos
           </Badge>
           <Badge tone="success" className="gap-1.5 px-3 py-1">
             <CheckCircle2 size={13} aria-hidden="true" />
-            {overview.provisionsCount.toLocaleString('es-MX')} disposiciones
+            {overview.provisionsCount.toLocaleString('es-MX')} artículos y reglas
           </Badge>
         </>
       )}
@@ -69,8 +70,8 @@ export default function LawsPage() {
             <TextInput
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Buscar ley por nombre o acrónimo (ej. LGSM, LFT, CFF)..."
-              aria-label="Buscar ordenamiento"
+              placeholder="Buscar ley por nombre o siglas (ej. LGSM, LFT, CFF)…"
+              aria-label="Buscar ley"
               className="pl-10"
             />
           </div>
@@ -94,7 +95,7 @@ export default function LawsPage() {
 
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
           <p>
-            Ordenamientos de la legislación federal mexicana integrados localmente para consulta RAG
+            Legislación federal mexicana incluida en la aplicación
             {versionShort ? ` · Versión ${versionShort}` : ''}.
           </p>
           <a
@@ -109,13 +110,13 @@ export default function LawsPage() {
         </div>
       </Card>
 
-      {error && <Callout tone="warning" title="El inventario no está disponible">{error}</Callout>}
-      {!overview && !error && <p className="text-sm text-slate-600" role="status">Cargando el inventario del corpus…</p>}
+      {error && <Callout tone="warning" title="La lista de leyes no está disponible">{error}</Callout>}
+      {!overview && !error && <p className="text-sm text-slate-600" role="status">Cargando la lista de leyes…</p>}
 
       {overview && filteredLaws.length === 0 && (
         <EmptyState
           icon={Search}
-          title="No se encontraron ordenamientos"
+          title="No se encontraron leyes"
           description="Prueba con otro nombre, sigla o filtro de materia."
         />
       )}
@@ -138,20 +139,20 @@ export default function LawsPage() {
                   </div>
                   <h3 className="mt-3.5 text-base font-bold leading-snug text-legal-950">{law.name}</h3>
                   <p className="mt-1.5 text-xs text-slate-500">
-                    {LEGAL_AREA_INFO[area].label} · Corpus local verificado
+                    {LEGAL_AREA_INFO[area].label} · Texto revisado contra la fuente oficial
                   </p>
                 </div>
 
                 <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-3.5">
                   <span className="text-xs font-semibold text-slate-600">
-                    {law.provisions.toLocaleString('es-MX')} disposiciones
+                    {provisionCountLabel(law.code, law.provisions)}
                   </span>
                   <button
                     type="button"
                     onClick={() => setReaderCode(law.code)}
                     className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-legal-950 transition-colors hover:border-slate-300 hover:bg-slate-100"
                   >
-                    Abrir articulado
+                    Abrir texto
                   </button>
                 </div>
               </li>

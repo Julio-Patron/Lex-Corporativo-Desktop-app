@@ -19,7 +19,7 @@ import { useSendArticleToDraft } from '../laws/useSendArticleToDraft';
 import { ReviewResultView } from './ReviewResultView';
 import { ReviewSetup } from './ReviewSetup';
 
-const PROGRESS_STEPS = ['Extrayendo texto', 'Identificando cláusulas', 'Buscando fundamentos', 'Analizando', 'Validando'];
+const PROGRESS_STEPS = ['Leyendo', 'Identificando cláusulas', 'Buscando artículos', 'Revisando', 'Comprobando citas'];
 
 export default function ReviewPage() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function ReviewPage() {
     if (!review.file) return;
     const initialRecordId = review.record?.id;
     setRunning(true);
-    setProgress({ step: 1, label: 'Extrayendo texto' });
+    setProgress({ step: 1, label: 'Leyendo el documento' });
     try {
       const file = review.file;
       const areas = review.areas;
@@ -111,7 +111,7 @@ export default function ReviewPage() {
   const openFoundation = (foundation: LegalFoundation) => {
     const code = resolveLawCode(foundation.law);
     if (!code) {
-      notify(`No se encontró «${foundation.law}» en el corpus instalado.`, 'info', 'Lector de leyes');
+      notify(`No se encontró «${foundation.law}» entre las leyes instaladas.`, 'info', 'Lector de leyes');
       return;
     }
     setReader({ code, article: foundation.article });
@@ -135,7 +135,7 @@ export default function ReviewPage() {
   };
 
   return (
-    <Page title="Auditar" hideTitle description="Sube un documento para detectar riesgos, omisiones y cláusulas faltantes." width="wide">
+    <Page title="Auditar" hideTitle description="Sube un documento y obtén los puntos que conviene revisar." width="wide">
       {running ? (
         <Card className="mx-auto max-w-xl py-10 text-center">
           <Loader2 size={28} className="mx-auto animate-spin text-legal-950" aria-hidden="true" />

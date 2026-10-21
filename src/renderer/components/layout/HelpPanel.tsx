@@ -9,7 +9,7 @@ import { cn } from '../../lib/utils';
 const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
   '/': { title: 'Buscador normativo', steps: [
     'Elige la materia de la consulta y escribe el tema.',
-    'La respuesta recupera artículos del corpus legal integrado. El inventario está en Leyes.',
+    'La respuesta muestra artículos de las leyes incluidas. La lista completa está en Leyes.',
     'Copia una cita o úsala al generar un documento en el Estudio.',
   ] },
   '/estudio/generar': { title: 'Generar', steps: [
@@ -19,12 +19,12 @@ const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
   ] },
   '/estudio/auditar': { title: 'Auditar', steps: [
     'Sube el documento y elige las materias y el alcance de la revisión.',
-    'Con IA conectada obtienes una auditoría apoyada en el corpus local; sin IA, una revisión básica de alcance limitado.',
+    'Con IA conectada obtienes una revisión completa basada en las leyes instaladas; sin IA, una revisión básica de alcance limitado.',
     'Desde el resultado puedes generar una adenda o una cláusula para un hallazgo, o exportar el informe.',
   ] },
   '/leyes': { title: 'Leyes', steps: [
-    'El inventario presenta el corpus legal integrado, ordenado por materia.',
-    'Abrir articulado muestra el texto íntegro de cada ley dentro de la aplicación, sin conexión.',
+    'Aquí están las leyes incluidas, ordenadas por materia.',
+    'Abrir texto muestra la ley completa dentro de la aplicación, sin conexión a internet.',
     'El enlace a la Cámara de Diputados abre la fuente oficial en tu navegador.',
   ] },
   '/estudio/portafolio': { title: 'Portafolio', steps: [
@@ -34,7 +34,7 @@ const SCREEN_HELP: Record<string, { title: string; steps: string[] }> = {
   ] },
   '/configuracion': { title: 'Configuración', steps: [
     'Inteligencia artificial: conecta o cambia tu proveedor y modelo.',
-    'Datos y privacidad: conservación del portafolio, privacidad estricta, respaldo y bitácora.',
+    'Datos y privacidad: conservación del portafolio, privacidad estricta, respaldo y registro de actividad.',
     'Acerca de: versión instalada y actualizaciones.',
   ] },
 };
@@ -48,7 +48,7 @@ const KEY_GUIDES = [
   {
     name: 'OpenAI',
     href: 'https://platform.openai.com/settings/organization/api-keys',
-    where: 'Entra a la plataforma de OpenAI, abre las claves de API y crea una.',
+    where: 'Entra a la plataforma de OpenAI, abre la sección de claves y crea una.',
   },
   {
     name: 'Anthropic',
@@ -60,11 +60,11 @@ const KEY_GUIDES = [
 const FAQ = [
   {
     q: '¿Qué se envía a mi proveedor de IA?',
-    a: 'Sólo la instrucción, extractos seleccionados del documento y los artículos recuperados del corpus local. Nunca el archivo original ni el resto del portafolio.',
+    a: 'Sólo tus instrucciones, partes seleccionadas del documento y los artículos de ley que aplican. Nunca el archivo original ni el resto del portafolio.',
   },
   {
     q: '¿Dónde se guarda mi información?',
-    a: 'En este equipo, en una bóveda cifrada por el sistema operativo. Puedes respaldarla o eliminarla en Configuración.',
+    a: 'En este equipo, cifrada con tu usuario de Windows. Puedes respaldarla o eliminarla en Configuración.',
   },
   {
     q: '¿Qué hace la revisión básica?',
@@ -127,24 +127,24 @@ export function HelpPanel() {
           <section>
             <h3 className="font-serif text-lg font-medium text-legal-950">La herramienta</h3>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              Lex Corporativo es un escritorio para trabajo jurídico mexicano: mercantil y corporativo, laboral, comercio exterior, aduanas y fiscal. Las leyes, la búsqueda y los documentos guardados permanecen en este equipo.
+              Lex Corporativo es una aplicación para el trabajo jurídico en México: mercantil y corporativo, laboral, comercio exterior, aduanas y fiscal. Las leyes, la búsqueda y los documentos guardados permanecen en este equipo.
             </p>
           </section>
 
           <section>
             <h3 className="font-serif text-lg font-medium text-legal-950">Cómo funciona</h3>
             <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-slate-700">
-              <li>Buscador normativo: eliges la materia y escribes el tema. La respuesta son artículos del corpus.</li>
-              <li>Auditar: subes un documento. Con IA, el dictamen se contrasta con esos artículos. Sin IA, la revisión sólo detecta menciones y estructura.</li>
+              <li>Buscador normativo: eliges la materia y escribes el tema. La respuesta son artículos de las leyes incluidas.</li>
+              <li>Auditar: subes un documento. Con IA, cada observación se comprueba contra esos artículos. Sin IA, la revisión sólo señala qué temas y apartados contiene.</li>
               <li>Generar: pides un documento, partes de un archivo o abres una plantilla. Con IA se redacta; sin IA puedes llenar la plantilla a mano.</li>
-              <li>Leyes muestra el inventario del corpus y el enlace a la Cámara de Diputados. Portafolio guarda documentos e informes en este equipo.</li>
+              <li>Leyes muestra la lista de leyes incluidas y el enlace a la Cámara de Diputados. Portafolio guarda documentos e informes en este equipo.</li>
             </ol>
           </section>
 
           <section>
             <h3 className="font-serif text-lg font-medium text-legal-950">Activar la IA</h3>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              La redacción y la auditoría con IA usan una clave tuya. El buscador, la revisión básica, las plantillas y el portafolio funcionan sin ella. La clave se guarda cifrada en este equipo y el costo lo cobra el proveedor.
+              La redacción y la revisión con IA usan la clave de tu cuenta de IA. El buscador, la revisión básica, las plantillas y el portafolio funcionan sin ella. La clave se guarda cifrada en este equipo y el costo lo cobra el proveedor.
             </p>
             <ul className="mt-3 space-y-3">
               {KEY_GUIDES.map((guide) => (
