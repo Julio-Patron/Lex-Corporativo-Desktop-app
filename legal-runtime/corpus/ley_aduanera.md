@@ -3922,12 +3922,16 @@ regulaciones y restricciones no arancelarias., 09-04-2012
 Las bebidas alcohólicas, la cerveza, el tabaco labrado en cigarrillos o puros y los caballos de carrera
 que se importen a la franja o región fronteriza, causarán el impuesto general de importación sin reducción
 alguna.
-ARTICULO 137 bis 1.- Las personas físicas que acrediten su residencia en la Franja Fronteriza Norte,
+
+**Artículo 137 Bis 1**
+Las personas físicas que acrediten su residencia en la Franja Fronteriza Norte,
 así como en los Estados de Baja California y Baja California Sur, en la región parcial del Estado de
 Sonora y en el Municipio Fronterizo de Cananea, Estado de Sonora, podrán efectuar la importación
 definitiva de vehículos automotores usados, siempre y cuando estén destinados a permanecer en estos
 lugares.
-ARTICULO 137 bis 2.- Para efecto del artículo anterior y de los siguientes, se entiende por:
+
+**Artículo 137 Bis 2**
+Para efecto del artículo anterior y de los siguientes, se entiende por:
 I.- Persona Física: El ciudadano al que la Ley ha dotado de derechos y obligaciones.
 II.- Franja Fronteriza Norte: La comprendida entre la Línea Divisoria Internacional con los Estados
 Unidos de América y la línea paralela a una distancia de 20 kilómetros hacia el interior del país, en el
@@ -3948,7 +3952,9 @@ VII.- Camión mediano: Al vehículo con o sin chasis para el transporte de merca
 personas, con peso bruto vehicular de más de 2,272 kilogramos, pero no mayor de 8,864 kilogramos.
 VIII.- Vehículo usado: Al vehículo de cinco o más años-modelos anteriores a la fecha en que se realice
 la importación.
-ARTICULO 137 bis 3.- La importación a que se refiere el artículo anterior podrá efectuarse pagando
+
+**Artículo 137 Bis 3**
+La importación a que se refiere el artículo anterior podrá efectuarse pagando
 exclusivamente el 50% del Impuesto General de Importación que corresponda a los vehículos a importar,
 conforme a su clasificación arancelaria.
 Las fracciones arancelarias aplicables según la tarifa de la Ley del Impuesto General de Importación,
@@ -3956,7 +3962,9 @@ serán las que correspondan al valor de la compra-venta en dólares de los Estad
 los vehículos automotores usados.
 Asimismo, se exime del requisito de permiso previo, por parte de la Secretaría de Economía, la
 importación de vehículos automotores usados a que se refieren los artículos anteriores.
-ARTICULO 137 bis 4.- Los vehículos que podrán importarse bajo el amparo de las disposiciones
+
+**Artículo 137 Bis 4**
+Los vehículos que podrán importarse bajo el amparo de las disposiciones
 legales anteriores, son los siguientes:
 I.- Automóviles cuyo valor no exceda de doce mil dólares de los Estados Unidos de América,
 excluyendo los vehículos deportivos, de lujo y convertibles.
@@ -3964,7 +3972,9 @@ II.- Camiones comerciales ligeros y medianos, propulsados por motor de gasolina.
 Los vehículos señalados en el presente artículo, deberán ser similares a los de las marcas de
 fabricación nacional, de conformidad con la lista que publique la Secretaría del Ramo competente en el
 Comisión Intersecretarial de Industria Automotriz.
-ARTICULO 137 bis 5.- Las personas físicas que pretendan efectuar la importación de los vehículos
+
+**Artículo 137 Bis 5**
+Las personas físicas que pretendan efectuar la importación de los vehículos
 en los términos de los artículos anteriores deberán cumplir con lo siguiente:
 I.- Acreditarse como ciudadano mexicano con el Acta de Nacimiento o de naturalización
 correspondiente.
@@ -3979,18 +3989,25 @@ IV.- Presentar al momento del despacho aduanero conjuntamente con los documentos
 respectivos, la constancia que acredite que el vehículo a importar cumple con las normas técnicas de
 emisión máxima permisible de contaminantes en su país de origen.
 
-ARTICULO 137 bis 6.- La importación de vehículos automotores usados que se realice en los
+**Artículo 137 Bis 6**
+La importación de vehículos automotores usados que se realice en los
 términos de los artículos anteriores, se limitará a una unidad por persona.
 Asimismo, la persona física que afecte la importación de una unidad vehicular usada, no podrá volver
 a efectuar la importación de otra unidad vehicular, en los términos de los artículos precedentes, sino
 después de haber transcurrido un año de la primer importación, siendo aplicables a su comercialización
 las limitaciones que derivan de las disposiciones aduaneras vigentes.
-ARTICULO 137 bis 7.- La internación al resto del territorio nacional de los vehículos importados al
+
+**Artículo 137 Bis 7**
+La internación al resto del territorio nacional de los vehículos importados al
 amparo de las disposiciones legales que preceden, se regirá por lo dispuesto en la Ley Aduanera, en
 especial por el párrafo final de su artículo 62, por las normas contenidas en el Reglamento de la Ley
 Aduanera y por las demás disposiciones normativas aplicables.
-ARTICULO 137 bis 8.- (Derogado).. Derogado DOF 19-11-2025
-ARTICULO 137 bis 9.- En lo conducente, serán aplicables a las importaciones de vehículos usados, a
+
+**Artículo 137 Bis 8**
+(Derogado).. Derogado DOF 19-11-2025
+
+**Artículo 137 Bis 9**
+En lo conducente, serán aplicables a las importaciones de vehículos usados, a
 que se refieren los artículos anteriores, las disposiciones contenidas en la Ley Aduanera, su Reglamento
 y demás.
 

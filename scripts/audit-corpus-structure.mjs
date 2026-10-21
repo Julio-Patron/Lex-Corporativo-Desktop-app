@@ -5,7 +5,10 @@ import path from 'node:path';
 
 const dir = process.argv[2];
 const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
-const SUFFIX = /^(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies|Decies|[A-Z])$/i;
+const SUFFIX = /^(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies|Decies|[A-ZÑ]|\d+)$/iu;
+// Línea del cuerpo con forma de encabezado ("Artículo 17 A.-", "ARTICULO 137 bis 1.-"):
+// indica un artículo que quedó dentro del anterior.
+const INNER_HEADING = /^(?:Art[íi]culo|ART[ÍI]CULO)\.?\s+\d+(?:o|º|°)?\.?(?:[ -]+[A-Za-zÁá]{1,10})?(?:\s+\d+)?(?:\.-|\.\s+[A-ZÁÉÍÓÚ¿])/u;
 const report = [];
 
 for (const file of files) {
@@ -24,6 +27,7 @@ for (const file of files) {
   const otherHeadings = entries.filter((e) => !/^(Artículo|Regla)\b/.test(e.heading)).map((e) => e.heading);
   const transitoriosInText = (text.match(/TRANSITORIO/gi) || []).length;
   const shortBodies = entries.filter((e) => e.body.join(' ').replace(/\s+/g, ' ').trim().length < 12).map((e) => e.heading);
+  const innerHeadings = entries.flatMap((e) => e.body.filter((line) => INNER_HEADING.test(line)).map((line) => `${e.heading}: ${line.slice(0, 40)}`));
   const last = entries.at(-1);
   const lastText = last ? last.body.join('\n').trim() : '';
 
@@ -88,6 +92,8 @@ for (const file of files) {
     menciónTransitorios: transitoriosInText,
     cuerposCortos: shortBodies.slice(0, 10),
     nCuerposCortos: shortBodies.length,
+    encabezadosInternos: innerHeadings.slice(0, 10),
+    nEncabezadosInternos: innerHeadings.length,
     ultimaEntrada: last?.heading,
     finUltimaEntrada: lastText.slice(-160).replace(/\s+/g, ' '),
     numeracion: numbering,

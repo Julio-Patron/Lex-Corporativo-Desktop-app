@@ -4,7 +4,7 @@
 > Módulo: mercantil
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTOC.pdf
 > SHA-256 fuente: cf8a5d05500ddbe21885db4a8f1128cf95b3aaab95b7982a47aa33baea652361
-> Verificación oficial: 2026-07-14
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2024-03-26
 **Artículo 1**
 Son cosas mercantiles los títulos de crédito. Su emisión, expedición, endoso, aval o
@@ -1911,7 +1911,9 @@ párrafo final, 81, 90, 127, 130, 132, 139, 140, 142, 148, 149, 151 al 162, 164,
 final.
 CAPITULO V Bis
 De los Certificados de Participación
-Artículo 228 a.- Los certificados de participación son títulos de crédito que representan:
+
+**Artículo 228-A**
+Los certificados de participación son títulos de crédito que representan:
 a).- El derecho a una parte alícuota de los frutos o rendimientos de los valores, derechos o bienes
 de cualquier clase que tenga en fideicomiso irrevocable para ese propósito la sociedad
 fiduciaria que los emita;
@@ -1933,57 +1935,81 @@ Artículo 228 a bis.- Los “certificados de vivienda” son títulos que repres
 pago de lo totalidad de las cuotas estipuladas, a que se transmita la propiedad de una vivienda,
 gozándose entretanto del aprovechamiento directo del inmueble; y en caso de incumplimiento o
 abandono, a recuperar una parte de dichas cuotas de acuerdo con los valores de rescate que se fijen.
-Artículo 228 b.- Los certificados serán bienes muebles aun cuando los bienes fideicometidos, materia
+
+**Artículo 228-B**
+Los certificados serán bienes muebles aun cuando los bienes fideicometidos, materia
 de la emisión, sean inmuebles.
 Sólo las instituciones de crédito autorizadas en los términos de la Ley respectiva para practicar
 operaciones fiduciarias podrán emitir estos títulos de crédito.
 Los certificados que las sociedades fiduciarias expidan haciendo constar la participación de los
 distintos copropietarios en bienes, títulos o valores que se encuentren en su poder, no producirán efectos
 como títulos de crédito y serán considerados solamente como documentos probatorios.
-Artículo 228 c.- Para los efectos de la emisión de certificados de participación podrán constituirse
+
+**Artículo 228-C**
+Para los efectos de la emisión de certificados de participación podrán constituirse
 fideicomisos sobre toda clase de empresas industriales y mercantiles, consideradas como unidades
 económicas.
-Artículo 228 d.- Los certificados de participación serán designados como ordinarios o inmobiliarios,
+
+**Artículo 228-D**
+Los certificados de participación serán designados como ordinarios o inmobiliarios,
 según que los bienes fideicometidos materia de la emisión sean muebles o inmuebles.
-Artículo 228 e.- Tratándose de certificados de participación inmobiliarios, la sociedad emisora podrá
+
+**Artículo 228-E**
+Tratándose de certificados de participación inmobiliarios, la sociedad emisora podrá
 establecer en beneficio de los tenedores, derechos de aprovechamiento directo del inmueble
 fideicometido, cuya extensión, alcance y modalidades se determinarán en el acta de la emisión
 correspondiente.
-Artículo 228 f.- La sociedad emisora, previo el consentimiento y aprobación del representante común
+
+**Artículo 228-F**
+La sociedad emisora, previo el consentimiento y aprobación del representante común
 de los tenedores, en su caso, podrá concertar y obtener préstamos para el mejoramiento e incremento de
 los bienes inmuebles materia de la emisión, emitiendo por este concepto “certificados fiduciarios de
 adeudo.”
 
 Los certificados fiduciarios de adeudo serán títulos de crédito contra el fideicomiso correspondiente.
 Serán preferentes en su pago a los certificados de participación de dicho fideicomiso.
-Artículo 228 g.- Cuando la sociedad emisora esté autorizada para practicar también operaciones
+
+**Artículo 228-G**
+Cuando la sociedad emisora esté autorizada para practicar también operaciones
 financieras en los términos de la Ley respectiva podrán garantizar a los tenedores de los certificados que
 emita un mínimo de rendimiento; esta garantía será otorgada sin obligar al departamento fiduciario de la
 institución.
-Artículo 228 h.- El monto total nominal de una emisión de certificados de participación será fijado
+
+**Artículo 228-H**
+El monto total nominal de una emisión de certificados de participación será fijado
 mediante dictamen que formule alguna sociedad nacional de crédito, previo peritaje que practique de los
 bienes fideicomitidos materia de esa emisión.
 La sociedad nacional de crédito, al formular su dictamen y fijar el monto total nominal de una emisión,
 tomará como base el valor comercial de los bienes y si se tratare de certificados amortizables estimarán
 sobre éste un margen prudente de seguridad para la inversión de los tenedores correspondientes. El
 dictamen que se formule por dichas instituciones será definitivo.
-Artículo 228 i.- Los certificados podrán ser amortizables o no serlo.
-Artículo 228 j.- Los certificados amortizables darán a sus tenedores, además del derecho a una parte
+
+**Artículo 228-I**
+Los certificados podrán ser amortizables o no serlo.
+
+**Artículo 228-J**
+Los certificados amortizables darán a sus tenedores, además del derecho a una parte
 alícuota de los frutos o rendimientos correspondientes, el del reembolso del valor nominal de los títulos.
 En caso de que la sociedad fiduciaria emisora no hiciere el pago del valor nominal de los certificados a su
 vencimiento, sus tenedores tendrán los derechos a que se refieren los incisos b) y c) y el párrafo final del
 artículo 228 a.
-Artículo 228 k.- Tratándose de certificados de participación no amortizables, la sociedad emisora no
+
+**Artículo 228-K**
+Tratándose de certificados de participación no amortizables, la sociedad emisora no
 está obligada a hacer pago del valor nominal de ellos a sus tenedores en ningún tiempo. Al extinguirse el
 fideicomiso base de la emisión y de acuerdo con las resoluciones de la asamblea general de tenedores
 de certificados, la sociedad emisora procederá a hacer la adjudicación y venta de los bienes
 fideicometidos y la distribución del producto neto de la misma, en los términos del artículo 228 a.
-Artículo 228 l.- Los certificados serán nominativos, tendrán cupones y deberán emitirse por series, en
+
+**Artículo 228-L**
+Los certificados serán nominativos, tendrán cupones y deberán emitirse por series, en
 denominaciones de cien pesos o de sus múltiplos.
 Los certificados darán a sus tenedores, dentro de cada serie, iguales derechos.
 Cualquier tenedor podrá pedir la nulidad de la emisión hecha en contra de lo dispuesto en este
 párrafo.
-Artículo 228 m.- La emisión se hará previa declaración unilateral de voluntad de la sociedad emisora
+
+**Artículo 228-M**
+La emisión se hará previa declaración unilateral de voluntad de la sociedad emisora
 expresada en escritura pública, en la que se harán constar:
 I.- La denominación, el objeto y el domicilio de la sociedad emisora;
 II.- Una relación del acto constitutivo del fideicomiso, bases de la emisión;
@@ -2007,7 +2033,9 @@ peritaje practicado sobre los mismos de acuerdo con el artículo 228 h.
 En caso de que los certificados se ofrezcan en venta al público, los avisos o la propaganda,
 contendrán los datos anteriores. Por violación de lo dispuesto en este párrafo quedarán solidariamente
 sujetos a daños y perjuicios aquellos a quienes la violación sea imputable.
-Artículo 228 n.- El certificado de participación deberá contener:
+
+**Artículo 228-N**
+El certificado de participación deberá contener:
 I.- Nombre, nacionalidad y domicilio del titular del certificado.
 II.- La mención de ser “certificados de participación” y la expresión de si es ordinario o inmobiliario;
 III.- La designación de la sociedad emisora y la firma autógrafa del funcionario de la misma, autorizado
@@ -2025,20 +2053,28 @@ expresión de las inscripciones relativas en el Registro Público;
 X.- El lugar y la fecha del acta de emisión, con especificación de la fecha y número de la inscripción
 relativa en el Registro de Comercio;
 XI.- La firma autógrafa del representante común de los tenedores de certificados.
-Artículo 228 o.- Los términos y condiciones de las emisiones de certificados de participación deberán
+
+**Artículo 228-O**
+Los términos y condiciones de las emisiones de certificados de participación deberán
 ser aprobados por la Comisión Nacional Bancaria, así como los textos de las actas de emisión y de los
 certificados y cualquiera modificación de ellos. Además, en el otorgamiento de un acta de emisión o de
 modificación deberá concurrir un representante de la Comisión Nacional Bancaria.
-Artículo 228 p.- Cuando en el acta de emisión se haya estipulado que los certificados serán
+
+**Artículo 228-P**
+Cuando en el acta de emisión se haya estipulado que los certificados serán
 reembolsados por sorteos, se seguirá el procedimiento que establece el artículo 222 de esta Ley.
-Artículo 228 q.- Para representar al conjunto de los tenedores de certificados se designará un
+
+**Artículo 228-Q**
+Para representar al conjunto de los tenedores de certificados se designará un
 representante común que podrá no ser tenedor de certificados. El cargo de representante común es
 personal y será desempeñado por el individuo designado al efecto o por los representantes ordinarios de
 la institución de crédito o de la sociedad financiera o fiduciaria que sean nombrados para el cargo. El
 representante común podrá otorgar poderes judiciales.
 Son aplicables al representante común de los tenedores de certificados, en lo conducente, las
 disposiciones de los artículos 216 y 226 de esta Ley.
-Artículo 228 r.- El representante común de los tenedores de certificados obrará como mandatario de
+
+**Artículo 228-R**
+El representante común de los tenedores de certificados obrará como mandatario de
 éstos, con las siguientes obligaciones y facultades, además de las que expresamente se consignen en el
 acta de emisión:
 1º.- Verificar los términos del acto constitutivo del fideicomiso base de la emisión;
@@ -2061,18 +2097,26 @@ a que este artículo se refiere, y ejecutar los actos conservatorios de esos der
 8º.- Recabar de los funcionarios de la institución fiduciaria emisora, todos los informes y datos que
 necesite para el ejercicio de sus atribuciones, inclusive los relativos a la situación financiera del
 fideicomiso base de la emisión.
-Artículo 228 s.- La asamblea general de tenedores de certificados de participación representará el
+
+**Artículo 228-S**
+La asamblea general de tenedores de certificados de participación representará el
 conjunto de éstos y sus decisiones, tomadas en los términos de esta Ley y de acuerdo con las
 estipulaciones relativas del acta de emisión, serán válidas respecto de todos los tenedores, aun de los
 ausentes o disidentes.
 Son aplicables a la asamblea general de tenedores de certificados de participación las disposiciones
 de los artículos 218, 219, 220 y 221 de esta Ley.
-Artículo 228 t.- El fideicomiso base de la emisión, no se extinguirá mientras haya saldos insolutos por
+
+**Artículo 228-T**
+El fideicomiso base de la emisión, no se extinguirá mientras haya saldos insolutos por
 concepto de créditos a cargo de la masa fiduciaria, de certificados o de participación en los frutos o
 rendimientos.
-Artículo 228 u.- Son aplicables a los derechos de los tenedores de certificados en lo conducente, los
+
+**Artículo 228-U**
+Son aplicables a los derechos de los tenedores de certificados en lo conducente, los
 artículos 223 y 224.
-Artículo 228 v.- Las acciones para el cobro de los cupones de los certificados prescribirán en tres
+
+**Artículo 228-V**
+Las acciones para el cobro de los cupones de los certificados prescribirán en tres
 años a partir del vencimiento. Las acciones para el cobro de los certificados amortizables prescribirán en
 cinco años a partir de la fecha en que venzan los plazos estipulados para hacer la amortización, o, en
 caso de sorteo, a partir de la fecha en que se publique la lista a que se refiere el artículo 222.

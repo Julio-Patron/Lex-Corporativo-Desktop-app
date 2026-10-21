@@ -4,7 +4,7 @@
 > Módulo: mercantil
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf
 > SHA-256 fuente: b99bbf981434011b6351ef308922fea90f6f0f8777b113183cf1737840c5bbef
-> Verificación oficial: 2026-07-14
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2025-11-14
 **Artículo 1**
 Los actos comerciales sólo se regirán por lo dispuesto en este Código y las demás leyes
@@ -233,7 +233,8 @@ susceptible de calificación por parte del responsable de oficina o registrador.
 El reglamento del presente Capítulo desarrollará el procedimiento registral de acuerdo con las bases
 anteriores.
 
-Artículo 21 bis 1.- La prelación entre derechos sobre dos o más actos que se refieran a un mismo
+**Artículo 21 Bis 1**
+La prelación entre derechos sobre dos o más actos que se refieran a un mismo
 folio mercantil electrónico, se determinará por el número de control o en su caso por el sello digital de
 tiempo que otorgue el registro, cualquiera que sea la fecha de su constitución o celebración.
 
@@ -309,7 +310,9 @@ electrónicamente la información relacionada con el Registro Público de Comerc
 asimismo, podrá reconocer para el mismo fin certificados digitales expedidos por otras autoridades
 certificadoras siempre y cuando, a su juicio, presenten el mismo grado de confiabilidad y cumplan con las
 medidas de seguridad que al efecto establezca la Secretaría.
-Artículo 30 bis 1.- Cuando la autorización a que se refiere el artículo anterior se otorgue a notarios o
+
+**Artículo 30 Bis 1**
+Cuando la autorización a que se refiere el artículo anterior se otorgue a notarios o
 corredores públicos, dicha autorización permitirá, además, el envío de información por medios digitales al
 Registro y la remisión que éste efectúe al fedatario público correspondiente del acuse que contenga el
 número de control o sello digital de tiempo a que se refiere el artículo 21 bis 1 de este Código.
@@ -365,7 +368,8 @@ lineamientos que al efecto emitan.
 SECCIÓN ÚNICA
 Del Registro Único de Garantías Mobiliarias
 
-Artículo 32 bis 1. Las garantías mobiliarias que se constituyan con apego a éste u otros
+**Artículo 32 Bis 1**
+Las garantías mobiliarias que se constituyan con apego a éste u otros
 ordenamientos jurídicos del orden mercantil, su modificación, transmisión o cancelación, así como
 cualquier acto jurídico que se realice con o respecto de ellas y, en general, cualquier gravamen o
 afectación sobre bienes muebles que sirva como garantía de manera directa o indirecta, deberán
@@ -397,15 +401,21 @@ los mismos.
 Se presumen mercantiles, y por tanto sujetas a inscripción en los términos de esta Sección, todas las
 garantías mobiliarias y demás actos contenidos en el apartado B anterior que sean otorgadas en favor de
 un comerciante o que sirvan para garantizar una obligación de naturaleza mercantil.
-Artículo 32 bis 2. Se constituye el Registro Único de Garantías Mobiliarias, en adelante el Registro,
+
+**Artículo 32 Bis 2**
+Se constituye el Registro Único de Garantías Mobiliarias, en adelante el Registro,
 como una sección del Registro Público de Comercio, en donde se inscribirán las garantías a que se
 
 refiere el artículo anterior. Esta Sección se sujetará a las bases especiales de operación a que se refieren
 los artículos siguientes.. Reformado DOF 13-06-2014
-Artículo 32 bis 3.- El Registro estará exclusivamente a cargo de la Secretaría; su operación se llevará
+
+**Artículo 32 Bis 3**
+El Registro estará exclusivamente a cargo de la Secretaría; su operación se llevará
 por medios digitales, mediante el programa informático establecido por la Secretaría y en una base de
 datos nacional.
-Artículo 32 bis 4.- La inscripción de las garantías mobiliarias, su modificación, transmisión o
+
+**Artículo 32 Bis 4**
+La inscripción de las garantías mobiliarias, su modificación, transmisión o
 cancelación, así como la de cualquier acto vinculado con ellas, se realizará de manera inmediata a su
 recepción, previo pago de los derechos correspondientes, y en el folio de su otorgante.
 Salvo prueba en contrario, se presume que los otorgantes de garantías mobiliarias autorizan la
@@ -449,16 +459,24 @@ veces el salario mínimo diario general vigente en el Distrito Federal. Lo anter
 sanciones penales o administrativas a que hubiere lugar.
 Salvo que la vigencia de la inscripción o anotación se establezca en la forma precodificada, ésta
 tendrá una vigencia de un año, misma que será susceptible de ser renovada.
-Artículo 32 bis 5.- En los términos que establezca el Reglamento respectivo, de igual forma serán
+
+**Artículo 32 Bis 5**
+En los términos que establezca el Reglamento respectivo, de igual forma serán
 susceptibles de anotarse en el Registro, los avisos preventivos; las resoluciones judiciales o
 administrativas, así como cualquier acto que por su naturaleza constituya, modifique, transmita o cancele
 una garantía mobiliaria.
-Artículo 32 Bis 6. Las garantías mobiliarias inscritas de conformidad con la presente Sección, surtirán
+
+**Artículo 32 Bis 6**
+Las garantías mobiliarias inscritas de conformidad con la presente Sección, surtirán
 efectos contra terceros y tendrán prelación sobre cualesquiera otras posteriores o anteriores no inscritas.
-Artículo 32 bis 7.- Cualquier interesado estará facultado para solicitar a la Secretaría la expedición de
+
+**Artículo 32 Bis 7**
+Cualquier interesado estará facultado para solicitar a la Secretaría la expedición de
 certificaciones respecto de los actos inscritos en el Registro, previa presentación de la solicitud
 correspondiente y pago de los derechos respectivos.
-Artículo 32 bis 8.- Las normas reglamentarias del Registro desarrollarán, entre otros:
+
+**Artículo 32 Bis 8**
+Las normas reglamentarias del Registro desarrollarán, entre otros:
 I. Los procedimientos y requisitos técnicos y operativos con motivo de inscripciones, anotaciones,
 certificaciones y consultas que se lleven a cabo;
 II. Las características de las formas precodificadas para la inscripción y anotación en el Registro;
@@ -470,7 +488,8 @@ información del Registro, y
 VI. Cualquier otro dato, requisito, procedimiento o condición necesarios para la adecuada
 operación del Registro.
 
-Artículo 32 bis 9.- No será aplicable a esta Sección, lo dispuesto por los artículos 18, segundo
+**Artículo 32 Bis 9**
+No será aplicable a esta Sección, lo dispuesto por los artículos 18, segundo
 párrafo, con excepción de las facultades previstas para la Secretaría; 20; 20 bis; 21, salvo por lo señalado
 en su fracción XX; 21 bis; 23; 25; 26; 31; 32 y 32 bis.
 CAPITULO III
@@ -1024,7 +1043,9 @@ Destinatario sepa, o debiera saber, de haber actuado con la debida diligencia, o
 método previamente acordado, que el nuevo Mensaje de Datos era un duplicado.
 CAPÍTULO I BIS
 De la Digitalización
-Artículo 95 bis 1.- Para el caso de los servicios de digitalización se estará a lo siguiente:
+
+**Artículo 95 Bis 1**
+Para el caso de los servicios de digitalización se estará a lo siguiente:
 a. En todo caso, los documentos podrán ser digitalizados en el formato que determine el
 comerciante.
 b. Una vez concluida la digitalización del documento, deberá acompañarse al mismo, así como a
@@ -1039,13 +1060,19 @@ servicios de certificación, se regirá por lo dispuesto en la Ley Federal de Pr
 Personales en Posesión de los Particulares.
 e. En todo caso, el prestador de servicios de certificación que ejecutó las actividades de
 digitalización deberá mantener la confidencialidad de la información, salvo por mandato judicial.
-Artículo 95 bis 2.- En materia de conservación de mensajes de datos, será responsabilidad estricta
+
+**Artículo 95 Bis 2**
+En materia de conservación de mensajes de datos, será responsabilidad estricta
 del comerciante mantenerlos bajo su control, acceso y resguardo directo, a fin de que su ulterior consulta
 pueda llevarse a cabo en cualquier momento.
-Artículo 95 bis 3.- En el caso de documentos digitalizados o almacenados por prestadores de
+
+**Artículo 95 Bis 3**
+En el caso de documentos digitalizados o almacenados por prestadores de
 servicios de certificación, se necesitará que éstos cuenten con acreditación para realizar sus actividades
 a que hace referencia el artículo 102 de este Código.
-Artículo 95 bis 4.- En caso que los servicios de digitalización sean contratados a un prestador de
+
+**Artículo 95 Bis 4**
+En caso que los servicios de digitalización sean contratados a un prestador de
 servicios de certificación, éste presumirá la buena fe del contratante, así como la legitimidad de los
 documentos que le son confiados a digitalizar, limitándose a reflejarlos fiel e íntegramente en los medios
 electrónicos que le sean solicitados, bajo las penas en que incurren aquellos que cometen delitos en
@@ -1061,12 +1088,16 @@ que, una vez digitalizado y entregado el documento electrónico a satisfacción 
 ser modificado, alterado, enmendado o corregido de modo alguno, en los términos que se establezca en
 la norma oficial mexicana sobre digitalización y conservación de mensajes de datos que para tal efecto
 emita la Secretaría.
-Artículo 95 bis 5.- Se presumirá que aquellos prestadores de servicios de certificación que ofrezcan
+
+**Artículo 95 Bis 5**
+Se presumirá que aquellos prestadores de servicios de certificación que ofrezcan
 el servicio de almacenamiento de mensajes de datos, cuentan con los medios tecnológicos suficientes
 para garantizar razonablemente a los contratantes que la información bajo su control podrá ser
 ulteriormente consultada en cualquier tiempo, a no ser que existan causas demostradas de fuerza mayor
 o que no sean imputables al Prestador de Servicios autorizado.
-Artículo 95 bis 6.- Para los efectos de este Título, la Secretaría tendrá las siguientes facultades:
+
+**Artículo 95 Bis 6**
+Para los efectos de este Título, la Secretaría tendrá las siguientes facultades:
 I. Expedir y revocar las acreditaciones como Prestadores de Servicios de Certificación a que se
 refieren los artículos 95 Bis 3, 100 y 102 de este Código, y
 II. Podrá verificar en cualquier tiempo el adecuado desarrollo de las operaciones de los
@@ -6887,7 +6918,9 @@ documento en cuestión, el tribunal, sin suspender el juicio y según las circun
 determinar al dictar la sentencia si se reservan los derechos del impugnador para el caso en que
 penalmente se demuestre la falsedad o bien puede subordinar la eficacia ejecutiva de la
 sentencia a la prestación de una caución.
-Artículo 1250 bis 1.- Tanto para la objeción o impugnación de documentos sean privados, o públicos
+
+**Artículo 1250 Bis 1**
+Tanto para la objeción o impugnación de documentos sean privados, o públicos
 que carezcan de matriz, únicamente se considerarán indubitables para el cotejo:
 I. Los documentos que las partes reconozcan como tales, de común acuerdo, debiendo manifestar
 esa conformidad ante la presencia judicial;
@@ -7701,14 +7734,18 @@ X. La resolución que dicte el juez en el caso previsto en el artículo 1148 de 
 **Artículo 1345 Bis**
 En los casos previstos en este Capítulo, la apelación debe interponerse ante el
 juez que pronunció la resolución impugnada en la forma y términos previstos en éste.
-Artículo 1345 bis 1.- El litigante al interponer la apelación de tramitación inmediata, expresará los
+
+**Artículo 1345 Bis 1**
+El litigante al interponer la apelación de tramitación inmediata, expresará los
 agravios que considere le cause la resolución recurrida, salvo en aquellos que específicamente la ley
 establezca un trámite diverso.
 Las apelaciones de tramitación inmediata que se interpongan contra auto o interlocutoria, deberán
 hacerse valer en el término de seis días y las que se interpongan contra sentencia definitiva dentro del
 plazo de nueve días, contados a partir del día siguiente a aquél en que surtan efectos las notificaciones
 de tales resoluciones.
-Artículo 1345 bis 2.- Interpuesta una apelación, si fuera procedente, el juez la admitirá sin
+
+**Artículo 1345 Bis 2**
+Interpuesta una apelación, si fuera procedente, el juez la admitirá sin
 substanciación alguna, siempre que tratándose de apelaciones de tramitación inmediata, en el escrito se
 hayan hecho valer los agravios respectivos, expresando en su auto si la admite en ambos efectos o en
 uno solo.
@@ -7720,7 +7757,9 @@ apelación de que se trate.
 De igual manera, al tener por interpuesto el recurso de apelación, dará vista con el mismo a la parte
 apelada, para que en el término de tres días conteste los agravios si se tratare de auto o sentencia
 interlocutoria, y de seis días si se tratare de sentencia definitiva.
-Artículo 1345 bis 3.- Transcurridos los plazos señalados en el artículo anterior, sin necesidad de
+
+**Artículo 1345 Bis 3**
+Transcurridos los plazos señalados en el artículo anterior, sin necesidad de
 rebeldía y se hayan contestado o no los agravios, se remitirán al superior, los escritos originales del
 apelante y en su caso de la parte apelada y las demás constancias que se señalan anteriormente, o los
 
@@ -7733,7 +7772,9 @@ El tribunal al recibir el testimonio formará un solo toca o cuaderno, en el que
 todas las apelaciones que se interpongan en el juicio de que se trate, el que deberá mantener en el local
 del tribunal hasta que concluya el negocio. Una vez terminado el asunto procederá a su destrucción,
 guardando solo copias con firma autógrafa de las resoluciones dictadas.
-Artículo 1345 bis 4.- El tribunal, al recibir las constancias que remita el inferior, revisará si la
+
+**Artículo 1345 Bis 4**
+El tribunal, al recibir las constancias que remita el inferior, revisará si la
 apelación fue interpuesta en tiempo y bien admitida, y calificará si se confirma o no el grado en que se
 admitió por el inferior. De encontrarla ajustada a derecho, así lo hará saber y citará a las partes en el
 mismo auto para dictar sentencia, la que pronunciará y notificará dentro de los términos de este Código.
@@ -7744,9 +7785,13 @@ La apelación admitida en ambos efectos suspende desde luego la ejecución de la
 que ésta cause ejecutoria. Cuando se interponga contra auto o interlocutoria que por su contenido impida
 la continuación del procedimiento y la apelación se admita en ambos efectos, se suspenderá la
 tramitación del juicio.
-Artículo 1345 bis 5.- Se admitirán en un solo efecto las apelaciones en los casos en que no se halle
+
+**Artículo 1345 Bis 5**
+Se admitirán en un solo efecto las apelaciones en los casos en que no se halle
 prevenido expresamente que se admitan en ambos efectos.
-Artículo 1345 bis 6.- Una vez confirmada la admisión y calificación del grado en que haya sido
+
+**Artículo 1345 Bis 6**
+Una vez confirmada la admisión y calificación del grado en que haya sido
 admitido el recurso por el juez, el tribunal citará a las partes en el mismo auto para oír sentencia.
 Tratándose de apelaciones que no se tengan que resolver junto con las apelaciones intermedias que
 deban tramitarse y resolverse junto con ésta, o bien tratándose de apelaciones de intermedias y definitiva
@@ -7754,13 +7799,17 @@ que se tramiten y resuelvan de manera conjunta, que no excedan en número de sei
 con un máximo de veinte días para elaborar el proyecto. Si el número de apelaciones que se tengan que
 resolver de manera conjunta exceden de seis, el plazo para dictar la sentencia se ampliará hasta por diez
 días más, así como en el caso de que tengan que examinarse expedientes y/o documentos voluminosos.
-Artículo 1345 bis 7. En el caso de que el apelante omitiera expresar agravios, al interponer el recurso
+
+**Artículo 1345 Bis 7**
+En el caso de que el apelante omitiera expresar agravios, al interponer el recurso
 de apelación de tramitación inmediata ante el juez sin necesidad de acusar rebeldía, declarará precluido
 su derecho y quedará firme la resolución. Si no se interpusiera apelación en contra de la sentencia
 definitiva, se entenderán consentidas las resoluciones y autos que hubieran sido apelados durante el
 procedimiento y que sean de tramitación conjunta con la sentencia definitiva, a excepción de lo previsto
 en el párrafo cuarto del artículo 1344 de este Código.. Reformado DOF 30-12-2008
-Artículo 1345 bis 8.- De los autos y de las sentencias interlocutorias de tramitación inmediata, de los
+
+**Artículo 1345 Bis 8**
+De los autos y de las sentencias interlocutorias de tramitación inmediata, de los
 que se derive una ejecución que pueda causar un daño irreparable o de difícil reparación y la apelación
 proceda en el efecto devolutivo, se admitirán en ambos efectos si el apelante lo solicita al interponer el
 recurso, y señala los motivos por los que se considera el daño irreparable o de difícil reparación.
@@ -8146,16 +8195,22 @@ Si las partes estimaren que la sentencia definitiva contiene omisiones, cláusul
 contradictorias, ambiguas u oscuras, las partes podrán solicitar de manera verbal dentro de la audiencia
 en que se dicte, la aclaración o adición a la resolución, sin que con ello se pueda variar la substancia de
 la resolución. Contra tal determinación no procederá recurso ordinario alguno.
-Artículo 1390 Bis 1. No se sustanciarán en este juicio aquellos de tramitación especial establecidos
+
+**Artículo 1390 Bis 1**
+No se sustanciarán en este juicio aquellos de tramitación especial establecidos
 en el presente Código y en otras leyes, ni los de cuantía indeterminada.
 
 Tratándose de acciones personales en donde no se reclame una prestación económica, la
 competencia por cuantía la determinará el valor del negocio materia de la controversia.
 Los medios preparatorios a juicio y las providencias precautorias se tramitarán en términos de los
 Capítulos X y XI, respectivamente, del Título Primero, Libro Quinto de este Código.
-Artículo 1390 Bis 2.- En el juicio oral mercantil se observarán especialmente los principios de
+
+**Artículo 1390 Bis 2**
+En el juicio oral mercantil se observarán especialmente los principios de
 oralidad, publicidad, igualdad, inmediación, contradicción, continuidad y concentración.
-Artículo 1390 Bis 3.- Quienes no puedan hablar, oír, o no hablen el idioma español, formularán sus
+
+**Artículo 1390 Bis 3**
+Quienes no puedan hablar, oír, o no hablen el idioma español, formularán sus
 preguntas o contestaciones por escrito o por medio de un intérprete, que se designará de entre aquellos
 autorizados como auxiliares de la administración de justicia o por colegios, asociaciones, barras de
 profesionales o instituciones públicas o privadas, relatándose sus preguntas o sus contestaciones en la
@@ -8164,17 +8219,23 @@ En estos casos, a solicitud del intérprete o de la parte, se concederá el tiem
 pueda hacer la traducción respectiva, cuidando, en lo posible, que no se interrumpa la fluidez del debate.
 Los intérpretes, al iniciar su función, serán advertidos de las penas en que incurren los falsos
 declarantes y sobre su obligación de traducir o interpretar fielmente lo dicho.
-Artículo 1390 Bis 4.- El juez tendrá las más amplias facultades de dirección procesal para decidir en
+
+**Artículo 1390 Bis 4**
+El juez tendrá las más amplias facultades de dirección procesal para decidir en
 forma pronta y expedita lo que en derecho convenga.
 Para hacer cumplir sus determinaciones el juez puede hacer uso de las medidas de apremio que se
 mencionan en el artículo 1067 Bis, en los términos que ahí se especifican.
-Artículo 1390 Bis 5.- Las diligencias de desahogo de pruebas que deban verificarse fuera del
+
+**Artículo 1390 Bis 5**
+Las diligencias de desahogo de pruebas que deban verificarse fuera del
 juzgado, pero dentro de su ámbito de competencia territorial, deberán ser presididas por el juez,
 registradas por personal técnico adscrito al Poder Judicial de la entidad federativa o del Poder Judicial de
 la federación, según corresponda, por cualquiera de los medios referidos en el artículo 1390 Bis-26 del
 presente título y certificadas de conformidad con lo dispuesto para el desarrollo de las audiencias en el
 juzgado.
-Artículo 1390 Bis 6.- La nulidad de una actuación deberá reclamarse en la audiencia subsecuente,
+
+**Artículo 1390 Bis 6**
+La nulidad de una actuación deberá reclamarse en la audiencia subsecuente,
 bajo pena de quedar validada de pleno derecho. La producida en la audiencia de juicio deberá
 reclamarse durante ésta hasta antes de que el juez pronuncie la sentencia definitiva. La del
 emplazamiento, por su parte, podrá reclamarse en cualquier momento hasta antes de que se dicte
@@ -8196,7 +8257,9 @@ Desahogadas las pruebas admitidas o cuando las partes no ofrezcan pruebas, o las
 no se admitan, el juez escuchará los alegatos de las partes en el orden que determine y sin mayores
 trámites, dictará la resolución interlocutoria si fuera posible; en caso contrario, citará a las partes para
 dictarla también en audiencia, dentro del término de tres días.
-Artículo 1390 Bis 7.- La recusación del juez será admisible hasta antes de la calificación sobre la
+
+**Artículo 1390 Bis 7**
+La recusación del juez será admisible hasta antes de la calificación sobre la
 admisibilidad de las pruebas en la audiencia preliminar.
 Se interpondrá ante el juez, expresándose con claridad y precisión la causa en que se funde, quien
 remitirá de inmediato testimonio de las actuaciones respectivas al Tribunal Superior para su resolución,
@@ -8204,20 +8267,28 @@ quien la substanciará conforme a las reglas previstas en el Capítulo IX, Títu
 este Código.. Reformado DOF 25-01-2017
 Si la recusación se declara fundada, será nulo lo actuado a partir del momento en que se interpuso la
 recusación.
-Artículo 1390 Bis 8.- En todo lo no previsto regirán las reglas generales de este Código, en cuanto no
+
+**Artículo 1390 Bis 8**
+En todo lo no previsto regirán las reglas generales de este Código, en cuanto no
 se opongan a las disposiciones del presente Título.. Reformado DOF 09-01-2012
-Artículo 1390 Bis 9.- Las promociones de las partes deberán formularse oralmente durante las
+
+**Artículo 1390 Bis 9**
+Las promociones de las partes deberán formularse oralmente durante las
 audiencias, con excepción de las señaladas en los artículos 1390 Bis 6 y 1390 Bis 13 de este Código.
 Los tribunales no admitirán promociones frívolas o improcedentes, y deberán desecharse de plano,
 debiendo fundamentar y motivar su decisión.. Reformado DOF 09-01-2012
-Artículo 1390 Bis 10.- En el juicio únicamente será notificado personalmente el emplazamiento y el
+
+**Artículo 1390 Bis 10**
+En el juicio únicamente será notificado personalmente el emplazamiento y el
 auto que admita la reconvención. Las demás determinaciones se notificarán a las partes conforme a las
 reglas de las notificaciones no personales.. Reformado DOF 25-01-2017
 CAPÍTULO II
 Del Procedimiento Oral
 SECCIÓN PRIMERA
 Fijación de la Litis
-Artículo 1390 Bis 11.- La demanda deberá presentarse por escrito y reunirá los requisitos siguientes:
+
+**Artículo 1390 Bis 11**
+La demanda deberá presentarse por escrito y reunirá los requisitos siguientes:
 
 I. El juez ante el que se promueve;
 II. El nombre y apellidos, denominación o razón social del actor y el domicilio que señale para oír y
@@ -8237,7 +8308,9 @@ VIII. El ofrecimiento de las pruebas que el actor pretenda rendir en el juicio, 
 IX. La firma del actor o de su representante legítimo. Si éstos no supieren o no pudieren firmar,
 pondrán su huella digital, firmando otra persona en su nombre y a su ruego, indicando estas
 circunstancias.
-Artículo 1390 Bis 12.- Si la demanda fuere obscura o irregular, o no cumpliera con alguno de los
+
+**Artículo 1390 Bis 12**
+Si la demanda fuere obscura o irregular, o no cumpliera con alguno de los
 requisitos que señala el artículo anterior, el juez señalará, con toda precisión, en qué consisten los
 defectos de la misma, en el proveído que al efecto se dicte, lo que se hará por una sola ocasión.
 El actor deberá cumplir con la prevención que haga el juez, en un plazo máximo de tres días,
@@ -8245,7 +8318,9 @@ contados a partir del día siguiente a aquel en que surta efectos la notificaci�
 transcurrido el término, el juez la desechará precisando los puntos de la prevención que no fueron
 atendidos y pondrá a disposición del interesado todos los documentos originales y copias simples que se
 hayan exhibido, con excepción de la demanda con la que se haya formado el expediente respectivo.
-Artículo 1390 bis 13. En los escritos de demanda, contestación, reconvención, contestación a la
+
+**Artículo 1390 Bis 13**
+En los escritos de demanda, contestación, reconvención, contestación a la
 reconvención y desahogo de vista de éstas, las partes ofrecerán sus pruebas expresando con toda
 claridad cuál es el hecho o hechos que se tratan de demostrar con las mismas, así como las razones por
 las que el oferente considera que demostrarán sus afirmaciones, proporcionando el nombre, apellidos y
@@ -8260,10 +8335,14 @@ extemporáneamente, salvo que se tratare de pruebas supervenientes, en términos
 49; que se refieran a hechos no controvertidos o ajenos a la litis, o bien sobre hechos imposibles o
 notoriamente inverosímiles.
 Si las partes incumplen los requisitos anteriores, el juez desechará las pruebas.
-Artículo 1390 Bis 14.- Admitida la demanda, el juez ordenará emplazar al demandado corriéndole
+
+**Artículo 1390 Bis 14**
+Admitida la demanda, el juez ordenará emplazar al demandado corriéndole
 traslado con copia de la misma y de los documentos acompañados, a fin de que dentro del plazo de
 nueve días entregue su contestación por escrito.
-Artículo 1390 Bis 15.- El emplazamiento se entenderá con el interesado, su representante,
+
+**Artículo 1390 Bis 15**
+El emplazamiento se entenderá con el interesado, su representante,
 mandatario o procurador, entregando cédula en la que se hará constar la fecha y la hora en que se
 entregue; la clase de procedimiento, el nombre y apellidos de las partes, el juez o tribunal que manda
 practicar la diligencia; transcripción de la determinación que se manda notificar y el nombre y apellidos de
@@ -8284,19 +8363,24 @@ persona buscada.
 Además de la cédula, se entregará copia simple de la demanda debidamente cotejada y sellada más,
 en su caso, copias simples de los demás documentos que el actor haya exhibido con su demanda.
 El actor podrá acompañar al actuario a efectuar el emplazamiento.
-Artículo 1390 Bis 16.- Transcurrido el plazo fijado para contestar la demanda y, en su caso, la
+
+**Artículo 1390 Bis 16**
+Transcurrido el plazo fijado para contestar la demanda y, en su caso, la
 reconvención, sin que lo hubiere hecho y sin que medie petición de parte, se procederá en los términos
 del artículo 1390 Bis 20.
 El juez examinará, escrupulosamente y bajo su más estricta responsabilidad, si el emplazamiento fue
 practicado al demandado en forma legal. Si el juez encontrara que el emplazamiento no se hizo conforme
 a la ley, mandará reponerlo.. Reformado DOF 09-01-2012
-Artículo 1390 Bis 17.- El escrito de contestación se formulará ajustándose a los términos previstos
+
+**Artículo 1390 Bis 17**
+El escrito de contestación se formulará ajustándose a los términos previstos
 para la demanda. Las excepciones que se tengan, cualquiera que sea su naturaleza, se harán valer
 simultáneamente en la contestación y nunca después, salvo las supervenientes. Del escrito de
 contestación se dará vista a la parte actora por el término de 3 días para que desahogue la vista de la
 misma.
 
-Artículo 1390 Bis 18.- El demandado, al tiempo de contestar la demanda, podrá proponer la
+**Artículo 1390 Bis 18**
+El demandado, al tiempo de contestar la demanda, podrá proponer la
 reconvención. Si se admite por el juez, ésta se notificará personalmente a la parte actora para que la
 conteste en un plazo de nueve días. Del escrito de contestación a la reconvención, se dará vista a la
 parte contraria por el término de tres días para que desahogue la vista de la misma. Si no se admite, el
@@ -8310,10 +8394,14 @@ a disposición del interesado todos los documentos originales y copias simples q
 la reconvención a excepción de la demanda con la que se interponga.
 Lo anterior, salvo que la acción de reconvención provenga de la misma causa que la acción principal,
 supuesto en el cual cesará de inmediato el juicio para que se continúe en la vía correspondiente.
-Artículo 1390 Bis 19.- El demandado podrá allanarse a la demanda; en este caso el juez citará a las
+
+**Artículo 1390 Bis 19**
+El demandado podrá allanarse a la demanda; en este caso el juez citará a las
 partes a la audiencia de juicio, que tendrá verificativo en un plazo no mayor de diez días, en la que se
 dictará la sentencia respectiva.
-Artículo 1390 Bis 20.- Desahogada la vista de la contestación a la demanda y, en su caso, de la
+
+**Artículo 1390 Bis 20**
+Desahogada la vista de la contestación a la demanda y, en su caso, de la
 contestación a la reconvención, o transcurridos los plazos para ello, el juez señalará de inmediato la
 fecha y hora para la celebración de la audiencia preliminar, la que deberá fijarse dentro de los diez días
 siguientes.
@@ -8322,14 +8410,20 @@ excepciones procesales opuestas, para que se rindan a más tardar en la audienci
 no desahogarse las pruebas en la audiencia, se declararán desiertas por causa imputable al oferente.
 SECCIÓN SEGUNDA
 De las Audiencias
-Artículo 1390 Bis 21.- Es obligación de las partes asistir a las audiencias del procedimiento, por sí o a
+
+**Artículo 1390 Bis 21**
+Es obligación de las partes asistir a las audiencias del procedimiento, por sí o a
 través de sus legítimos representantes, que gocen de las facultades a que se refiere el párrafo tercero del
 artículo 1069 de este Código, además de contar con facultades expresas para conciliar ante el juez y
 suscribir, en su caso, el convenio correspondiente.
-Artículo 1390 Bis 22.- Las resoluciones judiciales pronunciadas en las audiencias se tendrán por
+
+**Artículo 1390 Bis 22**
+Las resoluciones judiciales pronunciadas en las audiencias se tendrán por
 notificadas en ese mismo acto, sin necesidad de formalidad alguna a quienes estén presentes o debieron
 haber estado.
-Artículo 1390 Bis 23.- Las audiencias serán presididas por el juez. Se desarrollarán oralmente en lo
+
+**Artículo 1390 Bis 23**
+Las audiencias serán presididas por el juez. Se desarrollarán oralmente en lo
 relativo a toda intervención de quienes participen en ella. Serán públicas, siguiendo en lo que les sean
 aplicables las reglas del artículo 1080 de este Código y las disposiciones aplicables de la Ley Federal de
 Transparencia y Acceso a la Información Pública Gubernamental.
@@ -8342,14 +8436,18 @@ derecho.
 El juez contará con las más amplias facultades disciplinarias para mantener el orden durante el debate
 y durante las audiencias, para lo cual podrá ejercer el poder de mando de la fuerza pública e imponer
 indistintamente las medidas de apremio a que se refiere el artículo 1067 Bis de este Código.
-Artículo 1390 Bis 24.- El juez determinará el inicio y la conclusión de cada una de las etapas de la
+
+**Artículo 1390 Bis 24**
+El juez determinará el inicio y la conclusión de cada una de las etapas de la
 audiencia, con lo que quedan precluídos los derechos procesales que debieron ejercitarse en cada una
 de ellas.
 La parte que asista tardíamente a una audiencia se incorporará al procedimiento en la etapa en que
 ésta se encuentre, sin perjuicio de la facultad del juez en materia de conciliación y/o mediación.
 Una vez que los testigos, peritos o partes concluyan su intervención, a petición de ellos podrán
 ausentarse del recinto oficial cuando el juez lo autorice.
-Artículo 1390 Bis 25.- Las audiencias se suspenden por receso, diferimiento o por actualizarse
+
+**Artículo 1390 Bis 25**
+Las audiencias se suspenden por receso, diferimiento o por actualizarse
 cualquiera de los supuestos previstos en el artículo 1076, fracción VI, de este Código.
 Durante el desarrollo de las audiencias, de estimarlo necesario, el juez podrá decretar recesos, con el
 fin de realizar determinados actos relacionados con el asunto que se substancia, fijando al momento la
@@ -8357,7 +8455,9 @@ hora de reanudación de la audiencia.
 Cuando una audiencia no logre concluirse en la fecha señalada para su celebración, el juez podrá
 diferirla, y deberá fijarse, en el acto, la fecha y hora de su reanudación, salvo que ello resultare
 materialmente imposible, y ordenar su reanudación cuando resulte pertinente.
-Artículo 1390 Bis 26.- Para producir fe, las audiencias se registrarán por medios electrónicos, o
+
+**Artículo 1390 Bis 26**
+Para producir fe, las audiencias se registrarán por medios electrónicos, o
 cualquier otro idóneo a juicio del juez, que permita garantizar la fidelidad e integridad de la información, la
 conservación y reproducción de su contenido y el acceso a los mismos a quienes, de acuerdo a la ley,
 tuvieren derecho a ella.
@@ -8368,31 +8468,42 @@ Las partes y los terceros que intervengan en el desarrollo de las audiencias deb
 previamente protesta de que se conducirán con verdad. Para tal efecto, el secretario del juzgado les
 tomará protesta, apercibiéndolos de las penas que se imponen a quienes declaran con falsedad.
 
-Artículo 1390 Bis 27.- Al terminar las audiencias, se levantará acta que deberá contener, cuando
+**Artículo 1390 Bis 27**
+Al terminar las audiencias, se levantará acta que deberá contener, cuando
 menos:
 I. El lugar, la fecha y el expediente al que corresponde;
 II. El nombre de quienes intervienen y la constancia de la inasistencia de los que debieron o
 pudieron estar presentes, indicándose la causa de la ausencia si se conoce;
 III. Una relación sucinta del desarrollo de la audiencia, y
 IV. La firma del juez y secretario.
-Artículo 1390 Bis 28.- El secretario del juzgado deberá certificar el medio en donde se encuentre
+
+**Artículo 1390 Bis 28**
+El secretario del juzgado deberá certificar el medio en donde se encuentre
 registrada la audiencia respectiva, identificar dicho medio con el número de expediente y tomar las
 medidas necesarias para evitar que pueda alterarse.
-Artículo 1390 Bis 29.- Se podrá solicitar copia simple o certificada de las actas o copia en medio
+
+**Artículo 1390 Bis 29**
+Se podrá solicitar copia simple o certificada de las actas o copia en medio
 electrónico de los registros que obren en el procedimiento, la que deberá ser certificada en los términos
 del artículo anterior a costa del litigante y previo el pago correspondiente.
 Tratándose de copias simples, el juzgado debe expedir a costa del solicitante, sin demora alguna,
 aquéllas que se le soliciten, bastando que la parte interesada lo realice verbalmente.
-Artículo 1390 Bis 30.- La conservación de los registros estará a cargo del juzgado que los haya
+
+**Artículo 1390 Bis 30**
+La conservación de los registros estará a cargo del juzgado que los haya
 generado, los que deberán contar con el respaldo necesario, que se certificará en los términos del
 artículo 1390 Bis 28. Cuando por cualquier causa se dañe el soporte material del registro afectando su
 contenido, el juez ordenará reemplazarlo por una copia fiel, que obtendrá de quien la tuviere, si no
 dispone de ella directamente.
-Artículo 1390 Bis 31.- En el tribunal estarán disponibles los instrumentos y el personal necesarios
+
+**Artículo 1390 Bis 31**
+En el tribunal estarán disponibles los instrumentos y el personal necesarios
 para que las partes tengan acceso a los registros del procedimiento, a fin de conocer su contenido.
 SECCIÓN TERCERA
 De la Audiencia Preliminar
-Artículo 1390 Bis 32.- La audiencia preliminar tiene por objeto:
+
+**Artículo 1390 Bis 32**
+La audiencia preliminar tiene por objeto:
 I. La depuración del procedimiento;
 II. La conciliación y/o mediación de las partes por conducto del juez;
 III. La fijación de acuerdos sobre hechos no controvertidos;
@@ -8400,27 +8511,37 @@ IV. La fijación de acuerdos probatorios;
 V. La calificación sobre la admisibilidad de las pruebas, y
 
 VI. La citación para audiencia de juicio.
-Artículo 1390 Bis 33.- La audiencia preliminar se llevará a cabo con o sin asistencia de las partes. A
+
+**Artículo 1390 Bis 33**
+La audiencia preliminar se llevará a cabo con o sin asistencia de las partes. A
 quien no acuda sin justa causa calificada por el juez se le impondrá una sanción, que no podrá ser inferior
 a $3,113.63, ni superior a $10,051.06, monto que se actualizará en los términos del artículo 1253,
 fracción VI de este Código.. Reformado DOF 25-01-2017
 Cantidades del artículo actualizadas por acuerdo DOF 29-12-2012, 30-12-2013, 26-12-2014, 24-12-2015, 26-12-2016, 26-12-2017, 31-12-2018,
 30-12-2019, 24-12-2020, 30-12-2021, 27-12-2022, 28-12-2023, 30-12-2024, 26-12-2025, 18-02-2026
-Artículo 1390 Bis 34.- El juez examinará las cuestiones relativas a la legitimación procesal y
+
+**Artículo 1390 Bis 34**
+El juez examinará las cuestiones relativas a la legitimación procesal y
 procederá, en su caso, a resolver las excepciones procesales con el fin de depurar el procedimiento;
 salvo las cuestiones de incompetencia, que se tramitarán conforme a la parte general de este Código.
-Artículo 1390 Bis 35.- En caso de que resulten improcedentes las excepciones procesales, o si no se
+
+**Artículo 1390 Bis 35**
+En caso de que resulten improcedentes las excepciones procesales, o si no se
 opone alguna, el juez procurará la conciliación entre las partes, haciéndoles saber los beneficios de llegar
 a un convenio proponiéndoles soluciones. Si los interesados llegan a un convenio, el juez lo aprobará de
 plano si procede legalmente y dicho pacto tendrá fuerza de cosa juzgada. En caso de desacuerdo, el juez
 proseguirá con la audiencia.
 Las partes no podrán invocar, en ninguna etapa procesal, antecedente alguno relacionado con la
 proposición, discusión, aceptación, ni rechazo de las propuestas de conciliación y/o mediación.
-Artículo 1390 Bis 36.- Durante la audiencia, las partes podrán solicitar conjuntamente al juez la
+
+**Artículo 1390 Bis 36**
+Durante la audiencia, las partes podrán solicitar conjuntamente al juez la
 fijación de acuerdos sobre hechos no controvertidos, los que tendrán como fin establecer qué
 acontecimientos de la litis están fuera del debate, a efecto de que las pruebas sólo se dirijan a hechos en
 litigio.. Reformado DOF 25-01-2017
-Artículo 1390 Bis 37.- El juez podrá formular proposiciones a las partes para que realicen acuerdos
+
+**Artículo 1390 Bis 37**
+El juez podrá formular proposiciones a las partes para que realicen acuerdos
 probatorios respecto de aquellas pruebas ofrecidas a efecto de determinar cuáles resultan innecesarias.
 En caso de que las partes no lleguen a un acuerdo probatorio, el juez procederá a la calificación sobre
 la admisibilidad de las pruebas, así como la forma en que deberán prepararse para su desahogo en la
@@ -8441,7 +8562,9 @@ para su desahogo, se podrá concentrar la audiencia de juicio en la preliminar, 
 documentales respectivas y dictar la sentencia definitiva en la misma audiencia.
 SECCIÓN CUARTA
 De la Audiencia del Juicio
-Artículo 1390 Bis 38.- Abierta la audiencia se procederá al desahogo de las pruebas que se
+
+**Artículo 1390 Bis 38**
+Abierta la audiencia se procederá al desahogo de las pruebas que se
 encuentren debidamente preparadas en el orden que el juez estime pertinente. Al efecto, contará con las
 más amplias facultades como rector del procedimiento; dejando de recibir las que no se encuentren
 preparadas y haciendo efectivo el apercibimiento realizado al oferente; por lo que la audiencia no se
@@ -8450,7 +8573,9 @@ salvo en aquellos casos expresamente determinados en este Título, por caso fort
 En la audiencia sólo se concederá el uso de la palabra, por una vez, a cada una de las partes para
 formular sus alegatos.
 Enseguida, se declarará el asunto visto y se dictará de inmediato la resolución correspondiente.
-Artículo 1390 Bis 39.- El juez expondrá oralmente y de forma breve, los fundamentos de hecho y de
+
+**Artículo 1390 Bis 39**
+El juez expondrá oralmente y de forma breve, los fundamentos de hecho y de
 derecho que motivaron su sentencia y leerá únicamente los puntos resolutivos. Acto seguido quedará a
 disposición de las partes copia de la sentencia que se pronuncie, por escrito, para que estén en
 posibilidad de solicitar en un plazo máximo de sesenta minutos la aclaración de la misma en términos del
@@ -8461,7 +8586,9 @@ la exposición oral y lectura de los fundamentos de hecho y de derecho que motiv
 como de los respectivos puntos resolutivos.. Reformado DOF 09-01-2012, 25-01-2017
 CAPÍTULO III
 De los Incidentes
-Artículo 1390 Bis 40.- Los incidentes deberán promoverse oralmente en las audiencias y no las
+
+**Artículo 1390 Bis 40**
+Los incidentes deberán promoverse oralmente en las audiencias y no las
 suspenderán. Se exceptúan los incidentes relativos a la impugnación de documento o de nulidad del
 emplazamiento, mismos que se substanciarán en la forma que más adelante se precisa. La parte
 contraria contestará oralmente en la audiencia y, de no hacerlo, se tendrá por precluído su derecho.
@@ -8480,7 +8607,9 @@ CAPÍTULO IV
 De las Pruebas
 SECCIÓN PRIMERA
 Confesional
-Artículo 1390 Bis 41.- La prueba confesional en este juicio se desahogará conforme a las siguientes
+
+**Artículo 1390 Bis 41**
+La prueba confesional en este juicio se desahogará conforme a las siguientes
 reglas:
 I. La oferente de la prueba podrá pedir que la contraparte se presente a declarar sobre los
 interrogatorios que, en el acto de la audiencia se formulen;
@@ -8494,7 +8623,9 @@ el apercibimiento y se tendrán por ciertos los hechos que la contraparte preten
 esta probanza, salvo prueba en contrario.
 SECCIÓN SEGUNDA
 Testimonial
-Artículo 1390 Bis 42.- Las partes tendrán la obligación de presentar a sus testigos, para cuyo efecto
+
+**Artículo 1390 Bis 42**
+Las partes tendrán la obligación de presentar a sus testigos, para cuyo efecto
 se les entregarán las cédulas de notificación. Sin embargo, cuando realmente estuvieren imposibilitadas
 para hacerlo, lo manifestarán así bajo protesta de decir verdad y pedirán que se les cite. El juez ordenará
 la citación con el apercibimiento que, en caso de desobediencia, se les aplicarán y se les hará
@@ -8514,18 +8645,24 @@ procedimiento, se impondrá al oferente una sanción pecuniaria a favor del coli
 cantidad señalada en la fracción II del artículo 1067 Bis de este Código. El juez despachará de oficio
 ejecución en contra del infractor, sin perjuicio de que se denuncie la falsedad en que hubiere incurrido,
 declarándose desierta de oficio la prueba testimonial.. Reformado DOF 09-01-2012
-Artículo 1390 Bis 43.- Las partes interrogaran oralmente a los testigos. Las preguntas estarán
+
+**Artículo 1390 Bis 43**
+Las partes interrogaran oralmente a los testigos. Las preguntas estarán
 concebidas en términos claros y precisos, limitándose a los hechos o puntos controvertidos objeto de esta
 prueba, debiendo el juez impedir preguntas contrarias a estos requisitos, así como aquellas que resulten
 ociosas o impertinentes. Para conocer la verdad sobre los puntos controvertidos, el juez también puede,
 de oficio, interrogar ampliamente a los testigos.. Reformado DOF 09-01-2012
 SECCIÓN TERCERA
 Instrumental
-Artículo 1390 Bis 44.- Los registros del juicio oral, cualquiera que sea el medio, serán instrumentos
+
+**Artículo 1390 Bis 44**
+Los registros del juicio oral, cualquiera que sea el medio, serán instrumentos
 públicos; harán prueba plena y acreditarán el modo en que se desarrolló la audiencia o diligencia
 correspondiente, la observancia de las formalidades, las personas que hubieran intervenido, las
 resoluciones pronunciadas por el juez y los actos que se llevaron a cabo.
-Artículo 1390 Bis 45.- Los documentos que presenten las partes podrán ser objetados en cuanto su
+
+**Artículo 1390 Bis 45**
+Los documentos que presenten las partes podrán ser objetados en cuanto su
 alcance y valor probatorio, durante la etapa de admisión de pruebas en la audiencia preliminar. Los
 presentados con posterioridad deberán serlo durante la audiencia en que se ofrezcan.
 La impugnación de falsedad de un documento, tratándose de los exhibidos junto con la demanda, se
@@ -8546,7 +8683,9 @@ juzgador.
 
 SECCIÓN CUARTA
 Pericial
-Artículo 1390 Bis 46.- Al ofrecer la prueba pericial las partes deberán reunir los siguientes requisitos:
+
+**Artículo 1390 Bis 46**
+Al ofrecer la prueba pericial las partes deberán reunir los siguientes requisitos:
 señalarán con toda precisión la ciencia, arte, técnica, oficio o industria sobre la cual deba practicarse la
 prueba; los puntos sobre los que versará y las cuestiones que se deben resolver en la pericial, así como
 los datos de la cédula profesional o documento que acredite la calidad técnica, artística o industrial del
@@ -8562,7 +8701,9 @@ contraria, al presentar el escrito en el que desahogue la vista de ésta, deber�
 parte en los términos establecidos en este artículo.
 De estar debidamente ofrecida, el juez la admitirá en la etapa correspondiente, quedando obligadas
 las partes a que sus peritos en la audiencia de juicio exhiban el dictamen respectivo.
-Artículo 1390 Bis 47.- En caso de que alguno de los peritos de las partes no exhiba su dictamen en la
+
+**Artículo 1390 Bis 47**
+En caso de que alguno de los peritos de las partes no exhiba su dictamen en la
 audiencia correspondiente, precluirá el derecho de las partes para hacerlo y, en consecuencia, la prueba
 quedará desahogada con el dictamen que se tenga por rendido. En el supuesto de que ninguno de los
 peritos exhiba su dictamen en la audiencia respectiva, se declarará desierta la prueba.
@@ -8584,7 +8725,8 @@ independientemente de las sanciones administrativas y legales a que haya lugar.
 En el supuesto del párrafo anterior, el Juez designará otro perito tercero en discordia y, de ser
 necesario, suspenderá la audiencia para el desahogo de la prueba en cuestión.
 
-Artículo 1390 Bis 48.- Los peritos asistirán a la audiencia respectiva con el fin de exponer
+**Artículo 1390 Bis 48**
+Los peritos asistirán a la audiencia respectiva con el fin de exponer
 verbalmente las conclusiones de sus dictámenes, a efecto de que se desahogue la prueba con los
 exhibidos y respondan las preguntas que el juez o las partes les formulen, debiendo acreditar, en la
 misma audiencia y bajo su responsabilidad, su calidad científica, técnica, artística o industrial para el que
@@ -8595,7 +8737,9 @@ que se le imponga una sanción pecuniaria equivalente a la cantidad que cotizó 
 de las partes, en igual proporción.. Reformado DOF 09-01-2012, 25-01-2017
 SECCIÓN QUINTA
 Prueba Superveniente
-Artículo 1390 Bis 49.- Después de la demanda y contestación, reconvención y contestación a la
+
+**Artículo 1390 Bis 49**
+Después de la demanda y contestación, reconvención y contestación a la
 reconvención en su caso, no se admitirán al actor ni al demandado, respectivamente, otros documentos
 que los que se hallen en alguno de los casos siguientes:
 I. Ser de fecha posterior a dichos escritos;
@@ -8606,7 +8750,9 @@ parte interesada.
 Cuando alguna de las partes tenga conocimiento de una prueba documental superveniente, deberá
 ofrecerla hasta antes de que se declare visto el asunto y el juez, oyendo previamente a la parte contraria
 en la misma audiencia, resolverá lo conducente
-Artículo 1390 Bis 50.- La ejecución de los convenios celebrados ante los Jueces de Proceso Oral y
+
+**Artículo 1390 Bis 50**
+La ejecución de los convenios celebrados ante los Jueces de Proceso Oral y
 de las resoluciones dictadas por éstos, se hará en términos del Capítulo XXVII, del Título primero, del
 Libro Quinto de este Código.
 TÍTULO ESPECIAL BIS
@@ -8619,7 +8765,8 @@ El procedimiento ejecutivo a que se refiere este Título tiene lugar cuando la
 demanda se funda en uno de los documentos que traigan aparejada ejecución previstos en el artículo
 1391.
 
-Artículo 1390 Ter 1.- La vía indicada en el artículo que antecede procede siempre y cuando el valor
+**Artículo 1390 Ter 1**
+La vía indicada en el artículo que antecede procede siempre y cuando el valor
 de la suerte principal sea igual o superior a la cantidad a la que establece el artículo 1339 para que un
 juicio sea apelable y hasta cuatro millones de pesos 00/100 moneda nacional, sin que sean de tomarse
 en consideración intereses y demás accesorios reclamados a la fecha de interposición de la demanda,
@@ -8630,7 +8777,9 @@ diciembre de cada año.
 Para estos efectos, se basará en la variación observada en el valor del Índice Nacional de Precios al
 Consumidor, publicado por el Instituto Nacional de Estadística y Geografía entre la última actualización de
 dichos montos y el mes de noviembre del año en cuestión.
-Artículo 1390 Ter 2.- Contra las resoluciones pronunciadas en este juicio no se dará recurso ordinario
+
+**Artículo 1390 Ter 2**
+Contra las resoluciones pronunciadas en este juicio no se dará recurso ordinario
 alguno.
 No obstante, las partes podrán solicitar al juez, de manera verbal en las audiencias, que subsane las
 omisiones o irregularidades que se llegasen a presentar en la substanciación del juicio oral, para el sólo
@@ -8641,7 +8790,9 @@ Si las partes estimaren que la sentencia definitiva contiene omisiones, cláusul
 contradictorias, ambiguas u oscuras, podrán solicitar de manera verbal dentro de la audiencia en que se
 dicte, la aclaración o adición a la resolución, sin que con ello se pueda variar la substancia de la
 resolución.
-Artículo 1390 Ter 3.- En el juicio ejecutivo mercantil oral se observarán los principios que contempla
+
+**Artículo 1390 Ter 3**
+En el juicio ejecutivo mercantil oral se observarán los principios que contempla
 el artículo 1390 Bis 2 y se tramitará conforme a las reglas previstas en los artículos 1390 Bis 3; 1390 Bis
 4; 1390 Bis 5; 1390 Bis 6; 1390 Bis 7; 1390 Bis 8; 1390 Bis 9; 1390 Bis 10; 1390 Bis 12 y 1390 Bis 13,
 salvo lo relativo a la reconvención que es incompatible con este juicio.
@@ -8649,50 +8800,72 @@ CAPÍTULO II
 Del Procedimiento Ejecutivo Mercantil OralCapítulo adicionado DOF 25-01-2017
 SECCIÓN PRIMERA
 Fijación de la Litis
-Artículo 1390 Ter 4.- La demanda deberá presentarse en los términos señalados en el artículo 1390
+
+**Artículo 1390 Ter 4**
+La demanda deberá presentarse en los términos señalados en el artículo 1390
 Bis 11.
-Artículo 1390 Ter 5.- Presentada por el actor su demanda, se dictará auto, con efectos de
+
+**Artículo 1390 Ter 5**
+Presentada por el actor su demanda, se dictará auto, con efectos de
 mandamiento en forma, para que el demandado sea requerido de pago, y no haciéndolo se proceda al
 embargo de acuerdo a las reglas previstas en los artículos 1392, 1393, 1394, 1395 y 1396.
 
-Artículo 1390 Ter 6.- Dentro de los ocho días siguientes al requerimiento de pago, al embargo, en su
+**Artículo 1390 Ter 6**
+Dentro de los ocho días siguientes al requerimiento de pago, al embargo, en su
 caso, y al emplazamiento, el demandado deberá contestar la demanda, refiriéndose concretamente a
 cada hecho, oponiendo las excepciones que se prevén en los artículos 1397, 1398 y 1403; y conforme a
 las reglas previstas en los artículos 1390 Bis 16, 1390 Bis 20, 1399 y 1400, salvo lo relativo a la
 reconvención que es incompatible con este juicio.
-Artículo 1390 Ter 7.- El escrito de contestación se formulará ajustándose a los términos previstos
+
+**Artículo 1390 Ter 7**
+El escrito de contestación se formulará ajustándose a los términos previstos
 para la demanda.
 Del escrito de contestación se dará vista a la parte actora por el término de tres días para que la
 desahogue.
-Artículo 1390 Ter 8.- Si el demandado se allanare a la demanda y solicitare término de gracia para el
+
+**Artículo 1390 Ter 8**
+Si el demandado se allanare a la demanda y solicitare término de gracia para el
 pago y cumplimiento de lo reclamado, el juez dará vista a la actora para que dentro de tres días
 manifieste lo que a su derecho convenga, debiendo el juez resolver de acuerdo a las proposiciones de las
 partes en la audiencia de juicio que tendrá verificativo en un plazo no mayor de diez días en la que se
 dictará la sentencia respectiva.
-Artículo 1390 Ter 9.- Si se tratare de cartas de porte, se atenderá a lo que dispone el artículo 583.
+
+**Artículo 1390 Ter 9**
+Si se tratare de cartas de porte, se atenderá a lo que dispone el artículo 583.
 SECCIÓN SEGUNDA
 De las Audiencias
-Artículo 1390 Ter 10.- Las audiencias se desarrollarán conforme a las reglas generales previstas para
+
+**Artículo 1390 Ter 10**
+Las audiencias se desarrollarán conforme a las reglas generales previstas para
 el Juicio Oral Mercantil en términos de la Sección Segunda, del Capítulo II, del Título Especial de este
 Código.
-Artículo 1390 Ter 11.- La audiencia preliminar se sustanciará conforme a las reglas previstas en la
+
+**Artículo 1390 Ter 11**
+La audiencia preliminar se sustanciará conforme a las reglas previstas en la
 Sección Tercera, del Capítulo II, del Título Especial de este Código.
-Artículo 1390 Ter 12.- La audiencia de juicio se sustanciará conforme a las reglas previstas en la
+
+**Artículo 1390 Ter 12**
+La audiencia de juicio se sustanciará conforme a las reglas previstas en la
 Sección Cuarta, del Capítulo II, del Título Especial de este Código.
 CAPÍTULO III
 De los Incidentes
-Artículo 1390 Ter 13.- Los incidentes se tramitarán conforme a las reglas previstas en el Capítulo III
+
+**Artículo 1390 Ter 13**
+Los incidentes se tramitarán conforme a las reglas previstas en el Capítulo III
 del Título Especial de este Código.
 CAPÍTULO IV
 De las Pruebas
 
-Artículo 1390 Ter 14.- El desahogo de las pruebas se hará conforme a las reglas previstas en el
+**Artículo 1390 Ter 14**
+El desahogo de las pruebas se hará conforme a las reglas previstas en el
 Capítulo IV del Título Especial de este Código, salvo lo relativo a la reconvención que es incompatible con
 este juicio.
 CAPÍTULO V
 De la Ejecución
 SECCIÓN PRIMERA
-Artículo 1390 Ter 15.- La ejecución de los convenios celebrados ante los jueces de Proceso Oral y de
+
+**Artículo 1390 Ter 15**
+La ejecución de los convenios celebrados ante los jueces de Proceso Oral y de
 las resoluciones dictadas por éstos conforme a este Título, se hará en lo conducente en los términos
 previstos para la ejecución de los juicios ejecutivos reguladas en el Título Tercero, así como a lo
 dispuesto en el Título Primero, del Libro Quinto de este Código.
@@ -8952,9 +9125,13 @@ Cuando el monto líquido de la condena fuere superior al valor de los bienes
 embargados, previamente valuados en términos del artículo 1410 de este Código, y del certificado de
 gravámenes no aparecieren otros acreedores, el ejecutante podrá optar por la adjudicación directa de los
 bienes que haya en su favor al valor fijado en el avalúo.
-Artículo 1412 Bis 1.- Tratándose del remate y adjudicación de inmuebles, el juez y el adjudicatario,
+
+**Artículo 1412 Bis 1**
+Tratándose del remate y adjudicación de inmuebles, el juez y el adjudicatario,
 sin más trámite, otorgarán la escritura pública correspondiente ante fedatario público.
-Artículo 1412 bis 2.- Una vez que quede firme la resolución que determine la adjudicación de los
+
+**Artículo 1412 Bis 2**
+Una vez que quede firme la resolución que determine la adjudicación de los
 bienes, se dictarán las diligencias necesarias a petición de parte interesada para poner en posesión
 material y jurídica de dichos bienes al adjudicatario, siempre y cuando este último, en su caso, haya
 consignado el precio, dándose para ello las ordenes necesarias, aún las de desocupación de fincas
@@ -8997,33 +9174,46 @@ persona autorizada distinta del acreedor, para que realice el avalúo de los bie
 pueda llevarse a cabo, en términos de lo establecido en las fracciones de este artículo.
 A falta de acuerdo respecto a la designación del perito o de la persona autorizada, éste será
 designado por el juez competente a solicitud de cualquiera de las partes.
-Artículo 1414 bis 1.- El procedimiento se iniciará con el requerimiento formal de entrega de la
+
+**Artículo 1414 Bis 1**
+El procedimiento se iniciará con el requerimiento formal de entrega de la
 posesión de los bienes, que formule al deudor el fiduciario o el acreedor prendario, según corresponda,
 mediante fedatario público.
 Una vez entregada la posesión de los bienes al fiduciario o acreedor prendario, éste tendrá el carácter
 de depositario judicial hasta en tanto no se realice lo previsto en el artículo 1414 bis 4.
-Artículo 1414 bis 2.- Se dará por concluido el procedimiento extrajudicial y quedará expedita la vía
+
+**Artículo 1414 Bis 2**
+Se dará por concluido el procedimiento extrajudicial y quedará expedita la vía
 judicial en los siguientes casos:
 I. Cuando se oponga el deudor a la entrega material de los bienes o al pago del crédito
 respectivo, o
 II. Cuando no se haya producido el acuerdo a que se refiere el artículo 1414 bis o éste sea de
 imposible cumplimiento.
-Artículo 1414 bis 3.- Fuera de los casos previstos en el artículo anterior, el fiduciario o el acreedor
+
+**Artículo 1414 Bis 3**
+Fuera de los casos previstos en el artículo anterior, el fiduciario o el acreedor
 prendario podrá obtener la posesión de los bienes objeto de la garantía, si así se estipuló expresamente
 en el contrato respectivo. Este acto deberá llevarse a cabo ante fedatario público, quien deberá levantar
 el acta correspondiente, así como el inventario pormenorizado de los bienes.
-Artículo 1414 bis 4.- Una vez entregada la posesión de los bienes se procederá a la enajenación de
+
+**Artículo 1414 Bis 4**
+Una vez entregada la posesión de los bienes se procederá a la enajenación de
 éstos, en términos del artículo 1414 bis 17, fracción II.
-Artículo 1414 bis 5.- En caso de que el fiduciario o el acreedor prendario, según corresponda, no
+
+**Artículo 1414 Bis 5**
+En caso de que el fiduciario o el acreedor prendario, según corresponda, no
 pueda obtener la posesión de los bienes, se seguirá el procedimiento de ejecución forzosa a que se
 refiere el siguiente Capítulo de este Código.
-Artículo 1414 bis 6.- No será necesario agotar el procedimiento a que se refieren los artículos
+
+**Artículo 1414 Bis 6**
+No será necesario agotar el procedimiento a que se refieren los artículos
 anteriores, para iniciar el procedimiento de ejecución previsto en el Capítulo siguiente.
 CAPITULO II
 Del procedimiento judicial de ejecución de garantías otorgadas mediante prenda sin
 transmisión de posesión y fideicomiso de garantía
 
-Artículo 1414 bis 7.- Se tramitará de acuerdo a este procedimiento todo juicio que tenga por objeto el
+**Artículo 1414 Bis 7**
+Se tramitará de acuerdo a este procedimiento todo juicio que tenga por objeto el
 pago de un crédito cierto, líquido y exigible y la obtención de la posesión material de los bienes que lo
 garanticen, siempre que la garantía se haya otorgado mediante prenda sin transmisión de posesión, o
 bien, mediante fideicomiso de garantía en que no se hubiere convenido el procedimiento previsto en el
@@ -9032,7 +9222,9 @@ Para que el juicio se siga de acuerdo con las disposiciones de este Capítulo, e
 indispensable que el mencionado crédito conste en documento público o escrito privado, según
 corresponda, en términos de la Ley General de Títulos y Operaciones de Crédito y que sea exigible en los
 términos pactados o conforme con las disposiciones legales aplicables.
-Artículo 1414 bis 8.- Presentado el escrito de demanda, acompañado del contrato respectivo y la
+
+**Artículo 1414 Bis 8**
+Presentado el escrito de demanda, acompañado del contrato respectivo y la
 determinación del saldo que formule el actor, y cuando el promovente sea una institución de crédito,
 anexando la certificación de saldo que corresponda, el juez bajo su más estricta responsabilidad, si
 encuentra que se reúnen los requisitos fijados en el artículo anterior, en un plazo no mayor de dos días,
@@ -9052,7 +9244,9 @@ obligado por disposición de Ley a entregar estados de cuenta al deudor. Se ente
 recibido y aceptado este último estado de cuenta, si no lo objeta por escrito dentro de los diez días
 hábiles siguientes de haberlo recibido o bien efectúa pagos parciales al acreedor con posterioridad a su
 recepción.. Reformado DOF 13-06-2003, 10-01-2014
-Artículo 1414 bis 9.- La diligencia a que se refiere el artículo anterior, no se suspenderá por ningún
+
+**Artículo 1414 Bis 9**
+La diligencia a que se refiere el artículo anterior, no se suspenderá por ningún
 motivo y se llevará adelante hasta su conclusión, dejando al demandado sus derechos a salvo para que
 los haga valer como le convenga durante el juicio. A fin de poner en posesión material de los bienes al
 demandante, el juzgador apercibirá al demandado con el uso de los medios de apremio establecidos en
@@ -9067,7 +9261,9 @@ conforme a la sentencia, proceda que el demandado entregue al demandante la pose
 
 inmueble, el juez hará efectivos los medios de apremio decretados y dictará las medidas conducentes
 para lograr el cumplimiento de la sentencia, ajustándose a lo dispuesto en este artículo.
-Artículo 1414 bis 10.- El demandado podrá oponer las excepciones que a su derecho convenga, pero
+
+**Artículo 1414 Bis 10**
+El demandado podrá oponer las excepciones que a su derecho convenga, pero
 su trámite se sujetará a las reglas siguientes:
 I. Sólo se tendrán por opuestas las excepciones que se acrediten con prueba documental, salvo
 aquéllas que por su naturaleza requieran del ofrecimiento y desahogo de pruebas distintas a la
@@ -9092,26 +9288,35 @@ en un término que no exceda de tres días hábiles, la corrija.
 El juez, bajo su más estricta responsabilidad, revisará la contestación de la demanda y desechará de
 plano todas las excepciones notoriamente improcedentes, o aquéllas respecto de las cuales no se exhiba
 prueba documental o no se ofrezcan las pruebas directamente pertinentes a acreditarlas.
-Artículo 1414 bis 11.- El allanamiento que afecte toda la demanda producirá el efecto de que el
+
+**Artículo 1414 Bis 11**
+El allanamiento que afecte toda la demanda producirá el efecto de que el
 asunto pase a sentencia definitiva.
 El demandado aun cuando no hubiere contestado en tiempo la demanda, tendrá en todo tiempo el
 derecho de ofrecer pruebas, hasta antes de que se dicte la sentencia correspondiente, y por una sola
 vez.
-Artículo 1414 bis 12.- Tanto en la demanda como en la contestación a la misma, las partes tienen la
+
+**Artículo 1414 Bis 12**
+Tanto en la demanda como en la contestación a la misma, las partes tienen la
 obligación de ser claras y precisas. En esos mismos escritos deberán ofrecer todas sus pruebas
 relacionándolas con los hechos que pretendan probar y presentar todos los documentos respectivos,
 salvo lo dispuesto en el segundo párrafo del artículo anterior.
-Artículo 1414 bis 13.- Siempre que las pruebas ofrecidas sean contra la moral o el derecho, o no se
+
+**Artículo 1414 Bis 13**
+Siempre que las pruebas ofrecidas sean contra la moral o el derecho, o no se
 ajusten a lo dispuesto en los artículos 1414 bis 11 y 1414 bis 12, o bien se refieran a hechos imposibles,
 notoriamente inverosímiles o no controvertidos por las partes, el juez las desechará de plano.
 
-Artículo 1414 bis 14.- El juez resolverá sobre la admisión o desechamiento de pruebas en el auto que
+**Artículo 1414 Bis 14**
+El juez resolverá sobre la admisión o desechamiento de pruebas en el auto que
 tenga por contestada o no la demanda. En el mismo auto, el juez dará vista al actor con las excepciones
 opuestas por el demandado, por el término de tres días y señalará fecha y hora para la celebración de la
 audiencia de pruebas alegatos y sentencia. Esta audiencia deberá celebrarse dentro de los diez días
 siguientes a aquél en que haya concluido el plazo fijado para que el actor desahogue la vista a que se
 refiere este artículo.
-Artículo 1414 bis 15.- La preparación de las pruebas quedará a cargo de las partes, por lo que
+
+**Artículo 1414 Bis 15**
+La preparación de las pruebas quedará a cargo de las partes, por lo que
 deberán presentar a sus testigos, peritos, documentos públicos y privados, pliego de posiciones y demás
 pruebas que les hayan sido admitidas.
 Cuando las partes tengan que rendir prueba testimonial o pericial para acreditar algún hecho, deberán
@@ -9128,11 +9333,15 @@ calificada por el juez según prudente estimación.
 Si llamado un testigo o solicitado un documento que haya sido admitido como prueba, ésta no se
 desahoga por causa imputable al oferente, a más tardar en la audiencia, se declarará desierta, a menos
 que exista una causa de fuerza mayor debidamente comprobada.
-Artículo 1414 bis 16.- El juez debe presidir la audiencia, ordenar el desahogo de las pruebas
+
+**Artículo 1414 Bis 16**
+El juez debe presidir la audiencia, ordenar el desahogo de las pruebas
 admitidas y preparadas, y dar oportunidad a las partes para alegar lo que a su derecho convenga, por
 escrito o verbalmente, sin necesidad de asentarlo en autos en este último caso. Acto continuo, el juez
 dictará sentencia, la que será apelable únicamente en efecto devolutivo.
-Artículo 1414 bis 17.- Obtenido el valor de avalúo de los bienes, de acuerdo con lo dispuesto en el
+
+**Artículo 1414 Bis 17**
+Obtenido el valor de avalúo de los bienes, de acuerdo con lo dispuesto en el
 artículo 1414 bis, se estará a lo siguiente:
 I. Cuando el valor de los bienes sea igual al monto del adeudo condenado, quedará liquidado
 totalmente el crédito respectivo, sin corresponder en consecuencia acción o derecho alguno a la
@@ -9179,18 +9388,23 @@ demandado en un plazo no mayor de cinco días, una vez que se haya deducido el m
 del crédito otorgado, incluyendo intereses y demás gastos incurridos para la venta, en
 efectivo, cheque de caja o mediante billete de depósito a favor de la parte demandada a
 través del fedatario.. Reformado DOF 13-06-2003, 10-01-2014
-Artículo 1414 bis 18.- En caso de incumplimiento de la parte actora a lo señalado en la fracción III,
+
+**Artículo 1414 Bis 18**
+En caso de incumplimiento de la parte actora a lo señalado en la fracción III,
 inciso c), del artículo anterior, el juez lo apercibirá con las medidas de apremio establecidas en el artículo
 1414 Bis 9, y le ordenará pagar una pena equivalente a cien y hasta tres mil veces, el salario mínimo
 diario general vigente en el Distrito Federal en las fechas de incumplimiento, por día transcurrido,
 mientras subsista el incumplimiento.. Reformado DOF 13-06-2003
 
-Artículo 1414 bis 19.- El actor, en tanto no realice la entrega al demandado del remanente de
+**Artículo 1414 Bis 19**
+El actor, en tanto no realice la entrega al demandado del remanente de
 recursos que proceda en términos del artículo 1414 bis 17, fracción III, por la venta de los bienes objeto
 de la garantía, cubrirá a éste, por todo el tiempo que dure el incumplimiento, una tasa de interés
 equivalente a dos veces el Costo de Captación a Plazo de pasivos denominados en moneda nacional
 de la Federación.. Reformado DOF 13-06-2003, 10-01-2014
-Artículo 1414 bis 20.- En los procedimientos que se ventilen conforme a lo señalado en este
+
+**Artículo 1414 Bis 20**
+En los procedimientos que se ventilen conforme a lo señalado en este
 Capítulo, no se admitirán incidentes y las resoluciones que se dicten podrán ser apeladas sólo en efecto
 devolutivo, por lo que en ningún caso podrá suspenderse el procedimiento, salvo lo previsto en el último
 párrafo del artículo 1414 bis 10.

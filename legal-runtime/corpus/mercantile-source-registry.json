@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-14",
+  "checkedAt": "2026-10-20",
   "policy": {
     "officialPdfOnly": true,
     "duplicateProvisionPolicy": "block",
@@ -15,14 +15,14 @@
       "localFile": "tmp/pdfs/CCom.pdf",
       "candidateFile": "tmp/mercantile-corpus-stage/candidates/codigo_comercio.md",
       "sourceSha256": "b99bbf981434011b6351ef308922fea90f6f0f8777b113183cf1737840c5bbef",
-      "candidateSha256": "6a6c86d07742323638bd89827f1431794a4c77fb1575efd440ad1f501e5c8ae2",
+      "candidateSha256": "610ea40118e9cf940147d7e6cdcb7e34cc8e26279da8477b93dc0cad4a796dce",
       "bytes": 2630704,
       "pages": 291,
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
       "lastReform": "2025-11-14",
       "firstProvisionPage": 1,
       "transitoryPage": 212,
-      "provisions": 1528,
+      "provisions": 1641,
       "validation": {
         "status": "pass",
         "failures": [],
@@ -62,14 +62,14 @@
       "localFile": "tmp/pdfs/LGSM.pdf",
       "candidateFile": "tmp/mercantile-corpus-stage/candidates/lgsm.md",
       "sourceSha256": "72b051296792cad896ac90e814ff8949e4ac140bf5ca5cc08f2f03e5e95aeac3",
-      "candidateSha256": "046d9d3bc192be11ec74f0ad0bbda6bfc0e2b4cfe00eb8eb78d1a8e97714b2c9",
+      "candidateSha256": "f401dc581ca6a6f03f95510d7f97cbf8a7443a1bda7ef696cd0f7528cfc4476c",
       "bytes": 835947,
       "pages": 63,
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
       "lastReform": "2023-10-20",
       "firstProvisionPage": 1,
       "transitoryPage": 49,
-      "provisions": 276,
+      "provisions": 277,
       "validation": {
         "status": "pass",
         "failures": [],
@@ -109,14 +109,14 @@
       "localFile": "tmp/pdfs/LGTOC.pdf",
       "candidateFile": "tmp/mercantile-corpus-stage/candidates/lgtoc.md",
       "sourceSha256": "cf8a5d05500ddbe21885db4a8f1128cf95b3aaab95b7982a47aa33baea652361",
-      "candidateSha256": "53cd6af2fa8d915c773a674e103abb8dcdcfde88e7dabd12f704b2df3fafcc3f",
+      "candidateSha256": "a13cf16e23f809fb779d38fd756ca0e29f0910dda5f0c997e59601b70b2d2f2a",
       "bytes": 1205962,
       "pages": 118,
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
       "lastReform": "2024-03-26",
       "firstProvisionPage": 1,
       "transitoryPage": 89,
-      "provisions": 440,
+      "provisions": 462,
       "validation": {
         "status": "pass",
         "failures": [],
@@ -342,10 +342,17 @@
       "provisionKey": "ccom:article:21-bis",
       "label": "Artículo 21 Bis",
       "sourcePages": [
-        6,
+        6
+      ],
+      "contentSha256": "57bb4200827f0036a74e193411937fa1e081b94fee5bac5b674d6ef7a86d931c"
+    },
+    {
+      "provisionKey": "ccom:article:21-bis-1",
+      "label": "Artículo 21 Bis 1",
+      "sourcePages": [
         7
       ],
-      "contentSha256": "6f675c1bb34f3df21227d9f60d99c593c70214e9f3c6c46a7642fa2f3bb7f7b9"
+      "contentSha256": "e1c56f7a2a8cd84579be4bc44980fae90d0ed29004004a642c0ac762eac737b3"
     },
     {
       "provisionKey": "ccom:article:22",
@@ -425,7 +432,15 @@
       "sourcePages": [
         8
       ],
-      "contentSha256": "34248c6ee9088c56da06f11ae58a88826c8f5cc9877cc45dbdba1402b0d4f7d5"
+      "contentSha256": "52f9b5b9f87516d4c2853231ff0069535eb6e371eeb1535f4337d4cd2f4f4177"
+    },
+    {
+      "provisionKey": "ccom:article:30-bis-1",
+      "label": "Artículo 30 Bis 1",
+      "sourcePages": [
+        8
+      ],
+      "contentSha256": "aa33711eced064783cb38cb1c263d482b7c51dee80154f05c3872740c8970054"
     },
     {
       "provisionKey": "ccom:article:31",
@@ -447,10 +462,83 @@
       "provisionKey": "ccom:article:32-bis",
       "label": "Artículo 32 Bis",
       "sourcePages": [
-        9,
+        9
+      ],
+      "contentSha256": "d175bd45ca0f10331fa3fbebdff114f5646dbc5e334d68d2f41497b845515ced"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-1",
+      "label": "Artículo 32 Bis 1",
+      "sourcePages": [
+        10
+      ],
+      "contentSha256": "5def0e037331d88ac84d34fd89d1b2969d9b2c178ecca68393e6bc4852bf0892"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-2",
+      "label": "Artículo 32 Bis 2",
+      "sourcePages": [
+        10,
+        11
+      ],
+      "contentSha256": "381628ab0cba7eef55a097be623eba0cea1dc7d6ee75253dab487a4fc2dd570a"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-3",
+      "label": "Artículo 32 Bis 3",
+      "sourcePages": [
+        11
+      ],
+      "contentSha256": "d2b1a794578184800f0a96537a1cf7c0e5715b5702e58d7577dff3a739bea4b7"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-4",
+      "label": "Artículo 32 Bis 4",
+      "sourcePages": [
+        11,
+        12
+      ],
+      "contentSha256": "1fa6accadf252cd365c8243c287e26e2b44937dd36e0be8ee21f04117480dbc8"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-5",
+      "label": "Artículo 32 Bis 5",
+      "sourcePages": [
+        12
+      ],
+      "contentSha256": "c2ce3e52c32646b6a0394dab6aee9e38b52ef9d989964248b022425803024a03"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-6",
+      "label": "Artículo 32 Bis 6",
+      "sourcePages": [
+        12
+      ],
+      "contentSha256": "d8c8cbe1233524b3289ca709eaf5b2a6a95dc50fae037d2e5f61c374aa6a4c78"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-7",
+      "label": "Artículo 32 Bis 7",
+      "sourcePages": [
+        12
+      ],
+      "contentSha256": "4395424e604bfade0262d4c5f8dbcad5d902e033b3954238ccdcf9b1adc537ea"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-8",
+      "label": "Artículo 32 Bis 8",
+      "sourcePages": [
+        12
+      ],
+      "contentSha256": "abbc6c5d53d8e4991eb3faab9197f461ebd60cfb7ff6fac09a1a7a0879224fe5"
+    },
+    {
+      "provisionKey": "ccom:article:32-bis-9",
+      "label": "Artículo 32 Bis 9",
+      "sourcePages": [
         13
       ],
-      "contentSha256": "bbe916e188650b157e3f1bdf74f90bdc92a3eede103fee7d909a14d531616c19"
+      "contentSha256": "5817e1006bcc1721069ce024d6aff8d5608e7bfdfbb09964ec4dbdc3a15a8c33"
     },
     {
       "provisionKey": "ccom:article:33",
@@ -1007,9 +1095,58 @@
       "label": "Artículo 95",
       "sourcePages": [
         24,
+        25
+      ],
+      "contentSha256": "515f5d1673e698fe17a97e418ee0dae3cbe1f0210826f250ff2e68a2a3d67274"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-1",
+      "label": "Artículo 95 Bis 1",
+      "sourcePages": [
+        25
+      ],
+      "contentSha256": "b95c5f661e9f3a2895841cedb3b6ebf26fe8f357064e4875cde460ce3edaf276"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-2",
+      "label": "Artículo 95 Bis 2",
+      "sourcePages": [
+        25
+      ],
+      "contentSha256": "cd3c158a7c3308be1769f7d70c59ebdfb6681ac2f7a0483f9904f38e13a507b7"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-3",
+      "label": "Artículo 95 Bis 3",
+      "sourcePages": [
+        25
+      ],
+      "contentSha256": "299660ee78e1cdfcb8e0e9453be2ae39dca9aee2995d71637635300562767b79"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-4",
+      "label": "Artículo 95 Bis 4",
+      "sourcePages": [
+        25,
         26
       ],
-      "contentSha256": "8b26b202ac91f922feb7b84abaf92ab78f5194767a9dcfb16d9241ebc894bfb5"
+      "contentSha256": "2a06df888be3881147be813e9e3e783b43f715fd438a18a87f59cd231c652a23"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-5",
+      "label": "Artículo 95 Bis 5",
+      "sourcePages": [
+        26
+      ],
+      "contentSha256": "dd0ccb00ad41d30147492b98f6548c8268545b941f16f5f8017729d922a40389"
+    },
+    {
+      "provisionKey": "ccom:article:95-bis-6",
+      "label": "Artículo 95 Bis 6",
+      "sourcePages": [
+        26
+      ],
+      "contentSha256": "952974656960d8f030736d2f89f3d629a6ab8fb3d3ac1f227d1e40eea1c9b33d"
     },
     {
       "provisionKey": "ccom:article:96",
@@ -10352,7 +10489,15 @@
         141,
         142
       ],
-      "contentSha256": "042ed4b3c09f73d51dc88fb8c4c304c2bbd031df51e361f871b832a9c4cf48bd"
+      "contentSha256": "035126848c8c5ea01f2344bb67f31fedd8778297d37efe609955681f0672d414"
+    },
+    {
+      "provisionKey": "ccom:article:1250-bis-1",
+      "label": "Artículo 1250 Bis 1",
+      "sourcePages": [
+        142
+      ],
+      "contentSha256": "76fc17005d34791cbb1fec2ec1513101251a80852f8bb796890052ed422f747c"
     },
     {
       "provisionKey": "ccom:article:1251",
@@ -11145,10 +11290,75 @@
       "provisionKey": "ccom:article:1345-bis",
       "label": "Artículo 1345 Bis",
       "sourcePages": [
+        159
+      ],
+      "contentSha256": "247d6935eea2ee96a9329897637e4ca64c923c565c6ee2db78bff9a3ce1cf9ef"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-1",
+      "label": "Artículo 1345 Bis 1",
+      "sourcePages": [
+        159
+      ],
+      "contentSha256": "4d532826c5b7003fca7648813133930a3b264863d0b296a40e8c705b2753e4ca"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-2",
+      "label": "Artículo 1345 Bis 2",
+      "sourcePages": [
+        159
+      ],
+      "contentSha256": "bff46dbce086260dc3d162a64eaa64022aa05662c6342a8c231a3d7a15673e02"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-3",
+      "label": "Artículo 1345 Bis 3",
+      "sourcePages": [
         159,
+        160
+      ],
+      "contentSha256": "b06e5d2d16b7c5a914a92fec7fddb5f7b65242d730c55ce172b70ff1d62b8161"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-4",
+      "label": "Artículo 1345 Bis 4",
+      "sourcePages": [
+        160
+      ],
+      "contentSha256": "a0519278054d0b1d4a528a007f7ae4c5c9165939968752c1745f0ebd4e7d818e"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-5",
+      "label": "Artículo 1345 Bis 5",
+      "sourcePages": [
+        160
+      ],
+      "contentSha256": "cee8c5bab024a588f336d8352549110efe1828599a2044aa9a3b3e98a8b594db"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-6",
+      "label": "Artículo 1345 Bis 6",
+      "sourcePages": [
+        160
+      ],
+      "contentSha256": "332a88bd02ffec13622e12b8105e5b25c1a48377ee8a68ab7c55ac7e6957c6b2"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-7",
+      "label": "Artículo 1345 Bis 7",
+      "sourcePages": [
+        160
+      ],
+      "contentSha256": "7567fd1ca50f0e64569f4124ef5c773c9af4260fa1d8a912e9264cc85ea22ba7"
+    },
+    {
+      "provisionKey": "ccom:article:1345-bis-8",
+      "label": "Artículo 1345 Bis 8",
+      "sourcePages": [
+        160,
         161
       ],
-      "contentSha256": "78273a74ce1f3d7c98301e91dff0d171c9422e55cc834d8ac024dd296fa10664"
+      "contentSha256": "190a0989da949f94ca68f8145ce3e4891a24b449510ab2da16daef3f546039d1"
     },
     {
       "provisionKey": "ccom:article:1346",
@@ -11534,19 +11744,547 @@
       "provisionKey": "ccom:article:1390-bis",
       "label": "Artículo 1390 Bis",
       "sourcePages": [
+        168
+      ],
+      "contentSha256": "9cb1f8665fee74231f8ca76ee6c34a6f12019e24b14fd4bd744d6ce0a6c7697c"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-1",
+      "label": "Artículo 1390 Bis 1",
+      "sourcePages": [
         168,
+        169
+      ],
+      "contentSha256": "1713ea32b3bf39ac1311fc8e2e32672b7b628e2f73369df600a11682b322980d"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-2",
+      "label": "Artículo 1390 Bis 2",
+      "sourcePages": [
+        169
+      ],
+      "contentSha256": "dc0589a2386a0ea1b0dc7e5ec50331304206908c5fdccfc63780db24f181bb79"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-3",
+      "label": "Artículo 1390 Bis 3",
+      "sourcePages": [
+        169
+      ],
+      "contentSha256": "30f688683bd91792927cabccc6aada578aa17d68096f033186f5f5ff4f3d9256"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-4",
+      "label": "Artículo 1390 Bis 4",
+      "sourcePages": [
+        169
+      ],
+      "contentSha256": "25bf3f2579b927e6be8b88fedd15aa2e495a0b83f23ea27b76aa674bc3986306"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-5",
+      "label": "Artículo 1390 Bis 5",
+      "sourcePages": [
+        169
+      ],
+      "contentSha256": "b7cf3753c6423fa290ec428479730e364edbd72a2b271f542098c70b97ec04a9"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-6",
+      "label": "Artículo 1390 Bis 6",
+      "sourcePages": [
+        169,
+        170
+      ],
+      "contentSha256": "61e354c9825accb4580fb0b94a819c5879478edc2f1170d26015fb25a892a472"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-7",
+      "label": "Artículo 1390 Bis 7",
+      "sourcePages": [
+        170
+      ],
+      "contentSha256": "db78f6f89d266b380b779675b3bdf844f2b2ba02bf82b182187abf09a9fce8f5"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-8",
+      "label": "Artículo 1390 Bis 8",
+      "sourcePages": [
+        170
+      ],
+      "contentSha256": "e5d2cd4bc2ceee26c5ebd984fb6bdfe1efdb7280743cb32b94874b9c39bd0e4a"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-9",
+      "label": "Artículo 1390 Bis 9",
+      "sourcePages": [
+        170
+      ],
+      "contentSha256": "bc7547b53011c638791a94b46c00390a7c299ae99aaabdfaaf4b55c24576c861"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-10",
+      "label": "Artículo 1390 Bis 10",
+      "sourcePages": [
+        170
+      ],
+      "contentSha256": "1ef9339977260914aca8af3525ceb67c25976a13840ba9e624ced93b190c589d"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-11",
+      "label": "Artículo 1390 Bis 11",
+      "sourcePages": [
+        170,
+        171
+      ],
+      "contentSha256": "f4ee8c7476acc32d19d57e92d5d47020f2b0b59636ad3505755926d6d769e475"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-12",
+      "label": "Artículo 1390 Bis 12",
+      "sourcePages": [
+        171
+      ],
+      "contentSha256": "d27fd8affa60ea5c1248b252ccce3fd253724dd4e8154ee6adc6f7f7d9ad6323"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-13",
+      "label": "Artículo 1390 Bis 13",
+      "sourcePages": [
+        171,
+        172
+      ],
+      "contentSha256": "3fded271333b40bff20e33c0059036a4ed5d432f60d297d018274ef1959ebd9d"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-14",
+      "label": "Artículo 1390 Bis 14",
+      "sourcePages": [
+        172
+      ],
+      "contentSha256": "a23842e88d788abadd3b370b0b19c0973385f041a9686adddecdf27efd7c8111"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-15",
+      "label": "Artículo 1390 Bis 15",
+      "sourcePages": [
+        172
+      ],
+      "contentSha256": "70ec5f043a6a35727346943a5d843c1932e3ce7b88db7eb3f8d01796a0e32ace"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-16",
+      "label": "Artículo 1390 Bis 16",
+      "sourcePages": [
+        172
+      ],
+      "contentSha256": "bc8d9f2c42e4416f3dd50f805fa337b74042bd568eb1623a93267fe281a8aa29"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-17",
+      "label": "Artículo 1390 Bis 17",
+      "sourcePages": [
+        172
+      ],
+      "contentSha256": "832f8fc7142a685113a85a5011e72874a2b11bc1d77312fb8adb13d8200362f5"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-18",
+      "label": "Artículo 1390 Bis 18",
+      "sourcePages": [
+        173
+      ],
+      "contentSha256": "5161ac042f4cd3a1e6c6472e75f6aaae7ca6eb7e5cfcc10f1ec175c06ced1d08"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-19",
+      "label": "Artículo 1390 Bis 19",
+      "sourcePages": [
+        173
+      ],
+      "contentSha256": "6a57561140ec279d7a48272c5d6ab74a357f527e21c6d16dc669d65ef244023f"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-20",
+      "label": "Artículo 1390 Bis 20",
+      "sourcePages": [
+        173
+      ],
+      "contentSha256": "dc4538a0f8f79ba8131280bae9c95195c4988676829e598a0e8e4bdf29d67916"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-21",
+      "label": "Artículo 1390 Bis 21",
+      "sourcePages": [
+        173
+      ],
+      "contentSha256": "c6cb0117f510e53bf83e9c5207e1dfe80fead65f17994147228451c854fab19a"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-22",
+      "label": "Artículo 1390 Bis 22",
+      "sourcePages": [
+        173
+      ],
+      "contentSha256": "078fc8d14f41a3f007f7832731274092a008633a645ffb32712676e66831c684"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-23",
+      "label": "Artículo 1390 Bis 23",
+      "sourcePages": [
+        173,
+        174
+      ],
+      "contentSha256": "124d831cd6abb9f24c8af42f2d8cdd4d4772cc335b448e35b6b5932c929cd923"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-24",
+      "label": "Artículo 1390 Bis 24",
+      "sourcePages": [
+        174
+      ],
+      "contentSha256": "b99584792878a83942cf59ddd57f2ddfc94f709d1fe5ed15700785577186a28e"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-25",
+      "label": "Artículo 1390 Bis 25",
+      "sourcePages": [
+        174
+      ],
+      "contentSha256": "7ea703010f806c1916ef602955edf1136a5a32b797ca637f0efe7625a75ecd1b"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-26",
+      "label": "Artículo 1390 Bis 26",
+      "sourcePages": [
+        174
+      ],
+      "contentSha256": "0656202ce07d510225ed187b6283364b365168485018164ad23e8eb692716d9f"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-27",
+      "label": "Artículo 1390 Bis 27",
+      "sourcePages": [
+        175
+      ],
+      "contentSha256": "e4288650b46a8dd403556e40c116a082cb2c5159567a50168c382fa9adbeb556"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-28",
+      "label": "Artículo 1390 Bis 28",
+      "sourcePages": [
+        175
+      ],
+      "contentSha256": "e0465c3a17beca78ba048db8187764e2fd6c4ad69cd47be1621d3434af3f9155"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-29",
+      "label": "Artículo 1390 Bis 29",
+      "sourcePages": [
+        175
+      ],
+      "contentSha256": "85679808a6b9062c53682b0a26d7b966f359210493ae50ff48b4a8fb40563269"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-30",
+      "label": "Artículo 1390 Bis 30",
+      "sourcePages": [
+        175
+      ],
+      "contentSha256": "16a80303fa008fd02a068ccef2e8784f6bc3e279d61b94a6d34387287a797e09"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-31",
+      "label": "Artículo 1390 Bis 31",
+      "sourcePages": [
+        175
+      ],
+      "contentSha256": "466a407e317dc833cad5e63d74f90efa8f5e43fa817940755f1f4011f6f4134f"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-32",
+      "label": "Artículo 1390 Bis 32",
+      "sourcePages": [
+        175,
+        176
+      ],
+      "contentSha256": "282b636e842ca3921e147bba9d10474838630fb27aa640346d0241f53e39f725"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-33",
+      "label": "Artículo 1390 Bis 33",
+      "sourcePages": [
+        176
+      ],
+      "contentSha256": "d708276fd23bfe45a470c77c26a2c502979b7017e0c8013035063554ce5a9c53"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-34",
+      "label": "Artículo 1390 Bis 34",
+      "sourcePages": [
+        176
+      ],
+      "contentSha256": "fe84214985bb7ef68a116585fd79c1674eb578843180097dafdac837371d85fa"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-35",
+      "label": "Artículo 1390 Bis 35",
+      "sourcePages": [
+        176
+      ],
+      "contentSha256": "c6a0562b713f3aa43417d2d56d5b2a29660c26abe90e5eed499f89eba2d4625e"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-36",
+      "label": "Artículo 1390 Bis 36",
+      "sourcePages": [
+        176
+      ],
+      "contentSha256": "883b015e21eab173648a730667bb91a824a757028d2998f5591a76f9a01fe29b"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-37",
+      "label": "Artículo 1390 Bis 37",
+      "sourcePages": [
+        176,
+        177
+      ],
+      "contentSha256": "10cc4e6aec0f4b502b627587c8dc92d81c7db62f0e78706ad29ed0ea14fb3626"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-38",
+      "label": "Artículo 1390 Bis 38",
+      "sourcePages": [
+        177
+      ],
+      "contentSha256": "90945b45eed259c3615a99b91c566c5b12af7ff2d36d8ffe1a2e00a4bdf87dbf"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-39",
+      "label": "Artículo 1390 Bis 39",
+      "sourcePages": [
+        177
+      ],
+      "contentSha256": "0f948c810ebef8f34ca22514d4c52eadf6673cb16c9d8bd50d6ebfdbf15d2644"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-40",
+      "label": "Artículo 1390 Bis 40",
+      "sourcePages": [
+        177,
+        178
+      ],
+      "contentSha256": "c8656579ecbee377fdafd85ead0f20afffab415f23d96e09b01f3f13efaae476"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-41",
+      "label": "Artículo 1390 Bis 41",
+      "sourcePages": [
+        178
+      ],
+      "contentSha256": "5e57c799a3771122c18799bae3eb15348e1ea245cdba4d584b7e8a45c8bf3cb3"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-42",
+      "label": "Artículo 1390 Bis 42",
+      "sourcePages": [
+        178,
+        179
+      ],
+      "contentSha256": "d59b5d862a1758e3fc7646e40006600affbfe361d6e12deba453e7e065923a39"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-43",
+      "label": "Artículo 1390 Bis 43",
+      "sourcePages": [
+        179
+      ],
+      "contentSha256": "f0d9623b67d6c90bee083e10c9e9ad18c066d9a1cb2c740f80a3ee4fbda21b4f"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-44",
+      "label": "Artículo 1390 Bis 44",
+      "sourcePages": [
+        179
+      ],
+      "contentSha256": "957373a33effb6a996a2d538f6392e9df567cbcf8e67c16f80cf84eb315831c5"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-45",
+      "label": "Artículo 1390 Bis 45",
+      "sourcePages": [
+        179,
+        180
+      ],
+      "contentSha256": "26ecb8afcadcd19a21aff0fa66bd0d734fca6d977f4e415448dff30e3de76746"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-46",
+      "label": "Artículo 1390 Bis 46",
+      "sourcePages": [
+        180
+      ],
+      "contentSha256": "4218ad8a10238fcc4bd3cdcad511094941b745b8e885ebd9859552ac91c4d258"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-47",
+      "label": "Artículo 1390 Bis 47",
+      "sourcePages": [
+        180
+      ],
+      "contentSha256": "8d07e7d1ae23e654377995902258dd2957978367edb762ff86a3323faae3eda4"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-48",
+      "label": "Artículo 1390 Bis 48",
+      "sourcePages": [
         181
       ],
-      "contentSha256": "c7fb3896638387a670a8b817187d0564fa4362cf249edd1830cf2bf10063e257"
+      "contentSha256": "0e646784595d1f1265c8a2e804f5dffcd81bfa844e6a523ce9aef482e715801e"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-49",
+      "label": "Artículo 1390 Bis 49",
+      "sourcePages": [
+        181
+      ],
+      "contentSha256": "3ae622e8f27e54e2c2f6fd9bcd09a0a345e0b7cf2dedf7bd159986a4824e2d1e"
+    },
+    {
+      "provisionKey": "ccom:article:1390-bis-50",
+      "label": "Artículo 1390 Bis 50",
+      "sourcePages": [
+        181
+      ],
+      "contentSha256": "ae7c8269df5bdf37bf61032f8ed80dc672212076124b5f347113fdb1fb5ac55c"
     },
     {
       "provisionKey": "ccom:article:1390-ter",
       "label": "Artículo 1390 Ter",
       "sourcePages": [
-        181,
+        181
+      ],
+      "contentSha256": "852e33cc8b7653876007ad7c5a9c1694aa3a9cabfa35fa312288c1305821a9ab"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-1",
+      "label": "Artículo 1390 Ter 1",
+      "sourcePages": [
+        182
+      ],
+      "contentSha256": "1468b2cad2af0614a91bd9406a005ff140c06614bc50a5c4048d9e4a089a6f62"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-2",
+      "label": "Artículo 1390 Ter 2",
+      "sourcePages": [
+        182
+      ],
+      "contentSha256": "7c3a1f8a91f42e0e5da96fde86ceb9edec0bb010c25d8a0a6aaa6cdac0cfe596"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-3",
+      "label": "Artículo 1390 Ter 3",
+      "sourcePages": [
+        182
+      ],
+      "contentSha256": "f335247a4a039b7f837b17c2e1297a43769d979b880c2d2e2b212da02a9b30a9"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-4",
+      "label": "Artículo 1390 Ter 4",
+      "sourcePages": [
+        182
+      ],
+      "contentSha256": "79d8f185aa1b46d736973e3130bc8e06bdf0267c23b2062719cd0aad186fbcc3"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-5",
+      "label": "Artículo 1390 Ter 5",
+      "sourcePages": [
+        182
+      ],
+      "contentSha256": "269f6ff7ed19a1ae17b89cf48d3e1697dddaaedd94d3c811bbe7a71b44ab4fc4"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-6",
+      "label": "Artículo 1390 Ter 6",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "aa8067d56b4920a42d0987c672a7129f257f130c9953e7e89c535fdfc66675d9"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-7",
+      "label": "Artículo 1390 Ter 7",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "392d8c7927f3a969c539ddc49b12ddd4e52e7dea0d6c3966c0408dfd34626463"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-8",
+      "label": "Artículo 1390 Ter 8",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "0377f527b4745220cb414fa83785ea60725890633ef0878d6a56df64e1469fdf"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-9",
+      "label": "Artículo 1390 Ter 9",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "8a527b08895edc78edd38d7c79106d22a0afafd0e5df40ce1ee32df0caa3badd"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-10",
+      "label": "Artículo 1390 Ter 10",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "d7980dd827e4d028e9d84dc2d1a4ab8e73981c5eb05df54695f2d06f8247a772"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-11",
+      "label": "Artículo 1390 Ter 11",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "4e065c4c498bd80730cf063dfb5f0fdc1afbd7dd737ac1f33266c9c811ac38d1"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-12",
+      "label": "Artículo 1390 Ter 12",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "362dcc34a81b898a6c7dd9ef83b5f80c0cd8e18b42e5d57beb9504348b2e4fff"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-13",
+      "label": "Artículo 1390 Ter 13",
+      "sourcePages": [
+        183
+      ],
+      "contentSha256": "090f612de6398d97d078fdf2c7cc50c514581c30a8d4aa09f5c9196f8dadb145"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-14",
+      "label": "Artículo 1390 Ter 14",
+      "sourcePages": [
         184
       ],
-      "contentSha256": "f8a28bdb0904b884eff3e7b8d52ae6530aaea5a18f8836e41272886c46a61e6b"
+      "contentSha256": "0431025beea124bdf1dfbb8263cd5ef74ca38220930d112fb26cbf5c573421d0"
+    },
+    {
+      "provisionKey": "ccom:article:1390-ter-15",
+      "label": "Artículo 1390 Ter 15",
+      "sourcePages": [
+        184
+      ],
+      "contentSha256": "4e7d2d09efa314c8a070583ea8a7815b84eaf875a3458dea94a7b3ad04a1d02f"
     },
     {
       "provisionKey": "ccom:article:1391",
@@ -11740,7 +12478,23 @@
       "sourcePages": [
         190
       ],
-      "contentSha256": "7b5d6d198583aefb7e53c776ebdd0521c24866eaf2fa5ad5a83147ffa11cfca9"
+      "contentSha256": "0fda2d30bbd0d2be4c2e63bbd5f78ff6077cbab3a4633df6f039c68b6bb30360"
+    },
+    {
+      "provisionKey": "ccom:article:1412-bis-1",
+      "label": "Artículo 1412 Bis 1",
+      "sourcePages": [
+        190
+      ],
+      "contentSha256": "ac9cf418729ba0daa456e2709ebb44c51d07b7a7a8f4d49eb040de0e70ee9eb5"
+    },
+    {
+      "provisionKey": "ccom:article:1412-bis-2",
+      "label": "Artículo 1412 Bis 2",
+      "sourcePages": [
+        190
+      ],
+      "contentSha256": "1126b526c8ed0cc1e3f7c02d05b5a19c43247ce93c7e994af7949b7e84f32067"
     },
     {
       "provisionKey": "ccom:article:1413",
@@ -11763,9 +12517,171 @@
       "label": "Artículo 1414 Bis",
       "sourcePages": [
         190,
+        191
+      ],
+      "contentSha256": "ca9b0dcf1d97be6b64e606ae4712ae73740fb0ab9cbfc64dd18fd3f1a6a127f9"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-1",
+      "label": "Artículo 1414 Bis 1",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "ebbb90e5c029513db6b7af17183fe6af1174a0c69ac30695b5ae78bb5bb7ec6f"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-2",
+      "label": "Artículo 1414 Bis 2",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "8f391197a1ce36d5ce61fb9184d08b1b11ff150ca731529f8ed613ac5a9a2b16"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-3",
+      "label": "Artículo 1414 Bis 3",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "17485ce964d41eeab2e670bbf621ec051a9b2999a906df4d87ba4cc68fadc658"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-4",
+      "label": "Artículo 1414 Bis 4",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "87daf4c75b6f61a4d4a420b95009906343ad5e182c3c944c07da97fc91928f28"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-5",
+      "label": "Artículo 1414 Bis 5",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "60cc534a809d97aaca064c525c009f6472d9cacc521ea2dcfec200456602edf8"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-6",
+      "label": "Artículo 1414 Bis 6",
+      "sourcePages": [
+        191
+      ],
+      "contentSha256": "968fa04597e36d40c9e2182a9c1dd11f4ea9ba348c0f3c969b53b4c22f3f6b84"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-7",
+      "label": "Artículo 1414 Bis 7",
+      "sourcePages": [
+        192
+      ],
+      "contentSha256": "3f76349b284867c6ab971c26b2cc612b77710c471c9fc1a3c1c96eed34434492"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-8",
+      "label": "Artículo 1414 Bis 8",
+      "sourcePages": [
+        192
+      ],
+      "contentSha256": "22a125ceac19837ec8092aa39f98f75fe0b8bc37fec4685ab82729efcdcd7c79"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-9",
+      "label": "Artículo 1414 Bis 9",
+      "sourcePages": [
+        192,
+        193
+      ],
+      "contentSha256": "78a9f297cd169d91f10d1bbf2ad75c40a8b71c8d58c2cc89dfd787be1ff16488"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-10",
+      "label": "Artículo 1414 Bis 10",
+      "sourcePages": [
+        193
+      ],
+      "contentSha256": "d30315de18ab1c3f4eb011ae308ad8c6f864c1747985a32fb84e4257fb7bbafa"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-11",
+      "label": "Artículo 1414 Bis 11",
+      "sourcePages": [
+        193
+      ],
+      "contentSha256": "edd5109c663e1511091a1875425b914920cddec11934ae20e89b537d8caff760"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-12",
+      "label": "Artículo 1414 Bis 12",
+      "sourcePages": [
+        193
+      ],
+      "contentSha256": "6fb3b72ef84f84a111f36fbfdee6c73add7c478da9db43f3957b323ea935a9c3"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-13",
+      "label": "Artículo 1414 Bis 13",
+      "sourcePages": [
+        193
+      ],
+      "contentSha256": "fce8d7d21b53f57d050c53871cb9bd56637aaf4837c4e9f42f946b6d0d35ed46"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-14",
+      "label": "Artículo 1414 Bis 14",
+      "sourcePages": [
+        194
+      ],
+      "contentSha256": "302ee275af3d264bda2ba08f4e56895f804db6e610439d37d87a9a21e44b8e8d"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-15",
+      "label": "Artículo 1414 Bis 15",
+      "sourcePages": [
+        194
+      ],
+      "contentSha256": "d70e2243326522331b9e8fbd2d4b7639278437d5790dd05957a61e44bb929669"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-16",
+      "label": "Artículo 1414 Bis 16",
+      "sourcePages": [
+        194
+      ],
+      "contentSha256": "fba84957be73a1bf50a8c80ecd49bff752683705f3f49db50cacfca84229e2dc"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-17",
+      "label": "Artículo 1414 Bis 17",
+      "sourcePages": [
+        194,
+        195
+      ],
+      "contentSha256": "ae70f16a33dcfba949b86d661617879a3f40fbbcd373c3972f54a529a5228f8a"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-18",
+      "label": "Artículo 1414 Bis 18",
+      "sourcePages": [
+        195
+      ],
+      "contentSha256": "ee591d19a65532b27ce7713316b7d67b5753b5bf9d0bbe557cc62d12cccba702"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-19",
+      "label": "Artículo 1414 Bis 19",
+      "sourcePages": [
         196
       ],
-      "contentSha256": "4cdcef608a98dc0e3ce9a5c811b2fe7653caf66f9eb32485a3cbdab2aea363c7"
+      "contentSha256": "343176c739e30f2f659a6ff636366f52884d7d0081c03f285d528ec57da77833"
+    },
+    {
+      "provisionKey": "ccom:article:1414-bis-20",
+      "label": "Artículo 1414 Bis 20",
+      "sourcePages": [
+        196
+      ],
+      "contentSha256": "90be7077289aaa979f28fa5f83e8d512557b9e39a93d37c02b34873f55e363db"
     },
     {
       "provisionKey": "ccom:article:1415",
@@ -14501,9 +15417,18 @@
       "label": "Artículo 249 Bis",
       "sourcePages": [
         42,
+        43
+      ],
+      "contentSha256": "fe82a608547e0cfe0f63b46dbfeec7c2681987a12c90547085aa547b690197ac"
+    },
+    {
+      "provisionKey": "lgsm:article:249-bis-1",
+      "label": "Artículo 249 Bis 1",
+      "sourcePages": [
+        43,
         44
       ],
-      "contentSha256": "678b32cd5533708fecbe04b95f65b20864c3a008abd556395a19401660ba13c0"
+      "contentSha256": "355d9983b17a59de8a3de6aa3a756e7dcc8af3551cd97056f2f4169d82c91956"
     },
     {
       "provisionKey": "lgsm:article:250",
@@ -16558,10 +17483,190 @@
       "provisionKey": "lgtoc:article:228",
       "label": "Artículo 228",
       "sourcePages": [
+        40
+      ],
+      "contentSha256": "fccc6cc54c1a06f0e5e8d9e9491a993c902f77c9bd2e793e94c1dbfa8432eb86"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-a",
+      "label": "Artículo 228-A",
+      "sourcePages": [
         40,
+        41
+      ],
+      "contentSha256": "cd10d68b24a78ddea01ec8ba71a204acf49c8374303bc6aa0aa7dad96d5904bf"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-b",
+      "label": "Artículo 228-B",
+      "sourcePages": [
+        41
+      ],
+      "contentSha256": "efd41d47a30746a10eb5ac6128a42bcb48cb775dfed90882c66fa33d0271398d"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-c",
+      "label": "Artículo 228-C",
+      "sourcePages": [
+        41
+      ],
+      "contentSha256": "73f41fd69b452f58b8d85f1f435deab8426a79565d92c2403debd24382f03ab3"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-d",
+      "label": "Artículo 228-D",
+      "sourcePages": [
+        41
+      ],
+      "contentSha256": "22978aee98bb500491b92b292a1c293fa8d216740a14d35ec1f4b4495a1a2183"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-e",
+      "label": "Artículo 228-E",
+      "sourcePages": [
+        41
+      ],
+      "contentSha256": "e82b6441ba42d5a616bd91428942e7afe1533e82babc634a311983722074fd7c"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-f",
+      "label": "Artículo 228-F",
+      "sourcePages": [
+        41,
+        42
+      ],
+      "contentSha256": "d1abb895473e4ab6017f0716ed83b198cb4c0ba5f4b40217590f2bc24b2a15b3"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-g",
+      "label": "Artículo 228-G",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "049d7d04530d4ca3289851a77d921337467365c947f07b3175bafad436e50a33"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-h",
+      "label": "Artículo 228-H",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "f23e83b4da34cf8bf6e690aa17bb14c808f0c1e6476ccd5da6766c7976676781"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-i",
+      "label": "Artículo 228-I",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "123f6ffc5898756adc046b1ac9514db186da54a607e53dd2323613de9f20b2dc"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-j",
+      "label": "Artículo 228-J",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "669316e47554b35403c9e25eb168e5f2d5d33e5378c42f05f76b2f5995d4fcf0"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-k",
+      "label": "Artículo 228-K",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "100a85c7c1e082311e3a7bc317d5b99f5b9186c03af6c212b5449f791f2a7b27"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-l",
+      "label": "Artículo 228-L",
+      "sourcePages": [
+        42
+      ],
+      "contentSha256": "8a5a9dd63f4fe095873af5c7aa78662bced1d52e2a7d81a597846d3f738076f0"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-m",
+      "label": "Artículo 228-M",
+      "sourcePages": [
+        42,
+        43
+      ],
+      "contentSha256": "1b95a1456d5a7963e7d0f35482e11838d2d1edfc57ef176d35c9200e4fbc4be0"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-n",
+      "label": "Artículo 228-N",
+      "sourcePages": [
+        43,
+        44
+      ],
+      "contentSha256": "b8160f549ead0f379bd4784fc46ab87d217219a4d171e32591593914cdf7c50e"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-o",
+      "label": "Artículo 228-O",
+      "sourcePages": [
+        44
+      ],
+      "contentSha256": "8658442fdaec37824629b1d80512bf8f66e7b500b1b66e9e6a6727d524a55f9d"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-p",
+      "label": "Artículo 228-P",
+      "sourcePages": [
+        44
+      ],
+      "contentSha256": "bde0e568d7fe4079141ac89ce099d7a0ef904e6c61840430a616447de717833e"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-q",
+      "label": "Artículo 228-Q",
+      "sourcePages": [
+        44
+      ],
+      "contentSha256": "9240a741abdac896b22e1456708d53e00bcb80d53e4618acfaba02a4b2505833"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-r",
+      "label": "Artículo 228-R",
+      "sourcePages": [
+        44,
         45
       ],
-      "contentSha256": "936a143762a17c01c4b620bdacf7e99bc09fe525797091c5f4ff75c284612100"
+      "contentSha256": "a648c84174b877b72ee7ade8b7345898b358e6d769ad42a7db5b73cd5492167e"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-s",
+      "label": "Artículo 228-S",
+      "sourcePages": [
+        45
+      ],
+      "contentSha256": "61cccc659d54b6afbdeff5bb683e2a17acee4b054924192b456c620f098096eb"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-t",
+      "label": "Artículo 228-T",
+      "sourcePages": [
+        45
+      ],
+      "contentSha256": "5e36ab515aabf4bcc6f723929e26058cc338b95e2dd610404c16db22479406ae"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-u",
+      "label": "Artículo 228-U",
+      "sourcePages": [
+        45
+      ],
+      "contentSha256": "96bdd9e35837f6a5854099c9f2b25760af7452f2126b6202432b5bdd74e31553"
+    },
+    {
+      "provisionKey": "lgtoc:article:228-v",
+      "label": "Artículo 228-V",
+      "sourcePages": [
+        45
+      ],
+      "contentSha256": "526fa7a961fd3735a784556894238f63781e140700f71305ae37c15a52e40444"
     },
     {
       "provisionKey": "lgtoc:article:229",

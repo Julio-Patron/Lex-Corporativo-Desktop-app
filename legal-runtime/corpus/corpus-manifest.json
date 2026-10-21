@@ -11,8 +11,8 @@
   },
   "summary": {
     "configuredLaws": 16,
-    "corpusEntries": 7351,
-    "uniqueProvisionKeys": 7351,
+    "corpusEntries": 7515,
+    "uniqueProvisionKeys": 7515,
     "duplicateProvisionKeys": 0,
     "duplicateRows": 0,
     "conflictingDuplicateKeys": 0,
@@ -24,8 +24,8 @@
     "table": "legal_knowledge",
     "exists": true,
     "fileCount": 24,
-    "totalBytes": 33371693,
-    "sha256": "cc163af0827f2f9b2bc46fa277d329333f854ef35b6183f5077e64eab1766739"
+    "totalBytes": 33610415,
+    "sha256": "f1351cfad86aef0a8a157edd623c76f060cfc2c5698f490f3ad9a6c9863705f3"
   },
   "laws": [
     {
@@ -42,16 +42,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 512865,
-        "sha256": "6a6c86d07742323638bd89827f1431794a4c77fb1575efd440ad1f501e5c8ae2"
+        "bytes": 513198,
+        "sha256": "610ea40118e9cf940147d7e6cdcb7e34cc8e26279da8477b93dc0cad4a796dce"
       },
       "structure": {
-        "entries": 1528,
-        "uniqueProvisionKeys": 1528,
+        "entries": 1641,
+        "uniqueProvisionKeys": 1641,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -77,16 +77,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 139747,
-        "sha256": "046d9d3bc192be11ec74f0ad0bbda6bfc0e2b4cfe00eb8eb78d1a8e97714b2c9"
+        "bytes": 139750,
+        "sha256": "f401dc581ca6a6f03f95510d7f97cbf8a7443a1bda7ef696cd0f7528cfc4476c"
       },
       "structure": {
-        "entries": 276,
-        "uniqueProvisionKeys": 276,
+        "entries": 277,
+        "uniqueProvisionKeys": 277,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -112,16 +112,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 271367,
-        "sha256": "53cd6af2fa8d915c773a674e103abb8dcdcfde88e7dabd12f704b2df3fafcc3f"
+        "bytes": 271433,
+        "sha256": "a13cf16e23f809fb779d38fd756ca0e29f0910dda5f0c997e59601b70b2d2f2a"
       },
       "structure": {
-        "entries": 440,
-        "uniqueProvisionKeys": 440,
+        "entries": 462,
+        "uniqueProvisionKeys": 462,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -182,16 +182,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 89689,
-        "sha256": "fe96fa46cd8a28ee40197a12e8c104744368ecf31b17235938e2fab60b1650fb"
+        "bytes": 89722,
+        "sha256": "6dea59999d34fd3c144e9f5e3876843d85c3479aff735b1d7b9f985c2889627c"
       },
       "structure": {
-        "entries": 98,
-        "uniqueProvisionKeys": 98,
+        "entries": 109,
+        "uniqueProvisionKeys": 109,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -217,16 +217,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 166714,
-        "sha256": "1068fcc60c533d065cebc9bb9cc140db25381b88dfa95dcd4cb7e8843f57eef6"
+        "bytes": 166746,
+        "sha256": "226ec847287492a5b9a48ec55a3bdc9668caba99ac8aed4b4d88ac902805765c"
       },
       "structure": {
-        "entries": 215,
-        "uniqueProvisionKeys": 215,
+        "entries": 223,
+        "uniqueProvisionKeys": 223,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -256,12 +256,12 @@
       },
       "file": {
         "exists": true,
-        "bytes": 491996,
-        "sha256": "3fcc14c6f703a76c89a34f77661489d69cfb68f1b227180722df4c9878622ebb"
+        "bytes": 492031,
+        "sha256": "25a08999c94a2b34e249859c8c3b5e23e909c3352bfd5de563ea1acf209891e7"
       },
       "structure": {
-        "entries": 268,
-        "uniqueProvisionKeys": 268,
+        "entries": 277,
+        "uniqueProvisionKeys": 277,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -594,5 +594,5 @@
     "status": "pass",
     "failures": []
   },
-  "artifactSha256": "ef25897d91f8a824d0def9fea485352d05a0243f4fadbb63e6101026e2fb152d"
+  "artifactSha256": "64c0719b9b10c43403b30a252cbc0a819422eead59a24892f6760dc8cd4b1a34"
 }

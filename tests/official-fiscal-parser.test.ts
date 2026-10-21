@@ -183,6 +183,43 @@ describe('detección de encabezados de artículo', () => {
     expect(result.provisions[1].content).toMatch(/^En los casos de las fracciones I, V, X y XI/);
   });
 
+  it('reconoce la letra separada por espacio y el sufijo seguido de número', () => {
+    expect(matchArticleHeading('Artículo 17 A.- Las restricciones y regulaciones no arancelarias')).toBe('17 A');
+    expect(matchArticleHeading('ARTICULO 137 bis 1.- Las personas físicas que acrediten su residencia')).toBe('137 bis 1');
+    expect(matchArticleHeading('Artículo 1390 Bis 12.- Las partes podrán ofrecer pruebas')).toBe('1390 Bis 12');
+    expect(matchArticleHeading('Artículo 32 bis 1. Las garantías mobiliarias que se constituyan')).toBe('32 bis 1');
+    expect(matchArticleHeading('Artículo 228 o.- Los términos y condiciones de las emisiones')).toBe('228 o');
+
+    expect(normalizeProvisionId('17 A', 'article')).toBe('17-A');
+    expect(normalizeProvisionId('228 o', 'article')).toBe('228-O');
+    expect(normalizeProvisionId('137 bis 1', 'article')).toBe('137 Bis 1');
+    expect(normalizeProvisionId('1390 Ter 3', 'article')).toBe('1390 Ter 3');
+    expect(normalizeProvisionId('3o', 'article')).toBe('3');
+  });
+
+  it('no abre artículos con referencias que llevan letra o número después del sufijo', () => {
+    expect(matchArticleHeading('Artículo 17 A de la Ley de Comercio Exterior')).toBeNull();
+    expect(matchArticleHeading('Artículo 21 bis 1 de este Código, la prelación')).toBeNull();
+    expect(matchArticleHeading('Artículo 5 a la fecha de su publicación')).toBeNull();
+  });
+
+  it('separa los artículos con sufijo y número que antes quedaban dentro del anterior', () => {
+    const result = extractLawArticles([{
+      num: 1,
+      headings: [{ id: '1390 Bis' }, { id: '1390 Bis 1' }, { id: '1390 Bis 2' }, { id: '17' }, { id: '17 A' }],
+      text: [
+        `Artículo 1390 Bis.- ${longText('Juicio oral mercantil')}`,
+        `Artículo 1390 Bis 1. ${longText('No se sustanciarán en este juicio')}`,
+        `Artículo 1390 Bis 2.- ${longText('Principios de oralidad')}`,
+        `Artículo 17.- ${longText('Restricciones')}`,
+        `Artículo 17 A.- ${longText('Regulaciones no arancelarias')}`,
+      ].join('\n'),
+    }]);
+
+    expect(result.provisions.map(item => item.id)).toEqual(['1390 Bis', '1390 Bis 1', '1390 Bis 2', '17', '17-A']);
+    expect(result.provisions[0].content).not.toContain('No se sustanciarán');
+  });
+
   it('detiene el cuerpo de la ley en el encabezado espaciado "T r a n s i t o r i o s"', () => {
     const result = extractLawArticles([
       { num: 1, text: `Artículo 203.- ${longText('Recurso de revocación')}` },

@@ -64,7 +64,7 @@ const SOURCES = [
     parser: 'law',
     policy: {
       minimumEntries: 90,
-      maximumEntries: 110,
+      maximumEntries: 120,
       anchors: [
         { id: '1', terms: ['regular y promover', 'comercio exterior'] },
         { id: '15', terms: ['medidas de regulacion', 'restriccion no arancelarias'] },
@@ -85,7 +85,7 @@ const SOURCES = [
     parser: 'law',
     policy: {
       minimumEntries: 185,
-      maximumEntries: 220,
+      maximumEntries: 235,
       anchors: [
         { id: '1', terms: ['Ley de Comercio Exterior'] },
         { id: '2', terms: ['Comision', 'Secretaria de Economia'] },
@@ -106,7 +106,7 @@ const SOURCES = [
     parser: 'law',
     policy: {
       minimumEntries: 200,
-      maximumEntries: 275,
+      maximumEntries: 290,
       anchors: [
         { id: '1', terms: ['despacho aduanero'] },
         { id: '36', terms: ['pedimento'] },

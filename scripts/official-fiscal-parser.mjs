@@ -16,7 +16,10 @@ const ARTICLE_SUFFIX_WORDS = ARTICLE_SUFFIX_NAMES.map(anyCase).join('|');
 // "Artículo", "ARTÍCULO" o "ARTICULO", con un punto opcional ("Artículo. 88."). El número
 // debe ir seguido de un terminador (".", ".-", "-", "–" o "—"), como en el texto oficial.
 const ARTICLE_WORD_SOURCE = String.raw`(?:Art[íi]culo|ART[ÍIí]CULO)\.?`;
-const ARTICLE_ID_SOURCE = String.raw`(\d+(?:o|º|°)?(?:(?:\.-|-)(?:${ARTICLE_SUFFIX_WORDS}|[A-Z]))?(?:\s+(?:${ARTICLE_SUFFIX_WORDS}))?)`;
+// Después del número puede venir un sufijo con guion ("69-B"), un sufijo latino que a su
+// vez lleve número ("1390 Bis 12", "137 bis 1") o una letra suelta separada por espacio
+// ("17 A", "228 a"); el terminador obligatorio evita confundirla con "Artículo 5 a la".
+const ARTICLE_ID_SOURCE = String.raw`(\d+(?:o|º|°)?(?:(?:\.-|-)(?:${ARTICLE_SUFFIX_WORDS}|[A-Z]))?(?:\s+(?:${ARTICLE_SUFFIX_WORDS})(?:\s+\d+)?|\s+[A-Za-z](?![\p{L}\d]))?)`;
 const ARTICLE_TERMINATOR_SOURCE = String.raw`\s*(?:\.\s*-\s*|[.\-–—])\s*`;
 const ARTICLE_HEADER_SOURCE = String.raw`^\s*${ARTICLE_WORD_SOURCE}\s+${ARTICLE_ID_SOURCE}${ARTICLE_TERMINATOR_SOURCE}`;
 const RULE_HEADER_SOURCE = String.raw`^\s*(\d+(?:\.\d+){1,3})\.\s+(?=\S)`;
@@ -73,6 +76,9 @@ export function normalizeProvisionId(value, kind) {
   const normalized = String(value)
     .normalize('NFC')
     .trim()
+    // La letra suelta ("17 A", "228 o") se escribe con guion, como el resto de las letras
+    // del corpus; así "228 o" no se confunde con el ordinal "1o".
+    .replace(/^(\d+)\s+([A-Za-z])$/u, (_match, number, letter) => `${number}-${letter.toUpperCase()}`)
     .replace(/[–—]/g, '-')
     .replace(/(\d)\s*(?:o|º|°)\.?/gi, '$1')
     .replace(/\.\s*-\s*/g, '-')

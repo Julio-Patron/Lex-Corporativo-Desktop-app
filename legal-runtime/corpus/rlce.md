@@ -4,7 +4,7 @@
 > Módulo: comercio_exterior
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LCE.pdf
 > SHA-256 fuente: 14d38a7a24e4d8e5093951b5e80a87f331fa3ea0be2164269573a8b9e4c291dd
-> Verificación oficial: 2026-08-12
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2014-05-22
 **Artículo 1**
 Para los efectos de este Reglamento, se entenderá por:
@@ -221,7 +221,9 @@ III. Fracción arancelaria y descripción detallada de la mercancía;
 IV. Cantidad y valor solicitado;
 V. País de origen o destino, y
 VI. En su caso, especificaciones técnicas de la mercancía y documentación que la identifique.
-ARTICULO 17 A.- Los trámites relacionados con la importación, exportación y tránsito de mercancías,
+
+**Artículo 17-A**
+Los trámites relacionados con la importación, exportación y tránsito de mercancías,
 así como regulaciones y restricciones no arancelarias, deberán presentarse mediante medios
 electrónicos en términos de la legislación aplicable en la materia. En caso de resultar necesario, para la
 atención de dichos trámites la Secretaría se coordinará con la dependencia, órgano o entidad que
@@ -375,7 +377,9 @@ comercialmente intercambiables con los que se compara.
 **Artículo 38**
 El margen de discriminación de precios de la mercancía se definirá como la diferencia
 entre su valor normal y su precio de exportación, relativa a este último precio.
-ARTICULO 38 A.- Para efectos del artículo 38 de la Ley, el monto de la subvención se calculará en
+
+**Artículo 38-A**
+Para efectos del artículo 38 de la Ley, el monto de la subvención se calculará en
 función del beneficio obtenido por el receptor.
 La metodología para calcular el monto de la subvención en función del beneficio obtenido, podrá
 considerar las condiciones y características particulares de cada subvención, del país que la otorga; así
@@ -1201,7 +1205,9 @@ Las cuotas compensatorias aplicadas a las importaciones procedentes de
 exportadores extranjeros que, habiéndoseles otorgado oportunidad de defensa, no hayan participado en
 la investigación, se fijarán conforme los márgenes de discriminación de precios de que tenga
 conocimiento la Secretaría.
-ARTICULO 89 A.- En términos de lo dispuesto en el artículo 87 de la Ley, las cuotas compensatorias
+
+**Artículo 89-A**
+En términos de lo dispuesto en el artículo 87 de la Ley, las cuotas compensatorias
 podrán establecerse en función de precios o valores de referencia. El monto de las cuotas compensatorias
 que así se determinen no podrá ser superior a los márgenes de discriminación de precios o al monto de
 la subvención calculado.
@@ -1413,7 +1419,9 @@ II. Una vez presentada la solicitud, la Secretaría deberá solicitar, conforme 
 tratado o convenio internacional de que se trate, el inicio del procedimiento de solución de controversias.
 CAPITULO XI
 Procedimientos especiales
-ARTICULO 117 A.- El procedimiento a que se refiere el artículo 89 A de la Ley, se substanciará de la
+
+**Artículo 117-A**
+El procedimiento a que se refiere el artículo 89 A de la Ley, se substanciará de la
 siguiente forma:
 I. La solicitud deberá presentarse por escrito ante la unidad administrativa competente de la
 Secretaría, por el particular interesado o por quien actúe en su representación, acompañada de los
@@ -1438,7 +1446,9 @@ de la resolución de inicio del procedimiento y la notificará a las partes inte
 Si la Secretaría confirma que la mercancía en cuestión está sujeta al pago de la cuota compensatoria,
 ésta deberá pagarse junto con los recargos que correspondan de conformidad con las disposiciones
 fiscales aplicables.
-ARTICULO 117 B.- El procedimiento de elusión de cuotas compensatorias o medidas de salvaguarda
+
+**Artículo 117-B**
+El procedimiento de elusión de cuotas compensatorias o medidas de salvaguarda
 a que se refiere el artículo 89 B de la Ley, se substanciará de la siguiente forma:
 I. La solicitud deberá presentarse por escrito ante la unidad administrativa competente de la
 Secretaría, por el particular interesado o por quien actúe en su representación, acompañada de los
@@ -1458,7 +1468,9 @@ pública y se fijará el plazo para que las partes presenten sus alegatos, y
 IV. La Secretaría publicará la resolución final en el Diario Oficial de la Federación dentro de un plazo
 de ciento treinta días, contado a partir del día siguiente de la publicación de la resolución de inicio, y la
 notificará a las partes interesadas comparecientes.
-ARTICULO 117 C.- El procedimiento a que se refiere el artículo 89 C de la Ley, se substanciará de la
+
+**Artículo 117-C**
+El procedimiento a que se refiere el artículo 89 C de la Ley, se substanciará de la
 siguiente forma:
 I. La solicitud deberá presentarse por escrito ante la unidad administrativa competente de la
 Secretaría, por el particular interesado o por quien actúe en su representación, acompañada de los
@@ -1473,7 +1485,9 @@ II. Recibida la solicitud y, en caso de ser procedente, la Secretaría dará res
 de un plazo de sesenta días, contado a partir del día siguiente al de la presentación de la solicitud. La
 respuesta a la solicitud a que se refiere este artículo se publicará en el Diario Oficial de la Federación y se
 notificará a las partes interesadas de que tenga conocimiento.
-ARTICULO 117 D.- El procedimiento a que se refiere el artículo 89 D de la Ley, se substanciará de la
+
+**Artículo 117-D**
+El procedimiento a que se refiere el artículo 89 D de la Ley, se substanciará de la
 siguiente forma:
 I. La solicitud deberá presentarse por escrito, ante la unidad administrativa competente de la
 Secretaría, por el particular interesado o por quien actúe en su representación, acompañada de los
@@ -1490,7 +1504,9 @@ pública y se fijará el plazo para que las partes presenten sus alegatos, y
 IV. La Secretaría publicará la resolución final en el Diario Oficial de la Federación dentro de un plazo
 de ciento treinta días, contado a partir del día siguiente de la publicación de la resolución de inicio, y la
 notificará a las partes interesadas de que tenga conocimiento.
-ARTICULO 117 E.- El procedimiento a que se refiere el artículo 89 E de la Ley sólo procederá para
+
+**Artículo 117-E**
+El procedimiento a que se refiere el artículo 89 E de la Ley sólo procederá para
 aquellas partes interesadas que presenten su solicitud y que, de conformidad con los tratados o
 convenios comerciales internacionales de los que México sea Parte, tengan ese derecho.
 La solicitud deberá presentarse por escrito, ante la unidad administrativa competente de la Secretaría,

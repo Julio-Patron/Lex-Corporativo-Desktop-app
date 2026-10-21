@@ -59,12 +59,12 @@ const RECHECKED_OCTOBER_2026 = {
 };
 
 export const LAWS = [
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'CCom', name: 'Código de Comercio', module: 'mercantil', corpus: 'codigo_comercio.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LGSM', name: 'Ley General de Sociedades Mercantiles', module: 'mercantil', corpus: 'lgsm.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGSM.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LGTOC', name: 'Ley General de Títulos y Operaciones de Crédito', module: 'mercantil', corpus: 'lgtoc.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTOC.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'CCom', name: 'Código de Comercio', module: 'mercantil', corpus: 'codigo_comercio.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LGSM', name: 'Ley General de Sociedades Mercantiles', module: 'mercantil', corpus: 'lgsm.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGSM.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LGTOC', name: 'Ley General de Títulos y Operaciones de Crédito', module: 'mercantil', corpus: 'lgtoc.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTOC.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LFT', name: 'Ley Federal del Trabajo', module: 'laboral', corpus: 'lft.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'LCE', name: 'Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'lce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LCE.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'RLCE', name: 'Reglamento de la Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'rlce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LCE.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LCE', name: 'Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'lce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LCE.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'RLCE', name: 'Reglamento de la Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'rlce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LCE.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LA', name: 'Ley Aduanera', module: 'aduanal', corpus: 'ley_aduanera.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'RLA', name: 'Reglamento de la Ley Aduanera', module: 'aduanal', corpus: 'rla.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAdua.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LIGIE', name: 'Ley de los Impuestos Generales de Importación y de Exportación', module: 'aduanal', corpus: 'ligie.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIGIE_2022.pdf' },
