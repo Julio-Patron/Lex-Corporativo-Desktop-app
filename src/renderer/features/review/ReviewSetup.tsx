@@ -9,7 +9,6 @@ import type { ReviewSession } from '../../store/useWorkspaceStore';
 interface ReviewSetupProps {
   review: ReviewSession;
   aiReady: boolean;
-  providerName: string;
   reviewAvailable: boolean;
   unavailableReason?: string;
   onChange: (patch: Partial<ReviewSession>) => void;
@@ -18,7 +17,7 @@ interface ReviewSetupProps {
   onError: (message: string) => void;
 }
 
-export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, unavailableReason, onChange, onStart, onConnectAi, onError }: ReviewSetupProps) {
+export function ReviewSetup({ review, aiReady, reviewAvailable, unavailableReason, onChange, onStart, onConnectAi, onError }: ReviewSetupProps) {
   const instructionId = useId();
   const allSelected = review.areas.length === LEGAL_AREAS.length;
   const startLabel = aiReady ? 'Revisar documento' : 'Hacer revisión básica';
@@ -40,7 +39,7 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
           <div>
             <p className="text-sm font-bold text-legal-950">{reviewAvailable ? 'Todo listo para revisar' : 'La revisión no está disponible por ahora'}</p>
             <p className="text-xs text-slate-500">
-              {aiReady ? `Revisión con IA mediante ${providerName}` : 'Revisión básica en tu computadora, sin IA'}
+              {aiReady ? 'Revisión con IA' : 'Revisión básica en tu computadora, sin IA'}
             </p>
           </div>
         </div>
@@ -135,12 +134,12 @@ export function ReviewSetup({ review, aiReady, providerName, reviewAvailable, un
                 <SearchCheck size={18} aria-hidden="true" />
               </span>
               <h2 className="text-base font-bold leading-snug text-legal-950">
-                {aiReady ? `Revisión con IA · ${providerName}` : 'Revisión básica (sin IA)'}
+                {aiReady ? 'Revisión con IA' : 'Revisión básica (sin IA)'}
               </h2>
             </div>
             {aiReady ? (
               <p className="text-sm leading-relaxed text-slate-600">
-                Se envían a {providerName} partes del documento y los artículos que aplican. Cada observación se comprueba contra esas fuentes antes de mostrarse.
+                Se envían a la IA partes del documento y los artículos que aplican. Cada observación se comprueba contra esas fuentes antes de mostrarse.
               </p>
             ) : (
               <>
