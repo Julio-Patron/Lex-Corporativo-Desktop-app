@@ -117,8 +117,9 @@ async function main() {
       await js(`document.querySelector('[aria-label="Cerrar info"]').click()`);
       await waitFor('!document.querySelector("[role=dialog]")');
       await routeTo('/leyes', zoom);
-      assert.equal(await js(`document.querySelector('a[href="https://www.diputados.gob.mx/LeyesBiblio/index.htm"]')?.target`), '_blank');
-      assert.equal(await js(`!![...document.querySelectorAll('main button')].find(e => /Descargar|Leer/.test(e.textContent))`), false);
+      // La página sólo lista las leyes y enlaza su texto oficial; no hay lector ni descargas.
+      assert.equal(await js(`document.querySelector('main a[href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"]')?.target`), '_blank');
+      assert.equal(await js(`!![...document.querySelectorAll('main button')].find(e => /Descargar|Leer|Abrir texto/.test(e.textContent))`), false);
       await routeTo('/estudio/generar', zoom);
       assert.equal(await js(`document.querySelector('main details')?.open`), false);
       await click('Usar una plantilla precargada', 'summary');

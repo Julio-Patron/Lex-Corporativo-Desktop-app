@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { create } from 'zustand';
-import { BookOpen, Check, ChevronDown, Clipboard, Compass, FileSignature, Link2, Sparkles } from 'lucide-react';
+import { Check, ChevronDown, Clipboard, Compass, FileSignature, Link2, Sparkles } from 'lucide-react';
 import { BrandPlate } from '../../components/BrandWatermark';
 import { AreaTag, Button, Callout, RadioGroup, TextArea } from '../../components/ui';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, isLegalArea, type LegalArea } from '../../lib/legal-areas';
 import { suggestAlternativeLegalModule } from '../../lib/legal-search-routing';
 import { cn } from '../../lib/utils';
 import { useUiStore } from '../../store/useUiStore';
-import { LawReaderDialog } from '../laws/LawReaderDialog';
+import { OfficialSourceLink } from '../laws/OfficialSourceLink';
+import { useOfficialLawSources } from '../laws/useOfficialLawSources';
 import { useSendArticleToDraft } from '../laws/useSendArticleToDraft';
 
 type AreaFilter = LegalArea | 'todos';
@@ -94,6 +95,7 @@ function Opening({ compact }: { compact: boolean }) {
 export default function BuscadorPage() {
   const notify = useUiStore((state) => state.notify);
   const sendArticleToDraft = useSendArticleToDraft();
+  const officialSourceFor = useOfficialLawSources();
   const area = useBuscadorStore((state) => state.area);
   const setArea = useBuscadorStore((state) => state.setArea);
   const draft = useBuscadorStore((state) => state.draft);
@@ -101,7 +103,6 @@ export default function BuscadorPage() {
   const turns = useBuscadorStore((state) => state.turns);
   const setTurns = useBuscadorStore((state) => state.setTurns);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [readerTarget, setReaderTarget] = useState<{ lawCode: string; articleRef?: string | null } | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const busy = turns.some((turn) => turn.status === 'loading');
   const empty = turns.length === 0;
@@ -237,6 +238,7 @@ export default function BuscadorPage() {
                             const module = isLegalArea(result.module) ? result.module : null;
                             const relatedRefs = result.related_refs || [];
                             const matchedTerms = (result.matched_terms || []).slice(0, 5);
+                            const officialUrl = officialSourceFor(result.law_code);
                             return (
                               <li key={id} className="rounded-xl border border-slate-200 bg-white p-4 shadow-card">
                                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -294,15 +296,7 @@ export default function BuscadorPage() {
                                 )}
 
                                 <div className="mt-3 flex flex-wrap gap-2 border-t border-slate-100 pt-3">
-                                  {result.law_code && (
-                                    <Button
-                                      size="sm"
-                                      variant="ghost"
-                                      onClick={() => setReaderTarget({ lawCode: result.law_code!, articleRef: result.article_number ?? result.subtitle ?? null })}
-                                    >
-                                      <BookOpen size={14} aria-hidden="true" /> Ver en ley
-                                    </Button>
-                                  )}
+                                  {officialUrl && <OfficialSourceLink href={officialUrl}>Texto oficial</OfficialSourceLink>}
                                   <Button size="sm" variant="ghost" onClick={() => void copy(result)}>
                                     {copiedId === id ? <Check size={14} aria-hidden="true" /> : <Clipboard size={14} aria-hidden="true" />} Copiar cita
                                   </Button>
@@ -385,16 +379,6 @@ export default function BuscadorPage() {
           </div>
         </div>
       </form>
-
-      <LawReaderDialog
-        lawCode={readerTarget?.lawCode ?? null}
-        articleRef={readerTarget?.articleRef ?? null}
-        onClose={() => setReaderTarget(null)}
-        onUseArticle={(citation, lawArea) => {
-          setReaderTarget(null);
-          sendArticleToDraft(citation, lawArea);
-        }}
-      />
     </div>
   );
 }

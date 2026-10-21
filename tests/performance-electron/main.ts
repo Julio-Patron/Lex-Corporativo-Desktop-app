@@ -24,7 +24,7 @@ async function main() {
   const { registerIpcHandlers } = await import('../../src/main/ipc');
   const { registerRecoveryHandlers } = await import('../../src/main/ipc/recovery.handler');
   const { searchLegalArticles } = await import('../../src/main/lib/rag');
-  const { readLegalCorpusLawContent } = await import('../../src/main/lib/legal-corpus');
+  const { getLegalCorpusOverview } = await import('../../src/main/lib/legal-corpus');
   const { processAnalyzePayload } = await import('../../src/main/ipc/analyze.handler');
   const { closeDb } = await import('../../src/main/lib/case-vault');
   registerIpcHandlers();
@@ -63,8 +63,8 @@ async function main() {
   assert.ok(first.matches.length > 0);
   for (let index = 0; index < 5; index++) {
     await measured('warmSearchMs', () => searchLegalArticles('CFF artículo 69-B', 'fiscal', 8));
-    const law = await measured('largeLawReadMs', () => readLegalCorpusLawContent('RMF'));
-    assert.ok(law.content.length > 100_000);
+    const overview = await measured('lawListMs', () => getLegalCorpusOverview());
+    assert.equal(overview.laws.length, 16);
     const review = await measured('basicReviewMs', () => processAnalyzePayload({ ecosystem: 'fiscal', files: [{ name: 'sintetico.txt', mimeType: 'text/plain', base64: Buffer.from(synthetic).toString('base64') }] }, null));
     assert.equal(review.reviewMode, 'basic');
     assert.equal(review.basicReason, 'no_api_key');

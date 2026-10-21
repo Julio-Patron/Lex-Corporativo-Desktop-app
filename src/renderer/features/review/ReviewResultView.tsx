@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { BookOpen, Check, CircleCheck, CircleX, Clipboard, Download, FilePlus2, FileSignature, FileText, RotateCcw } from 'lucide-react';
 import { AreaTag, Badge, Button, Callout, Card, SectionTitle } from '../../components/ui';
 import { formatDate } from '../../components/PortfolioRow';
-import { canOpenLawInReader } from '../../lib/law-reader';
+import { resolveLawCode } from '../../lib/law-codes';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { BASIC_REVIEW_LIMITS, reviewModeLabel, risksBySeverity, SEVERITY_LABELS } from '../../lib/review';
 import { cn } from '../../lib/utils';
-import type { LegalFoundation, ReviewRecord, ReviewRisk } from '../../types';
+import { OfficialSourceLink } from '../laws/OfficialSourceLink';
+import { useOfficialLawSources } from '../laws/useOfficialLawSources';
+import type { ReviewRecord, ReviewRisk } from '../../types';
 
 interface ReviewResultViewProps {
   record: ReviewRecord;
   aiReady: boolean;
   onDraftAddendum: () => void;
   onDraftClause: (finding: { title: string; explanation?: string; reference?: string }) => void;
-  onOpenFoundation: (foundation: LegalFoundation) => void;
   onExport: (format: 'pdf' | 'docx') => Promise<void>;
   onCopy: () => Promise<void>;
   onNewReview: () => void;
@@ -40,8 +41,9 @@ function List({ items }: { items: string[] }) {
   );
 }
 
-export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClause, onOpenFoundation, onExport, onCopy, onNewReview, onConnectAi }: ReviewResultViewProps) {
+export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClause, onExport, onCopy, onNewReview, onConnectAi }: ReviewResultViewProps) {
   const { result } = record;
+  const officialSourceFor = useOfficialLawSources();
   const isBasic = record.reviewMode === 'basic';
   const grouped = risksBySeverity(record);
   const risks = [...grouped.high, ...grouped.medium, ...grouped.low];
@@ -173,10 +175,10 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
                   <Button size="sm" variant="secondary" onClick={() => onDraftClause(risk)}>
                     <FilePlus2 size={14} aria-hidden="true" /> Redactar cláusula
                   </Button>
-                  {(risk.legalFoundations ?? []).slice(0, 2).filter((foundation) => canOpenLawInReader(foundation.law)).map((foundation) => (
-                    <Button key={foundation.id} size="sm" variant="ghost" onClick={() => onOpenFoundation(foundation)}>
+                  {(risk.legalFoundations ?? []).slice(0, 2).filter((foundation) => resolveLawCode(foundation.law) !== null).map((foundation) => (
+                    <span key={foundation.id} className="inline-flex min-h-9 items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-sm font-semibold text-slate-700">
                       <BookOpen size={14} aria-hidden="true" /> {foundation.law} {foundation.article}
-                    </Button>
+                    </span>
                   ))}
                 </div>
               </li>
@@ -232,10 +234,10 @@ export function ReviewResultView({ record, aiReady, onDraftAddendum, onDraftClau
               <li key={foundation.id} className="flex flex-col rounded-lg border border-slate-200 p-4">
                 <p className="text-sm font-semibold text-slate-950">{foundation.law}{foundation.article ? ` · ${foundation.article}` : ''}</p>
                 {foundation.excerpt && <p className="mt-1.5 line-clamp-4 flex-1 font-serif text-sm leading-relaxed text-slate-700">{foundation.excerpt}</p>}
-                {canOpenLawInReader(foundation.law) && (
-                  <Button size="sm" variant="ghost" className="mt-3 self-start" onClick={() => onOpenFoundation(foundation)}>
-                    <BookOpen size={14} aria-hidden="true" /> Leer artículo
-                  </Button>
+                {officialSourceFor(foundation.law) && (
+                  <OfficialSourceLink href={officialSourceFor(foundation.law)!} className="mt-3 self-start">
+                    <span className="sr-only">{foundation.law}: </span>Texto oficial
+                  </OfficialSourceLink>
                 )}
               </li>
             ))}

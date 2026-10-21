@@ -2,7 +2,6 @@ import { app } from 'electron';
 import { existsSync, readFileSync } from 'fs';
 import { extname, isAbsolute, relative, resolve } from 'path';
 import { z } from 'zod';
-import { normalizeLawCode } from './legal-relevance';
 
 const LegalCorpusModuleSchema = z.enum([
   'mercantil',
@@ -23,6 +22,9 @@ const CorpusManifestSchema = z.object({
     name: z.string().trim().min(1).max(240),
     module: LegalCorpusModuleSchema,
     corpusFile: z.string().trim().min(1).max(160),
+    source: z.object({
+      url: z.string().trim().max(500).regex(/^https:\/\/\S+$/),
+    }),
     file: z.object({
       exists: z.boolean(),
       bytes: z.number().int().nonnegative(),
@@ -43,6 +45,7 @@ export interface LegalCorpusLaw {
   provisions: number;
   bytes: number;
   sha256: string;
+  officialUrl: string;
 }
 
 export interface LegalCorpusOverview {
@@ -56,6 +59,12 @@ interface InstalledCorpusLaw extends LegalCorpusLaw {
   corpusFile: string;
   filePath: string;
 }
+
+// La RMF vigente es el texto base más sus resoluciones de modificaciones: se enlaza la
+// página del SAT que las publica juntas, no el PDF de la base.
+const OFFICIAL_PAGE_OVERRIDES: Record<string, string> = {
+  RMF: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/normatividad_rmf_rgce2026.html',
+};
 
 function getCorpusDirectory(): string {
   return app.isPackaged
@@ -108,6 +117,7 @@ function readInstalledCorpus(): {
       provisions: law.structure.entries,
       bytes: law.file.bytes,
       sha256: law.file.sha256,
+      officialUrl: OFFICIAL_PAGE_OVERRIDES[law.code] ?? law.source.url,
       corpusFile: law.corpusFile,
       filePath,
     };
@@ -126,40 +136,6 @@ function readInstalledCorpus(): {
 
 export function getLegalCorpusOverview(): LegalCorpusOverview {
   return readInstalledCorpus().overview;
-}
-
-export function getInstalledCorpusLaw(code: string): InstalledCorpusLaw {
-  const normalizedCode = code.trim().toLocaleLowerCase('es-MX');
-  const resolvedCode = normalizeLawCode(code)?.toLocaleLowerCase('es-MX');
-  const law = readInstalledCorpus().installedLaws.find(
-    (candidate) => {
-      const candidateCode = candidate.code.toLocaleLowerCase('es-MX');
-      const candidateName = candidate.name.toLocaleLowerCase('es-MX');
-      return candidateCode === normalizedCode
-        || (resolvedCode && candidateCode === resolvedCode)
-        || candidateName === normalizedCode;
-    },
-  );
-  if (!law) throw new Error('El ordenamiento solicitado no forma parte del corpus instalado.');
-  return law;
-}
-
-export function readLegalCorpusLawContent(code: string): {
-  code: string;
-  name: string;
-  module: LegalCorpusModule;
-  content: string;
-  provisions: number;
-} {
-  const law = getInstalledCorpusLaw(code);
-  const content = readFileSync(law.filePath, 'utf8');
-  return {
-    code: law.code,
-    name: law.name,
-    module: law.module,
-    content,
-    provisions: law.provisions,
-  };
 }
 
 export function isLegalCorpusAvailable(): boolean {

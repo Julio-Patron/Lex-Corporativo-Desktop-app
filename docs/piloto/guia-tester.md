@@ -17,7 +17,7 @@ Gracias por participar. Este documento explica qué vas a instalar, cómo hacerl
 | Memoria | 8 GB o más |
 | Disco | 1.5 GB libres |
 | Permisos | No se requiere administrador; la instalación es por usuario |
-| Red | Opcional. Sin red funcionan búsqueda, lector de leyes, auditoría por reglas y portafolio. Con IA se necesita red y tu clave |
+| Red | Opcional. Sin red funcionan búsqueda, lista de leyes, auditoría por reglas y portafolio. El texto oficial de cada ley se abre en el navegador y necesita red. Con IA se necesita red y tu clave |
 
 ## 3. Verificar el archivo antes de instalar
 
@@ -41,7 +41,7 @@ Tus datos se guardan en `%APPDATA%\Lex Corporativo`. Esa carpeta **no se borra a
 
 ## 5. Conectar tu cuenta de IA (opcional)
 
-Las funciones de análisis con IA y redacción requieren una clave propia de uno de estos proveedores. Sin clave puedes usar el buscador, el lector de leyes, la auditoría por reglas y el portafolio.
+Las funciones de análisis con IA y redacción requieren una clave propia de uno de estos proveedores. Sin clave puedes usar el buscador, la lista de leyes, la auditoría por reglas y el portafolio.
 
 | Proveedor | Dónde obtener la clave | Modelo por defecto |
 | --- | --- | --- |
