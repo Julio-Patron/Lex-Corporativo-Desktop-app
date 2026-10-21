@@ -11,8 +11,8 @@
   },
   "summary": {
     "configuredLaws": 16,
-    "corpusEntries": 7348,
-    "uniqueProvisionKeys": 7348,
+    "corpusEntries": 7351,
+    "uniqueProvisionKeys": 7351,
     "duplicateProvisionKeys": 0,
     "duplicateRows": 0,
     "conflictingDuplicateKeys": 0,
@@ -24,8 +24,8 @@
     "table": "legal_knowledge",
     "exists": true,
     "fileCount": 24,
-    "totalBytes": 33366828,
-    "sha256": "0637bac6db53b436b758684e1f61286b6e698dfb0d155c2a9f7442a46fb8564a"
+    "totalBytes": 33371693,
+    "sha256": "cc163af0827f2f9b2bc46fa277d329333f854ef35b6183f5077e64eab1766739"
   },
   "laws": [
     {
@@ -147,12 +147,12 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 1103227,
-        "sha256": "43046a8ab9e6b61ef1ae4087ac4900bbd570db533a5cd6191a42dc8b34519fb6"
+        "bytes": 1103225,
+        "sha256": "254d6ff8be8cc0c717599b8739a382b4c1723e5d403227288afb7e6aa17b0f7d"
       },
       "structure": {
         "entries": 1266,
@@ -252,12 +252,12 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 496755,
-        "sha256": "5a98f1773606bd2181402994301128471273f0f5ee0357743c2c4d09143c698b"
+        "bytes": 491996,
+        "sha256": "3fcc14c6f703a76c89a34f77661489d69cfb68f1b227180722df4c9878622ebb"
       },
       "structure": {
         "entries": 268,
@@ -287,16 +287,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 251025,
-        "sha256": "4e66d08d2157af8d130bdb485293640b2ea50388c30e4f804ba493cf246501ff"
+        "bytes": 251027,
+        "sha256": "0307375ca5d392f15fd595ee192f393b70b61634e422c132f8aed6b65833565c"
       },
       "structure": {
-        "entries": 281,
-        "uniqueProvisionKeys": 281,
+        "entries": 282,
+        "uniqueProvisionKeys": 282,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -322,16 +322,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 1649588,
-        "sha256": "a9b4842998807183058ec7a30a4147bdcb0a96c920c2d81a28fcd75fe499424d"
+        "bytes": 1622490,
+        "sha256": "a1caa69d31474f0ac90dc3818f02bb5b6db4b8f96e1b31fc1beabdc13ba7b2c9"
       },
       "structure": {
-        "entries": 97,
-        "uniqueProvisionKeys": 97,
+        "entries": 98,
+        "uniqueProvisionKeys": 98,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -352,17 +352,17 @@
       "source": {
         "authority": "Servicio de Administración Tributaria",
         "type": "official_pdf",
-        "url": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rgce/compiladas/1raRMRGCEpara2026.pdf",
+        "url": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado2daRMRGCEpara2026.pdf",
         "provenance": "official_sat_compilation_pdf",
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-08-12"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 1578141,
-        "sha256": "fdc8e9f66a106179c6371d3f527a1017ca1d5d3e2cff2c1062ef02b99e223e8c"
+        "bytes": 1573210,
+        "sha256": "2a65e1a0d95a76c1fa0ac5d450ec521cb4015a34b87a3830580ca35b9f392270"
       },
       "structure": {
         "entries": 550,
@@ -392,12 +392,12 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 829372,
-        "sha256": "32a499f1efc39b99b2b0439f686eba61a74230bbb41b7e77f0affc6ad12870f7"
+        "bytes": 829371,
+        "sha256": "0fc27f9c51bf384c7a818d3234a8e2d39bdda8eb16289daf5c896ca353d1aa4d"
       },
       "structure": {
         "entries": 421,
@@ -497,16 +497,16 @@
         "verificationStatus": "verified_against_official_source",
         "effectiveFrom": null,
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 157239,
-        "sha256": "ee7d406682635990cdf310c25ff5bcfa8af7fc360d44c9af56887e2df432a1be"
+        "bytes": 157243,
+        "sha256": "dbb9f7eb3c5de0be0f144cb0a28ec81ab910c2eb75a021654cd945580f5331e0"
       },
       "structure": {
-        "entries": 79,
-        "uniqueProvisionKeys": 79,
+        "entries": 80,
+        "uniqueProvisionKeys": 80,
         "duplicateProvisionKeys": 0,
         "duplicateRows": 0,
         "conflictingDuplicateKeys": 0,
@@ -565,14 +565,14 @@
         "url": "https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/RMF_2026-DOF-28122025.pdf",
         "provenance": "official_base_with_published_amendment_overlay",
         "verificationStatus": "verified_against_official_source",
-        "effectiveFrom": "2026-07-10",
+        "effectiveFrom": "2026-10-01",
         "effectiveTo": null,
-        "officialLastCheckedAt": "2026-07-14"
+        "officialLastCheckedAt": "2026-10-20"
       },
       "file": {
         "exists": true,
-        "bytes": 2610787,
-        "sha256": "8261ac65ba20f7bba53244988fab04ff6648c25a079efb61a6460af7aedf5ed9"
+        "bytes": 2615396,
+        "sha256": "eb6ec05554b1d4576c41411713919c8271d7faadf933938646461219eb4679ce"
       },
       "structure": {
         "entries": 1196,
@@ -594,5 +594,5 @@
     "status": "pass",
     "failures": []
   },
-  "artifactSha256": "469fe4ada8352c5bb43968f5b68c17e4ece2bc4120e41337919acaeb404ec337"
+  "artifactSha256": "ef25897d91f8a824d0def9fea485352d05a0243f4fadbb63e6101026e2fb152d"
 }

@@ -24,9 +24,9 @@ describe('legal corpus catalog', () => {
     const overview = getLegalCorpusOverview();
 
     expect(overview.lawsCount).toBe(16);
-    expect(overview.provisionsCount).toBe(7348);
+    expect(overview.provisionsCount).toBe(7351);
     expect(overview.laws).toHaveLength(16);
-    expect(overview.laws.reduce((total, law) => total + law.provisions, 0)).toBe(7348);
+    expect(overview.laws.reduce((total, law) => total + law.provisions, 0)).toBe(7351);
     expect(overview.laws.find((law) => law.code === 'LFT')).toMatchObject({
       name: 'Ley Federal del Trabajo',
       module: 'laboral',

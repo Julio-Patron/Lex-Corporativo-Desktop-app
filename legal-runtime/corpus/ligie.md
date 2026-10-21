@@ -3,15 +3,15 @@
 > Código: LIGIE
 > Módulo: aduanal
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LIGIE_2022.pdf
-> SHA-256 fuente: a7688a47c8283f327b943e06ed948782feba2f5a0e16fe796d50d8340ce40ece
-> Verificación oficial: 2026-08-12
+> SHA-256 fuente: 955510d7ea82cf42d18c72e3146f999af254c0fda5eda3f12a1fd1c10e9864ce
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2025-12-29
+> Nota de la fuente: Fracciones arancelarias de la Tarifa de la Ley modificadas por Decreto DOF 13-10-2026
 **Artículo 1o - Capítulo 01**
 Animales vivos
 Nota.
 1. Este Capítulo comprende todos los animales vivos, excepto:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) los peces, los crustáceos, moluscos y demás invertebrados acuáticos, de las partidas 03.01,
 03.06, 03.07 o 03.08;
 b) los cultivos de microorganismos y demás productos de la partida 30.02;
@@ -69,7 +69,6 @@ Pza 15 Ex.
 01.03 Animales vivos de la especie porcina.
 0103.10 - Reproductores de raza pura.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0103.10.01 Reproductores de raza pura. Cbza Ex. Ex.
 - Los demás:
 0103.91 -- De peso inferior a 50 kg.
@@ -136,7 +135,6 @@ Pza 10 Ex.
 - Los demás:
 0105.94 -- Aves de la especie Gallus domesticus.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0105.94.01 Gallos de pelea. Cbza 20 Ex.
 0105.94.99 Los demás. Cbza 10 Ex.
 0105.99 -- Los demás.
@@ -193,7 +191,6 @@ novaehollandiae). Cbza 20 Ex.
 - Insectos:
 0106.41 -- Abejas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0106.41.01 Abejas. Kg 10 Ex.
 0106.49 -- Los demás.
 0106.49.99 Los demás. Kg 20 Ex.
@@ -253,7 +250,6 @@ Arancel “eliminado” del Decreto DOF 06-01-2023 por Decreto
 DOF 31-12-2025 (antes Imp. Ex. y se restablece Imp. 20)
 Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 02.02 Carne de animales de la especie bovina,
 congelada.
 0202.10 - En canales o medias canales.
@@ -330,7 +326,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 Arancel modificado con vigencia temporal DOF 06-01-2023
 Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (se mantiene Imp. Ex.)
 Arancel “eliminado” del Decreto DOF 06-01-2023 por Decreto
 DOF 31-12-2025 (antes Imp. Ex. y se restablece Imp. 20)
@@ -391,7 +386,6 @@ Carne de animales de las especies
 caballar, asnal o mular, fresca,
 refrigerada o congelada.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0205.00
 Carne de animales de las especies
 caballar, asnal o mular, fresca, refrigerada
@@ -454,7 +448,6 @@ Arancel modificado con vigencia temporal DOF 06-01-2023
 Kg Ex. Ex.
 0207.12 -- Sin trocear, congelados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0207.12.01
 Sin trocear, congelados.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -522,7 +515,6 @@ Kg Ex. Ex.
 0207.53.01 Hígados grasos, frescos o refrigerados. Kg 10 Ex.
 0207.54 -- Los demás, frescos o refrigerados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0207.54.91 Los demás, frescos o refrigerados. Kg Ex. Ex.
 0207.55 -- Los demás, congelados.
 0207.55.01 Hígados. Kg 10 Ex.
@@ -578,7 +570,6 @@ Carne y despojos comestibles, salados
 o en salmuera, secos o ahumados;
 harina y polvo comestibles, de carne o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de despojos.
 - Carne de la especie porcina:
 0210.11 -- Jamones, paletas, y sus trozos, sin
@@ -629,7 +620,6 @@ Notas.
 a) los mamíferos de la partida 01.06;
 b) la carne de los mamíferos de la partida 01.06 (partidas 02.08 o 02.10);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) el pescado (incluidos los hígados, huevas y lechas) ni los crustáceos, moluscos o demás
 invertebrados acuáticos, muertos e impropios para la alimentación humana por su
 naturaleza o por su estado de presentación (Capítulo 05); la harina, polvo y “pellets” de
@@ -674,7 +664,6 @@ IMPUESTO
 DE EXP.
 03.01 Peces vivos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Peces ornamentales:
 0301.11 -- De agua dulce.
 0301.11.01 De agua dulce. Cbza 10 Ex.
@@ -738,7 +727,6 @@ los filetes y demás carne de pescado
 de la partida 03.04.
 - Salmónidos, excepto los despojos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comestibles de pescado de las
 subpartidas 0302.91 a 0302.99:
 0302.11 --
@@ -801,7 +789,6 @@ Kg 15 Ex.
 - Atunes (del género Thunnus), listados
 (bonitos de vientre rayado) (Katsuwonus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 pelamis), excepto los despojos
 comestibles de pescado de las
 subpartidas 0302.91 a 0302.99:
@@ -859,7 +846,6 @@ subpartidas 0302.91 a 0302.99:
 0302.41 -- Arenques (Clupea harengus, Clupea
 pallasii).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0302.41.01 Arenques (Clupea harengus, Clupea
 pallasii). Kg 15 Ex.
 0302.42 -- Anchoas (Engraulis spp.).
@@ -917,7 +903,6 @@ chalcogramma). Kg 15 Ex.
 Micromesistius australis).
 0302.56.01 Bacaladillas (Micromesistius poutassou, Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Micromesistius australis).
 0302.59 -- Los demás.
 0302.59.99 Los demás. Kg 15 Ex.
@@ -976,7 +961,6 @@ Austromerluzas antárticas y
 austromerluzas negras (merluzas
 negras, bacalaos de profundidad,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 nototenias negras) (Dissostichus spp.).
 0302.83.01
 Austromerluzas antárticas y
@@ -1037,7 +1021,6 @@ rhodurus).
 0303.12.91 Los demás salmones del Pacífico
 (Oncorhynchus gorbuscha, Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Oncorhynchus keta, Oncorhynchus
 tschawytscha, Oncorhynchus kisutch,
 Oncorhynchus masou y Oncorhynchus
@@ -1099,7 +1082,6 @@ spp.).
 0303.25.01 Carpas (Cyprinus spp., Carassius spp.,
 Ctenopharyngodon idellus, Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Hypophthalmichthys spp., Cirrhinus spp.,
 Mylopharyngodon piceus, Catla catla,
 Labeo spp., Osteochilus hasselti,
@@ -1160,7 +1142,6 @@ obesus).
 obesus). Kg Ex. Ex.
 0303.45 -- Atunes comunes o de aleta azul, del
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Atlántico y del Pacífico (Thunnus
 thynnus, Thunnus orientalis).
 0303.45.01
@@ -1221,7 +1202,6 @@ australasicus, Scomber japonicus). Kg 15 Ex.
 0303.56.01 Cobias (Rachycentron canadum). Kg 15 Ex.
 0303.57 -- Peces espada (Xiphias gladius).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0303.57.01 Peces espada (Xiphias gladius). Kg 15 Ex.
 0303.59 -- Los demás.
 0303.59.99 Los demás. Kg 15 Ex.
@@ -1279,7 +1259,6 @@ Kg 15 Ex.
 0303.89 -- Los demás.
 0303.89.01 Totoabas en vida libre. Kg 15 Prohibida
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Descripción de la fracción reformada DOF 21-07-2025
 0303.89.02 Totoabas de manejo intensivo
 Kg 15 Ex
@@ -1340,7 +1319,6 @@ Silurus spp., Clarias spp., Ictalurus spp.). Kg 15 Ex.
 0304.33 -- Percas del Nilo (Lates niloticus).
 0304.33.01 Percas del Nilo (Lates niloticus). Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0304.39 -- Los demás.
 0304.39.99 Los demás. Kg 15 Ex.
 - Filetes de los demás pescados, frescos o
@@ -1407,7 +1385,6 @@ austromerluzas negras (merluzas
 negras, bacalaos de profundidad,
 nototenias negras) (Dissostichus spp.).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0304.46.01
 Austromerluzas antárticas y
 austromerluzas negras (merluzas
@@ -1470,7 +1447,6 @@ Austromerluzas antárticas y
 austromerluzas negras (merluzas
 negras, bacalaos de profundidad,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 nototenias negras) (Dissostichus spp.).
 0304.55.01
 Austromerluzas antárticas y
@@ -1530,7 +1506,6 @@ Gadus macrocephalus). Kg 15 Ex.
 0304.73 -- Carboneros (Pollachius virens).
 0304.73.01 Carboneros (Pollachius virens). Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0304.74 -- Merluzas (Merluccius spp., Urophycis
 spp.).
 0304.74.01 Merluzas (Merluccius spp., Urophycis
@@ -1594,7 +1569,6 @@ nototenias negras) (Dissostichus spp.).
 0304.85.01 Austromerluzas antárticas y
 austromerluzas negras (merluzas Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 negras, bacalaos de profundidad,
 nototenias negras) (Dissostichus spp.).
 0304.86 -- Arenques (Clupea harengus, Clupea
@@ -1658,7 +1632,6 @@ Clarias spp., Ictalurus spp.), carpas
 (Cyprinus spp., Carassius spp.,
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Ctenopharyngodon idellus,
 Hypophthalmichthys spp., Cirrhinus spp.,
 Mylopharyngodon piceus, Catla catla,
@@ -1719,7 +1692,6 @@ Labeo spp., Osteochilus hasselti,
 Leptobarbus hoeveni, Megalobrama
 spp.), anguilas (Anguilla spp.), percas del
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Nilo (Lates niloticus) y peces cabeza de
 serpiente (Channa spp.).
 0305.31.01
@@ -1783,7 +1755,6 @@ Truchas (Salmo trutta, Oncorhynchus
 mykiss, Oncorhynchus clarki,
 Oncorhynchus aguabonita,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Oncorhynchus gilae, Oncorhynchus
 apache y Oncorhynchus chrysogaster).
 0305.43.01
@@ -1844,7 +1815,6 @@ spp.), anguilas (Anguilla spp.), percas del
 Nilo (Lates niloticus) y peces cabeza de
 serpiente (Channa spp.).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0305.52.01
 Tilapias (Oreochromis spp.), bagres o
 peces gato (Pangasius spp., Silurus spp.,
@@ -1906,7 +1876,6 @@ espadines (Sprattus sprattus), caballas
 australasicus, Scomber japonicus),
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 caballas de la India (Rastrelliger spp.),
 carites (Scomberomorus spp.), jureles
 (Trachurus spp.), pámpanos (Caranx
@@ -1964,7 +1933,6 @@ serpiente (Channa spp.).
 Kg 15 Ex.
 0305.69 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0305.69.99 Los demás. Kg 15 Ex.
 -
 Aletas, cabezas, colas, vejigas natatorias
@@ -2021,7 +1989,6 @@ spp., Jasus spp.).
 spp., Jasus spp.). Kg 15 Ex.
 0306.32 -- Bogavantes (Homarus spp.).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0306.32.01 Bogavantes (Homarus spp.). Kg 15 Ex.
 0306.33 -- Cangrejos (excepto macruros).
 0306.33.01 Cangrejos (excepto macruros). Kg 15 Ex.
@@ -2080,7 +2047,6 @@ antes o durante el ahumado.
 0307.11.01 Vivas, frescas o refrigeradas. Kg 15 Ex.
 0307.12 -- Congeladas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0307.12.01 Congeladas. Kg 15 Ex.
 0307.19 -- Las demás.
 0307.19.99 Las demás. Kg 15 Ex.
@@ -2134,7 +2100,6 @@ Abulones u orejas de mar (Haliotis spp.)
 y cobos (caracoles de mar) (Strombus
 spp.):
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0307.81 -- Abulones u orejas de mar (Haliotis spp.),
 vivos, frescos o refrigerados.
 0307.81.01 Abulones u orejas de mar (Haliotis spp.),
@@ -2188,7 +2153,6 @@ Erizos de mar (Strongylocentrotus spp.,
 Paracentrotus lividus, Loxechinus albus,
 Echinus esculentus):
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0308.21 -- Vivos, frescos o refrigerados.
 0308.21.01 Vivos, frescos o refrigerados. Kg 15 Ex.
 0308.22 -- Congelados.
@@ -2233,7 +2197,6 @@ b) Se entiende por pastas lácteas para untar las emulsiones del tipo agua-en-ac
 puedan untar y contengan materias grasas de la leche como únicas materias grasas y en las
 que el contenido de éstas sea superior o igual al 39% pero inferior al 80%, en peso.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. Los productos obtenidos por concentración del lactosuero con adición de leche o de materias
 grasas de la leche se clasifican en la partida 04.06 como quesos, siempre que presenten las tres
 características siguientes:
@@ -2278,7 +2241,6 @@ edulcorante.
 0401.10 - Con un contenido de materias grasas
 inferior o igual al 1% en peso.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0401.10.02
 Con un contenido de materias grasas
 inferior o igual al 1% en peso.
@@ -2363,7 +2325,6 @@ Dls por Kg
 de azúcar)
 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (10%+0.36 Dls por Kg de azúcar)]
 -
 En polvo, gránulos o demás formas
@@ -2445,7 +2406,6 @@ Ex.
 0403.20.99 Los demás. Kg 20 Ex.
 0403.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0403.90.99 Los demás. Kg 20 Ex.
 04.04
 Lactosuero, incluso concentrado o
@@ -2503,7 +2463,6 @@ Queso de pasta azul y demás quesos
 que presenten vetas producidas por
 Penicillium roqueforti.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0406.40.01
 Queso de pasta azul y demás quesos
 que presenten vetas producidas por
@@ -2567,7 +2526,6 @@ Kg Ex. Ex.
 0407.90.99 Los demás. Kg 20 Ex.
 04.08 Huevos de ave sin cáscara (cascarón)
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 y yemas de huevo, frescos, secos,
 cocidos en agua o vapor, moldeados,
 congelados o conservados de otro
@@ -2611,7 +2569,6 @@ c) las materias primas textiles de origen animal, excepto la crin y los desperdi
 (Sección XI);
 d) las cabezas preparadas para artículos de cepillería (partida 96.03).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. En la partida 05.01 también se considera cabello en bruto el extendido longitudinalmente, pero
 sin colocarlo en el mismo sentido.
 3. En la Nomenclatura, se considera marfil la materia de las defensas de elefante, hipopótamo,
@@ -2667,7 +2624,6 @@ desinfectados o preparados para su
 conservación; polvo y desperdicios de
 plumas o de partes de plumas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0505.10 - Plumas de las utilizadas para relleno;
 plumón.
 0505.10.01 Plumas de las utilizadas para relleno;
@@ -2723,7 +2679,6 @@ cortar en forma determinada, incluso en
 polvo y desperdicios.
 Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 05.10
 Ámbar gris, castóreo, algalia y almizcle;
 cantáridas; bilis, incluso desecada;
@@ -2780,7 +2735,6 @@ bovino, equino, porcino, ovino y caprino. Pza Ex. Ex.
 _______________
 Sección II
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 PRODUCTOS DEL REINO VEGETAL
 Nota.
 1. En esta Sección, el término “pellets” designa los productos en forma de cilindro, bolita, etc.,
@@ -2836,7 +2790,6 @@ raíces), esquejes e injertos; micelios.
 0602.10.07 Esquejes sin enraizar e injertos. Kg Ex. Ex.
 0602.20 - Árboles, arbustos y matas, de frutas o de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 otros frutos comestibles, incluso
 injertados.
 0602.20.04
@@ -2889,7 +2842,6 @@ preparados de otra forma.
 0604.90.01 Musgo del género Sphagnum. Kg Ex. Ex.
 0604.90.99 Los demás. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 _________________
 
 **Artículo 1o - Capítulo 07**
@@ -2940,7 +2892,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 Arancel modificado con vigencia temporal DOF 06-01-2023
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (se mantiene Imp. Ex.)
 07.03
 Cebollas, chalotes, ajos, puerros y
@@ -3006,7 +2957,6 @@ foliosum). Kg 10 Ex.
 0705.29.99 Las demás.
 Arancel modificado con vigencia temporal DOF 06-01-2023 Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 10)
 Arancel “eliminado” del Decreto DOF 06-01-2023 por Decreto
 DOF 31-12-2024 (antes Imp. Ex y se restablece Imp. 10)
@@ -3059,7 +3009,6 @@ refrigeradas.
 0709.53 -- Hongos del género Cantharellus.
 0709.53.01 Hongos del género Cantharellus. Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0709.54 -- Shiitake (Lentinus edodes).
 0709.54.01 Shiitake (Lentinus edodes). Kg 10 Ex.
 0709.55 --
@@ -3123,7 +3072,6 @@ Kg Ex. Ex.
 - Hortalizas de vaina, estén o no
 desvainadas:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0710.21 -- Chícharos (guisantes, arvejas) (Pisum
 sativum).
 0710.21.01 Chícharos (guisantes, arvejas) (Pisum
@@ -3182,7 +3130,6 @@ Arancel modificado con vigencia temporal DOF 06-01-2023
 (se mantiene Imp. Ex.)
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Orejas de Judas (Auricularia spp.), hongos
 gelatinosos (Tremella spp.) y demás
@@ -3246,7 +3193,6 @@ Arancel modificado con vigencia temporal DOF 06-01-2023
 Arancel “eliminado” del Decreto DOF 06-01-2023 por Decreto
 Kg 45 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 DOF 31-12-2025 (antes Imp. Ex. y se restablece Imp. 45)
 0713.34 --
 Frijoles (porotos, alubias, judías, fréjoles)
@@ -3316,7 +3262,6 @@ o en "pellets"; médula de sagú.
 0714.20 - Camotes (boniatos, batatas).
 0714.20.01 Congelados. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0714.20.99 Los demás. Kg 10 Ex.
 0714.30 - Ñame (Dioscorea spp.).
 0714.30.01 Congelados. Kg 20 Ex.
@@ -3364,7 +3309,6 @@ cáscara o mondados.
 - Cocos:
 0801.11 -- Secos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0801.11.01 Secos. Kg 20 Ex.
 0801.12 -- Con la cáscara interna (endocarpio).
 0801.12.01 Con la cáscara interna (endocarpio). Kg 20 Ex.
@@ -3416,7 +3360,6 @@ mondados.
 0802.62 -- Sin cáscara.
 0802.62.01 Sin cáscara. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0802.70 - Nueces de cola (Cola spp.).
 0802.70.01 Nueces de cola (Cola spp.). Kg 20 Ex.
 0802.80 - Nueces de areca.
@@ -3470,7 +3413,6 @@ satsumas). Kg 20 Ex.
 0805.22.01 Clementinas. Kg 20 Ex.
 0805.29 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0805.29.99 Los demás. Kg 20 Ex.
 0805.40 - Toronjas y pomelos.
 0805.40.01 Toronjas y pomelos. Kg 20 Ex.
@@ -3529,7 +3471,6 @@ ciruelas y endrinas, frescos.
 - Cerezas:
 0809.21 -- Guindas (cerezas ácidas) (Prunus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cerasus).
 0809.21.01 Guindas (cerezas ácidas) (Prunus
 cerasus). Kg 20 Ex.
@@ -3586,7 +3527,6 @@ AMX
 Dls por Kg
 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de azúcar)
 0811.90 - Los demás.
 0811.90.99 Los demás. Kg
@@ -3647,7 +3587,6 @@ adicionada de otras sustancias para su
 conservación provisional.
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 _________________
 
 **Artículo 1o - Capítulo 09**
@@ -3696,7 +3635,6 @@ café en cualquier proporción.
 0901.22.02 Café Veracruz. Kg 45 Ex.
 0901.22.03 Café Chiapas. Kg 45 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0901.22.04 Café Pluma. Kg 45 Ex.
 0901.22.99 Los demás. Kg 45 Ex.
 0901.90 - Los demás.
@@ -3756,7 +3694,6 @@ DOF 31-12-2024 (antes Imp. Ex y se mantiene Imp. Ex.)
 Kg Ex. Ex.
 0904.22 -- Triturados o pulverizados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0904.22.02
 Triturados o pulverizados.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -3807,7 +3744,6 @@ cardamomos.
 09.09 Semillas de anís, badiana, hinojo,
 cilantro, comino o alcaravea; bayas de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 enebro.
 - Semillas de cilantro:
 0909.21 -- Sin triturar ni pulverizar.
@@ -3855,7 +3791,6 @@ Notas.
 1. A) Los productos citados en los textos de las partidas de este Capítulo se clasifican en dichas
 partidas solo si están presentes los granos, incluso en espigas o con los tallos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 B) Este Capítulo no comprende los granos mondados o trabajados de otra forma. Sin embargo,
 el arroz descascarillado, blanqueado, pulido, glaseado, escaldado o partido se clasifica en la
 partida 10.06. Asimismo, la quinoa (quinua) a la cual se le ha eliminado total o parcialmente el
@@ -3923,7 +3858,6 @@ Arancel modificado con vigencia temporal DOF 06-01-2023
 (se mantiene Imp. Ex. y se abroga modificación DOF 18-11-2022)
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Modificación DOF 06-01-2023 “eliminada” por DOF 18-05-2023
 (antes Imp. Ex., en consecuencia se restablece Imp. 15)
 Arancel modificado con vigencia temporal DOF 31-12-2024 (antes
@@ -3984,7 +3918,6 @@ pardo).
 1006.20.02 Arroz del Estado de Morelos. Kg 20 Ex.
 1006.20.99 Los demás. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1006.30 - Arroz semiblanqueado o blanqueado,
 incluso pulido o glaseado.
 1006.30.03 Arroz del Estado de Morelos. Kg 20 Ex.
@@ -4043,7 +3976,6 @@ _______________
 **Artículo 1o - Capítulo 11**
 Productos de la molinería; malta; almidón y fécula; inulina; gluten de trigo
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas.
 1. Este Capítulo no comprende:
 a) la malta tostada acondicionada como sucedáneo del café (partidas 09.01 o 21.01, según los
@@ -4118,7 +4050,6 @@ Alforfón...........
 -
 -
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3. En la partida 11.03, se consideran grañones y sémola los productos obtenidos por fragmentación
 de los granos de cereales que respondan a las condiciones siguientes:
 a) los de maíz, deberán pasar por un tamiz de tela metálica con abertura de malla de 2 mm en
@@ -4176,7 +4107,6 @@ troceados o quebrantados), excepto el
 arroz de la partida 10.06; germen de
 cereales entero, aplastado, en copos o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 molido.
 - Granos aplastados o en copos:
 1104.12 -- De avena.
@@ -4226,7 +4156,6 @@ incluso tostada.
 - Almidón y fécula:
 1108.11 -- Almidón de trigo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1108.11.01 Almidón de trigo. Kg 10 Ex.
 1108.12 -- Almidón de maíz.
 1108.12.01
@@ -4269,7 +4198,6 @@ b) las especias y demás productos del Capítulo 09;
 c) los cereales (Capítulo 10);
 d) los productos de las partidas 12.01 a 12.07 o de la partida 12.11.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. La partida 12.11 comprende, entre otras, las plantas y partes de plantas de las especies
 siguientes: albahaca, borraja, ginseng, hisopo, regaliz, diversas especies de menta, romero, ruda,
 salvia y ajenjo.
@@ -4319,7 +4247,6 @@ sin cáscara o quebrantados.
 1202.41.01 Con cáscara. Kg Ex. Ex.
 1202.42 -- Sin cáscara, incluso quebrantados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1202.42.01 Sin cáscara, incluso quebrantados. Kg Ex. Ex.
 12.03 Copra.
 1203.00 Copra.
@@ -4368,7 +4295,6 @@ Kg 10 Ex.
 - Los demás:
 1207.91 -- Semillas de amapola (adormidera).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1207.91.01 Semillas de amapola (adormidera). Kg 10 Prohibida
 1207.99 -- Los demás.
 1207.99.99 Los demás. Kg Ex. Ex.
@@ -4418,7 +4344,6 @@ cuando esté mezclada con otras semillas. Prohibida Prohibida Prohibida
 1209.99.99 Los demás. Kg Ex. Ex.
 12.10 Conos de lúpulo frescos o secos,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 incluso triturados, molidos o en
 "pellets"; lupulino.
 1210.10 - Conos de lúpulo sin triturar ni moler ni en
@@ -4475,7 +4400,6 @@ vegetales (incluidas las raíces de
 achicoria sin tostar de la variedad
 Cichorium intybus sativum) empleados
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 principalmente en la alimentación
 humana, no expresados ni
 comprendidos en otra parte.
@@ -4529,7 +4453,6 @@ _______________
 **Artículo 1o - Capítulo 13**
 Gomas, resinas y demás jugos y extractos vegetales
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Nota.
 1. La partida 13.02 comprende, entre otros, los extractos de regaliz, piretro (pelitre), lúpulo o áloe, y
 el opio.
@@ -4573,7 +4496,6 @@ mucílagos y espesativos
 derivados de los vegetales,
 incluso modificados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Jugos y extractos vegetales:
 1302.11 -- Opio.
 1302.11.02 Preparado para fumar. Prohibida Prohibida Prohibida
@@ -4627,7 +4549,6 @@ modificados.
 Cannabis). Prohibida Prohibida Prohibida
 1302.39.99 Los demás. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 _______________
 
 **Artículo 1o - Capítulo 14**
@@ -4673,7 +4594,6 @@ comprendidos en otra parte.
 _______________
 Sección III
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 GRASAS Y ACEITES, ANIMALES, VEGETALES O DE ORIGEN MICROBIANO, Y
 PRODUCTOS DE SU DESDOBLAMIENTO; GRASAS ALIMENTICIAS ELABORADAS;
 CERAS DE ORIGEN ANIMAL O VEGETAL
@@ -4714,7 +4634,6 @@ DE IMP.
 IMPUESTO
 DE EXP.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 15.01
 Grasa de cerdo (incluida la manteca de
 cerdo) y grasa de ave, excepto las de las
@@ -4770,7 +4689,6 @@ sus fracciones. Kg 10 Ex.
 derivadas, incluida la lanolina.
 1505.00 Grasa de lana y sustancias grasas
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 derivadas, incluida la lanolina.
 1505.00.04 Grasa de lana y sustancias grasas
 derivadas, incluida la lanolina. Kg 10 Ex.
@@ -4827,7 +4745,6 @@ aceites o fracciones con los aceites o
 fracciones de la partida 15.09.
 1510.10 - Aceite de orujo de oliva en bruto.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1510.10.01 Aceite de orujo de oliva en bruto. Kg 10 Ex.
 1510.90 - Los demás.
 1510.90.99 Los demás. Kg 10 Ex.
@@ -4882,7 +4799,6 @@ mostaza, y sus fracciones, incluso
 refinados, pero sin modificar
 químicamente.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Aceites de nabo (de nabina) o de colza con
 bajo contenido de ácido erúcico y sus
@@ -4939,7 +4855,6 @@ elaidinizados, incluso refinados, pero
 sin preparar de otro modo.
 1516.10 - Grasas y aceites, animales, y sus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fracciones.
 1516.10.01 Grasas y aceites, animales, y sus
 fracciones. Kg 15 Ex.
@@ -4994,7 +4909,6 @@ microbiano, o de fracciones de diferentes
 grasas o aceites, de este Capítulo, no
 expresadas ni comprendidas en otra parte.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1518.00.01 Mezcla de aceites de girasol y oliva,
 bromados, calidad farmacéutica. Kg Ex. Ex.
 1518.00.02 Aceites animales o vegetales epoxidados. Kg 15 Ex.
@@ -5042,8 +4956,6 @@ Nota.
 aglomerados por simple presión o con adición de un aglutinante en proporción inferior o igual al
 3% en peso.
 _______________
-
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 
 **Artículo 1o - Capítulo 16**
 Preparaciones de carne, pescado, crustáceos, moluscos o demás invertebrados
@@ -5098,7 +5010,6 @@ Arancel “eliminado” del Decreto DOF 06-01-2023 por Decreto
 DOF 31-12-2025 (antes Imp. Ex. y se restablece Imp. 15)
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 16.02
 Las demás preparaciones y conservas
 de carne, despojos, sangre o de
@@ -5155,7 +5066,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 Arancel modificado con vigencia temporal y acotación
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 “Únicamente sardina” DOF 06-01-2023 (se mantiene Imp. Ex.)
 1604.14 -- Atunes, listados y bonitos (Sarda spp.).
 1604.14.04
@@ -5216,7 +5126,6 @@ decápodos Natantia:
 1605.30 - Bogavantes.
 1605.30.01 Bogavantes. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1605.40 - Los demás crustáceos.
 1605.40.91 Los demás crustáceos. Kg 20 Ex.
 - Moluscos:
@@ -5261,7 +5170,6 @@ b) los azúcares químicamente puros (excepto la sacarosa, lactosa, maltosa, glu
 c) los medicamentos y demás productos del Capítulo 30.
 Notas de subpartida.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1. En las subpartidas 1701.12, 1701.13 y 1701.14, se entiende por azúcar en bruto, el que contenga
 en peso, calculado sobre producto seco, un porcentaje de sacarosa correspondiente a una
 lectura en el polarímetro inferior a 99.5°.
@@ -5324,7 +5232,6 @@ melaza caramelizados.
 1702.11 -- Con un contenido de lactosa superior o
 igual al 99% en peso, expresado en
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 lactosa anhidra, calculado sobre producto
 seco.
 1702.11.01
@@ -5390,7 +5297,6 @@ Ex.
 1703.90 - Las demás.
 1703.90.99 Las demás. Kg AMX Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (10%+0.36
 Dls por Kg
 de azúcar)
@@ -5442,7 +5348,6 @@ cacao.
 1802.00 Cáscara, películas y demás residuos de
 cacao.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1802.00.01 Cáscara, películas y demás residuos de
 cacao. Kg Ex. Ex.
 18.03 Pasta de cacao, incluso desgrasada.
@@ -5505,7 +5410,6 @@ de azúcar)
 Ex.
 1806.32 -- Sin rellenar.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1806.32.01 Sin rellenar. Kg
 AMX
 (20%+0.36
@@ -5549,7 +5453,6 @@ en las Notas de los Capítulos 10 u 11.
 CÓDIGO DESCRIPCIÓN UNIDAD CUOTA (ARANCEL)
 IMPUESTO IMPUESTO
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 DE IMP. DE EXP.
 19.01
 Extracto de malta; preparaciones
@@ -5616,7 +5519,6 @@ la utilización directa del producto en la
 preparación de alimentos o postres, por
 Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ejemplo.
 1901.90.05
 Preparaciones a base de productos
@@ -5685,7 +5587,6 @@ con fécula, en copos, grumos, granos
 perlados, cerniduras o formas similares.
 Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 19.04
 Productos a base de cereales
 obtenidos por inflado o tostado (por
@@ -5754,7 +5655,6 @@ Dls por Kg
 de azúcar)
 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1905.32 --
 Barquillos y obleas, incluso rellenos
 ("gaufrettes", "wafers") y "waffles"
@@ -5812,7 +5712,6 @@ almendras confitadas y los productos similares presentados como artículos de co
 Capítulo 08), preparados o conservados por procedimientos distintos de los mencionados en la
 Nota 1 a).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. El jugo de tomate con un contenido de extracto seco superior o igual al 7% en peso, se clasifica
 en la partida 20.02.
 5. En la partida 20.07, la expresión obtenidos por cocción significa obtenidos por tratamiento térmico
@@ -5862,7 +5761,6 @@ Tomates preparados o conservados
 (excepto en vinagre o en ácido
 acético).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2002.10 - Tomates enteros o en trozos.
 2002.10.01
 Tomates enteros o en trozos.
@@ -5924,7 +5822,6 @@ sativum). Kg 20 Ex.
 2005.59 -- Las demás.
 2005.59.99 Las demás. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2005.60 - Espárragos.
 2005.60.01 Espárragos. Kg 20 Ex.
 2005.70 - Aceitunas.
@@ -5986,7 +5883,6 @@ Ex.
 diabéticos. Kg 20 Ex.
 2007.99.02 Jaleas, destinadas a diabéticos. Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2007.99.03 Purés o pastas destinadas a diabéticos. Kg 20 Ex.
 2007.99.99 Las demás. Kg
 AMX
@@ -6046,7 +5942,6 @@ Kg 20 Ex.
 2008.97.01 Mezclas. Kg 20 Ex.
 2008.99 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2008.99.99 Los demás. Kg 20 Ex.
 20.09
 Jugos de frutas u otros frutos (incluido
@@ -6099,7 +5994,6 @@ Vaccinium oxycoccos); jugo de arándanos
 rojos o encarnados (Vaccinium vitis-
 idaea).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2009.81.01
 Jugo de arándanos agrios, trepadores o
 palustres (Vaccinium macrocarpon,
@@ -6141,7 +6035,6 @@ definición se hará abstracción, en su caso, de los diversos ingredientes aña
 pequeña cantidad para sazonar, conservar u otros fines. Estas preparaciones pueden contener
 pequeñas cantidades de fragmentos visibles.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -6204,7 +6097,6 @@ microorganismos monocelulares muertos.
 2102.30.01 Polvos preparados para esponjar masas. Kg 15 Ex.
 21.03 Preparaciones para salsas y salsas
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 preparadas; condimentos y
 sazonadores, compuestos; harina de
 mostaza y mostaza preparada.
@@ -6269,7 +6161,6 @@ proteicas texturadas.
 2106.90 - Las demás.
 2106.90.01 Polvos para la elaboración de budines y Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 gelatinas destinadas a diabéticos.
 2106.90.03 Autolizados o extractos de levadura. Kg 15 Ex.
 2106.90.04
@@ -6334,7 +6225,6 @@ culinario de tal forma que resulten impropios para el consumo como bebida (gener
 partida 21.03);
 b) el agua de mar (partida 25.01);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) el agua destilada, de conductividad o del mismo grado de pureza (partida 28.53);
 d) las disoluciones acuosas con un contenido de ácido acético superior al 10% en peso (partida
 29.15);
@@ -6390,7 +6280,6 @@ Ex.
 2202.91 -- Cerveza sin alcohol.
 2202.91.01 Cerveza sin alcohol. L 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2202.99 -- Las demás.
 2202.99.01 A base de ginseng y jalea real. L 10 Ex.
 2202.99.02
@@ -6448,7 +6337,6 @@ a 2 l. L 20 Ex.
 22.06 Las demás bebidas fermentadas (por
 ejemplo: sidra, perada, aguamiel, sake);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 mezclas de bebidas fermentadas y
 mezclas de bebidas fermentadas y
 bebidas no alcohólicas, no expresadas
@@ -6519,7 +6407,6 @@ centesimales Gay-Lussac, a la temperatura
 de 15°C, a granel.
 L 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2208.20.99 Los demás. L 20 Ex.
 2208.30 - Whisky.
 2208.30.05 Whisky. L Ex. Ex.
@@ -6568,7 +6455,6 @@ Nota de subpartida.
 1. En la subpartida 2306.41, se entiende por de semillas de nabo (nabina) o de colza con bajo
 contenido de ácido erúcico las semillas definidas en la Nota 1 de subpartida del Capítulo 12.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -6636,7 +6522,6 @@ azúcar y demás desperdicios de la
 industria azucarera.
 2303.20.01 Pulpa de remolacha, bagazo de caña de Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 azúcar y demás desperdicios de la
 industria azucarera.
 2303.30 - Heces y desperdicios de cervecería o de
@@ -6695,7 +6580,6 @@ los de las partidas 23.04 o 23.05.
 2306.60 - De nuez o de almendra de palma
 (palmiste).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2306.60.01 De nuez o de almendra de palma
 (palmiste). Kg 15 Ex.
 2306.90 - Los demás.
@@ -6754,7 +6638,6 @@ Tabaco y sucedáneos del tabaco elaborados; productos, incluso con nicotina,
 destinados para la inhalación sin combustión; otros productos que contengan nicotina
 destinados para la absorción de nicotina en el cuerpo humano
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas.
 1. Este Capítulo no comprende los cigarrillos medicinales (Capítulo 30).
 2. Cualquier producto susceptible de clasificarse en la partida 24.04 y en otra partida de este
@@ -6806,7 +6689,6 @@ Los demás tabacos y sucedáneos
 del tabaco, elaborados; tabaco
 "homogeneizado" o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 "reconstituido"; extractos y jugos
 de tabaco.
 -
@@ -6867,7 +6749,6 @@ Ex.
 2404.92 -- Para administrarse por vía
 transdérmica.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2404.92.01 Para administrarse por vía
 transdérmica. Kg 5 Ex.
 2404.99 -- Los demás.
@@ -6905,7 +6786,6 @@ de óptica) de peso unitario superior o igual a 2.5 g, de la partida 38.24; los 
 ij) las tizas para billar (partida 95.04);
 k) las tizas para escribir o dibujar y los jaboncillos (tizas) de sastre (partida 96.09).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3. Cualquier producto susceptible de clasificarse en la partida 25.17 y en otra partida de este
 Capítulo, se clasifica en la partida 25.17.
 4. La partida 25.30 comprende, entre otras: la vermiculita, la perlita y las cloritas, sin dilatar; las
@@ -6958,7 +6838,6 @@ sublimado, el precipitado y el coloidal. Kg Ex. Ex.
 2504.90 - Los demás.
 2504.90.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 25.05
 Arenas naturales de cualquier clase,
 incluso coloreadas, excepto las arenas
@@ -7009,7 +6888,6 @@ Fosfatos de calcio naturales, fosfatos
 aluminocálcicos naturales y cretas
 fosfatadas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2510.10 - Sin moler.
 2510.10.02 Sin moler. Kg Ex. Ex.
 2510.20 - Molidos.
@@ -7066,7 +6944,6 @@ rectangulares.
 2514.00.01 Pizarra, incluso desbastada o simplemente
 troceada, por aserrado o de otro modo, en Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 bloques o en placas cuadradas o
 rectangulares.
 25.15
@@ -7123,7 +7000,6 @@ los tipos generalmente utilizados para
 hacer hormigón, o para firmes de
 carreteras, vías férreas u otros
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 balastos, guijarros y pedernal, incluso
 tratados térmicamente; macadán de
 escorias o de desechos industriales
@@ -7183,7 +7059,6 @@ rectangulares.
 2518.20 - Dolomita calcinada o sinterizada.
 2518.20.01 Dolomita calcinada o sinterizada. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 25.19
 Carbonato de magnesio natural
 (magnesita); magnesia electrofundida;
@@ -7240,7 +7115,6 @@ de la partida 28.25.
 2522.30 - Cal hidráulica.
 2522.30.01 Cal hidráulica. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 25.23
 Cementos hidráulicos (comprendidos
 los cementos sin pulverizar o clínker),
@@ -7292,7 +7166,6 @@ naturales; ácido bórico natural con un
 contenido de H3BO3 inferior o igual al
 85%, calculado sobre producto seco.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2528.00
 Boratos naturales y sus concentrados
 (incluso calcinados), excepto los boratos
@@ -7338,7 +7211,6 @@ a) las escorias y desechos industriales similares preparados en forma de macadá
 25.17);
 b) el carbonato de magnesio natural (magnesita), incluso calcinado (partida 25.19);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) los lodos procedentes de los depósitos de almacenamiento de aceites de petróleo
 constituidos principalmente por estos aceites (partida 27.10);
 d) las escorias de desfosforación del Capítulo 31;
@@ -7385,7 +7257,6 @@ excepto las piritas de hierro tostadas
 2601.11 -- Sin aglomerar.
 2601.11.01 Sin aglomerar. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2601.12 -- Aglomerados.
 2601.12.01 Aglomerados. Kg Ex. Ex.
 2601.20 - Piritas de hierro tostadas (cenizas de
@@ -7435,7 +7306,6 @@ concentrados.
 2608.00 Minerales de cinc y sus concentrados.
 2608.00.01 Minerales de cinc y sus concentrados. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 26.09 Minerales de estaño y sus
 concentrados.
 2609.00 Minerales de estaño y sus concentrados.
@@ -7478,7 +7348,6 @@ sus concentrados.
 2616.90.99 Los demás. Kg Ex. Ex.
 26.17 Los demás minerales y sus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 concentrados.
 2617.10 - Minerales de antimonio y sus
 concentrados.
@@ -7534,7 +7403,6 @@ químicos.
 2620.60.01 Que contengan arsénico, mercurio, talio o
 sus mezclas, de los tipos utilizados para la Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 extracción de arsénico o de estos metales
 o para la elaboración de sus compuestos
 químicos.
@@ -7579,7 +7447,6 @@ método de destilación a baja presión (Capítulo 39).
 principalmente aceites de petróleo o de mineral bituminoso (tal como se definen en la Nota 2 de
 este Capítulo), incluso mezclados con agua. Estos desechos incluyen, principalmente:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) los aceites impropios para su utilización inicial (por ejemplo: aceites lubricantes, hidráulicos o
 para transformadores, usados);
 b) los lodos de aceites procedentes de los depósitos de almacenamiento de aceites de petróleo
@@ -7627,7 +7494,6 @@ similares, obtenidos de la hulla.
 2701.20.01 Briquetas, ovoides y combustibles sólidos
 similares, obtenidos de la hulla. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 27.02 Lignitos, incluso aglomerados, excepto
 el azabache.
 2702.10 - Lignitos, incluso pulverizados, pero sin
@@ -7686,7 +7552,6 @@ deshidratados o descabezados, incluidos
 los alquitranes reconstituidos.
 L Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 27.07
 Aceites y demás productos de la
 destilación de los alquitranes de hulla de
@@ -7741,7 +7606,6 @@ bituminoso, excepto los aceites crudos;
 preparaciones no expresadas ni
 comprendidas en otra parte, con un
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 contenido de aceites de petróleo o de
 mineral bituminoso superior o igual al
 70% en peso, en las que estos aceites
@@ -7804,7 +7668,6 @@ Que contengan bifenilos policlorados
 bifenilos polibromados (PBB).
 L Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2710.99 -- Los demás.
 2710.99.99 Los demás. L Ex. Ex.
 27.11 Gas de petróleo y demás hidrocarburos
@@ -7857,7 +7720,6 @@ petróleo o de mineral bituminoso.
 2713.11 -- Sin calcinar.
 2713.11.01 Sin calcinar. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2713.12 -- Calcinado.
 2713.12.01 Calcinado. Kg Ex. Ex.
 2713.20 - Betún de petróleo.
@@ -7905,7 +7767,6 @@ Notas.
 clasifica en dicha partida y no en otra de la Nomenclatura, excepto los minerales de metales
 radiactivos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 B) Salvo lo dispuesto en el apartado A) anterior, cualquier producto que responda al texto
 específico de una de las partidas 28.43, 28.46 o 28.52, se clasifica en dicha partida y no en
 otra de esta Sección.
@@ -7945,7 +7806,6 @@ un antiaglomerante) indispensable para su conservación o transporte;
 e) los productos de los apartados a), b), c) o d) anteriores, con adición de una sustancia
 antipolvo o de un colorante, para facilitar su identificación o por razones de seguridad,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 siempre que estas adiciones no hagan al producto más apto para usos determinados que
 para uso general.
 2. Además de los ditionitos y sulfoxilatos, estabilizados con sustancias orgánicas (partida 28.31), los
@@ -7984,7 +7844,6 @@ g) los metales, incluso puros, las aleaciones metálicas o los cermets, incluido
 metálicos sinterizados (es decir, carburos metálicos sinterizados con un metal), de la
 Sección XV;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 h) los elementos de óptica, por ejemplo, los de sales halogenadas de metales alcalinos o
 alcalinotérreos (partida 90.01).
 4. Los ácidos complejos de constitución química definida constituidos por un ácido de elementos no
@@ -8022,7 +7881,6 @@ Nota de subpartida.
 orgánicos o inorgánicos de mercurio que cumplan las condiciones de los apartados a) a e) de la
 Nota 1 del Capítulo 28 o de los apartados a) a h) de la Nota 1 del Capítulo 29.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -8077,7 +7935,6 @@ elementos no metálicos.
 - Silicio:
 2804.61 -- Con un contenido de silicio superior o igual
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 al 99.99% en peso.
 2804.61.01 Con un contenido de silicio superior o igual
 al 99.99% en peso. Kg Ex. Ex.
@@ -8125,7 +7982,6 @@ clorhídrico); ácido clorosulfúrico.
 2808.00 Ácido nítrico; ácidos sulfonítricos.
 2808.00.01 Ácido nítrico; ácidos sulfonítricos. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 28.09
 Pentóxido de difósforo; ácido fosfórico;
 ácidos polifosfóricos, aunque no sean
@@ -8174,7 +8030,6 @@ elementos no metálicos.
 2812.13 -- Tricloruro de fósforo.
 2812.13.01 Tricloruro de fósforo. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2812.14 -- Pentacloruro de fósforo.
 2812.14.01 Pentacloruro de fósforo. Kg Ex. Ex.
 2812.15 -- Monocloruro de azufre.
@@ -8222,7 +8077,6 @@ líquida. Kg Ex. Ex.
 2815.30.01 Peróxidos de sodio o de potasio. Kg Ex. Ex.
 28.16 Hidróxido y peróxido de magnesio;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 óxidos, hidróxidos y peróxidos, de
 estroncio o de bario.
 2816.10 - Hidróxido y peróxido de magnesio.
@@ -8270,7 +8124,6 @@ superior o igual al 70% en peso.
 2821.20.01 Tierras colorantes. Kg Ex. Ex.
 28.22 Óxidos e hidróxidos de cobalto; óxidos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de cobalto comerciales.
 2822.00 Óxidos e hidróxidos de cobalto; óxidos de
 cobalto comerciales.
@@ -8319,7 +8172,6 @@ fluoroaluminatos y demás sales
 complejas de flúor.
 - Fluoruros:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2826.12 -- De aluminio.
 2826.12.01 De aluminio. Kg Ex. Ex.
 2826.19 -- Los demás.
@@ -8374,7 +8226,6 @@ hipocloritos de calcio.
 hipocloritos de calcio. Kg Ex. Ex.
 2828.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2828.90.99 Los demás. Kg 5 Ex.
 28.29 Cloratos y percloratos; bromatos y
 perbromatos; yodatos y peryodatos.
@@ -8421,7 +8272,6 @@ de constitución química definida.
 2833.25 -- De cobre.
 2833.25.01 De cobre, excepto lo comprendido en la Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fracción arancelaria 2833.25.02.
 2833.25.02 Sulfato tetraminocúprico. Kg Ex. Ex.
 2833.27 -- De bario.
@@ -8472,7 +8322,6 @@ dicálcico"). Kg Ex. Ex.
 2835.39.01 Pirofosfato tetrasódico. Kg 7 Ex.
 2835.39.02 Hexametafosfato de sodio. Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2835.39.99 Los demás. Kg Ex. Ex.
 28.36
 Carbonatos; peroxocarbonatos
@@ -8531,7 +8380,6 @@ metales alcalinos.
 2839.11 -- Metasilicatos.
 2839.11.01 Metasilicatos. Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2839.19 -- Los demás.
 2839.19.99 Los demás. Kg 5 Ex.
 2839.90 - Los demás.
@@ -8584,7 +8432,6 @@ Kg Ex. Ex.
 2842.90 - Las demás.
 2842.90.99 Las demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 SUBCAPÍTULO VI
 VARIOS
 28.43
@@ -8642,7 +8489,6 @@ que contengan uranio enriquecido en U
 productos.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2844.30 -
 Uranio empobrecido en U 235 y sus
 compuestos; torio y sus compuestos;
@@ -8707,7 +8553,6 @@ dispersiones (incluido el cermet), productos
 cerámicos y mezclas, que contengan estos
 elementos, isótopos o compuestos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2844.43.91
 Los demás elementos e isótopos y
 compuestos, radiactivos; aleaciones,
@@ -8764,7 +8609,6 @@ incluso solidificado con urea.
 incluso solidificado con urea. Kg Ex. Ex.
 28.49 Carburos, aunque no sean de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 constitución química definida.
 2849.10 - De calcio.
 2849.10.01 De calcio. Kg Ex. Ex.
@@ -8818,7 +8662,6 @@ excepto las de metal precioso.
 _______________
 
 **Artículo 1o - Capítulo 29**
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Productos químicos orgánicos
 Notas.
 1. Salvo disposición en contrario, las partidas de este Capítulo comprenden solamente:
@@ -8854,7 +8697,6 @@ g) las materias colorantes de origen vegetal o animal (partida 32.03), las mater
 orgánicas sintéticas, los productos orgánicos sintéticos de los tipos utilizados como agentes
 de avivado fluorescente o como luminóforos (partida 32.04), así como los tintes y demás
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 materias colorantes presentados en formas o en envases para la venta al por menor (partida
 32.12);
 h) las enzimas (partida 35.07);
@@ -8895,7 +8737,6 @@ compuestos de función fenol o de función enol);
 3°) los compuestos de coordinación, excepto los productos del Subcapítulo XI o de la
 partida 29.41, se clasifican en la partida del Capítulo 29 situada en último lugar por
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 orden de numeración entre las correspondientes a los fragmentos formados por
 escisión de todos los enlaces metálicos, excepto los enlaces metal-carbono.
 D) Los alcoholatos metálicos se clasifican en la misma partida que los alcoholes
@@ -8939,7 +8780,6 @@ SUBCAPÍTULO I
 HIDROCARBUROS Y SUS
 DERIVADOS HALOGENADOS,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 SULFONADOS, NITRADOS O
 NITROSADOS
 29.01 Hidrocarburos acíclicos.
@@ -8988,7 +8828,6 @@ cicloterpénicos:
 hidrocarburos.
 - Derivados clorados de los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hidrocarburos acíclicos saturados:
 2903.11 -- Clorometano (cloruro de metilo) y
 cloroetano (cloruro de etilo).
@@ -9047,7 +8886,6 @@ y 1,1,2,2-tetrafluoroetano (HFC-134).
 2903.45.01 1,1,1,2-Tetrafluoroetano (HFC-134a)
 y 1,1,2,2-tetrafluoroetano (HFC-134). Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2903.46 --
 1,1,1,2,3,3,3-Heptafluoropropano
 (HFC-227ea), 1,1,1,2,2,3-
@@ -9114,7 +8952,6 @@ dibromoetano).
 dibromoetano). Kg Ex. Ex.
 2903.69 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2903.69.99 Los demás. Kg Ex. Ex.
 -
 Derivados halogenados de los
@@ -9175,7 +9012,6 @@ heptacloro (ISO).
 2903.82.02 1,4,5,6,7,8,8-Heptacloro-
 3a,4,7,7atetrahidro-4,7- Prohibida Prohibida Prohibida
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 metanoindeno (Heptacloro).
 2903.82.04
 1,2,4,5,6,7,8,8-Octacloro-3-
@@ -9234,7 +9070,6 @@ solamente nitrosados.
 2904.20.99 Los demás. Kg Ex. Ex.
 - Ácido perfluorooctano sulfónico, sus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sales y fluoruro de perfluorooctano
 sulfonilo:
 2904.31 -- Ácido perfluorooctano sulfónico.
@@ -9285,7 +9120,6 @@ propan-2-ol (alcohol isopropílico). Kg Ex. Ex.
 isómeros.
 2905.16.03 Octanol (alcohol octílico) y sus Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 isómeros.
 2905.17 --
 Dodecan-1-ol (alcohol laurílico),
@@ -9340,7 +9174,6 @@ alcoholes acíclicos:
 29.06 Alcoholes cíclicos y sus
 derivados halogenados,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sulfonados, nitrados o nitrosados.
 - Ciclánicos, ciclénicos o
 cicloterpénicos:
@@ -9390,7 +9223,6 @@ difenilolpropano) y sus sales.
 2907.23.03 4,4'-Isopropilidendifenol (bisfenol A,
 difenilolpropano) y sus sales. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2907.29 -- Los demás.
 2907.29.99 Los demás. Kg Ex. Ex.
 29.08
@@ -9443,7 +9275,6 @@ nitrosados:
 2909.11 -- Éter dietílico (óxido de dietilo).
 2909.11.01 Éter dietílico (óxido de dietilo). Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2909.19 -- Los demás.
 2909.19.99 Los demás. Kg Ex. Ex.
 2909.20 -
@@ -9506,7 +9337,6 @@ Kg Ex. Ex.
 fenoles, y sus derivados
 halogenados, sulfonados, nitrados o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 nitrosados.
 2909.50.01 Éter monometílico de la
 hidroquinona. Kg 7 Ex.
@@ -9563,7 +9393,6 @@ derivados halogenados, sulfonados,
 nitrados o nitrosados.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 SUBCAPÍTULO V
 COMPUESTOS CON FUNCIÓN
 ALDEHÍDO
@@ -9615,7 +9444,6 @@ de los productos de la partida
 2913.00 Derivados halogenados, sulfonados,
 nitrados o nitrosados de los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 productos de la partida 29.12.
 2913.00.03
 Derivados halogenados, sulfonados,
@@ -9669,7 +9497,6 @@ funciones oxigenadas:
 2914.39 -- Las demás.
 2914.39.99 Las demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2914.40 - Cetonas-alcoholes y cetonas-
 aldehídos.
 2914.40.01 Acetilmetilcarbinol. Kg Ex. Ex.
@@ -9720,7 +9547,6 @@ sulfonados, nitrados o nitrosados.
 acético:
 2915.21 -- Ácido acético.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2915.21.01 Ácido acético. Kg Ex. Ex.
 2915.24 -- Anhídrido acético.
 2915.24.01 Anhídrido acético. Kg 10 Ex.
@@ -9773,7 +9599,6 @@ sales y sus ésteres.
 propilenglicol. Kg 5 Ex.
 2915.70.03 Estearato de butilo. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2915.70.04 Monoestearato de sorbitan. Kg 5 Ex.
 2915.70.05 Monoestearato de glicerilo. Kg 5 Ex.
 2915.70.06 Palmitato de metilo. Kg 5 Ex.
@@ -9827,7 +9652,6 @@ sulfonados, nitrados o nitrosados.
 - Ácidos monocarboxílicos acíclicos
 no saturados, sus anhídridos,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 halogenuros, peróxidos,
 peroxiácidos y sus derivados:
 2916.11 -- Ácido acrílico y sus sales.
@@ -9883,7 +9707,6 @@ benzoilo. Kg Ex. Ex.
 2916.34 -- Ácido fenilacético y sus sales.
 2916.34.01 Ácido fenilacético y sus sales. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2916.39 -- Los demás.
 2916.39.08 Esteres del ácido fenilacético. Kg Ex. Ex.
 2916.39.99 Los demás. Kg Ex. Ex.
@@ -9944,7 +9767,6 @@ Kg 35 Ex.
 ortoftálico.
 2917.34.01 Ortoftalatos de dibutilo. Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2917.34.99 Los demás. Kg Ex. Ex.
 2917.35 -- Anhídrido ftálico.
 2917.35.01
@@ -10008,7 +9830,6 @@ AMX
 por Kg de
 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 azúcar)
 2918.15.05
 Sales del ácido cítrico, excepto
@@ -10067,7 +9888,6 @@ halogenuros, peróxidos,
 peroxiácidos y sus derivados.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Los demás:
 2918.91 --
 2,4,5-T (ISO) (ácido
@@ -10129,7 +9949,6 @@ nitrosados:
 (ISO) (metil paratión).
 2920.11.01 Fósforotioato de O,O-dietil-O-p- Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 nitrofenilo (Paratión).
 2920.11.03 Fósforotioato de O,O-dimetil-O-p-
 nitrofenilo (Paratión metílico). Prohibida Prohibida Prohibida
@@ -10182,7 +10001,6 @@ dietilamina). Kg Ex. Ex.
 diisopropilamina).
 2921.14.01 Clorhidrato de 2-cloroetil (N,N- Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 diisopropilamina).
 2921.19 -- Los demás.
 2921.19.02 Trietilamina. Kg 5 Ex.
@@ -10237,7 +10055,6 @@ etilanfetamina (DCI), fencanfamina
 (DCI), levanfetamina (DCI) y
 mefenorex (DCI); sales de estos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 productos.
 2921.46.01
 Anfetamina (DCI), benzfetamina
@@ -10298,7 +10115,6 @@ Kg 35 Ex.
 2922.12.99 Los demás. Kg Ex. Ex.
 2922.14 -- Dextropropoxifeno (DCI) y sus sales.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2922.14.03 Dextropropoxifeno (DCI) y sus sales. Kg Ex. Ex.
 2922.15 -- Trietanolamina.
 2922.15.01 Trietanolamina. Kg 10 Ex.
@@ -10360,7 +10176,6 @@ diferentes, y sus ésteres; sales de
 estos productos:
 2922.41 -- Lisina y sus ésteres; sales de estos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 productos.
 2922.41.02 Lisina y sus ésteres; sales de estos
 productos. Kg Ex. Ex.
@@ -10425,7 +10240,6 @@ Kg Ex. Ex.
 2922.49.19 p-n-Butilaminobenzoato del éter
 monometílico del nonaetilenglicol Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (Benzonatato).
 2922.49.20 Sal de sodio del ácido
 aminonitrobenzoico. Kg Ex. Ex.
@@ -10483,7 +10297,6 @@ carboxiamida; compuestos con
 función amida del ácido
 carbónico.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Amidas acíclicas (incluidos los
 carbamatos) y sus derivados; sales
@@ -10541,7 +10354,6 @@ N-acetilantranílico) y sus sales. Kg Ex. Ex.
 2924.29.09 Acetotoluidina. Kg 5 Ex.
 2924.29.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 29.25
 Compuestos con función
 carboxiimida (incluida la sacarina
@@ -10593,7 +10405,6 @@ o de la hidroxilamina.
 2928.00.01 Metil-etil-cetoxima. Kg Ex. Ex.
 2928.00.02 Hidrazobenceno. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2928.00.03 Fosforotioato de O,O-dietil O-
 iminofenil acetonitrilo. Kg Ex. Ex.
 2928.00.05 1,2-Naftoquinona-
@@ -10646,7 +10457,6 @@ tiourama. Kg Ex. Ex.
 2930.60 - 2-(N,N-Dietilamino)etanotiol.
 2930.60.01 2-(N,N-Dietilamino)etanotiol. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2930.70 - Sulfuro de bis(2-hidroxietilo)
 (tiodiglicol (DCI)).
 2930.70.01 Sulfuro de bis(2-hidroxietilo)
@@ -10705,7 +10515,6 @@ Metilfosfonato de (5-etil-2-metil-2-
 óxido-1,3,2-dioxafosfinan-5-il)metil
 metilo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2931.47.01
 Metilfosfonato de (5-etil-2-metil-2-
 óxido-1,3,2-dioxafosfinan-5-il)metil
@@ -10767,7 +10576,6 @@ tetrahidrofurfurílico.
 2932.13.01 Alcohol furfurílico y alcohol
 tetrahidrofurfurílico. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2932.14 -- Sucralosa.
 2932.14.01 Sucralosa. Kg Ex. Ex.
 2932.19 -- Los demás.
@@ -10823,7 +10631,6 @@ contenga uno o más ciclos imidazol
 condensar:
 2933.21 -- Hidantoína y sus derivados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2933.21.01 Hidantoína y sus derivados. Kg Ex. Ex.
 2933.29 -- Los demás.
 2933.29.99 Los demás. Kg Ex. Ex.
@@ -10880,7 +10687,6 @@ derivados. Kg Ex. Ex.
 2933.39 -- Los demás.
 2933.39.02 Feniramina, bromofeniramina y sus Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 maleatos.
 2933.39.06 4,4'-Bipiridilo. Kg 5 Ex.
 2933.39.17
@@ -10944,7 +10750,6 @@ Kg Ex. Ex.
 2933.54 -- Los demás derivados de la
 malonilurea (ácido barbitúrico); sales
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de estos productos.
 2933.54.91
 Los demás derivados de la
@@ -11004,7 +10809,6 @@ pinazepam (DCI), pirovalerona
 (DCI); sales de estos productos.
 2933.91.03 Alprazolam (DCI), camazepam Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (DCI), clonazepam (DCI),
 clorazepato, clordiazepóxido (DCI),
 delorazepam (DCI), diazepam (DCI),
@@ -11065,7 +10869,6 @@ condensaciones.
 2934.30.02 Compuestos cuya estructura
 contenga ciclos fenotiazina (incluso Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hidrogenados), sin otras
 condensaciones.
 - Los demás:
@@ -11127,7 +10930,6 @@ metilperfluorooctano sulfonamida.
 metilperfluorooctano sulfonamida. Kg Ex. Ex.
 2935.50 - Las demás perfluorooctano
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sulfonamidas.
 2935.50.91 Las demás perfluorooctano
 sulfonamidas. Kg Ex. Ex.
@@ -11178,7 +10980,6 @@ derivados.
 2936.29.04 Nicotinamida (Niacinamida). Kg 5 Ex.
 2936.29.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2936.90 - Los demás, incluidos los
 concentrados naturales.
 2936.90.91 Los demás, incluidos los
@@ -11235,7 +11036,6 @@ eno (Linestrenol). Kg 5 Ex.
 sales. Kg 5 Ex.
 2937.23.18 Mestranol. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2937.23.21 Delmadinona, sus sales o sus
 ésteres. Kg 5 Ex.
 2937.23.22
@@ -11294,7 +11094,6 @@ sales, éteres, ésteres y demás
 derivados.
 - Alcaloides del opio y sus derivados;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sales de estos productos:
 2939.11 --
 Concentrados de paja de
@@ -11357,7 +11156,6 @@ de estos productos:
 2939.59 -- Los demás.
 2939.59.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Alcaloides del cornezuelo del
 centeno y sus derivados; sales de
@@ -11415,7 +11213,6 @@ Kg Ex. Ex.
 29.41 Antibióticos.
 2941.10 - Penicilinas y sus derivados con la
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 estructura del ácido penicilánico;
 sales de estos productos.
 2941.10.03 Bencilpenicilina procaína. Kg 5 Ex.
@@ -11464,7 +11261,6 @@ b) los productos, tales como comprimidos, gomas de mascar o parches autoadhesivo
 administran por vía transdérmica), que contengan nicotina y destinados para ayudar a dejar
 de fumar (partida 24.04);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) el yeso fraguable especialmente calcinado o finamente molido para uso en odontología
 (partida 25.20);
 d) los destilados acuosos aromáticos y las disoluciones acuosas de aceites esenciales,
@@ -11499,7 +11295,6 @@ a) los catguts estériles y las ligaduras estériles similares, para suturas qui
 hilos reabsorbibles estériles para cirugía u odontología) y los adhesivos estériles para tejidos
 orgánicos utilizados en cirugía para cerrar heridas;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) las laminarias estériles;
 c) los hemostáticos reabsorbibles estériles para cirugía u odontología; las barreras
 antiadherencias estériles para cirugía u odontología, incluso reabsorbibles;
@@ -11537,7 +11332,6 @@ aditivos.
 activos, o que contengan alguno de los principios activos siguientes, incluso combinados con
 otros ingredientes farmacéuticos activos: ácido artelínico o sus sales; amodiaquina (DCI);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 arteméter (DCI); artemotil (DCI); artenimol (DCI); artesunato (DCI); cloroquina (DCI);
 dihidroartemisinina (DCI); lumefantrina (DCI); mefloquina (DCI); piperaquina (DCI); pirimetamina
 (DCI) o sulfadoxina (DCI).
@@ -11595,7 +11389,6 @@ vacunas, toxinas, cultivos de
 microorganismos (excepto las
 levaduras) y productos similares;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cultivos de células, incluso
 modificadas.
 -
@@ -11661,7 +11454,6 @@ levaduras) y productos similares:
 3002.41 -- Vacunas para uso en medicina
 humana.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3002.41.01 Vacuna antiestafilocócica. Kg Ex. Ex.
 3002.41.02 Vacuna antihepatitis tipo "A" o "B". Kg Ex. Ex.
 3002.41.03 Vacuna contra la haemophilus tipo
@@ -11721,7 +11513,6 @@ Kg 15 Ex.
 3003.20 - Los demás, que contengan
 antibióticos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3003.20.01
 Medicamentos a base de dos o más
 antibióticos, aún cuando contengan
@@ -11782,7 +11573,6 @@ sodada. Kg Ex. Ex.
 3003.90.03 Preparaciones a base de proteínas
 hidrolizadas. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3003.90.04 Tioleico RV 100. Kg Ex. Ex.
 3003.90.08 Insaponificable de aceite de germen
 de maíz. Kg Ex. Ex.
@@ -11844,7 +11634,6 @@ derivados de estos productos con la
 estructura del ácido penicilánico, o
 estreptomicinas o derivados de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 estos productos.
 3004.10.01 Antibiótico a base de piperacilina
 sódica. Kg 5 Ex.
@@ -11905,7 +11694,6 @@ o sus sales.
 o sus sales. Kg 10 Ex.
 3004.43 -- Que contengan norefedrina o sus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sales.
 3004.43.01 Que contengan norefedrina o sus
 sales. Kg 10 Ex.
@@ -11972,7 +11760,6 @@ Kg Ex. Ex.
 3004.90.09 Solución coloidal de polimerizado
 de gelatinas desintegradas, Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 conteniendo además cloruros de
 sodio, de potasio y de calcio.
 3004.90.11 Preparación de hidroxialuminato de
@@ -12035,7 +11822,6 @@ Kg Ex. Ex.
 3004.90.35 A base de sulfato de indinavir, o de
 amprenavir. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3004.90.36 A base de finasteride. Kg Ex. Ex.
 3004.90.37 Tabletas de liberación prolongada, a
 base de nifedipina. Kg Ex. Ex.
@@ -12100,7 +11886,6 @@ veterinarios.
 capa adhesiva.
 3005.10.01 Tafetán engomado o venditas Kg 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 adhesivas.
 3005.10.02 Apósitos de tejido cutáneo de
 porcino, liofilizados. Kg 5 Ex.
@@ -12162,7 +11947,6 @@ refección de los huesos.
 3006.40.02 Preparaciones de metales preciosos
 para obturación dental. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3006.40.03 Cera para cirugía de huesos, a base
 de cera natural de abeja. Kg Ex. Ex.
 3006.40.99 Los demás. Kg 5 Ex.
@@ -12231,7 +12015,6 @@ azúcar)
 Ex.
 3006.93.03 En forma líquida para ingestión oral. L AMX Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (20%+0.36
 Dls por Kg de
 azúcar)
@@ -12265,7 +12048,6 @@ magnesio;
 8) la urea, incluso pura;
 b) los abonos que consistan en mezclas entre sí de los productos del apartado a) precedente;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) los abonos que consistan en mezclas de cloruro de amonio o de productos de los apartados
 a) y b) precedentes, con creta, yeso natural u otras materias inorgánicas sin poder
 fertilizante;
@@ -12301,7 +12083,6 @@ utilizados como abonos que contengan como componentes esenciales, por lo menos, 
 elementos fertilizantes: nitrógeno, fósforo o potasio.
 CÓDIGO DESCRIPCIÓN UNIDAD CUOTA (ARANCEL)
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 IMPUESTO
 DE IMP.
 IMPUESTO
@@ -12371,7 +12152,6 @@ Kg Ex. Ex.
 3102.50 - Nitrato de sodio.
 3102.50.01 Nitrato de sodio. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3102.60 - Sales dobles y mezclas entre sí de
 nitrato de calcio y nitrato de amonio.
 3102.60.01
@@ -12441,7 +12221,6 @@ Arancel con facilidades de importación de vigencia temporal
 DOF 06-01-2023
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 31.05
 Abonos minerales o químicos, con
 dos o tres de los elementos
@@ -12515,7 +12294,6 @@ dos elementos fertilizantes: fósforo y
 potasio.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel con facilidades de importación de vigencia temporal
 DOF 06-01-2023
 3105.90 - Los demás.
@@ -12558,7 +12336,6 @@ sombreros, y constituidas por:
 a) polvos metálicos impalpables (incluso de metal precioso) o pigmentos, aglomerados con
 cola, gelatina u otros aglutinantes;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) metales (incluso metal precioso) o pigmentos, depositados en una hoja de cualquier materia
 que sirva de soporte.
 CÓDIGO DESCRIPCIÓN UNIDAD
@@ -12615,7 +12392,6 @@ Nota 3 de este Capítulo a base de materias
 colorantes de origen vegetal o animal.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 32.04
 Materias colorantes orgánicas
 sintéticas, aunque sean de constitución
@@ -12679,7 +12455,6 @@ base de estos colorantes.
 3204.16.05 Colorantes reactivos y preparaciones a
 base de estos colorantes. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3204.17 -- Colorantes pigmentarios y preparaciones a
 base de estos colorantes.
 3204.17.01
@@ -12751,7 +12526,6 @@ Kg 5 Ex.
 3204.17.99 Los demás. Kg Ex. Ex.
 3204.18 -- Colorantes carotenoides y preparaciones a
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 base de estos colorantes.
 3204.18.01 Colorantes carotenoides y preparaciones a
 base de estos colorantes. Kg Ex. Ex.
@@ -12816,7 +12590,6 @@ Index": Amarillo 3(15985), 4(19140); Azul
 Kg 5 Ex.
 3205.00.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 32.06
 Las demás materias colorantes;
 preparaciones a que se refiere la Nota 3
@@ -12884,7 +12657,6 @@ minutos a 45 g/10 minutos y tamaño del
 pigmento de 3 micras a 5 micras.
 Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3206.49.04
 Dispersiones de pigmentos nacarados o
 perlescentes a base de cristales de
@@ -12944,7 +12716,6 @@ gránulos, copos o escamillas. Kg Ex. Ex.
 32.08 Pinturas y barnices a base de polímeros
 sintéticos o naturales modificados,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 dispersos o disueltos en un medio no
 acuoso; disoluciones definidas en la
 Nota 4 de este Capítulo.
@@ -12999,7 +12770,6 @@ Colores para la pintura artística, la
 enseñanza, la pintura de carteles, para
 matizar o para entretenimiento y colores
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 similares, en pastillas, tubos, botes,
 frascos o en formas o envases
 similares.
@@ -13050,7 +12820,6 @@ Notas.
 a) las oleorresinas naturales o extractos vegetales de las partidas 13.01 o 13.02;
 b) el jabón y demás productos de la partida 34.01;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) las esencias de trementina, de madera de pino o de pasta celulósica al sulfato y demás
 productos de la partida 38.05.
 2. En la partida 33.02, se entiende por sustancias odoríferas únicamente las sustancias de la partida
@@ -13105,7 +12874,6 @@ Kg 5 Ex.
 3301.25 -- De las demás mentas.
 3301.25.91 De las demás mentas. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3301.29 -- Los demás.
 3301.29.99 Los demás. Kg Ex. Ex.
 3301.30 - Resinoides.
@@ -13164,7 +12932,6 @@ medicamentos, incluidas las
 preparaciones antisolares y las
 bronceadoras; preparaciones para
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 manicuras o pedicuros.
 3304.10 - Preparaciones para el maquillaje de los
 labios.
@@ -13211,7 +12978,6 @@ interdentales (hilo dental).
 3306.20.02 Hilo utilizado para limpieza de los espacios
 interdentales (hilo dental). Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3306.90 - Los demás.
 3306.90.99 Los demás.
 33.07
@@ -13262,7 +13028,6 @@ a base de yeso fraguable
 Notas.
 1. Este Capítulo no comprende:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) las mezclas o preparaciones alimenticias de grasas o de aceites, animales, vegetales o de
 origen microbiano, de los tipos utilizados como preparaciones de desmoldeo (partida 15.17);
 b) los compuestos aislados de constitución química definida;
@@ -13300,7 +13065,6 @@ c) las ceras minerales y productos similares de la partida 27.12, incluso mezcla
 simplemente coloreados;
 d) las ceras mezcladas, dispersas o disueltas en un medio líquido (partidas 34.05, 38.09, etc.).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -13362,7 +13126,6 @@ limpieza, aunque contengan jabón,
 excepto las de la partida 34.01.
 - Agentes de superficie orgánicos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 aniónicos, incluso acondicionados para la
 venta al por menor:
 3402.31 -- Ácidos alquilbenceno sulfónicos lineales
@@ -13429,7 +13192,6 @@ estabilizada en lactosa, con clorhidrato
 de cisteina, edetato disódico y
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 polietilenglicol.
 3402.50.99 Los demás. Kg 6 Ex.
 3402.90 - Las demás.
@@ -13489,7 +13251,6 @@ Kg 6 Ex.
 3403.99.99 Las demás. Kg 6 Ex.
 34.04 Ceras artificiales y ceras preparadas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3404.20 - De poli(oxietileno) (polietilenglicol).
 3404.20.01 De poli(oxietileno) (polietilenglicol). Kg 10 Ex.
 3404.90 - Las demás.
@@ -13552,7 +13313,6 @@ Kg 25 Ex.
 34.06 Velas, cirios y artículos similares.
 3406.00 Velas, cirios y artículos similares.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3406.00.01 Velas, cirios y artículos similares. Kg 20 Ex.
 34.07
 Pastas para modelar, incluidas las
@@ -13602,7 +13362,6 @@ b) las fracciones de la sangre (excepto la albúmina de la sangre sin preparar p
 terapéuticos o profilácticos), los medicamentos y demás productos del Capítulo 30;
 c) las preparaciones enzimáticas para precurtido (partida 32.02);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 d) las preparaciones enzimáticas para el lavado o prelavado y demás productos del Capítulo
 34;
 e) las proteínas endurecidas (partida 39.13);
@@ -13654,7 +13413,6 @@ hojas cuadradas o rectangulares,
 incluso trabajadas en la superficie o
 coloreadas) y sus derivados; ictiocola;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 las demás colas de origen animal,
 excepto las colas de caseína de la
 partida 35.01.
@@ -13712,7 +13470,6 @@ igual a 1 kg.
 3506.10 - Productos de cualquier clase utilizados
 como colas o adhesivos, acondicionados
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 para la venta al por menor como colas o
 adhesivos, de peso neto inferior o igual a
 1 kg.
@@ -13762,7 +13519,6 @@ a) el metaldehído, la hexametilentetramina y productos similares, en tabletas, 
 análogas, que impliquen su utilización como combustibles, así como los combustibles a base
 de alcohol y los combustibles preparados similares, sólidos o en pasta;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) los combustibles líquidos y los gases combustibles licuados en recipientes de los tipos
 utilizados para cargar o recargar encendedores o mecheros, de capacidad inferior o igual a
 300 cm3; y
@@ -13816,7 +13572,6 @@ de pirotecnia.
 3604.10.01 Artículos para fuegos artificiales. Kg 15 Ex.
 3604.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3604.90.99 Los demás. Kg 15 Ex.
 36.05
 Fósforos (cerillas), excepto los
@@ -13873,7 +13628,6 @@ sensibilizadas, sin impresionar,
 excepto las de papel, cartón o textiles;
 películas fotográficas planas
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 autorrevelables, sensibilizadas, sin
 impresionar, incluso en cargadores.
 3701.10 - Para rayos X.
@@ -13932,7 +13686,6 @@ exposiciones fotográficas, sin movimiento,
 con peso unitario superior o igual a 100
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 kg.
 3702.41.99 Las demás. Kg 5 Ex.
 3702.42 --
@@ -13999,7 +13752,6 @@ longitud inferior o igual a 30 m.
 3702.96.01 De anchura inferior o igual a 35 mm y
 longitud inferior o igual a 30 m. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3702.97 -- De anchura inferior o igual a 35 mm y
 longitud superior a 30 m.
 3702.97.01 De anchura inferior o igual a 35 mm y
@@ -14059,7 +13811,6 @@ exclusivamente para instituciones de
 educación o similares.
 Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3705.00.03 Microfilmes. Kg Ex. Ex.
 3705.00.04
 Para la reproducción offset, excepto lo
@@ -14108,7 +13859,6 @@ siguientes:
 germinación y reguladores del crecimiento de las plantas, desinfectantes y productos
 similares, presentados en las formas o envases previstos en la partida 38.08;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3) los productos extintores presentados como cargas para aparatos extintores o en
 granadas o bombas extintoras (partida 38.13);
 4) los materiales de referencia certificados especificados en la Nota 2 siguiente;
@@ -14147,7 +13897,6 @@ envases para la venta al por menor;
 e) los indicadores cerámicos fusibles para el control de la temperatura de los hornos (por
 ejemplo, conos de Seger).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. En la Nomenclatura, se entiende por desechos municipales los recolectados de viviendas
 particulares, hoteles, restaurantes, hospitales, almacenes, oficinas, etcétera y los recogidos en
 calzadas y aceras, así como los desechos de material de construcción y los escombros de
@@ -14188,7 +13937,6 @@ sales; alaclor (ISO); aldicarb (ISO); aldrina (ISO); azinfos-metil (ISO); binapa
 (ISO) (toxafeno); captafol (ISO); carbofurano (carbofurán) (ISO); clordano (ISO); clordimeformo
 (ISO); clorobencilato (ISO); compuestos de mercurio; compuestos de tributilestaño; DDT (ISO)
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (clofenotano (DCI), 1,1,1-tricloro-2,2-bis(p-clorofenil)etano); dibromuro de etileno (ISO) (1,2-
 dibromoetano); dicloruro de etileno (ISO) (1,2-dicloroetano); dieldrina (ISO, DCI); 4,6-dinitro-o-
 cresol (DNOC (ISO)) o sus sales; dinoseb (ISO), sus sales o sus ésteres; endosulfán (ISO);
@@ -14242,7 +13990,6 @@ revestimiento interior de hornos.
 3801.30.02 Pastas carbonosas para electrodos y
 pastas similares para el Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 revestimiento interior de hornos.
 3801.90 - Las demás.
 3801.90.01
@@ -14299,7 +14046,6 @@ tratamientos de la madera de
 coníferas; dipenteno en bruto;
 esencia de pasta celulósica al
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 bisulfito (bisulfito de trementina) y
 demás paracimenos en bruto;
 aceite de pino con alfa-terpineol
@@ -14361,7 +14107,6 @@ madera; metileno (nafta de madera);
 pez vegetal; pez de cervecería y
 preparaciones similares a base de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 colofonia, de ácidos resínicos o de
 pez vegetal.
 3807.00.01
@@ -14426,7 +14171,6 @@ contenido en peso neto inferior o
 igual a 300 g.
 3808.61.01 Acondicionados en envases con un Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 contenido en peso neto inferior o
 igual a 300 g.
 3808.62 --
@@ -14493,7 +14237,6 @@ papel, del cuero o industrias
 similares, no expresados ni
 comprendidos en otra parte.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3809.10 - A base de materias amiláceas.
 3809.10.01 A base de materias amiláceas. Kg 5 Ex.
 - Los demás:
@@ -14555,7 +14298,6 @@ peptizantes, mejoradores de
 viscosidad, anticorrosivos y
 demás aditivos preparados para
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 aceites minerales (incluida la
 gasolina) u otros líquidos
 utilizados para los mismos fines
@@ -14624,7 +14366,6 @@ emulsionantes.
 Kg Ex. Ex.
 3811.90.99 Los demás. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 38.12
 Aceleradores de vulcanización
 preparados; plastificantes
@@ -14684,7 +14425,6 @@ Kg 5 Ex.
 38.14 Disolventes y diluyentes
 orgánicos compuestos, no
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 expresados ni comprendidos en
 otra parte; preparaciones para
 quitar pinturas o barnices.
@@ -14745,7 +14485,6 @@ Kg 5 Ex.
 3816.00.06 Compuestos con un contenido de:
 arenas silíceas superior o igual al Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 44% pero inferior o igual al 46%,
 carbono superior o igual al 24% pero
 inferior o igual al 26% y de carburo
@@ -14806,7 +14545,6 @@ bituminoso o con un contenido
 inferior al 70% en peso de dichos
 aceites.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3819.00.03
 Líquidos para transmisiones
 hidráulicas a base de ésteres
@@ -14869,7 +14607,6 @@ en kits:
 3822.11 -- Para la malaria (paludismo).
 3822.11.01 Presentados en forma de Kit. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3822.11.99 Los demás. Kg 5 Ex.
 3822.12 --
 Para el Zika y demás enfermedades
@@ -14934,7 +14671,6 @@ características sean: "Titer" de 53°C
 a 62°C, índice de yodo inferior o
 Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 igual a 2, color Gardner de 1 a 12,
 índice de acidez de 206 a 220,
 índice de saponificación de 207 a
@@ -14992,7 +14728,6 @@ de subpartida de este Capítulo:
 etileno).
 3824.81.01 Que contengan oxirano (óxido de Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 etileno).
 3824.82 --
 Que contengan bifenilos
@@ -15058,7 +14793,6 @@ Kg 5 Ex.
 hexa-, hepta- u octabromodifenílicos.
 3824.88.01 Que contengan éteres tetra-, penta-, Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hexa-, hepta- u octabromodifenílicos.
 3824.89 -- Que contengan parafinas cloradas
 de cadena corta.
@@ -15124,7 +14858,6 @@ igual al 25%.
 Kg Ex. Ex.
 3824.99.16 Mezclas de fosfato de cresilo y Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 derivados sulfurados.
 3824.99.18
 Polvo desecado proveniente de la
@@ -15190,7 +14923,6 @@ siliciuros. Kg Ex. Ex.
 activado y óxido de cobre. Kg Ex. Ex.
 3824.99.37 Preparación a base de vermiculita y Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 turba, con o sin perlita.
 3824.99.38
 Preparación a base de alúmina,
@@ -15261,7 +14993,6 @@ Mezcla de mono, di y triglicéridos de
 cadena C12 a C18.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3824.99.59
 Mezclas orgánicas, extractantes a
 base de dodecilsalicilaldoxima, con
@@ -15334,7 +15065,6 @@ Kg Ex. Ex.
 3824.99.76 Ácidos nafténicos; Dinonilnaftalen
 sulfonato de plomo. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3824.99.83
 Soluciones y mezclas, de las
 utilizadas para lo comprendido en la
@@ -15393,7 +15123,6 @@ Biodiésel y sus mezclas, sin aceites
 de petróleo o de mineral bituminoso
 o con un contenido inferior al 70%
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 en peso de estos aceites.
 3826.00.01
 Biodiésel y sus mezclas, sin aceites
@@ -15456,7 +15185,6 @@ bromoclorodifluorometano (Halón-
 Kg Ex. Ex.
 - Que contengan
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hidroclorofluorocarburos (HCFC),
 incluso con perfluorocarburos (PFC)
 o hidrofluorocarburos (HFC), pero
@@ -15521,7 +15249,6 @@ contenido de pentafluoroetano
 en masa, pero que no contengan
 derivados fluorados de los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hidrocarburos acíclicos no saturados
 (HFO).
 3827.62.91
@@ -15587,7 +15314,6 @@ subpartidas anteriores, que
 contengan sustancias de las
 subpartidas 2903.41 a 2903.48.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3827.68.91
 Las demás, no comprendidas en
 subpartidas anteriores, que
@@ -15629,7 +15355,6 @@ En la Nomenclatura, el término plástico comprende también la fibra vulcanizad
 dicho término no se aplica a las materias textiles de la Sección XI.
 2. Este Capítulo no comprende:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) las preparaciones lubricantes de las partidas 27.10 o 34.03;
 b) las ceras de las partidas 27.12 o 34.04;
 c) los compuestos orgánicos aislados de constitución química definida (Capítulo 29);
@@ -15662,7 +15387,6 @@ gafas (anteojos), instrumentos de dibujo);
 v) los artículos del Capítulo 91 (por ejemplo: cajas y envolturas similares de relojes o demás
 aparatos de relojería);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 w) los artículos del Capítulo 92 (por ejemplo: instrumentos musicales y sus partes);
 x) los artículos del Capítulo 94 (por ejemplo: muebles, luminarias y aparatos de alumbrado,
 carteles luminosos, construcciones prefabricadas);
@@ -15700,7 +15424,6 @@ modificar. Esta disposición no se aplica a los copolímeros de injerto.
 siguientes:
 a) líquidos y pastas, incluidas las dispersiones (emulsiones y suspensiones) y las disoluciones;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) bloques irregulares, trozos, grumos, polvo (incluido el polvo para moldear), gránulos, copos y
 masas no coherentes similares.
 7. La partida 39.15 no comprende los desechos, desperdicios ni recortes de una sola materia
@@ -15740,7 +15463,6 @@ ij) accesorios y guarniciones para fijar permanentemente a las puertas, ventanas
 paredes y demás partes de un edificio, por ejemplo: tiradores, perillas o manijas, ganchos,
 soportes, toalleros, placas de interruptores y demás placas de protección.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas de subpartida.
 1. Dentro de una partida de este Capítulo, los polímeros (incluidos los copolímeros) y los polímeros
 modificados químicamente, se clasifican conforme las disposiciones siguientes:
@@ -15785,7 +15507,6 @@ IMPUESTO
 DE EXP.
 SUBCAPÍTULO I
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 FORMAS PRIMARIAS
 39.01 Polímeros de etileno en formas
 primarias.
@@ -15840,7 +15561,6 @@ Kg 35 Ex.
 3903.20.01 Copolímeros de estireno-acrilonitrilo (SAN). Kg 6 Ex.
 3903.30 - Copolímeros de acrilonitrilo-butadieno-
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 estireno (ABS).
 3903.30.01 Copolímeros de acrilonitrilo-butadieno-
 estireno (ABS). Kg 5 Ex.
@@ -15905,7 +15625,6 @@ Kg 5 Ex.
 3904.22 -- Plastificados.
 3904.22.01 Plastificados. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3904.30 - Copolímeros de cloruro de vinilo y acetato
 de vinilo.
 3904.30.01
@@ -15968,7 +15687,6 @@ comprendido en la fracción arancelaria
 3905.29.02.
 Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3905.29.02 Copolímero de acetato de vinilo-vinil
 pirrolidona. Kg Ex. Ex.
 3905.29.99 Los demás. Kg 7 Ex.
@@ -16023,7 +15741,6 @@ en formas primarias.
 3907.21.01 Metilfosfonato de bis(polioxietileno). Kg 5 Ex.
 3907.29 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3907.29.01 Resinas de poli(2,2-bis(3,4-dicarboxifenoxi))
 fenil propanol-2-fenilen bis imida. Kg Ex. Ex.
 3907.29.02
@@ -16089,7 +15806,6 @@ modificadores en gránulos.
 Kg Ex. Ex.
 3907.91.99 Los demás. Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 6)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
@@ -16156,7 +15872,6 @@ Kg 6 Ex.
 3908.10.06 Poliamida 12. Kg 3 Ex.
 3908.10.07 Poliamida del adipato de Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hexametilendiamina con cargas, pigmentos
 o modificantes.
 3908.10.08
@@ -16224,7 +15939,6 @@ sin modificar. Kg 5 Ex.
 3909.40.99 Los demás. Kg 6 Ex.
 3909.50 - Poliuretanos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3909.50.04
 Prepolímeros y polímeros de difenilmetan
 diisocianato y polimetilen polifenil isocianato
@@ -16289,7 +16003,6 @@ al agua sin pigmentar en una proporción
 superior o igual al 65% pero inferior o igual
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 al 70%.
 3911.90.03 Resinas de anacardo modificadas. Kg Ex. Ex.
 3911.90.04
@@ -16345,7 +16058,6 @@ primarias.
 3913.90.02 Esponjas celulósicas. Kg 3 Ex.
 3913.90.05 Producto de la reacción del líquido obtenido Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de la cáscara de nuez de anacardo y el
 formaldehído.
 3913.90.06 Goma de Xantán. Kg 7 Ex.
@@ -16394,7 +16106,6 @@ Tubos y accesorios de tubería (por
 ejemplo: juntas, codos, empalmes
 (racores)), de plástico.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3917.10 - Tripas artificiales de proteínas endurecidas
 o de plásticos celulósicos.
 3917.10.05 Tripas artificiales de proteínas endurecidas
@@ -16443,7 +16154,6 @@ de este Capítulo.
 3918.90 - De los demás plásticos.
 3918.90.91 De los demás plásticos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 39.19
 Placas, láminas, hojas, cintas, tiras y
 demás formas planas, autoadhesivas, de
@@ -16498,7 +16208,6 @@ poliésteres alílicos o demás poliésteres:
 3920.62 -- De poli(tereftalato de etileno).
 3920.62.02 Películas de poliéster biorientado.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3920.62.99
 Las demás.
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
@@ -16541,7 +16250,6 @@ de plástico.
 3921.19.91 De los demás plásticos.
 3921.90 - Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3921.90.09
 De poliéster metalizados con anchura
 superior o igual a 35 mm, con un espesor
@@ -16596,7 +16304,6 @@ cintas magnéticas de sonido de anchura
 inferior a 13 mm.
 Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3923.40.99 Los demás.
 3923.50 - Tapones, tapas, cápsulas y demás
 dispositivos de cierre.
@@ -16649,7 +16356,6 @@ las partidas 39.01 a 39.14.
 3926.10 - Artículos de oficina y artículos escolares.
 3926.10.01 Artículos de oficina y artículos escolares. Kg 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3926.20 -
 Prendas y complementos (accesorios), de
 vestir, incluidos los guantes, mitones y
@@ -16706,7 +16412,6 @@ recubiertos con banda de caucho, con
 incrustaciones de carburo de tungsteno o
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cerdas de acero.
 3926.90.27
 Láminas perforadas o troqueladas de
@@ -16745,7 +16450,6 @@ vulcanización con azufre en sustancias no termoplásticas que, a una temperatur
 comprendida entre 18°C y 29°C, puedan alargarse hasta tres veces su longitud primitiva sin
 romperse y que, después de alargarse hasta dos veces su longitud primitiva, adquieran en
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 menos de cinco minutos una longitud no mayor de una vez y media su longitud primitiva.
 Para este ensayo, pueden añadirse las sustancias necesarias para la reticulación, tales
 como activadores o aceleradores de vulcanización; también se admite la presencia de las
@@ -16786,7 +16490,6 @@ textiles impregnados, recubiertos, revestidos o enfundados con caucho.
 9. En las partidas 40.01, 40.02, 40.03, 40.05 y 40.08, se entiende por placas, hojas y tiras
 únicamente las placas, hojas y tiras, así como los bloques de forma geométrica regular, sin cortar
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o simplemente cortados en forma cuadrada o rectangular (incluso si esta operación les confiere el
 carácter de artículos ya dispuestos para su uso), aunque tengan un simple trabajo de superficie
 (impresión u otros) pero sin otra labor.
@@ -16843,7 +16546,6 @@ Kg 5 Ex.
 4002.19 -- Los demás.
 4002.19.01 Poli(butadieno-estireno), con un contenido Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 reaccionado de butadieno superior o igual
 al 90% pero inferior o igual al 97% y de
 10% a 3% respectivamente, de estireno.
@@ -16908,7 +16610,6 @@ Kg Ex. Ex.
 conjugado (EPDM).
 4002.70.01 Caucho etileno-propileno-dieno no Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 conjugado (EPDM).
 4002.80 - Mezclas de los productos de la partida
 40.01 con los de esta partida.
@@ -16961,7 +16662,6 @@ la subpartida 4005.10. Kg Ex. Ex.
 4005.99 -- Los demás.
 4005.99.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 40.06
 Las demás formas (por ejemplo:
 varillas, tubos, perfiles) y artículos (por
@@ -17012,7 +16712,6 @@ solamente con metal:
 - Reforzados o combinados de otro modo
 solamente con materia textil:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4009.31 -- Sin accesorios.
 4009.31.06 Sin accesorios. Kg Ex. Ex.
 4009.32 -- Con accesorios.
@@ -17074,7 +16773,6 @@ igual a 240 cm.
 4010.34.01 Correas de transmisión sin fin, sin estriar,
 de sección trapezoidal, de circunferencia Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 exterior superior a 180 cm pero inferior o
 igual a 240 cm.
 4010.35 --
@@ -17139,7 +16837,6 @@ Pza 35 Ex.
 4011.40 - De los tipos utilizados en motocicletas.
 4011.40.01 De los tipos utilizados en motocicletas. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4011.50 - De los tipos utilizados en bicicletas.
 4011.50.01 De los tipos utilizados en bicicletas. Pza Ex. Ex.
 4011.70 - De los tipos utilizados en vehículos y
@@ -17206,7 +16903,6 @@ Pza Ex. Ex.
 para rines de diámetro superior a 61 cm. Pza Ex. Ex.
 4011.80.93 Los demás, para rines. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4011.90 - Los demás.
 4011.90.01
 Reconocibles como diseñados
@@ -17272,7 +16968,6 @@ turismo (incluidos los del tipo familiar
 carreras), en autobuses o camiones.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4013.20 - De los tipos utilizados en bicicletas.
 4013.20.01 De los tipos utilizados en bicicletas. Pza Ex. Ex.
 4013.90 - Las demás.
@@ -17323,7 +17018,6 @@ vulcanizado sin endurecer.
 4016.92.01 Cilíndricas de diámetro inferior o igual a 1
 cm. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4016.92.99 Las demás. Kg 10 Ex.
 4016.93 -- Juntas o empaquetaduras.
 4016.93.04 Juntas o empaquetaduras.
@@ -17374,7 +17068,6 @@ Pieles (excepto la peletería) y cueros
 Notas.
 1. Este Capítulo no comprende:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) los recortes y desperdicios similares de cueros y pieles en bruto (partida 05.11);
 b) las pieles y partes de pieles de ave, con sus plumas o plumón (partidas 05.05 o 67.01,
 según los casos);
@@ -17429,7 +17122,6 @@ unitario superior a 16 kg. Kg Ex. Ex.
 medios crupones y faldas.
 4101.90.91 Los demás, incluidos los crupones, Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 medios crupones y faldas.
 41.02
 Cueros y pieles en bruto, de ovino
@@ -17482,7 +17174,6 @@ flor. M² Ex. Ex.
 4104.41 -- Plena flor sin dividir; divididos con la
 flor.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4104.41.02 Plena flor sin dividir; divididos con la
 flor. M² Ex. Ex.
 4104.49 -- Los demás.
@@ -17535,7 +17226,6 @@ depilados, incluso divididos,
 excepto los de la partida 41.14.
 - Cueros y pieles enteros:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4107.11 -- Plena flor sin dividir.
 4107.11.02 Plena flor sin dividir. M² Ex. Ex.
 4107.12 -- Divididos con la flor.
@@ -17591,7 +17281,6 @@ Cueros y pieles agamuzados
 (incluido el agamuzado combinado
 al aceite); cueros y pieles
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 charolados y sus imitaciones de
 cueros o pieles chapados; cueros y
 pieles metalizados.
@@ -17649,7 +17338,6 @@ Manufacturas de cuero; artículos de talabartería o guarnicionería; artículos
 bolsos de mano (carteras) y continentes similares; manufacturas de tripa
 Notas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1. En este Capítulo, la expresión cuero natural comprende también los cueros y pieles agamuzados
 (incluido el agamuzado combinado al aceite), los cueros y pieles charolados y sus imitaciones de
 cueros o pieles chapados y los cueros y pieles metalizados.
@@ -17686,7 +17374,6 @@ accesorios o adornos de mínima importancia, siempre que tales partes no confier
 manufacturas su carácter esencial. Si, por el contrario, esas partes confieren a las
 manufacturas su carácter esencial, éstas deben clasificarse en el Capítulo 71.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. En la partida 42.03, la expresión prendas y complementos (accesorios), de vestir se refiere, entre
 otros, a los guantes, mitones y manoplas (incluidos los de deporte y los de protección), a los
 delantales y demás equipos especiales de protección individual para cualquier oficio, a los
@@ -17745,7 +17432,6 @@ totalmente o en su mayor parte con
 esas materias o papel.
 - Baúles, maletas (valijas) y maletines,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 incluidos los de aseo y los
 portadocumentos, portafolios (carteras de
 mano), cartapacios y continentes
@@ -17798,7 +17484,6 @@ o cuero regenerado.
 Pza 25 Ex.
 4202.92 -- Con la superficie exterior de hojas de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 plástico o materia textil.
 4202.92.04 Con la superficie exterior de hojas de
 plástico o materia textil.
@@ -17846,7 +17531,6 @@ Kg Ex. Ex.
 _______________
 
 **Artículo 1o - Capítulo 43**
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Peletería y confecciones de peletería; peletería facticia o artificial
 Notas.
 1. Independientemente de la peletería en bruto de la partida 43.01, en la Nomenclatura, el término
@@ -17891,7 +17575,6 @@ cola o patas.
 cola o patas. Kg Ex. Ex.
 4301.30 - De cordero llamadas astracán,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 "Breitschwanz", "caracul", "persa" o
 similares, de cordero de Indias, de China,
 de Mongolia o del Tíbet, enteras, incluso
@@ -17946,7 +17629,6 @@ vestir. Pza 20 Ex.
 4303.90 - Los demás.
 4303.90.99 Los demás. Pza 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 43.04 Peletería facticia o artificial y artículos
 de peletería facticia o artificial.
 4304.00 Peletería facticia o artificial y artículos de
@@ -17982,7 +17664,6 @@ o armarios para máquinas y aparatos y partes de carretería);
 m) los artículos de la Sección XVIII (por ejemplo: cajas y envolturas similares de aparatos de
 relojería y los instrumentos musicales y sus partes);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 n) las partes de armas (partida 93.05);
 o) los artículos del Capítulo 94 (por ejemplo: muebles, luminarias y aparatos de alumbrado,
 construcciones prefabricadas);
@@ -18022,7 +17703,6 @@ aglomerados por simple presión o por adición de aglutinante en una proporción
 3% en peso. Estas briquetas se presentan en forma de unidades cúbicas, poliédricas o
 cilíndricas, con una dimensión mínima de sección transversal superior a 25 mm.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 3. En la subpartida 4407.13, la abreviatura P-P-A (“S-P-F”) se refiere a la madera proveniente de
 rodales mixtos de pícea, pino y abeto, donde la proporción de cada especie varía y es
 desconocida.
@@ -18078,7 +17758,6 @@ frutos.
 4402.20.01 De cáscaras o de huesos (carozos) de
 frutos. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4402.90 - Los demás.
 4402.90.99 Los demás. Kg Ex. Ex.
 44.03
@@ -18140,7 +17819,6 @@ Meranti Bakau. M³ Ex. Ex.
 4403.49.99 Las demás. M³ Ex. Ex.
 - Las demás:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4403.91 -- De encina, roble, alcornoque y demás
 belloteros (Quercus spp.).
 4403.91.01 De encina, roble, alcornoque y demás
@@ -18203,7 +17881,6 @@ M³ 5 Ex.
 4404.20.04 Madera hilada. M³ 5 Ex.
 4404.20.99 Los demás. M³ 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 44.05 Lana de madera; harina de madera.
 4405.00 Lana de madera; harina de madera.
 4405.00.03 Lana de madera; harina de madera. Kg 5 Ex.
@@ -18260,7 +17937,6 @@ M³ 5 Ex.
 4407.19 -- Las demás.
 4407.19.02 Tablillas con ancho que no exceda de 10 M³ Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cm y longitud inferior o igual a 20 cm,
 para la fabricación de lápices, excepto lo
 comprendido en la fracción arancelaria
@@ -18313,7 +17989,6 @@ belloteros (Quercus spp.). M³ Ex. Ex.
 4407.99.99 Los demás. M³ Ex. Ex.
 44.08 Hojas para chapado (incluidas las
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 obtenidas por cortado de madera
 estratificada), para contrachapado o
 para maderas estratificadas similares y
@@ -18368,7 +18043,6 @@ otras materias leñosas, incluso
 aglomeradas con resinas o demás
 aglutinantes orgánicos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - De madera:
 4410.11 -- Tableros de partículas.
 4410.11.04 Tableros de partículas. Kg 15 Ex.
@@ -18427,7 +18101,6 @@ inferior o igual a 0.8 g/cm³. Kg 5 Ex.
 44.12 Madera contrachapada, madera
 chapada y madera estratificada similar.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4412.10 - De bambú.
 4412.10.01 De bambú. Kg 7 Ex.
 -
@@ -18488,7 +18161,6 @@ subpartida 4412.33.
 4412.34.91 Las demás, que tengan, por lo menos,
 una hoja externa de madera distinta de la Kg 7 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de coníferas, no especificadas en la
 subpartida 4412.33.
 4412.39 -- Las demás, con las dos hojas externas de
@@ -18550,7 +18222,6 @@ Kg 7 Ex.
 4412.99 -- Las demás, con las dos hojas externas de
 madera de coníferas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4412.99.91 Las demás, con las dos hojas externas de
 madera de coníferas. Kg 7 Ex.
 44.13 Madera densificada en bloques, tablas,
@@ -18610,7 +18281,6 @@ Kg Ex. Ex.
 4416.00.05 Barriles o manufacturas de tonelería con
 capacidad inferior a 5,000 litros, de roble Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o de encino.
 4416.00.99 Los demás. Kg 15 Ex.
 44.17
@@ -18664,7 +18334,6 @@ capa superior de bambú.
 4418.73.99 Los demás. Kg 15 Ex.
 4418.74 -- Los demás, para suelos en mosaico.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4418.74.91 Los demás, para suelos en mosaico. Kg 15 Ex.
 4418.75 -- Los demás, multicapas.
 4418.75.91 Los demás, multicapas. Kg 15 Ex.
@@ -18718,7 +18387,6 @@ manufacturas similares, de madera;
 estatuillas y demás objetos de adorno,
 de madera; artículos de mobiliario, de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 madera, no comprendidos en el
 Capítulo 94.
 - Estatuillas y demás objetos de adorno:
@@ -18766,7 +18434,6 @@ c) los artículos del Capítulo 95 (por ejemplo: juguetes, juegos, artefactos de
 CÓDIGO DESCRIPCIÓN UNIDAD CUOTA (ARANCEL)
 IMPUESTO IMPUESTO
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 DE IMP. DE EXP.
 45.01
 Corcho natural en bruto o simplemente
@@ -18821,7 +18488,6 @@ _______________
 **Artículo 1o - Capítulo 46**
 Manufacturas de espartería o cestería
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas.
 1. En este Capítulo, la expresión materia trenzable se refiere a materias en un estado o forma tales
 que puedan trenzarse, entrelazarse o trabajarse de modo análogo. Se consideran como tales, por
@@ -18870,7 +18536,6 @@ vegetal:
 ensamblados en tiras. Kg 15 Ex.
 4601.92.99 Los demás. Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4601.93 -- De ratán (roten).
 4601.93.02 De ratán (roten). Kg 15 Ex.
 4601.94 -- De las demás materias vegetales.
@@ -18920,7 +18585,6 @@ IMPUESTO
 DE EXP.
 47.01 Pasta mecánica de madera.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4701.00 Pasta mecánica de madera.
 4701.00.01 Pasta mecánica de madera. Kg Ex. Ex.
 47.02 Pasta química de madera para disolver.
@@ -18973,7 +18637,6 @@ fibrosas celulósicas.
 4706.10 - Pasta de línter de algodón.
 4706.10.01 Pasta de línter de algodón. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4706.20 -
 Pasta de fibras obtenidas de papel o
 cartón reciclado (desperdicios y
@@ -19030,7 +18693,6 @@ Notas.
 1. En este Capítulo, salvo disposición en contrario, toda referencia a papel incluye también al
 cartón, sin que se tenga en cuenta el espesor o el peso por m2.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. Este Capítulo no comprende:
 a) los artículos del Capítulo 30;
 b) las hojas para el marcado a fuego de la partida 32.12;
@@ -19066,7 +18728,6 @@ jaspeados en la masa por cualquier procedimiento. Salvo lo dispuesto en la parti
 partidas no se aplican al papel, cartón, guata de celulosa y napa de fibras de celulosa que hayan
 sido tratados de otro modo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. En este Capítulo, se considera papel prensa el papel sin estucar ni recubrir del tipo utilizado para
 la impresión de diarios, en el que el contenido de fibras de madera obtenidas por procedimiento
 mecánico o químico-mecánico sea superior o igual al 50% en peso del contenido total de fibra,
@@ -19103,7 +18764,6 @@ b) un grado de blancura (factor de reflectancia) superior o igual al 60%, y
 2) un espesor superior a 225 micras (micrómetros, micrones) pero inferior o igual a
 508 micras (micrómetros, micrones) y un contenido de cenizas superior al 3%;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) un grado de blancura (factor de reflectancia) inferior al 60%, un espesor inferior o igual
 a 254 micras (micrómetros, micrones) y un contenido de cenizas superior al 8%.
 Sin embargo, la partida 48.02 no comprende el papel y cartón filtro (incluido el papel para bolsitas
@@ -19141,7 +18801,6 @@ colocados en la pared.
 Las manufacturas con soporte de papel o cartón susceptibles de utilizarse como cubresuelos o
 como revestimientos de paredes se clasifican en la partida 48.23.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 10. La partida 48.20 no comprende las hojas y tarjetas sueltas, cortadas en formatos, incluso
 impresas, estampadas o perforadas.
 11. Se clasifican, entre otros, en la partida 48.23, el papel y cartón perforados para mecanismos
@@ -19201,7 +18860,6 @@ dirección transversal
 70 830 1,790 2.3 7.2
 80 965 2,070 2.8 8.3
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 100 1,230 2,635 3.7 10.6
 115 1,425 3,060 4.4 12.3
 3. En la subpartida 4805.11, se entiende por papel semiquímico para acanalar el papel presentado
@@ -19253,7 +18911,6 @@ imprimir u otros fines gráficos y papel
 y cartón para tarjetas o cintas para
 perforar (sin perforar), en bobinas
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (rollos) o en hojas de forma cuadrada o
 rectangular, de cualquier tamaño,
 excepto el papel de las partidas 48.01 o
@@ -19321,7 +18978,6 @@ de México.
 Kg Ex. Ex.
 4802.56.99 Los demás. Kg 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024
 (antes Imp. 5)
 4802.57 -- Los demás, de peso superior o igual a 40
@@ -19388,7 +19044,6 @@ uso doméstico, de higiene o tocador,
 guata de celulosa y napa de fibras de
 celulosa, incluso rizados ("crepés"),
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 plisados, gofrados, estampados,
 perforados, coloreados o decorados en la
 superficie o impresos, en bobinas (rollos)
@@ -19449,7 +19104,6 @@ con un contenido de fibras de madera
 obtenidas por procedimiento químico
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 superior al 95% en peso del contenido
 total de fibra.
 Arancel modificado con vigencia temporal DOF 22-04-2024
@@ -19507,7 +19161,6 @@ Kg 35 Ex.
 4805.30.01 Papel sulfito para envolver. Kg Ex. Ex.
 4805.40 - Papel y cartón filtro.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4805.40.01 Papel y cartón filtro. Kg Ex. Ex.
 4805.50 - Papel y cartón fieltro, papel y cartón lana.
 4805.50.01 Papel y cartón fieltro, papel y cartón lana. Kg Ex. Ex.
@@ -19562,7 +19215,6 @@ reforzados interiormente, en bobinas
 Kg Ex. Ex.
 48.08 Papel y cartón corrugados (incluso
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 revestidos por encolado), rizados
 ("crepés"), plisados, gofrados,
 estampados o perforados, en bobinas
@@ -19617,7 +19269,6 @@ de fibra:
 4810.13.07 En bobinas (rollos).
 Arancel modificado con vigencia temporal DOF 22-04-2024 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. Ex.)
 4810.14 --
 En hojas en las que un lado sea inferior o
@@ -19685,7 +19336,6 @@ g/m².
 4810.32.01 Blanqueados uniformemente en la masa y
 con un contenido de fibras de madera Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 obtenidas por procedimiento químico
 superior al 95% en peso del contenido
 total de fibra, de peso superior a 150
@@ -19743,7 +19393,6 @@ adhesivos):
 g/m².
 4811.51.01 Recubiertos por una de sus caras, con Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 una película de materia plástica artificial,
 aun cuando también lleven recubrimiento
 de otros materiales, excepto papel
@@ -19804,7 +19453,6 @@ igual a 5 cm.
 igual a 5 cm. Kg Ex. Ex.
 4813.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4813.90.99 Los demás. Kg Ex. Ex.
 48.14
 Papel para decorar y revestimientos
@@ -19856,7 +19504,6 @@ y tarjetas para correspondencia.
 y tarjetas para correspondencia.
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4817.30 -
 Cajas, bolsas y presentaciones similares
 de papel o cartón, con un surtido de
@@ -19917,7 +19564,6 @@ cucuruchos y demás envases de papel,
 cartón, guata de celulosa o napa de
 fibras de celulosa; cartonajes de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 oficina, tienda o similares.
 4819.10 - Cajas de papel o cartón corrugado.
 4819.10.01 Cajas de papel o cartón corrugado.
@@ -19973,7 +19619,6 @@ de cartas, agendas y artículos similares.
 Kg 25 Ex.
 4820.20 - Cuadernos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4820.20.01
 Cuadernos.
 Arancel modificado con vigencia temporal DOF 22-04-2024
@@ -20031,7 +19676,6 @@ cartón, guata de celulosa o napa de
 fibras de celulosa.
 4823.20 - Papel y cartón filtro.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4823.20.02 Papel y cartón filtro.
 4823.40 -
 Papel diagrama para aparatos
@@ -20086,7 +19730,6 @@ manuscritos o mecanografiados y planos
 Notas.
 1. Este Capítulo no comprende:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) los negativos y positivos fotográficos con soporte transparente (Capítulo 37);
 b) los mapas, planos y esferas, en relieve, incluso impresos (partida 90.23);
 c) los naipes y demás artículos del Capítulo 95;
@@ -20129,7 +19772,6 @@ incluso en hojas sueltas.
 4901.10 - En hojas sueltas, incluso plegadas.
 4901.10.01 Obras de la literatura universal y libros Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 técnicos, científicos o de arte, incluso
 los de carácter biográfico.
 4901.10.99 Los demás. Kg 15 Ex.
@@ -20190,7 +19832,6 @@ cuadernos para dibujar o colorear, para
 niños.
 4903.00.01 Álbumes o libros de estampas. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4903.00.99 Los demás. Pza 15 Ex.
 49.04
 Música manuscrita o impresa,
@@ -20253,7 +19894,6 @@ mano, de arquitectura, ingeniería,
 industriales, comerciales, topográficos
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o similares; textos manuscritos;
 reproducciones fotográficas sobre
 papel sensibilizado y copias con papel
@@ -20314,7 +19954,6 @@ cualquier otro tipo de artículos,
 conteniendo dibujos, figuras o
 Prohibida Prohibida Prohibida
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ilustraciones que representen a la niñez
 de manera denigrante o ridícula, en
 actitudes de incitación a la violencia, a
@@ -20380,7 +20019,6 @@ relativos a servicios de transporte de
 compañías que operen en el extranjero.
 Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4911.10.03 Folletos o publicaciones turísticas. Kg 5 Ex.
 4911.10.04 Figuras o paisajes, impresos o
 fotografiados sobre tejidos. Kg 5 Ex.
@@ -20438,7 +20076,6 @@ Notas.
 a) los pelos y cerdas para cepillería (partida 05.02), la crin y los desperdicios de crin
 (partida 05.11);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) el cabello y sus manufacturas (partidas 05.01, 67.03 o 67.04); sin embargo, las telas
 filtrantes, tejidos gruesos y capachos, de cabello, de los tipos utilizados comúnmente en
 las prensas de aceite o en usos técnicos análogos, se clasifican en la partida 59.11;
@@ -20474,7 +20111,6 @@ aparatos de alumbrado);
 t) los artículos del Capítulo 95 (por ejemplo: juguetes, juegos, artefactos deportivos, redes
 para deportes);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 u) los artículos del Capítulo 96 (por ejemplo: cepillos y brochas, juegos o surtidos de viaje
 para costura, cierres de cremallera (cierres relámpago), cintas entintadas para máquinas
 de escribir, compresas y tampones higiénicos, pañales);
@@ -20510,7 +20146,6 @@ d) de coco, de tres o más cabos;
 e) de las demás fibras vegetales, de título superior a 20.000 decitex;
 f) reforzados con hilos de metal.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 B) Las disposiciones anteriores no se aplican:
 a) a los hilados de lana, pelo o crin ni a los hilados de papel, sin reforzar con hilos de metal;
 b) a los cables de filamentos sintéticos o artificiales del Capítulo 55 ni a los multifilamentos
@@ -20544,7 +20179,6 @@ a) a los hilados sencillos de cualquier materia textil, excepto:
 2°) los hilados sencillos de lana o pelo fino, blanqueados, teñidos o estampados, de
 título superior a 5.000 decitex;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) a los hilados crudos, retorcidos o cableados:
 1°) de seda o de desperdicios de seda, cualquiera que sea su forma de presentación; o
 2°) de las demás materias textiles (excepto lana y pelo fino) que se presenten en
@@ -20580,7 +20214,6 @@ bordes haya sido termosellado, con el borde visiblemente adelgazado o comprimido
 demás bordes tratados según los procedimientos descritos en los demás apartados de
 esta Nota; sin embargo, no se considera confeccionada la materia textil en piezas cuyos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 bordes desprovistos de orillos hayan sido cortados en caliente o simplemente
 sobrehilados para evitar su deshilachado;
 d) los artículos cuyos bordes hayan sido dobladillados o ribeteados por cualquier sistema o
@@ -20621,7 +20254,6 @@ agregarles funcionalidad, ya sea incorporados como componentes integrados o en e
 de la fibra o tejido, se clasifican en sus respectivas partidas de la Sección XI, siempre que
 conserven el carácter esencial de artículos de esta Sección.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas de subpartida.
 1. En esta Sección y, en su caso, en la Nomenclatura, se entiende por:
 a) Hilados crudos
@@ -20654,7 +20286,6 @@ d) Tejidos crudos
 los tejidos de hilados crudos sin blanquear, teñir ni estampar. Estos tejidos pueden tener un
 apresto sin color o un color fugaz.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 e) Tejidos blanqueados
 los tejidos:
 1°) blanqueados o, salvo disposición en contrario, teñidos de blanco o con apresto blanco,
@@ -20687,7 +20318,6 @@ la estructura de tejido en la que cada hilo de trama pasa alternativamente por e
 debajo de los hilos sucesivos de la urdimbre y cada hilo de la urdimbre pasa alternativamente
 por encima y por debajo de los hilos sucesivos de la trama.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. A) Los productos de los Capítulos 56 a 63 que contengan dos o más materias textiles se
 consideran constituidos totalmente por la materia textil que les correspondería de acuerdo con
 la Nota 2 de esta Sección para la clasificación de un producto de los Capítulos 50 a 55 o de la
@@ -20740,7 +20370,6 @@ Hilados de seda (excepto los hilados de
 desperdicios de seda) sin acondicionar
 para la venta al por menor.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5004.00.01
 Hilados de seda (excepto los hilados de
 desperdicios de seda) sin acondicionar
@@ -20795,7 +20424,6 @@ Lana y pelo fino u ordinario; hilados y tejidos de crin
 Nota.
 1. En la Nomenclatura se entiende por:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) lana, la fibra natural que recubre los ovinos;
 b) pelo fino, el pelo de alpaca, llama (incluido el guanaco), vicuña, camello, dromedario, yac,
 cabra de Angora (“mohair”), cabra del Tíbet, cabra de Cachemira o cabras similares
@@ -20844,7 +20472,6 @@ fino. Kg Ex. Ex.
 5103.30 - Desperdicios de pelo ordinario.
 5103.30.01 Desperdicios de pelo ordinario. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 51.04 Hilachas de lana o de pelo fino u
 ordinario.
 5104.00 Hilachas de lana o de pelo fino u ordinario.
@@ -20891,7 +20518,6 @@ en peso.
 5107.20.01 Con un contenido de lana inferior al 85%
 en peso. Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 51.08
 Hilados de pelo fino cardado o peinado,
 sin acondicionar para la venta al por
@@ -20942,7 +20568,6 @@ principalmente con filamentos sintéticos o
 artificiales.
 5111.20.91 Los demás, mezclados exclusiva o M² 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 principalmente con filamentos sintéticos o
 artificiales.
 5111.30 -
@@ -20993,7 +20618,6 @@ _______________
 Algodón
 Nota de subpartida.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1. En las subpartidas 5209.42 y 5211.42, se entiende por tejidos de mezclilla (“denim”) los tejidos
 con hilados de distintos colores, de ligamento sarga de curso inferior o igual a 4, incluida la sarga
 quebrada (a veces llamada raso de 4), de efecto por urdimbre, en los que los hilos de urdimbre
@@ -21045,7 +20669,6 @@ acondicionar para la venta al por menor.
 5205.11.01 De título superior o igual a 714.29 decitex
 (inferior o igual al número métrico 14). Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5205.12 --
 De título inferior a 714.29 decitex pero
 superior o igual a 232.56 decitex (superior
@@ -21109,7 +20732,6 @@ número métrico 52).
 5205.23.01 De título inferior a 232.56 decitex pero
 superior o igual a 192.31 decitex (superior Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 al número métrico 43 pero inferior o igual al
 número métrico 52).
 5205.24 --
@@ -21175,7 +20797,6 @@ inferior o igual al número métrico 43, por
 hilo sencillo).
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5205.33 --
 De título inferior a 232.56 decitex pero
 superior o igual a 192.31 decitex, por hilo
@@ -21241,7 +20862,6 @@ superior o igual a 192.31 decitex, por hilo
 sencillo (superior al número métrico 43 pero
 inferior o igual al número métrico 52, por
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hilo sencillo).
 5205.43.01
 De título inferior a 232.56 decitex pero
@@ -21305,7 +20925,6 @@ inferior al 85% en peso, sin acondicionar
 para la venta al por menor.
 - Hilados sencillos de fibras sin peinar:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5206.11 -- De título superior o igual a 714.29 decitex
 (inferior o igual al número métrico 14).
 5206.11.01 De título superior o igual a 714.29 decitex
@@ -21369,7 +20988,6 @@ Kg 25 Ex.
 5206.23 -- De título inferior a 232.56 decitex pero
 superior o igual a 192.31 decitex (superior
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 al número métrico 43 pero inferior o igual al
 número métrico 52).
 5206.23.01
@@ -21434,7 +21052,6 @@ Kg 25 Ex.
 5206.34 -- De título inferior a 192.31 decitex pero
 superior o igual a 125 decitex, por hilo
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sencillo (superior al número métrico 52 pero
 inferior o igual al número métrico 80, por
 hilo sencillo).
@@ -21499,7 +21116,6 @@ inferior o igual al número métrico 80, por
 hilo sencillo).
 5206.44.01 De título inferior a 192.31 decitex pero Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 superior o igual a 125 decitex, por hilo
 sencillo (superior al número métrico 52 pero
 inferior o igual al número métrico 80, por
@@ -21559,7 +21175,6 @@ M² 35 Ex.
 5208.21 -- De ligamento tafetán, de peso inferior o
 igual a 100 g/m².
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5208.21.01
 De ligamento tafetán, de peso inferior o
 igual a 100 g/m².
@@ -21627,7 +21242,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 10)
 M² 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 15)
 5208.43 -- De ligamento sarga, incluido el cruzado, de
 curso inferior o igual a 4.
@@ -21680,7 +21294,6 @@ M² 25 Ex.
 5209.29.91 Los demás tejidos.
 - Teñidos:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5209.31 -- De ligamento tafetán.
 5209.31.01 De ligamento tafetán.
 5209.32 -- De ligamento sarga, incluido el cruzado, de
@@ -21743,7 +21356,6 @@ mezclado exclusiva o principalmente
 con fibras sintéticas o artificiales, de
 peso inferior o igual a 200 g/m².
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Crudos:
 5210.11 -- De ligamento tafetán.
 5210.11.02 De ligamento tafetán.
@@ -21791,7 +21403,6 @@ peso superior a 200 g/m².
 5211.11.02 De ligamento tafetán.
 5211.12 -- De ligamento sarga, incluido el cruzado, de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 curso inferior o igual a 4.
 5211.12.01 De ligamento sarga, incluido el cruzado, de
 curso inferior o igual a 4.
@@ -21856,7 +21467,6 @@ M² 35 Ex.
 - Estampados:
 5211.51 -- De ligamento tafetán.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5211.51.01 De ligamento tafetán.
 5211.52 -- De ligamento sarga, incluido el cruzado, de
 curso inferior o igual a 4.
@@ -21900,7 +21510,6 @@ DE IMP.
 IMPUESTO
 DE EXP.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 53.01
 Lino en bruto o trabajado, pero sin hilar;
 estopas y desperdicios de lino (incluidos
@@ -21955,7 +21564,6 @@ vegetales no expresadas ni comprendidas
 en otra parte, en bruto o trabajadas, pero sin
 hilar; estopas y desperdicios de estas fibras
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (incluidos los desperdicios de hilados y las
 hilachas).
 5305.00.08
@@ -22000,7 +21608,6 @@ peso:
 5309.21.01 Crudos o blanqueados. M² 10 Ex.
 5309.29 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5309.29.99 Los demás. M² 10 Ex.
 53.10 Tejidos de yute o demás fibras textiles del
 líber de la partida 53.03.
@@ -22045,7 +21652,6 @@ IMPUESTO
 DE EXP.
 54.01 Hilo de coser de filamentos sintéticos o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 artificiales, incluso acondicionado para
 la venta al por menor.
 5401.10 - De filamentos sintéticos.
@@ -22098,7 +21704,6 @@ Kg 5 Ex.
 5402.45 -- Los demás, de nailon o demás poliamidas.
 5402.45.03 De aramidas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5402.45.99 Los demás. Kg 5 Ex.
 5402.46 -- Los demás, de poliésteres, parcialmente
 orientados.
@@ -22146,7 +21751,6 @@ metro.
 5403.31.03 De rayón viscosa, sin torsión o con una
 torsión inferior o igual a 120 vueltas por Kg 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 metro. Fracción reformada DOF 29-12-2025 (antes Imp. Ex.)
 5403.32 -- De rayón viscosa, con una torsión superior
 a 120 vueltas por metro.
@@ -22194,7 +21798,6 @@ de anchura aparente inferior o igual a 5
 mm.
 5405.00 Monofilamentos artificiales de título superior
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o igual a 67 decitex y cuya mayor
 dimensión de la sección transversal sea
 inferior o igual a 1 mm; tiras y formas
@@ -22251,7 +21854,6 @@ Los demás tejidos con un contenido de
 filamentos de nailon o demás poliamidas
 superior o igual al 85% en peso:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5407.41 -- Crudos o blanqueados.
 5407.41.05 Crudos o blanqueados.
 5407.42 -- Teñidos.
@@ -22304,7 +21906,6 @@ en peso:
 - Los demás tejidos con un contenido de
 filamentos sintéticos inferior al 85% en
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 peso, mezclados exclusiva o principalmente
 con algodón:
 5407.81 -- Crudos o blanqueados.
@@ -22351,7 +21952,6 @@ artificiales, superior o igual al 85% en peso:
 5408.32.06 Teñidos. M² 10 Ex.
 5408.33 -- Con hilados de distintos colores.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5408.33.05 Con hilados de distintos colores.
 5408.34 -- Estampados.
 5408.34.04 Estampados.
@@ -22394,7 +21994,6 @@ Kg 25 Ex.
 5501.90 - Los demás.
 5501.90.99 Los demás. Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 55.02 Cables de filamentos artificiales.
 5502.10 - De acetato de celulosa.
 5502.10.01 De acetato de celulosa.
@@ -22437,7 +22036,6 @@ artificiales (incluidas las borras, los
 desperdicios de hilados y las hilachas).
 5505.10 - De fibras sintéticas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5505.10.01 De fibras sintéticas.
 5505.20 - De fibras artificiales.
 5505.20.01 De fibras artificiales.
@@ -22487,7 +22085,6 @@ nailon o demás poliamidas superior o igual
 al 85% en peso:
 5509.11 -- Sencillos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5509.11.01 Sencillos. Fracción reformada DOF 29-12-2025 (antes Imp. 10) Kg 25 Ex.
 5509.12 -- Retorcidos o cableados.
 5509.12.01 Retorcidos o cableados.
@@ -22539,7 +22136,6 @@ lana o pelo fino.
 lana o pelo fino. Kg 10 Ex.
 5509.62 -- Mezclados exclusiva o principalmente con
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 algodón.
 5509.62.01 Mezclados exclusiva o principalmente con
 algodón. Fracción reformada DOF 29-12-2025 (antes Imp. 10)
@@ -22594,7 +22190,6 @@ contenido de estas fibras superior o igual al
 5511.10.01 De fibras sintéticas discontinuas con un
 contenido de estas fibras superior o igual al Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 85% en peso.
 5511.20 -
 De fibras sintéticas discontinuas con un
@@ -22657,7 +22252,6 @@ principalmente con algodón, de peso
 inferior o igual a 170 g/m².
 - Crudos o blanqueados:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5513.11 -- De fibras discontinuas de poliéster, de
 ligamento tafetán.
 5513.11.04
@@ -22725,7 +22319,6 @@ M² 35 Ex.
 - Estampados:
 5513.41 -- De fibras discontinuas de poliéster, de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ligamento tafetán.
 5513.41.01 De fibras discontinuas de poliéster, de
 ligamento tafetán.
@@ -22790,7 +22383,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 15)
 M² 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5514.29 -- Los demás tejidos.
 5514.29.91
 Los demás tejidos.
@@ -22851,7 +22443,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 M² 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Imp. 15)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
 - De fibras discontinuas acrílicas o
@@ -22912,7 +22503,6 @@ discontinuas inferior al 85% en peso,
 mezcladas exclusiva o principalmente con
 filamentos sintéticos o artificiales:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5516.21 -- Crudos o blanqueados.
 5516.21.01 Crudos o blanqueados. M² 10 Ex.
 5516.22 -- Teñidos.
@@ -22959,7 +22549,6 @@ algodón:
 _______________
 
 **Artículo 1o - Capítulo 56**
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Guata, fieltro y tela sin tejer; hilados especiales; cordeles, cuerdas y cordajes; artículos
 de cordelería
 Notas.
@@ -22996,7 +22585,6 @@ tejer, en las que la materia textil sea un simple soporte (Capítulos 39 o 40).
 4. La partida 56.04 no comprende los hilados textiles, ni las tiras y formas similares de las partidas
 54.04 o 54.05, cuya impregnación, recubrimiento o revestimiento no sea perceptible a simple
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 vista (Capítulos 50 a 55, generalmente); para la aplicación de esta disposición, se hará
 abstracción de los cambios de color producidos por estas operaciones.
 CÓDIGO DESCRIPCIÓN UNIDAD
@@ -23044,7 +22632,6 @@ recubierta, revestida o estratificada.
 5603.12 -- De peso superior a 25 g/m² pero inferior o
 igual a 70 g/m².
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5603.12.02 De peso superior a 25 g/m² pero inferior o
 igual a 70 g/m².
 Kg 25 Ex.
@@ -23102,7 +22689,6 @@ superior o igual a 0.05 mm, sin exceder de
 0.70 mm. Fracción reformada DOF 29-12-2025 (antes Imp. 10)
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5604.90.05
 De materia textil sintética y artificial, excepto
 lo comprendido en la fracción arancelaria
@@ -23164,7 +22750,6 @@ revestidos de metal.
 5605.00.01 Hilados metálicos e hilados metalizados,
 incluso entorchados, constituidos por hilados Kg 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 textiles, tiras o formas similares de las
 partidas 54.04 o 54.05, combinados con
 metal en forma de hilos, tiras o polvo, o
@@ -23217,7 +22802,6 @@ Kg 25 Ex.
 5607.90.99 Los demás.
 56.08 Redes de mallas anudadas, en paño o en
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 pieza, fabricadas con cordeles, cuerdas o
 cordajes; redes confeccionadas para la
 pesca y demás redes confeccionadas, de
@@ -23271,7 +22855,6 @@ incluso confeccionadas.
 5701.10 - De lana o pelo fino.
 5701.10.01 De lana o pelo fino.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5701.90 - De las demás materias textiles.
 5701.90.91 De las demás materias textiles.
 57.02
@@ -23321,7 +22904,6 @@ confeccionados:
 5702.92 -- De materia textil sintética o artificial.
 5702.92.01 De materia textil sintética o artificial. M² 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5702.99 -- De las demás materias textiles.
 5702.99.91 De las demás materias textiles.
 57.03
@@ -23371,7 +22953,6 @@ el suelo, de materia textil, incluso
 confeccionados.
 M² 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 _______________
 
 **Artículo 1o - Capítulo 58**
@@ -23413,7 +22994,6 @@ DE EXP.
 58.01 Terciopelo y felpa, excepto los de
 punto, y tejidos de chenilla, excepto los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 productos de las partidas 58.02 o 58.06.
 5801.10 - De lana o pelo fino.
 5801.10.01 De lana o pelo fino.
@@ -23462,7 +23042,6 @@ demás materias textiles. M² 10 Ex.
 5802.30 - Superficies textiles con mechón insertado.
 5802.30.01 Superficies textiles con mechón insertado. M² 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 58.03 Tejidos de gasa de vuelta, excepto los
 productos de la partida 58.06.
 5803.00 Tejidos de gasa de vuelta, excepto los
@@ -23522,7 +23101,6 @@ aglutinados.
 5806.10 - Cintas de terciopelo, de felpa, de tejidos
 de chenilla o de tejidos con bucles del tipo
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 toalla.
 5806.10.01 De seda. Kg Ex. Ex.
 5806.10.99 Las demás.
@@ -23572,7 +23150,6 @@ pompones, borlas y artículos similares.
 5808.90.99 Los demás. Kg 10 Ex.
 58.09 Tejidos de hilos de metal y tejidos de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hilados metálicos o de hilados textiles
 metalizados de la partida 56.05, de los
 tipos utilizados en prendas de vestir,
@@ -23630,7 +23207,6 @@ materia textil combinadas con una materia
 de relleno y mantenidas mediante
 M² 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 puntadas u otro modo de sujeción,
 excepto los bordados de la partida 58.10.
 _______________
@@ -23669,7 +23245,6 @@ montaje de una o varias capas de tejido con una o varias capas de hojas o lámin
 que se combinan mediante cualquier proceso que permita unir las capas, incluso si las capas de
 hojas o láminas de plástico son visibles a simple vista en sección transversal.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. En la partida 59.05, se entiende por revestimientos de materia textil para paredes los productos
 presentados en rollos de anchura superior o igual a 45 cm para decoración de paredes o techos,
 constituidos por una superficie textil con un soporte o, a falta de soporte, con un tratamiento en el
@@ -23705,7 +23280,6 @@ g) la mica aglomerada o reconstituida con soporte de tela (partida 68.14);
 h) las hojas y tiras delgadas de metal con soporte de tela (generalmente Secciones XIV o XV).
 7. La partida 59.10 no comprende:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a) las correas de materia textil de espesor inferior a 3 mm, en pieza o cortadas en longitudes
 determinadas;
 b) las correas de tela impregnada, recubierta, revestida o estratificada con caucho, así como
@@ -23753,7 +23327,6 @@ Telas recubiertas de cola o materias
 amiláceas, de los tipos utilizados para
 encuadernación, cartonaje, estuchería o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 usos similares.
 5901.10.01
 Telas recubiertas de cola o materias
@@ -23800,7 +23373,6 @@ incluso cortados.
 paredes.
 5905.00 Revestimientos de materia textil para
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 paredes.
 5905.00.01 Revestimientos de materia textil para
 paredes.
@@ -23855,7 +23427,6 @@ tubulares utilizados para su fabricación,
 incluso impregnados.
 5908.00.03 Tejidos tubulares.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 5908.00.99 Los demás.
 59.09
 Mangueras para bombas y tubos
@@ -23913,7 +23484,6 @@ confeccionadas.
 5911.20.01 Gasas y telas para cerner, incluso
 confeccionadas. M² 14 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Telas y fieltros sin fin o con dispositivos
 de unión, de los tipos utilizados en las
@@ -23959,7 +23529,6 @@ utilizados en prendas de vestir, tapicería o usos similares.
 cadeneta en los que las mallas estén constituidas por hilados textiles.
 Nota de subpartida
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1. La subpartida 6005.35 comprende los tejidos de monofilamentos de polietileno o de
 multifilamentos de poliéster, con un peso superior o igual a 30 g/m2 pero inferior o igual a 55 g/
 m2, cuya malla contenga una cantidad superior o igual a 20 perforaciones/cm2 pero inferior o igual
@@ -24008,7 +23577,6 @@ peso, sin hilos de caucho.
 6002.90.01 De seda.
 6002.90.99 Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 60.03
 Tejidos de punto de anchura inferior o
 igual a 30 cm, excepto los de las
@@ -24059,7 +23627,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 10)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024
 (antes Imp. 15)
 6005.24 -- Estampados.
@@ -24106,7 +23673,6 @@ Kg 25 Ex.
 6006.22.02 Teñidos.
 Arancel modificado con vigencia temporal DOF 19-12-2024 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 10)
 6006.23 -- Con hilados de distintos colores.
 6006.23.02 Con hilados de distintos colores.
@@ -24146,7 +23712,6 @@ Notas.
 a) los artículos de la partida 62.12;
 b) los artículos de prendería de la partida 63.09;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) los artículos de ortopedia, tales como bragueros para hernias, fajas medicoquirúrgicas
 (partida 90.21).
 3. En las partidas 61.03 y 61.04:
@@ -24187,7 +23752,6 @@ misma tela, acondicionado para la venta al por menor y compuesto por:
 constituir una segunda prenda exterior solamente en el caso de los “twinset” o un
 chaleco que puede constituir una segunda prenda en los demás casos; y
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - una o dos prendas diferentes que cubran la parte inferior del cuerpo y que consistan en
 un pantalón largo, un pantalón con peto, un pantalón corto (calzón), un short (excepto
 de baño), una falda o una falda pantalón.
@@ -24227,7 +23791,6 @@ El conjunto de esquí puede también estar compuesto por un mono (overol) de esq
 mencionado anteriormente y por una especie de chaqueta (saco) acolchada sin mangas que se
 viste sobre el mono (overol).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Todos los componentes del conjunto de esquí deben estar confeccionados con una tela de la
 misma textura, estilo y composición, del mismo color o de colores distintos; además, deben ser
 de tallas correspondientes o compatibles.
@@ -24284,7 +23847,6 @@ artículos de la partida 61.04.
 6102.20.03 De algodón.
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Imp. 20)
 6102.30 - De fibras sintéticas o artificiales.
 6102.30.01 Con un contenido de lana o pelo fino
@@ -24345,7 +23907,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 20)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 25)
 - Pantalones largos, pantalones con peto,
@@ -24404,7 +23965,6 @@ Pza 35 Ex.
 6104.29.91 De las demás materias textiles.
 - Chaquetas (sacos):
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6104.31 -- De lana o pelo fino.
 6104.31.01 De lana o pelo fino.
 6104.32 -- De algodón.
@@ -24473,7 +24033,6 @@ Imp. 20)
 Pza 35 Ex.
 6104.59 -- De las demás materias textiles.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6104.59.91
 De las demás materias textiles.
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
@@ -24540,7 +24099,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 (antes Imp. 20, en consecuencia se restablece Imp. 25)
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
@@ -24611,7 +24169,6 @@ Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 (antes Imp. 20, en consecuencia se restablece Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 6107.22 -- De fibras sintéticas o artificiales.
@@ -24668,7 +24225,6 @@ Pza 35 Ex.
 6108.31 -- De algodón.
 6108.31.03 De algodón. Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. 25)
 Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
@@ -24734,7 +24290,6 @@ chalecos y artículos similares, de punto.
 6110.11 -- De lana.
 6110.11.03 De lana. Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6110.12 -- De cabra de Cachemira.
 6110.12.01
 De cabra de Cachemira.
@@ -24808,7 +24363,6 @@ Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Imp. 25)
 6111.90 - De las demás materias textiles.
 6111.90.91 De las demás materias textiles.
@@ -24869,7 +24423,6 @@ Pza 35 Ex.
 6112.49.91 De las demás materias textiles.
 61.13 Prendas de vestir confeccionadas con
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 tejidos de punto de las partidas 59.03,
 59.06 o 59.07.
 6113.00
@@ -24935,7 +24488,6 @@ Pza 35 Ex.
 igual a 67 decitex por hilo sencillo.
 6115.22.01 De fibras sintéticas, de título superior o Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 igual a 67 decitex por hilo sencillo.
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 20)
@@ -25002,7 +24554,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 20)
 Par 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6116.93 -- De fibras sintéticas.
 6116.93.01
 De fibras sintéticas.
@@ -25045,7 +24596,6 @@ a) se entiende por trajes (ambos o ternos) y trajes sastre los surtidos formados
 prendas de vestir confeccionadas en su superficie exterior con la misma tela y compuestos
 por:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - una sola chaqueta (saco) que cubra la parte superior del cuerpo, cuyo exterior, excepto
 las mangas, esté constituido por cuatro o más piezas, eventualmente acompañada de
 un solo chaleco sastre en el que su parte delantera esté confeccionada con la misma
@@ -25086,7 +24636,6 @@ además, deben ser de tallas correspondientes o compatibles. El término conjunt
 los conjuntos de abrigo para entrenamiento o deporte ni los monos (overoles) y conjuntos de
 esquí, de la partida 62.11.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4. Las partidas 62.05 y 62.06 no comprenden las prendas de vestir con bolsillos por debajo de la
 cintura o con acanalado elástico u otro medio para ceñir el bajo de la prenda. La partida 62.05 no
 comprende las prendas sin mangas.
@@ -25127,7 +24676,6 @@ se clasifican en la partida 62.14.
 9. Las prendas de vestir de este Capítulo que se cierren por delante de izquierda sobre derecha se
 consideran como prendas para hombres o niños, y aquellas que se cierren por delante de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 derecha sobre izquierda, como prendas para mujeres o niñas. Estas disposiciones no se
 aplicarán cuando el corte de la prenda indique manifiestamente que ha sido diseñada para uno u
 otro sexo.
@@ -25195,7 +24743,6 @@ contenido del plumaje superior o igual al
 10%, en peso.
 Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6201.40.02
 Con un contenido de lana o pelo fino
 superior o igual a 36% en peso, excepto lo
@@ -25266,7 +24813,6 @@ Imp. 25)
 Pza 35 Ex.
 6202.40 - De fibras sintéticas o artificiales.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6202.40.01
 Con un contenido de plumón y plumas de
 ave acuática superior o igual al 15%, en
@@ -25337,7 +24883,6 @@ Pza 35 Ex.
 6203.19.91 De las demás materias textiles.
 Arancel modificado con vigencia temporal DOF 15-08-2023 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 20)
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 25)
@@ -25403,7 +24948,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6203.42 -- De algodón.
 6203.42.01
 Con un contenido de plumón y plumas de
@@ -25474,7 +25018,6 @@ Trajes sastre, conjuntos, chaquetas
 pantalones largos, pantalones con peto,
 pantalones cortos (calzones) y shorts
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (excepto de baño), para mujeres o niñas.
 - Trajes sastre:
 6204.11 -- De lana o pelo fino.
@@ -25534,7 +25077,6 @@ Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 (antes Imp. 20, en consecuencia se restablece Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 6204.39 -- De las demás materias textiles.
@@ -25606,7 +25148,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6204.49 -- De las demás materias textiles.
 6204.49.91
 De las demás materias textiles.
@@ -25672,7 +25213,6 @@ Pza 25 Ex.
 6204.63.91 Los demás, para mujeres.
 Arancel modificado con vigencia temporal DOF 18-11-2022 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 25)
 Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 (antes Imp. 20, en consecuencia se restablece Imp. 25)
@@ -25740,7 +25280,6 @@ Imp. 25)
 Pza 35 Ex.
 6205.30.92 Para niños, excepto lo comprendido en la Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fracción arancelaria 6205.30.01.
 Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. 25)
@@ -25805,7 +25344,6 @@ Imp. 25)
 Pza 35 Ex.
 6206.40.92 Para niñas, excepto lo comprendido en las Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fracciones arancelarias 6206.40.01 y
 6206.40.02.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -25862,7 +25400,6 @@ Pza 35 Ex.
 6207.99.91 De las demás materias textiles.
 62.08 Camisetas, combinaciones, enaguas,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 bragas (bombachas, calzones) (incluso
 las que no llegan hasta la cintura),
 camisones, pijamas, saltos de cama,
@@ -25922,7 +25459,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6209.90 - De las demás materias textiles.
 6209.90.91
 De las demás materias textiles.
@@ -25990,7 +25526,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6211.12 -- Para mujeres o niñas.
 6211.12.01
 Para mujeres o niñas.
@@ -26060,7 +25595,6 @@ Modificación DOF 18-11-2022 derogada por DOF 15-08-2023
 (antes Imp. 20, en consecuencia se restablece Imp. 25)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 25)
 6212.30 - Fajas sostén (fajas corpiño).
@@ -26116,7 +25650,6 @@ Pza 35 Ex.
 6215.90 - De las demás materias textiles.
 6215.90.91 De las demás materias textiles. Pza 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 62.16 Guantes, mitones y manoplas.
 6216.00 Guantes, mitones y manoplas.
 6216.00.01 Guantes, mitones y manoplas.
@@ -26155,7 +25688,6 @@ b) calzado, sombreros y demás tocados, de materias distintas del amianto (asbes
 Para que se clasifiquen en esta partida, los artículos antes citados deben cumplir las dos
 condiciones siguientes:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - tener señales apreciables de uso, y
 - presentarse a granel o en balas, sacos (bolsas) o acondicionamientos similares.
 Nota de subpartida.
@@ -26212,7 +25744,6 @@ Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 20)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Las demás ropas de cama, estampadas:
 6302.21 -- De algodón.
 6302.21.01
@@ -26284,7 +25815,6 @@ Pza 35 Ex.
 6302.51.01 De algodón.
 6302.53 -- De fibras sintéticas o artificiales.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6302.53.01
 De fibras sintéticas o artificiales.
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
@@ -26352,7 +25882,6 @@ Pza 35 Ex.
 6303.92 -- De fibras sintéticas.
 6303.92.02 De fibras sintéticas. Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 19-12-2024 (antes
 Imp. 20)
 6303.99 -- De las demás materias textiles.
@@ -26412,7 +25941,6 @@ la partida 53.03.
 la partida 53.03.
 Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6305.20 - De algodón.
 6305.20.01 De algodón.
 - De materias textiles sintéticas o artificiales:
@@ -26475,7 +26003,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Imp. 25)
 6306.30 - Velas.
 6306.30.02 Velas. Fracción reformada DOF 29-12-2025 (antes Imp. 15) Pza 25 Ex.
@@ -26532,7 +26059,6 @@ confección de alfombras, tapicería,
 manteles o servilletas bordados o de
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 artículos textiles similares, en envases para
 la venta al por menor.
 SUBCAPÍTULO III
@@ -26570,7 +26096,6 @@ f) el calzado que tenga el carácter de juguete y el calzado con patines fijos (
 ruedas); espinilleras (canilleras) y demás artículos de protección utilizados en la práctica del
 deporte (Capítulo 95).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. En la partida 64.06, no se consideran partes las clavijas (estaquillas), protectores, anillos para
 ojetes, ganchos, hebillas, galones, borlas, cordones y demás artículos de ornamentación o de
 pasamanería, que siguen su propio régimen, ni los botones para el calzado (partida 96.06).
@@ -26618,7 +26143,6 @@ Par 35 Ex.
 6401.92 -- Que cubran el tobillo sin cubrir la rodilla.
 6401.92.11 Con suela y parte superior recubierta Par 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (incluidos los accesorios o refuerzos) con un
 contenido de poli(cloruro de vinilo) (P.V.C.)
 superior al 90%, incluso con soporte o forro
@@ -26686,7 +26210,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 30)
 Par 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Los demás calzados:
 6402.91 -- Que cubran el tobillo.
 6402.91.02
@@ -26764,7 +26287,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 10)
 Par 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 64.03
 Calzado con suela de caucho, plástico,
 cuero natural o regenerado y parte
@@ -26832,7 +26354,6 @@ Par 35 Ex.
 plantillas ni puntera metálica de protección.
 Par 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6403.91.12
 De construcción "Welt".
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
@@ -26907,7 +26428,6 @@ Imp. 30)
 Par 35 Ex.
 64.04 Calzado con suela de caucho, plástico,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cuero natural o regenerado y parte
 superior de materia textil.
 - Calzado con suela de caucho o plástico:
@@ -26975,7 +26495,6 @@ Par 35 Ex.
 6404.19 -- Los demás.
 6404.19.02 Para mujeres, adultas y jóvenes, excepto el Par 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 que tenga una banda o aplicación similar
 pegada o moldeada a la suela y sobrepuesta
 al corte y lo comprendido en la fracción
@@ -27044,7 +26563,6 @@ superiores fijadas a las palmillas distintas
 de la suela); plantillas, taloneras y
 artículos similares, amovibles; polainas y
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 artículos similares, y sus partes.
 6406.10 - Partes superiores de calzado y sus partes,
 excepto los contrafuertes y punteras duras.
@@ -27095,7 +26613,6 @@ fieltro, para sombreros.
 Pza Ex. Ex.
 65.02 Cascos para sombreros, trenzados o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fabricados por unión de tiras de
 cualquier materia, sin ahormado ni
 perfilado del ala y sin guarnecer.
@@ -27160,7 +26677,6 @@ incluso guarnecidos.
 6506.10 - Cascos de seguridad.
 6506.10.01 Cascos de seguridad. Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Los demás:
 6506.91 -- De caucho o plástico.
 6506.91.01 Gorras. Pza 15 Ex.
@@ -27212,7 +26728,6 @@ quitasoles toldo y artículos similares).
 6601.91 -- Con astil o mango telescópico.
 6601.91.01 Con astil o mango telescópico. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6601.99 -- Los demás.
 6601.99.99 Los demás. Pza 15 Ex.
 66.02 Bastones, bastones asiento, látigos,
@@ -27251,7 +26766,6 @@ particular, los artículos de cama de la partida 94.04;
 b) las prendas y complementos (accesorios), de vestir, en los que las plumas o plumón sean
 simples adornos o material de relleno;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) las flores, follaje, y sus partes y los artículos confeccionados de la partida 67.02.
 3. La partida 67.02 no comprende:
 a) los artículos de vidrio (Capítulo 70);
@@ -27307,7 +26821,6 @@ materia textil, preparados para la fabricación
 de pelucas o artículos similares.
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 67.04
 Pelucas, barbas, cejas, pestañas,
 mechones y artículos análogos, de
@@ -27348,7 +26861,6 @@ h) las pequeñas muelas para tornos de dentista (partida 90.18);
 ij) los artículos del Capítulo 91 (por ejemplo: cajas y envolturas similares de relojes u otros
 aparatos de relojería);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 k) los artículos del Capítulo 94 (por ejemplo: muebles, luminarias y aparatos de alumbrado,
 construcciones prefabricadas);
 l) los artículos del Capítulo 95 (por ejemplo: juguetes, juegos, artefactos deportivos);
@@ -27406,7 +26918,6 @@ rectangular, en los que la superficie mayor
 pueda inscribirse en un cuadrado de lado
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 inferior a 7 cm.
 6802.10.99 Los demás. Kg 10 Ex.
 -
@@ -27461,7 +26972,6 @@ cerámica.
 6804.22.91 De los demás abrasivos aglomerados o de
 cerámica. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6804.23 -- De piedras naturales.
 6804.23.02 De piedras naturales. Kg Ex. Ex.
 6804.30 - Piedras de afilar o pulir a mano.
@@ -27520,7 +27030,6 @@ similares (por ejemplo: pez de petróleo,
 brea).
 6807.10 - En rollos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6807.10.01 En rollos. Kg Ex. Ex.
 6807.90 - Las demás.
 6807.90.99 Las demás. Kg Ex. Ex.
@@ -27574,7 +27083,6 @@ construcción o ingeniería civil.
 6810.91.99 Las demás. Kg 15 Ex.
 6810.99 -- Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6810.99.99 Las demás. Kg 15 Ex.
 68.11 Manufacturas de amiantocemento,
 celulosacemento o similares.
@@ -27637,7 +27145,6 @@ Kg 5 Ex.
 - Las demás:
 6812.91 -- Prendas y complementos (accesorios), de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 vestir, calzado, sombreros y demás
 tocados.
 6812.91.01
@@ -27709,7 +27216,6 @@ textiles o demás materias.
 6813.89 -- Las demás.
 6813.89.99 Las demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 68.14
 Mica trabajada y manufacturas de mica,
 incluida la aglomerada o reconstituida,
@@ -27769,7 +27275,6 @@ Kg Ex. Ex.
 6815.91.99 Las demás. Kg 5 Ex.
 6815.99 -- Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6815.99.01 A base de óxidos, fundidos eléctricamente. Kg Ex. Ex.
 6815.99.99 Las demás. Kg 5 Ex.
 _______________
@@ -27805,7 +27310,6 @@ ij) los artículos del Capítulo 94 (por ejemplo: muebles, luminarias y aparatos
 construcciones prefabricadas);
 k) los artículos del Capítulo 95 (por ejemplo: juguetes, juegos, artefactos deportivos);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 l) los artículos de la partida 96.06 (por ejemplo, botones) o de la partida 96.14 (por ejemplo,
 pipas);
 m) los artículos del Capítulo 97 (por ejemplo, objetos de arte).
@@ -27869,7 +27373,6 @@ sílice (SiO2) o de una mezcla o combinación
 de estos productos, superior al 50% en
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 peso.
 6902.90 - Los demás.
 6902.90.99 Los demás. Kg Ex. Ex.
@@ -27925,7 +27428,6 @@ Kg Ex. Ex.
 tubería, de cerámica.
 6906.00 Tubos, canalones y accesorios de tubería,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de cerámica.
 6906.00.01 Tubos, canalones y accesorios de tubería,
 de cerámica. Kg 15 Ex.
@@ -27999,7 +27501,6 @@ Imp. 25)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
 M² 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 69.09
 Aparatos y artículos, de cerámica, para
 usos químicos o demás usos técnicos;
@@ -28058,7 +27559,6 @@ cerámica, excepto porcelana.
 6912.00 Vajilla y demás artículos de uso doméstico,
 higiene o tocador, de cerámica, excepto
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 porcelana.
 6912.00.03 De Talavera. Kg 15 Ex.
 6912.00.99 Los demás. Kg 15 Ex.
@@ -28098,7 +27598,6 @@ g) las luminarias y los aparatos de alumbrado, los anuncios, letreros y placas i
 luminosos y artículos similares, con fuente de luz inseparable, así como sus partes, de la
 partida 94.05;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 h) los juegos, juguetes y accesorios para árboles de Navidad, así como los demás artículos del
 Capítulo 95, excepto los ojos sin mecanismo para muñecas o demás artículos del Capítulo
 95;
@@ -28143,7 +27642,6 @@ partida 85.49; vidrio en masa.
 7001.00.01 Calcín y demás desperdicios y desechos de
 vidrio, excepto el vidrio de tubos de rayos Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 catódicos y demás vidrios activados de la
 partida 85.49; vidrio en masa.
 70.02
@@ -28206,7 +27704,6 @@ Kg 35 Ex.
 7003.30 - Perfiles.
 7003.30.01 Perfiles. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 70.04
 Vidrio estirado o soplado, en hojas,
 incluso con capa absorbente, reflectante
@@ -28274,7 +27771,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 15)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 70.06
 Vidrio de las partidas 70.03, 70.04 o
 70.05, curvado, biselado, grabado,
@@ -28343,7 +27839,6 @@ Kg 35 Ex.
 70.08 Vidrieras aislantes de paredes múltiples.
 7008.00 Vidrieras aislantes de paredes múltiples.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7008.00.01
 Vidrieras aislantes de paredes múltiples.
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
@@ -28405,7 +27900,6 @@ catódicos o similares.
 7011.10 - Para alumbrado eléctrico.
 7011.10.05 Para alumbrado eléctrico. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7011.20 - Para tubos de rayos catódicos.
 7011.20.05 Para tubos de rayos catódicos. Kg Ex. Ex.
 7011.90 - Las demás.
@@ -28476,7 +27970,6 @@ entre 0°C y 300°C.
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Imp. 15)
 7013.49 -- Los demás.
 7013.49.99
@@ -28537,7 +28030,6 @@ Adoquines, baldosas, ladrillos, placas,
 tejas y demás artículos, de vidrio
 prensado o moldeado, incluso armado,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 para la construcción; cubos, dados y
 demás artículos similares, de vidrio,
 incluso con soporte, para mosaicos o
@@ -28593,7 +28085,6 @@ de vidrio trabajado al soplete (vidrio
 ahilado), excepto la bisutería;
 microesferas de vidrio con un diámetro
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 inferior o igual a 1 mm.
 7018.10 -
 Cuentas de vidrio, imitaciones de perlas, de
@@ -28651,7 +28142,6 @@ Kg 5 Ex.
 7019.63.99 Los demás. Kg Ex. Ex.
 7019.64 -- Tejidos de hilados de malla cerrada, de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ligamento tafetán, recubiertos o
 estratificados.
 7019.64.01
@@ -28705,7 +28195,6 @@ preciosos, chapados de metal precioso (plaqué) y manufacturas de estas materias
 bisutería; monedas
 Notas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 1. Sin perjuicio de la aplicación de la Nota 1 A) de la Sección VI y de las excepciones previstas a
 continuación, se incluye en este Capítulo cualquier artículo compuesto total o parcialmente:
 a) de perlas naturales (finas) o cultivadas, de piedras preciosas o semipreciosas (naturales,
@@ -28742,7 +28231,6 @@ l) los artículos de los Capítulos 90, 91 o 92 (instrumentos científicos, apar
 instrumentos musicales);
 m) las armas y sus partes (Capítulo 93);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 n) los artículos contemplados en la Nota 2 del Capítulo 95;
 o) los artículos clasificados en el Capítulo 96 conforme la Nota 4 de dicho Capítulo;
 p) las obras originales de estatuaria o escultura (partida 97.03), las piezas de colección (partida
@@ -28781,7 +28269,6 @@ a) los pequeños objetos utilizados como adorno personal (por ejemplo: sortijas,
 collares, broches, pendientes, cadenas de reloj, dijes, colgantes, alfileres y botones de
 corbata, gemelos, medallas o insignias, religiosas u otras);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) los artículos de uso personal que se llevan sobre la persona, así como los artículos de
 bolsillo o de bolso de mano (cartera) (por ejemplo: cigarreras, pitilleras, petacas,
 bomboneras, polveras, pastilleros, monederos de malla, rosarios).
@@ -28830,7 +28317,6 @@ transporte.
 7101.22 -- Trabajadas.
 7101.22.01 Graduadas y ensartadas temporalmente Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 para facilitar su transporte.
 7101.22.99 Las demás. Kg Ex. Ex.
 71.02 Diamantes, incluso trabajados, sin
@@ -28882,7 +28368,6 @@ transporte.
 7104.10.01 Cuarzo piezoeléctrico.
 Arancel modificado con vigencia temporal DOF 15-08-2023 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. Ex.)
 - Las demás, en bruto o simplemente
 aserradas o desbastadas:
@@ -28934,7 +28419,6 @@ semilabrado o en polvo.
 7108.11.01 Polvo. G Ex. Ex.
 7108.12 -- Las demás formas en bruto.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7108.12.91 Las demás formas en bruto. Kg Ex. Ex.
 7108.13 -- Las demás formas semilabradas.
 7108.13.91 Las demás formas semilabradas. Kg Ex. Ex.
@@ -28985,7 +28469,6 @@ precioso o de chapado de metal precioso
 que contengan metal precioso o
 compuestos de metal precioso, de los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 tipos utilizados principalmente para la
 recuperación del metal precioso,
 distintos de los productos de la partida
@@ -29043,7 +28526,6 @@ sobre metal común.
 sobre metal común. Kg Ex. Ex.
 71.14 Artículos de orfebrería y sus partes, de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 metal precioso o de chapado de metal
 precioso (plaqué).
 - De metal precioso, incluso revestido o
@@ -29098,7 +28580,6 @@ sin dorar ni platear. Kg 5 Ex.
 7117.90 - Las demás.
 7117.90.01 Partes o piezas sueltas, de metales Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comunes, sin dorar o platear, incluso
 broches.
 7117.90.02 De Ámbar de Chiapas. Kg 10 Ex.
@@ -29137,7 +28618,6 @@ k) los artículos del Capítulo 94 (por ejemplo: muebles, somieres, luminarias y
 alumbrado, letreros luminosos, construcciones prefabricadas);
 l) los artículos del Capítulo 95 (por ejemplo: juguetes, juegos, artefactos deportivos);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 m) los cedazos de mano, botones, plumas, portaminas, plumillas, monopies, bípodes, trípodes y
 artículos similares y demás artículos del Capítulo 96 (manufacturas diversas);
 n) los artículos del Capítulo 97 (por ejemplo, objetos de arte).
@@ -29176,7 +28656,6 @@ aleaciones.
 alcanza también a las aleaciones clasificadas con ese metal por aplicación de la Nota 5.
 7. Regla para la clasificación de los artículos compuestos:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Salvo disposición en contrario en un texto de partida, las manufacturas de metal común (incluidas
 las manufacturas de materiales mezclados, consideradas como tales conforme a las Reglas
 Generales Interpretativas), que comprendan dos o más metales comunes, se clasifican con las
@@ -29215,7 +28694,6 @@ bruto de la partida 74.03. Esta disposición se aplica mutatis mutandis a los pr
 Capítulo 81.
 b) Perfiles
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 los productos laminados, extrudidos, estirados, forjados u obtenidos por conformado o
 plegado, enrollados o sin enrollar, de sección transversal constante en toda su longitud, que
 no cumplan las definiciones de barras, alambre, chapas, hojas, tiras o tubos. También se
@@ -29259,8 +28737,6 @@ roscados, taladrados, estrechados o abocardados, tener forma cónica o estar pro
 bridas, collarines o anillos.
 _______________
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
-
 **Artículo 1o - Capítulo 72**
 Fundición, hierro y acero
 Notas.
@@ -29294,7 +28770,6 @@ al 4% en peso y con uno o varios elementos en las proporciones en peso siguiente
 porcentaje de cobre sea superior al 10%.
 d) Acero
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 las materias férreas, excepto las de la partida 72.03 que, salvo determinados tipos de aceros
 producidos en forma de piezas moldeadas, se presten a la deformación plástica y con un
 contenido de carbono inferior o igual al 2% en peso. Sin embargo, los aceros al cromo
@@ -29327,7 +28802,6 @@ los productos colados groseramente en forma de lingotes sin mazarotas o de bloqu
 presenten defectos profundos en la superficie y no respondan, en su composición química, a
 las definiciones de fundición en bruto, de fundición especular o de ferroaleaciones.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 h) Granallas
 los productos que pasen por un tamiz con abertura de malla de 1 mm en proporción inferior
 al 90% en peso, y por un tamiz con abertura de malla de 5 mm en proporción superior o
@@ -29366,7 +28840,6 @@ los productos que no respondan a las definiciones de los apartados ij), k) o l) 
 la definición de alambre, cuya sección transversal maciza y constante tenga forma de
 círculo, segmento circular, óvalo, cuadrado, rectángulo, triángulo u otro polígono convexo
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (incluidos los círculos aplanados y los rectángulos modificados, en los que dos lados
 opuestos tengan forma de arco convexo y los otros dos sean rectos, iguales y paralelos).
 Estos productos pueden:
@@ -29401,7 +28874,6 @@ proporciones en peso que se indican:
 - superior al 0.1% de cualquiera de los elementos siguientes: aluminio, molibdeno, titanio,
 volframio (tungsteno), vanadio.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) Acero sin alear de fácil mecanización
 el acero sin alear que contenga uno o varios de los elementos siguientes en las
 proporciones en peso que se indican:
@@ -29437,7 +28909,6 @@ Para la aplicación de esta regla, los elementos no citados específicamente en 
 Capítulo y comprendidos en la expresión los demás elementos deberán, sin embargo, exceder
 cada uno del 10% en peso.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -29503,7 +28974,6 @@ Kg 35 Ex.
 7202.30.01 Ferro-sílico-manganeso.
 Arancel modificado con vigencia temporal DOF 22-04-2024 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. Ex.)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
 - Ferrocromo:
@@ -29554,7 +29024,6 @@ de chatarra de hierro o acero.
 7204.10.01 Desperdicios y desechos, de fundición.
 - Desperdicios y desechos, de aceros
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 aleados:
 7204.21 -- De acero inoxidable.
 7204.21.01 De acero inoxidable. Kg Ex. Ex.
@@ -29603,7 +29072,6 @@ hierro de la partida 72.03.
 7206.90 - Las demás.
 7206.90.99 Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 72.07 Productos intermedios de hierro o
 acero sin alear.
 - Con un contenido de carbono inferior al
@@ -29668,7 +29136,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 22-04-2024 (se
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 mantiene Imp. 25)
 7208.27 -- De espesor inferior a 3 mm.
 7208.27.01
@@ -29740,7 +29207,6 @@ mantiene Imp. 25)
 Kg 35 Ex.
 - Los demás, sin enrollar, simplemente
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 laminados en caliente:
 7208.51 -- De espesor superior a 10 mm.
 7208.51.04
@@ -29813,7 +29279,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 22-04-2024 (se
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 mantiene Imp. 25)
 7209.16 -- De espesor superior a 1 mm pero inferior
 a 3 mm.
@@ -29886,7 +29351,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (se
 mantiene Imp. 25)
 Kg 50 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7209.28 -- De espesor inferior a 0.5 mm.
 7209.28.01
 De espesor inferior a 0.5 mm.
@@ -29954,7 +29418,6 @@ mantiene Imp. 25)
 Kg 35 Ex.
 7210.49 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7210.49.99
 Los demás.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -30023,7 +29486,6 @@ superior a 150 mm y espesor superior o
 igual a 4 mm, sin enrollar y sin motivos
 en relieve.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7211.13.01
 Laminados en las cuatro caras o en
 acanaladuras cerradas, de anchura
@@ -30094,7 +29556,6 @@ mantiene Imp. 25)
 Kg 35 Ex.
 72.12 Productos laminados planos de hierro
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o acero sin alear, de anchura inferior a
 600 mm, chapados o revestidos.
 7212.10 - Estañados.
@@ -30163,7 +29624,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 7213.20 - Los demás, de acero de fácil
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 mecanización.
 7213.20.91
 Los demás, de acero de fácil
@@ -30232,7 +29692,6 @@ Kg 35 Ex.
 mecanización.
 7214.30.91 Las demás, de acero de fácil Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 mecanización.
 Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. Ex.)
@@ -30300,7 +29759,6 @@ laminados o extrudidos en caliente, de
 altura inferior a 80 mm.
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. Ex.)
 Arancel modificado con vigencia temporal DOF 15-08-2023
@@ -30374,7 +29832,6 @@ mantiene Imp. 25)
 Kg 35 Ex.
 7216.33.02 Cuyo patín (ancho de las secciones Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 paralelas) sea superior a 300 mm.
 7216.40 -
 Perfiles en L o en T, simplemente
@@ -30447,7 +29904,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 - Los demás:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7216.91 -- Obtenidos o acabados en frío, a partir de
 productos laminados planos.
 7216.91.01
@@ -30511,7 +29967,6 @@ intermedios de acero inoxidable.
 7218.99 -- Los demás.
 7218.99.99 Los demás. Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 72.19
 Productos laminados planos de acero
 inoxidable, de anchura superior o
@@ -30563,7 +30018,6 @@ mantiene Imp. 25)
 Kg 25 Ex.
 7219.33 -- De espesor superior a 1 mm pero inferior
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 a 3 mm.
 7219.33.01
 De espesor superior a 1 mm pero inferior
@@ -30627,7 +30081,6 @@ Kg 20 Ex.
 72.21 Alambrón de acero inoxidable.
 7221.00 Alambrón de acero inoxidable.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7221.00.01 Alambrón de acero inoxidable.
 72.22 Barras y perfiles, de acero inoxidable.
 - Barras simplemente laminadas o
@@ -30674,7 +30127,6 @@ demás aceros aleados, de anchura
 superior o igual a 600 mm.
 - De acero al silicio llamado "magnético"
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (acero magnético al silicio):
 7225.11 -- De grano orientado.
 7225.11.01 De grano orientado. Kg Ex. Ex.
@@ -30745,7 +30197,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024 (se
 mantiene Imp. 25)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7225.99 -- Los demás.
 7225.99.99
 Los demás.
@@ -30811,7 +30262,6 @@ Kg 35 Ex.
 aleados.
 7227.10 - De acero rápido.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7227.10.01
 De acero rápido.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -30879,7 +30329,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 7228.60 - Las demás barras.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7228.60.91 Las demás barras.
 7228.70 - Perfiles.
 7228.70.01
@@ -30936,7 +30385,6 @@ soldadura.
 7301.10 - Tablestacas.
 7301.10.01 Tablestacas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7301.20 - Perfiles.
 7301.20.01 Perfiles.
 73.02
@@ -30989,7 +30437,6 @@ a 4 mm sin exceder de 19.5 mm.
 Kg 35 Ex.
 7304.11.02 Tubos laminados en caliente, sin Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 recubrimiento u otros trabajos de
 superficie, incluidos los tubos laminados
 en caliente barnizados o laqueados: de
@@ -31052,7 +30499,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 25)
 7304.19.03
 Tubos laminados en caliente, sin
@@ -31124,7 +30570,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. Ex.)
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 15)
 Arancel modificado con vigencia temporal DOF 22-04-2024
@@ -31196,7 +30641,6 @@ a 4 mm sin exceder de 19.5 mm.
 Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 5)
 7304.39.02
 Tubos llamados "mecánicos" o
@@ -31262,7 +30706,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Kg 35 Ex.
 7304.39.11 Tubos llamados de "conducción", sin Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 recubrimientos distintos de los
 obtenidos por laqueado y barnizado o
 sin trabajos de superficie, de diámetro
@@ -31329,7 +30772,6 @@ obtenidos por laqueado y barnizado o
 sin trabajos de superficie, de diámetro
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 exterior superior a 406.4 mm y espesor
 de pared superior o igual a 9.52 mm sin
 exceder de 31.75 mm.
@@ -31396,7 +30838,6 @@ acero inoxidable:
 7304.49.99 Los demás.
 - Los demás, de sección circular, de los
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 demás aceros aleados:
 7304.51 -- Estirados o laminados en frío.
 7304.51.12
@@ -31468,7 +30909,6 @@ Tubos de entubación ("casing") de los
 tipos utilizados para la extracción de
 petróleo o gas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7305.20.01
 Con espesor de pared inferior a 50.8
 mm.
@@ -31545,7 +30985,6 @@ Arancel modificado con vigencia temporal DOF 18-11-2022
 (antes Imp. Ex.)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 15)
 Arancel modificado con vigencia temporal DOF 22-04-2024
@@ -31615,7 +31054,6 @@ oleoductos o gasoductos:
 7306.11.01 Soldados, de acero inoxidable.
 7306.19 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7306.19.99
 Los demás.
 Arancel modificado con vigencia temporal DOF 18-11-2022
@@ -31685,7 +31123,6 @@ Kg 35 Ex.
 7306.30.99 Los demás.
 Arancel modificado con vigencia temporal DOF 18-11-2022 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 5)
 Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 15)
@@ -31755,7 +31192,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 (se mantiene Imp. 25)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 73.07
 Accesorios de tubería (por ejemplo:
 empalmes (racores), codos,
@@ -31818,7 +31254,6 @@ fundición, hierro o acero, excepto las
 construcciones prefabricadas de la
 partida 94.06; chapas, barras,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 perfiles, tubos y similares, de
 fundición, hierro o acero, preparados
 para la construcción.
@@ -31882,7 +31317,6 @@ licuado), de fundición, hierro o acero,
 de capacidad superior a 300 l, sin
 dispositivos mecánicos ni térmicos,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 incluso con revestimiento interior o
 calorífugo.
 7309.00
@@ -31948,7 +31382,6 @@ Arancel modificado con vigencia temporal DOF 31-12-2024
 (antes Imp. 35)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado DOF 23-04-2026 (antes Imp. Ex.)
 73.11 Recipientes para gas comprimido o
 licuado, de fundición, hierro o acero.
@@ -32012,7 +31445,6 @@ Kg 35 Ex.
 7312.90.99 Los demás.
 73.13 Alambre de púas, de hierro o acero;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 alambre (simple o doble) y fleje,
 torcidos, incluso con púas, de hierro
 o acero, de los tipos utilizados para
@@ -32078,7 +31510,6 @@ de cruce, de alambre cuya mayor
 dimensión de la sección transversal sea
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 superior o igual a 3 mm y con malla de
 superficie superior o igual a 100 cm².
 Arancel modificado con vigencia temporal DOF 15-08-2023
@@ -32146,7 +31577,6 @@ partes:
 7315.11 -- Cadenas de rodillos.
 7315.11.06 Cadenas de rodillos. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7315.12 -- Las demás cadenas.
 7315.12.91
 Las demás cadenas.
@@ -32212,7 +31642,6 @@ onduladas o biseladas, y artículos
 similares, de fundición, hierro o
 acero, incluso con cabeza de otras
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 materias, excepto de cabeza de
 cobre.
 7317.00
@@ -32284,7 +31713,6 @@ Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
 Kg 35 Ex.
 7318.13 -- Escarpias y armellas, roscadas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7318.13.01
 Escarpias y armellas, roscadas.
 Arancel modificado con vigencia temporal DOF 15-08-2023
@@ -32365,7 +31793,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7318.24 -- Pasadores y chavetas.
 7318.24.03
 Pasadores y chavetas.
@@ -32423,7 +31850,6 @@ fundición, hierro o acero.
 7321.11 -- De combustibles gaseosos, o de gas y
 otros combustibles.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7321.11.01
 Cocinas que consuman combustibles
 gaseosos.
@@ -32489,7 +31915,6 @@ petróleo.
 Kg Ex. Ex.
 7321.90.05 Cámaras de cocción, incluso sin Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ensamblar, reconocibles como
 diseñadas exclusivamente para lo
 comprendido en la fracción arancelaria
@@ -32555,7 +31980,6 @@ incluidas sus partes. Kg Ex. Ex.
 7322.90.99 Los demás.
 Arancel modificado con vigencia temporal DOF 15-08-2023 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (antes Imp. 15)
 Arancel modificado con vigencia temporal DOF 22-04-2024
 (antes Imp. 25)
@@ -32626,7 +32050,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 25)
 Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Bañeras:
 7324.21 -- De fundición, incluso esmaltadas.
 7324.21.01
@@ -32693,7 +32116,6 @@ acero.
 7326.20.06 Manufacturas de alambre de hierro o
 acero. Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024
 (antes Imp. Ex.)
 7326.90 - Las demás.
@@ -32737,7 +32159,6 @@ sobre cada uno de los demás elementos, siempre que:
 límites indicados en el cuadro anterior; o
 2) el contenido total de los demás elementos sea superior al 2.5% en peso.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) Aleaciones madre de cobre
 las composiciones que contengan cobre en proporción superior al 10% en peso y otros
 elementos, que no se presten a la deformación plástica y se utilicen como productos de
@@ -32778,7 +32199,6 @@ DE EXP.
 (cobre precipitado).
 7401.00 Matas de cobre; cobre de cementación
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (cobre precipitado).
 7401.00.03 Matas de cobre; cobre de cementación
 (cobre precipitado). Kg Ex. Ex.
@@ -32824,7 +32244,6 @@ las aleaciones madre de la partida 74.05). Kg Ex. Ex.
 7407.10.01 Barras. Kg 5 Ex.
 7407.10.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - De aleaciones de cobre:
 7407.21 -- A base de cobre-cinc (latón).
 7407.21.02 Perfiles huecos. Kg Ex. Ex.
@@ -32880,7 +32299,6 @@ superior a 0.15 mm.
 7409.21.01 Enrolladas. Kg Ex. Ex.
 7409.29 -- Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7409.29.99 Las demás. Kg Ex. Ex.
 - De aleaciones a base de cobre-estaño
 (bronce):
@@ -32942,7 +32360,6 @@ igual a 0.40 mm, para instalaciones
 sanitarias.
 Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. 5)
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
@@ -32997,7 +32414,6 @@ muelle (resorte)).
 7415.21.01 Arandelas (incluidas las arandelas de
 muelle (resorte)). Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7415.29 -- Los demás.
 7415.29.99 Los demás. Kg Ex. Ex.
 - Los demás artículos roscados:
@@ -33061,7 +32477,6 @@ Kg Ex. Ex.
 7419.20.99 Los demás. Kg 10 Ex.
 7419.80 - Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7419.80.01 Cadenas y sus partes. Kg Ex. Ex.
 7419.80.02 Terminales para cables. Kg 15 Ex.
 7419.80.03 Accesorios para tendidos aéreos
@@ -33102,7 +32517,6 @@ cualquier forma, sea inferior o igual a 6 mm en su mayor dimensión.
 CÓDIGO DESCRIPCIÓN UNIDAD CUOTA (ARANCEL)
 IMPUESTO IMPUESTO
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 DE IMP. DE EXP.
 75.01
 Matas de níquel, "sinters" de óxidos de
@@ -33153,7 +32567,6 @@ manguitos), de níquel.
 - Tubos:
 7507.11 -- De níquel sin alear.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7507.11.01 De níquel sin alear. Kg Ex. Ex.
 7507.12 -- De aleaciones de níquel.
 7507.12.01 De aleaciones de níquel. Kg Ex. Ex.
@@ -33200,7 +32613,6 @@ demás elementos, siempre que:
 1) el contenido en peso de, al menos, uno de los demás elementos o el total hierro más
 silicio, sea superior a los límites indicados en el cuadro anterior; o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2) el contenido total de los demás elementos sea superior al 1% en peso.
 2. No obstante lo dispuesto en la Nota 9 c) de la Sección XV, en la subpartida 7616.91, solamente
 se admite como alambre el producto, enrollado o sin enrollar, cuya sección transversal, de
@@ -33266,7 +32678,6 @@ Kg 25 Ex.
 7604.29.01 Barras de aluminio, con un contenido de:
 hierro de 0.7%, silicio superior o igual al Kg 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 0.4% pero inferior o igual al 0.8%, cobre
 superior o igual 0.15% pero inferior o igual
 al 0.40%, magnesio superior o igual al
@@ -33327,7 +32738,6 @@ magnesio superior o igual al 0.8% pero
 inferior o igual al 1.2%, cromo superior o
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 igual al 0.04% pero inferior o igual al
 0.35%, además de los otros elementos, en
 peso.
@@ -33386,7 +32796,6 @@ Hojas y tiras, delgadas, de aluminio
 (incluso impresas o fijadas sobre papel,
 cartón, plástico o soportes similares),
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de espesor inferior o igual a 0.2 mm
 (sin incluir el soporte).
 - Sin soporte:
@@ -33449,7 +32858,6 @@ Accesorios de tubería (por ejemplo:
 empalmes (racores), codos, manguitos)
 de aluminio.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7609.00
 Accesorios de tubería (por ejemplo:
 empalmes (racores), codos, manguitos) de
@@ -33514,7 +32922,6 @@ dispositivos mecánicos ni térmicos, incluso
 con revestimiento interior o calorífugo.
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 76.12
 Depósitos, barriles, tambores, bidones,
 botes, cajas y recipientes similares, de
@@ -33571,7 +32978,6 @@ análogos.
 7615.10.02 Artículos de uso doméstico y sus partes;
 esponjas, estropajos, guantes y artículos Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 similares para fregar, lustrar o usos
 análogos.
 7615.20 - Artículos de higiene o tocador, y sus
@@ -33627,7 +33033,6 @@ comprendido en la fracción arancelaria
 Kg 10 Ex.
 7616.99.11 Anodos. Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 7616.99.12 Reconocibles para naves aéreas.
 7616.99.13
 Escaleras.
@@ -33660,7 +33065,8 @@ Imp. 15)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 25)
 Kg 25 Ex.
 _______________
-Capítulo 78 (Sic DOF 07-06-2022)
+
+**Artículo 1o - Capítulo 78**
 Plomo y sus manufacturas
 Nota de subpartida.
 1. En este Capítulo, se entiende por plomo refinado:
@@ -33693,7 +33099,6 @@ Zn Cinc
 0.005
 0.002
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Los demás (por ejemplo, Te), cada uno 0.001
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
@@ -33738,7 +33143,6 @@ a) Cinc sin alear
 el metal con un contenido de cinc superior o igual al 97.5% en peso.
 b) Aleaciones de cinc
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 las materias metálicas en las que el cinc predomine en peso sobre cada uno de los demás
 elementos, siempre que el contenido total de los demás elementos sea superior al 2.5% en
 peso.
@@ -33784,8 +33188,6 @@ al 99.99% en peso. Kg Ex. Ex.
 7907.00.91 Las demás manufacturas de cinc. Kg Ex. Ex.
 ______________
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
-
 **Artículo 1o - Capítulo 80**
 Estaño y sus manufacturas
 Nota de subpartida.
@@ -33828,7 +33230,6 @@ DE EXP.
 8007.00 Las demás manufacturas de estaño.
 8007.00.01 Chapas, hojas y tiras, de estaño, de Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 espesor superior a 0.2 mm.
 8007.00.02
 Hojas y tiras, delgadas, de estaño (incluso
@@ -33890,7 +33291,6 @@ obtenidas por sinterizado, perfiles,
 chapas, hojas y tiras.
 8102.95.02 Barras, excepto las simplemente Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 obtenidas por sinterizado, perfiles,
 chapas, hojas y tiras.
 8102.96 -- Alambre.
@@ -33944,7 +33344,6 @@ Matas de cobalto y demás productos
 intermedios de la metalurgia del cobalto;
 cobalto en bruto; polvo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8105.20.01
 Matas de cobalto y demás productos
 intermedios de la metalurgia del cobalto;
@@ -34001,7 +33400,6 @@ Kg Ex. Ex.
 - Los demás:
 8109.91 -- Con un contenido inferior a 1 parte de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 hafnio (celtio) por 500 partes de circonio,
 en peso.
 8109.91.01
@@ -34053,7 +33451,6 @@ desechos.
 8112.39.99 Los demás. Kg Ex. Ex.
 - Renio:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8112.41 -- En bruto; desperdicios y desechos; polvo.
 8112.41.01 En bruto; desperdicios y desechos; polvo. Kg Ex. Ex.
 8112.49 -- Los demás.
@@ -34098,7 +33495,6 @@ d) de abrasivos con soporte de metal común, siempre que se trate de útiles cuy
 aristas u otras partes cortantes no hayan perdido su función propia por la presencia de polvo
 abrasivo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. Las partes de metal común de los artículos de este Capítulo se clasifican con los mismos,
 excepto las partes especialmente citadas y los portaútiles para herramientas de mano de la
 partida 84.66. Sin embargo, siempre se excluyen de este Capítulo las partes o accesorios de uso
@@ -34154,7 +33550,6 @@ agrícolas, hortícolas o forestales.
 8201.90.03 Bieldos de más de cinco dientes. Pza Ex. Ex.
 8201.90.99 Los demás. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 82.02
 Sierras de mano; hojas de sierra de
 cualquier clase (incluidas las fresas
@@ -34215,7 +33610,6 @@ Limas, escofinas, alicates (incluso
 cortantes), tenazas, pinzas, cizallas
 para metales, cortatubos, cortapernos,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sacabocados y herramientas similares,
 de mano.
 8203.10 - Limas, escofinas y herramientas similares.
@@ -34270,7 +33664,6 @@ por chorro de agua; yunques; fraguas
 portátiles; muelas de mano o pedal,
 con bastidor.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8205.10 - Herramientas de taladrar o roscar
 (incluidas las terrajas).
 8205.10.01 Taladros, excepto los berbiquíes . Pza Ex. Ex.
@@ -34325,7 +33718,6 @@ partidas 82.02 a 82.05, acondicionadas
 en juegos para la venta al por menor.
 8206.00 Herramientas de dos o más de las
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 partidas 82.02 a 82.05, acondicionadas en
 juegos para la venta al por menor.
 8206.00.01
@@ -34392,7 +33784,6 @@ Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. Ex.)
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
 Imp. 25)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 35)
@@ -34457,7 +33848,6 @@ para preparar, acondicionar o servir
 alimentos o bebidas.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 82.11
 Cuchillos con hoja cortante o dentada,
 incluidas las navajas de podar, y sus
@@ -34508,7 +33898,6 @@ sacapuntas y sus cuchillas.
 sacapuntas y sus cuchillas. Kg 15 Ex.
 8214.20 - Herramientas y juegos de herramientas de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 manicura o de pedicuro (incluidas las
 limas para uñas).
 8214.20.02
@@ -34565,7 +33954,6 @@ IMPUESTO
 DE EXP.
 83.01 Candados, cerraduras y cerrojos (de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 llave, combinación o eléctricos), de
 metal común; cierres y monturas
 cierre, con cerradura incorporada, de
@@ -34623,7 +34011,6 @@ Kg 35 Ex.
 8302.20 - Ruedas.
 8302.20.02 Ruedas. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8302.30 -
 Las demás guarniciones, herrajes y
 artículos similares, para vehículos
@@ -34686,7 +34073,6 @@ correspondencia, plumeros (vasos o
 cajas para plumas de escribir),
 portasellos y material similar de oficina,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de metal común, excepto los muebles de
 oficina de la partida 94.03.
 8304.00.03
@@ -34749,7 +34135,6 @@ artículos similares. Pza 15 Ex.
 8306.21.01 Plateados, dorados o platinados. Pza 15 Ex.
 8306.29 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8306.29.99 Los demás. Pza 15 Ex.
 8306.30 - Marcos para fotografías, grabados o
 similares; espejos.
@@ -34807,7 +34192,6 @@ común.
 8309.10.01 Tapas corona. Kg 5 Ex.
 8309.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8309.90.01
 Tapones o tapas, excepto los tapones sin
 cerradura para tanques de gasolina y lo
@@ -34870,7 +34254,6 @@ depósito de metal o de carburo
 metálico; alambres y varillas, de polvo
 de metal común aglomerado, para la
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 metalización por proyección.
 8311.10 - Electrodos recubiertos para soldadura de
 arco, de metal común.
@@ -34949,7 +34332,6 @@ Sección XVI
 MÁQUINAS Y APARATOS, MATERIAL ELÉCTRICO Y SUS PARTES; APARATOS DE
 GRABACIÓN O REPRODUCCIÓN DE SONIDO, APARATOS DE GRABACIÓN O
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 REPRODUCCIÓN DE IMAGEN Y SONIDO EN TELEVISIÓN, Y LAS PARTES Y
 ACCESORIOS DE ESTOS APARATOS
 Notas.
@@ -34984,7 +34366,6 @@ materia constitutiva de la parte operante (por ejemplo: Capítulos 40, 42, 43, 4
 partidas 68.04 o 69.09);
 p) los artículos del Capítulo 95;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 q) las cintas para máquina de escribir y cintas entintadas similares, incluso en carretes o
 cartuchos (clasificación según la materia constitutiva o en la partida 96.12 si están
 entintadas o preparadas de otro modo para imprimir), así como los monopies, bípodes,
@@ -35027,7 +34408,6 @@ b) son embalados o enviados de tal manera que los artículos no están protegido
 individualmente, de eventuales daños que pudieran ocurrir durante el transporte, carga
 o descarga.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 B) Los envíos que contengan una mezcla de desperdicios y desechos eléctricos y electrónicos
 y de otros desperdicios y desechos, deben clasificarse en la partida 85.49.
 C) Esta Sección no comprende los desechos municipales, tal como se definen en la Nota 4 del
@@ -35062,7 +34442,6 @@ A) No se clasifican en la partida 84.19:
 2°) los aparatos humectadores de granos para la molinería (partida 84.37);
 3°) los difusores para la industria azucarera (partida 84.38);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 4°) las máquinas y aparatos para tratamiento térmico de hilados, tejidos o manufacturas de
 materia textil (partida 84.51);
 5°) los aparatos, dispositivos o equipos de laboratorio diseñados para realizar una
@@ -35099,7 +34478,6 @@ inmediatamente necesarios para la ejecución de ese o esos programas;
 4°) ejecutar, sin intervención humana, un programa de proceso en el que puedan, por
 decisión lógica, modificar su ejecución durante el mismo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 B) Las máquinas automáticas para tratamiento o procesamiento de datos pueden presentarse
 en forma de sistemas que comprendan un número variable de unidades individuales.
 C) Sin perjuicio de lo dispuesto en los apartados D) y E) siguientes, se considerará que forma
@@ -35136,7 +34514,6 @@ Las bolas de acero que no respondan a esta definición se clasifican en la parti
 8. Salvo disposición en contrario y sin perjuicio de lo dispuesto en la Nota 2 anterior, así como en la
 Nota 3 de la Sección XVI, las máquinas que tengan múltiples utilizaciones se clasifican en la
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 partida que corresponda a su utilización principal. Cuando no exista tal partida o no sea posible
 determinar la utilización principal, se clasifican en la partida 84.79.
 En cualquier caso, las máquinas de cordelería o de cablería (por ejemplo: retorcedoras,
@@ -35178,7 +34555,6 @@ materias duras similares, que pueden realizar diferentes tipos de operaciones de
 cambio automático de útiles procedentes de un almacén, de acuerdo con un programa de
 mecanizado.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2. En la subpartida 8471.49, se entiende por sistemas las máquinas automáticas para tratamiento o
 procesamiento de datos cuyas unidades cumplan con todas las condiciones establecidas en la
 Nota 6 C) del Capítulo 84 y constituidas, al menos, por una unidad central de proceso, una
@@ -35235,7 +34611,6 @@ hora.
 Kg 15 Ex.
 8402.12 -- Calderas acuotubulares con una
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 producción de vapor inferior o igual a 45 t
 por hora.
 8402.12.01
@@ -35292,7 +34667,6 @@ sus depuradores.
 8405.10 - Generadores de gas pobre (gas de aire) o
 de gas de agua, incluso con sus
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 depuradores; generadores de acetileno y
 generadores similares de gases, por vía
 húmeda, incluso con sus depuradores.
@@ -35348,7 +34722,6 @@ Pza 5 Ex.
 8407.32 -- De cilindrada superior a 50 cm3 pero
 inferior o igual a 250 cm3.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8407.32.02
 Para acoplarse en bicicletas, con
 potencia hasta 1.5 CP y con peso unitario
@@ -35407,7 +34780,6 @@ mm, sin exceder de 140 mm.
 Kg Ex. Ex.
 8409.99.03 Pistones, camisas, anillos o válvulas, aun Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cuando se presenten en juegos ("kits")
 excepto lo comprendido en las fracciones
 arancelarias 8409.99.02 y 8409.99.04.
@@ -35465,7 +34837,6 @@ inferior o igual a 10,000 kW. Pza Ex. Ex.
 84.11 Turborreactores, turbopropulsores y
 demás turbinas de gas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Turborreactores:
 8411.11 -- De empuje inferior o igual a 25 kN.
 8411.11.01 De empuje inferior o igual a 25 kN. Pza Ex. Ex.
@@ -35516,7 +34887,6 @@ elevadores de líquidos.
 - Bombas equipadas o diseñadas para
 equiparlas con dispositivo medidor:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8413.11 --
 Bombas para distribución de carburantes
 o lubricantes, de los tipos utilizados en
@@ -35580,7 +34950,6 @@ acondicionadores de aire.
 Pza 5 Ex.
 8413.70.05 Para albercas. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8413.70.07
 Bombas de agua, reconocibles como
 diseñadas exclusivamente para el
@@ -35646,7 +35015,6 @@ Pza Ex. Ex.
 8414.30.05 Rotativos, de segunda etapa de
 compresión, con un desplazamiento Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 volumétrico de hasta 15 m³ por minuto,
 para ser utilizados en sistemas de
 refrigeración de baja temperatura.
@@ -35708,7 +35076,6 @@ a 120 cm.
 8414.60.01 De uso doméstico. Pza Ex. Ex.
 8414.60.99 Los demás. Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8414.70 - Recintos de seguridad biológica
 herméticos a gases.
 8414.70.01 Del tipo de campana aspirante. Pza 10 Ex.
@@ -35770,7 +35137,6 @@ inversión del ciclo térmico (bombas de
 calor reversibles).
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8415.82 -- Los demás, con equipo de enfriamiento.
 8415.82.01
 Equipos de aire acondicionado, de ciclo
@@ -35835,7 +35201,6 @@ Pza 35 Ex.
 84.17 Hornos industriales o de laboratorio,
 incluidos los incineradores, que no
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sean eléctricos.
 8417.10 -
 Hornos para tostación, fusión u otros
@@ -35899,7 +35264,6 @@ las máquinas y aparatos para
 acondicionamiento de aire de la
 partida 84.15.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8418.10 -
 Combinaciones de refrigerador y
 congelador con puertas o cajones
@@ -35960,7 +35324,6 @@ incorporado, con o sin depósito (por
 ejemplo, un botellón), aunque puedan
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 conectarse a una tubería, (por ejemplo,
 despachadores).
 8418.50.99 Los demás. Pza 10 Ex.
@@ -36032,7 +35395,6 @@ refrigeración para ser incorporado en las
 mismas.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8418.69.13
 Instalaciones frigoríficas (unidades
 funcionales), excepto lo comprendido en
@@ -36094,7 +35456,6 @@ los eléctricos:
 8419.12.01 De uso doméstico, excepto los de placas,
 metálicas o plásticas y de agua de tubos Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 evacuados.
 8419.12.99 Los demás. Pza 5 Ex.
 8419.19 -- Los demás.
@@ -36151,7 +35512,6 @@ de aire u otros gases. Pza Ex. Ex.
 8419.81 -- Para la preparación de bebidas calientes
 o la cocción o calentamiento de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 alimentos.
 8419.81.01 Cafeteras. Pza 15 Ex.
 8419.81.03
@@ -36211,7 +35571,6 @@ centrífugas:
 8421.12.02 Secadoras de ropa. Pza 10 Ex.
 8421.19 -- Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8421.19.01 Turbinadoras para el refinado del azúcar. Pza 15 Ex.
 8421.19.03 Centrífugas con canasta de eje de
 rotación vertical. Pza 15 Ex.
@@ -36276,7 +35635,6 @@ compresión.
 8421.32.01 Convertidores catalíticos. Pza Ex. Ex.
 8421.32.99 Los demás. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8421.39 -- Los demás.
 8421.39.02
 Filtros secadores, aun cuando tengan
@@ -36337,7 +35695,6 @@ arancelaria 8422.20.02.
 Pza 15 Ex.
 8422.20.02 Para lavar botellas de vidrio, cuya Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 capacidad sea de 3 ml a 20 l.
 8422.20.99 Los demás. Pza Ex. Ex.
 8422.30 -
@@ -36399,7 +35756,6 @@ Pza 15 Ex.
 - Los demás aparatos e instrumentos de
 pesar:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8423.81 -- Con capacidad inferior o igual a 30 kg.
 8423.81.03 Con capacidad inferior o igual a 30 kg. Pza 15 Ex.
 8423.82 -- Con capacidad superior a 30 kg pero
@@ -36459,7 +35815,6 @@ horticultura:
 8424.82.07 Para agricultura u horticultura. Pza Ex. Ex.
 8424.89 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8424.89.99 Los demás. Pza Ex. Ex.
 8424.90 - Partes.
 8424.90.01 Partes. Kg Ex. Ex.
@@ -36522,7 +35877,6 @@ Grúas y aparatos de elevación sobre
 cable aéreo; puentes rodantes,
 pórticos de descarga o manipulación,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 puentes grúa, carretillas puente y
 carretillas grúa.
 -
@@ -36583,7 +35937,6 @@ Pza 5 Ex.
 8426.99.99 Los demás. Pza Ex. Ex.
 84.27 Carretillas apiladoras; las demás
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 carretillas de manipulación con
 dispositivo de elevación incorporado.
 8427.10 - Carretillas autopropulsadas con motor
@@ -36648,7 +36001,6 @@ neumáticos.
 8428.20.02 Con dispositivo dosificador, excepto para
 carga o descarga de navíos. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8428.20.03 Para el manejo de documentos y valores. Pza 15 Ex.
 8428.20.99 Los demás. Pza Ex. Ex.
 -
@@ -36711,7 +36063,6 @@ apisonadoras (aplanadoras),
 autopropulsadas.
 - Topadoras frontales (buldóceres) y
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 topadoras angulares ("angledozers"):
 8429.11 -- De orugas.
 8429.11.01 De orugas. Pza Ex. Ex.
@@ -36769,7 +36120,6 @@ rocas, y máquinas para hacer túneles o
 galerías:
 8430.31 -- Autopropulsadas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8430.31.03 Autopropulsadas. Pza Ex. Ex.
 8430.39 -- Las demás.
 8430.39.01 Escudos de perforación. Pza 5 Ex.
@@ -36823,7 +36173,6 @@ máquinas o aparatos de las partidas
 8431.31 -- De ascensores, montacargas o escaleras
 mecánicas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8431.31.02 De ascensores, montacargas o escaleras
 mecánicas. Kg Ex. Ex.
 8431.39 -- Las demás.
@@ -36883,7 +36232,6 @@ trasplantadoras, para siembra directa. Pza Ex. Ex.
 8432.39.99 Las demás. Pza Ex. Ex.
 - Esparcidores de estiércol y distribuidores
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de abonos:
 8432.41 -- Esparcidores de estiércol.
 8432.41.01 Esparcidores de estiércol. Pza Ex. Ex.
@@ -36936,7 +36284,6 @@ tubérculos. Pza Ex. Ex.
 8433.59 -- Los demás.
 8433.59.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8433.60 -
 Máquinas para limpieza o clasificación de
 huevos, frutos o demás productos
@@ -36994,7 +36341,6 @@ incluidas las incubadoras y criadoras:
 8436.80 - Las demás máquinas y aparatos.
 8436.80.91 Las demás máquinas y aparatos. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Partes:
 8436.91 -- De máquinas o aparatos para la
 avicultura.
@@ -37058,7 +36404,6 @@ elaboración de cacao o la fabricación de
 chocolate.
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8438.30 - Máquinas y aparatos para la industria
 azucarera.
 8438.30.01
@@ -37115,7 +36460,6 @@ Kg Ex. Ex.
 8439.99 -- Las demás.
 8439.99.99 Las demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 84.40
 Máquinas y aparatos para
 encuadernación, incluidas las
@@ -37172,7 +36516,6 @@ material. Kg Ex. Ex.
 8442.50 - Clisés, planchas, cilindros y demás
 elementos impresores; piedras
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 litográficas, planchas, placas y cilindros,
 preparados para la impresión (por
 ejemplo: aplanados, graneados, pulidos).
@@ -37235,7 +36578,6 @@ aparatos flexográficos.
 8443.15.02 Máquinas y aparatos para imprimir,
 tipográficos, distintos de los alimentados Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 con bobinas, excepto las máquinas y
 aparatos flexográficos.
 8443.16 -- Máquinas y aparatos para imprimir,
@@ -37300,7 +36642,6 @@ Kg Ex. Ex.
 8443.99 -- Los demás.
 8443.99.05 Reconocibles como diseñadas Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 exclusivamente para aparatos de
 fotocopia por sistema óptico y lo
 comprendido en la fracción arancelaria
@@ -37355,7 +36696,6 @@ canilleras) o devanar materia textil.
 canilleras) o devanar materia textil. Pza Ex. Ex.
 8445.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8445.90.99 Los demás. Pza Ex. Ex.
 84.46 Telares.
 8446.10 - Para tejidos de anchura inferior o igual a
@@ -37407,7 +36747,6 @@ partidas 84.44, 84.45, 84.46 u 84.47 (por
 ejemplo: husos, aletas, guarniciones
 de cardas, peines, barretas, hileras,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 lanzaderas, lizos y cuadros de lizos,
 agujas, platinas, ganchos).
 -
@@ -37472,7 +36811,6 @@ participen en la formación de mallas. Kg Ex. Ex.
 8448.59 -- Los demás.
 8448.59.99 Los demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 84.49
 Máquinas y aparatos para la
 fabricación o acabado del fieltro o tela
@@ -37530,7 +36868,6 @@ prensar (incluidas las prensas para
 fijar), blanquear, teñir, aprestar,
 acabar, recubrir o impregnar hilados,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 telas o manufacturas textiles y
 máquinas para el revestimiento de
 telas u otros soportes utilizados en la
@@ -37584,7 +36921,6 @@ máquinas de coser.
 8452.30.01 Agujas para máquinas de coser. Kg Ex. Ex.
 8452.90 - Muebles, basamentos y tapas o cubiertas
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 para máquinas de coser, y sus partes; las
 demás partes para máquinas de coser.
 8452.90.01
@@ -37638,7 +36974,6 @@ para laminar en caliente y en frío.
 para laminar en caliente y en frío. Pza Ex. Ex.
 8455.22 -- Para laminar en frío.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8455.22.03 Para laminar en frío. Pza Ex. Ex.
 8455.30 - Cilindros de laminadores.
 8455.30.03 Cilindros de laminadores. Pza Ex. Ex.
@@ -37695,7 +37030,6 @@ simultánea, dos o más operaciones, de
 peso unitario inferior o igual a 10,000 kg.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8457.30.03
 Con mesa de transferencia lineal o
 rotativa (máquinas “transfer”) de peso
@@ -37753,7 +37087,6 @@ torneado) de la partida 84.58.
 8459.41.01 Máquinas para la reconstrucción de
 culatas de motor de explosión o de Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 combustión interna, de un husillo, con
 cabezal flotante o de mesa neumática y
 portapiezas basculante en dos ejes.
@@ -37811,7 +37144,6 @@ numérico.
 Pza Ex. Ex.
 8460.24 -- Las demás, de control numérico.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8460.24.91 Las demás, de control numérico. Pza Ex. Ex.
 8460.29 -- Las demás.
 8460.29.99 Las demás. Pza Ex. Ex.
@@ -37866,7 +37198,6 @@ punzonar, entallar o mordiscar, metal
 (excepto los bancos de estirar);
 prensas para trabajar metal o carburos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 metálicos, no expresadas
 anteriormente.
 -
@@ -37926,7 +37257,6 @@ Pza 15 Ex.
 8462.29.05 Dobladoras (plegadoras) de
 accionamiento mecánico, con motor, Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 excepto de control numérico.
 8462.29.06
 Dobladoras de tubos accionadas con
@@ -37986,7 +37316,6 @@ Pza 15 Ex.
 8462.59 -- Las demás.
 8462.59.01 Dobladoras (plegadoras) de Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 accionamiento mecánico, con motor.
 8462.59.02
 Dobladoras de tubos accionadas con
@@ -38042,7 +37371,6 @@ frío.
 8464.90 - Las demás.
 8464.90.99 Las demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 84.65
 Máquinas herramienta (incluidas las de
 clavar, grapar, encolar o ensamblar de
@@ -38099,7 +37427,6 @@ tipo.
 apertura automática.
 8466.10.03 Portatroqueles. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8466.10.99 Los demás. Kg Ex. Ex.
 8466.20 - Portapiezas.
 8466.20.02 Portapiezas. Kg Ex. Ex.
@@ -38160,7 +37487,6 @@ Perforadoras por percusión y rotación
 igual a ½ CP.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8467.21.99 Los demás. Pza 5 Ex.
 8467.22 -- Sierras, incluidas las tronzadoras.
 8467.22.02 Sierras de disco con potencia del motor
@@ -38214,7 +37540,6 @@ Máquinas de calcular y máquinas de
 bolsillo registradoras, reproductoras y
 visualizadoras de datos, con función
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de cálculo; máquinas de contabilidad,
 de franquear, expedir boletos (tiques)
 y máquinas similares, con dispositivo
@@ -38273,7 +37598,6 @@ constituidas, al menos, por una unidad
 central de proceso, un teclado y un
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 visualizador.
 - Las demás máquinas automáticas para
 tratamiento o procesamiento de datos:
@@ -38338,7 +37662,6 @@ automáticos de billetes de banco,
 máquinas de clasificar, contar o
 encartuchar monedas, sacapuntas,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 perforadoras, grapadoras).
 8472.10 - Copiadoras, incluidos los mimeógrafos.
 8472.10.01 Mimeógrafos. Pza Ex. Ex.
@@ -38399,7 +37722,6 @@ partida 84.71.
 partida 84.71. Kg Ex. Ex.
 8473.40 - Partes y accesorios de máquinas de la
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 partida 84.72.
 8473.40.04 Partes y accesorios de máquinas de la
 partida 84.72. Kg Ex. Ex.
@@ -38455,7 +37777,6 @@ asfalto. Pza Ex. Ex.
 8474.80.04 Para la obtención de elementos
 prefabricados para construcción, de Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cemento o concreto.
 8474.80.99 Los demás. Pza Ex. Ex.
 8474.90 - Partes.
@@ -38513,7 +37834,6 @@ refrigeración, incorporado.
 8476.81.01 Con dispositivo de calentamiento o
 refrigeración, incorporado. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8476.89 -- Las demás.
 8476.89.99 Las demás. Pza 15 Ex.
 8476.90 - Partes.
@@ -38573,7 +37893,6 @@ Capítulo.
 8478.10 - Máquinas y aparatos.
 8478.10.01 Para colocar filtros o boquillas a los Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cigarrillos.
 8478.10.02
 Automáticas para elaborar cigarrillos,
@@ -38640,7 +37959,6 @@ aglomeradas.
 Pza 15 Ex.
 8479.30.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8479.40 - Máquinas de cordelería o cablería.
 8479.40.02 Máquinas de cordelería o cablería. Pza Ex. Ex.
 8479.50 - Robots industriales, no expresados ni
@@ -38706,7 +38024,6 @@ Pza 15 Ex.
 8479.82.04 Agitador-mezclador de hélice, excepto lo
 comprendido en la fracción arancelaria Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8479.82.05.
 8479.82.05
 Agitadores, reconocibles como diseñados
@@ -38773,7 +38090,6 @@ Pza 5 Ex.
 84.80 Cajas de fundición; placas de fondo
 para moldes; modelos para moldes;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 moldes para metal (excepto las
 lingoteras), carburos metálicos, vidrio,
 materia mineral, caucho o plástico.
@@ -38830,7 +38146,6 @@ Kg 5 Ex.
 8481.20.10 Tipo globo o tipo ángulo, de bronce o
 latón con diámetro de conexión hasta Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 76.2 mm para gases halogenados,
 reconocibles como diseñadas
 exclusivamente para servicios de
@@ -38899,7 +38214,6 @@ volumétricos automáticos para medir
 cerveza.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8481.80.09 Reconocibles para naves aéreas. Kg Ex. Ex.
 8481.80.10
 De asiento, de tres o más vías, cuya
@@ -38975,7 +38289,6 @@ Kg 5 Ex.
 8481.80.22 Válvulas de funcionamiento automático
 por medio de actuador, excepto lo Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comprendido en las fracciones
 arancelarias 8481.80.06, 8481.80.15 y
 8481.80.24.
@@ -39037,7 +38350,6 @@ ensambles y rodamientos equivalentes a
 los comprendidos en esta fracción
 Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 arancelaria, según las Normas
 Internacionales ANSI-ABMA Standard
 19.1, ANSI-ABMA Standard 19.2 o ISO
@@ -39099,7 +38411,6 @@ combinados. Kg Ex. Ex.
 8482.99.01 Pistas o tazas con números de serie:
 15245, L68110, L68111, L45410, Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 M12610, LM11710, LM11910, LM12710,
 LM12711, LM29710, LM48510, LM67010
 o LM501314, incluyendo aquellas que
@@ -39156,7 +38467,6 @@ Kg Ex. Ex.
 8483.60 - Embragues y órganos de acoplamiento,
 incluidas las juntas de articulación.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8483.60.01 Embragues. Kg Ex. Ex.
 8483.60.02
 Acoplamientos elásticos, acoplamientos
@@ -39213,7 +38523,6 @@ partes y accesorios.
 8486.10 - Máquinas y aparatos para la fabricación
 de semiconductores en forma de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 monocristales periformes u obleas
 ("wafers").
 8486.10.01
@@ -39275,8 +38584,6 @@ Kg Ex. Ex.
 8487.90.99 Las demás. Kg 5 Ex.
 _______________
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
-
 **Artículo 1o - Capítulo 85**
 Máquinas, aparatos y material eléctrico, y sus partes; aparatos de grabación o
 reproducción de sonido, aparatos de grabación o reproducción de imagen y sonido en
@@ -39316,7 +38623,6 @@ aspirantes para extracción o reciclado, con ventilador incorporado, incluso con
 equipados con un sistema operativo diseñado para realizar las funciones de una máquina
 automática para tratamiento o procesamiento de datos, tales como la descarga y el
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 funcionamiento simultáneo de varias aplicaciones, incluidas las aplicaciones de terceros, e
 incluso dotados de otras funciones tales como una cámara digital o un sistema de navegación.
 6. En la partida 85.23:
@@ -39361,7 +38667,6 @@ mismo proceso tecnológico, se clasifican en la partida 85.42.
 9. En la partida 85.36, se entiende por conectores de fibras ópticas, de haces o cables de fibras
 ópticas, los conectores que solo sirven para alinear mecánicamente las fibras ópticas extremo
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 con extremo en un sistema de cable digital. No realizan ninguna otra función, tal como la
 amplificación, regeneración o modificación de la señal.
 10. La partida 85.37 no comprende los mandos a distancia inalámbricos con dispositivo infrarrojo de
@@ -39404,7 +38709,6 @@ semiconductor desempeña un papel crítico e insustituible sobre la función y e
 rendimiento del transductor, y cuyo funcionamiento está basado en las propiedades
 semiconductoras físicas, eléctricas, químicas y ópticas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 2) Los fenómenos físicos o químicos se refieren a fenómenos, tales como la presión, las
 ondas sonoras, la aceleración, la vibración, el movimiento, la orientación, la tensión, la
 intensidad de campo magnético, la intensidad de campo eléctrico, la luz, la
@@ -39450,7 +38754,6 @@ componentes discretos;
 3°) los circuitos integrados multichip, formados por dos o más circuitos integrados
 monolíticos, interconectados de modo prácticamente inseparable, dispuestos o no
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 sobre uno o más sustratos aislantes, con o sin bastidor de conexión, pero sin ningún
 otro elemento activo o pasivo, de circuito.
 4°) los circuitos integrados de componentes múltiples (MCO), que son combinaciones de
@@ -39496,7 +38799,6 @@ Para los artículos definidos en esta Nota, las partidas 85.41 y 85.42 tienen pr
 cualquier otra de la Nomenclatura que pudiera comprenderlos, especialmente en razón de su
 función, excepto en el caso de la partida 85.23.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Notas de subpartida.
 1. La subpartida 8525.81 comprende únicamente las cámaras de televisión, cámaras digitales y
 videocámaras, ultrarrápidas, que tienen una o más de las siguientes características:
@@ -39544,7 +38846,6 @@ fotovoltaicos:
 8501.31.03 Motores con potencia inferior o igual a
 264 W y voltaje de 12 V, de uso Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 automotriz, para limpiaparabrisas,
 elevadores de cristales, radiadores y
 calefacción.
@@ -39603,7 +38904,6 @@ asíncronos monofásicos, según
 normas NMX-J-75 o NMX-J-226, o sus
 Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 equivalentes, excepto los motores
 para ascensores o elevadores; para
 máquinas de afeitar o cortar el pelo,
@@ -39664,7 +38964,6 @@ Pza 15 Ex.
 8501.64.03 De potencia superior a 750 kVA, pero
 inferior o igual a 6,000 kVA, para Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 producir electricidad a partir de fuentes
 de energía renovable.
 8501.64.99 Los demás. Pza Ex. Ex.
@@ -39720,7 +39019,6 @@ Pza 5 Ex.
 8502.39 -- Los demás.
 8502.39.01 Turbogeneradores (turbodinamos o Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 turboalternadores), excepto lo
 comprendido en la fracción arancelaria
 8502.39.03.
@@ -39787,7 +39085,6 @@ excepto lo comprendido en la fracción
 arancelaria 8504.21.02.
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8504.21.99 Los demás. Pza 5 Ex.
 8504.22 -- De potencia superior a 650 kVA pero
 inferior o igual a 10,000 kVA.
@@ -39850,7 +39147,6 @@ e inferior o igual a 500 W de potencia
 con instrumentos indicadores de
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 tensión y corriente con protección
 automática contra sobrecarga.
 8504.40.13 Controladores de velocidad para
@@ -39915,7 +39211,6 @@ Pza Ex. Ex.
 8504.90.99 Las demás. Kg Ex. Ex.
 85.05 Electroimanes; imanes
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 permanentes y artículos destinados
 a ser imantados permanentemente;
 platos, mandriles y dispositivos
@@ -39971,7 +39266,6 @@ arranque de motores de émbolo
 8507.10.99 Los demás. Pza 15 Ex.
 8507.20 - Los demás acumuladores de plomo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8507.20.01 Reconocibles para naves aéreas. Pza Ex. Ex.
 8507.20.02
 Recargables, de plomo-ácido, para
@@ -40032,7 +39326,6 @@ frutos u hortalizas.
 8509.40.02 Exprimidoras de frutas. Pza Ex. Ex.
 8509.40.03 Batidoras. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8509.40.99 Las demás. Pza 15 Ex.
 8509.80 - Los demás aparatos.
 8509.80.03 Cuchillos. Pza Ex. Ex.
@@ -40089,7 +39382,6 @@ motores.
 8511.10 - Bujías de encendido.
 8511.10.03 Cuyo electrodo central sea de níquel, Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 tungsteno; platino, iridio o de
 aleaciones de oro; o que contengan
 dos o más electrodos a tierra; excepto
@@ -40148,7 +39440,6 @@ motocicletas.
 Kg Ex. Ex.
 8512.20.02 Luces direccionales y/o calaveras Kg 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 traseras, excepto lo comprendido en la
 fracción arancelaria 8512.20.01.
 8512.20.99 Los demás. Kg 5 Ex.
@@ -40202,7 +39493,6 @@ Pza 15 Ex.
 desperdicios. Pza 5 Ex.
 8514.19.99 Los demás. Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8514.20 - Hornos que funcionen por inducción o
 pérdidas dieléctricas.
 8514.20.01 De inducción de baja frecuencia, para
@@ -40262,7 +39552,6 @@ eléctricos para proyectar en
 caliente metal o cermet.
 - Máquinas y aparatos para soldadura
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fuerte o para soldadura blanda:
 8515.11 -- Soldadores y pistolas para soldar.
 8515.11.01 Para soldar o cortar, portátiles
@@ -40329,7 +39618,6 @@ eléctricos para calefacción de
 espacios o suelos; aparatos
 electrotérmicos para el cuidado del
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 cabello (por ejemplo: secadores,
 rizadores, calientatenacillas) o para
 secar las manos; planchas
@@ -40385,7 +39673,6 @@ té.
 té. Pza Ex. Ex.
 8516.72 -- Tostadoras de pan.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8516.72.01 Tostadoras de pan. Pza Ex. Ex.
 8516.79 -- Los demás.
 8516.79.01 Para calefacción de automóviles.
@@ -40445,7 +39732,6 @@ Pza Ex. Ex.
 8517.18.91 Los demás teléfonos para servicio
 público. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8517.18.99 Los demás. Pza 15 Ex.
 -
 Los demás aparatos de emisión,
@@ -40515,7 +39801,6 @@ Pza 15 Ex.
 8517.69.92 Los demás videófonos. Pza 15 Ex.
 8517.69.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Partes:
 8517.71 --
 Antenas y reflectores de antena de
@@ -40575,7 +39860,6 @@ montados en una misma caja. Pza 15 Ex.
 8518.29.99 Los demás. Pza Ex. Ex.
 8518.30 - Auriculares, incluidos los de casco,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 estén o no combinados con micrófono,
 y juegos o conjuntos constituidos por
 un micrófono y uno o varios altavoces
@@ -40637,7 +39921,6 @@ Pza 15 Ex.
 8519.81.03 Reproductores de casetes
 (tocacasetes) con potencia superior o Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 igual a 60 W, excepto lo comprendido
 en la fracción arancelaria 8519.81.12.
 8519.81.04
@@ -40708,7 +39991,6 @@ como diseñadas exclusivamente para
 el uso de radiodifusoras y estudios
 Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 profesionales de grabación.
 8519.89.99 Los demás. Pza Ex. Ex.
 85.21
@@ -40771,7 +40053,6 @@ las partidas 85.19 u 85.21.
 8522.10 - Cápsulas fonocaptoras.
 8522.10.01 Cápsulas fonocaptoras. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8522.90 - Los demás.
 8522.90.07
 Circuitos modulares reconocibles
@@ -40834,7 +40115,6 @@ Pza 10 Ex.
 - Soportes semiconductores:
 8523.51 -- Dispositivos de almacenamiento
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 permanente de datos a base de
 semiconductores.
 8523.51.01
@@ -40889,7 +40169,6 @@ reproducción de sonido
 incorporado; cámaras de televisión,
 cámaras digitales y videocámaras.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8525.50 - Aparatos emisores.
 8525.50.05 Aparatos emisores. Pza Ex. Ex.
 8525.60 - Aparatos emisores con aparato
@@ -40950,7 +40229,6 @@ Pza Ex. Ex.
 85.27 Aparatos receptores de
 radiodifusión, incluso combinados
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 en la misma envoltura con grabador
 o reproductor de sonido o con reloj.
 -
@@ -41011,7 +40289,6 @@ Monitores y proyectores, que no
 incorporen aparato receptor de
 televisión; aparatos receptores de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 televisión, incluso con aparato
 receptor de radiodifusión o
 grabación o reproducción de sonido
@@ -41079,7 +40356,6 @@ pulgadas), excepto los de alta
 definición.
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8528.59.03 De alta definición. Pza 15 Ex.
 8528.59.04
 Incompletos o sin terminar (incluso los
@@ -41148,7 +40424,6 @@ convertidor de bajada cuya frecuencia
 de operación sea de 11.7 a 14.5 GHz,
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 y un receptor cuya frecuencia de
 operación sea de hasta 4.2 GHz.
 8528.71.99 Los demás. Pza 10 Ex.
@@ -41216,7 +40491,6 @@ especificadas en la Nota Nacional 13
 del Capítulo 85, excepto las
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comprendidas en la fracción
 arancelaria 8529.90.19.
 8529.90.13 Amplificadores para transmisores de
@@ -41281,7 +40555,6 @@ acústica o visual (por ejemplo:
 timbres, sirenas, tableros
 indicadores, avisadores de
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 protección contra robo o incendio),
 excepto los de las partidas 85.12 u
 85.30.
@@ -41346,7 +40619,6 @@ peso unitario superior a 1 kg. Pza 5 Ex.
 8532.22 -- Electrolíticos de aluminio.
 8532.22.04 Electrolíticos de aluminio. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8532.23 -- Con dieléctrico de cerámica de una
 sola capa.
 8532.23.06 Con dieléctrico de cerámica de una
@@ -41398,7 +40670,6 @@ aglomeradas o de capa. Kg Ex. Ex.
 8534.00 Circuitos impresos.
 8534.00.04 Circuitos impresos. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 85.35
 Aparatos para corte,
 seccionamiento, protección,
@@ -41458,7 +40729,6 @@ portalámparas y demás conectores,
 cajas de empalme), para una
 tensión inferior o igual a 1,000
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 voltios; conectores de fibras
 ópticas, haces o cables de fibras
 ópticas.
@@ -41517,7 +40787,6 @@ cables de fibras ópticas. Kg Ex. Ex.
 8536.90 - Los demás aparatos.
 8536.90.28 Cajas de conexión, de derivación, de Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 corte, extremidad u otras cajas
 análogas.
 8536.90.99 Los demás. Kg Ex. Ex.
@@ -41578,7 +40847,6 @@ Kg Ex. Ex.
 8538.90.05 Circuitos modulares. Pza Ex. Ex.
 8538.90.99 Las demás. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 85.39
 Lámparas y tubos eléctricos de
 incandescencia o de descarga,
@@ -41647,7 +40915,6 @@ sodio; lámparas de halogenuro
 metálico.
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8539.39 -- Los demás.
 8539.39.01 Para luz relámpago. Pza 5 Ex.
 8539.39.02 Reconocibles para naves aéreas. Pza Ex. Ex.
@@ -41706,7 +40973,6 @@ aparatos receptores de televisión,
 incluso para videomonitores:
 8540.11 -- En colores.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8540.11.06 En colores. Pza Ex. Ex.
 8540.12 -- Monocromos.
 8540.12.02 Monocromos. Pza Ex. Ex.
@@ -41766,7 +41032,6 @@ incluidas las células fotovoltaicas,
 aunque estén ensambladas en
 módulos o paneles; diodos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 emisores de luz (LED), incluso
 ensamblados con otros diodos
 emisores de luz (LED); cristales
@@ -41819,7 +41084,6 @@ semiconductores. Kg Ex. Ex.
 8541.90.02 Partes. Kg Ex. Ex.
 85.42 Circuitos electrónicos integrados.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Circuitos electrónicos integrados:
 8542.31 --
 Procesadores y controladores, incluso
@@ -41881,7 +41145,6 @@ Prohibida Prohibida Prohibida
 8543.70.08 Para electrocutar insectos voladores,
 mediante un sistema de rejillas Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 electrizadas con voltaje elevado y que
 proyecte luz negra.
 8543.70.17 Ecualizadores. Pza 15 Ex.
@@ -41941,7 +41204,6 @@ encendido y demás juegos de cables
 de los tipos utilizados en los medios
 de transporte.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8544.30.01 Reconocibles para naves aéreas. Kg Ex. Ex.
 8544.30.99 Los demás.
 -
@@ -41998,7 +41260,6 @@ la fracción arancelaria 8546.20.05. Kg Ex. Ex.
 8546.20.03 De porcelana o de esteatita para radio
 y televisión. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8546.20.04 Reconocibles para naves aéreas. Kg Ex. Ex.
 8546.20.05
 Tubo cilíndrico exterior, de porcelana,
@@ -42056,7 +41317,6 @@ baterías de pilas o acumuladores
 eléctricos; pilas, baterías de pilas y
 acumuladores eléctricos, inservibles:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8549.11 --
 Desperdicios y desechos de
 acumuladores de plomo y ácido;
@@ -42122,7 +41382,6 @@ pilas, acumuladores eléctricos,
 interruptores de mercurio, vidrio de
 tubos de rayos catódicos u otros
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 vidrios activados, o componentes
 eléctricos o electrónicos que
 contengan cadmio, mercurio, plomo o
@@ -42173,7 +41432,6 @@ a) las juntas o empaquetaduras, arandelas y similares, de cualquier materia (ré
 materia constitutiva o partida 84.84), así como los demás artículos de caucho vulcanizado
 sin endurecer (partida 40.16);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) las partes y accesorios de uso general, tal como se definen en la Nota 2 de la Sección XV,
 de metal común (Sección XV), ni los artículos similares de plástico (Capítulo 39);
 c) los artículos del Capítulo 82 (herramientas);
@@ -42209,7 +41467,6 @@ Las partes y accesorios de vehículos de cojín (colchón) de aire se clasifican
 accesorios de los vehículos de la partida en que éstos se hubieran clasificado por aplicación de
 las disposiciones anteriores.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 El material fijo para vías de aerotrenes se considera material fijo de vías férreas, y los aparatos
 de señalización, seguridad, control o mando para vías de aerotrenes como aparatos de
 señalización, seguridad, control o mando para vías férreas.
@@ -42250,7 +41507,6 @@ fuente externa de electricidad o
 acumuladores eléctricos.
 8601.10 - De fuente externa de electricidad.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8601.10.01 De fuente externa de electricidad. Pza Ex. Ex.
 8601.20 - De acumuladores eléctricos.
 8601.20.01 De acumuladores eléctricos. Pza Ex. Ex.
@@ -42306,7 +41562,6 @@ especiales, para vías férreas o similares
 (excepto los coches de la partida 86.04).
 8605.00.01 Coches de viajeros. Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8605.00.99 Los demás. Pza 5 Ex.
 86.06 Vagones para transporte de
 mercancías sobre carriles (rieles).
@@ -42356,7 +41611,6 @@ Material fijo de vías férreas o similares;
 aparatos mecánicos (incluso
 electromecánicos) de señalización,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 seguridad, control o mando para vías
 férreas o similares, carreteras o vías
 fluviales, áreas o parques de
@@ -42411,7 +41665,6 @@ para tirar o empujar otros aparatos, vehículos o cargas, incluso si tienen cier
 acondicionamientos accesorios en relación con su utilización principal, que permitan el transporte
 de herramientas, semillas, abonos, etc.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Las máquinas e instrumentos de trabajo diseñados para equipar los tractores de la partida 87.01
 como material intercambiable siguen su propio régimen, aunque se presenten con el tractor,
 incluso si están montados sobre éste.
@@ -42463,7 +41716,6 @@ eléctrico.
 8701.24.99 Los demás. Pza 20 Ex.
 8701.29 -- Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8701.29.01 Usados. Pza 50 Ex.
 8701.29.99 Los demás. Pza 20 Ex.
 8701.30 - Tractores de orugas.
@@ -42529,7 +41781,6 @@ por 12 e inversor de marcha, que no
 incorpore al menos nueve de los
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 siguientes elementos: el conjunto de
 rines, toldo, brazos de levante,
 contrapesos, tubo de escape, eje
@@ -42593,7 +41844,6 @@ transmisión manual y tablero de
 instrumentos analógico, excepto lo
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comprendido en la fracción arancelaria
 8701.94.02.
 8701.94.04
@@ -42654,7 +41904,6 @@ sea al menos 2 años anterior al vigente.
 Pza Ex. Ex.
 8701.95.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 87.02
 Vehículos automóviles para transporte
 de diez o más personas, incluido el
@@ -42719,7 +41968,6 @@ especiales para transporte de personas
 en campos de golf y vehículos similares.
 Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Los demás vehículos, únicamente con
 motor de émbolo (pistón), de encendido
@@ -42773,7 +42021,6 @@ fracción arancelaria 8703.40.03. Pza 50 Ex.
 8703.40.03 Motociclos de tres ruedas (trimotos), de
 cilindrada inferior o igual a 1,000 cm³, que Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 presenten una dirección tipo automóvil o,
 al mismo tiempo, diferencial y reversa;
 motociclos de cuatro ruedas
@@ -42831,7 +42078,6 @@ Pza 50 Ex.
 8703.90.99 Los demás. Pza 20 Ex.
 87.04 Vehículos automóviles para transporte
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 de mercancías.
 8704.10 - Volquetes automotores diseñados para
 utilizarlos fuera de la red de carreteras.
@@ -42888,7 +42134,6 @@ recolección de basura doméstica. Pza 5 Ex.
 8704.32.07 Usados, excepto lo comprendido en la
 fracción arancelaria 8704.32.01. Pza 50 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8704.32.99 Los demás. Pza 20 Ex.
 -
 Los demás, equipados para la propulsión
@@ -42946,7 +42191,6 @@ recolección de basura doméstica. Pza 5 Ex.
 fracción arancelaria 8704.52.01. Pza 50 Ex.
 8704.52.99 Los demás. Pza 20 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8704.60 - Los demás, únicamente propulsados con
 motor eléctrico.
 8704.60.01 Usados. Pza 15 Ex.
@@ -43008,7 +42252,6 @@ con potencia inferior a 20 CP (15 kW).
 Pza Ex. Ex.
 8706.00.99 Los demás. Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 22-04-2024
 (antes Imp. 20)
 Arancel modificado DOF 23-04-2026 (mantiene Imp. 25)
@@ -43073,7 +42316,6 @@ Pza 10 Ex.
 8708.29.01 Guardafangos. Pza Ex. Ex.
 8708.29.02 Capots (cofres). Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8708.29.03 Estribos. Pza Ex. Ex.
 8708.29.04
 Viseras, forros de tablero, paneles de
@@ -43138,7 +42380,6 @@ Pza 35 Ex.
 8708.30.02 Reconocibles como diseñadas
 exclusivamente para tractores de ruedas. Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8708.30.04
 Guarniciones de frenos montadas,
 excepto lo comprendido en las fracciones
@@ -43203,7 +42444,6 @@ portadores; sus partes.
 8708.50.01 Para trolebuses.
 8708.50.02 Reconocibles como diseñadas Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 exclusivamente para lo comprendido en
 las fracciones arancelarias 8701.91.01,
 8701.92.01, 8701.93.01, 8701.94.01,
@@ -43278,7 +42518,6 @@ lo comprendido en las fracciones
 arancelarias 8708.50.22 y 8708.50.23.
 Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8708.50.22 Ensamble de toma de fuerza para control
 de tracción delantera-trasera (PTU).
 Pza 25 Ex.
@@ -43345,7 +42584,6 @@ exclusivamente para lo comprendido en
 la partida 87.03, excepto los
 Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 comprendidos en las fracciones
 arancelarias 8708.50.04 y 8708.50.05.
 8708.50.92
@@ -43407,7 +42645,6 @@ las fracciones arancelarias 8701.91.01,
 8701.92.01, 8701.93.01, 8701.94.01,
 Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8701.94.05 y 8701.95.01.
 8708.91.02 Aspas para radiadores.
 8708.91.03
@@ -43467,7 +42704,6 @@ aeropuertos, para transporte de
 mercancías a corta distancia;
 carretillas tractor de los tipos
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 utilizados en estaciones ferroviarias;
 sus partes.
 - Carretillas:
@@ -43530,7 +42766,6 @@ Pza 25 Ex.
 8711.40.02 Esbozo de motocicleta conteniendo
 conjunto formado con bastidor (cuadro) y Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 motor de émbolo (pistón) de cilindrada
 superior a 500 cm³ pero inferior o igual a
 550 cm³, ensamblado o sin ensamblar.
@@ -43588,7 +42823,6 @@ Pza Ex. Ex.
 8714.10.03 Bastidor (cuadro, armazón, chasis),
 excepto los comprendidos en la fracción Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 arancelaria 8714.10.02.
 8714.10.99 Los demás. Pza Ex. Ex.
 8714.20 - De sillones de ruedas y demás vehículos
@@ -43646,7 +42880,6 @@ autocargadores o autodescargadores,
 para uso agrícola.
 8716.20.04 Remolques y semirremolques, Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 autocargadores o autodescargadores,
 para uso agrícola.
 - Los demás remolques y semirremolques
@@ -43713,7 +42946,6 @@ _______________
 **Artículo 1o - Capítulo 88**
 Aeronaves, vehículos espaciales, y sus partes
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Nota.
 1. En este Capítulo, se entiende por aeronave no tripulada cualquier aeronave, distinta de las de la
 partida 88.01, diseñada para vuelos sin piloto a bordo. Pueden estar diseñadas para transportar
@@ -43768,7 +43000,6 @@ plazas. Pza 5 Ex.
 vacío inferior o igual a 2,000 kg.
 8802.20.01 Aviones monomotores, de una plaza, Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 reconocibles como diseñados
 exclusivamente para fumigar, rociar o
 esparcir líquidos o sólidos, con tolva de
@@ -43833,7 +43064,6 @@ dispositivos para aterrizaje en
 portaaviones y aparatos y dispositivos
 similares, y sus partes.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8805.10.01
 Aparatos y dispositivos para lanzamiento
 de aeronaves y sus partes; aparatos y
@@ -43898,7 +43128,6 @@ Pza Ex. Ex.
 8806.24.99 Las demás. Pza 15 Ex.
 8806.29 -- Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8806.29.01
 Drones con videocámara incluida y cuyo
 objetivo principal sea grabar, capturar o
@@ -43965,7 +43194,6 @@ vacío superior a 15,000 kg. Pza Ex. Ex.
 o aeronaves no tripuladas.
 8807.30.91 Las demás partes de aviones, helicópteros Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o aeronaves no tripuladas.
 8807.90 - Las demás.
 8807.90.99 Las demás. Pza 5 Ex.
@@ -44022,7 +43250,6 @@ de refrigeración ni bodegas de carga.
 Pza 10 Ex.
 8901.90.99 Los demás. Pza 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 89.02
 Barcos de pesca; barcos factoría y
 demás barcos para la preparación o la
@@ -44085,7 +43312,6 @@ fueraborda:
 o igual a 24 m.
 8903.32.01 De longitud superior a 7.5 m pero inferior Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 o igual a 24 m.
 8903.33 -- De longitud superior a 24 m.
 8903.33.01 De longitud superior a 24 m. Pza 15 Ex.
@@ -44137,7 +43363,6 @@ incluso de amarre, boyas y balizas).
 89.08 Barcos y demás artefactos flotantes
 para desguace.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 8908.00 Barcos y demás artefactos flotantes para
 desguace.
 8908.00.01 Barcos y demás artefactos flotantes para
@@ -44179,7 +43404,6 @@ por chorro de agua, incluso provistos de dispositivos ópticos de lectura (por e
 divisores ópticos), de la partida 84.66 (excepto los dispositivos puramente ópticos, por
 ejemplo: anteojos de centrado, de alineación); las máquinas de calcular (partida 84.70); las
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 válvulas, incluidas las reductoras de presión, y demás artículos de grifería (partida 84.81);
 las máquinas y aparatos de la partida 84.86, incluidos los aparatos para la proyección o el
 trazado de circuitos sobre superficies sensibilizadas de material semiconductor;
@@ -44219,7 +43443,6 @@ tanto en la partida 90.13 como en la partida 90.31, se clasifican en esta últim
 6. En la partida 90.21, se entiende por artículos y aparatos de ortopedia los que se utilizan para:
 - prevenir o corregir ciertas deformidades corporales;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - sostener o mantener partes del cuerpo después de una enfermedad, operación o lesión.
 Los artículos y aparatos de ortopedia comprenden los zapatos ortopédicos y las plantillas
 interiores especiales diseñados para corregir las deformidades del pie, siempre que sean hechos
@@ -44273,7 +43496,6 @@ Pza Ex. Ex.
 9001.50 - Lentes de otras materias para gafas
 (anteojos).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9001.50.02 Lentes de otras materias para gafas
 (anteojos). Pza Ex. Ex.
 9001.90 - Los demás.
@@ -44329,7 +43551,6 @@ armazones, excepto los aparatos de
 radioastronomía.
 9005.10 - Binoculares (incluidos los prismáticos).
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9005.10.01 Binoculares (incluidos los prismáticos). Pza 10 Ex.
 9005.80 - Los demás instrumentos.
 9005.80.91 Los demás instrumentos. Pza 10 Ex.
@@ -44395,7 +43616,6 @@ anchura inferior o igual a 35 mm.
 Pza 10 Ex.
 9006.59.99 Las demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 -
 Aparatos y dispositivos, incluidos
 lámparas y tubos, para producir
@@ -44452,7 +43672,6 @@ automático de película fotográfica,
 película cinematográfica (filme) o papel
 fotográfico en rollo o para impresión
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 automática de películas reveladas en
 rollos de papel fotográfico.
 9010.10.01
@@ -44512,7 +43731,6 @@ comprendidos en otra parte de este
 Capítulo.
 9013.10 - Miras telescópicas para armas;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 periscopios; visores para máquinas,
 aparatos o instrumentos de este
 Capítulo o de la Sección XVI.
@@ -44571,7 +43789,6 @@ brújulas; telémetros.
 9015.20.01 Teodolitos. Pza 15 Ex.
 9015.20.99 Los demás. Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9015.30 - Niveles.
 9015.30.01 Niveles. Pza Ex. Ex.
 9015.40 - Instrumentos y aparatos de
@@ -44625,7 +43842,6 @@ galgas. Pza Ex. Ex.
 9017.80 - Los demás instrumentos.
 9017.80.03 Comprobadores de cuadrante. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9017.80.04 Metros de madera plegable. Pza Ex. Ex.
 9017.80.99 Los demás. Pza 15 Ex.
 9017.90 - Partes y accesorios.
@@ -44681,7 +43897,6 @@ Kg Ex. Ex.
 9018.32.03 Desechables, sin esterilizar, empacar o
 envasar ni acondicionar para su venta al Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 por menor, reconocibles como
 diseñadas exclusivamente para jeringas
 hipodérmicas desechables.
@@ -44741,7 +43956,6 @@ reservorio para líquido cefalorraquídeo. Kg 10 Ex.
 9018.90.06 Estuches de cirugía o disección. Kg 10 Ex.
 9018.90.07 Bisturís. Kg 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9018.90.08 Valvas, portaagujas y escoplos para
 cirugía. Kg 5 Ex.
 9018.90.09 Separadores para cirugía. Kg 10 Ex.
@@ -44801,7 +44015,6 @@ máscaras antigás, excepto las
 máscaras de protección sin
 mecanismo ni elemento filtrante
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 amovible.
 9020.00
 Los demás aparatos respiratorios y
@@ -44855,7 +44068,6 @@ utilicen radiaciones alfa, beta,
 gamma o demás radiaciones
 ionizantes, incluso para uso médico,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 quirúrgico, odontológico o
 veterinario, incluidos los aparatos de
 radiografía o radioterapia, tubos de
@@ -44913,7 +44125,6 @@ ejemplo: en la enseñanza o
 exposiciones), no susceptibles de
 otros usos.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9023.00
 Instrumentos, aparatos y modelos
 diseñados para demostraciones (por
@@ -44973,7 +44184,6 @@ Pza Ex. Ex.
 9025.80.01 Aerómetros y densímetros. Pza 15 Ex.
 9025.80.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9025.90 - Partes y accesorios.
 9025.90.01 Partes y accesorios. Kg Ex. Ex.
 90.26
@@ -45029,7 +44239,6 @@ espectrógrafos que utilicen radiaciones
 9027.30.01 Espectrómetros, espectrofotómetros y
 espectrógrafos que utilicen radiaciones Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ópticas (UV, visibles, IR).
 9027.50 -
 Los demás instrumentos y aparatos que
@@ -45090,7 +44299,6 @@ Cuentarrevoluciones, contadores de
 producción, taxímetros,
 cuentakilómetros, podómetros y
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 contadores similares.
 9029.10.03 Taxímetros electrónicos o
 electromecánicos. Pza 15 Ex.
@@ -45147,7 +44355,6 @@ distorsiómetros, sofómetros).
 Pza Ex. Ex.
 - Los demás instrumentos y aparatos:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9030.82 --
 Para medida o control de obleas
 ("wafers") o dispositivos
@@ -45206,7 +44413,6 @@ balanceo de neumáticos o ruedas. Pza Ex. Ex.
 9031.80.07 Niveles. Pza 15 Ex.
 9031.80.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9031.90 - Partes y accesorios.
 9031.90.01 Reconocibles para lo comprendido en la
 fracción arancelaria 9031.80.02. Kg Ex. Ex.
@@ -45269,7 +44475,6 @@ Partes y accesorios, no expresados ni
 comprendidos en otra parte de este
 Capítulo, para máquinas, aparatos,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 instrumentos o artículos del Capítulo 90.
 9033.00.01
 Partes y accesorios, no expresados ni
@@ -45311,7 +44516,6 @@ inferiores o iguales a 50 mm.
 mecanismos o partes de aparatos de relojería, o en otros usos, por ejemplo, en instrumentos de
 medida o precisión, se clasifican en este Capítulo.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 CÓDIGO DESCRIPCIÓN UNIDAD
 CUOTA (ARANCEL)
 IMPUESTO
@@ -45366,7 +44570,6 @@ contador de tiempo incorporado:
 9102.99 -- Los demás.
 9102.99.99 Los demás. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 91.03 Despertadores y demás relojes de
 pequeño mecanismo de relojería.
 9103.10 - Eléctricos.
@@ -45422,7 +44625,6 @@ Pza Ex. Ex.
 9106.90.99 Los demás. Pza Ex. Ex.
 91.07 Interruptores horarios y demás
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 aparatos que permitan accionar un
 dispositivo en un momento dado, con
 mecanismo de relojería o motor
@@ -45476,7 +44678,6 @@ parcialmente montados ("chablons"). Pza Ex. Ex.
 9110.19.01 Mecanismos "en blanco" ("ébauches"). Pza Ex. Ex.
 9110.90 - Los demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9110.90.99 Los demás. Pza Ex. Ex.
 91.11 Cajas de los relojes de las partidas
 91.01 o 91.02, y sus partes.
@@ -45523,7 +44724,6 @@ relojería.
 _______________
 
 **Artículo 1o - Capítulo 92**
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Instrumentos musicales; sus partes y accesorios
 Notas.
 1. Este Capítulo no comprende:
@@ -45574,7 +44774,6 @@ arpas).
 9202.10 - De arco.
 9202.10.01 De arco. Pza 35 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Arancel modificado con vigencia temporal DOF 15-08-2023
 (antes Imp. Ex.)
 Arancel modificado con vigencia temporal DOF 22-04-2024 (antes
@@ -45651,7 +44850,6 @@ ejemplo: tambores, cajas, xilófonos, platillos,
 castañuelas, maracas).
 9206.00.01 Instrumentos musicales de percusión (por Pza 10 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 ejemplo: tambores, cajas, xilófonos, platillos,
 castañuelas, maracas).
 92.07
@@ -45715,7 +44913,6 @@ cualquier tipo.
 9209.91 -- Partes y accesorios de pianos.
 9209.91.01 Gabinetes, muebles o sus partes. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9209.91.99
 Los demás.
 Arancel modificado con vigencia temporal DOF 15-08-2023
@@ -45763,7 +44960,6 @@ DE IMP.
 IMPUESTO
 DE EXP.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 93.01 Armas de guerra, excepto los
 revólveres, pistolas y armas blancas.
 9301.10 - Piezas de artillería (por ejemplo: cañones,
@@ -45822,7 +45018,6 @@ proyectil blindado.
 Pza 10 Ex.
 9303.90.99 Las demás. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 93.04
 Las demás armas (por ejemplo: armas
 largas y pistolas de muelle (resorte),
@@ -45878,7 +45073,6 @@ Sables, espadas, bayonetas, lanzas y
 demás armas blancas, sus partes y
 fundas.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9307.00
 Sables, espadas, bayonetas, lanzas y
 demás armas blancas, sus partes y
@@ -45919,7 +45113,6 @@ relojería);
 l) los muebles, luminarias y aparatos de alumbrado que presenten el carácter de juguete
 (partida 95.03), billares de cualquier clase y muebles de juegos de la partida 95.04, así como
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 las mesas para juegos de prestidigitación y artículos de decoración (excepto las guirnaldas
 eléctricas), tales como farolillos y faroles venecianos (partida 95.05);
 m) los monopies, bípodes, trípodes y artículos similares (partida 96.20).
@@ -45967,7 +45160,6 @@ vehículos automóviles. Pza Ex. Ex.
 - Asientos giratorios de altura ajustable:
 9401.31 -- De madera.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9401.31.01 De madera.
 9401.39 -- Los demás.
 9401.39.99
@@ -46022,7 +45214,6 @@ Pza 35 Ex.
 - Partes:
 9401.91 -- De madera.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9401.91.01 De madera.
 9401.99 -- Las demás.
 9401.99.01
@@ -46083,7 +45274,6 @@ conteniendo por lo menos: una cubierta
 para monitor, una cubierta para teclado y
 Pza 25 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 una cubierta para la unidad central de
 proceso.
 9403.40 - Muebles de madera de los tipos utilizados
@@ -46143,7 +45333,6 @@ Arancel modificado con vigencia temporal DOF 22-04-2024
 Pza 35 Ex.
 - Partes:
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9403.91 -- De madera.
 9403.91.01 De madera. Kg Ex. Ex.
 9403.99 -- Las demás.
@@ -46204,7 +45393,6 @@ otra parte.
 - Lámparas y demás luminarias, eléctricas,
 para colgar o fijar al techo o a la pared,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 excepto las de los tipos utilizados para el
 alumbrado de espacios o vías públicos:
 9405.11 --
@@ -46272,7 +45460,6 @@ Pza 15 Ex.
 eléctricos.
 9405.50.02 Luminarias y aparatos de alumbrado, no Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 eléctricos.
 - Anuncios, letreros y placas indicadoras,
 luminosos y artículos similares:
@@ -46332,7 +45519,6 @@ acero. Kg 10 Ex.
 _______________
 
 **Artículo 1o - Capítulo 95**
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Juguetes, juegos y artículos para recreo o deporte; sus partes y accesorios
 Notas.
 1. Este Capítulo no comprende:
@@ -46369,7 +45555,6 @@ n) los vehículos de deporte de la Sección XVII, excepto los toboganes, “bobs
 o) las bicicletas para niños (partida 87.12);
 p) las aeronaves no tripuladas (partida 88.06);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 q) las embarcaciones de deporte, tales como canoas y esquifes (Capítulo 89), y sus medios de
 propulsión (Capítulo 44, si son de madera);
 r) las gafas (anteojos) protectoras para la práctica de deportes o juegos al aire libre (partida
@@ -46409,7 +45594,6 @@ generalmente se instalan en residencias o en patios de recreo;
 b) la expresión atracciones de parques acuáticos designa a un aparato o combinación de
 aparatos colocados en un área definida que involucra agua, sin una ruta establecida. Las
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 atracciones de parques acuáticos comprenden solo los equipos diseñados específicamente
 para su utilización en parques acuáticos;
 c) la expresión atracciones de feria designa a los juegos de azar, fuerza o destreza que
@@ -46461,7 +45645,6 @@ comprendido en la fracción arancelaria
 9503.00.01.
 Pza 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9503.00.04
 Muñecas y muñecos que representen
 solamente seres humanos, incluso
@@ -46524,7 +45707,6 @@ niño o la niña, representen un personaje,
 profesión u oficio, excepto juegos que
 Kg 30 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 imiten preparaciones de belleza, de
 maquillaje o de manicura.
 9503.00.20
@@ -46590,7 +45772,6 @@ fracciones arancelarias 9503.00.04 y
 9503.00.05.
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9503.00.30
 Partes y accesorios de muñecas y
 muñecos que representen solamente
@@ -46656,7 +45837,6 @@ bolos automáticos (“bowlings”),
 juegos activados con monedas,
 billetes de banco, tarjetas bancarias,
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 fichas o por cualquier otro medio de
 pago.
 9504.20 - Billares de cualquier clase y sus
@@ -46719,7 +45899,6 @@ artículos sorpresa.
 9505.10 - Artículos para fiestas de Navidad.
 9505.10.01 Árboles artificiales para fiestas de Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Navidad.
 9505.10.99 Los demás. Kg 10 Ex.
 9505.90 - Los demás.
@@ -46771,7 +45950,6 @@ incluso sin cordaje:
 tenis de mesa:
 9506.61 -- Pelotas de tenis.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9506.61.01 Pelotas de tenis. Kg 10 Ex.
 9506.62 -- Inflables.
 9506.62.01 Inflables. Kg 15 Ex.
@@ -46826,7 +46004,6 @@ ambulantes.
 9508.10 - Circos y zoológicos, ambulantes.
 9508.10.01 Circos y zoológicos, ambulantes. Pza Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 - Atracciones para parques de diversiones
 y atracciones de parques acuáticos:
 9508.21 -- Montañas rusas.
@@ -46869,7 +46046,6 @@ utilizados en medicina, cirugía, odontología o veterinaria (partida 90.18));
 g) los artículos del Capítulo 91 (por ejemplo: cajas y envolturas similares de relojes o demás
 aparatos de relojería);
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 h) los instrumentos musicales, sus partes y accesorios (Capítulo 92);
 ij) los artículos del Capítulo 93 (armas y sus partes);
 k) los artículos del Capítulo 94 (por ejemplo: muebles, luminarias y aparatos de alumbrado);
@@ -46916,7 +46092,6 @@ estas materias; manufacturas
 moldeadas o talladas de cera, parafina,
 estearina, gomas o resinas naturales o
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 pasta para modelar y demás
 manufacturas moldeadas o talladas no
 expresadas ni comprendidas en otra
@@ -46978,7 +46153,6 @@ Pza 15 Ex.
 9603.29 -- Los demás.
 9603.29.99 Los demás. Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9603.30 -
 Pinceles y brochas para pintura artística,
 pinceles para escribir y pinceles similares
@@ -47045,7 +46219,6 @@ esbozos de botones.
 9606.21 -- De plástico, sin forrar con materia textil.
 9606.21.01 De plástico, sin forrar con materia textil. Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9606.22 -- De metal común, sin forrar con materia
 textil.
 9606.22.01 De metal común, sin forrar con materia
@@ -47100,7 +46273,6 @@ anteriores.
 9608.50.02 Juegos de artículos pertenecientes, por lo
 menos, a dos de las subpartidas Pza 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 anteriores.
 9608.60 - Cartuchos de repuesto con su punta para
 bolígrafo.
@@ -47155,7 +46327,6 @@ incluso enmarcados. Kg 15 Ex.
 96.11 Fechadores, sellos, numeradores,
 timbradores y artículos similares
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 (incluidos los aparatos para imprimir
 etiquetas), de mano; componedores e
 imprentillas con componedor, de
@@ -47211,7 +46382,6 @@ Kg 25 Ex.
 9613.90.02 Para encendedores a gas. Kg Ex. Ex.
 9613.90.99 Los demás. Kg 5 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 96.14
 Pipas (incluidas las cazoletas),
 boquillas para cigarros (puros) o
@@ -47272,7 +46442,6 @@ montados y aislados por vacío, así como
 sus partes (excepto las ampollas de
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 vidrio).
 96.18
 Maniquíes y artículos similares;
@@ -47339,7 +46508,6 @@ comprendido en la fracción arancelaria
 9620.00.04.
 Kg 15 Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9620.00.03
 De las materias indicadas en la Partida
 68.15.
@@ -47385,7 +46553,6 @@ Capítulo y en otros de la Nomenclatura, se clasifican en este Capítulo;
 B) los artículos susceptibles de clasificarse en la partida 97.06 y en las partidas 97.01 a 97.05
 se clasifican en las partidas 97.01 a 97.05.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 6. Los marcos de pinturas, dibujos, collages o cuadros similares, grabados, estampas o litografías
 se clasifican con ellos cuando sus características y valor están en relación con los de dichas
 obras.
@@ -47438,7 +46605,6 @@ artículos franqueados y análogos,
 incluso obliterados, excepto los
 artículos de la partida 49.07.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9704.00
 Sellos (estampillas) de correo, timbres
 fiscales, marcas postales, sobres primer
@@ -47501,7 +46667,6 @@ conducto del titular del Instituto
 competente. Descripción modificada DOF 18-11-2022
 Kg Ex. Ex.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9705.21.99 Los demás. Pza Ex. Ex.
 9705.22 -- Especies extintas o en peligro de
 extinción, y sus partes.
@@ -47559,7 +46724,6 @@ Kg Ex. Ex.
 9706.10.01 De más de 250 años. Pza Ex. Ex.
 9706.90 - Las demás.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 9706.90.99 Las demás. Pza Ex. Ex.
 _______________
 Sección XXII
@@ -47572,6 +46736,808 @@ Notas.
 ser clasificadas en otros Capítulos de la Nomenclatura, éstas se clasificarán en el presente
 Capítulo cuando correspondan a alguna de las siguientes operaciones especiales:
 a) importaciones o exportaciones de muestras y muestrarios que cumplan con lo previsto en el
+artículo 2o. fracción II, Regla Complementaria 7a, inciso d), de la presente Ley (partida
+98.01);
+b) importaciones de mercancías a que se refieren los incisos a) primer párrafo y b) primer
+párrafo de la Regla 8a de las Complementarias para la interpretación y aplicación de la Tarifa
+de la Ley de los Impuestos Generales de Importación y de Exportación, realizadas por
+empresas que cuenten con registro de empresa fabricante (partida 98.02). Las mercancías a
+que se refiere el inciso a) segundo párrafo, gozarán de la tasa arancelaria establecida en las
+fracciones arancelarias de la partida 98.02 y deberán clasificarse en los Capítulos 01 al 97
+de la Tarifa, según les corresponda;
+c) importaciones de material de ensamble para ser utilizadas en la fabricación de automóviles,
+camiones, autobuses integrales o tractocamiones (partida 98.03);
+d) importaciones o exportaciones de equipajes de pasajeros o menajes de casa, conforme a lo
+previsto en la Ley Aduanera, así como a las disposiciones de carácter general que al
+respecto dicte la Secretaría de Hacienda y Crédito Público (partida 98.04);
+e) importaciones de mercancías que en apoyo del sector pesquero merecen un tratamiento
+especial (partida 98.05);
+f) importaciones o exportaciones de mercancías que, en opinión de la Comisión de Comercio
+Exterior, merecen un tratamiento especial y que por sus características no puedan
+clasificarse de manera unitaria conforme a las reglas de clasificación de la nomenclatura de
+la Tarifa de la presente Ley (partida 98.06);
+g) las demás operaciones que en opinión de la Comisión de Comercio Exterior merecen un
+tratamiento especial (partida 98.07).
+CÓDIGO DESCRIPCIÓN UNIDAD
+CUOTA (ARANCEL)
+IMPUESTO
+DE IMP.
+IMPUESTO
+DE EXP.
+98.01 Importaciones o exportaciones de
+muestras y muestrarios.
+9801.00 Importaciones o exportaciones de
+
+muestras y muestrarios.
+9801.00.01 Importaciones o exportaciones de
+muestras y muestrarios. Kg Ex. Ex.
+98.02
+Maquinaria, partes o componentes
+para la fabricación de productos,
+conforme a la Regla 8a de las
+Complementarias.
+9802.00
+Maquinaria, partes o componentes para
+la fabricación de productos, conforme a la
+Regla 8a de las Complementarias.
+9802.00.01
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Eléctrica, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.02
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Electrónica, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.03
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Mueble, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.04
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Juguete, Juegos de Recreo y Artículos
+Deportivos, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+
+9802.00.05
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Calzado, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.06
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Minera y Metalúrgica, cuando las
+empresas cuenten con la autorización a
+que se refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.07
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Bienes de Capital, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.08
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Fotográfica, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.09
+Mercancías para el Programa de
+Promoción Sectorial de la Industria de
+Maquinaria Agrícola, cuando las
+empresas cuenten con la autorización a
+que se refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.10 Mercancías para el Programa de
+Promoción Sectorial de las Industrias Kg Ex. Ex.
+
+Diversas, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+9802.00.11
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Química, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.12
+Mercancías para el Programa de
+Promoción Sectorial de la Industria de
+Manufacturas del Caucho y Plástico
+cuando las empresas cuenten con la
+autorización a que se refiere la Regla 8ª
+de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía, excepto las comprendidas
+en la fracción arancelaria 9802.00.38.
+Kg Ex. Ex.
+9802.00.13
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Siderúrgica cuando se trate de
+productores directos y las empresas
+cuenten con la autorización a que se
+refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía,
+excepto las comprendidas en el Anexo II
+del Decreto para el Fomento de la
+Industria Manufacturera, Maquiladora y
+de Servicios de Exportación.
+Kg Ex. Ex.
+9802.00.14
+Mercancías para el Programa de
+Promoción Sectorial de la Industria de
+Productos Farmoquímicos,
+Medicamentos y Equipo Médico, cuando
+las empresas cuenten con la autorización
+a que se refiere la Regla 8a de las
+Complementarias, para la interpretación y
+Kg Ex. Ex.
+
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+9802.00.15
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Transporte, excepto el Sector de la
+Industria Automotriz y de Autopartes,
+cuando las empresas cuenten con la
+autorización a que se refiere la Regla 8a
+de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.16
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Papel y Cartón, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.17
+Mercancías para el Programa de
+Promoción Sectorial de la Industria de la
+Madera, cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.18
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Cuero y Pieles, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.19
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Automotriz y de Autopartes, cuando las
+empresas cuenten con la autorización a
+que se refiere la Regla 8a de las
+Complementarias, para la interpretación y
+Kg Ex. Ex.
+
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+9802.00.20
+Mercancías para el Programa de
+Promoción Sectorial de la Industria Textil
+y de la Confección excepto lo
+comprendido en la fracción 9802.00.24 y
+las comprendidas en el Anexo II,
+Apartado C del Decreto para el Fomento
+de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.21
+Mercancías para el Programa de
+Promoción Sectorial de la Industria de
+Chocolates, Dulces y Similares, cuando
+las empresas cuenten con la autorización
+a que se refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía.
+Kg Ex. Ex.
+9802.00.22
+Mercancías para el Programa de
+Promoción Sectorial de la Industria del
+Café, cuando las empresas cuenten con
+la autorización a que se refiere la Regla
+8a de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía.
+Kg Ex. Ex.
+9802.00.23
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Siderúrgica cuando se trate de
+productores indirectos y las empresas
+cuenten con la autorización a que se
+refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación, conforme a los criterios que
+establezca la Secretaría de Economía,
+excepto las comprendidas en el Anexo II
+Kg 5 Ex.
+
+del Decreto para el Fomento de la
+Industria Manufacturera, Maquiladora y
+de Servicios de Exportación.
+9802.00.24
+Hilados de filamento de nailon rígidos de
+título inferior o igual a 44.4 decitex (40
+deniers) e inferior o igual a 1.33 decitex
+(1.2 deniers) por filamento e hilados de
+filamento de nailon rígidos de título igual
+a 44.4 decitex (40 deniers) y 34
+filamentos de título igual a 1.30 decitex
+(1.17 deniers) por filamento, de la
+fracción arancelaria 5402.45.99; hilados
+rígidos, de filamentos de poliéster (no
+texturados), de título inferior o igual a
+1.66 decitex (1.5 deniers) por filamento,
+de la fracción arancelaria 5402.47.91;
+hilados de filamentos de título igual a
+75.48 decitex (68 deniers), teñidos en
+rígido brillante con 32 filamentos y torsión
+de 800 vueltas por metro e hilados de
+filamentos rígidos brillante, de poliéster
+catiónico de título igual a 305 decitex
+(274.53 deniers), con 96 filamentos y
+torsión de 120 vueltas por metro en S, de
+la fracción arancelaria 5402.62.02; fibra
+corta de poliéster de baja fusión (low
+melt), conformada por una fibra
+bicomponente de un centro de poliéster y
+una cubierta de copolímero de poliéster,
+con punto de fusión inferior a 180 grados
+centígrados, de la fracción arancelaria
+5503.20.99, para el Programa de
+Promoción Sectorial de la Industria Textil
+y de la Confección, cuando las empresas
+cuenten con la autorización a que se
+refiere la Regla 8a de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación conforme a los criterios
+establecidos por la Secretaría de
+Economía. Descripción modificada DOF 18-11-2022
+Kg Ex. Ex.
+9802.00.25
+Mercancías para el Programa de
+Promoción Sectorial de la Industria
+Alimentaria cuando las empresas cuenten
+con la autorización a que se refiere la
+Regla 8ª de las Complementarias, para la
+interpretación y aplicación de la Tarifa de
+la Ley de los Impuestos Generales de
+Importación y de Exportación, conforme a
+los criterios que establezca la Secretaría
+de Economía, excepto las comprendidas
+Kg Ex. Ex.
+
+en el Anexo II del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+9802.00.26
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado A del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Kg Ex. Ex.
+9802.00.27
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado B del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Kg Ex. Ex.
+9802.00.28
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado C del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación, excepto lo comprendido en
+la fracción 9802.00.24.
+Kg Ex. Ex.
+9802.00.29
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+M Ex. Ex.
+
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como M y listadas en el
+Anexo II, Apartado C del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+9802.00.30
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como M² y listadas en el
+Anexo II, Apartado C del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+M2 Ex. Ex.
+9802.00.31
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Par y listadas en
+el Anexo II, Apartado C del Decreto para
+el Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Par Ex. Ex.
+9802.00.32
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Pza y listadas en
+el Anexo II, Apartado C del Decreto para
+el Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Pza Ex. Ex.
+9802.00.33 Mercancías al amparo de la autorización Kg Ex. Ex.
+
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado D del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+9802.00.34
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Pza y listadas en
+el Anexo II, Apartado D del Decreto para
+el Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Pza Ex. Ex.
+9802.00.35
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como G y listadas en el
+Anexo II, Apartado E del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+G Ex. Ex.
+9802.00.36
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado E del Decreto para el
+Kg Ex. Ex.
+
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+9802.00.37
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en las fracciones
+arancelarias cuya unidad de medida de la
+TIGIE se indique como Kg y listadas en el
+Anexo II, Apartado F del Decreto para el
+Fomento de la Industria Manufacturera,
+Maquiladora y de Servicios de
+Exportación.
+Kg Ex. Ex.
+9802.00.38
+Mercancías al amparo de la autorización
+a que se refiere la Regla 8ª de las
+Complementarias, para la interpretación y
+aplicación de la Tarifa de la Ley de los
+Impuestos Generales de Importación y de
+Exportación (TIGIE), conforme a los
+criterios que establezca la Secretaría de
+Economía, clasificadas en la partida
+arancelaria 40.04.
+Kg Ex. Ex.
+98.03
+Material de ensamble para la
+fabricación de automóviles, camiones,
+autobuses integrales o
+tractocamiones.
+9803.00
+Material de ensamble para la fabricación
+de automóviles, camiones, autobuses
+integrales o tractocamiones.
+9803.00.01
+Partes y componentes para el ensamble
+de automóviles cuando se trate de
+empresas de la industria automotriz
+terminal que cuenten con autorización de
+depósito fiscal para ensamble y
+fabricación de vehículos conforme a la
+Ley Aduanera, siempre que se ajusten a
+los lineamientos que establezca la
+Secretaría de Economía.
+Arancel modificado con vigencia temporal DOF 13-10-2026
+(antes Imp. 10)
+Kg Ex. Ex.
+9803.00.02
+Partes y componentes para el ensamble
+de camiones, autobuses integrales y
+tracto-camiones cuando se trate de
+empresas de la industria automotriz
+terminal que cuenten con autorización de
+depósito fiscal para ensamble y
+fabricación de vehículos conforme a la
+Ley Aduanera, siempre que se ajusten a
+Kg 10 Ex.
+
+los lineamientos que establezca la
+Secretaría de Economía.
+98.04
+Importaciones o exportaciones de
+equipajes de pasajeros o menajes de
+casa.
+9804.00
+Importaciones o exportaciones de
+equipajes de pasajeros o menajes de
+casa.
+9804.00.01 Menajes de casa. Kg Ex. Ex.
+9804.00.99 Los demás. Kg Ex. Ex.
+98.05 Mercancías del sector pesquero con
+tratamiento especial.
+9805.00 Mercancías del sector pesquero con
+tratamiento especial.
+9805.00.01
+Dispositivos excluidores de tortugas
+marinas y sus partes, para redes de
+arrastre camaroneras.
+Pza Ex. Ex.
+98.06
+Importaciones o exportaciones de
+materiales y equipos sujetos a
+tratamiento especial.
+9806.00
+Importaciones o exportaciones de
+materiales y equipos sujetos a
+tratamiento especial.
+9806.00.01
+Mercancías importadas por un organismo
+de certificación en cantidad no mayor a 3
+unidades, o el número de muestras que
+determine la Norma Mexicana NMX-Z12
+o, en su caso, el número de muestras
+determinado por la Norma Oficial
+Mexicana correspondiente, destinadas
+exclusivamente a obtener la certificación
+del cumplimiento de una Norma Oficial
+Mexicana.
+Pza Ex. Ex.
+9806.00.02
+Equipos anticontaminantes y sus partes,
+cuando las empresas se ajusten a los
+lineamientos establecidos por las
+Secretarías de Medio Ambiente y
+Recursos Naturales, y de Economía.
+Pza Ex. Ex.
+9806.00.03
+Maquinaria, equipo, instrumentos,
+materiales, animales, plantas y demás
+artículos para investigación o desarrollos
+tecnológicos, cuando los centros públicos
+de investigación, universidades públicas y
+privadas, instituciones de investigación
+científica y tecnológica, personas físicas y
+morales, inscritos en el Registro Nacional
+de Instituciones y Empresas Científicas y
+Tecnológicas, se sujeten a los
+lineamientos establecidos por la
+Kg Ex. Ex.
+
+Secretaría de Economía y el Consejo
+Nacional de Ciencia y Tecnología.
+9806.00.04
+Equipos y artículos reconocibles como
+destinados exclusivamente a compensar
+una disfunción corporal de personas con
+discapacidad, excepto lo comprendido en
+las fracciones arancelarias 8713.10.01 y
+8713.90.99, y excepto los vehículos del
+Capítulo 87.
+Pza Ex. Ex.
+9806.00.05
+Mercancías destinadas a la reparación o
+mantenimiento de naves aéreas o
+aeropartes.
+Kg Ex. Ex.
+9806.00.06
+Mercancías, insumos, partes y
+componentes para el submontaje,
+montaje o producción de aeronaves o
+aeropartes destinadas a usos en materia
+de aviación civil, cuando las empresas
+cuenten con la aprobación de producción
+de productos aeronáuticos y sus
+artículos, en cualquiera de sus tipos,
+emitida por la Secretaría de
+Infraestructura, Comunicaciones y
+Transportes a través de la Agencia
+Federal de Aviación Civil.
+Descripción modificada DOF 18-11-2022
+Kg Ex. Ex.
+9806.00.07
+Archivos (expedientes) conteniendo,
+entre otros, diagnósticos médicos,
+radiografías, fluorangiografías, resultados
+de laboratorio, electrocardiogramas.
+Kg Ex. Ex.
+9806.00.08
+Mercancías destinadas a procesos tales
+como reparación, reacondicionamiento o
+remanufactura, cuando las empresas
+cuenten con registro otorgado conforme a
+los lineamientos establecidos por la
+Secretaría de Economía.
+Kg Ex. Ex.
+9806.00.09
+Insumos, materias primas, materiales
+auxiliares, envases y empaques que no
+estén sujetos al cumplimiento de
+regulaciones y restricciones no
+arancelarias en materia de sanidad
+animal y vegetal, salud pública, medio
+ambiente y seguridad nacional, que se
+destinen al régimen de recinto fiscalizado
+estratégico, por parte de las personas
+autorizadas para operar el régimen. Las
+mercancías objeto de almacenaje,
+consolidación de carga, así como las
+resultantes de los procesos de
+elaboración, transformación o reparación
+en el recinto fiscalizado estratégico,
+cuando se extraigan del recinto deberán
+ser clasificadas en términos de la Tarifa
+Kg Ex. Ex.
+
+de esta Ley y cumplir, en su caso, con las
+regulaciones y restricciones no
+arancelarias que correspondan a esas
+mercancías, en los términos de las
+disposiciones que resulten aplicables.
+9806.00.10
+Maquinaria y equipo, que no estén
+sujetas al cumplimiento de regulaciones y
+restricciones no arancelarias en materia
+de sanidad animal y vegetal, salud
+pública, medio ambiente y seguridad
+nacional, que se destinen al régimen de
+recinto fiscalizado estratégico, por parte
+de personas autorizadas para operar el
+régimen. Cuando las mercancías se
+extraigan del recinto deberán ser
+clasificadas en términos de la Tarifa de
+esta Ley y cumplir, en su caso, con las
+regulaciones y restricciones no
+arancelarias que correspondan a esas
+mercancías, en los términos de las
+disposiciones que resulten aplicables.
+Kg Ex. Ex.
+98.07 Las demás operaciones especiales.
+9807.00 Las demás operaciones especiales.
+9807.00.01
+Mercancías producidas en territorio
+nacional que retornen en el mismo estado
+en que fueron exportadas o retornadas
+del territorio nacional, de conformidad con
+los lineamientos establecidos por la
+Secretaría de Economía.
+Kg Ex. Ex.
+_______________
 
 **Artículo 2**
 Las Reglas Generales y las Complementarias para la aplicación e interpretación de esta
@@ -47589,7 +47555,6 @@ esenciales del artículo completo o terminado. Alcanza también al artículo com
 o terminado, o considerado como tal en virtud de las disposiciones precedentes,
 cuando se presente desmontado o sin montar todavía.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 b) Cualquier referencia a una materia en una partida determinada alcanza a dicha
 materia incluso mezclada o asociada con otras materias. Asimismo, cualquier
 referencia a las manufacturas de una materia determinada alcanza también a las
@@ -47634,7 +47599,6 @@ mutatis mutandis, por las Reglas anteriores, bien entendido que solo pueden comp
 subpartidas del mismo nivel. A efectos de esta Regla, también se aplican las Notas de
 Sección y de Capítulo, salvo disposición en contrario.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 II. Reglas Complementarias.
 1ª Las Reglas Generales para la interpretación de la Tarifa de esta Ley son igualmente válidas para
 establecer dentro de cada subpartida la fracción arancelaria aplicable, excepto para la Sección
@@ -47675,7 +47639,6 @@ impuesto general de exportación que corresponda.
 3ª Para los efectos de interpretación y aplicación de la Tarifa, la Secretaría de Economía,
 conjuntamente con la de Hacienda y Crédito Público, darán a conocer, mediante Acuerdos que
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 se publicarán en el Diario Oficial de Federación, las Notas Nacionales, así como sus
 modificaciones posteriores, cuya aplicación es obligatoria para determinar la clasificación
 arancelaria de las mercancías.
@@ -47707,7 +47670,6 @@ Hz hertz (hercio (s))
 °K grado(s) kelvin
 kcal kilocaloría(s)
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Kg; kg kilogramo(s)
 kN kilonewton(s)
 kPa kilopascal(es)
@@ -47736,7 +47698,6 @@ RPM revoluciones por minuto
 t tonelada(s)
 W vatio(s) ; watt(s)
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 Wh vatio-hora
 V volt(io(s))
 vol. volumétrico; volumen
@@ -47767,7 +47728,6 @@ a) Los ataúdes y las urnas que contengan cadáveres o sus restos;
 b) Las piezas postales obliteradas que los convenios postales internacionales comprenden bajo
 la denominación de correspondencia;
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 c) Los efectos importados por vía postal que al efecto establezca la Secretaría de Hacienda y
 Crédito Público, mediante reglas de carácter general;
 d) Las muestras y muestrarios que por sus condiciones carecen de valor comercial. Se
@@ -47810,7 +47770,6 @@ ordenados de manera progresiva iniciando del 00 al 99, reservando los códigos n
 99) para las mercancías que no estén comprendidas en los números de identificación comercial
 con terminación 01 a 89.
 
-LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN
 La Secretaría de Economía, dará a conocer mediante Acuerdo publicado en el Diario Oficial de
 la Federación:
 a) Los números de identificación comercial de las fracciones arancelarias.
