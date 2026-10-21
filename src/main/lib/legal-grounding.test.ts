@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   renderGroundedClaims,
+  renderGroundedDocument,
   validateGroundedLegalOutput,
   validateOrRepairStructuredGroundedOutput,
   validateStructuredGroundedOutput,
@@ -111,5 +112,50 @@ describe('legal response grounding gate', () => {
 
     expect(rendered).toContain('Respuesta ejecutiva');
     expect(rendered).toContain('Fuentes vinculadas: CFF Artículo 69-B');
+  });
+});
+
+describe('grounded drafting documents', () => {
+  const draftSources = [
+    ...sources,
+    { id: 'user:requirements', kind: 'instruction' as const, title: 'Instrucciones del usuario', content: 'Contrato con ACME.' },
+    { id: 'template:mercantil-servicios', kind: 'instruction' as const, title: 'Contrato de servicios', content: 'Machote.' },
+  ];
+  const contract: StructuredGroundedOutput = {
+    claims: [
+      { claimId: 'proemio', heading: 'CONTRATO DE PRESTACIÓN DE SERVICIOS', text: 'Que celebran ACME, S.A. de C.V. y [DATO FALTANTE].', sourceIds: ['user:requirements', 'template:mercantil-servicios'] },
+      { claimId: 'clausula-1', heading: 'PRIMERA. Deducibilidad', text: 'El prestador entregará CFDI por cada pago.', sourceIds: ['law:lisr:27', 'user:requirements'] },
+      { claimId: 'firmas', heading: 'FIRMAS', text: '[NOMBRE Y FIRMA]', sourceIds: ['template:mercantil-servicios'] },
+    ],
+  };
+
+  it('accepts sections without a legal source when the document as a whole cites one', () => {
+    const result = validateStructuredGroundedOutput(contract, draftSources, { requiredSourceKindsInOutput: ['legal'] });
+    expect(result.valid).toBe(true);
+  });
+
+  it('rejects a drafted document that cites no legal source when legal context was retrieved', () => {
+    const result = validateStructuredGroundedOutput({
+      claims: contract.claims.filter((claim) => claim.claimId !== 'clausula-1'),
+    }, draftSources, { requiredSourceKindsInOutput: ['legal'] });
+    expect(result.valid).toBe(false);
+    expect(result.reason).toBe('missing_citation');
+    expect(result.unsupported).toEqual(['kind:legal']);
+  });
+
+  it('renders the full document first and the legal foundations in a closing annex', () => {
+    const rendered = renderGroundedDocument(contract, draftSources);
+
+    expect(rendered).not.toContain('Fuentes vinculadas');
+    expect(rendered.indexOf('## FIRMAS')).toBeLessThan(rendered.indexOf('## Fundamentos'));
+    expect(rendered).toContain('## CONTRATO DE PRESTACIÓN DE SERVICIOS\nQue celebran ACME, S.A. de C.V. y [DATO FALTANTE].');
+    expect(rendered).toContain('- PRIMERA. Deducibilidad: LISR Artículo 27');
+    expect(rendered).not.toContain('Instrucciones del usuario');
+    expect(rendered).not.toContain('- FIRMAS');
+  });
+
+  it('omits the foundations annex when no section cites a legal source', () => {
+    const rendered = renderGroundedDocument({ claims: [contract.claims[0], contract.claims[2]] }, draftSources);
+    expect(rendered).not.toContain('Fundamentos');
   });
 });

@@ -80,7 +80,11 @@ export interface GroundingValidationOptions {
 
 export interface StructuredGroundingValidationOptions {
   requiredClaimTexts?: string[];
+  // Tipos de fuente que cada claim debe citar (análisis: cada hallazgo con ley y evidencia).
   requiredSourceKinds?: GroundingSourceKind[];
+  // Tipos de fuente que deben aparecer al menos una vez en toda la salida (redacción: el
+  // documento cita leyes, pero el proemio o las firmas no necesitan un artículo propio).
+  requiredSourceKindsInOutput?: GroundingSourceKind[];
 }
 
 export interface StructuredGroundingRepairOutcome {
@@ -359,6 +363,18 @@ export function validateStructuredGroundedOutput(
     claim.sourceIds.forEach(sourceId => cited.add(sourceId));
   }
 
+  const citedKinds = new Set([...cited].map(sourceId => allowed.get(sourceId)));
+  const missingOutputKinds = (options.requiredSourceKindsInOutput || []).filter(kind => !citedKinds.has(kind));
+  if (missingOutputKinds.length > 0) {
+    return {
+      valid: false,
+      cited: [...cited],
+      unsupported: missingOutputKinds.map(kind => `kind:${kind}`),
+      unsupportedClaims: [],
+      reason: 'missing_citation',
+    };
+  }
+
   const claimTexts = new Set(parsed.data.claims.map(claim => normalizeClaimText(claim.text)));
   const missingRequired = (options.requiredClaimTexts || [])
     .map(normalizeClaimText)
@@ -377,15 +393,38 @@ export function validateStructuredGroundedOutput(
   return { valid: true, cited: [...cited], unsupported: [], unsupportedClaims: [] };
 }
 
-export function renderGroundedClaims(
-  output: StructuredGroundedOutput,
-  sources: GroundingSource[],
-): string {
-  const labels = new Map(sources.map(source => {
+function sourceLabels(sources: GroundingSource[]): Map<string, string> {
+  return new Map(sources.map(source => {
     const id = getGroundingSourceId(source);
     const label = [source.law_code || source.title, source.article_number].filter(Boolean).join(' ').trim();
     return [id, label || id] as const;
   }).filter((entry): entry is readonly [string, string] => Boolean(entry[0])));
+}
+
+// Documento redactado: las secciones se leen de corrido y los artículos que las sustentan
+// van al final, en «Fundamentos». Las instrucciones y la evidencia no se listan ahí.
+export function renderGroundedDocument(
+  output: StructuredGroundedOutput,
+  sources: GroundingSource[],
+): string {
+  const labels = sourceLabels(sources.filter(source => (source.kind || 'legal') === 'legal'));
+  const body = output.claims
+    .map(claim => claim.heading ? `## ${claim.heading}\n${claim.text}` : claim.text)
+    .join('\n\n');
+  const foundations = output.claims.flatMap(claim => {
+    const cited = [...new Set(claim.sourceIds.map(sourceId => labels.get(sourceId)).filter(Boolean))];
+    return cited.length > 0 ? [`- ${claim.heading || claim.claimId}: ${cited.join('; ')}`] : [];
+  });
+  return foundations.length > 0
+    ? `${body}\n\n---\n\n## Fundamentos\n${foundations.join('\n')}`.trim()
+    : body.trim();
+}
+
+export function renderGroundedClaims(
+  output: StructuredGroundedOutput,
+  sources: GroundingSource[],
+): string {
+  const labels = sourceLabels(sources);
 
   const body = output.claims.map(claim => {
     const heading = claim.heading ? `${claim.heading}\n` : '';

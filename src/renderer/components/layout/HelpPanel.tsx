@@ -136,7 +136,7 @@ export function HelpPanel() {
             <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-6 text-slate-700">
               <li>Buscador normativo: eliges la materia y escribes el tema. La respuesta son artículos de las leyes incluidas.</li>
               <li>Auditar: subes un documento. Con IA, cada observación se comprueba contra esos artículos. Sin IA, la revisión sólo señala qué temas y apartados contiene.</li>
-              <li>Generar: pides un documento, partes de un archivo o abres una plantilla. Con IA se redacta; sin IA puedes llenar la plantilla a mano.</li>
+              <li>Generar: pides un documento, partes de un archivo o abres una plantilla. Con IA se redacta el documento completo a partir de la plantilla y al final se listan los artículos que lo sustentan; sin IA puedes llenar la plantilla a mano.</li>
               <li>Leyes muestra la lista de leyes incluidas y el enlace a la Cámara de Diputados. Portafolio guarda documentos e informes en este equipo.</li>
             </ol>
           </section>

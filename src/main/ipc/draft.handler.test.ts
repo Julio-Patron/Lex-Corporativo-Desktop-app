@@ -6,7 +6,7 @@ vi.mock('electron', () => ({
   },
 }));
 
-import { parseDraftPayload, renderSourceAnalysis } from './draft.handler';
+import { draftRetrievalQuery, parseDraftPayload, renderSourceAnalysis } from './draft.handler';
 
 describe('draft payload validation', () => {
   it('accepts drafting without a predefined template', () => {
@@ -39,6 +39,39 @@ describe('draft payload validation', () => {
 
     expect(payload.template?.id).toBe('fiscal-escrito-sat');
     expect(payload.templateId).toBe('fiscal-escrito-sat');
+  });
+
+  it('keeps the template body so the provider drafts from the full machote', () => {
+    const payload = parseDraftPayload({
+      requirements: 'DOCUMENTO SOLICITADO: Escrito SAT\n\nDATOS PROPORCIONADOS:\n- RFC: AAA010101AAA',
+      ecosystem: 'fiscal',
+      template: {
+        id: 'fiscal-escrito-sat',
+        title: 'Escrito SAT',
+        prompt: 'Escrito libre al SAT.',
+        body: '# ESCRITO LIBRE\n\nC. ADMINISTRADOR DESCONCENTRADO...\n\n[NOMBRE Y FIRMA]',
+      },
+    });
+
+    expect(payload.template?.body).toContain('# ESCRITO LIBRE');
+  });
+
+  it('searches legal foundations by document type, not only by the captured values', () => {
+    const payload = parseDraftPayload({
+      requirements: 'DOCUMENTO SOLICITADO: Contrato individual de trabajo\n\nDATOS PROPORCIONADOS:\n- Salario: 15000',
+      ecosystem: 'laboral',
+      template: {
+        id: 'laboral-contrato-individual',
+        title: 'Contrato individual de trabajo',
+        prompt: 'Contrato por tiempo indeterminado con jornada, salario y prestaciones.',
+        output: 'Contrato firmado por ambas partes.',
+      },
+    });
+
+    const query = draftRetrievalQuery(payload);
+    expect(query.startsWith('Contrato individual de trabajo')).toBe(true);
+    expect(query).toContain('jornada, salario y prestaciones');
+    expect(query).toContain('- Salario: 15000');
   });
 
   it('accepts labor drafting when the template belongs to the labor area', () => {
