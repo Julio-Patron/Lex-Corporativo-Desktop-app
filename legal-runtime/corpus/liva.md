@@ -4,7 +4,7 @@
 > Módulo: fiscal
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf
 > SHA-256 fuente: f2b5b1770441a6a4e48f3ade408f9ff7a3e9c81bd5d529e52484f49e4a8e91a6
-> Verificación oficial: 2026-07-14
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2021-11-12
 **Artículo 1**
 Están obligadas al pago del impuesto al valor agregado establecido en esta Ley, las
@@ -1327,7 +1327,9 @@ temporal correspondiente.
 El concesionario de la red pública de telecomunicaciones en México de que se trate, deberá informar
 del cumplimiento de dicho bloqueo temporal a la autoridad fiscal a más tardar al quinto día siguiente a
 aquél en que lo haya realizado.
-Artículo 18-H QUINTUS. Para los efectos de lo dispuesto en los artículos 18-H BIS, 18-H TER y 18-H
+
+**Artículo 18-H Quintus**
+Para los efectos de lo dispuesto en los artículos 18-H BIS, 18-H TER y 18-H
 QUÁTER, el Servicio de Administración Tributaria dará a conocer en su página de Internet y en el Diario
 Oficial de la Federación el nombre del proveedor y la fecha a partir de la cual se deberá realizar el
 bloqueo temporal del acceso al servicio digital, a efecto de que los receptores de los servicios en territorio

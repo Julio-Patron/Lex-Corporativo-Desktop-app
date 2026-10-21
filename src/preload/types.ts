@@ -198,22 +198,9 @@ export interface LexDesktopAPI {
         provisions: number;
         bytes: number;
         sha256: string;
+        /** Página o PDF oficial donde se consulta el texto vigente. */
+        officialUrl: string;
       }>;
-    }>;
-    download: (payload: { code: string }) => Promise<{
-      success: boolean;
-      canceled: boolean;
-      filePath?: string;
-      code?: string;
-      sha256?: string;
-    }>;
-    read: (payload: { code: string }) => Promise<{
-      success: boolean;
-      code: string;
-      name: string;
-      module: LegalArea;
-      content: string;
-      provisions: number;
     }>;
   };
   runtime: {

@@ -1,4 +1,4 @@
-# Escenarios del piloto 1.0.0-rc.18
+# Escenarios del piloto 1.0.0-rc.19
 
 Cada escenario tiene identificador, ruta en la aplicación, prerrequisitos, pasos, resultado esperado y prioridad. **P0** es obligatorio para todas las personas participantes; **P1** debe cubrirse al menos por dos personas; **P2** es deseable. La última columna indica qué hallazgo de auditoría o gate de publicación ayuda a cerrar.
 
@@ -19,7 +19,7 @@ Registra cada ejecución con la plantilla de retroalimentación, incluso cuando 
 | ID | Pr. | Escenario | Pasos | Esperado | Cierra |
 | --- | --- | --- | --- | --- | --- |
 | BUS-01 | P0 | Consulta libre por materia | Escribir una pregunta fiscal (p. ej. "plazo para presentar declaración anual personas morales") con red desconectada | Resultados con artículos citados del corpus local; sin red funciona | — |
-| BUS-02 | P0 | Abrir artículo citado | Desde un resultado, abrir el artículo en el lector | El lector muestra el texto íntegro del artículo y permite navegar la ley | — |
+| BUS-02 | P0 | Abrir texto oficial | Desde un resultado, abrir «Texto oficial» | Se abre en el navegador el texto vigente de esa ley en la Cámara de Diputados (la RMF, en la página del SAT) | — |
 | BUS-03 | P1 | Consulta ambigua entre materias | Pregunta que mezcle laboral y fiscal (p. ej. "retención de ISR en finiquito") | La app sugiere o enruta la materia; los resultados son pertinentes | — |
 | BUS-04 | P1 | Sin resultados | Consulta fuera del corpus (p. ej. derecho penal) | Mensaje de abstención claro, sin inventar fuentes | Política de grounding |
 
@@ -27,9 +27,8 @@ Registra cada ejecución con la plantilla de retroalimentación, incluso cuando 
 
 | ID | Pr. | Escenario | Pasos | Esperado | Cierra |
 | --- | --- | --- | --- | --- | --- |
-| LEY-01 | P0 | Abrir ley extensa | Abrir la Resolución Miscelánea Fiscal y desplazarse | Carga en menos de 2 s; desplazamiento fluido | PERF |
-| LEY-02 | P1 | Buscar dentro de la ley | Buscar un artículo o palabra dentro del lector | Salta al punto correcto; resalta la coincidencia | — |
-| LEY-03 | P1 | Descargar texto | Descargar la ley en formato texto | Archivo guardado en Descargas; contenido íntegro | — |
+| LEY-01 | P0 | Lista de leyes | Abrir Leyes, buscar «LFT» y filtrar por materia | Aparecen las 16 leyes y reglamentos con su número de artículos o reglas; el filtro funciona | — |
+| LEY-02 | P1 | Texto oficial | En una ley, abrir «Texto oficial» | Se abre en el navegador el PDF vigente de la Cámara de Diputados; la RMF abre la página del SAT y las RGCE su compilación oficial | — |
 
 ## Auditar documento (`/estudio/auditar`)
 

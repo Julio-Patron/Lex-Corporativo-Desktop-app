@@ -45,8 +45,6 @@ const api: LexDesktopAPI = {
   },
   legalCorpus: {
     list: () => ipcRenderer.invoke('corpus:list'),
-    download: (payload) => ipcRenderer.invoke('corpus:download', payload),
-    read: (payload) => ipcRenderer.invoke('corpus:read', payload),
   },
   runtime: {
     getHealth: () => ipcRenderer.invoke('runtime:get-health'),

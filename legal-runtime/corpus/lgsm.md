@@ -4,7 +4,7 @@
 > Módulo: mercantil
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LGSM.pdf
 > SHA-256 fuente: 72b051296792cad896ac90e814ff8949e4ac140bf5ca5cc08f2f03e5e95aeac3
-> Verificación oficial: 2026-07-14
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2023-10-20
 **Artículo 1**
 Esta Ley reconoce las siguientes especies de sociedades mercantiles:
@@ -2015,7 +2015,9 @@ comisión de delitos fiscales o patrimoniales;
 VIII.- No se encuentre en concurso mercantil, y
 IX.- No sea una entidad integrante del sistema financiero, en términos de la legislación especial
 aplicable.
-Artículo 249 Bis 1.- El procedimiento de disolución y liquidación a que se refiere el artículo 249 Bis de
+
+**Artículo 249 Bis 1**
+El procedimiento de disolución y liquidación a que se refiere el artículo 249 Bis de
 esta Ley, se realizará conforme a lo siguiente:
 I.- La totalidad de los socios o accionistas acordarán mediante asamblea la disolución y liquidación de
 la sociedad, declarando bajo protesta de decir verdad, que se ubican y cumplen con las condiciones a

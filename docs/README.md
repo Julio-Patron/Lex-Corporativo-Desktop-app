@@ -8,6 +8,7 @@ Qué documento manda sobre cada tema y cuáles se conservan sólo como historia.
 | --- | --- | --- |
 | [plan-cierre-desarrollo-y-piloto.md](plan-cierre-desarrollo-y-piloto.md) | Decisiones del cierre, checklist de cierre y de empaquetado, plan del piloto, decisiones pendientes, estado de los gates | 2026-10-19 |
 | [arquitectura-procesamiento-y-gate-publicacion.md](arquitectura-procesamiento-y-gate-publicacion.md) | Decisión de producto (BYOK, sin LLM local), política de grounding, gates del release comercial | 2026-10-19 (nota de estado) |
+| [auditorias/corpus-2026-10-20.md](auditorias/corpus-2026-10-20.md) | Actualización del corpus para rc.19: publicaciones posteriores al corte, correcciones de segmentación y verificaciones | 2026-10-20 |
 | [auditorias/hallazgos-2026-10-19.json](auditorias/hallazgos-2026-10-19.json) | Estado vigente de todos los hallazgos (seguridad, datos, dependencias, rendimiento, código, pruebas) | 2026-10-19 |
 | [auditorias/evidencia-2026-10-19.json](auditorias/evidencia-2026-10-19.json) | Bundle sanitizado de CI, auditorías, `npm audit`, preflight, cobertura e instalador del piloto | 2026-10-19 |
 | [auditorias/rendimiento-2026-10-19.md](auditorias/rendimiento-2026-10-19.md) | Auditoría de rendimiento con umbrales | 2026-10-19 |

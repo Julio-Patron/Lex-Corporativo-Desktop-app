@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-07-14",
+  "checkedAt": "2026-10-20",
   "sources": [
     {
       "code": "CFF",
@@ -14,11 +14,13 @@
       "pages": 377,
       "publishedAt": null,
       "lastReform": "2026-04-09",
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": false,
       "firstProvisionPage": 1,
       "transitoryPage": 243,
       "provisions": 421,
-      "candidateSha256": "32a499f1efc39b99b2b0439f686eba61a74230bbb41b7e77f0affc6ad12870f7",
+      "candidateSha256": "0fc27f9c51bf384c7a818d3234a8e2d39bdda8eb16289daf5c896ca353d1aa4d",
       "validation": {
         "status": "pass",
         "failures": [],
@@ -42,6 +44,8 @@
       "publishedAt": "2013-12-11",
       "lastReform": "2024-04-01",
       "checkedAt": "2026-07-14",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": true,
       "firstProvisionPage": 1,
       "transitoryPage": 278,
       "provisions": 236,
@@ -69,6 +73,8 @@
       "publishedAt": "2015-10-08",
       "lastReform": "2016-05-06",
       "checkedAt": "2026-07-14",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": true,
       "firstProvisionPage": 1,
       "transitoryPage": 90,
       "provisions": 313,
@@ -93,11 +99,13 @@
       "pages": 128,
       "publishedAt": "1978-12-29",
       "lastReform": "2021-11-12",
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": false,
       "firstProvisionPage": 1,
       "transitoryPage": 50,
-      "provisions": 79,
-      "candidateSha256": "ee7d406682635990cdf310c25ff5bcfa8af7fc360d44c9af56887e2df432a1be",
+      "provisions": 80,
+      "candidateSha256": "dbb9f7eb3c5de0be0f144cb0a28ec81ab910c2eb75a021654cd945580f5331e0",
       "validation": {
         "status": "pass",
         "failures": [],
@@ -121,6 +129,8 @@
       "publishedAt": "2006-12-04",
       "lastReform": "2014-09-25",
       "checkedAt": "2026-07-14",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": true,
       "firstProvisionPage": 1,
       "transitoryPage": 15,
       "provisions": 84,
@@ -146,12 +156,14 @@
       "bytes": 4688799,
       "pages": 666,
       "publishedAt": "2025-12-28",
-      "lastReform": null,
-      "checkedAt": "2026-07-14",
+      "lastReform": "2026-10-01",
+      "checkedAt": "2026-10-20",
+      "recheckedAt": "2026-10-20",
+      "canonicalUnchanged": false,
       "firstProvisionPage": 9,
       "transitoryPage": 661,
       "provisions": 1196,
-      "candidateSha256": "8261ac65ba20f7bba53244988fab04ff6648c25a079efb61a6460af7aedf5ed9",
+      "candidateSha256": "eb6ec05554b1d4576c41411713919c8271d7faadf933938646461219eb4679ce",
       "validation": {
         "status": "pass",
         "failures": [],
@@ -160,439 +172,478 @@
       "promotionEligible": true,
       "promotionBlocker": null,
       "corpusProvenance": "official_base_with_published_amendment_overlay",
-      "effectiveFrom": "2026-07-10",
-      "amendmentCode": "RMF-2026-1RM",
-      "amendmentSourceSha256": "ff4b0ed8957f4ff5cbb678f8fdd2e4da84b3a4a96d259027ed0d817c255e6e37",
-      "appliedPatches": [
+      "effectiveFrom": "2026-10-01",
+      "appliedAmendments": [
         {
-          "id": "2.1.6",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "2a83c236a9b62f3d07e338f6920f9deba2f1841b794b92bf44ccc34503afebc0",
-          "amendmentContentSha256": "012e07d4a052a2866194f5abdd18b47b230221fd8aac863e2403dfb69eec07b0",
-          "consolidatedContentSha256": "a0e68cb4ead18bf63a9bcb132084b9f1952d5a38f81d724959169c4a888cf33b",
-          "amendmentSourcePages": [
-            1,
-            2
+          "code": "RMF-2026-1RM",
+          "sourceSha256": "ff4b0ed8957f4ff5cbb678f8fdd2e4da84b3a4a96d259027ed0d817c255e6e37",
+          "publishedAt": "2026-07-09",
+          "effectiveFrom": "2026-07-10",
+          "status": "pass",
+          "patches": [
+            {
+              "id": "2.1.6",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "2a83c236a9b62f3d07e338f6920f9deba2f1841b794b92bf44ccc34503afebc0",
+              "amendmentContentSha256": "012e07d4a052a2866194f5abdd18b47b230221fd8aac863e2403dfb69eec07b0",
+              "consolidatedContentSha256": "a0e68cb4ead18bf63a9bcb132084b9f1952d5a38f81d724959169c4a888cf33b",
+              "amendmentSourcePages": [
+                1,
+                2
+              ]
+            },
+            {
+              "id": "2.4.1",
+              "operation": "reforma",
+              "scope": "tercer párrafo, fracción I, inciso a)",
+              "baseContentSha256": "e7c18deefcfe3673f1aa719e8b78c59a11b874db71012240e1d274d5c4537947",
+              "amendmentContentSha256": "182c01e24cafa97fc1194a687212d0aeac65e6b0064e5a3df9932a25028aa7aa",
+              "consolidatedContentSha256": "000f88765fd63f60ca3b8de5e797b37f1e887282db46ef4cde3569c4bf73f089",
+              "amendmentSourcePages": [
+                2
+              ]
+            },
+            {
+              "id": "2.7.1.48",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "47f3333c33f2414e8a6e0902325b3f9227e606fab81035be37435be3fbd7495c",
+              "amendmentContentSha256": "63144f755845fea4a0d5757af8bfb7bd2a8ff50208b14ad2df6de4a6936bfb23",
+              "consolidatedContentSha256": "239e6369f5ec0497d3c4176dd3a279064743fcdecdabfe78b67f4b520bee3e1d",
+              "amendmentSourcePages": [
+                2
+              ]
+            },
+            {
+              "id": "2.7.3.1",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "e4456d3fe9dcf708880a5657741a66cce13d006d0d46976f558dbeaed1c5e316",
+              "amendmentContentSha256": "1903a0254924fc5cb1ea38f5d64525aa56fd9f03ad52585664cc8df2e4b966f1",
+              "consolidatedContentSha256": "1e256dc6608176fecfc981776a566b13f6ccb121d5e66521ddcc7098e1c9bd74",
+              "amendmentSourcePages": [
+                2,
+                3
+              ]
+            },
+            {
+              "id": "2.7.3.2",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "e28ae5c10f5a0ad3a401e192fcb269d2cb6b706cb53843dec27020bea6624c3c",
+              "amendmentContentSha256": "7ab8eec0447d9b8e568466ded8fef4713ab3b6c215f4962a635334599d71c775",
+              "consolidatedContentSha256": "235dea6af866c93a2f5e1224f0a92f4b831b687bdff8be828379f125205d125a",
+              "amendmentSourcePages": [
+                3
+              ]
+            },
+            {
+              "id": "2.7.3.3",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "ebea41ce9671f323ed61364b8634001f87f788d4729d3ab5ec75bfe79fd4db88",
+              "amendmentContentSha256": "fb3d35e1da6ceb55667d16d4efcad516ca34a3069c2f1b5f6c02740df7365dc7",
+              "consolidatedContentSha256": "a9a14c7539b0ce224795641a817e6925ca49cf9f5ee93ccd925fb776027ba19e",
+              "amendmentSourcePages": [
+                3
+              ]
+            },
+            {
+              "id": "2.7.3.4",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "2ee546e5ad574afba921bc382af3cefd90bf4cc054ce703a77e002d745bd5cd6",
+              "amendmentContentSha256": "2bf653cec86c438cc78bdc54624c0aa8f1d4955fdf4d65c97320c66c78b3faf6",
+              "consolidatedContentSha256": "cf132277ebc6f830422137ea3347c2fc011bc4762e9ebcc701cde76529bf2033",
+              "amendmentSourcePages": [
+                3
+              ]
+            },
+            {
+              "id": "2.7.3.5",
+              "operation": "reforma",
+              "scope": "cuarto párrafo",
+              "baseContentSha256": "8fe77b24114fc5c8411ae39027b08cbd94e411c46862ba9aa31393b4fb2a1592",
+              "amendmentContentSha256": "74dfe2cffd6a2da9f4f483381d0cfbc0f05b8b39b75f3b14466173d263fca891",
+              "consolidatedContentSha256": "d332224fddf68675ecbad5a1a11775cfbd1b3a9a76dbde3865fa9bf7fdfd6a52",
+              "amendmentSourcePages": [
+                3,
+                4
+              ]
+            },
+            {
+              "id": "2.7.3.7",
+              "operation": "reforma",
+              "scope": "sexto párrafo",
+              "baseContentSha256": "c1edc8d3be0f8d1d29fb04b3a1fbac23b7fdc1d8ff7b43d7c81d46a580237cf7",
+              "amendmentContentSha256": "c9564478fd5655e359660033ed6a27232d9d96bd932604cd3cec333dcb84cdb2",
+              "consolidatedContentSha256": "0257b0ebe768e6853c93600683e73b793952c89d47fc98208c587777df80eb46",
+              "amendmentSourcePages": [
+                4
+              ]
+            },
+            {
+              "id": "2.7.3.8",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "44b513b17b7fb118ec5662f64e6fd5695f29563d115e99b12b93831b868c36dd",
+              "amendmentContentSha256": "b26318c79c06012312e18ad490c8d8845500b5ea625ea94d6a40398910e1dae1",
+              "consolidatedContentSha256": "0233cd2045204e78005de59678823d8bf8fa4e99e991dc36973264efb9cd9f22",
+              "amendmentSourcePages": [
+                4
+              ]
+            },
+            {
+              "id": "2.7.3.9",
+              "operation": "reforma",
+              "scope": "tercer párrafo",
+              "baseContentSha256": "f8ee914db2a391cd2e67e6a5a67600f6ad4f1c7e00cdc5d7d295e18803ee0fa3",
+              "amendmentContentSha256": "3f3eabe40f44d781a19596e41d74972fd0b282c40ca8131aaeab371e7fca7356",
+              "consolidatedContentSha256": "108d8c923520f4a0f201601f3a2f098e7e7927aa4d9f625f0421d0faece328e5",
+              "amendmentSourcePages": [
+                4,
+                5
+              ]
+            },
+            {
+              "id": "2.7.4.1",
+              "operation": "reforma",
+              "scope": "sexto párrafo",
+              "baseContentSha256": "b01aef8ddb48a96b88df57484c91af172bc9eece640c55861a3e0f8dfa93d66c",
+              "amendmentContentSha256": "44948206d78f60a0a55a146ec2612cb96e3a0e2ae4ce783526d683a5509c48ee",
+              "consolidatedContentSha256": "f28cbaa044a6423fe9945fc73312adea9cdb03072562ba0017d1b08fef921e4b",
+              "amendmentSourcePages": [
+                5
+              ]
+            },
+            {
+              "id": "2.7.5.8",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "8bb6c41990ba3cd0f267d16179925c1bd7ab9ff8e88537018534d83d2d338be7",
+              "amendmentContentSha256": "ad8b8ff64a4a77b302d99859f26583541cb24c77bc8fe4c53599a55130e8471d",
+              "consolidatedContentSha256": "74401cfce6857688c391f20a2e6d1b1eb4bef6674a6b2e701b447a38d0f4599b",
+              "amendmentSourcePages": [
+                5
+              ]
+            },
+            {
+              "id": "2.10.10",
+              "operation": "reforma",
+              "scope": "segundo párrafo",
+              "baseContentSha256": "9fac08a291b48e53e85ac2d92e2b0df9cedf1b5b155bd9df0274e3136154f100",
+              "amendmentContentSha256": "b78b90a2e26381b5c392c6df7c8794fb579c90833f60d5843940caf5d5a61614",
+              "consolidatedContentSha256": "31bed4604e1e4fef30bd135e46823e8065c23a6d877e559dcec0b8eb08b4ff83",
+              "amendmentSourcePages": [
+                5,
+                6
+              ]
+            },
+            {
+              "id": "2.11.3",
+              "operation": "reforma",
+              "scope": "primer párrafo, fracción II, segundo párrafo, y segundo y tercer párrafos de la regla",
+              "baseContentSha256": "461d6ac808cf1d62dc55d7a90819a6aab92f2276c0c2b47f9ff526417df6dd9e",
+              "amendmentContentSha256": "76c750f236d5c9857bfb9359c13a70dbd60fab9c218e81a3646305189884f927",
+              "consolidatedContentSha256": "c1dab8c4b2ce31d9da28c9db15a7d644b3c0ae4dfa1429f163056a3b62fe74bf",
+              "amendmentSourcePages": [
+                6
+              ]
+            },
+            {
+              "id": "2.14.3",
+              "operation": "reforma",
+              "scope": "segundo párrafo",
+              "baseContentSha256": "343e06a5cb9b35e57c27e7c60ad3c3a5a4f67ff591aa0fa02a31a97d042d62b4",
+              "amendmentContentSha256": "907293fee748703c515db5e0bdd652c5a2b323ba212b11f3a5853cc1603366dc",
+              "consolidatedContentSha256": "ceff15d6d8b0965f0a65dfbf8719fa655d7d893b9e40643a55c59db75efa2bf6",
+              "amendmentSourcePages": [
+                7
+              ]
+            },
+            {
+              "id": "2.14.9",
+              "operation": "reforma",
+              "scope": "fracciones III y IV, segundo párrafo",
+              "baseContentSha256": "d2164c8538350d2e44a9e0547a1bcd6075446a3685f0d12ccced8d4fa12b325c",
+              "amendmentContentSha256": "264cb6bc7e128413b794e7f234c2b79205a3dc2ae16a7171cec9cfbfc2ca3636",
+              "consolidatedContentSha256": "2b02d41cc350a826fd134b7f252edf9eaddc335a5f40ad996b44ad04d534358e",
+              "amendmentSourcePages": [
+                7
+              ]
+            },
+            {
+              "id": "2.14.11",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "c3007f7f48e39502399096c1dfdc7d8336114a4db767469db06f803b7a96e290",
+              "amendmentContentSha256": "34baa2822ef7b1636b2cddfa90b12499bb14c685a14c629398374d13b33e680d",
+              "consolidatedContentSha256": "a99a42e098075e51d3fd16d9bc74f0c0e9cf32d3f830ad6bd6a1e98234571cc0",
+              "amendmentSourcePages": [
+                7,
+                8
+              ]
+            },
+            {
+              "id": "3.15.14",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "3ca09a928d666dc2d71f35f88ddea00a4230b9ab7ba2734eac44232a5241ea77",
+              "amendmentContentSha256": "bdf5932d7aff54ab7c1bc93236cea15f333eebd3be9763273f7be470131ebb67",
+              "consolidatedContentSha256": "2de30907e3b61e06713220b0cee3671802ffba906c98830a75df7825e26caf3a",
+              "amendmentSourcePages": [
+                9
+              ]
+            },
+            {
+              "id": "3.16.11",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "05fbdfca8ec9c07c7f0e1bd77d823c1fd8a205502ed895d0efdf904dd1211e92",
+              "amendmentContentSha256": "75877093bb0eb5bcde53f7e0a2d75de1008bf47254e5015702dcd194f613aec0",
+              "consolidatedContentSha256": "00998ded62fc635eb1e0df9526affa6b7151fa46650f21130c7b6644ba18d400",
+              "amendmentSourcePages": [
+                9
+              ]
+            },
+            {
+              "id": "5.2.7",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "6240e83db5159acbfc5ab7149c52f840eee83855f9306dc0974afbd5c2f32ca6",
+              "amendmentContentSha256": "a174b185e6f859788806c4757ada0dbec6bf67162d7e30a78166b4f2f1942645",
+              "consolidatedContentSha256": "aa0ca14ca7b9c6d18d28d13558086f3e5239e2e74ddc3edea2f84930306c623f",
+              "amendmentSourcePages": [
+                9,
+                10
+              ]
+            },
+            {
+              "id": "5.2.8",
+              "operation": "reforma",
+              "scope": "segundo párrafo",
+              "baseContentSha256": "858614a34ed51671c0826ec90a69ecfc2e9e0ad6287df975b0251e20e1d4b18d",
+              "amendmentContentSha256": "0db818febe6ad86e4fc806d8773c323329fa1b58dc4e8806304e06acb43c9675",
+              "consolidatedContentSha256": "5c8989094e23873e503746edc23a616d32413f4c8b0d2f2df0695121fdd537b7",
+              "amendmentSourcePages": [
+                10
+              ]
+            },
+            {
+              "id": "5.2.48",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "17cd42d51ed12b56d03168407137d8cd3830057968fc9a2c7cad7922797ba786",
+              "amendmentContentSha256": "8d3430095c0889a3fe150a8163c9f37888272c2164afc28a260a8b0dcc1ebcaa",
+              "consolidatedContentSha256": "b63caba2d5557ec5e18b211435bc07136da20f0d02dac7ab0653f117c9fa9477",
+              "amendmentSourcePages": [
+                10
+              ]
+            },
+            {
+              "id": "9.4.6",
+              "operation": "reforma",
+              "scope": "fracciones I, primer párrafo y II",
+              "baseContentSha256": "e7dbc84fab3f882b4cae90aacd76e51cf93ccb1ef1c366654d0ad000935ebbb3",
+              "amendmentContentSha256": "4813d3daeb1e44cd0d9c6d7ef24c833dff267d66636d56bc70cbac144e5a9bbf",
+              "consolidatedContentSha256": "a7a6e13aae6e2d6d9504726f0362c63515b93a2756a787cb055785e53fbf06a8",
+              "amendmentSourcePages": [
+                11,
+                12
+              ]
+            },
+            {
+              "id": "10.16",
+              "operation": "reforma",
+              "scope": "primer párrafo, fracción VI",
+              "baseContentSha256": "e1b5a8f1ed43aaa830da3e326082110332319f1c11db3d0c23b7c7a077e537b7",
+              "amendmentContentSha256": "39be51b48bab6112ecbf3934759c2f82213c0b89d0c93015ae35649671473a66",
+              "consolidatedContentSha256": "08c5fe75d886c916c774ed03f6119c2230e70dc966bf85cfcf28d4eb940e6d64",
+              "amendmentSourcePages": [
+                12
+              ]
+            },
+            {
+              "id": "11.7.1",
+              "operation": "reforma",
+              "scope": "apartado A, fracciones II, primer párrafo y III, inciso g), numeral 3",
+              "baseContentSha256": "cc2571786594b5bc2da0b578e4559a378e9fcc23169f1a7aa82dfe985daec633",
+              "amendmentContentSha256": "13b2ba411a1fa35b651c76dba46d2189c253f7fbe19146cc0b20e94b173d6e1b",
+              "consolidatedContentSha256": "d1faafe2e0190aafb20f7564b8803e109dde61b49f769b99162c2bdcf413d734",
+              "amendmentSourcePages": [
+                12,
+                13
+              ]
+            },
+            {
+              "id": "11.9.13",
+              "operation": "reforma",
+              "scope": "primer párrafo",
+              "baseContentSha256": "deb80b3828656ccffad28c320d1656d0bcf309ed56233e09553ec9534dae8911",
+              "amendmentContentSha256": "be02d508416090b2565934da99e4a922792b504b1b88f26a1b1a95b10e950dd9",
+              "consolidatedContentSha256": "39eae47e6c0e16d6b55285e76a05fda2da78077341cb612651bbf5c9ca3bce96",
+              "amendmentSourcePages": [
+                14
+              ]
+            },
+            {
+              "id": "12.1.2",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "149a54ff2b243c296f7ea410c531af4693f59e5be007c17dcdb82dab36f1d806",
+              "amendmentContentSha256": "d09bc802a2c5f2e79b98339907423d9f8191ce5ed6d20e3fd1b93294f252fe6e",
+              "consolidatedContentSha256": "f54b20d038a311f343776bd386945b72f020d52724a94ba234f9a49b32aa11ed",
+              "amendmentSourcePages": [
+                15
+              ]
+            },
+            {
+              "id": "12.1.9",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "50fc45a16a442b452b390e49ef163e2a61d809e8e9a63137e3b6015fd2796ae1",
+              "amendmentContentSha256": "11f6ae64dce2d06fb1ff400942be2d58cf760f3c7e7be95e4e581073a53b6b4d",
+              "consolidatedContentSha256": "e5b64bc507e0514a00830b165abc0df429a111b71b226d82e976de4202e2911d",
+              "amendmentSourcePages": [
+                15
+              ]
+            },
+            {
+              "id": "12.1.11",
+              "operation": "reforma",
+              "scope": "regla completa",
+              "baseContentSha256": "3d6f2752bc61718d5f4ec220021bfe3a3a6e6fc31d08ea765b46d1e6f3b76039",
+              "amendmentContentSha256": "aa077ef9bb544dd64d1d363362381cb584daab0b259c664a8ab66f2ec9b2d65f",
+              "consolidatedContentSha256": "7c1c335abfbdc9989313197dd6c2110e8ec1a510cf8c41addea0bff5589a0194",
+              "amendmentSourcePages": [
+                15,
+                17
+              ]
+            },
+            {
+              "id": "3.5.23",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "6a2d6d878aa9e82369442bbaac467b6793b09c4039582a9d93e4a79d06b18265",
+              "consolidatedContentSha256": "19ef0ee5b51d22d513829e90fcecbf1f55ee06d33ad81311a27097efa211a961",
+              "amendmentSourcePages": [
+                8,
+                9
+              ]
+            },
+            {
+              "id": "9.1.23",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "fa6ec2f203453ed062881370adba52f967d26df189c9ba65fa5c6272d2b19a78",
+              "consolidatedContentSha256": "8070de70990f7b3b8bd9a476c357e80cba1f1d0da3f0dc1682a03cc65a50af86",
+              "amendmentSourcePages": [
+                11
+              ]
+            },
+            {
+              "id": "9.1.24",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "7d4d2692822c3351e385067fe69256afbbfbe16b37a0f5a62808d5d267b3fdb3",
+              "consolidatedContentSha256": "a79b5b78390b190ae61ac78ed9c9a3aea3febe5a7cfe481dccb1b988e468fe81",
+              "amendmentSourcePages": [
+                11
+              ]
+            },
+            {
+              "id": "11.7.3",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "9d9e7c9ce787201e24b71e0d6f97ca1090b46bc2653993a7ea999d5a682b0c0c",
+              "consolidatedContentSha256": "bb48fa3b7e56915b83f77118fd04b6b4ea7c103c8e8386cedcfc77406df7c8d4",
+              "amendmentSourcePages": [
+                13,
+                14
+              ]
+            },
+            {
+              "id": "11.18.1",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "ca053d77df5260abbba55455e2ffdac6d1da5cdb94f459e47813e8b0efc8e343",
+              "consolidatedContentSha256": "af85713512280094b46837d2958030f93384655430df2f2c0fb957e11315affd",
+              "amendmentSourcePages": [
+                14
+              ]
+            },
+            {
+              "id": "11.18.2",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "50128b3e6129c9c86fd2a734b56486f8050912b23505409dabcb09d4f43918f5",
+              "consolidatedContentSha256": "5033ad2efbcb6a880b88e8998b0fa9b8e2209e27f5540205f3e01bc7e496f142",
+              "amendmentSourcePages": [
+                14
+              ]
+            },
+            {
+              "id": "11.18.3",
+              "operation": "adición",
+              "scope": "regla completa",
+              "baseContentSha256": null,
+              "amendmentContentSha256": "a4fa89aef9abe3eb38ced63fe7c3939ef7bf05744e822e91d666c30c4460936e",
+              "consolidatedContentSha256": "d01df8b86e2606590358a4e561f98bd45458abf3cd723c9450fbbbca76bf3fc1",
+              "amendmentSourcePages": [
+                14,
+                15
+              ]
+            },
+            {
+              "id": "2.12.4",
+              "operation": "derogación",
+              "scope": "regla completa",
+              "baseContentSha256": "b9691ff47e602f89e101ace1be141aa3de5daa48033a87ddfdc484688e7bb847",
+              "amendmentContentSha256": "4428207c61b2d433e8a145a5debc7661bcec7723eef2c3bef37c65deb36809a6",
+              "consolidatedContentSha256": "11d185fc696ffc19c20551628bbdebfd135ef931aabb09b7c7884a1991020348",
+              "amendmentSourcePages": [
+                6
+              ]
+            }
           ]
         },
         {
-          "id": "2.4.1",
-          "operation": "reforma",
-          "scope": "tercer párrafo, fracción I, inciso a)",
-          "baseContentSha256": "e7c18deefcfe3673f1aa719e8b78c59a11b874db71012240e1d274d5c4537947",
-          "amendmentContentSha256": "182c01e24cafa97fc1194a687212d0aeac65e6b0064e5a3df9932a25028aa7aa",
-          "consolidatedContentSha256": "000f88765fd63f60ca3b8de5e797b37f1e887282db46ef4cde3569c4bf73f089",
-          "amendmentSourcePages": [
-            2
-          ]
-        },
-        {
-          "id": "2.7.1.48",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "47f3333c33f2414e8a6e0902325b3f9227e606fab81035be37435be3fbd7495c",
-          "amendmentContentSha256": "63144f755845fea4a0d5757af8bfb7bd2a8ff50208b14ad2df6de4a6936bfb23",
-          "consolidatedContentSha256": "239e6369f5ec0497d3c4176dd3a279064743fcdecdabfe78b67f4b520bee3e1d",
-          "amendmentSourcePages": [
-            2
-          ]
-        },
-        {
-          "id": "2.7.3.1",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "e4456d3fe9dcf708880a5657741a66cce13d006d0d46976f558dbeaed1c5e316",
-          "amendmentContentSha256": "1903a0254924fc5cb1ea38f5d64525aa56fd9f03ad52585664cc8df2e4b966f1",
-          "consolidatedContentSha256": "1e256dc6608176fecfc981776a566b13f6ccb121d5e66521ddcc7098e1c9bd74",
-          "amendmentSourcePages": [
-            2,
-            3
-          ]
-        },
-        {
-          "id": "2.7.3.2",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "e28ae5c10f5a0ad3a401e192fcb269d2cb6b706cb53843dec27020bea6624c3c",
-          "amendmentContentSha256": "7ab8eec0447d9b8e568466ded8fef4713ab3b6c215f4962a635334599d71c775",
-          "consolidatedContentSha256": "235dea6af866c93a2f5e1224f0a92f4b831b687bdff8be828379f125205d125a",
-          "amendmentSourcePages": [
-            3
-          ]
-        },
-        {
-          "id": "2.7.3.3",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "ebea41ce9671f323ed61364b8634001f87f788d4729d3ab5ec75bfe79fd4db88",
-          "amendmentContentSha256": "fb3d35e1da6ceb55667d16d4efcad516ca34a3069c2f1b5f6c02740df7365dc7",
-          "consolidatedContentSha256": "a9a14c7539b0ce224795641a817e6925ca49cf9f5ee93ccd925fb776027ba19e",
-          "amendmentSourcePages": [
-            3
-          ]
-        },
-        {
-          "id": "2.7.3.4",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "2ee546e5ad574afba921bc382af3cefd90bf4cc054ce703a77e002d745bd5cd6",
-          "amendmentContentSha256": "2bf653cec86c438cc78bdc54624c0aa8f1d4955fdf4d65c97320c66c78b3faf6",
-          "consolidatedContentSha256": "cf132277ebc6f830422137ea3347c2fc011bc4762e9ebcc701cde76529bf2033",
-          "amendmentSourcePages": [
-            3
-          ]
-        },
-        {
-          "id": "2.7.3.5",
-          "operation": "reforma",
-          "scope": "cuarto párrafo",
-          "baseContentSha256": "8fe77b24114fc5c8411ae39027b08cbd94e411c46862ba9aa31393b4fb2a1592",
-          "amendmentContentSha256": "74dfe2cffd6a2da9f4f483381d0cfbc0f05b8b39b75f3b14466173d263fca891",
-          "consolidatedContentSha256": "d332224fddf68675ecbad5a1a11775cfbd1b3a9a76dbde3865fa9bf7fdfd6a52",
-          "amendmentSourcePages": [
-            3,
-            4
-          ]
-        },
-        {
-          "id": "2.7.3.7",
-          "operation": "reforma",
-          "scope": "sexto párrafo",
-          "baseContentSha256": "c1edc8d3be0f8d1d29fb04b3a1fbac23b7fdc1d8ff7b43d7c81d46a580237cf7",
-          "amendmentContentSha256": "c9564478fd5655e359660033ed6a27232d9d96bd932604cd3cec333dcb84cdb2",
-          "consolidatedContentSha256": "0257b0ebe768e6853c93600683e73b793952c89d47fc98208c587777df80eb46",
-          "amendmentSourcePages": [
-            4
-          ]
-        },
-        {
-          "id": "2.7.3.8",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "44b513b17b7fb118ec5662f64e6fd5695f29563d115e99b12b93831b868c36dd",
-          "amendmentContentSha256": "b26318c79c06012312e18ad490c8d8845500b5ea625ea94d6a40398910e1dae1",
-          "consolidatedContentSha256": "0233cd2045204e78005de59678823d8bf8fa4e99e991dc36973264efb9cd9f22",
-          "amendmentSourcePages": [
-            4
-          ]
-        },
-        {
-          "id": "2.7.3.9",
-          "operation": "reforma",
-          "scope": "tercer párrafo",
-          "baseContentSha256": "f8ee914db2a391cd2e67e6a5a67600f6ad4f1c7e00cdc5d7d295e18803ee0fa3",
-          "amendmentContentSha256": "3f3eabe40f44d781a19596e41d74972fd0b282c40ca8131aaeab371e7fca7356",
-          "consolidatedContentSha256": "108d8c923520f4a0f201601f3a2f098e7e7927aa4d9f625f0421d0faece328e5",
-          "amendmentSourcePages": [
-            4,
-            5
-          ]
-        },
-        {
-          "id": "2.7.4.1",
-          "operation": "reforma",
-          "scope": "sexto párrafo",
-          "baseContentSha256": "b01aef8ddb48a96b88df57484c91af172bc9eece640c55861a3e0f8dfa93d66c",
-          "amendmentContentSha256": "44948206d78f60a0a55a146ec2612cb96e3a0e2ae4ce783526d683a5509c48ee",
-          "consolidatedContentSha256": "f28cbaa044a6423fe9945fc73312adea9cdb03072562ba0017d1b08fef921e4b",
-          "amendmentSourcePages": [
-            5
-          ]
-        },
-        {
-          "id": "2.7.5.8",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "8bb6c41990ba3cd0f267d16179925c1bd7ab9ff8e88537018534d83d2d338be7",
-          "amendmentContentSha256": "ad8b8ff64a4a77b302d99859f26583541cb24c77bc8fe4c53599a55130e8471d",
-          "consolidatedContentSha256": "74401cfce6857688c391f20a2e6d1b1eb4bef6674a6b2e701b447a38d0f4599b",
-          "amendmentSourcePages": [
-            5
-          ]
-        },
-        {
-          "id": "2.10.10",
-          "operation": "reforma",
-          "scope": "segundo párrafo",
-          "baseContentSha256": "9fac08a291b48e53e85ac2d92e2b0df9cedf1b5b155bd9df0274e3136154f100",
-          "amendmentContentSha256": "b78b90a2e26381b5c392c6df7c8794fb579c90833f60d5843940caf5d5a61614",
-          "consolidatedContentSha256": "31bed4604e1e4fef30bd135e46823e8065c23a6d877e559dcec0b8eb08b4ff83",
-          "amendmentSourcePages": [
-            5,
-            6
-          ]
-        },
-        {
-          "id": "2.11.3",
-          "operation": "reforma",
-          "scope": "primer párrafo, fracción II, segundo párrafo, y segundo y tercer párrafos de la regla",
-          "baseContentSha256": "461d6ac808cf1d62dc55d7a90819a6aab92f2276c0c2b47f9ff526417df6dd9e",
-          "amendmentContentSha256": "76c750f236d5c9857bfb9359c13a70dbd60fab9c218e81a3646305189884f927",
-          "consolidatedContentSha256": "c1dab8c4b2ce31d9da28c9db15a7d644b3c0ae4dfa1429f163056a3b62fe74bf",
-          "amendmentSourcePages": [
-            6
-          ]
-        },
-        {
-          "id": "2.14.3",
-          "operation": "reforma",
-          "scope": "segundo párrafo",
-          "baseContentSha256": "343e06a5cb9b35e57c27e7c60ad3c3a5a4f67ff591aa0fa02a31a97d042d62b4",
-          "amendmentContentSha256": "907293fee748703c515db5e0bdd652c5a2b323ba212b11f3a5853cc1603366dc",
-          "consolidatedContentSha256": "ceff15d6d8b0965f0a65dfbf8719fa655d7d893b9e40643a55c59db75efa2bf6",
-          "amendmentSourcePages": [
-            7
-          ]
-        },
-        {
-          "id": "2.14.9",
-          "operation": "reforma",
-          "scope": "fracciones III y IV, segundo párrafo",
-          "baseContentSha256": "d2164c8538350d2e44a9e0547a1bcd6075446a3685f0d12ccced8d4fa12b325c",
-          "amendmentContentSha256": "264cb6bc7e128413b794e7f234c2b79205a3dc2ae16a7171cec9cfbfc2ca3636",
-          "consolidatedContentSha256": "2b02d41cc350a826fd134b7f252edf9eaddc335a5f40ad996b44ad04d534358e",
-          "amendmentSourcePages": [
-            7
-          ]
-        },
-        {
-          "id": "2.14.11",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "c3007f7f48e39502399096c1dfdc7d8336114a4db767469db06f803b7a96e290",
-          "amendmentContentSha256": "34baa2822ef7b1636b2cddfa90b12499bb14c685a14c629398374d13b33e680d",
-          "consolidatedContentSha256": "a99a42e098075e51d3fd16d9bc74f0c0e9cf32d3f830ad6bd6a1e98234571cc0",
-          "amendmentSourcePages": [
-            7,
-            8
-          ]
-        },
-        {
-          "id": "3.15.14",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "3ca09a928d666dc2d71f35f88ddea00a4230b9ab7ba2734eac44232a5241ea77",
-          "amendmentContentSha256": "bdf5932d7aff54ab7c1bc93236cea15f333eebd3be9763273f7be470131ebb67",
-          "consolidatedContentSha256": "2de30907e3b61e06713220b0cee3671802ffba906c98830a75df7825e26caf3a",
-          "amendmentSourcePages": [
-            9
-          ]
-        },
-        {
-          "id": "3.16.11",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "05fbdfca8ec9c07c7f0e1bd77d823c1fd8a205502ed895d0efdf904dd1211e92",
-          "amendmentContentSha256": "75877093bb0eb5bcde53f7e0a2d75de1008bf47254e5015702dcd194f613aec0",
-          "consolidatedContentSha256": "00998ded62fc635eb1e0df9526affa6b7151fa46650f21130c7b6644ba18d400",
-          "amendmentSourcePages": [
-            9
-          ]
-        },
-        {
-          "id": "5.2.7",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "6240e83db5159acbfc5ab7149c52f840eee83855f9306dc0974afbd5c2f32ca6",
-          "amendmentContentSha256": "a174b185e6f859788806c4757ada0dbec6bf67162d7e30a78166b4f2f1942645",
-          "consolidatedContentSha256": "aa0ca14ca7b9c6d18d28d13558086f3e5239e2e74ddc3edea2f84930306c623f",
-          "amendmentSourcePages": [
-            9,
-            10
-          ]
-        },
-        {
-          "id": "5.2.8",
-          "operation": "reforma",
-          "scope": "segundo párrafo",
-          "baseContentSha256": "858614a34ed51671c0826ec90a69ecfc2e9e0ad6287df975b0251e20e1d4b18d",
-          "amendmentContentSha256": "0db818febe6ad86e4fc806d8773c323329fa1b58dc4e8806304e06acb43c9675",
-          "consolidatedContentSha256": "5c8989094e23873e503746edc23a616d32413f4c8b0d2f2df0695121fdd537b7",
-          "amendmentSourcePages": [
-            10
-          ]
-        },
-        {
-          "id": "5.2.48",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "17cd42d51ed12b56d03168407137d8cd3830057968fc9a2c7cad7922797ba786",
-          "amendmentContentSha256": "8d3430095c0889a3fe150a8163c9f37888272c2164afc28a260a8b0dcc1ebcaa",
-          "consolidatedContentSha256": "b63caba2d5557ec5e18b211435bc07136da20f0d02dac7ab0653f117c9fa9477",
-          "amendmentSourcePages": [
-            10
-          ]
-        },
-        {
-          "id": "9.4.6",
-          "operation": "reforma",
-          "scope": "fracciones I, primer párrafo y II",
-          "baseContentSha256": "e7dbc84fab3f882b4cae90aacd76e51cf93ccb1ef1c366654d0ad000935ebbb3",
-          "amendmentContentSha256": "4813d3daeb1e44cd0d9c6d7ef24c833dff267d66636d56bc70cbac144e5a9bbf",
-          "consolidatedContentSha256": "a7a6e13aae6e2d6d9504726f0362c63515b93a2756a787cb055785e53fbf06a8",
-          "amendmentSourcePages": [
-            11,
-            12
-          ]
-        },
-        {
-          "id": "10.16",
-          "operation": "reforma",
-          "scope": "primer párrafo, fracción VI",
-          "baseContentSha256": "e1b5a8f1ed43aaa830da3e326082110332319f1c11db3d0c23b7c7a077e537b7",
-          "amendmentContentSha256": "39be51b48bab6112ecbf3934759c2f82213c0b89d0c93015ae35649671473a66",
-          "consolidatedContentSha256": "08c5fe75d886c916c774ed03f6119c2230e70dc966bf85cfcf28d4eb940e6d64",
-          "amendmentSourcePages": [
-            12
-          ]
-        },
-        {
-          "id": "11.7.1",
-          "operation": "reforma",
-          "scope": "apartado A, fracciones II, primer párrafo y III, inciso g), numeral 3",
-          "baseContentSha256": "cc2571786594b5bc2da0b578e4559a378e9fcc23169f1a7aa82dfe985daec633",
-          "amendmentContentSha256": "13b2ba411a1fa35b651c76dba46d2189c253f7fbe19146cc0b20e94b173d6e1b",
-          "consolidatedContentSha256": "d1faafe2e0190aafb20f7564b8803e109dde61b49f769b99162c2bdcf413d734",
-          "amendmentSourcePages": [
-            12,
-            13
-          ]
-        },
-        {
-          "id": "11.9.13",
-          "operation": "reforma",
-          "scope": "primer párrafo",
-          "baseContentSha256": "deb80b3828656ccffad28c320d1656d0bcf309ed56233e09553ec9534dae8911",
-          "amendmentContentSha256": "be02d508416090b2565934da99e4a922792b504b1b88f26a1b1a95b10e950dd9",
-          "consolidatedContentSha256": "39eae47e6c0e16d6b55285e76a05fda2da78077341cb612651bbf5c9ca3bce96",
-          "amendmentSourcePages": [
-            14
-          ]
-        },
-        {
-          "id": "12.1.2",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "149a54ff2b243c296f7ea410c531af4693f59e5be007c17dcdb82dab36f1d806",
-          "amendmentContentSha256": "d09bc802a2c5f2e79b98339907423d9f8191ce5ed6d20e3fd1b93294f252fe6e",
-          "consolidatedContentSha256": "f54b20d038a311f343776bd386945b72f020d52724a94ba234f9a49b32aa11ed",
-          "amendmentSourcePages": [
-            15
-          ]
-        },
-        {
-          "id": "12.1.9",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "50fc45a16a442b452b390e49ef163e2a61d809e8e9a63137e3b6015fd2796ae1",
-          "amendmentContentSha256": "11f6ae64dce2d06fb1ff400942be2d58cf760f3c7e7be95e4e581073a53b6b4d",
-          "consolidatedContentSha256": "e5b64bc507e0514a00830b165abc0df429a111b71b226d82e976de4202e2911d",
-          "amendmentSourcePages": [
-            15
-          ]
-        },
-        {
-          "id": "12.1.11",
-          "operation": "reforma",
-          "scope": "regla completa",
-          "baseContentSha256": "3d6f2752bc61718d5f4ec220021bfe3a3a6e6fc31d08ea765b46d1e6f3b76039",
-          "amendmentContentSha256": "aa077ef9bb544dd64d1d363362381cb584daab0b259c664a8ab66f2ec9b2d65f",
-          "consolidatedContentSha256": "7c1c335abfbdc9989313197dd6c2110e8ec1a510cf8c41addea0bff5589a0194",
-          "amendmentSourcePages": [
-            15,
-            17
-          ]
-        },
-        {
-          "id": "3.5.23",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "6a2d6d878aa9e82369442bbaac467b6793b09c4039582a9d93e4a79d06b18265",
-          "consolidatedContentSha256": "19ef0ee5b51d22d513829e90fcecbf1f55ee06d33ad81311a27097efa211a961",
-          "amendmentSourcePages": [
-            8,
-            9
-          ]
-        },
-        {
-          "id": "9.1.23",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "fa6ec2f203453ed062881370adba52f967d26df189c9ba65fa5c6272d2b19a78",
-          "consolidatedContentSha256": "8070de70990f7b3b8bd9a476c357e80cba1f1d0da3f0dc1682a03cc65a50af86",
-          "amendmentSourcePages": [
-            11
-          ]
-        },
-        {
-          "id": "9.1.24",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "7d4d2692822c3351e385067fe69256afbbfbe16b37a0f5a62808d5d267b3fdb3",
-          "consolidatedContentSha256": "a79b5b78390b190ae61ac78ed9c9a3aea3febe5a7cfe481dccb1b988e468fe81",
-          "amendmentSourcePages": [
-            11
-          ]
-        },
-        {
-          "id": "11.7.3",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "9d9e7c9ce787201e24b71e0d6f97ca1090b46bc2653993a7ea999d5a682b0c0c",
-          "consolidatedContentSha256": "bb48fa3b7e56915b83f77118fd04b6b4ea7c103c8e8386cedcfc77406df7c8d4",
-          "amendmentSourcePages": [
-            13,
-            14
-          ]
-        },
-        {
-          "id": "11.18.1",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "ca053d77df5260abbba55455e2ffdac6d1da5cdb94f459e47813e8b0efc8e343",
-          "consolidatedContentSha256": "af85713512280094b46837d2958030f93384655430df2f2c0fb957e11315affd",
-          "amendmentSourcePages": [
-            14
-          ]
-        },
-        {
-          "id": "11.18.2",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "50128b3e6129c9c86fd2a734b56486f8050912b23505409dabcb09d4f43918f5",
-          "consolidatedContentSha256": "5033ad2efbcb6a880b88e8998b0fa9b8e2209e27f5540205f3e01bc7e496f142",
-          "amendmentSourcePages": [
-            14
-          ]
-        },
-        {
-          "id": "11.18.3",
-          "operation": "adición",
-          "scope": "regla completa",
-          "baseContentSha256": null,
-          "amendmentContentSha256": "a4fa89aef9abe3eb38ced63fe7c3939ef7bf05744e822e91d666c30c4460936e",
-          "consolidatedContentSha256": "d01df8b86e2606590358a4e561f98bd45458abf3cd723c9450fbbbca76bf3fc1",
-          "amendmentSourcePages": [
-            14,
-            15
-          ]
-        },
-        {
-          "id": "2.12.4",
-          "operation": "derogación",
-          "scope": "regla completa",
-          "baseContentSha256": "b9691ff47e602f89e101ace1be141aa3de5daa48033a87ddfdc484688e7bb847",
-          "amendmentContentSha256": "4428207c61b2d433e8a145a5debc7661bcec7723eef2c3bef37c65deb36809a6",
-          "consolidatedContentSha256": "11d185fc696ffc19c20551628bbdebfd135ef931aabb09b7c7884a1991020348",
-          "amendmentSourcePages": [
-            6
+          "code": "RMF-2026-2RM",
+          "sourceSha256": "e46db09fcbc46d87259b28a8683fe5a611bde9854a16d271bf35a5217cd9ed5b",
+          "publishedAt": "2026-10-01",
+          "effectiveFrom": "2026-10-01",
+          "status": "pass",
+          "patches": [
+            {
+              "id": "9.4.4",
+              "operation": "reforma y adición",
+              "scope": "segundo párrafo reformado; se adicionan los párrafos tercero y cuarto, y los actuales tercero y cuarto pasan a ser quinto y sexto",
+              "baseContentSha256": "f13eea5d578fd7cfffd6809106fbbac6537e163a93821e309cee06c3a8888338",
+              "amendmentContentSha256": "cd38692ea6a05680f0e6ba2da05aa1ba837f2bf4cb6901d1cbd7b5244deef79a",
+              "consolidatedContentSha256": "5270f38447eebf96fb351a0e012155f68295e951e44a87f2b5cc27b086179f4b",
+              "amendmentSourcePages": [
+                1
+              ]
+            },
+            {
+              "id": "11.7.3",
+              "operation": "adición",
+              "scope": "fracciones XIV a XXVI",
+              "baseContentSha256": "bb48fa3b7e56915b83f77118fd04b6b4ea7c103c8e8386cedcfc77406df7c8d4",
+              "amendmentContentSha256": "858477aecb859e8f604303d222b7e35b3a5ecab126485741ac538c9b6ec023d3",
+              "consolidatedContentSha256": "ba25723b2e1bd1fe7ef00e86d3c628cdbd1c9e1e4cd2215800cfc84714f50429",
+              "amendmentSourcePages": [
+                1,
+                2
+              ]
+            }
           ]
         }
       ]
@@ -606,11 +657,12 @@
       "url": "https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf",
       "authority": "Servicio de Administración Tributaria / Diario Oficial de la Federación",
       "publishedAt": "2026-07-09",
+      "effectiveFrom": "2026-07-10",
       "localFile": "tmp/pdfs/RMF_2026_1a_mod.pdf",
       "sourceSha256": "ff4b0ed8957f4ff5cbb678f8fdd2e4da84b3a4a96d259027ed0d817c255e6e37",
       "bytes": 232948,
       "pages": 17,
-      "checkedAt": "2026-07-14",
+      "checkedAt": "2026-10-20",
       "directive": "Se reforma el Glosario, fracción II, numeral 58, así como las reglas 2.1.6., primer párrafo;\n2.4.1., tercer párrafo, fracción I, inciso a); 2.7.1.48., primer párrafo; 2.7.3.1., tercer párrafo; 2.7.3.2., tercer\npárrafo; 2.7.3.3., tercer párrafo; 2.7.3.4., tercer párrafo; 2.7.3.5., cuarto párrafo; 2.7.3.7., sexto párrafo;\n2.7.3.8., tercer párrafo; 2.7.3.9., tercer párrafo; 2.7.4.1., sexto párrafo; 2.7.5.8.; 2.10.10., segundo párrafo;\n2.11.3., primer párrafo, fracción II, segundo párrafo, y segundo y tercer párrafos de la regla; 2.14.3., segundo\npárrafo; 2.14.9., fracciones III y IV, segundo párrafo; 2.14.11., primer párrafo; 3.15.14.; 3.16.11.; 5.2.7., primer\npárrafo; 5.2.8., segundo párrafo; 5.2.48., primer párrafo; 9.4.6., fracciones I, primer párrafo y II; 10.16., primer\npárrafo, fracción VI; 11.7.1., apartado A, fracciones II, primer párrafo y III, inciso g), numeral 3; 11.9.13., primer\npárrafo; 12.1.2.; 12.1.9.; 12.1.11.; se adicionan las reglas 3.5.23.; 9.1.23.; 9.1.24.; 11.7.3.; así como el\nCapítulo 11.18. que comprende las reglas 11.18.1. a 11.18.3. y se deroga la regla 2.12.4. de la Resolución\nMiscelánea Fiscal para 2026,",
       "mentionedProvisionIds": [
         "2.1.6",
@@ -692,8 +744,7 @@
           "11.7.3",
           "11.18",
           "11.18.1",
-          "11.18.3",
-          "2.12.4"
+          "11.18.3"
         ],
         "repealed": [
           "2.12.4"
@@ -701,9 +752,97 @@
       },
       "contentSha256": "e1116786f83c7d3ad79bd70ee073067fce4b294d5ed11d906ee22141016a085f",
       "status": "parsed_directive_requires_patch_application",
+      "directiveCheck": {
+        "status": "pass",
+        "undeclaredMentions": [],
+        "declaredNotMentioned": [
+          "11.18.2"
+        ]
+      },
+      "outOfCorpusChanges": [
+        "Glosario, fracción II, numeral 58 (el glosario no forma parte del corpus de reglas).",
+        "Anexos 1, 2, 3, 9, 14, 15, 21, 22 y 29 (los anexos no forman parte del corpus).",
+        "Transitorios de la RMF (se excluyen del corpus por política)."
+      ],
+      "expectedBlocks": 38,
       "parsedBlocks": 38,
       "missingProvisionIds": [],
       "patchExtractionStatus": "pass"
+    },
+    {
+      "code": "RMF-2026-2RM",
+      "name": "Segunda Resolución de Modificaciones a la RMF para 2026",
+      "file": "RMF_2026_2a_mod.pdf",
+      "url": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf",
+      "authority": "Servicio de Administración Tributaria / Diario Oficial de la Federación",
+      "publishedAt": "2026-10-01",
+      "effectiveFrom": "2026-10-01",
+      "localFile": "tmp/pdfs/RMF_2026_2a_mod.pdf",
+      "sourceSha256": "e46db09fcbc46d87259b28a8683fe5a611bde9854a16d271bf35a5217cd9ed5b",
+      "bytes": 142214,
+      "pages": 2,
+      "checkedAt": "2026-10-20",
+      "directive": "Se reforma la regla 9.4.4., segundo párrafo y se adicionan las reglas 9.4.4., tercer y cuarto\npárrafos, pasando los actuales a ser quinto y sexto, respectivamente; y 11.7.3., fracciones XIV a la XXVI de la\nResolución Miscelánea Fiscal para 2026,",
+      "mentionedProvisionIds": [
+        "9.4.4",
+        "11.7.3"
+      ],
+      "operations": {
+        "reformed": [
+          "9.4.4"
+        ],
+        "added": [
+          "9.4.4",
+          "11.7.3"
+        ],
+        "repealed": []
+      },
+      "contentSha256": "e4b29756007bb77fa16caeb39180417d90f76c1aa12ac732876fa3ece5a1ed57",
+      "status": "parsed_directive_requires_patch_application",
+      "directiveCheck": {
+        "status": "pass",
+        "undeclaredMentions": [],
+        "declaredNotMentioned": []
+      },
+      "outOfCorpusChanges": [
+        "Segunda Modificación al Anexo 2 de la RMF para 2026 (los anexos no forman parte del corpus).",
+        "Adición del transitorio Vigésimo Noveno (los transitorios se excluyen del corpus por política)."
+      ],
+      "expectedBlocks": 2,
+      "parsedBlocks": 2,
+      "missingProvisionIds": [],
+      "patchExtractionStatus": "pass"
+    },
+    {
+      "code": "RMF-2026-3RM",
+      "name": "Tercera Resolución de Modificaciones a la RMF para 2026",
+      "file": "RMF_2026_3a_mod.pdf",
+      "url": "https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/3aRM_RMF2026_DOF_02102026.pdf",
+      "authority": "Servicio de Administración Tributaria / Diario Oficial de la Federación",
+      "publishedAt": "2026-10-02",
+      "effectiveFrom": "2026-12-31",
+      "outOfCorpusChanges": [
+        "Primera Modificación al Anexo 7 de la RMF para 2026 (los anexos no forman parte del corpus)."
+      ],
+      "localFile": "tmp/pdfs/RMF_2026_3a_mod.pdf",
+      "sourceSha256": "ad76e833fa529562767539bcf682a4d88d0f22d193ec11100b87826d130ff77b",
+      "bytes": 11383,
+      "pages": 1,
+      "checkedAt": "2026-10-20",
+      "directive": "",
+      "mentionedProvisionIds": [],
+      "operations": {
+        "reformed": [],
+        "added": [],
+        "repealed": []
+      },
+      "contentSha256": "ac75248280cd0a1feaffcdd41c82e79b786752a8bd1b390682aaedd646cbd128",
+      "status": "checked_no_rule_changes",
+      "directiveCheck": null,
+      "expectedBlocks": 0,
+      "parsedBlocks": 0,
+      "missingProvisionIds": [],
+      "patchExtractionStatus": "not_applicable"
     }
   ],
   "provisions": [
@@ -2094,7 +2233,7 @@
         144,
         145
       ],
-      "contentSha256": "114562ae5fd09b88f7927ea5612538108094e5e24a1b435558352bb534f32b35"
+      "contentSha256": "0a470d4134af6e552c0b8ebe194f953de34287503462c1c06d0eef70559560e1"
     },
     {
       "provisionKey": "cff:article:76",
@@ -2103,7 +2242,7 @@
         145,
         146
       ],
-      "contentSha256": "adf08f5d4ed37cf819effc878a72eeaeddb6bc77ca08875caa79c791ad78c8aa"
+      "contentSha256": "e2907f5c5ea0cc351ce7a9f1ba7a42b9f9e33ef01d840b7887d20c39bd6bd43f"
     },
     {
       "provisionKey": "cff:article:77",
@@ -9220,7 +9359,15 @@
       "sourcePages": [
         32
       ],
-      "contentSha256": "8711aafdaafaff6cc9ef65d6f6e41c809d5c0bc0e29a0c26fde650c6ab06aa9e"
+      "contentSha256": "b796d2f4a8807232e37c55edf4db86cae81ec89f4d7fd28dcf44cc5cae2f7366"
+    },
+    {
+      "provisionKey": "liva:article:18-h-quintus",
+      "label": "Artículo 18-H Quintus",
+      "sourcePages": [
+        32
+      ],
+      "contentSha256": "09f3c7d1389a9e9f21d4100e2f79ff39937f683753d2597c9b2cfb51a626defc"
     },
     {
       "provisionKey": "liva:article:18-i",
@@ -18687,9 +18834,10 @@
       "provisionKey": "rmf:rule:9-4-4",
       "label": "Regla 9.4.4",
       "sourcePages": [
-        585
+        585,
+        1
       ],
-      "contentSha256": "f13eea5d578fd7cfffd6809106fbbac6537e163a93821e309cee06c3a8888338"
+      "contentSha256": "5270f38447eebf96fb351a0e012155f68295e951e44a87f2b5cc27b086179f4b"
     },
     {
       "provisionKey": "rmf:rule:9-4-5",
@@ -19276,9 +19424,11 @@
       "label": "Regla 11.7.3",
       "sourcePages": [
         13,
-        14
+        14,
+        1,
+        2
       ],
-      "contentSha256": "bb48fa3b7e56915b83f77118fd04b6b4ea7c103c8e8386cedcfc77406df7c8d4"
+      "contentSha256": "ba25723b2e1bd1fe7ef00e86d3c628cdbd1c9e1e4cd2215800cfc84714f50429"
     },
     {
       "provisionKey": "rmf:rule:11-8-1",
@@ -20262,10 +20412,12 @@
   ],
   "canonicalPromotions": [
     "CFF",
+    "LIVA",
+    "RMF"
+  ],
+  "unchangedSources": [
     "LISR",
     "RLISR",
-    "LIVA",
-    "RLIVA",
-    "RMF"
+    "RLIVA"
   ]
 }

@@ -2,10 +2,10 @@
 
 > Código: RMF
 > Módulo: fiscal
-> Fuente oficial: https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/RMF_2026-DOF-28122025.pdf + https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf
-> SHA-256 fuente: 6f71ce0cccf430171fe858c5d244b1c321fa68306f962d44ec4977858a52919a; amendment=ff4b0ed8957f4ff5cbb678f8fdd2e4da84b3a4a96d259027ed0d817c255e6e37
-> Verificación oficial: 2026-07-14
-> Última reforma indicada en la fuente: 2026-07-09
+> Fuente oficial: https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/RMF_2026-DOF-28122025.pdf + https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf + https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf
+> SHA-256 fuente: 6f71ce0cccf430171fe858c5d244b1c321fa68306f962d44ec4977858a52919a; amendment=ff4b0ed8957f4ff5cbb678f8fdd2e4da84b3a4a96d259027ed0d817c255e6e37; amendment=e46db09fcbc46d87259b28a8683fe5a611bde9854a16d271bf35a5217cd9ed5b
+> Verificación oficial: 2026-10-20
+> Última reforma indicada en la fuente: 2026-10-01
 **Regla 1.1**
 Para los efectos del artículo 32, fracción II del RISAT, la presentación de los documentos que
 deba hacerse ante las unidades administrativas del SAT, se hará por conducto de los módulos
@@ -33393,6 +33393,38 @@ Pago de ISR a cargo de las personas físicas residentes en el extranjero que ten
 calidad de jugadores
 
 **Regla 9.4.4**
+[ACTUALIZACIÓN OFICIAL VIGENTE — SEGUNDA RESOLUCIÓN DE MODIFICACIONES 2026]
+Operación: reforma y adición. Alcance publicado: segundo párrafo reformado; se adicionan los párrafos tercero y cuarto, y los actuales tercero y cuarto pasan a ser quinto y sexto.
+Publicación: 2026-10-01. Vigencia general: 2026-10-01.
+Fuente modificatoria: https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf
+SHA-256 fuente modificatoria: e46db09fcbc46d87259b28a8683fe5a611bde9854a16d271bf35a5217cd9ed5b
+El siguiente bloque es el texto literal publicado para el alcance reformado y prevalece sobre el texto base en ese alcance:
+...
+Los jugadores a que se refiere esta regla, aplicarán lo dispuesto en el artículo 170, cuarto o
+quinto párrafo de la Ley del ISR, según sea el caso. El jugador o su representante en el
+país, según corresponda, calculará el ISR que resulte y lo enterará a más tardar al día
+siguiente en que se obtuvo el ingreso, ya sea por transferencia electrónica de fondos
+mediante pago con línea de captura vía Internet, o bien, en efectivo, tarjeta de crédito o
+débito, o cheque personal de la institución de crédito ante la cual efectúe el pago
+correspondiente, conforme a la regla 2.1.18.
+Los jugadores podrán optar por realizar el pago del ISR a su cargo, a más tardar al día
+siguiente en que se obtuvo el ingreso, por conducto de las Asociaciones Miembro de la
+FIFA, sin incluir a la Asociación Anfitriona, en términos de la ficha de trámite 117/CFF
+“Informe relacionado con el pago del ISR de las personas físicas residentes en el extranjero
+que tengan la calidad de jugadores”, contenida en el Anexo 2.
+Se considera que los jugadores identificados en la determinación del ISR a cargo conforme
+al párrafo anterior, han cumplido con la obligación de presentar la declaración a que se
+refiere el artículo 170, cuarto párrafo de la Ley del ISR, en relación con las demás
+disposiciones fiscales que resulten aplicables, cuando las Asociaciones Miembro de la FIFA
+hayan efectuado el pago del monto total señalado en la línea de captura vigente
+correspondiente.
+...
+...
+LIF Vigésimo Quinto Transitorio, LISR 4, 170, RMF 2.1.18., 9.4.3.
+Cálculo del precio base del diésel
+
+[TEXTO BASE OFICIAL — CONSERVA VIGENCIA FUERA DEL ALCANCE REFORMADO]
+No se deben completar los puntos suspensivos del bloque modificatorio por inferencia. Para una respuesta se recuperan conjuntamente esta superposición y el texto base:
 Para los efectos de la regla 9.4.3., fracción IV, se considerará que la fuente de riqueza de los
 ingresos obtenidos por los jugadores se encuentra en territorio nacional únicamente en la
 proporción que represente la cantidad de Partidos que tengan lugar en México en los que
@@ -35444,6 +35476,33 @@ contribuyentes que se indican, publicado en el DOF el 8 de enero de 2019
 Títulos o valores susceptibles de aplicar el estímulo
 
 **Regla 11.7.3**
+[ACTUALIZACIÓN OFICIAL VIGENTE — SEGUNDA RESOLUCIÓN DE MODIFICACIONES 2026]
+Operación: adición. Alcance publicado: fracciones XIV a XXVI.
+Publicación: 2026-10-01. Vigencia general: 2026-10-01.
+Fuente modificatoria: https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf
+SHA-256 fuente modificatoria: e46db09fcbc46d87259b28a8683fe5a611bde9854a16d271bf35a5217cd9ed5b
+El siguiente bloque es el texto literal publicado para el alcance reformado y prevalece sobre el texto base en ese alcance:
+…
+I. a XIII. ...
+XIV. El 9 de julio se le restará la cantidad de 0.92 pesos por litro.
+XV. El 16 de julio se le restará la cantidad de 0.88 pesos por litro.
+XVI. El 23 de julio se le restará la cantidad de 0.88 pesos por litro.
+
+XVII. El 30 de julio se le restará la cantidad de 0.89 pesos por litro.
+XVIII. El 6 de agosto se le restará la cantidad de 0.89 pesos por litro.
+XIX. El 13 de agosto se le restará la cantidad de 0.92 pesos por litro.
+XX. El 20 de agosto se le restará la cantidad de 0.92 pesos por litro.
+XXI. El 27 de agosto se le restará la cantidad de 0.94 pesos por litro.
+XXII. El 3 de septiembre se le restará la cantidad de 0.95 pesos por litro.
+XXIII. El 10 de septiembre se le restará la cantidad de 0.96 pesos por litro.
+XXIV. El 17 de septiembre se le restará la cantidad de 0.98 pesos por litro.
+XXV. El 24 de septiembre se le restará la cantidad de 0.99 pesos por litro.
+XXVI. El 1 de octubre se le restará la cantidad de 1.06 pesos por litro.
+Decreto IEPS combustibles DOF 27/12/2016 modificado mediante Decreto DOF 31/12/2025,
+Acuerdo DOF 11/03/2019 modificado mediante Acuerdo DOF 04/09/2025
+
+[TEXTO BASE OFICIAL — CONSERVA VIGENCIA FUERA DEL ALCANCE REFORMADO]
+No se deben completar los puntos suspensivos del bloque modificatorio por inferencia. Para una respuesta se recuperan conjuntamente esta superposición y el texto base:
 [ACTUALIZACIÓN OFICIAL VIGENTE — PRIMERA RESOLUCIÓN DE MODIFICACIONES 2026]
 Operación: adición. Alcance publicado: regla completa.
 Publicación: 2026-07-09. Vigencia general: 2026-07-10.

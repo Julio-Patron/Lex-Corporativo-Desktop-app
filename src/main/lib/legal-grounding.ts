@@ -95,11 +95,19 @@ export interface StructuredGroundingRepairOutcome {
 }
 
 const LAW_CODES = 'CFF|LISR|RLISR|LIVA|RLIVA|RMF|CCOM|LGSM|LGTOC|LFT|LCE|RLCE|LA|RLA|RGCE|LIGIE|TIGIE';
-const ARTICLE_ID = String.raw`\d+(?:o|º|°)?(?:\s*-\s*[A-Z])?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?`;
+// Además del sufijo con guion ("69-B"), un sufijo latino puede llevar número ("1390 Bis 12")
+// y una letra puede ir separada por espacio ("17 A"). Las expresiones usan la bandera "i",
+// así que la letra minúscula se descarta después (articleIdentifier): en "artículo 27 y 28"
+// la "y" no es sufijo.
+const ARTICLE_ID = String.raw`\d+(?:o|º|°)?(?:\s*-\s*[A-Z])?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?|\s+[A-Z](?![\p{L}\d]))?`;
 const RULE_ID = String.raw`\d+(?:\.\d+){1,3}`;
 
 function normalizeLawCode(value: string): string {
   return value.toUpperCase();
+}
+
+function articleIdentifier(value: string): string {
+  return value.replace(/\s+\p{Ll}$/u, '');
 }
 
 function normalizeProvisionId(value: string): string {
@@ -107,7 +115,8 @@ function normalizeProvisionId(value: string): string {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
-    .replace(/(\d)\s*(?:o|º|°)\.?/g, '$1')
+    // Sólo el ordinal pegado al número ("1o.", "5º"); "228 o" es la letra del artículo 228-O.
+    .replace(/(\d)(?:o\b|\s*[º°])\.?/g, '$1')
     .replace(/\s*-\s*/g, '-')
     .replace(/\s+/g, '-')
     .replace(/[.,;:]+$/g, '')
@@ -248,7 +257,7 @@ export function validateGroundedLegalOutput(
     for (const match of output.matchAll(explicitPatterns[patternIndex])) {
       const lawCode = normalizeLawCode(lawFirst ? match[1] : match[3]);
       const kindLabel = lawFirst ? match[2] : match[1];
-      const id = lawFirst ? match[3] : match[2];
+      const id = articleIdentifier(lawFirst ? match[3] : match[2]);
       const kind = kindLabel.toLowerCase() === 'regla' ? 'rule' : 'article';
       const key = `${lawCode}:${kind}:${normalizeProvisionId(id)}`;
       cited.add(key);
@@ -262,7 +271,7 @@ export function validateGroundedLegalOutput(
   ];
   for (const pattern of genericPatterns) {
     for (const match of output.matchAll(pattern.regex)) {
-      const genericKey = `${pattern.kind}:${normalizeProvisionId(match[1])}`;
+      const genericKey = `${pattern.kind}:${normalizeProvisionId(articleIdentifier(match[1]))}`;
       if (![...cited].some(key => key.endsWith(`:${genericKey}`))) {
         cited.add(genericKey);
         if (!allowedGeneric.has(genericKey)) unsupported.add(genericKey);

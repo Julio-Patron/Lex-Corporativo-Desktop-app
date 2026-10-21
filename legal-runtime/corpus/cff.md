@@ -4,7 +4,7 @@
 > Módulo: fiscal
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf
 > SHA-256 fuente: be7427b20d3552775ab42018f8f87578078770095bf8cf46322c25e36ee3aa7d
-> Verificación oficial: 2026-07-14
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2026-04-09
 **Artículo 1**
 Las personas físicas y las morales, están obligadas a contribuir para los gastos públicos
@@ -6325,10 +6325,10 @@ efectos la notificación al infractor de la resolución por la cual se le impong
 reducirá en un 20% de su monto, sin necesidad de que la autoridad que la impuso dicte nueva
 resolución. Lo dispuesto en esta fracción no será aplicable tratándose de la materia aduanera, ni
 cuando se presente el supuesto de disminución de la multa previsto en el séptimo párrafo del
+artículo 76 de este ordenamiento, así como el supuesto previsto en el artículo 78, de este Código.
 
 **Artículo 76**
-de este ordenamiento, así como el supuesto previsto en el artículo 78, de este Código.
-Artículo 76. Cuando la comisión de una o varias infracciones origine la omisión total o parcial en el
+Cuando la comisión de una o varias infracciones origine la omisión total o parcial en el
 pago de contribuciones incluyendo las retenidas o recaudadas, excepto tratándose de contribuciones al
 comercio exterior, y sea descubierta por las autoridades fiscales mediante el ejercicio de sus facultades,
 se aplicará una multa del 55% al 75% de las contribuciones omitidas.

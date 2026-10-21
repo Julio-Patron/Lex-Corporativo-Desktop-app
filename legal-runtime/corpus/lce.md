@@ -4,7 +4,7 @@
 > Módulo: comercio_exterior
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LCE.pdf
 > SHA-256 fuente: 3f114f47007c21b4691bad502b786b45aa5e45c1571bd56dd8ca4f5af991b459
-> Verificación oficial: 2026-08-12
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2026-05-01
 **Artículo 1**
 La presente Ley tiene por objeto regular y promover el comercio exterior, incrementar la
@@ -236,7 +236,9 @@ caso, conjuntamente con la autoridad competente. Estas medidas consistirán en p
 máximos, marcado de país de origen, certificaciones, cuotas compensatorias y los demás instrumentos
 que se consideren adecuados para los fines de esta Ley. Las cuotas compensatorias sólo se aplicarán en
 el caso previsto en la fracción V del artículo anterior.
-Artículo 17 A.- Las restricciones y regulaciones no arancelarias, deberán cumplirse conforme a lo
+
+**Artículo 17-A**
+Las restricciones y regulaciones no arancelarias, deberán cumplirse conforme a lo
 establecido en los ordenamientos aplicables.
 Dicho cumplimiento deberá demostrarse mediante documentos que contengan medidas de seguridad
 o a través de medios electrónicos, o ambos, que determine la Secretaría, conjuntamente con las
@@ -274,7 +276,9 @@ procedimiento establecido en el artículo 17.
 En todo caso, las mercancías sujetas a restricciones o regulaciones no arancelarias se
 identificarán en términos de sus fracciones arancelarias y nomenclatura que les corresponda conforme a
 la tarifa respectiva.
-Artículo 20 A.- La Secretaría aceptará los certificados de firma electrónica emitidos por los
+
+**Artículo 20-A**
+La Secretaría aceptará los certificados de firma electrónica emitidos por los
 prestadores de servicios de certificación que estén acreditados en los términos del Código de Comercio,
 
 así como los que ella misma emita, para efecto de los trámites y notificaciones relacionadas con las
@@ -788,7 +792,9 @@ cuota o, en su defecto, se harán efectivas las garantías que se hubieren otorg
 se modificó o revocó la cuota, se procederá a cancelar o modificar dichas garantías o, en su caso, a
 devolver, con los intereses correspondientes, las cantidades que se hubieren enterado por dicho
 concepto o la diferencia respectiva.
-Artículo 65 A.- En el caso de la discriminación de precios que cause daño a la rama de producción
+
+**Artículo 65-A**
+En el caso de la discriminación de precios que cause daño a la rama de producción
 nacional, corresponde a la Secretaría determinar la aplicación de una cuota compensatoria definitiva
 sobre las mercancías sujetas a investigación que se hayan importado durante los tres meses anteriores a
 la fecha de aplicación de las medidas provisionales cuando en relación con el producto objeto de
@@ -852,10 +858,14 @@ cuota compensatoria daría lugar a la continuación o repetición de la práctic
 En caso de que no se haya iniciado alguno de estos procedimientos, la Secretaría deberá publicar en
 el Diario Oficial de la Federación un aviso sobre la eliminación de dicha cuota, el cual deberá notificar a
 las partes interesadas de que tenga conocimiento.
-Artículo 70 A.- La Secretaría publicará en el Diario Oficial de la Federación un aviso sobre la
+
+**Artículo 70-A**
+La Secretaría publicará en el Diario Oficial de la Federación un aviso sobre la
 próxima expiración de la vigencia de cuotas compensatorias, al menos 45 días anteriores a su
 vencimiento, el cual se deberá notificar a los productores nacionales de que se tenga conocimiento.
-Artículo 70 B.- Para que la Secretaría inicie de oficio un examen de vigencia de cuotas
+
+**Artículo 70-B**
+Para que la Secretaría inicie de oficio un examen de vigencia de cuotas
 compensatorias, uno o varios productores deberán expresar por escrito a la Secretaría su interés de que
 se inicie dicho examen, y presentar una propuesta de período de examen de 6 meses a un año
 comprendido en el tiempo de vigencia de la cuota compensatoria, al menos 25 días antes del término de
@@ -1059,12 +1069,16 @@ provisionales sean garantizadas conforme al artículo 65 y las cuotas compensato
 a la fracción III del artículo 98.
 CAPITULO V
 PROCEDIMIENTOS ESPECIALES
-Artículo 89 A.- Determinada una cuota compensatoria definitiva, las partes interesadas podrán
+
+**Artículo 89-A**
+Determinada una cuota compensatoria definitiva, las partes interesadas podrán
 solicitar a la Secretaría que resuelva si una mercancía está sujeta a dicha cuota compensatoria; de ser
 procedente la solicitud dará inicio a un procedimiento de cobertura de producto dentro de los 20 días
 siguientes a la presentación de la misma; y emitirá la resolución final dentro de los 60 días contados a
 partir de su inicio. Estas resoluciones deberán publicarse en el Diario Oficial de la Federación.
-Artículo 89 B.- Se considera elusión de cuotas compensatorias o de medidas de salvaguarda, lo
+
+**Artículo 89-B**
+Se considera elusión de cuotas compensatorias o de medidas de salvaguarda, lo
 siguiente:
 I. La introducción a territorio nacional de insumos, piezas o componentes con objeto de producir o
 realizar operaciones de montaje de la mercancía sujeta a cuota compensatoria o medida de salvaguarda;
@@ -1082,10 +1096,14 @@ Las mercancías que se importen en estas condiciones pagarán la cuota compensat
 a la medida de salvaguarda correspondiente. La elusión de cuotas compensatorias o medidas de
 salvaguarda, preliminares o definitivas, se determinará mediante un procedimiento iniciado de oficio o a
 solicitud de parte interesada.
-Artículo 89 C.- Las partes interesadas podrán solicitar a la Secretaría, en cualquier tiempo, que aclare
+
+**Artículo 89-C**
+Las partes interesadas podrán solicitar a la Secretaría, en cualquier tiempo, que aclare
 o precise determinado aspecto de las resoluciones por las que se impongan cuotas compensatorias
 definitivas.
-Artículo 89 D.- Los productores cuyas mercancías estén sujetas a una cuota compensatoria definitiva
+
+**Artículo 89-D**
+Los productores cuyas mercancías estén sujetas a una cuota compensatoria definitiva
 y que no hayan realizado exportaciones de esas mercancías durante el período investigado en el
 procedimiento que dio lugar a la cuota compensatoria de que se trate, podrán solicitar a la Secretaría el
 inicio de un procedimiento para nuevos exportadores a efecto de que ésta se pronuncie sobre los
@@ -1096,14 +1114,18 @@ compensatorias con posterioridad al período investigado en el procedimiento que
 compensatoria de que se trate, y
 II. Demuestren que no tienen vinculación alguna con los productores o exportadores del país
 exportador a quienes se les haya determinado cuota compensatoria específica.
-Artículo 89 E.- A solicitud de parte interesada, la Secretaría le aplicará las resoluciones firmes
+
+**Artículo 89-E**
+A solicitud de parte interesada, la Secretaría le aplicará las resoluciones firmes
 dictadas como consecuencia de un recurso de revocación, de un juicio de nulidad o de una resolución de
 la Secretaría por la que se dé cumplimiento a un laudo emitido por un mecanismo alternativo de solución
 de controversias, siempre que esa parte interesada se encuentre en el mismo supuesto jurídico que
 aquella que obtuvo la resolución favorable.
 La parte interesada deberá formular su solicitud dentro de los 30 días siguientes contados a partir de
 que la resolución respectiva quede firme.
-Artículo 89 F.- La Secretaría publicará en el Diario Oficial de la Federación el inicio del examen de
+
+**Artículo 89-F**
+La Secretaría publicará en el Diario Oficial de la Federación el inicio del examen de
 vigencia de cuota compensatoria y notificará a las partes de que tenga conocimiento, para que en un
 plazo de 28 días contados a partir del día siguiente de su publicación en dicho órgano informativo,
 manifiesten lo que a su derecho convenga.

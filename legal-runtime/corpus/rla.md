@@ -4,7 +4,7 @@
 > Módulo: aduanal
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAdua.pdf
 > SHA-256 fuente: bcdfcd9073014aec4aefbacc01c9dd5b1f97f0da0c4556f0f506d20f12d77812
-> Verificación oficial: 2026-08-12
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2026-02-23
 **Artículo 1**
 Además de las definiciones establecidas en el artículo 2o. de la Ley Aduanera, para
@@ -1433,7 +1433,8 @@ Exenciones
 Sección Primera
 Cuerpo Diplomático, Consular y Misiones Especiales
 
-Artículo. 88. Para efectos del artículo 61, fracción I de la Ley, estarán comprendidas las siguientes
+**Artículo 88**
+Para efectos del artículo 61, fracción I de la Ley, estarán comprendidas las siguientes
 Mercancías:
 I. Las importadas por misiones diplomáticas, consulares, especiales del extranjero acreditadas ante
 el Estado Mexicano, los miembros de éstas, y las oficinas de organismos internacionales

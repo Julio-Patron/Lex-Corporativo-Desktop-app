@@ -122,7 +122,7 @@ function cleanArticleIdentifier(raw: string): string {
     .trim()
     .replace(/\s*-\s*/g, '-')
     .replace(/\s+/g, ' ')
-    .replace(/\b(bis|ter|qu[aá]ter|quinquies|sexies|septies|octies|nonies)\b/i, (m) => (
+    .replace(/\b(bis|ter|qu[aá]ter|quinquies|quintus|sexies|septies|octies|nonies)\b/i, (m) => (
       m.charAt(0).toUpperCase() + m.slice(1).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     ));
 }
@@ -142,7 +142,7 @@ export function extractCrossReferencedProvisions(
   if (!code || !content) return [];
 
   const selfId = String(currentArticle || '')
-    .match(/\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?/i)?.[0]
+    .match(/\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?)?/i)?.[0]
     ?.replace(/\s+/g, '')
     .toUpperCase() || '';
 
@@ -150,8 +150,8 @@ export function extractCrossReferencedProvisions(
   const isRuleLaw = code === 'RMF' || code === 'RGCE';
 
   // Match single or plural article/rule mentions
-  const articleRegex = /\b(?:art[ií]culos?|arts?\.?|reglas?)\s+(\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?(?:\s*(?:,|y|o|al)\s*\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?)*)/giu;
-  const idTokenRegex = /\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies))?/giu;
+  const articleRegex = /\b(?:art[ií]culos?|arts?\.?|reglas?)\s+(\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?)?(?:\s*(?:,|y|o|al)\s*\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?)?)*)/giu;
+  const idTokenRegex = /\d+(?:\.\d+){0,3}(?:\s*-\s*[A-Za-z]+)?(?:\s+(?:Bis|Ter|Qu[aá]ter|Quinquies|Quintus|Sexies|Septies|Octies|Nonies)(?:\s+\d+)?)?/giu;
 
   for (const match of content.matchAll(articleRegex)) {
     const rawGroup = match[1] || '';

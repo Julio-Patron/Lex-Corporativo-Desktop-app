@@ -4,7 +4,7 @@
 > Módulo: laboral
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf
 > SHA-256 fuente: 12f09393a1951a91c3f57f579bf611b034edf1a5f78cdbfb828e23ff3a9acbf7
-> Verificación oficial: 2026-08-12
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2026-05-14
 **Artículo 1**
 La presente Ley es de observancia general en toda la República y rige las relaciones de
@@ -16504,15 +16504,15 @@ mencionada en la fracción I, y cuando la solicitud se hubiere presentado por te
 además tiendan a comprobar su interés. El Tribunal aceptará únicamente las que satisfagan los
 requisitos señalados;
 IV. Las pruebas se rendirán en la audiencia de calificación de la huelga, salvo lo dispuesto en el
-
-**Artículo 931**
-de esta Ley. Sólo en casos excepcionales podrá el Tribunal diferir la recepción de
+artículo 931 de esta Ley. Sólo en casos excepcionales podrá el Tribunal diferir la recepción de
 las pruebas que por su naturaleza no puedan desahogarse en la audiencia de calificación de la
 huelga, y
 V. Concluida la recepción de las pruebas, el Tribunal, dentro de las veinticuatro horas siguientes,
 resolverá sobre la existencia o inexistencia del estado legal de la huelga.
 VI. Se deroga.
-Artículo 931.- Si se ofrece como prueba el recuento de los trabajadores, se observarán las normas
+
+**Artículo 931**
+Si se ofrece como prueba el recuento de los trabajadores, se observarán las normas
 siguientes:
 I. Se deroga.
 II. Unicamente tendrán derecho a votar los trabajadores de la empresa que concurran al recuento;

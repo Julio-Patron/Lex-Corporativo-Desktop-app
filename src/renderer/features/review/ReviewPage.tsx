@@ -7,15 +7,12 @@ import { useAiGuard } from '../../hooks/useAiGuard';
 import { exportMarkdown } from '../../hooks/usePortfolioActions';
 import { hasUnsavedDraft } from '../../lib/drafting';
 import { toFilePayload } from '../../lib/files';
-import { resolveLawCode } from '../../lib/law-reader';
 import { LEGAL_AREA_INFO } from '../../lib/legal-areas';
 import { newRecordId, saveReviewRecord } from '../../lib/portfolio';
 import { buildAddendumInstructions, buildClauseInstructions, buildReviewReport } from '../../lib/review';
 import { providerLabel, useUiStore } from '../../store/useUiStore';
 import { useWorkspaceStore } from '../../store/useWorkspaceStore';
-import type { LegalFoundation, ReviewRecord, ReviewResult } from '../../types';
-import { LawReaderDialog } from '../laws/LawReaderDialog';
-import { useSendArticleToDraft } from '../laws/useSendArticleToDraft';
+import type { ReviewRecord, ReviewResult } from '../../types';
 import { ReviewResultView } from './ReviewResultView';
 import { ReviewSetup } from './ReviewSetup';
 
@@ -33,11 +30,9 @@ export default function ReviewPage() {
   const health = useUiStore((state) => state.runtimeHealth);
   const requestProcessingSetup = useUiStore((state) => state.requestProcessingSetup);
   const { aiReady, ensureAi } = useAiGuard();
-  const sendArticleToDraft = useSendArticleToDraft();
   const [dialogState, confirm] = useConfirmDialog();
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState<{ step: number; label: string } | null>(null);
-  const [reader, setReader] = useState<{ code: string; article?: string } | null>(null);
 
   useEffect(() => {
     const off = window.lexDesktop.analysis.onProgress((state) => setProgress({ step: state.step, label: state.label }));
@@ -108,15 +103,6 @@ export default function ReviewPage() {
     navigate('/estudio/generar');
   };
 
-  const openFoundation = (foundation: LegalFoundation) => {
-    const code = resolveLawCode(foundation.law);
-    if (!code) {
-      notify(`No se encontró «${foundation.law}» entre las leyes instaladas.`, 'info', 'Lector de leyes');
-      return;
-    }
-    setReader({ code, article: foundation.article });
-  };
-
   const exportReport = async (format: 'pdf' | 'docx') => {
     if (!review.record) return;
     const areas = review.record.areas.map((area) => LEGAL_AREA_INFO[area].shortLabel).join(', ');
@@ -153,7 +139,6 @@ export default function ReviewPage() {
           aiReady={aiReady}
           onDraftAddendum={() => void draftFrom(buildAddendumInstructions(review.record!))}
           onDraftClause={(finding) => void draftFrom(buildClauseInstructions(finding))}
-          onOpenFoundation={openFoundation}
           onExport={exportReport}
           onCopy={() => navigator.clipboard.writeText(buildReviewReport(review.record!)).catch(() => notify('No se pudo copiar al portapapeles.', 'warning'))}
           onNewReview={resetReview}
@@ -173,12 +158,6 @@ export default function ReviewPage() {
         />
       )}
 
-      <LawReaderDialog
-        lawCode={reader?.code ?? null}
-        articleRef={reader?.article}
-        onClose={() => setReader(null)}
-        onUseArticle={(citation, area) => { setReader(null); sendArticleToDraft(citation, area); }}
-      />
       <ConfirmDialog {...dialogState} />
     </Page>
   );

@@ -49,24 +49,30 @@ const VERIFIED_DOCUMENTAL_METADATA = {
 const VERIFIED_RGCE_METADATA = {
   corpusProvenance: 'official_sat_compilation_pdf',
   verificationStatus: 'verified_against_official_source',
-  officialLastCheckedAt: '2026-08-12',
+  officialLastCheckedAt: '2026-10-20',
+};
+
+// Leyes cuyo texto cambió en la verificación del 20 de octubre de 2026. Las demás
+// conservan la fecha anterior porque ni su fuente oficial ni su texto cambiaron.
+const RECHECKED_OCTOBER_2026 = {
+  officialLastCheckedAt: '2026-10-20',
 };
 
 export const LAWS = [
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'CCom', name: 'Código de Comercio', module: 'mercantil', corpus: 'codigo_comercio.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LGSM', name: 'Ley General de Sociedades Mercantiles', module: 'mercantil', corpus: 'lgsm.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGSM.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LGTOC', name: 'Ley General de Títulos y Operaciones de Crédito', module: 'mercantil', corpus: 'lgtoc.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTOC.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'LFT', name: 'Ley Federal del Trabajo', module: 'laboral', corpus: 'lft.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'LCE', name: 'Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'lce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LCE.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'RLCE', name: 'Reglamento de la Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'rlce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LCE.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'LA', name: 'Ley Aduanera', module: 'aduanal', corpus: 'ley_aduanera.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'RLA', name: 'Reglamento de la Ley Aduanera', module: 'aduanal', corpus: 'rla.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAdua.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, code: 'LIGIE', name: 'Ley de los Impuestos Generales de Importación y de Exportación', module: 'aduanal', corpus: 'ligie.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIGIE_2022.pdf' },
-  { ...SAT_RULE_METADATA, ...VERIFIED_RGCE_METADATA, code: 'RGCE', name: 'Reglas Generales de Comercio Exterior para 2026', module: 'aduanal', corpus: 'rgce_2026.md', url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rgce/compiladas/1raRMRGCEpara2026.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'CFF', name: 'Código Fiscal de la Federación', module: 'fiscal', corpus: 'cff.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'CCom', name: 'Código de Comercio', module: 'mercantil', corpus: 'codigo_comercio.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LGSM', name: 'Ley General de Sociedades Mercantiles', module: 'mercantil', corpus: 'lgsm.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGSM.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LGTOC', name: 'Ley General de Títulos y Operaciones de Crédito', module: 'mercantil', corpus: 'lgtoc.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTOC.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LFT', name: 'Ley Federal del Trabajo', module: 'laboral', corpus: 'lft.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LCE', name: 'Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'lce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LCE.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'RLCE', name: 'Reglamento de la Ley de Comercio Exterior', module: 'comercio_exterior', corpus: 'rlce.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LCE.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LA', name: 'Ley Aduanera', module: 'aduanal', corpus: 'ley_aduanera.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'RLA', name: 'Reglamento de la Ley Aduanera', module: 'aduanal', corpus: 'rla.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAdua.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_DOCUMENTAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LIGIE', name: 'Ley de los Impuestos Generales de Importación y de Exportación', module: 'aduanal', corpus: 'ligie.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIGIE_2022.pdf' },
+  { ...SAT_RULE_METADATA, ...VERIFIED_RGCE_METADATA, code: 'RGCE', name: 'Reglas Generales de Comercio Exterior para 2026', module: 'aduanal', corpus: 'rgce_2026.md', url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado2daRMRGCEpara2026.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'CFF', name: 'Código Fiscal de la Federación', module: 'fiscal', corpus: 'cff.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LISR', name: 'Ley del Impuesto sobre la Renta', module: 'fiscal', corpus: 'lisr.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'RLISR', name: 'Reglamento de la Ley del Impuesto sobre la Renta', module: 'fiscal', corpus: 'rlisr.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LISR_060516.pdf' },
-  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'LIVA', name: 'Ley del Impuesto al Valor Agregado', module: 'fiscal', corpus: 'liva.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf' },
+  { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, ...RECHECKED_OCTOBER_2026, code: 'LIVA', name: 'Ley del Impuesto al Valor Agregado', module: 'fiscal', corpus: 'liva.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf' },
   { ...FEDERAL_LAW_METADATA, ...VERIFIED_FEDERAL_FISCAL_METADATA, code: 'RLIVA', name: 'Reglamento de la Ley del Impuesto al Valor Agregado', module: 'fiscal', corpus: 'rliva.md', url: 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LIVA_250914.pdf' },
   {
     ...SAT_RULE_METADATA,
@@ -75,10 +81,16 @@ export const LAWS = [
     module: 'fiscal',
     corpus: 'rmf.md',
     url: 'https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/RMF_2026-DOF-28122025.pdf',
-    amendmentUrl: 'https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf',
+    // Resoluciones de modificaciones en orden de publicación. La tercera sólo da a conocer
+    // un anexo y no cambia el texto de las reglas.
+    amendments: [
+      { code: 'RMF-2026-1RM', url: 'https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf', publishedAt: '2026-07-09', effectiveFrom: '2026-07-10', changesRules: true },
+      { code: 'RMF-2026-2RM', url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf', publishedAt: '2026-10-01', effectiveFrom: '2026-10-01', changesRules: true },
+      { code: 'RMF-2026-3RM', url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/3aRM_RMF2026_DOF_02102026.pdf', publishedAt: '2026-10-02', effectiveFrom: '2026-12-31', changesRules: false },
+    ],
     corpusProvenance: 'official_base_with_published_amendment_overlay',
     verificationStatus: 'verified_against_official_source',
-    effectiveFrom: '2026-07-10',
-    officialLastCheckedAt: '2026-07-14',
+    effectiveFrom: '2026-10-01',
+    officialLastCheckedAt: '2026-10-20',
   },
 ];

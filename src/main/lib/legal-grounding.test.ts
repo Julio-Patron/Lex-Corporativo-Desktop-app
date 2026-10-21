@@ -41,6 +41,35 @@ describe('legal response grounding gate', () => {
     expect(result.reason).toBe('unsupported_claim');
   });
 
+  it('accepts citations to articles with a numbered suffix or a separate letter', () => {
+    const suffixedSources = [
+      { id: 'law:ccom:1390-bis-12', kind: 'legal' as const, law_code: 'CCom', article_number: 'Artículo 1390 Bis 12', content: 'Las partes podrán ofrecer pruebas en el juicio oral mercantil.' },
+      { id: 'law:lce:17-a', kind: 'legal' as const, law_code: 'LCE', article_number: 'Artículo 17-A', content: 'Las restricciones y regulaciones no arancelarias deberán expedirse.' },
+    ];
+
+    expect(validateGroundedLegalOutput(
+      'Conforme al Artículo 1390 Bis 12 del CCom, las partes podrán ofrecer pruebas en el juicio oral mercantil.',
+      suffixedSources,
+    ).valid).toBe(true);
+    expect(validateGroundedLegalOutput(
+      'El Artículo 17 A de la LCE dispone que las restricciones y regulaciones no arancelarias deberán expedirse.',
+      suffixedSources,
+    ).valid).toBe(true);
+    expect(validateGroundedLegalOutput('También aplica el Artículo 1390 Bis 13 del CCom.', suffixedSources)).toMatchObject({
+      valid: false,
+      unsupported: ['CCOM:article:1390-bis-13'],
+    });
+  });
+
+  it('does not read a conjunction after the number as a letter suffix', () => {
+    const result = validateGroundedLegalOutput(
+      'El Artículo 27 y el artículo 69-B del CFF; el Artículo 27 y siguientes de la LISR regulan los requisitos de las deducciones autorizadas.',
+      sources,
+    );
+    expect(result.unsupported).not.toContain('LISR:article:27-y');
+    expect(result.cited).toContain('LISR:article:27');
+  });
+
   it('rejects a local citation not present in retrieved sources', () => {
     const result = validateGroundedLegalOutput('También resulta aplicable el Artículo 113 del CFF.', sources);
     expect(result.valid).toBe(false);

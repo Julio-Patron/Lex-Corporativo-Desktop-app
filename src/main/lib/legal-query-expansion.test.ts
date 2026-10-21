@@ -32,6 +32,15 @@ describe('legal short-query expansion', () => {
     expect(refs[0].query).toBe('LGTOC Artículo 171');
   });
 
+  it('keeps the number after a suffix in cross-references and in the self-reference', () => {
+    const refs = extractCrossReferencedProvisions(
+      'CCOM',
+      'Artículo 1390 Bis 12',
+      'Lo dispuesto en el artículo 1390 Bis 12 se aplicará conforme a los artículos 1390 Bis 13 y 1390 Bis 14.',
+    );
+    expect(refs.map(r => r.article_number)).toEqual(['Artículo 1390 Bis 13', 'Artículo 1390 Bis 14']);
+  });
+
   it('builds related corpus queries combining cross-references and domain topics', () => {
     const related = buildRelatedCorpusQueries(
       'requisitos del pagare',

@@ -2,18 +2,21 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
-import { PDFParse } from 'pdf-parse';
-import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
 import { CORPUS_DIR } from './legal-corpus-config.mjs';
 import {
+  applyAmendmentSequence,
+  compareDirectiveWithDefinition,
   extractLawArticles,
-  consolidateRmfProvisions,
   extractRmfAmendmentProvisions,
   extractRmfAmendmentSummary,
   extractRmfRules,
   renderCorpusMarkdown,
+  RMF_2026_FIRST_AMENDMENT,
+  RMF_2026_SECOND_AMENDMENT,
+  unchangedVerificationDate,
   validateProvisions,
 } from './official-fiscal-parser.mjs';
+import { parseOfficialPdf } from './official-pdf-reader.mjs';
 
 const args = process.argv.slice(2);
 const valueArg = name => args.find(arg => arg.startsWith(`${name}=`))?.slice(name.length + 1);
@@ -98,7 +101,7 @@ const SOURCES = [
     parser: 'law',
     policy: {
       minimumEntries: 55,
-      maximumEntries: 79,
+      maximumEntries: 80,
       anchors: [
         { id: '1', terms: ['tasa del 16%'] },
         { id: '5', terms: ['acreditable'] },
@@ -148,14 +151,42 @@ const SOURCES = [
   },
 ];
 
-const RMF_AMENDMENT = {
-  code: 'RMF-2026-1RM',
-  name: 'Primera Resolución de Modificaciones a la RMF para 2026',
-  file: 'RMF_2026_1a_mod.pdf',
-  url: 'https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf',
-  authority: 'Servicio de Administración Tributaria / Diario Oficial de la Federación',
-  publishedAt: '2026-07-09',
-};
+// Resoluciones de modificaciones en orden de publicación. Las que traen texto de reglas se
+// aplican una sobre el resultado de la anterior; la que sólo da a conocer anexos no lleva
+// definición y se registra como revisada sin cambios en reglas.
+const RMF_AMENDMENTS = [
+  {
+    code: 'RMF-2026-1RM',
+    name: 'Primera Resolución de Modificaciones a la RMF para 2026',
+    file: 'RMF_2026_1a_mod.pdf',
+    url: 'https://wwwnp.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/1aRM_RMF2026.pdf',
+    authority: 'Servicio de Administración Tributaria / Diario Oficial de la Federación',
+    publishedAt: '2026-07-09',
+    effectiveFrom: '2026-07-10',
+    definition: RMF_2026_FIRST_AMENDMENT,
+  },
+  {
+    code: 'RMF-2026-2RM',
+    name: 'Segunda Resolución de Modificaciones a la RMF para 2026',
+    file: 'RMF_2026_2a_mod.pdf',
+    url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/2aRM_RMF2026_01102026.pdf',
+    authority: 'Servicio de Administración Tributaria / Diario Oficial de la Federación',
+    publishedAt: '2026-10-01',
+    effectiveFrom: '2026-10-01',
+    definition: RMF_2026_SECOND_AMENDMENT,
+  },
+  {
+    code: 'RMF-2026-3RM',
+    name: 'Tercera Resolución de Modificaciones a la RMF para 2026',
+    file: 'RMF_2026_3a_mod.pdf',
+    url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/rmf/3aRM_RMF2026_DOF_02102026.pdf',
+    authority: 'Servicio de Administración Tributaria / Diario Oficial de la Federación',
+    publishedAt: '2026-10-02',
+    effectiveFrom: '2026-12-31',
+    definition: null,
+    outOfCorpusChanges: ['Primera Modificación al Anexo 7 de la RMF para 2026 (los anexos no forman parte del corpus).'],
+  },
+];
 
 function sha256File(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
@@ -191,91 +222,35 @@ function extractLastReform(text) {
   return match ? `${match[3]}-${match[2]}-${match[1]}` : null;
 }
 
-function groupTextItemsByLine(items) {
-  const lines = [];
-  for (const item of items.filter(candidate => 'str' in candidate)) {
-    const y = item.transform?.[5] ?? 0;
-    let line = lines.find(candidate => Math.abs(candidate.y - y) < 0.6);
-    if (!line) {
-      line = { y, items: [] };
-      lines.push(line);
-    }
-    line.items.push(item);
-  }
-
-  return lines
-    .map(line => ({ ...line, items: line.items.sort((left, right) => left.transform[4] - right.transform[4]) }))
-    .sort((left, right) => right.y - left.y);
-}
-
-function headingIdFromLine(line, parserKind) {
-  const text = line.items.map(item => item.str).join('').replace(/\s+/g, ' ').trim();
-  const match = parserKind === 'rmf'
-    ? text.match(/^(\d+(?:\.\d+){1,3})\.\s+/)
-    : text.match(/^Art[íi]culo\s+(\d+(?:o|º|°)?(?:(?:\.-|-)(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES|[A-Z]))?(?:\s+(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES))?)(?:\.\s*-|[.\-–—])/i);
-  return match?.[1] || null;
-}
-
-async function extractStyledHeadings(filePath, parserKind) {
-  const document = await pdfjs.getDocument({ data: new Uint8Array(fs.readFileSync(filePath)) }).promise;
-  const headingsByPage = new Map();
-  let headingFont = null;
-
-  try {
-    for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
-      const page = await document.getPage(pageNumber);
-      const textContent = await page.getTextContent();
-      const lines = groupTextItemsByLine(textContent.items);
-
-      if (!headingFont) {
-        const firstHeading = lines.find(line => {
-          const id = headingIdFromLine(line, parserKind);
-          const firstTextItem = line.items.find(item => item.str.trim());
-          const x = firstTextItem?.transform?.[4] ?? Number.POSITIVE_INFINITY;
-          return id === '1' || id === '1o' || (parserKind === 'rmf' && id === '1.1' && x < 120);
-        });
-        headingFont = firstHeading?.items.find(item => item.str.trim())?.fontName || null;
-      }
-
-      if (!headingFont) continue;
-      const pageHeadings = lines.flatMap(line => {
-        const firstTextItem = line.items.find(item => item.str.trim());
-        const id = headingIdFromLine(line, parserKind);
-        const x = firstTextItem?.transform?.[4] ?? Number.POSITIVE_INFINITY;
-        if (!id || firstTextItem?.fontName !== headingFont || x > 120) return [];
-        return [{ id }];
-      });
-      if (pageHeadings.length) headingsByPage.set(pageNumber, pageHeadings);
-    }
-  } finally {
-    await document.destroy();
-  }
-
-  return headingsByPage;
-}
-
+// Usa el lector compartido con la etapa documental, de modo que los encabezados
+// tipográficos y los del texto se reconocen con el mismo patrón. Las resoluciones
+// modificatorias se segmentan sólo por texto: no tienen encabezados de artículo útiles.
 async function parsePdf(filePath, parserKind) {
-  const parser = new PDFParse({ url: filePath });
-  try {
-    const [textResult, headingsByPage] = await Promise.all([
-      parser.getText(),
-      extractStyledHeadings(filePath, parserKind),
-    ]);
-    return {
-      ...textResult,
-      pages: textResult.pages.map(page => ({
-        ...page,
-        headings: headingsByPage.get(page.num) || [],
-      })),
-    };
-  } finally {
-    await parser.destroy();
+  if (parserKind === 'amendment') {
+    const pdf = await parseOfficialPdf(filePath, 'article');
+    return { ...pdf, pages: pdf.pages.map(page => ({ ...page, headings: [] })) };
   }
+  return parseOfficialPdf(filePath, parserKind === 'rmf' ? 'rule' : 'article');
 }
 
 function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
+}
+
+// Escribe el candidato. Si sólo difiere del corpus canónico en la fecha de verificación,
+// conserva la fecha canónica: la promoción deja intacta la ley y no hay que reindexarla.
+function writeCandidate(source, provisions, metadata) {
+  const candidatePath = path.join(outputDir, 'candidates', source.corpus);
+  const canonicalPath = path.join(CORPUS_DIR, source.corpus);
+  let markdown = renderCorpusMarkdown(source, provisions, metadata);
+  const preservedCheckedAt = fs.existsSync(canonicalPath)
+    ? unchangedVerificationDate(markdown, fs.readFileSync(canonicalPath, 'utf8'))
+    : null;
+  if (preservedCheckedAt) markdown = renderCorpusMarkdown(source, provisions, { ...metadata, checkedAt: preservedCheckedAt });
+  fs.mkdirSync(path.dirname(candidatePath), { recursive: true });
+  fs.writeFileSync(candidatePath, markdown, 'utf8');
+  return { candidatePath, checkedAt: preservedCheckedAt || metadata.checkedAt, unchanged: Boolean(preservedCheckedAt) };
 }
 
 async function stageSource(source) {
@@ -294,13 +269,12 @@ async function stageSource(source) {
     );
   }
   const sourceSha256 = sha256File(filePath);
-  const candidatePath = path.join(outputDir, 'candidates', source.corpus);
-  fs.mkdirSync(path.dirname(candidatePath), { recursive: true });
-  fs.writeFileSync(candidatePath, renderCorpusMarkdown(source, extracted.provisions, {
+  const candidate = writeCandidate(source, extracted.provisions, {
     checkedAt,
     lastReform: reportedLastReform || source.lastReform,
     sourceSha256,
-  }), 'utf8');
+  });
+  const candidatePath = candidate.candidatePath;
 
   const result = {
     code: source.code,
@@ -314,7 +288,9 @@ async function stageSource(source) {
     pages: pdf.total,
     publishedAt: source.publishedAt,
     lastReform: reportedLastReform || source.lastReform,
-    checkedAt,
+    checkedAt: candidate.checkedAt,
+    recheckedAt: checkedAt,
+    canonicalUnchanged: candidate.unchanged,
     firstProvisionPage: extracted.firstProvisionPage,
     transitoryPage: extracted.transitoryPage,
     provisions: extracted.provisions.length,
@@ -322,7 +298,7 @@ async function stageSource(source) {
     validation,
     promotionEligible: validation.status === 'pass' && source.code !== 'RMF',
     promotionBlocker: source.code === 'RMF'
-      ? 'La primera resolución de modificaciones debe aplicarse como parche verificable antes de declarar vigente el corpus consolidado.'
+      ? 'Las resoluciones de modificaciones deben aplicarse como parches verificables antes de declarar vigente el corpus consolidado.'
       : validation.status === 'pass' ? null : 'La extracción no superó los controles estructurales.',
     provisionRegistry: extracted.provisions.map(item => ({
       provisionKey: `${source.code.toLowerCase()}:${item.kind}:${item.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
@@ -335,53 +311,78 @@ async function stageSource(source) {
   return result;
 }
 
-async function stageAmendment() {
-  const filePath = path.join(sourceDir, RMF_AMENDMENT.file);
+// Una resolución sin definición sólo es válida si no modifica reglas; una con definición
+// debe extraer todos sus bloques y su directiva no puede mencionar reglas no declaradas.
+function amendmentIsVerified(amendment) {
+  if (amendment.status === 'directive_not_found') return false;
+  if (amendment.patchExtractionStatus === 'fail') return false;
+  return amendment.directiveCheck?.status !== 'fail';
+}
+
+async function stageAmendment(amendment) {
+  const { definition, ...metadata } = amendment;
+  const filePath = path.join(sourceDir, amendment.file);
   verifyPdf(filePath);
   const pdf = await parsePdf(filePath, 'amendment');
-  const summary = extractRmfAmendmentSummary(pdf.pages, RMF_AMENDMENT);
-  const extracted = extractRmfAmendmentProvisions(pdf.pages, RMF_AMENDMENT);
+  const summary = extractRmfAmendmentSummary(pdf.pages, amendment);
+  const extracted = definition ? extractRmfAmendmentProvisions(pdf.pages, amendment, definition) : null;
   const result = {
-    ...RMF_AMENDMENT,
+    ...metadata,
     localFile: path.relative(process.cwd(), filePath).replace(/\\/g, '/'),
     sourceSha256: sha256File(filePath),
     bytes: fs.statSync(filePath).size,
     pages: pdf.total,
     checkedAt,
     ...summary,
-    parsedBlocks: extracted.provisions.length,
-    missingProvisionIds: extracted.missingProvisionIds,
-    patchExtractionStatus: extracted.status,
+    directiveCheck: definition ? compareDirectiveWithDefinition(summary, definition) : null,
+    outOfCorpusChanges: definition?.outOfCorpusChanges || amendment.outOfCorpusChanges || [],
+    expectedBlocks: extracted?.expectedProvisionIds.length ?? 0,
+    parsedBlocks: extracted?.provisions.length ?? 0,
+    missingProvisionIds: extracted?.missingProvisionIds ?? [],
+    patchExtractionStatus: extracted
+      ? extracted.status
+      : summary.status === 'checked_no_rule_changes' ? 'not_applicable' : 'fail',
   };
-  Object.defineProperty(result, '_extractedProvisions', { value: extracted.provisions, enumerable: false });
+  Object.defineProperty(result, '_extractedProvisions', { value: extracted?.provisions || [], enumerable: false });
+  Object.defineProperty(result, '_definition', { value: definition, enumerable: false });
   return result;
 }
 
-function consolidateStagedRmf(sources, amendment) {
+function consolidateStagedRmf(sources, amendments) {
   const rmf = sources.find(item => item.code === 'RMF');
   if (!rmf) throw new Error('No se encontró el texto base RMF entre las fuentes preparadas.');
 
-  const consolidated = consolidateRmfProvisions(rmf._extractedProvisions, amendment._extractedProvisions, {
-    publishedAt: amendment.publishedAt,
-    effectiveFrom: '2026-07-10',
-    url: amendment.url,
-    sourceSha256: amendment.sourceSha256,
-  });
+  const unverified = amendments.filter(item => !amendmentIsVerified(item));
+  if (unverified.length) {
+    throw new Error(`Resoluciones de modificaciones sin verificar: ${unverified.map(item => item.code).join(', ')}.`);
+  }
+
+  const applied = amendments.filter(item => item._definition);
+  const consolidated = applyAmendmentSequence(rmf._extractedProvisions, applied.map(item => ({
+    definition: item._definition,
+    provisions: item._extractedProvisions,
+    metadata: {
+      publishedAt: item.publishedAt,
+      effectiveFrom: item.effectiveFrom,
+      url: item.url,
+      sourceSha256: item.sourceSha256,
+    },
+  })));
   if (consolidated.status !== 'pass') {
-    throw new Error(`No fue posible consolidar la RMF: ${consolidated.failures.join(' ') || 'número de parches inesperado'}`);
+    const failures = consolidated.steps.flatMap(step => step.failures.map(failure => `${step.code}: ${failure}`));
+    throw new Error(`No fue posible consolidar la RMF: ${failures.join(' ') || 'número de parches inesperado'}`);
   }
 
   const definition = SOURCES.find(item => item.code === 'RMF');
-  const candidatePath = path.join(outputDir, 'candidates', definition.corpus);
-  const baseSha256 = rmf.sourceSha256;
-  fs.writeFileSync(candidatePath, renderCorpusMarkdown({
+  const latest = applied.at(-1);
+  const candidate = writeCandidate({
     ...definition,
-    url: `${definition.url} + ${amendment.url}`,
+    url: [definition.url, ...applied.map(item => item.url)].join(' + '),
   }, consolidated.provisions, {
     checkedAt,
-    lastReform: amendment.publishedAt,
-    sourceSha256: `${baseSha256}; amendment=${amendment.sourceSha256}`,
-  }), 'utf8');
+    lastReform: latest.publishedAt,
+    sourceSha256: [rmf.sourceSha256, ...applied.map(item => `amendment=${item.sourceSha256}`)].join('; '),
+  });
 
   const validation = validateProvisions(consolidated.provisions, definition.policy);
   if (validation.status !== 'pass') {
@@ -389,16 +390,24 @@ function consolidateStagedRmf(sources, amendment) {
   }
 
   Object.assign(rmf, {
-    candidateSha256: sha256File(candidatePath),
+    candidateSha256: sha256File(candidate.candidatePath),
+    checkedAt: candidate.checkedAt,
+    canonicalUnchanged: candidate.unchanged,
+    lastReform: latest.publishedAt,
     provisions: consolidated.provisions.length,
     validation,
     promotionEligible: true,
     promotionBlocker: null,
     corpusProvenance: 'official_base_with_published_amendment_overlay',
-    effectiveFrom: '2026-07-10',
-    amendmentCode: amendment.code,
-    amendmentSourceSha256: amendment.sourceSha256,
-    appliedPatches: consolidated.patches,
+    effectiveFrom: latest.effectiveFrom,
+    appliedAmendments: consolidated.steps.map((step, index) => ({
+      code: step.code,
+      sourceSha256: applied[index].sourceSha256,
+      publishedAt: applied[index].publishedAt,
+      effectiveFrom: applied[index].effectiveFrom,
+      status: step.status,
+      patches: step.patches,
+    })),
     provisionRegistry: consolidated.provisions.map(item => ({
       provisionKey: `rmf:${item.kind}:${item.id.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
       label: item.label,
@@ -411,17 +420,24 @@ function consolidateStagedRmf(sources, amendment) {
 
 async function main() {
   fs.mkdirSync(outputDir, { recursive: true });
-  for (const source of [...SOURCES, RMF_AMENDMENT]) await ensureSourceAvailable(source);
+  for (const source of [...SOURCES, ...RMF_AMENDMENTS]) await ensureSourceAvailable(source);
   const sources = [];
   for (const source of SOURCES) {
     const staged = await stageSource(source);
     sources.push(staged);
     console.log(`${source.code}: ${staged.provisions} disposiciones, validación ${staged.validation.status}.`);
   }
-  const amendment = await stageAmendment();
-  console.log(`${amendment.code}: ${amendment.parsedBlocks}/38 bloques modificatorios extraídos.`);
-  const rmfConsolidation = consolidateStagedRmf(sources, amendment);
-  console.log(`RMF: ${rmfConsolidation.patches.length} parches oficiales aplicados mediante superposición verificable.`);
+  const amendments = [];
+  for (const definition of RMF_AMENDMENTS) {
+    const amendment = await stageAmendment(definition);
+    amendments.push(amendment);
+    console.log(amendment.directiveCheck
+      ? `${amendment.code}: ${amendment.parsedBlocks}/${amendment.expectedBlocks} bloques modificatorios extraídos; directiva ${amendment.directiveCheck.status}.`
+      : `${amendment.code}: ${amendment.status}.`);
+  }
+  const rmfConsolidation = consolidateStagedRmf(sources, amendments);
+  const appliedSummary = rmfConsolidation.steps.map(step => `${step.patches.length} de ${step.code}`).join(', ');
+  console.log(`RMF: parches oficiales aplicados mediante superposición verificable (${appliedSummary}).`);
 
   const report = {
     schemaVersion: 1,
@@ -435,7 +451,7 @@ async function main() {
       unsupportedClaimsAllowed: false,
     },
     summary: {
-      officialSources: sources.length + 1,
+      officialSources: sources.length + amendments.length,
       stagedBaseSources: sources.length,
       passedStructuralValidation: sources.filter(item => item.validation.status === 'pass').map(item => item.code),
       promotionEligible: sources.filter(item => item.promotionEligible).map(item => item.code),
@@ -443,7 +459,7 @@ async function main() {
       totalProvisions: sources.reduce((total, item) => total + item.provisions, 0),
     },
     sources,
-    amendments: [amendment],
+    amendments,
   };
 
   const registry = {
@@ -457,7 +473,7 @@ async function main() {
         warnings: source.validation.warnings,
       },
     })),
-    amendments: [amendment],
+    amendments,
     provisions: sources.flatMap(item => item.provisionRegistry),
   };
 
@@ -465,7 +481,9 @@ async function main() {
   writeJson(path.join(outputDir, 'fiscal-source-registry.json'), registry);
 
   if (shouldPromote) {
-    const promotedSources = sources.filter(item => item.promotionEligible);
+    const eligibleSources = sources.filter(item => item.promotionEligible);
+    const promotedSources = eligibleSources.filter(item => !item.canonicalUnchanged);
+    const unchangedSources = eligibleSources.filter(item => item.canonicalUnchanged);
     for (const source of promotedSources) {
       const definition = SOURCES.find(item => item.code === source.code);
       fs.copyFileSync(path.join(outputDir, 'candidates', definition.corpus), path.join(CORPUS_DIR, definition.corpus));
@@ -474,12 +492,14 @@ async function main() {
     writeJson(path.join(CORPUS_DIR, 'fiscal-source-registry.json'), {
       ...registry,
       canonicalPromotions: promotedSources.map(item => item.code),
-      provisions: promotedSources.flatMap(item => item.provisionRegistry),
+      unchangedSources: unchangedSources.map(item => item.code),
+      provisions: eligibleSources.flatMap(item => item.provisionRegistry),
     });
-    console.log(`Promovidos al corpus canónico: ${promotedSources.map(item => item.code).join(', ')}.`);
+    console.log(`Promovidos al corpus canónico: ${promotedSources.map(item => item.code).join(', ') || 'ninguno'}.`);
+    if (unchangedSources.length) console.log(`Sin cambios, no se reescriben: ${unchangedSources.map(item => item.code).join(', ')}.`);
   }
 
-  if (sources.some(item => item.validation.status !== 'pass') || amendment.status === 'directive_not_found' || amendment.patchExtractionStatus !== 'pass') {
+  if (sources.some(item => item.validation.status !== 'pass') || amendments.some(item => !amendmentIsVerified(item))) {
     process.exitCode = 1;
   }
 }

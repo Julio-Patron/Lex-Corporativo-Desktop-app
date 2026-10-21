@@ -1,16 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BookOpen, CheckCircle2, ExternalLink, Search } from 'lucide-react';
+import { BookOpen, CheckCircle2, Search } from 'lucide-react';
 import { AreaTag, Badge, Callout, Card, EmptyState, Page, RadioGroup, TextInput } from '../../components/ui';
 import { normalizeSearchText } from '../../lib/drafting';
-import { provisionCountLabel } from '../../lib/law-reader';
+import { provisionCountLabel } from '../../lib/law-codes';
 import { LEGAL_AREA_INFO, LEGAL_AREAS, type LegalArea } from '../../lib/legal-areas';
-import { LawReaderDialog } from './LawReaderDialog';
-import { useSendArticleToDraft } from './useSendArticleToDraft';
+import { OfficialSourceLink } from './OfficialSourceLink';
 import { cn } from '../../lib/utils';
 
 type CorpusOverview = Awaited<ReturnType<typeof window.lexDesktop.legalCorpus.list>>;
-
-const DIPUTADOS_URL = 'https://www.diputados.gob.mx/LeyesBiblio/index.htm';
 
 function failureMessage(error: unknown): string {
   if (typeof error === 'object' && error && 'message' in error && typeof error.message === 'string' && error.message) return error.message;
@@ -22,8 +19,6 @@ export default function LawsPage() {
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
   const [areaFilter, setAreaFilter] = useState<LegalArea | 'todas'>('todas');
-  const [readerCode, setReaderCode] = useState<string | null>(null);
-  const sendArticleToDraft = useSendArticleToDraft();
 
   useEffect(() => {
     let alive = true;
@@ -48,7 +43,7 @@ export default function LawsPage() {
   return (
     <Page
       title="Leyes"
-      description="Consulta el texto completo de cada ley, aun sin conexión a internet."
+      description="Leyes y reglamentos incluidos en la aplicación. Cada uno enlaza a su texto oficial."
       width="wide"
       actions={overview && (
         <>
@@ -93,21 +88,10 @@ export default function LawsPage() {
           />
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 pt-3 text-xs text-slate-500">
-          <p>
-            Legislación federal mexicana incluida en la aplicación
-            {versionShort ? ` · Versión ${versionShort}` : ''}.
-          </p>
-          <a
-            href={DIPUTADOS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-semibold text-legal-950 underline decoration-legal-gold underline-offset-4 hover:text-legal-golddark"
-          >
-            Cámara de Diputados
-            <ExternalLink size={13} aria-hidden="true" />
-          </a>
-        </div>
+        <p className="border-t border-slate-100 pt-3 text-xs text-slate-500">
+          Legislación federal mexicana incluida en la aplicación
+          {versionShort ? ` · Versión ${versionShort}` : ''}.
+        </p>
       </Card>
 
       {error && <Callout tone="warning" title="La lista de leyes no está disponible">{error}</Callout>}
@@ -147,28 +131,15 @@ export default function LawsPage() {
                   <span className="text-xs font-semibold text-slate-600">
                     {provisionCountLabel(law.code, law.provisions)}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => setReaderCode(law.code)}
-                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-legal-950 transition-colors hover:border-slate-300 hover:bg-slate-100"
-                  >
-                    Abrir texto
-                  </button>
+                  <OfficialSourceLink href={law.officialUrl} className="-mr-2 min-h-8 px-2 py-1 text-xs">
+                    <span className="sr-only">{law.name}: </span>Texto oficial
+                  </OfficialSourceLink>
                 </div>
               </li>
             );
           })}
         </ol>
       )}
-
-      <LawReaderDialog
-        lawCode={readerCode}
-        onClose={() => setReaderCode(null)}
-        onUseArticle={(citation, area) => {
-          setReaderCode(null);
-          sendArticleToDraft(citation, area);
-        }}
-      />
     </Page>
   );
 }

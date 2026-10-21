@@ -4,7 +4,7 @@
 > Módulo: aduanal
 > Fuente oficial: https://www.diputados.gob.mx/LeyesBiblio/pdf/LAdua.pdf
 > SHA-256 fuente: 43927095d22ff7bc7780e78132d2160b5050b5f76026b539daec32be09d7341d
-> Verificación oficial: 2026-08-12
+> Verificación oficial: 2026-10-20
 > Última reforma indicada en la fuente: 2025-11-19
 **Artículo 1**
 Esta Ley, la de los Impuestos Generales de Importación y de Exportación y las demás
@@ -3922,12 +3922,16 @@ regulaciones y restricciones no arancelarias., 09-04-2012
 Las bebidas alcohólicas, la cerveza, el tabaco labrado en cigarrillos o puros y los caballos de carrera
 que se importen a la franja o región fronteriza, causarán el impuesto general de importación sin reducción
 alguna.
-ARTICULO 137 bis 1.- Las personas físicas que acrediten su residencia en la Franja Fronteriza Norte,
+
+**Artículo 137 Bis 1**
+Las personas físicas que acrediten su residencia en la Franja Fronteriza Norte,
 así como en los Estados de Baja California y Baja California Sur, en la región parcial del Estado de
 Sonora y en el Municipio Fronterizo de Cananea, Estado de Sonora, podrán efectuar la importación
 definitiva de vehículos automotores usados, siempre y cuando estén destinados a permanecer en estos
 lugares.
-ARTICULO 137 bis 2.- Para efecto del artículo anterior y de los siguientes, se entiende por:
+
+**Artículo 137 Bis 2**
+Para efecto del artículo anterior y de los siguientes, se entiende por:
 I.- Persona Física: El ciudadano al que la Ley ha dotado de derechos y obligaciones.
 II.- Franja Fronteriza Norte: La comprendida entre la Línea Divisoria Internacional con los Estados
 Unidos de América y la línea paralela a una distancia de 20 kilómetros hacia el interior del país, en el
@@ -3948,7 +3952,9 @@ VII.- Camión mediano: Al vehículo con o sin chasis para el transporte de merca
 personas, con peso bruto vehicular de más de 2,272 kilogramos, pero no mayor de 8,864 kilogramos.
 VIII.- Vehículo usado: Al vehículo de cinco o más años-modelos anteriores a la fecha en que se realice
 la importación.
-ARTICULO 137 bis 3.- La importación a que se refiere el artículo anterior podrá efectuarse pagando
+
+**Artículo 137 Bis 3**
+La importación a que se refiere el artículo anterior podrá efectuarse pagando
 exclusivamente el 50% del Impuesto General de Importación que corresponda a los vehículos a importar,
 conforme a su clasificación arancelaria.
 Las fracciones arancelarias aplicables según la tarifa de la Ley del Impuesto General de Importación,
@@ -3956,7 +3962,9 @@ serán las que correspondan al valor de la compra-venta en dólares de los Estad
 los vehículos automotores usados.
 Asimismo, se exime del requisito de permiso previo, por parte de la Secretaría de Economía, la
 importación de vehículos automotores usados a que se refieren los artículos anteriores.
-ARTICULO 137 bis 4.- Los vehículos que podrán importarse bajo el amparo de las disposiciones
+
+**Artículo 137 Bis 4**
+Los vehículos que podrán importarse bajo el amparo de las disposiciones
 legales anteriores, son los siguientes:
 I.- Automóviles cuyo valor no exceda de doce mil dólares de los Estados Unidos de América,
 excluyendo los vehículos deportivos, de lujo y convertibles.
@@ -3964,7 +3972,9 @@ II.- Camiones comerciales ligeros y medianos, propulsados por motor de gasolina.
 Los vehículos señalados en el presente artículo, deberán ser similares a los de las marcas de
 fabricación nacional, de conformidad con la lista que publique la Secretaría del Ramo competente en el
 Comisión Intersecretarial de Industria Automotriz.
-ARTICULO 137 bis 5.- Las personas físicas que pretendan efectuar la importación de los vehículos
+
+**Artículo 137 Bis 5**
+Las personas físicas que pretendan efectuar la importación de los vehículos
 en los términos de los artículos anteriores deberán cumplir con lo siguiente:
 I.- Acreditarse como ciudadano mexicano con el Acta de Nacimiento o de naturalización
 correspondiente.
@@ -3979,18 +3989,25 @@ IV.- Presentar al momento del despacho aduanero conjuntamente con los documentos
 respectivos, la constancia que acredite que el vehículo a importar cumple con las normas técnicas de
 emisión máxima permisible de contaminantes en su país de origen.
 
-ARTICULO 137 bis 6.- La importación de vehículos automotores usados que se realice en los
+**Artículo 137 Bis 6**
+La importación de vehículos automotores usados que se realice en los
 términos de los artículos anteriores, se limitará a una unidad por persona.
 Asimismo, la persona física que afecte la importación de una unidad vehicular usada, no podrá volver
 a efectuar la importación de otra unidad vehicular, en los términos de los artículos precedentes, sino
 después de haber transcurrido un año de la primer importación, siendo aplicables a su comercialización
 las limitaciones que derivan de las disposiciones aduaneras vigentes.
-ARTICULO 137 bis 7.- La internación al resto del territorio nacional de los vehículos importados al
+
+**Artículo 137 Bis 7**
+La internación al resto del territorio nacional de los vehículos importados al
 amparo de las disposiciones legales que preceden, se regirá por lo dispuesto en la Ley Aduanera, en
 especial por el párrafo final de su artículo 62, por las normas contenidas en el Reglamento de la Ley
 Aduanera y por las demás disposiciones normativas aplicables.
-ARTICULO 137 bis 8.- (Derogado).. Derogado DOF 19-11-2025
-ARTICULO 137 bis 9.- En lo conducente, serán aplicables a las importaciones de vehículos usados, a
+
+**Artículo 137 Bis 8**
+(Derogado).. Derogado DOF 19-11-2025
+
+**Artículo 137 Bis 9**
+En lo conducente, serán aplicables a las importaciones de vehículos usados, a
 que se refieren los artículos anteriores, las disposiciones contenidas en la Ley Aduanera, su Reglamento
 y demás.
 
@@ -5205,9 +5222,7 @@ la autoridad aduanera.
 Párrafo con incisos reformado DOF 09-12-2013
 
 Para efectos de lo anterior, la autoridad competente deberá sujetarse al procedimiento referido en el
-
-**Artículo 167**
-de esta Ley, así como a lo establecido en sus artículos 167-A, 167-B y 167-C.
+artículo 167 de esta Ley, así como a lo establecido en sus artículos 167-A, 167-B y 167-C.
 En caso de fallecimiento del agente aduanal, el mandatario a que se refiere el artículo 163, fracción IV
 de esta Ley que dé aviso a la autoridad aduanera dentro de los cinco días siguientes al del fallecimiento y
 acompañe copia del acta de defunción, podrá efectuar los trámites necesarios para concluir las
@@ -5217,7 +5232,9 @@ El agente aduanal que se incorpore a una agencia aduanal en términos de lo disp
 167-D de la presente Ley, podrá solicitar su retiro voluntario en cualquier momento, siempre y cuando no
 se encuentre sujeto a un procedimiento de inhabilitación, suspensión, cancelación o extinción de su
 patente.
-ARTICULO 167. En los casos de las fracciones I, V, X y XI del artículo 164 de esta Ley, las
+
+**Artículo 167**
+En los casos de las fracciones I, V, X y XI del artículo 164 de esta Ley, las
 autoridades aduaneras, una vez comprobados los hechos establecidos en dichas fracciones, ordenarán
 la suspensión provisional por el tiempo que subsista la causa que la motivó. Decretada la medida
 provisional antes mencionada, el agente aduanal podrá, en cualquier momento, desvirtuar la causal de
@@ -6579,59 +6596,3 @@ procederá el recurso de revocación establecido en el Código Fiscal de la Fede
 La interposición del recurso de revocación será optativa para el interesado antes de acudir al Tribunal
 Federal de Justicia Fiscal y Administrativa.
 Reforma DOF 30-12-1996: Derogó del artículo el entonces último párrafo
-T r a n s i t o r i o s
-Primero. La presente Ley entrará en vigor el 1o. de abril de 1996, con excepción de los artículos 21,
-fracciones l y ll; y 82, párrafos primero y segundo, los que entrarán en vigor a partir del 1o. de julio de
-1996.
-Segundo. A partir de la fecha en que entre en vigor esta Ley, quedará abrogada la Ley Aduanera,
-publicada en el Diario Oficial de la Federación el 30 de diciembre de 1981.
-En tanto se expiden las disposiciones reglamentarias de esta Ley, seguirá en vigor el Reglamento de
-la Ley que se abroga en todo lo que no se le oponga.
-Tercero. Hasta en tanto entra en vigor lo dispuesto en los artículos 21, fracciones l y ll y 82, párrafos
-primero y segundo de esta Ley, las mercancías que ingresen al territorio nacional, o que se pretendan
-extraer del mismo por vía postal, quedarán confiadas al Servicio Postal Mexicano, bajo la vigilancia y
-control de las autoridades aduaneras.
-Para los efectos de lo dispuesto en el párrafo anterior, el Servicio Postal Mexicano deberá:
-l. Abrir los bultos postales procedentes del extranjero en presencia de las autoridades
-aduaneras.
-II. Presentar las mercancías a las autoridades aduaneras para su reconocimiento y, en su
-caso, clasificación arancelaria, valoración y determinación de créditos fiscales.
-Asimismo, las autoridades aduaneras determinarán las contribuciones relativas a las importaciones y
-exportaciones, incluyendo las cuotas compensatorias, cuando se realicen por vía postal. En este caso, el
-pago se efectuará dentro de los cinco días hábiles siguientes a la notificación de la citada determinación.
-
-Cuarto. A partir de que entre en vigor esta Ley quedan sin efectos las disposiciones administrativas,
-resoluciones, consultas, interpretaciones, autorizaciones o permisos de carácter general o que se
-hubieran otorgado a título particular que contravengan o se opongan a lo preceptuado en esta Ley.
-Quinto. Los despachos, operaciones y procedimientos de comercio exterior, iniciados de acuerdo con
-las disposiciones de la Ley que se abroga, serán concluidos conforme a las disposiciones de la misma.
-Sexto. Los titulares de autorizaciones vigentes a la fecha de entrada en vigor de la presente Ley, que
-estén cumpliendo con todas las obligaciones derivadas de las mismas, podrán continuar desempeñando
-las actividades que les fueron autorizadas, para lo cual deberán satisfacer los requisitos establecidos en
-esta Ley. De no hacerlo, tales autorizaciones quedarán sin efectos.
-Séptimo. Las personas que tengan autorización para actuar como dictaminadores aduaneros, vigente
-al 1o. de abril de 1996, deberán cumplir los requisitos establecidos en el artículo 174 de esta Ley para
-continuar operando, en un plazo que no excederá del 31 de diciembre de 1996.
-Octavo. Las empresas con inscripción en el registro del despacho de mercancías de las empresas,
-vigente al 1o. de abril de 1996, conforme al artículo 72 de la Ley que se abroga, se considerarán inscritas
-en el citado registro, en los términos de lo previsto en el artículo 100 de esta Ley.
-Noveno. Las personas que hubieran introducido al país yates y veleros turísticos, así como casas
-rodantes, bajo el régimen de las marinas turísticas y de los campamentos de casas rodantes vigente al
-primero de abril de 1996, conforme a los artículos 95 y 95-A de la Ley que se abroga, deberán realizar el
-cambio al régimen de importación temporal, conforme al artículo 106, fracción V, incisos c) y d) de esta
-Ley, en un plazo que no excederá del 31 de marzo de 1997.
-Artículos Tercero a Vigésimo. ..........
-T r a n s i t o r i o s
-Primero. El presente Decreto entrará en vigor el 1o. de enero de 1996.
-Segundo. De conformidad con la disposición del Banco de México publicada en el Diario Oficial de
-la Federación el día 6 de enero de 1994, todas las sumas en moneda nacional que en las leyes fiscales
-se encuentren expresadas en "nuevos pesos" y su abreviatura "N", a partir del 1o. de enero de 1996
-deberán entenderse como "pesos" y su símbolo "$".
-México, D.F., a 7 de diciembre de 1995.- Dip. Oscar Cantón Zetina, Presidente.- Sen. Gustavo
-Carvajal Moreno, Presidente.- Dip. Emilio Solórzano Solís, Secretario.- Sen. Jorge G. López Tijerina,
-Secretario.- Rúbricas".
-En cumplimiento de lo dispuesto por la fracción I del Artículo 89 de la Constitución Política de los
-Estados Unidos Mexicanos, y para su debida publicación y observancia, expido el presente Decreto en la
-residencia del Poder Ejecutivo Federal, en la Ciudad de México, Distrito Federal, a los trece días del mes
-de diciembre de mil novecientos noventa y cinco.- Ernesto Zedillo Ponce de León.- Rúbrica.- El
-Secretario de Gobernación, Emilio Chuayffet Chemor.- Rúbrica.
