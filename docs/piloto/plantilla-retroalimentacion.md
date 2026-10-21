@@ -6,7 +6,7 @@ Copia este bloque por cada escenario ejecutado o incidencia encontrada. Un formu
 ID del reporte:            PIL-___ (lo asigna el responsable)
 Fecha y hora:
 Persona que prueba:        (nombre o alias acordado)
-Versión de la app:         1.0.0-rc.18
+Versión de la app:         1.0.0-rc.19
 SHA-256 del instalador:    (copiar del manifiesto)
 Windows:                   (resultado de winver, p. ej. Windows 11 Pro 24H2)
 Proveedor de IA usado:     ninguno / Gemini / OpenAI / Anthropic   Modelo:
