@@ -4,11 +4,17 @@ import fs from 'fs';
 import path from 'path';
 import { CORPUS_DIR } from './legal-corpus-config.mjs';
 import {
-  cleanPageText,
-  extractLawArticles,
-  extractRmfRules,
+  extractCompilationLastReform,
+  extractDocumentalProvisions,
+  extractSourceNotes,
+  slugProvisionId,
+  verifyCompilationIncludesAmendment,
+} from './official-documental-parser.mjs';
+import {
+  extractRmfAmendmentProvisions,
   renderCorpusMarkdown,
-  sha256,
+  RGCE_2026_SECOND_AMENDMENT,
+  unchangedVerificationDate,
   validateProvisions,
 } from './official-fiscal-parser.mjs';
 import { parseOfficialPdf } from './official-pdf-reader.mjs';
@@ -139,7 +145,7 @@ const SOURCES = [
     authority: 'Camara de Diputados del H. Congreso de la Union',
     publishedAt: '2022-06-07',
     lastReform: '2025-12-29',
-    repeatedHeader: 'LEY DE LOS IMPUESTOS GENERALES DE IMPORTACION Y DE EXPORTACION',
+    repeatedHeader: 'LEY DE LOS IMPUESTOS GENERALES DE IMPORTACIÓN Y DE EXPORTACIÓN',
     parser: 'ligie',
     policy: {
       minimumEntries: 95,
@@ -156,14 +162,23 @@ const SOURCES = [
     code: 'RGCE',
     name: 'Reglas Generales de Comercio Exterior para 2026',
     module: 'aduanal',
-    file: 'RGCE_2026_compilada_1ra.pdf',
+    file: 'RGCE_2026_compilada_2da.pdf',
     corpus: 'rgce_2026.md',
-    url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rgce/compiladas/1raRMRGCEpara2026.pdf',
+    // El SAT publicó la compilación con la segunda resolución en la carpeta de la RMF.
+    url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rmf/compiladas/Compilado2daRMRGCEpara2026.pdf',
     authority: 'Servicio de Administracion Tributaria',
     publishedAt: '2025-12-27',
-    lastReform: '2026-05-14',
+    lastReform: '2026-09-22',
     repeatedHeader: 'REGLAS GENERALES DE COMERCIO EXTERIOR PARA 2026',
     parser: 'rule',
+    // La compilación debe traer el texto literal publicado en la resolución más reciente.
+    compilationCheck: {
+      code: 'RGCE-2026-2RM',
+      file: 'RGCE_2026_2da_mod.pdf',
+      url: 'https://www.sat.gob.mx/minisitio/NormatividadRMFyRGCE/documentos2026/rgce/rgce/2daRMRGCEpara2026.pdf',
+      publishedAt: '2026-09-22',
+      definition: RGCE_2026_SECOND_AMENDMENT,
+    },
     policy: {
       minimumEntries: 500,
       maximumEntries: 1300,
@@ -220,165 +235,6 @@ function extractLastReform(text) {
   return match ? `${match[3]}-${match[2]}-${match[1]}` : null;
 }
 
-function normalizeForTermMatching(value) {
-  return String(value || '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
-function normalizeBody(value) {
-  return String(value || '')
-    .replace(/\[\[PAGE:\d+]]/g, '')
-    .replace(/\r/g, '')
-    .replace(/[ \t]+/g, ' ')
-    .replace(/\n[ \t]+/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-}
-
-function titleCaseArticleSuffix(rawSuffix) {
-  const normalized = String(rawSuffix || '').toLowerCase();
-  if (normalized === 'quater') return 'Quáter';
-  return normalized.charAt(0).toUpperCase() + normalized.slice(1);
-}
-
-function repairSplitSuffixArticles(provisions) {
-  return provisions.map(provision => {
-    if (provision.kind !== 'article' || !/^\d+$/.test(String(provision.id))) return provision;
-
-    const match = provision.content.match(/^(Bis|Ter|Qu[aá]ter|Quinquies|Sexies|Septies|Octies|Nonies|[A-ZÑ])\.-\s*/iu);
-    if (!match) return provision;
-
-    const rawSuffix = match[1];
-    const suffix = rawSuffix.length === 1
-      ? rawSuffix.toUpperCase()
-      : titleCaseArticleSuffix(rawSuffix);
-    const id = rawSuffix.length === 1 ? `${provision.id}-${suffix}` : `${provision.id} ${suffix}`;
-    const content = provision.content.slice(match[0].length).trim();
-
-    return {
-      ...provision,
-      id,
-      label: `Artículo ${id}`,
-      content,
-      contentSha256: sha256(content),
-    };
-  });
-}
-
-function slugProvisionId(value) {
-  return String(value || '')
-    .replace(/ñ/g, 'enie')
-    .replace(/Ñ/g, 'enie')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function sanitizePages(pdf, source) {
-  return pdf.pages.map(page => {
-    let text = page.text;
-    if (source.code === 'RGCE') {
-      text = text
-        .split('\n')
-        .filter(line => {
-          const compact = line.replace(/\s+/g, ' ').trim();
-          return compact
-            && !/^NOTA: Este documento constituye/i.test(compact)
-            && !/^de dar a conocer el texto actualizado/i.test(compact)
-            && !/^de los Derechos del Contribuyente/i.test(compact)
-            && !/^la Federaci[oó]n\.$/i.test(compact)
-            && !/^P[aá]gina\s+\d+\s+de\s+\d+$/i.test(compact);
-        })
-        .join('\n');
-    }
-
-    return {
-      ...page,
-      text,
-    };
-  });
-}
-
-function pageForOffset(ranges, offset) {
-  const range = ranges.find(item => offset >= item.start && offset <= item.end);
-  if (range) return range.page;
-  const previous = [...ranges].reverse().find(item => offset >= item.end);
-  return previous?.page ?? ranges[0]?.page ?? null;
-}
-
-function extractLigieProvisions(pages, source) {
-  const cleanedPages = pages.map(page => ({
-    num: page.num,
-    text: cleanPageText(page.text, source),
-  }));
-  let text = '';
-  const ranges = [];
-
-  for (const page of cleanedPages) {
-    const marker = `\n[[PAGE:${page.num}]]\n`;
-    text += marker;
-    const start = text.length;
-    text += page.text;
-    ranges.push({ page: page.num, start, end: text.length });
-  }
-
-  const article1 = text.search(/^\s*Art[íi]culo\s+1(?:o|º|°)?[.\-–—]/imu);
-  const article2 = text.search(/^\s*Art[íi]culo\s+2(?:o|º|°)?[.\-–—]/imu);
-  const transitory = text.search(/^\s*TRANSITORIOS\s*:?\s*$/imu);
-  const tariffStart = text.search(/^\s*TARIFA\s*$/imu);
-  const tariffEnd = article2 > tariffStart ? article2 : (transitory > tariffStart ? transitory : text.length);
-  const sliceStart = tariffStart >= 0 ? tariffStart : article1;
-  const tariffText = sliceStart >= 0 ? text.slice(sliceStart, tariffEnd) : '';
-
-  const chapterMatches = [...tariffText.matchAll(/^\s*Cap[íi]tulo\s+(\d{2})\s*$/gimu)];
-  const provisions = [];
-
-  for (let index = 0; index < chapterMatches.length; index += 1) {
-    const match = chapterMatches[index];
-    const start = sliceStart + (match.index ?? 0);
-    const bodyStart = start + match[0].length;
-    const end = sliceStart + (chapterMatches[index + 1]?.index ?? tariffText.length);
-    const body = normalizeBody(text.slice(bodyStart, end));
-    if (!body || body.length < 80) continue;
-    const id = `1-Capitulo-${match[1]}`;
-    const startPage = pageForOffset(ranges, start);
-    const endPage = pageForOffset(ranges, Math.max(bodyStart, end - 1));
-    provisions.push({
-      kind: 'article',
-      id,
-      label: `Artículo 1o - Capítulo ${match[1]}`,
-      content: body,
-      contentSha256: sha256(body),
-      sourcePages: startPage === endPage ? [startPage] : [startPage, endPage],
-    });
-  }
-
-  const legalArticles = repairSplitSuffixArticles(extractLawArticles(pages, source).provisions)
-    .filter(provision => normalizeForTermMatching(provision.id) !== '1');
-
-  return {
-    firstProvisionPage: pageForOffset(ranges, article1 >= 0 ? article1 : sliceStart),
-    transitoryPage: transitory >= 0 ? pageForOffset(ranges, transitory) : null,
-    provisions: [...provisions, ...legalArticles],
-  };
-}
-
-function extractSourceProvisions(pdf, source) {
-  const pages = sanitizePages(pdf, source);
-  if (source.parser === 'rule') return extractRmfRules(pages, source);
-  if (source.parser === 'ligie') return extractLigieProvisions(pages, source);
-  const extracted = extractLawArticles(pages, source);
-  return {
-    ...extracted,
-    provisions: repairSplitSuffixArticles(extracted.provisions),
-  };
-}
-
 function validateSource(source, extracted, reportedLastReform) {
   const validation = validateProvisions(extracted.provisions, source.policy);
   if (source.lastReform && reportedLastReform !== source.lastReform) {
@@ -390,21 +246,67 @@ function validateSource(source, extracted, reportedLastReform) {
   return validation;
 }
 
+// Escribe el candidato. Si sólo difiere del corpus canónico en la fecha de verificación,
+// conserva la fecha canónica: la promoción deja intacta la ley y no hay que reindexarla.
+function writeCandidate(source, provisions, metadata) {
+  const candidatePath = path.join(outputDir, 'candidates', source.corpus);
+  const canonicalPath = path.join(CORPUS_DIR, source.corpus);
+  let markdown = renderCorpusMarkdown(source, provisions, metadata);
+  const preservedCheckedAt = fs.existsSync(canonicalPath)
+    ? unchangedVerificationDate(markdown, fs.readFileSync(canonicalPath, 'utf8'))
+    : null;
+  if (preservedCheckedAt) markdown = renderCorpusMarkdown(source, provisions, { ...metadata, checkedAt: preservedCheckedAt });
+  fs.mkdirSync(path.dirname(candidatePath), { recursive: true });
+  fs.writeFileSync(candidatePath, markdown, 'utf8');
+  return { candidatePath, checkedAt: preservedCheckedAt || metadata.checkedAt, unchanged: Boolean(preservedCheckedAt) };
+}
+
+// Extrae los bloques de la resolución suelta y comprueba que la compilación los traiga.
+// Las resoluciones se segmentan sólo por texto, igual que en la etapa fiscal.
+async function checkCompilation(check, provisions) {
+  const { definition, ...metadata } = check;
+  const filePath = path.join(sourceDir, check.file);
+  verifyPdf(filePath);
+  const pdf = await parseOfficialPdf(filePath, 'article');
+  const blocks = extractRmfAmendmentProvisions(pdf.pages.map(page => ({ ...page, headings: [] })), {}, definition);
+  const comparison = verifyCompilationIncludesAmendment(provisions, blocks.provisions);
+  return {
+    ...metadata,
+    sourceSha256: sha256File(filePath),
+    expectedBlocks: blocks.expectedProvisionIds.length,
+    missingBlocks: blocks.missingProvisionIds,
+    status: blocks.status === 'pass' && comparison.status === 'pass' ? 'pass' : 'fail',
+    rules: comparison.rules,
+  };
+}
+
 async function stage(source) {
   const filePath = path.join(sourceDir, source.file);
   verifyPdf(filePath);
   const pdf = await parseOfficialPdf(filePath, source.parser === 'rule' ? 'rule' : 'article');
-  const extracted = extractSourceProvisions(pdf, source);
-  const reportedLastReform = extractLastReform(pdf.pages[0]?.text) || source.lastReform;
+  const extracted = extractDocumentalProvisions(pdf.pages, source);
+  const firstPageText = pdf.pages[0]?.text;
+  const reportedLastReform = extractLastReform(firstPageText)
+    || (source.parser === 'rule' ? extractCompilationLastReform(firstPageText) : null)
+    || source.lastReform;
+  const sourceNotes = extractSourceNotes(firstPageText);
   const validation = validateSource(source, extracted, reportedLastReform);
+  const compilationCheck = source.compilationCheck ? await checkCompilation(source.compilationCheck, extracted.provisions) : null;
+  if (compilationCheck?.status === 'fail') {
+    const failedRules = compilationCheck.rules.filter(rule => rule.status !== 'pass').map(rule => rule.id);
+    validation.status = 'fail';
+    validation.failures.push(
+      `La compilacion no trae el texto literal de ${compilationCheck.code}: ${[...compilationCheck.missingBlocks, ...failedRules].join(', ')}.`,
+    );
+  }
   const sourceSha256 = sha256File(filePath);
-  const candidatePath = path.join(outputDir, 'candidates', source.corpus);
-  fs.mkdirSync(path.dirname(candidatePath), { recursive: true });
-  fs.writeFileSync(candidatePath, renderCorpusMarkdown(source, extracted.provisions, {
+  const candidate = writeCandidate(source, extracted.provisions, {
     checkedAt,
     lastReform: reportedLastReform,
     sourceSha256,
-  }), 'utf8');
+    sourceNotes,
+  });
+  const candidatePath = candidate.candidatePath;
 
   return {
     code: source.code,
@@ -420,11 +322,15 @@ async function stage(source) {
     pages: pdf.total,
     publishedAt: source.publishedAt,
     lastReform: reportedLastReform,
-    checkedAt,
+    sourceNotes,
+    checkedAt: candidate.checkedAt,
+    recheckedAt: checkedAt,
+    canonicalUnchanged: candidate.unchanged,
     firstProvisionPage: extracted.firstProvisionPage,
     transitoryPage: extracted.transitoryPage,
     provisions: extracted.provisions.length,
     validation,
+    compilationCheck,
     promotionEligible: validation.status === 'pass',
     provisionRegistry: extracted.provisions.map(item => ({
       provisionKey: `${source.code.toLowerCase()}:${item.kind}:${slugProvisionId(item.id)}`,
@@ -437,13 +343,21 @@ async function stage(source) {
 
 async function main() {
   fs.mkdirSync(outputDir, { recursive: true });
-  for (const source of SOURCES) await ensureSourceAvailable(source);
+  for (const source of SOURCES) {
+    await ensureSourceAvailable(source);
+    if (source.compilationCheck) await ensureSourceAvailable(source.compilationCheck);
+  }
 
   const sources = [];
   for (const source of SOURCES) {
     const result = await stage(source);
     sources.push(result);
     console.log(`${source.code}: ${result.provisions} disposiciones; validacion ${result.validation.status}.`);
+    if (result.compilationCheck) {
+      const check = result.compilationCheck;
+      const passed = check.rules.filter(rule => rule.status === 'pass').length;
+      console.log(`${source.code}: la compilacion trae ${passed}/${check.expectedBlocks} bloques literales de ${check.code}.`);
+    }
   }
 
   const registry = {
@@ -465,11 +379,19 @@ async function main() {
     if (sources.some(source => !source.promotionEligible)) {
       throw new Error('Promocion bloqueada por validacion documental fallida.');
     }
-    for (const source of SOURCES) {
-      fs.copyFileSync(path.join(outputDir, 'candidates', source.corpus), path.join(CORPUS_DIR, source.corpus));
+    const promotedSources = sources.filter(source => !source.canonicalUnchanged);
+    const unchangedSources = sources.filter(source => source.canonicalUnchanged);
+    for (const source of promotedSources) {
+      const definition = SOURCES.find(item => item.code === source.code);
+      fs.copyFileSync(path.join(outputDir, 'candidates', definition.corpus), path.join(CORPUS_DIR, definition.corpus));
     }
-    writeJson(path.join(CORPUS_DIR, 'documental-source-registry.json'), registry);
-    console.log(`Promovidos al corpus canonico: ${SOURCES.map(source => source.code).join(', ')}.`);
+    writeJson(path.join(CORPUS_DIR, 'documental-source-registry.json'), {
+      ...registry,
+      canonicalPromotions: promotedSources.map(source => source.code),
+      unchangedSources: unchangedSources.map(source => source.code),
+    });
+    console.log(`Promovidos al corpus canonico: ${promotedSources.map(source => source.code).join(', ') || 'ninguno'}.`);
+    if (unchangedSources.length) console.log(`Sin cambios, no se reescriben: ${unchangedSources.map(source => source.code).join(', ')}.`);
   }
 
   if (sources.some(source => source.validation.status !== 'pass')) process.exitCode = 1;

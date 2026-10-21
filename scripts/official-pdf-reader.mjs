@@ -1,14 +1,7 @@
 import fs from 'fs';
 import { PDFParse } from 'pdf-parse';
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
-import { normalizeProvisionId } from './official-fiscal-parser.mjs';
-
-function regexFrom(source) {
-  return new RegExp(source, 'gimu');
-}
-
-const ARTICLE_HEADER_SOURCE = String.raw`^\s*Art[íi]culo\s+(\d+(?:o|º|°)?(?:(?:\.-|-)(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES|[A-Z]))?(?:\s+(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES))?)(?:\.\s*-|[.\-–—])`;
-const RULE_HEADER_SOURCE = String.raw`^\s*(\d+(?:\.\d+){1,3})\.\s+(?=\S)`;
+import { matchArticleHeading, normalizeProvisionId } from './official-fiscal-parser.mjs';
 
 function groupTextItemsByLine(items) {
   const lines = [];
@@ -28,17 +21,16 @@ function groupTextItemsByLine(items) {
 
 function headingIdFromLine(line, kind) {
   const text = line.items.map(item => item.str).join('').replace(/\s+/g, ' ').trim();
-  const match = kind === 'rule'
-    ? text.match(/^(\d+(?:\.\d+){1,3})\.\s+/)
-    : text.match(/^Art[íi]culo\s+(\d+(?:o|º|°)?(?:(?:\.-|-)(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES|[A-Z]))?(?:\s+(?:BIS|TER|QU[AÁ]TER|QUINQUIES|SEXIES|SEPTIES|OCTIES|NONIES))?)(?:\.\s*-|[.\-–—])/i);
-  return match?.[1] || null;
+  if (kind === 'rule') return text.match(/^(\d+(?:\.\d+){1,3})\.\s+/)?.[1] || null;
+  // Mismo patrón que el parser de texto, para que el encabezado tipográfico y su
+  // candidato en el texto extraído coincidan ("Artículo. 88.", "18-H QUINTUS.").
+  return matchArticleHeading(text);
 }
 
 async function extractStyledHeadings(filePath, kind) {
   const document = await pdfjs.getDocument({ data: new Uint8Array(fs.readFileSync(filePath)) }).promise;
   const headingsByPage = new Map();
   let headingFont = null;
-  const headerSource = kind === 'rule' ? RULE_HEADER_SOURCE : ARTICLE_HEADER_SOURCE;
 
   try {
     for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber += 1) {
