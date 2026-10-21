@@ -143,6 +143,8 @@ describe('utilidades del corpus documental', () => {
   it('confirma que la compilación trae el texto literal de cada bloque de la resolución', () => {
     const compiled = [
       { id: '1.4.12', content: 'Para los efectos del artículo 184-C de la Ley, se cumplirá con la ficha de trámite 20/LA\n"Solicitud para dejar sin efectos la suspensión", contenida en el Anexo 2.\nLey 184-C, RGCE 1.2.2.' },
+      // En la compilación, el título de una regla queda al final de la anterior.
+      { id: '1.4.13', content: 'Texto de la regla 1.4.13.\nExpediente que debe integrar el agente aduanal respecto de los usuarios que les soliciten operaciones' },
       { id: '4.5.33', content: 'Los almacenes deberán:\nI. Presentar el aviso.\nII. Conservar copia.\nIII. Transmitir la información en la Ventanilla Digital.\nLey 119' },
     ];
     const amendment = [
@@ -157,12 +159,24 @@ describe('utilidades del corpus documental', () => {
       rules: [{ id: '1.4.12', status: 'pass' }, { id: '4.5.33', status: 'pass' }],
     });
 
-    const outdated = [{ ...compiled[1], content: 'III. Transmitir la información en el portal anterior.' }];
+    const outdated = [{ id: '4.5.33', content: 'III. Transmitir la información en el portal anterior.' }];
     expect(verifyCompilationIncludesAmendment(outdated, [amendment[1]])).toMatchObject({
       status: 'fail',
       rules: [{ id: '4.5.33', status: 'fail', missingFragments: ['III. Transmitir la información en la Ventanilla Digital.'] }],
     });
     expect(verifyCompilationIncludesAmendment([], [amendment[0]]).rules[0]).toMatchObject({ status: 'fail', found: false });
+  });
+
+  it('no descarta como título las últimas líneas reformadas que faltan en la compilación', () => {
+    const compiled = [
+      { id: '1.4.12', content: 'La autoridad aduanera resolverá la solicitud\nen un plazo de cinco días.\nLey 184-C' },
+      { id: '1.4.13', content: 'Texto de la regla siguiente.\nExpediente que debe integrar el agente aduanal' },
+    ];
+    const reformedTail = [{ id: '1.4.12', content: 'La autoridad aduanera resolverá la solicitud\nen un plazo de diez días.\nLey 184-C' }];
+    const nextRuleTitle = [{ id: '1.4.12', content: 'La autoridad aduanera resolverá la solicitud\nen un plazo de cinco días.\nLey 184-C\nExpediente que debe integrar el agente aduanal' }];
+
+    expect(verifyCompilationIncludesAmendment(compiled, reformedTail).status).toBe('fail');
+    expect(verifyCompilationIncludesAmendment(compiled, nextRuleTitle).status).toBe('pass');
   });
 
   it('repara sufijos partidos incluido Quintus', () => {

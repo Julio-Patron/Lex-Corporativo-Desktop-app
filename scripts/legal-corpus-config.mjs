@@ -53,7 +53,7 @@ const VERIFIED_RGCE_METADATA = {
 };
 
 // Leyes cuyo texto cambió en la verificación del 20 de octubre de 2026. Las demás
-// conservan la fecha anterior: su fuente oficial no cambió y no se volvieron a indexar.
+// conservan la fecha anterior porque ni su fuente oficial ni su texto cambiaron.
 const RECHECKED_OCTOBER_2026 = {
   officialLastCheckedAt: '2026-10-20',
 };

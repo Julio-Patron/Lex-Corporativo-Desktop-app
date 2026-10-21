@@ -221,9 +221,12 @@ const MAX_TRAILING_TITLE_LINES = 3;
 // Comprueba que una compilación oficial trae el texto literal de cada bloque de una
 // resolución de modificaciones. Cada tramo entre puntos suspensivos debe aparecer en la
 // regla compilada; el último tramo puede terminar con el título de la regla siguiente
-// (hasta tres líneas), que en la resolución precede al número de esa regla.
+// (hasta tres líneas), que en la resolución precede al número de esa regla. Esas líneas
+// sólo se descartan si están en otra parte de la compilación: si no, son texto reformado
+// que falta.
 export function verifyCompilationIncludesAmendment(compiledProvisions, amendmentProvisions) {
   const compiledById = new Map(compiledProvisions.map(item => [item.id, normalizeForContainment(item.content)]));
+  const compiledText = [...compiledById.values()].join(' ');
   const rules = amendmentProvisions.map(amendment => {
     const compiled = compiledById.get(amendment.id);
     if (compiled === undefined) return { id: amendment.id, found: false, status: 'fail', missingFragments: [] };
@@ -243,7 +246,9 @@ export function verifyCompilationIncludesAmendment(compiledProvisions, amendment
     const missingFragments = fragments.filter((lines, index) => {
       const maxTrim = index === fragments.length - 1 ? Math.min(MAX_TRAILING_TITLE_LINES, lines.length - 1) : 0;
       for (let trim = 0; trim <= maxTrim; trim += 1) {
-        if (compiled.includes(normalizeForContainment(lines.slice(0, lines.length - trim).join(' ')))) return false;
+        const kept = normalizeForContainment(lines.slice(0, lines.length - trim).join(' '));
+        const dropped = normalizeForContainment(lines.slice(lines.length - trim).join(' '));
+        if (compiled.includes(kept) && (!dropped || compiledText.includes(dropped))) return false;
       }
       return true;
     }).map(lines => normalizeForContainment(lines.join(' ')).slice(0, 120));
