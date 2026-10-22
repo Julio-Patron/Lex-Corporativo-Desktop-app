@@ -860,6 +860,15 @@ export async function searchUserDocuments(
 }
 
 /**
+ * One line per source with its FUENTE_ID, the identifier the AI must cite.
+ */
+export function formatLegalSourceLine(m: RAGMatch): string {
+  return m.type === 'jurisprudence'
+    ? `— [FUENTE_ID=${String(m.id)}] JURISPRUDENCIA [${m.subtitle}]: "${m.content.slice(0, 2000)}"`
+    : `— [FUENTE_ID=${String(m.id)}] [FUENTE OFICIAL VERIFICADA] ${m.law_code || m.title} ${m.article_number || ''}: "${m.content.slice(0, 1500)}"`;
+}
+
+/**
  * Formats structured RAG citations into an LLM context block
  */
 export function formatRAGContext(matches: RAGMatch[], module: LegalSearchScope, isDrafting = false): string {
@@ -867,11 +876,11 @@ export function formatRAGContext(matches: RAGMatch[], module: LegalSearchScope, 
 
   const statuteLines = matches
     .filter(m => m.type === 'statute')
-    .map(m => `— [FUENTE_ID=${String(m.id)}] [FUENTE OFICIAL VERIFICADA] ${m.law_code || m.title} ${m.article_number || ''}: "${m.content.slice(0, 1500)}"`);
+    .map(formatLegalSourceLine);
 
   const jurLines = matches
     .filter(m => m.type === 'jurisprudence')
-    .map(m => `— [FUENTE_ID=${String(m.id)}] JURISPRUDENCIA [${m.subtitle}]: "${m.content.slice(0, 2000)}"`);
+    .map(formatLegalSourceLine);
 
   let instructionLines: string[];
   if (isDrafting) {
