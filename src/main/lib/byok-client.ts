@@ -738,6 +738,8 @@ async function discoverAnthropicModelsFromApi(apiKey: string, failedModel: strin
   }
 }
 
+const STREAM_PROGRESS_LOG_MS = 15_000;
+
 // Arma el mensaje final (content, stop_reason, usage) a partir de los eventos
 // SSE de Messages, con la misma forma que la respuesta sin streaming.
 async function readAnthropicMessageStream(response: Response, keepAlive: () => void): Promise<any> {
@@ -748,6 +750,10 @@ async function readAnthropicMessageStream(response: Response, keepAlive: () => v
   const partialJson = new Map<number, string>();
   let finished = false;
   let buffer = '';
+  // El avance en el registro muestra que la respuesta sigue llegando durante esperas largas.
+  const startedAt = Date.now();
+  let lastProgressAt = startedAt;
+  let outputChars = 0;
 
   const handleEvent = (rawEvent: string) => {
     const data = rawEvent
@@ -768,6 +774,7 @@ async function readAnthropicMessageStream(response: Response, keepAlive: () => v
         break;
       case 'content_block_delta':
         if (!block) break;
+        outputChars += String(event.delta?.text ?? event.delta?.partial_json ?? event.delta?.thinking ?? '').length;
         if (event.delta?.type === 'text_delta') block.text = (block.text ?? '') + event.delta.text;
         else if (event.delta?.type === 'input_json_delta') partialJson.set(event.index, (partialJson.get(event.index) ?? '') + event.delta.partial_json);
         else if (event.delta?.type === 'thinking_delta') block.thinking = (block.thinking ?? '') + event.delta.thinking;
@@ -804,6 +811,10 @@ async function readAnthropicMessageStream(response: Response, keepAlive: () => v
         handleEvent(buffer.slice(0, boundary));
         buffer = buffer.slice(boundary + 2);
         boundary = buffer.indexOf('\n\n');
+      }
+      if (Date.now() - lastProgressAt >= STREAM_PROGRESS_LOG_MS) {
+        lastProgressAt = Date.now();
+        console.info(`[BYOK] Stream progress <- provider=anthropic outputChars=${outputChars} elapsedMs=${lastProgressAt - startedAt}`);
       }
     }
     buffer += decoder.decode().replace(/\r/g, '');
