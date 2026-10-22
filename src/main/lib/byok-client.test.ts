@@ -14,6 +14,74 @@ function mockJsonResponse(payload: unknown) {
   return fetchMock;
 }
 
+type AnthropicBlock = { type: string; [key: string]: any };
+
+// Eventos SSE de Messages para un mensaje final; el JSON de las herramientas llega en dos partes.
+function anthropicEvents(message: { stop_reason?: string; content: AnthropicBlock[] }) {
+  return [
+    { type: 'message_start', message: { id: 'msg_test', type: 'message', role: 'assistant', content: [], stop_reason: null } },
+    ...message.content.flatMap((block, index) => {
+      if (block.type === 'tool_use') {
+        const json = JSON.stringify(block.input);
+        const half = Math.ceil(json.length / 2);
+        return [
+          { type: 'content_block_start', index, content_block: { ...block, input: {} } },
+          { type: 'content_block_delta', index, delta: { type: 'input_json_delta', partial_json: json.slice(0, half) } },
+          { type: 'content_block_delta', index, delta: { type: 'input_json_delta', partial_json: json.slice(half) } },
+          { type: 'content_block_stop', index },
+        ];
+      }
+      if (block.type === 'text') {
+        return [
+          { type: 'content_block_start', index, content_block: { type: 'text', text: '' } },
+          { type: 'content_block_delta', index, delta: { type: 'text_delta', text: block.text } },
+          { type: 'content_block_stop', index },
+        ];
+      }
+      return [
+        { type: 'content_block_start', index, content_block: block },
+        { type: 'content_block_stop', index },
+      ];
+    }),
+    { type: 'message_delta', delta: { stop_reason: message.stop_reason ?? 'end_turn' }, usage: { output_tokens: 1 } },
+    { type: 'message_stop' },
+  ];
+}
+
+// Responde con un flujo SSE: un evento por lectura, con pausa opcional, o se queda sin enviar más.
+function mockAnthropicStream(events: unknown[], options: { delayMs?: number; stallAfterEvents?: boolean } = {}) {
+  const encoder = new TextEncoder();
+  const fetchMock = vi.fn().mockImplementation(async (_url: string, init: RequestInit) => {
+    let index = 0;
+    return {
+      ok: true,
+      body: new ReadableStream<Uint8Array>({
+        start(controller) {
+          init.signal?.addEventListener('abort', () => {
+            try {
+              controller.error(new DOMException('This operation was aborted', 'AbortError'));
+            } catch {
+              // El flujo ya estaba cerrado.
+            }
+          });
+        },
+        async pull(controller) {
+          if (index >= events.length) {
+            if (options.stallAfterEvents) return new Promise<void>(() => {});
+            controller.close();
+            return;
+          }
+          if (options.delayMs) await new Promise((resolve) => setTimeout(resolve, options.delayMs));
+          const event = events[index++] as { type: string };
+          controller.enqueue(encoder.encode(`event: ${event.type}\ndata: ${JSON.stringify(event)}\n\n`));
+        },
+      }),
+    };
+  });
+  vi.stubGlobal('fetch', fetchMock);
+  return fetchMock;
+}
+
 describe('BYOK provider client', () => {
   it('calls Gemini generateContent without placing the key in the URL', async () => {
     const fetchMock = mockJsonResponse({ candidates: [{ content: { parts: [{ text: 'gemini-result' }] } }] });
@@ -44,7 +112,7 @@ describe('BYOK provider client', () => {
   });
 
   it('uses an Anthropic tool schema to obtain structured output', async () => {
-    const fetchMock = mockJsonResponse({ content: [{ type: 'tool_use', name: 'result', input: { ok: true } }] });
+    const fetchMock = mockAnthropicStream(anthropicEvents({ stop_reason: 'tool_use', content: [{ type: 'tool_use', id: 'toolu_test', name: 'result', input: { ok: true } }] }));
     const result = await generateByokText({
       provider: 'anthropic',
       apiKey: 'anthropic-secret',
@@ -58,10 +126,56 @@ describe('BYOK provider client', () => {
     const body = JSON.parse(init.body);
     expect(init.headers['x-api-key']).toBe('anthropic-secret');
     expect(body.tool_choice).toEqual({ type: 'tool', name: 'result' });
+    expect(body.stream).toBe(true);
+  });
+
+  it('keeps reading a long Anthropic response while data keeps arriving', async () => {
+    const answer = 'Respuesta larga que llega por partes';
+    const events = [
+      { type: 'message_start', message: { id: 'msg_test', type: 'message', role: 'assistant', content: [], stop_reason: null } },
+      { type: 'content_block_start', index: 0, content_block: { type: 'text', text: '' } },
+      ...answer.split(' ').map((word, position) => ({ type: 'content_block_delta', index: 0, delta: { type: 'text_delta', text: position === 0 ? word : ` ${word}` } })),
+      { type: 'ping' },
+      { type: 'content_block_stop', index: 0 },
+      { type: 'message_delta', delta: { stop_reason: 'end_turn' }, usage: { output_tokens: 7 } },
+      { type: 'message_stop' },
+    ];
+    // 12 eventos cada 40 ms: casi medio segundo en total con un límite de 150 ms entre datos.
+    mockAnthropicStream(events, { delayMs: 40 });
+
+    const result = await generateByokText({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-4-6', prompt: 'consulta', timeoutMs: 150 });
+
+    expect(result).toBe(answer);
+  });
+
+  it('gives up when Anthropic stops sending data', async () => {
+    mockAnthropicStream([
+      { type: 'message_start', message: { id: 'msg_test', type: 'message', role: 'assistant', content: [], stop_reason: null } },
+    ], { stallAfterEvents: true });
+
+    await expect(generateByokText({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-4-6', prompt: 'consulta', timeoutMs: 100 }))
+      .rejects.toThrow(/agotó el tiempo de espera/);
+  });
+
+  it('reports an error sent in the middle of an Anthropic response', async () => {
+    mockAnthropicStream([
+      { type: 'message_start', message: { id: 'msg_test', type: 'message', role: 'assistant', content: [], stop_reason: null } },
+      { type: 'error', error: { type: 'overloaded_error', message: 'Overloaded' } },
+    ]);
+
+    await expect(generateByokText({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-4-6', prompt: 'consulta' }))
+      .rejects.toThrow(/Anthropic interrumpió la respuesta \(overloaded_error\)/);
+  });
+
+  it('rejects an Anthropic response that ends before message_stop', async () => {
+    mockAnthropicStream(anthropicEvents({ content: [{ type: 'text', text: 'OK' }] }).slice(0, -2));
+
+    await expect(generateByokText({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-4-6', prompt: 'consulta' }))
+      .rejects.toThrow(/antes de terminar/);
   });
 
   it('omits sampling parameters rejected by Claude Sonnet 5', async () => {
-    const fetchMock = mockJsonResponse({ content: [{ type: 'text', text: 'OK' }] });
+    const fetchMock = mockAnthropicStream(anthropicEvents({ content: [{ type: 'text', text: 'OK' }] }));
     await generateByokText({
       provider: 'anthropic',
       apiKey: 'anthropic-secret',
@@ -76,7 +190,7 @@ describe('BYOK provider client', () => {
   });
 
   it('requests structured JSON from current Claude models without forced tools or sampling', async () => {
-    const fetchMock = mockJsonResponse({ stop_reason: 'end_turn', content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: '{"ok":true}' }] });
+    const fetchMock = mockAnthropicStream(anthropicEvents({ stop_reason: 'end_turn', content: [{ type: 'thinking', thinking: '' }, { type: 'text', text: '{"ok":true}' }] }));
     const result = await generateByokText({
       provider: 'anthropic',
       apiKey: 'anthropic-secret',
@@ -105,7 +219,7 @@ describe('BYOK provider client', () => {
   });
 
   it('reports a Claude safety refusal instead of an empty result', async () => {
-    mockJsonResponse({ stop_reason: 'refusal', content: [] });
+    mockAnthropicStream(anthropicEvents({ stop_reason: 'refusal', content: [] }));
     await expect(generateByokText({
       provider: 'anthropic',
       apiKey: 'anthropic-secret',
@@ -115,7 +229,7 @@ describe('BYOK provider client', () => {
   });
 
   it('tests the connection with the configured model, not a fixed one', async () => {
-    const fetchMock = mockJsonResponse({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'OK' }] });
+    const fetchMock = mockAnthropicStream(anthropicEvents({ stop_reason: 'end_turn', content: [{ type: 'text', text: 'OK' }] }));
     const result = await testByokConnection({ provider: 'anthropic', apiKey: 'anthropic-secret', model: 'claude-sonnet-5' });
 
     expect(result.model).toBe('claude-sonnet-5');
