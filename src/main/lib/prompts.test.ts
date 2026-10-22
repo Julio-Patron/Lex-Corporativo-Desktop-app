@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  getNoRagWarning,
-  getSystemInstruction,
+  getAnalysisFocus,
   isLawAllowedForModule,
   normalizeLawCode
 } from './prompts';
@@ -22,8 +21,8 @@ describe('legal module prompt isolation', () => {
     expect(isLawAllowedForModule('Código de Comercio', 'fiscal')).toBe(false);
   });
 
-  it('keeps mercantile prompts free of fiscal negative-trigger tokens', () => {
-    const mercantilePrompt = `${getSystemInstruction('mercantil')}\n${getNoRagWarning('mercantil')}`;
+  it('keeps the mercantile review focus free of fiscal negative-trigger tokens', () => {
+    const mercantilePrompt = getAnalysisFocus('mercantil');
 
     expect(mercantilePrompt).toContain('LGTOC');
     expect(mercantilePrompt).toContain('Código de Comercio');
