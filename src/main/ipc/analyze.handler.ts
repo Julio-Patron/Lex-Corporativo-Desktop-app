@@ -13,7 +13,6 @@ import { getActiveByokConfig } from '../lib/byok-settings';
 import { composeLimitedByokPrompt, extractJsonObject, generateByokText } from '../lib/byok-client';
 import { logLegalExecution } from '../lib/traceability';
 import {
-  GROUNDED_CLAIM_JSON_SCHEMA,
   GroundedClaimSchema,
   validateStructuredGroundedOutput,
   type GroundingSource,
@@ -72,34 +71,23 @@ const ByokAnalysisResultSchema = z.object({
   }).strict(),
   legalFoundations: z.array(LegalFoundationSchema),
   groundingClaims: z.array(GroundedClaimSchema).min(1),
-  confidence: z.enum(['low', 'medium', 'high']),
+  confidence: z.enum(['low', 'medium', 'high']).optional(),
   engine: z.literal('byok'),
 }).strict();
 
-const RISK_CATEGORY_KEYS = [
-  'materialidad',
-  'deducibilidad',
-  'ivaAcreditable',
-  'operacionesInexistentes',
-  'laborales',
-  'comercioExterior',
-  'aduanales',
-  'documentales',
-  'logisticos',
-  'clasificacionArancelaria',
-  'representacion',
-  'cumplimiento',
-  'forma',
-  'contractuales',
-  'corporativos',
-] as const;
+const sourceIdsJsonSchema = () => ({ type: 'array', minItems: 1, items: { type: 'string' } });
 
+// Lo que se pide a la IA: los textos y los FUENTE_ID que sustentan cada uno.
+// Las citas (groundingClaims) y los fundamentos se arman en
+// buildByokAnalysisResult: pedirle que copiara los artículos y repitiera cada
+// texto duplicaba la respuesta y la hacía rechazar por diferencias de redacción.
 const BYOK_ANALYSIS_JSON_SCHEMA: Record<string, unknown> = {
   type: 'object',
   additionalProperties: false,
-  required: ['summary', 'documentType', 'riskScore', 'detectedParties', 'detectedObligations', 'missingClauses', 'missingData', 'risks', 'recommendedActions', 'checklist', 'riskCategories', 'legalFoundations', 'groundingClaims', 'confidence', 'engine'],
+  required: ['summary', 'summarySourceIds', 'documentType', 'riskScore', 'detectedParties', 'detectedObligations', 'missingClauses', 'missingData', 'risks', 'recommendedActions'],
   properties: {
     summary: { type: 'string' },
+    summarySourceIds: sourceIdsJsonSchema(),
     documentType: { type: 'string' },
     riskScore: { type: 'number', minimum: 0, maximum: 100 },
     detectedParties: { type: 'array', items: { type: 'string' } },
@@ -111,78 +99,97 @@ const BYOK_ANALYSIS_JSON_SCHEMA: Record<string, unknown> = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'severity', 'explanation', 'relatedClauses', 'legalFoundations'],
+        required: ['title', 'severity', 'explanation', 'sourceIds'],
         properties: {
           title: { type: 'string' },
           severity: { type: 'string', enum: ['low', 'medium', 'high'] },
           explanation: { type: 'string' },
-          relatedClauses: { type: 'array', items: { type: 'string' } },
-          legalFoundations: {
-            type: 'array',
-            items: {
-              type: 'object',
-              additionalProperties: false,
-              required: ['id', 'title', 'law', 'article', 'excerpt', 'relevanceScore'],
-              properties: {
-                id: { type: 'string' },
-                title: { type: 'string' },
-                law: { type: 'string' },
-                article: { type: 'string' },
-                excerpt: { type: 'string' },
-                relevanceScore: { type: 'number', minimum: 0, maximum: 1 },
-              },
-            },
-          },
+          sourceIds: sourceIdsJsonSchema(),
         },
       },
     },
-    recommendedActions: { type: 'array', items: { type: 'string' } },
-    checklist: { type: 'array', items: { type: 'string' } },
-    riskCategories: {
-      type: 'object',
-      additionalProperties: false,
-      required: [...RISK_CATEGORY_KEYS],
-      properties: {
-        materialidad: { type: 'array', items: { type: 'string' } },
-        deducibilidad: { type: 'array', items: { type: 'string' } },
-        ivaAcreditable: { type: 'array', items: { type: 'string' } },
-        operacionesInexistentes: { type: 'array', items: { type: 'string' } },
-        laborales: { type: 'array', items: { type: 'string' } },
-        comercioExterior: { type: 'array', items: { type: 'string' } },
-        aduanales: { type: 'array', items: { type: 'string' } },
-        documentales: { type: 'array', items: { type: 'string' } },
-        logisticos: { type: 'array', items: { type: 'string' } },
-        clasificacionArancelaria: { type: 'array', items: { type: 'string' } },
-        representacion: { type: 'array', items: { type: 'string' } },
-        cumplimiento: { type: 'array', items: { type: 'string' } },
-        forma: { type: 'array', items: { type: 'string' } },
-        contractuales: { type: 'array', items: { type: 'string' } },
-        corporativos: { type: 'array', items: { type: 'string' } },
-      },
-    },
-    legalFoundations: {
+    recommendedActions: {
       type: 'array',
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['id', 'title', 'law', 'article', 'excerpt', 'relevanceScore'],
+        required: ['text', 'sourceIds'],
         properties: {
-          id: { type: 'string' },
-          title: { type: 'string' },
-          law: { type: 'string' },
-          article: { type: 'string' },
-          excerpt: { type: 'string' },
-          relevanceScore: { type: 'number', minimum: 0, maximum: 1 },
+          text: { type: 'string' },
+          sourceIds: sourceIdsJsonSchema(),
         },
       },
     },
-    groundingClaims: { type: 'array', minItems: 1, maxItems: 200, items: GROUNDED_CLAIM_JSON_SCHEMA },
-    confidence: { type: 'string', enum: ['low', 'medium', 'high'] },
-    engine: { type: 'string', enum: ['byok'] },
   },
 };
 
+// Las claves de más se descartan; la validación de citas decide si la respuesta sirve.
+const ByokAnalysisOutputSchema = z.object({
+  summary: z.string(),
+  summarySourceIds: z.array(z.string()),
+  documentType: z.string(),
+  riskScore: z.number().min(0).max(100),
+  detectedParties: z.array(z.string()),
+  detectedObligations: z.array(z.string()),
+  missingClauses: z.array(z.string()),
+  missingData: z.array(z.string()),
+  risks: z.array(z.object({
+    title: z.string(),
+    severity: z.enum(['low', 'medium', 'high']),
+    explanation: z.string(),
+    sourceIds: z.array(z.string()),
+  })),
+  recommendedActions: z.array(z.object({
+    text: z.string(),
+    sourceIds: z.array(z.string()),
+  })),
+});
+
+type ByokAnalysisOutput = z.infer<typeof ByokAnalysisOutputSchema>;
+
 type ByokAnalysisResult = z.infer<typeof ByokAnalysisResultSchema>;
+
+// Arma el resultado que guarda la app: las citas salen de los mismos textos de
+// la IA, con la ruta JSON del texto como claimId para que el motivo de un
+// rechazo señale qué corregir, y los fundamentos de sus FUENTE_ID legales. hydrateByokAnalysisFoundations
+// completa después el título y el texto de cada artículo con la copia local.
+function buildByokAnalysisResult(output: ByokAnalysisOutput, legalSourceIds: Set<string>): ByokAnalysisResult {
+  const unique = (ids: string[]) => [...new Set(ids)];
+  const foundationsFor = (ids: string[]) => unique(ids)
+    .filter(id => legalSourceIds.has(id))
+    .map(id => ({ id, title: '', law: '', article: '', excerpt: '', relevanceScore: 0 }));
+
+  return {
+    summary: output.summary,
+    documentType: output.documentType,
+    riskScore: output.riskScore,
+    detectedParties: output.detectedParties,
+    detectedObligations: output.detectedObligations,
+    missingClauses: output.missingClauses,
+    missingData: output.missingData,
+    risks: output.risks.map(risk => ({
+      title: risk.title,
+      severity: risk.severity,
+      explanation: risk.explanation,
+      relatedClauses: [],
+      legalFoundations: foundationsFor(risk.sourceIds),
+    })),
+    recommendedActions: output.recommendedActions.map(action => action.text),
+    checklist: [],
+    riskCategories: {},
+    legalFoundations: foundationsFor([
+      ...output.summarySourceIds,
+      ...output.risks.flatMap(risk => risk.sourceIds),
+      ...output.recommendedActions.flatMap(action => action.sourceIds),
+    ]),
+    groundingClaims: [
+      { claimId: 'summary', heading: 'Resumen', text: output.summary, sourceIds: unique(output.summarySourceIds) },
+      ...output.risks.map((risk, index) => ({ claimId: `risks.${index}`, heading: risk.title.slice(0, 160), text: risk.explanation, sourceIds: unique(risk.sourceIds) })),
+      ...output.recommendedActions.map((action, index) => ({ claimId: `recommendedActions.${index}`, heading: '', text: action.text, sourceIds: unique(action.sourceIds) })),
+    ],
+    engine: 'byok',
+  };
+}
 
 function analysisRequiredClaimTexts(result: ByokAnalysisResult): string[] {
   return [
@@ -639,16 +646,12 @@ export async function processAnalyzePayload(
         const outputContract = [
           'Devuelve solamente el objeto JSON definido por el esquema estricto.',
           hasLegalContext
-            ? 'Cada fundamento debe usar como id un FUENTE_ID legal exacto de FUNDAMENTOS LOCALES VERIFICADOS.'
-            : 'Si no hay fundamentos legales locales recuperados, legalFoundations debe ser un array vacío [].',
-          'groundingClaims debe incluir el texto exacto de summary, de cada risks[].explanation y de cada recommendedActions[].',
-          hasLegalContext
-            ? 'Cada groundingClaim debe vincular sourceIds exactos mostrados en los fundamentos legales o fragmentos del documento (doc:1, doc:2...).'
-            : 'Cada groundingClaim debe vincular sourceIds exactos mostrados en los fragmentos del documento analizado (doc:1, doc:2...).',
+            ? 'summarySourceIds, cada risks[].sourceIds y cada recommendedActions[].sourceIds deben listar los FUENTE_ID exactos que sustentan ese texto: artículos de FUNDAMENTOS LOCALES VERIFICADOS o fragmentos del documento (doc:1, doc:2...).'
+            : 'summarySourceIds, cada risks[].sourceIds y cada recommendedActions[].sourceIds deben listar los fragmentos del documento que sustentan ese texto (doc:1, doc:2...).',
+          'No copies el texto de los artículos: basta con su FUENTE_ID.',
           'No cites ni menciones disposiciones normativas ausentes de esos fundamentos.',
           'Separa hechos observados, cláusulas faltantes obligatorias (missingClauses) y riesgos clasificados por severidad y materia.',
           'Para datos ausentes en el documento usa [DATO FALTANTE].',
-          'engine debe ser exactamente "byok".',
           getAnalysisInstruction(contractLabels),
         ].join('\n');
 
@@ -695,12 +698,13 @@ export async function processAnalyzePayload(
           });
 
           emitProgress(5, 'Comprobando las citas y preparando el informe');
-          parsedResult = ByokAnalysisResultSchema.parse(JSON.parse(extractJsonObject(providerResult)));
+          const legalSourceIds = new Set(ragContext.sources.map(source => String(source.id)));
+          let providerOutput = ByokAnalysisOutputSchema.parse(JSON.parse(extractJsonObject(providerResult)));
+          parsedResult = buildByokAnalysisResult(providerOutput, legalSourceIds);
           const groundingSources: GroundingSource[] = [
             ...ragContext.sources.map(source => ({ ...source, kind: 'legal' as const })),
             ...documentSources,
           ];
-          const legalSourceIds = new Set(ragContext.sources.map(source => String(source.id)));
           let grounding = validateByokAnalysisGrounding(parsedResult, groundingSources, legalSourceIds);
           let repaired = false;
           let initialGroundingReason: string | undefined;
@@ -708,7 +712,7 @@ export async function processAnalyzePayload(
           if (!grounding.valid) {
             initialGroundingReason = grounding.reason;
             deps.logger.warn(`[IPC Analyze] Grounding repair triggered -> module=${activeModule} reason=${grounding.reason}`);
-            const rejectedOutput = JSON.stringify(parsedResult);
+            const rejectedOutput = JSON.stringify(providerOutput);
             const validation = grounding;
             const repairedProviderResult = await generateByokText({
               provider: byok.provider,
@@ -743,7 +747,8 @@ export async function processAnalyzePayload(
                 schema: BYOK_ANALYSIS_JSON_SCHEMA,
               },
             });
-            parsedResult = ByokAnalysisResultSchema.parse(JSON.parse(extractJsonObject(repairedProviderResult)));
+            providerOutput = ByokAnalysisOutputSchema.parse(JSON.parse(extractJsonObject(repairedProviderResult)));
+            parsedResult = buildByokAnalysisResult(providerOutput, legalSourceIds);
             grounding = validateByokAnalysisGrounding(parsedResult, groundingSources, legalSourceIds);
             repaired = true;
           }
