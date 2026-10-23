@@ -49,7 +49,7 @@ const getHybridLegalContext = vi.fn(async (_query: string, ecosystem: keyof type
 }));
 
 async function analyzeWith(ecosystems: Array<keyof typeof SOURCES>) {
-  await processAnalyzePayload(
+  const response = await processAnalyzePayload(
     {
       ecosystems,
       files: [{ name: 'contrato.txt', mimeType: 'text/plain', base64: Buffer.from('Contrato de prestación de servicios').toString('base64') }],
@@ -69,16 +69,22 @@ async function analyzeWith(ecosystems: Array<keyof typeof SOURCES>) {
     },
   );
   const [input] = vi.mocked(generateByokText).mock.calls[0];
-  return { system: input.systemInstruction ?? '', prompt: input.prompt, all: `${input.systemInstruction ?? ''}\n${input.prompt}` };
+  return {
+    response,
+    input,
+    system: input.systemInstruction ?? '',
+    prompt: input.prompt,
+    all: `${input.systemInstruction ?? ''}\n${input.prompt}`,
+  };
 }
 
-describe('prompt de la revisión con IA', () => {
-  beforeEach(() => {
-    vi.mocked(generateByokText).mockReset();
-    // La respuesta no importa: sólo se revisa lo que se envía.
-    vi.mocked(generateByokText).mockRejectedValue(new Error('sin respuesta'));
-  });
+beforeEach(() => {
+  vi.mocked(generateByokText).mockReset();
+  // Por omisión la IA no responde; las pruebas de la respuesta la definen con mockResolvedValueOnce.
+  vi.mocked(generateByokText).mockRejectedValue(new Error('sin respuesta'));
+});
 
+describe('prompt de la revisión con IA', () => {
   it('pide sólo las materias elegidas', async () => {
     const { prompt, all } = await analyzeWith(['mercantil', 'laboral']);
 
@@ -112,5 +118,66 @@ describe('prompt de la revisión con IA', () => {
     const { prompt } = await analyzeWith(['fiscal']);
 
     expect(prompt).toContain('SUFICIENCIA_DOCUMENTAL_PREVIA');
+  });
+});
+
+// Respuesta en el formato que se pide a la IA: textos y los FUENTE_ID que los sustentan.
+const AI_OUTPUT = {
+  summary: 'Contrato de prestación de servicios sin plazo de pago.',
+  summarySourceIds: ['doc:1'],
+  documentType: 'Contrato de prestación de servicios',
+  riskScore: 40,
+  detectedParties: ['ACME, S.A. de C.V.'],
+  detectedObligations: ['Prestar los servicios'],
+  missingClauses: ['Plazo de pago'],
+  missingData: ['Fecha de inicio [DATO FALTANTE]'],
+  risks: [{ title: 'Sin plazo de pago', severity: 'medium', explanation: 'El contrato no fija cuándo se paga.', sourceIds: ['doc:1', 'law:ccom:78', 'doc:1'] }],
+  recommendedActions: [{ text: 'Agregar una cláusula de plazo de pago.', sourceIds: ['law:ccom:78'] }],
+};
+
+describe('respuesta de la revisión con IA', () => {
+  it('pide sólo textos y FUENTE_ID, sin copiar artículos ni repetir textos', async () => {
+    const { input } = await analyzeWith(['mercantil']);
+    const schema = JSON.stringify(input.jsonSchema?.schema);
+
+    expect(schema).toContain('summarySourceIds');
+    expect(schema).not.toMatch(/groundingClaims|legalFoundations|excerpt|riskCategories|checklist|confidence|engine/);
+    expect(input.prompt).not.toMatch(/groundingClaims|texto exacto/);
+  });
+
+  it('arma las citas y los fundamentos a partir de los FUENTE_ID', async () => {
+    vi.mocked(generateByokText).mockResolvedValueOnce(JSON.stringify(AI_OUTPUT));
+    const { response } = await analyzeWith(['mercantil']);
+    const result = JSON.parse(response.result);
+
+    expect(generateByokText).toHaveBeenCalledTimes(1);
+    expect(response.reviewMode).toBe('ai');
+    expect(response.fallbackReason).toBeUndefined();
+    expect(result.recommendedActions).toEqual(['Agregar una cláusula de plazo de pago.']);
+    expect(result.risks[0].legalFoundations).toEqual([expect.objectContaining({ id: 'law:ccom:78', excerpt: SOURCES.mercantil.content })]);
+    expect(result.legalFoundations.map((foundation: { id: string }) => foundation.id)).toEqual(['law:ccom:78']);
+    expect(result.groundingClaims.map((claim: { text: string }) => claim.text)).toEqual([
+      AI_OUTPUT.summary,
+      AI_OUTPUT.risks[0].explanation,
+      AI_OUTPUT.recommendedActions[0].text,
+    ]);
+  });
+
+  it('pide una corrección cuando un texto cita una fuente que no existe', async () => {
+    vi.mocked(generateByokText)
+      .mockResolvedValueOnce(JSON.stringify({ ...AI_OUTPUT, risks: [{ ...AI_OUTPUT.risks[0], sourceIds: ['law:inventada:1'] }] }))
+      .mockResolvedValueOnce(JSON.stringify(AI_OUTPUT));
+    const { response } = await analyzeWith(['mercantil']);
+
+    expect(generateByokText).toHaveBeenCalledTimes(2);
+    expect(response.reviewMode).toBe('ai');
+    expect(response.fallbackReason).toBe('grounding_repair:unknown_source_id');
+
+    // La corrección recibe el borrador en el formato de la IA y señala el texto a corregir.
+    const repairPrompt = vi.mocked(generateByokText).mock.calls[1][0].prompt;
+    expect(repairPrompt).toContain('"risks.0"');
+    expect(repairPrompt).toContain('"law:inventada:1"');
+    expect(repairPrompt).toContain('summarySourceIds');
+    expect(repairPrompt).not.toContain('groundingClaims');
   });
 });
